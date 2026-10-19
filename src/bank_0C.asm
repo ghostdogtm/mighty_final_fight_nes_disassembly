@@ -37,12 +37,12 @@ loc_0C_802F:
 	SBC #$06                        ;c - - - - - 0x018048 0C:8038: E9 06
 	TAY                             ;c - - - - - 0x01804A 0C:803A: A8
 loc_0C_803B:
-	CPY ram_00F5                    ;C - - - - - 0x01804B 0C:803B: C4 F5
+	CPY prgBankA000                 ;C - - - - - 0x01804B 0C:803B: C4 F5
 	BEQ loc_0C_8048                 ;C - - - - - 0x01804D 0C:803D: F0 09
-	STY ram_00F5                    ;C - - - - - 0x01804F 0C:803F: 84 F5
+	STY prgBankA000                 ;C - - - - - 0x01804F 0C:803F: 84 F5
 	TXA                             ;C - - - - - 0x018051 0C:8041: 8A
 	PHA                             ;C - - - - - 0x018052 0C:8042: 48
-	JSR sub_0F_FF4D                 ;C - - - - - 0x018053 0C:8043: 20 4D FF
+	JSR SetPrgBanks                 ;C - - - - - 0x018053 0C:8043: 20 4D FF
 	PLA                             ;C - - - - - 0x018056 0C:8046: 68
 	TAX                             ;C - - - - - 0x018057 0C:8047: AA
 loc_0C_8048:
@@ -1514,7 +1514,7 @@ ofs_0C_8C3F:
 	LDA tbl_0F_FC33,Y               ;C - - - - - 0x018C6C 0C:8C5C: B9 33 FC
 	TAY                             ;C - - - - - 0x018C6F 0C:8C5F: A8
 	LDA ptr_00                      ;C - - - - - 0x018C70 0C:8C60: A5 00
-	STA a:ram_00EB,Y                ;C - - - - - 0x018C72 0C:8C62: 99 EB 00
+	STA a:chrBankShadow+3,Y         ;C - - - - - 0x018C72 0C:8C62: 99 EB 00
 loc_0C_8C65:
 	LDA objY                        ;C - - - - - 0x018C75 0C:8C65: AD C0 03
 	STA ram_0530,X                  ;C - - - - - 0x018C78 0C:8C68: 9D 30 05
@@ -2073,7 +2073,7 @@ ofs_0C_90BA:
 	LDA tbl_0F_FC33,Y               ;C - - - - - 0x0190F3 0C:90E3: B9 33 FC
 	TAY                             ;C - - - - - 0x0190F6 0C:90E6: A8
 	LDA ptr_00                      ;C - - - - - 0x0190F7 0C:90E7: A5 00
-	STA a:ram_00EB,Y                ;C - - - - - 0x0190F9 0C:90E9: 99 EB 00
+	STA a:chrBankShadow+3,Y         ;C - - - - - 0x0190F9 0C:90E9: 99 EB 00
 loc_0C_90EC:
 	INC ram_0300,X                  ;C - - - - - 0x0190FC 0C:90EC: FE 00 03
 	LDA objY                        ;C - - - - - 0x0190FF 0C:90EF: AD C0 03
@@ -2190,7 +2190,7 @@ ofs_0C_91B7:
 	LDA tbl_0F_FC33,Y               ;C - - - - - 0x0191F3 0C:91E3: B9 33 FC
 	TAY                             ;C - - - - - 0x0191F6 0C:91E6: A8
 	LDA ptr_00                      ;C - - - - - 0x0191F7 0C:91E7: A5 00
-	STA a:ram_00EB,Y                ;C - - - - - 0x0191F9 0C:91E9: 99 EB 00
+	STA a:chrBankShadow+3,Y         ;C - - - - - 0x0191F9 0C:91E9: 99 EB 00
 	LDA #$FF                        ;C - - - - - 0x0191FC 0C:91EC: A9 FF
 	STA ram_04C0,X                  ;C - - - - - 0x0191FE 0C:91EE: 9D C0 04
 	INC ram_0300,X                  ;C - - - - - 0x019201 0C:91F1: FE 00 03
@@ -2248,7 +2248,7 @@ loc_0C_924A:
 	LDA tbl_0F_FC33,Y               ;C - - - - - 0x01926D 0C:925D: B9 33 FC
 	TAY                             ;C - - - - - 0x019270 0C:9260: A8
 	LDA ptr_00                      ;C - - - - - 0x019271 0C:9261: A5 00
-	STA a:ram_00EB,Y                ;C - - - - - 0x019273 0C:9263: 99 EB 00
+	STA a:chrBankShadow+3,Y         ;C - - - - - 0x019273 0C:9263: 99 EB 00
 loc_0C_9266:
 	LDA ram_0460,X                  ;C - - - - - 0x019276 0C:9266: BD 60 04
 	AND #$01                        ;C - - - - - 0x019279 0C:9269: 29 01
@@ -2382,7 +2382,7 @@ ofs_0C_9357:
 	LDA tbl_0F_FC33,Y               ;C - - - - - 0x01939B 0C:938B: B9 33 FC
 	TAY                             ;C - - - - - 0x01939E 0C:938E: A8
 	LDA ptr_00                      ;C - - - - - 0x01939F 0C:938F: A5 00
-	STA a:ram_00EB,Y                ;C - - - - - 0x0193A1 0C:9391: 99 EB 00
+	STA a:chrBankShadow+3,Y         ;C - - - - - 0x0193A1 0C:9391: 99 EB 00
 loc_0C_9394:
 	LDA ram_0470,X                  ;C - - - - - 0x0193A4 0C:9394: BD 70 04
 	BNE loc_0C_93B5                 ;C - - - - - 0x0193A7 0C:9397: D0 1C
@@ -2697,7 +2697,7 @@ ofs_0C_95CE:
 	LDA tbl_0F_FC33,Y               ;C - - - - - 0x019605 0C:95F5: B9 33 FC
 	TAY                             ;C - - - - - 0x019608 0C:95F8: A8
 	LDA ptr_00                      ;C - - - - - 0x019609 0C:95F9: A5 00
-	STA a:ram_00EB,Y                ;C - - - - - 0x01960B 0C:95FB: 99 EB 00
+	STA a:chrBankShadow+3,Y         ;C - - - - - 0x01960B 0C:95FB: 99 EB 00
 loc_0C_95FE:
 	INC ram_0300,X                  ;C - - - - - 0x01960E 0C:95FE: FE 00 03
 	RTS                             ;C - - - - - 0x019611 0C:9601: 60
@@ -3487,7 +3487,7 @@ sub_0C_9C55:
 	LDA tbl_0F_FC33,Y               ;C - - - - - 0x019C80 0C:9C70: B9 33 FC
 	TAY                             ;C - - - - - 0x019C83 0C:9C73: A8
 	LDA ptr_00                      ;C - - - - - 0x019C84 0C:9C74: A5 00
-	STA a:ram_00EB,Y                ;C - - - - - 0x019C86 0C:9C76: 99 EB 00
+	STA a:chrBankShadow+3,Y         ;C - - - - - 0x019C86 0C:9C76: 99 EB 00
 loc_0C_9C79:
 	RTS                             ;C - - - - - 0x019C89 0C:9C79: 60
 sub_0C_9C7A:
@@ -3505,7 +3505,7 @@ sub_0C_9C7A:
 	LDA tbl_0F_FC33,Y               ;C - - - - - 0x019CA5 0C:9C95: B9 33 FC
 	TAY                             ;C - - - - - 0x019CA8 0C:9C98: A8
 	LDA ptr_00                      ;C - - - - - 0x019CA9 0C:9C99: A5 00
-	STA a:ram_00EB,Y                ;C - - - - - 0x019CAB 0C:9C9B: 99 EB 00
+	STA a:chrBankShadow+3,Y         ;C - - - - - 0x019CAB 0C:9C9B: 99 EB 00
 loc_0C_9C9E:
 	RTS                             ;C - - - - - 0x019CAE 0C:9C9E: 60
 tbl_0C_9C9F:
@@ -3532,7 +3532,7 @@ sub_0C_9CAD:
 	INY                             ;C - - - - - 0x019CDC 0C:9CCC: C8
 loc_0C_9CCD:
 	LDA ptr_00                      ;C - - - - - 0x019CDD 0C:9CCD: A5 00
-	STA a:ram_00EB,Y                ;C - - - - - 0x019CDF 0C:9CCF: 99 EB 00
+	STA a:chrBankShadow+3,Y         ;C - - - - - 0x019CDF 0C:9CCF: 99 EB 00
 loc_0C_9CD2:
 	RTS                             ;C - - - - - 0x019CE2 0C:9CD2: 60
 tbl_0C_9CD3:
@@ -3701,7 +3701,7 @@ loc_0C_9E9F:
 	LDA tbl_0F_FC33,Y               ;C - - - - - 0x019EB3 0C:9EA3: B9 33 FC
 	TAY                             ;C - - - - - 0x019EB6 0C:9EA6: A8
 	PLA                             ;C - - - - - 0x019EB7 0C:9EA7: 68
-	STA a:ram_00EB,Y                ;C - - - - - 0x019EB8 0C:9EA8: 99 EB 00
+	STA a:chrBankShadow+3,Y         ;C - - - - - 0x019EB8 0C:9EA8: 99 EB 00
 	LDA #$8F                        ;C - - - - - 0x019EBB 0C:9EAB: A9 8F
 	STA ram_0300,X                  ;C - - - - - 0x019EBD 0C:9EAD: 9D 00 03
 	JMP loc_0C_9FBB                 ;C - - - - - 0x019EC0 0C:9EB0: 4C BB 9F
@@ -3798,7 +3798,7 @@ loc_0C_9F19:
 	LDA tbl_0F_FC33,Y               ;C - - - - - 0x019F64 0C:9F54: B9 33 FC
 	TAY                             ;C - - - - - 0x019F67 0C:9F57: A8
 	PLA                             ;C - - - - - 0x019F68 0C:9F58: 68
-	STA a:ram_00EB,Y                ;C - - - - - 0x019F69 0C:9F59: 99 EB 00
+	STA a:chrBankShadow+3,Y         ;C - - - - - 0x019F69 0C:9F59: 99 EB 00
 	RTS                             ;C - - - - - 0x019F6C 0C:9F5C: 60
 loc_0C_9F5D:
 	LDA #$00                        ;C - - - - - 0x019F6D 0C:9F5D: A9 00

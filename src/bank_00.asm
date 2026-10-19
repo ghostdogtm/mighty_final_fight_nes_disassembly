@@ -29,16 +29,16 @@ ofs_00_8066:
 	LDA ram_0500                    ;C - - J - - 0x000076 00:8066: AD 00 05
 	AND #$01                        ;C - - - - - 0x000079 00:8069: 29 01
 	BNE loc_00_8077                 ;C - - - - - 0x00007B 00:806B: D0 0A
-	LDA ram_00FA                    ;C - - - - - 0x00007D 00:806D: A5 FA
+	LDA scrollY                     ;C - - - - - 0x00007D 00:806D: A5 FA
 	SEC                             ;C - - - - - 0x00007F 00:806F: 38
 	SBC #$01                        ;C - - - - - 0x000080 00:8070: E9 01
-	STA ram_00FA                    ;C - - - - - 0x000082 00:8072: 85 FA
+	STA scrollY                     ;C - - - - - 0x000082 00:8072: 85 FA
 	JMP loc_00_807E                 ;C - - - - - 0x000084 00:8074: 4C 7E 80
 loc_00_8077:
-	LDA ram_00FA                    ;C - - - - - 0x000087 00:8077: A5 FA
+	LDA scrollY                     ;C - - - - - 0x000087 00:8077: A5 FA
 	CLC                             ;C - - - - - 0x000089 00:8079: 18
 	ADC #$01                        ;C - - - - - 0x00008A 00:807A: 69 01
-	STA ram_00FA                    ;C - - - - - 0x00008C 00:807C: 85 FA
+	STA scrollY                     ;C - - - - - 0x00008C 00:807C: 85 FA
 loc_00_807E:
 	DEC ram_0500                    ;C - - - - - 0x00008E 00:807E: CE 00 05
 	LDA ram_0031                    ;C - - - - - 0x000091 00:8081: A5 31
@@ -67,7 +67,7 @@ loc_00_80AE:
 	LDA #$1C                        ;C - - - - - 0x0000BE 00:80AE: A9 1C
 	JSR sub_0F_F34C                 ;C - - - - - 0x0000C0 00:80B0: 20 4C F3
 	LDA #$00                        ;C - - - - - 0x0000C3 00:80B3: A9 00
-	STA ram_00FA                    ;C - - - - - 0x0000C5 00:80B5: 85 FA
+	STA scrollY                     ;C - - - - - 0x0000C5 00:80B5: 85 FA
 	STA ram_0035                    ;C - - - - - 0x0000C7 00:80B7: 85 35
 	LDA #$02                        ;C - - - - - 0x0000C9 00:80B9: A9 02
 	STA gameAction                  ;C - - - - - 0x0000CB 00:80BB: 85 30
@@ -1726,7 +1726,7 @@ loc_00_8DE0:
 loc_00_8E02:
 	LDA #$00                        ;C - - - - - 0x000E12 00:8E02: A9 00
 	STA ram_00B3                    ;C - - - - - 0x000E14 00:8E04: 85 B3
-	STA ram_00FA                    ;C - - - - - 0x000E16 00:8E06: 85 FA
+	STA scrollY                     ;C - - - - - 0x000E16 00:8E06: 85 FA
 	STA ram_0035                    ;C - - - - - 0x000E18 00:8E08: 85 35
 	STA ram_00A3                    ;C - - - - - 0x000E1A 00:8E0A: 85 A3
 	STA ram_00A4                    ;C - - - - - 0x000E1C 00:8E0C: 85 A4
@@ -1815,7 +1815,7 @@ loc_00_8E9E:
 	LDA #$00                        ;C - - - - - 0x000ECA 00:8EBA: A9 00
 	STA gameAction                  ;C - - - - - 0x000ECC 00:8EBC: 85 30
 	STA ram_0035                    ;C - - - - - 0x000ECE 00:8EBE: 85 35
-	STA ram_00FA                    ;C - - - - - 0x000ED0 00:8EC0: 85 FA
+	STA scrollY                     ;C - - - - - 0x000ED0 00:8EC0: 85 FA
 	STA ram_0500                    ;C - - - - - 0x000ED2 00:8EC2: 8D 00 05
 	STA ram_0510                    ;C - - - - - 0x000ED5 00:8EC5: 8D 10 05
 	STA ram_00BA                    ;C - - - - - 0x000ED8 00:8EC8: 85 BA
@@ -2585,10 +2585,10 @@ ofs_00_94F7:
 	LDA #$FD                        ;C - - - - - 0x00150F 00:94FF: A9 FD
 	STA ram_0062                    ;C - - - - - 0x001511 00:9501: 85 62
 	LDA #$23                        ;C - - - - - 0x001513 00:9503: A9 23
-	STA ram_00EB                    ;C - - - - - 0x001515 00:9505: 85 EB
-	STA ram_00EC                    ;C - - - - - 0x001517 00:9507: 85 EC
+	STA chrBankShadow+3             ;C - - - - - 0x001515 00:9505: 85 EB
+	STA chrBankShadow+4             ;C - - - - - 0x001517 00:9507: 85 EC
 	LDA #$35                        ;C - - - - - 0x001519 00:9509: A9 35
-	STA ram_00ED                    ;C - - - - - 0x00151B 00:950B: 85 ED
+	STA chrBankShadow+5             ;C - - - - - 0x00151B 00:950B: 85 ED
 	LDX #$00                        ;C - - - - - 0x00151D 00:950D: A2 00
 loc_00_950F:
 	LDA tbl_00_955D,X               ;C - - - - - 0x00151F 00:950F: BD 5D 95

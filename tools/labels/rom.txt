@@ -27,3 +27,5 @@ note 0E:C7F2 ; GG PENGZYLA start credits: LDA #$03 / STA credits
 note 0E:C755 ; GG PASGIYAA..GASGIYAA start stage: LDA #$00 / STA stage
 
 
+0F:FF4D SetPrgBanks             ; applies prgBank8000/prgBankA000 to MMC3 R6/R7
+0E:C1F8 stageBankTable          ; stageData -> PRG bank used in the $A000 window ($01,$05,$07,$09,$0D)

@@ -291,9 +291,9 @@ loc_04_8902:
 	LDA #$00                        ;C - - - - - 0x008924 04:8914: A9 00
 	STA palUpdateFlag               ;C - - - - - 0x008926 04:8916: 85 18
 	LDA #$78                        ;C - - - - - 0x008928 04:8918: A9 78
-	STA ram_00E8                    ;C - - - - - 0x00892A 04:891A: 85 E8
+	STA chrBankShadow               ;C - - - - - 0x00892A 04:891A: 85 E8
 	LDA #$7A                        ;C - - - - - 0x00892C 04:891C: A9 7A
-	STA ram_00E9                    ;C - - - - - 0x00892E 04:891E: 85 E9
+	STA chrBankShadow+1             ;C - - - - - 0x00892E 04:891E: 85 E9
 	JSR sub_0E_C362                 ;C - - - - - 0x008930 04:8920: 20 62 C3
 	RTS                             ;C - - - - - 0x008933 04:8923: 60
 tbl_04_8924:
@@ -312,11 +312,11 @@ loc_04_8942:
 	BPL loc_04_8942                 ;C - - - - - 0x008965 04:8955: 10 EB
 	STY palUpdateFlag               ;C - - - - - 0x008967 04:8957: 84 18
 	LDA #$74                        ;C - - - - - 0x008969 04:8959: A9 74
-	STA ram_00E8                    ;C - - - - - 0x00896B 04:895B: 85 E8
+	STA chrBankShadow               ;C - - - - - 0x00896B 04:895B: 85 E8
 	LDA #$76                        ;C - - - - - 0x00896D 04:895D: A9 76
-	STA ram_00E9                    ;C - - - - - 0x00896F 04:895F: 85 E9
+	STA chrBankShadow+1             ;C - - - - - 0x00896F 04:895F: 85 E9
 	LDA #$3C                        ;C - - - - - 0x008971 04:8961: A9 3C
-	STA ram_00EA                    ;C - - - - - 0x008973 04:8963: 85 EA
+	STA chrBankShadow+2             ;C - - - - - 0x008973 04:8963: 85 EA
 	LDA #$80                        ;C - - - - - 0x008975 04:8965: A9 80
 	STA ram_030D                    ;C - - - - - 0x008977 04:8967: 8D 0D 03
 	STA ram_056D                    ;C - - - - - 0x00897A 04:896A: 8D 6D 05
@@ -350,9 +350,9 @@ loc_04_89C2:
 	BPL loc_04_89C2                 ;C - - - - - 0x0089DC 04:89CC: 10 F4
 	STY palUpdateFlag               ;C - - - - - 0x0089DE 04:89CE: 84 18
 	LDA #$74                        ;C - - - - - 0x0089E0 04:89D0: A9 74
-	STA ram_00E8                    ;C - - - - - 0x0089E2 04:89D2: 85 E8
+	STA chrBankShadow               ;C - - - - - 0x0089E2 04:89D2: 85 E8
 	LDA #$76                        ;C - - - - - 0x0089E4 04:89D4: A9 76
-	STA ram_00E9                    ;C - - - - - 0x0089E6 04:89D6: 85 E9
+	STA chrBankShadow+1             ;C - - - - - 0x0089E6 04:89D6: 85 E9
 	RTS                             ;C - - - - - 0x0089E8 04:89D8: 60
 	.byte $3E,$AB,$47,$FA,$86,$2A,$EF,$0B,$CF,$AE,$FB,$8B,$72,$29,$9A,$AA;- - - - - - 0x0089E9 04:89D9:
 	.byte $5D,$AB,$A9,$AB,$BF,$29,$6D,$AB,$E7,$FE,$EC,$A3,$84,$2B,$AF,$BA;- - - - - - 0x0089F9 04:89E9:
@@ -372,9 +372,9 @@ loc_04_8A42:
 	BPL loc_04_8A42                 ;C - - - - - 0x008A5C 04:8A4C: 10 F4
 	STY palUpdateFlag               ;C - - - - - 0x008A5E 04:8A4E: 84 18
 	LDA #$78                        ;C - - - - - 0x008A60 04:8A50: A9 78
-	STA ram_00E8                    ;C - - - - - 0x008A62 04:8A52: 85 E8
+	STA chrBankShadow               ;C - - - - - 0x008A62 04:8A52: 85 E8
 	LDA #$62                        ;C - - - - - 0x008A64 04:8A54: A9 62
-	STA ram_00E9                    ;C - - - - - 0x008A66 04:8A56: 85 E9
+	STA chrBankShadow+1             ;C - - - - - 0x008A66 04:8A56: 85 E9
 	RTS                             ;C - - - - - 0x008A68 04:8A58: 60
 tbl_04_8A59:
 	.byte $0F,$20,$10,$00,$0F,$21,$20,$11,$0F,$23,$13,$28,$0F,$21,$20,$16;- D 0 - - - 0x008A69 04:8A59:
@@ -402,11 +402,11 @@ loc_04_8AC2:
 	LDA #$FF                        ;C - - - - - 0x008AF1 04:8AE1: A9 FF
 	STA palUpdateFlag               ;C - - - - - 0x008AF3 04:8AE3: 85 18
 	LDA #$78                        ;C - - - - - 0x008AF5 04:8AE5: A9 78
-	STA ram_00E8                    ;C - - - - - 0x008AF7 04:8AE7: 85 E8
+	STA chrBankShadow               ;C - - - - - 0x008AF7 04:8AE7: 85 E8
 	LDA #$56                        ;C - - - - - 0x008AF9 04:8AE9: A9 56
-	STA ram_00E9                    ;C - - - - - 0x008AFB 04:8AEB: 85 E9
+	STA chrBankShadow+1             ;C - - - - - 0x008AFB 04:8AEB: 85 E9
 	LDA #$35                        ;C - - - - - 0x008AFD 04:8AED: A9 35
-	STA ram_00EA                    ;C - - - - - 0x008AFF 04:8AEF: 85 EA
+	STA chrBankShadow+2             ;C - - - - - 0x008AFF 04:8AEF: 85 EA
 	LDA #$60                        ;C - - - - - 0x008B01 04:8AF1: A9 60
 	STA objX                        ;C - - - - - 0x008B03 04:8AF3: 8D 60 03
 	LDA #$47                        ;C - - - - - 0x008B06 04:8AF6: A9 47
@@ -433,11 +433,11 @@ loc_04_8B42:
 	BPL loc_04_8B42                 ;C - - - - - 0x008B65 04:8B55: 10 EB
 	STY palUpdateFlag               ;C - - - - - 0x008B67 04:8B57: 84 18
 	LDA #$78                        ;C - - - - - 0x008B69 04:8B59: A9 78
-	STA ram_00E8                    ;C - - - - - 0x008B6B 04:8B5B: 85 E8
+	STA chrBankShadow               ;C - - - - - 0x008B6B 04:8B5B: 85 E8
 	LDA #$62                        ;C - - - - - 0x008B6D 04:8B5D: A9 62
-	STA ram_00E9                    ;C - - - - - 0x008B6F 04:8B5F: 85 E9
+	STA chrBankShadow+1             ;C - - - - - 0x008B6F 04:8B5F: 85 E9
 	LDA #$37                        ;C - - - - - 0x008B71 04:8B61: A9 37
-	STA ram_00EB                    ;C - - - - - 0x008B73 04:8B63: 85 EB
+	STA chrBankShadow+3             ;C - - - - - 0x008B73 04:8B63: 85 EB
 	LDA #$80                        ;C - - - - - 0x008B75 04:8B65: A9 80
 	STA ram_0300                    ;C - - - - - 0x008B77 04:8B67: 8D 00 03
 	STA ram_0560                    ;C - - - - - 0x008B7A 04:8B6A: 8D 60 05
@@ -473,11 +473,11 @@ loc_04_8C02:
 	BPL loc_04_8C02                 ;C - - - - - 0x008C25 04:8C15: 10 EB
 	STY palUpdateFlag               ;C - - - - - 0x008C27 04:8C17: 84 18
 	LDA #$78                        ;C - - - - - 0x008C29 04:8C19: A9 78
-	STA ram_00E8                    ;C - - - - - 0x008C2B 04:8C1B: 85 E8
+	STA chrBankShadow               ;C - - - - - 0x008C2B 04:8C1B: 85 E8
 	LDA #$62                        ;C - - - - - 0x008C2D 04:8C1D: A9 62
-	STA ram_00E9                    ;C - - - - - 0x008C2F 04:8C1F: 85 E9
+	STA chrBankShadow+1             ;C - - - - - 0x008C2F 04:8C1F: 85 E9
 	LDA #$36                        ;C - - - - - 0x008C31 04:8C21: A9 36
-	STA ram_00EB                    ;C - - - - - 0x008C33 04:8C23: 85 EB
+	STA chrBankShadow+3             ;C - - - - - 0x008C33 04:8C23: 85 EB
 	LDA #$80                        ;C - - - - - 0x008C35 04:8C25: A9 80
 	STA ram_0300                    ;C - - - - - 0x008C37 04:8C27: 8D 00 03
 	STA ram_0560                    ;C - - - - - 0x008C3A 04:8C2A: 8D 60 05
@@ -540,11 +540,11 @@ loc_04_8D33:
 	STY palUpdateFlag               ;C - - - - - 0x008D4F 04:8D3F: 84 18
 loc_04_8D41:
 	LDA #$48                        ;C - - - - - 0x008D51 04:8D41: A9 48
-	STA ram_00E8                    ;C - - - - - 0x008D53 04:8D43: 85 E8
+	STA chrBankShadow               ;C - - - - - 0x008D53 04:8D43: 85 E8
 	LDA #$4A                        ;C - - - - - 0x008D55 04:8D45: A9 4A
-	STA ram_00E9                    ;C - - - - - 0x008D57 04:8D47: 85 E9
+	STA chrBankShadow+1             ;C - - - - - 0x008D57 04:8D47: 85 E9
 	LDA #$3C                        ;C - - - - - 0x008D59 04:8D49: A9 3C
-	STA ram_00EB                    ;C - - - - - 0x008D5B 04:8D4B: 85 EB
+	STA chrBankShadow+3             ;C - - - - - 0x008D5B 04:8D4B: 85 EB
 	LDY playerId                    ;C - - - - - 0x008D5D 04:8D4D: A4 34
 	LDA tbl_0E_C8DA,Y               ;C - - - - - 0x008D5F 04:8D4F: B9 DA C8
 	TAX                             ;C - - - - - 0x008D62 04:8D52: AA
@@ -779,11 +779,11 @@ loc_04_9002:
 	BPL loc_04_9002                 ;C - - - - - 0x009025 04:9015: 10 EB
 	STY palUpdateFlag               ;C - - - - - 0x009027 04:9017: 84 18
 	LDA #$78                        ;C - - - - - 0x009029 04:9019: A9 78
-	STA ram_00E8                    ;C - - - - - 0x00902B 04:901B: 85 E8
+	STA chrBankShadow               ;C - - - - - 0x00902B 04:901B: 85 E8
 	LDA #$62                        ;C - - - - - 0x00902D 04:901D: A9 62
-	STA ram_00E9                    ;C - - - - - 0x00902F 04:901F: 85 E9
+	STA chrBankShadow+1             ;C - - - - - 0x00902F 04:901F: 85 E9
 	LDA #$37                        ;C - - - - - 0x009031 04:9021: A9 37
-	STA ram_00EB                    ;C - - - - - 0x009033 04:9023: 85 EB
+	STA chrBankShadow+3             ;C - - - - - 0x009033 04:9023: 85 EB
 	LDA #$80                        ;C - - - - - 0x009035 04:9025: A9 80
 	STA ram_0300                    ;C - - - - - 0x009037 04:9027: 8D 00 03
 	STA ram_0560                    ;C - - - - - 0x00903A 04:902A: 8D 60 05
@@ -835,11 +835,11 @@ loc_04_9112:
 	BPL loc_04_9112                 ;C - - - - - 0x009135 04:9125: 10 EB
 	STY palUpdateFlag               ;C - - - - - 0x009137 04:9127: 84 18
 	LDA #$7C                        ;C - - - - - 0x009139 04:9129: A9 7C
-	STA ram_00E8                    ;C - - - - - 0x00913B 04:912B: 85 E8
+	STA chrBankShadow               ;C - - - - - 0x00913B 04:912B: 85 E8
 	LDA #$7E                        ;C - - - - - 0x00913D 04:912D: A9 7E
-	STA ram_00E9                    ;C - - - - - 0x00913F 04:912F: 85 E9
+	STA chrBankShadow+1             ;C - - - - - 0x00913F 04:912F: 85 E9
 	LDA #$3C                        ;C - - - - - 0x009141 04:9131: A9 3C
-	STA ram_00EA                    ;C - - - - - 0x009143 04:9133: 85 EA
+	STA chrBankShadow+2             ;C - - - - - 0x009143 04:9133: 85 EA
 	LDX #$01                        ;C - - - - - 0x009145 04:9135: A2 01
 	LDA #$80                        ;C - - - - - 0x009147 04:9137: A9 80
 	STA ram_0301                    ;C - - - - - 0x009149 04:9139: 8D 01 03
@@ -970,11 +970,11 @@ loc_04_9305:
 	BPL loc_04_9305                 ;C - - - - - 0x009328 04:9318: 10 EB
 	STY palUpdateFlag               ;C - - - - - 0x00932A 04:931A: 84 18
 	LDA #$78                        ;C - - - - - 0x00932C 04:931C: A9 78
-	STA ram_00E8                    ;C - - - - - 0x00932E 04:931E: 85 E8
+	STA chrBankShadow               ;C - - - - - 0x00932E 04:931E: 85 E8
 	LDA #$7A                        ;C - - - - - 0x009330 04:9320: A9 7A
-	STA ram_00E9                    ;C - - - - - 0x009332 04:9322: 85 E9
+	STA chrBankShadow+1             ;C - - - - - 0x009332 04:9322: 85 E9
 	LDA #$23                        ;C - - - - - 0x009334 04:9324: A9 23
-	STA ram_00EC                    ;C - - - - - 0x009336 04:9326: 85 EC
+	STA chrBankShadow+4             ;C - - - - - 0x009336 04:9326: 85 EC
 	LDA #$0A                        ;C - - - - - 0x009338 04:9328: A9 0A
 	JSR sub_0F_F34A                 ;C - - - - - 0x00933A 04:932A: 20 4A F3
 	JSR sub_04_942A                 ;C - - - - - 0x00933D 04:932D: 20 2A 94
@@ -1149,9 +1149,9 @@ loc_04_9529:
 	BPL loc_04_9529                 ;C - - - - - 0x009544 04:9534: 10 F3
 	STY palUpdateFlag               ;C - - - - - 0x009546 04:9536: 84 18
 	LDA #$78                        ;C - - - - - 0x009548 04:9538: A9 78
-	STA ram_00E8                    ;C - - - - - 0x00954A 04:953A: 85 E8
+	STA chrBankShadow               ;C - - - - - 0x00954A 04:953A: 85 E8
 	LDA #$7A                        ;C - - - - - 0x00954C 04:953C: A9 7A
-	STA ram_00E9                    ;C - - - - - 0x00954E 04:953E: 85 E9
+	STA chrBankShadow+1             ;C - - - - - 0x00954E 04:953E: 85 E9
 	LDA #$80                        ;C - - - - - 0x009550 04:9540: A9 80
 	STA ram_0300                    ;C - - - - - 0x009552 04:9542: 8D 00 03
 	STA ram_0560                    ;C - - - - - 0x009555 04:9545: 8D 60 05
@@ -1206,9 +1206,9 @@ loc_04_9616:
 	BPL loc_04_9616                 ;C - - - - - 0x009631 04:9621: 10 F3
 	STY palUpdateFlag               ;C - - - - - 0x009633 04:9623: 84 18
 	LDA #$78                        ;C - - - - - 0x009635 04:9625: A9 78
-	STA ram_00E8                    ;C - - - - - 0x009637 04:9627: 85 E8
+	STA chrBankShadow               ;C - - - - - 0x009637 04:9627: 85 E8
 	LDA #$7A                        ;C - - - - - 0x009639 04:9629: A9 7A
-	STA ram_00E9                    ;C - - - - - 0x00963B 04:962B: 85 E9
+	STA chrBankShadow+1             ;C - - - - - 0x00963B 04:962B: 85 E9
 	LDY lives                       ;C - - - - - 0x00963D 04:962D: A4 3E
 	LDA tbl_04_965E,Y               ;C - - - - - 0x00963F 04:962F: B9 5E 96
 	JSR sub_0F_F34A                 ;C - - - - - 0x009642 04:9632: 20 4A F3
@@ -1653,7 +1653,7 @@ loc_04_9AD9:
 	STA ptr_06+1                    ;C - - - - - 0x009AEB 04:9ADB: 85 07
 	LDA #$2B                        ;C - - - - - 0x009AED 04:9ADD: A9 2B
 loc_04_9ADF:
-	STA ram_00EC                    ;C - - - - - 0x009AEF 04:9ADF: 85 EC
+	STA chrBankShadow+4             ;C - - - - - 0x009AEF 04:9ADF: 85 EC
 	JSR sub_04_9AC2                 ;C - - - - - 0x009AF1 04:9AE1: 20 C2 9A
 	LDA ptr_06+1                    ;C - - - - - 0x009AF4 04:9AE4: A5 07
 	STA ram_0580,X                  ;C - - - - - 0x009AF6 04:9AE6: 9D 80 05

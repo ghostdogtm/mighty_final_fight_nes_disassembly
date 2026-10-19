@@ -1998,7 +1998,7 @@ loc_03_BF48:
 	LDA #$CF                        ;C - - - - - 0x007F6E 03:BF5E: A9 CF
 	STA ram_0580,X                  ;C - - - - - 0x007F70 03:BF60: 9D 80 05
 	LDA #$3B                        ;C - - - - - 0x007F73 03:BF63: A9 3B
-	STA ram_00EC                    ;C - - - - - 0x007F75 03:BF65: 85 EC
+	STA chrBankShadow+4             ;C - - - - - 0x007F75 03:BF65: 85 EC
 	LDA #$00                        ;C - - - - - 0x007F77 03:BF67: A9 00
 	STA ram_0570,X                  ;C - - - - - 0x007F79 03:BF69: 9D 70 05
 	STA ram_0590,X                  ;C - - - - - 0x007F7C 03:BF6C: 9D 90 05

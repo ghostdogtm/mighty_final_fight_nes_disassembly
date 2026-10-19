@@ -785,16 +785,16 @@ loc_05_AC3A:
 	LDA ram_0510,X                  ;C - - - - - 0x00AC50 05:AC40: BD 10 05
 	AND #$01                        ;C - - - - - 0x00AC53 05:AC43: 29 01
 	BNE loc_05_AC51                 ;C - - - - - 0x00AC55 05:AC45: D0 0A
-	LDA ram_00FA                    ;C - - - - - 0x00AC57 05:AC47: A5 FA
+	LDA scrollY                     ;C - - - - - 0x00AC57 05:AC47: A5 FA
 	SEC                             ;C - - - - - 0x00AC59 05:AC49: 38
 	SBC #$01                        ;C - - - - - 0x00AC5A 05:AC4A: E9 01
-	STA ram_00FA                    ;C - - - - - 0x00AC5C 05:AC4C: 85 FA
+	STA scrollY                     ;C - - - - - 0x00AC5C 05:AC4C: 85 FA
 	JMP loc_05_AC58                 ;C - - - - - 0x00AC5E 05:AC4E: 4C 58 AC
 loc_05_AC51:
-	LDA ram_00FA                    ;C - - - - - 0x00AC61 05:AC51: A5 FA
+	LDA scrollY                     ;C - - - - - 0x00AC61 05:AC51: A5 FA
 	CLC                             ;C - - - - - 0x00AC63 05:AC53: 18
 	ADC #$01                        ;C - - - - - 0x00AC64 05:AC54: 69 01
-	STA ram_00FA                    ;C - - - - - 0x00AC66 05:AC56: 85 FA
+	STA scrollY                     ;C - - - - - 0x00AC66 05:AC56: 85 FA
 loc_05_AC58:
 	DEC ram_0510,X                  ;C - - - - - 0x00AC68 05:AC58: DE 10 05
 	DEC ram_0520,X                  ;C - - - - - 0x00AC6B 05:AC5B: DE 20 05

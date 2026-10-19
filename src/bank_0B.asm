@@ -2007,7 +2007,7 @@ ofs_0B_BF2B:
 	LDA #$23                        ;C - - - - - 0x017F52 0B:BF42: A9 23
 	JSR sub_0F_F288                 ;C - - - - - 0x017F54 0B:BF44: 20 88 F2
 	LDA #$36                        ;C - - - - - 0x017F57 0B:BF47: A9 36
-	STA ram_00EB                    ;C - - - - - 0x017F59 0B:BF49: 85 EB
+	STA chrBankShadow+3             ;C - - - - - 0x017F59 0B:BF49: 85 EB
 	LDA #$15                        ;C - - - - - 0x017F5B 0B:BF4B: A9 15
 	STA palBuffer+27                ;C - - - - - 0x017F5D 0B:BF4D: 8D 1B 06
 	LDA #$26                        ;C - - - - - 0x017F60 0B:BF50: A9 26

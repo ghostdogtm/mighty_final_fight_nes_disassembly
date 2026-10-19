@@ -7,15 +7,15 @@
 	LDA ram_0029                    ;C - - - - - 0x01E017 0F:E007: A5 29
 	.byte $F0, $F2                  ;C - - - - - BEQ loc_0E_DFFD 0x01E019 0F:E009: (branch to another bank, kept as bytes)
 	LDX #$0A                        ;C - - - - - 0x01E01B 0F:E00B: A2 0A
-	STX ram_00F4                    ;C - - - - - 0x01E01D 0F:E00D: 86 F4
+	STX prgBank8000                 ;C - - - - - 0x01E01D 0F:E00D: 86 F4
 	INX                             ;C - - - - - 0x01E01F 0F:E00F: E8
-	STX ram_00F5                    ;C - - - - - 0x01E020 0F:E010: 86 F5
-	JSR sub_0F_FF4D                 ;C - - - - - 0x01E022 0F:E012: 20 4D FF
+	STX prgBankA000                 ;C - - - - - 0x01E020 0F:E010: 86 F5
+	JSR SetPrgBanks                 ;C - - - - - 0x01E022 0F:E012: 20 4D FF
 	JSR sub_0A_9C00                 ;C - - - - - bank=0A 0x01E025 0F:E015: 20 00 9C
 	LDY stage                       ;C - - - - - 0x01E028 0F:E018: A4 61
-	LDA tbl_0E_C1F8,Y               ;C - - - - - 0x01E02A 0F:E01A: B9 F8 C1
-	STA ram_00F5                    ;C - - - - - 0x01E02D 0F:E01D: 85 F5
-	JSR sub_0F_FF4D                 ;C - - - - - 0x01E02F 0F:E01F: 20 4D FF
+	LDA stageBankTable,Y            ;C - - - - - 0x01E02A 0F:E01A: B9 F8 C1
+	STA prgBankA000                 ;C - - - - - 0x01E02D 0F:E01D: 85 F5
+	JSR SetPrgBanks                 ;C - - - - - 0x01E02F 0F:E01F: 20 4D FF
 	LDA ram_0060                    ;C - - - - - 0x01E032 0F:E022: A5 60
 	CMP #$01                        ;C - - - - - 0x01E034 0F:E024: C9 01
 	BEQ loc_0F_E032                 ;C - - - - - 0x01E036 0F:E026: F0 0A
@@ -58,10 +58,10 @@ loc_0F_E03B:
 	JSR sub_0E_C8B4                 ;C - - - - - 0x01E087 0F:E077: 20 B4 C8
 	JSR sub_0F_E16B                 ;C - - - - - 0x01E08A 0F:E07A: 20 6B E1
 	LDX #$08                        ;C - - - - - 0x01E08D 0F:E07D: A2 08
-	STX ram_00F4                    ;C - - - - - 0x01E08F 0F:E07F: 86 F4
+	STX prgBank8000                 ;C - - - - - 0x01E08F 0F:E07F: 86 F4
 	INX                             ;C - - - - - 0x01E091 0F:E081: E8
-	STX ram_00F5                    ;C - - - - - 0x01E092 0F:E082: 86 F5
-	JSR sub_0F_FF4D                 ;C - - - - - 0x01E094 0F:E084: 20 4D FF
+	STX prgBankA000                 ;C - - - - - 0x01E092 0F:E082: 86 F5
+	JSR SetPrgBanks                 ;C - - - - - 0x01E094 0F:E084: 20 4D FF
 	JSR sub_08_8000                 ;C - - - - - bank=08 0x01E097 0F:E087: 20 00 80
 	JSR sub_08_8038                 ;C - - - - - bank=08 0x01E09A 0F:E08A: 20 38 80
 	JSR sub_08_8080                 ;C - - - - - bank=08 0x01E09D 0F:E08D: 20 80 80
@@ -165,8 +165,8 @@ sub_0F_E139:
 sub_0F_E143:
 	LDA #$00                        ;C - - - - - 0x01E153 0F:E143: A9 00
 	STA ram_00FC                    ;C - - - - - 0x01E155 0F:E145: 85 FC
-	STA ram_00FA                    ;C - - - - - 0x01E157 0F:E147: 85 FA
-	STA ram_00FD                    ;C - - - - - 0x01E159 0F:E149: 85 FD
+	STA scrollY                     ;C - - - - - 0x01E157 0F:E147: 85 FA
+	STA nametableSelect             ;C - - - - - 0x01E159 0F:E149: 85 FD
 	STA ram_00FB                    ;C - - - - - 0x01E15B 0F:E14B: 85 FB
 	STA ram_00F9                    ;C - - - - - 0x01E15D 0F:E14D: 85 F9
 	STA ram_00EE                    ;C - - - - - 0x01E15F 0F:E14F: 85 EE
@@ -752,9 +752,9 @@ loc_0F_E53F:
 	STA ram_0029                    ;C - - - - - 0x01E555 0F:E545: 85 29
 loc_0F_E547:
 	LDY stageData                   ;C - - - - - 0x01E557 0F:E547: A4 22
-	LDA tbl_0E_C1F8,Y               ;C - - - - - 0x01E559 0F:E549: B9 F8 C1
-	STA ram_00F5                    ;C - - - - - 0x01E55C 0F:E54C: 85 F5
-	JSR sub_0F_FF4D                 ;C - - - - - 0x01E55E 0F:E54E: 20 4D FF
+	LDA stageBankTable,Y            ;C - - - - - 0x01E559 0F:E549: B9 F8 C1
+	STA prgBankA000                 ;C - - - - - 0x01E55C 0F:E54C: 85 F5
+	JSR SetPrgBanks                 ;C - - - - - 0x01E55E 0F:E54E: 20 4D FF
 	LDA ram_0024                    ;C - - - - - 0x01E561 0F:E551: A5 24
 	LSR A                           ;C - - - - - 0x01E563 0F:E553: 4A
 	LSR A                           ;C - - - - - 0x01E564 0F:E554: 4A
@@ -1456,12 +1456,12 @@ loc_0F_EA6E:
 loc_0F_EA6F:
 	LDY ram_0320,X                  ;C - - - - - 0x01EA7F 0F:EA6F: BC 20 03
 	LDA tbl_0F_EB93,Y               ;C - - - - - 0x01EA82 0F:EA72: B9 93 EB
-	STA ram_00F4                    ;C - - - - - 0x01EA85 0F:EA75: 85 F4
+	STA prgBank8000                 ;C - - - - - 0x01EA85 0F:EA75: 85 F4
 	CLC                             ;C - - - - - 0x01EA87 0F:EA77: 18
 	ADC #$01                        ;C - - - - - 0x01EA88 0F:EA78: 69 01
-	STA ram_00F5                    ;C - - - - - 0x01EA8A 0F:EA7A: 85 F5
+	STA prgBankA000                 ;C - - - - - 0x01EA8A 0F:EA7A: 85 F5
 	STX ptr_00                      ;C - - - - - 0x01EA8C 0F:EA7C: 86 00
-	JSR sub_0F_FF4D                 ;C - - - - - 0x01EA8E 0F:EA7E: 20 4D FF
+	JSR SetPrgBanks                 ;C - - - - - 0x01EA8E 0F:EA7E: 20 4D FF
 	LDX ptr_00                      ;C - - - - - 0x01EA91 0F:EA81: A6 00
 	LDY #$00                        ;C - - - - - 0x01EA93 0F:EA83: A0 00
 	LDA ram_0560,X                  ;C - - - - - 0x01EA95 0F:EA85: BD 60 05
@@ -1534,11 +1534,11 @@ ofs_0F_EAFB:
 	LDY #$03                        ;C - - - - - 0x01EB17 0F:EB07: A0 03
 loc_0F_EB09:
 	STA ptr_04                      ;C - - - - - 0x01EB19 0F:EB09: 85 04
-	CPY ram_00F5                    ;C - - - - - 0x01EB1B 0F:EB0B: C4 F5
+	CPY prgBankA000                 ;C - - - - - 0x01EB1B 0F:EB0B: C4 F5
 	BEQ loc_0F_EB18                 ;C - - - - - 0x01EB1D 0F:EB0D: F0 09
-	STY ram_00F5                    ;C - - - - - 0x01EB1F 0F:EB0F: 84 F5
+	STY prgBankA000                 ;C - - - - - 0x01EB1F 0F:EB0F: 84 F5
 	STX ptr_04+1                    ;C - - - - - 0x01EB21 0F:EB11: 86 05
-	JSR sub_0F_FF4D                 ;C - - - - - 0x01EB23 0F:EB13: 20 4D FF
+	JSR SetPrgBanks                 ;C - - - - - 0x01EB23 0F:EB13: 20 4D FF
 	LDX ptr_04+1                    ;C - - - - - 0x01EB26 0F:EB16: A6 05
 loc_0F_EB18:
 	LDY #$01                        ;C - - - - - 0x01EB28 0F:EB18: A0 01
@@ -1813,9 +1813,9 @@ loc_0F_ED29:
 loc_0F_ED49:
 	STX ptr_04                      ;C - - - - - 0x01ED59 0F:ED49: 86 04
 	LDY stageData                   ;C - - - - - 0x01ED5B 0F:ED4B: A4 22
-	LDA tbl_0E_C1F8,Y               ;C - - - - - 0x01ED5D 0F:ED4D: B9 F8 C1
-	STA ram_00F5                    ;C - - - - - 0x01ED60 0F:ED50: 85 F5
-	JSR sub_0F_FF4D                 ;C - - - - - 0x01ED62 0F:ED52: 20 4D FF
+	LDA stageBankTable,Y            ;C - - - - - 0x01ED5D 0F:ED4D: B9 F8 C1
+	STA prgBankA000                 ;C - - - - - 0x01ED60 0F:ED50: 85 F5
+	JSR SetPrgBanks                 ;C - - - - - 0x01ED62 0F:ED52: 20 4D FF
 	LDX ptr_04                      ;C - - - - - 0x01ED65 0F:ED55: A6 04
 	LDY ram_0013                    ;C - - - - - 0x01ED67 0F:ED57: A4 13
 	JSR sub_0F_E66E                 ;C - - - - - 0x01ED69 0F:ED59: 20 6E E6
@@ -1962,9 +1962,9 @@ loc_0F_EE43:
 	STA ptr_02+1                    ;C - - - - - 0x01EE64 0F:EE54: 85 03
 	STX ptr_04                      ;C - - - - - 0x01EE66 0F:EE56: 86 04
 	LDY stageData                   ;C - - - - - 0x01EE68 0F:EE58: A4 22
-	LDA tbl_0E_C1F8,Y               ;C - - - - - 0x01EE6A 0F:EE5A: B9 F8 C1
-	STA ram_00F5                    ;C - - - - - 0x01EE6D 0F:EE5D: 85 F5
-	JSR sub_0F_FF4D                 ;C - - - - - 0x01EE6F 0F:EE5F: 20 4D FF
+	LDA stageBankTable,Y            ;C - - - - - 0x01EE6A 0F:EE5A: B9 F8 C1
+	STA prgBankA000                 ;C - - - - - 0x01EE6D 0F:EE5D: 85 F5
+	JSR SetPrgBanks                 ;C - - - - - 0x01EE6F 0F:EE5F: 20 4D FF
 	LDX ptr_04                      ;C - - - - - 0x01EE72 0F:EE62: A6 04
 	LDY ram_0013                    ;C - - - - - 0x01EE74 0F:EE64: A4 13
 	JSR sub_0F_E66E                 ;C - - - - - 0x01EE76 0F:EE66: 20 6E E6
@@ -2026,12 +2026,12 @@ sub_0F_EEC4:
 	LDA #$00                        ;C - - - - - 0x01EED7 0F:EEC7: A9 00
 	STA ram_0010                    ;C - - - - - 0x01EED9 0F:EEC9: 85 10
 	STA ram_0041                    ;C - - - - - 0x01EEDB 0F:EECB: 85 41
-	LDA ram_00F5                    ;C - - - - - 0x01EEDD 0F:EECD: A5 F5
+	LDA prgBankA000                 ;C - - - - - 0x01EEDD 0F:EECD: A5 F5
 	STA ram_002F                    ;C - - - - - 0x01EEDF 0F:EECF: 85 2F
 	LDY stageData                   ;C - - - - - 0x01EEE1 0F:EED1: A4 22
-	LDA tbl_0E_C1F8,Y               ;C - - - - - 0x01EEE3 0F:EED3: B9 F8 C1
-	STA ram_00F5                    ;C - - - - - 0x01EEE6 0F:EED6: 85 F5
-	JSR sub_0F_FF4D                 ;C - - - - - 0x01EEE8 0F:EED8: 20 4D FF
+	LDA stageBankTable,Y            ;C - - - - - 0x01EEE3 0F:EED3: B9 F8 C1
+	STA prgBankA000                 ;C - - - - - 0x01EEE6 0F:EED6: 85 F5
+	JSR SetPrgBanks                 ;C - - - - - 0x01EEE8 0F:EED8: 20 4D FF
 	PLA                             ;C - - - - - 0x01EEEB 0F:EEDB: 68
 	TAX                             ;C - - - - - 0x01EEEC 0F:EEDC: AA
 	PLA                             ;C - - - - - 0x01EEED 0F:EEDD: 68
@@ -2040,8 +2040,8 @@ loc_0F_EEDF:
 	TXA                             ;C - - - - - 0x01EEEF 0F:EEDF: 8A
 	PHA                             ;C - - - - - 0x01EEF0 0F:EEE0: 48
 	LDA ram_002F                    ;C - - - - - 0x01EEF1 0F:EEE1: A5 2F
-	STA ram_00F5                    ;C - - - - - 0x01EEF3 0F:EEE3: 85 F5
-	JSR sub_0F_FF4D                 ;C - - - - - 0x01EEF5 0F:EEE5: 20 4D FF
+	STA prgBankA000                 ;C - - - - - 0x01EEF3 0F:EEE3: 85 F5
+	JSR SetPrgBanks                 ;C - - - - - 0x01EEF5 0F:EEE5: 20 4D FF
 	PLA                             ;C - - - - - 0x01EEF8 0F:EEE8: 68
 	TAX                             ;C - - - - - 0x01EEF9 0F:EEE9: AA
 	RTS                             ;C - - - - - 0x01EEFA 0F:EEEA: 60
@@ -2680,9 +2680,9 @@ tbl_0F_F3E6:
 	.byte $00,$0F,$0E               ;- D 3 - - - 0x01F412 0F:F402:
 	.byte $04                       ;- - - - - - 0x01F415 0F:F405:
 sub_0F_F406:
-	LDA ram_00F2                    ;C - - - - - 0x01F416 0F:F406: A5 F2
+	LDA prgR6Shadow                 ;C - - - - - 0x01F416 0F:F406: A5 F2
 	PHA                             ;C - - - - - 0x01F418 0F:F408: 48
-	LDA ram_00F3                    ;C - - - - - 0x01F419 0F:F409: A5 F3
+	LDA prgR7Shadow                 ;C - - - - - 0x01F419 0F:F409: A5 F3
 	PHA                             ;C - - - - - 0x01F41B 0F:F40B: 48
 	INC ram_009A                    ;C - - - - - 0x01F41C 0F:F40C: E6 9A
 	LDA #$04                        ;C - - - - - 0x01F41E 0F:F40E: A9 04
@@ -2693,10 +2693,10 @@ sub_0F_F406:
 	STA ram_009A                    ;C - - - - - 0x01F42A 0F:F41A: 85 9A
 	JSR sub_0F_FF31                 ;C - - - - - 0x01F42C 0F:F41C: 20 31 FF
 	PLA                             ;C - - - - - 0x01F42F 0F:F41F: 68
-	STA ram_00F5                    ;C - - - - - 0x01F430 0F:F420: 85 F5
+	STA prgBankA000                 ;C - - - - - 0x01F430 0F:F420: 85 F5
 	PLA                             ;C - - - - - 0x01F432 0F:F422: 68
-	STA ram_00F4                    ;C - - - - - 0x01F433 0F:F423: 85 F4
-	JMP sub_0F_FF4D                 ;C - - - - - 0x01F435 0F:F425: 4C 4D FF
+	STA prgBank8000                 ;C - - - - - 0x01F433 0F:F423: 85 F4
+	JMP SetPrgBanks                 ;C - - - - - 0x01F435 0F:F425: 4C 4D FF
 sub_0F_F428:
 	LDA #$1E                        ;C - - - - - 0x01F438 0F:F428: A9 1E
 	STA ram_00A4                    ;C - - - - - 0x01F43A 0F:F42A: 85 A4
@@ -2715,19 +2715,19 @@ sub_0F_F43B:
 	STA ram_00A4                    ;C - - - - - 0x01F44D 0F:F43D: 85 A4
 	RTS                             ;C - - - - - 0x01F44F 0F:F43F: 60
 sub_0F_F440:
-	STA ram_00EA                    ;C - - - - - 0x01F450 0F:F440: 85 EA
+	STA chrBankShadow+2             ;C - - - - - 0x01F450 0F:F440: 85 EA
 	RTS                             ;C - - - - - 0x01F452 0F:F442: 60
 sub_0F_F443:
 	JSR sub_0F_F288                 ;C - - - - - 0x01F453 0F:F443: 20 88 F2
-	STY ram_00EB                    ;C - - - - - 0x01F456 0F:F446: 84 EB
+	STY chrBankShadow+3             ;C - - - - - 0x01F456 0F:F446: 84 EB
 	RTS                             ;C - - - - - 0x01F458 0F:F448: 60
 sub_0F_F449:
 	JSR sub_0F_F288                 ;C - - - - - 0x01F459 0F:F449: 20 88 F2
-	STY ram_00EC                    ;C - - - - - 0x01F45C 0F:F44C: 84 EC
+	STY chrBankShadow+4             ;C - - - - - 0x01F45C 0F:F44C: 84 EC
 	RTS                             ;C - - - - - 0x01F45E 0F:F44E: 60
 sub_0F_F44F:
 	JSR sub_0F_F288                 ;C - - - - - 0x01F45F 0F:F44F: 20 88 F2
-	STY ram_00ED                    ;C - - - - - 0x01F462 0F:F452: 84 ED
+	STY chrBankShadow+5             ;C - - - - - 0x01F462 0F:F452: 84 ED
 loc_0F_F454:
 	RTS                             ;C - - - - - 0x01F464 0F:F454: 60
 sub_0F_F455:
@@ -3972,14 +3972,14 @@ loc_0F_FE51:
 	DEX                             ;C - - - - - 0x01FE63 0F:FE53: CA
 	BPL loc_0F_FE51                 ;C - - - - - 0x01FE64 0F:FE54: 10 FB
 	LDA #$18                        ;C - - - - - 0x01FE66 0F:FE56: A9 18
-	STA ram_00FE                    ;C - - - - - 0x01FE68 0F:FE58: 85 FE
+	STA ppuMaskBuf                  ;C - - - - - 0x01FE68 0F:FE58: 85 FE
 	LDA #$01                        ;C - - - - - 0x01FE6A 0F:FE5A: A9 01
 	STA MMC3_MIRRORING              ;C - - - - - 0x01FE6C 0F:FE5C: 8D 00 A0
 	LDX #$0C                        ;C - - - - - 0x01FE6F 0F:FE5F: A2 0C
-	STX ram_00F4                    ;C - - - - - 0x01FE71 0F:FE61: 86 F4
+	STX prgBank8000                 ;C - - - - - 0x01FE71 0F:FE61: 86 F4
 	INX                             ;C - - - - - 0x01FE73 0F:FE63: E8
-	STX ram_00F5                    ;C - - - - - 0x01FE74 0F:FE64: 86 F5
-	JSR sub_0F_FF4D                 ;C - - - - - 0x01FE76 0F:FE66: 20 4D FF
+	STX prgBankA000                 ;C - - - - - 0x01FE74 0F:FE64: 86 F5
+	JSR SetPrgBanks                 ;C - - - - - 0x01FE76 0F:FE66: 20 4D FF
 	LDX #$00                        ;C - - - - - 0x01FE79 0F:FE69: A2 00
 	STX MMC3_BANK_SELECT            ;C - - - - - 0x01FE7B 0F:FE6B: 8E 00 80
 	LDA #$40                        ;C - - - - - 0x01FE7E 0F:FE6E: A9 40
@@ -3989,17 +3989,17 @@ loc_0F_FE51:
 	LDA #$42                        ;C - - - - - 0x01FE87 0F:FE77: A9 42
 	STA MMC3_BANK_DATA              ;C - - - - - 0x01FE89 0F:FE79: 8D 01 80
 	LDA #$40                        ;C - - - - - 0x01FE8C 0F:FE7C: A9 40
-	STA ram_00E8                    ;C - - - - - 0x01FE8E 0F:FE7E: 85 E8
+	STA chrBankShadow               ;C - - - - - 0x01FE8E 0F:FE7E: 85 E8
 	LDA #$42                        ;C - - - - - 0x01FE90 0F:FE80: A9 42
-	STA ram_00E9                    ;C - - - - - 0x01FE92 0F:FE82: 85 E9
+	STA chrBankShadow+1             ;C - - - - - 0x01FE92 0F:FE82: 85 E9
 	LDA #$00                        ;C - - - - - 0x01FE94 0F:FE84: A9 00
-	STA ram_00EA                    ;C - - - - - 0x01FE96 0F:FE86: 85 EA
+	STA chrBankShadow+2             ;C - - - - - 0x01FE96 0F:FE86: 85 EA
 	LDA #$01                        ;C - - - - - 0x01FE98 0F:FE88: A9 01
-	STA ram_00EB                    ;C - - - - - 0x01FE9A 0F:FE8A: 85 EB
+	STA chrBankShadow+3             ;C - - - - - 0x01FE9A 0F:FE8A: 85 EB
 	LDA #$02                        ;C - - - - - 0x01FE9C 0F:FE8C: A9 02
-	STA ram_00EC                    ;C - - - - - 0x01FE9E 0F:FE8E: 85 EC
+	STA chrBankShadow+4             ;C - - - - - 0x01FE9E 0F:FE8E: 85 EC
 	LDA #$03                        ;C - - - - - 0x01FEA0 0F:FE90: A9 03
-	STA ram_00ED                    ;C - - - - - 0x01FEA2 0F:FE92: 85 ED
+	STA chrBankShadow+5             ;C - - - - - 0x01FEA2 0F:FE92: 85 ED
 	JSR sub_0E_C31D                 ;C - - - - - 0x01FEA4 0F:FE94: 20 1D C3
 	LDA #$20                        ;C - - - - - 0x01FEA7 0F:FE97: A9 20
 	LDX #$00                        ;C - - - - - 0x01FEA9 0F:FE99: A2 00
@@ -4108,35 +4108,36 @@ sub_0F_FF31:
 	JMP loc_0F_FEBA                 ;C - - - - - 0x01FF59 0F:FF49: 4C BA FE
 loc_0F_FF4C:
 	RTS                             ;C - - - - - 0x01FF5C 0F:FF4C: 60
-sub_0F_FF4D:
-	INC ram_00F6                    ;C - - - - - 0x01FF5D 0F:FF4D: E6 F6
+; applies prgBank8000/prgBankA000 to MMC3 R6/R7
+SetPrgBanks:
+	INC bankSwitchBusy              ;C - - - - - 0x01FF5D 0F:FF4D: E6 F6
 	LDA #$06                        ;C - - - - - 0x01FF5F 0F:FF4F: A9 06
-	STA ram_00F0                    ;C - - - - - 0x01FF61 0F:FF51: 85 F0
+	STA mmc3SelectShadow            ;C - - - - - 0x01FF61 0F:FF51: 85 F0
 	STA MMC3_BANK_SELECT            ;C - - - - - 0x01FF63 0F:FF53: 8D 00 80
-	LDA ram_00F4                    ;C - - - - - 0x01FF66 0F:FF56: A5 F4
-	STA ram_00F2                    ;C - - - - - 0x01FF68 0F:FF58: 85 F2
+	LDA prgBank8000                 ;C - - - - - 0x01FF66 0F:FF56: A5 F4
+	STA prgR6Shadow                 ;C - - - - - 0x01FF68 0F:FF58: 85 F2
 	STA MMC3_BANK_DATA              ;C - - - - - 0x01FF6A 0F:FF5A: 8D 01 80
 	LDA #$07                        ;C - - - - - 0x01FF6D 0F:FF5D: A9 07
-	STA ram_00F0                    ;C - - - - - 0x01FF6F 0F:FF5F: 85 F0
+	STA mmc3SelectShadow            ;C - - - - - 0x01FF6F 0F:FF5F: 85 F0
 	STA MMC3_BANK_SELECT            ;C - - - - - 0x01FF71 0F:FF61: 8D 00 80
-	LDA ram_00F5                    ;C - - - - - 0x01FF74 0F:FF64: A5 F5
-	STA ram_00F3                    ;C - - - - - 0x01FF76 0F:FF66: 85 F3
+	LDA prgBankA000                 ;C - - - - - 0x01FF74 0F:FF64: A5 F5
+	STA prgR7Shadow                 ;C - - - - - 0x01FF76 0F:FF66: 85 F3
 	STA MMC3_BANK_DATA              ;C - - - - - 0x01FF78 0F:FF68: 8D 01 80
-	DEC ram_00F6                    ;C - - - - - 0x01FF7B 0F:FF6B: C6 F6
+	DEC bankSwitchBusy              ;C - - - - - 0x01FF7B 0F:FF6B: C6 F6
 	LDA ram_00F7                    ;C - - - - - 0x01FF7D 0F:FF6D: A5 F7
 	BNE sub_0F_FF72                 ;C - - - - - 0x01FF7F 0F:FF6F: D0 01
 	RTS                             ;C - - - - - 0x01FF81 0F:FF71: 60
 sub_0F_FF72:
-	LDA ram_00F6                    ;C - - - - - 0x01FF82 0F:FF72: A5 F6
+	LDA bankSwitchBusy              ;C - - - - - 0x01FF82 0F:FF72: A5 F6
 	BNE loc_0F_FFB2                 ;C - - - - - 0x01FF84 0F:FF74: D0 3C
 	LDA #$06                        ;C - - - - - 0x01FF86 0F:FF76: A9 06
-	STA ram_00F0                    ;C - - - - - 0x01FF88 0F:FF78: 85 F0
+	STA mmc3SelectShadow            ;C - - - - - 0x01FF88 0F:FF78: 85 F0
 	STA MMC3_BANK_SELECT            ;C - - - - - 0x01FF8A 0F:FF7A: 8D 00 80
 	LDA #$06                        ;C - - - - - 0x01FF8D 0F:FF7D: A9 06
 	STA MMC3_BANK_DATA              ;C - - - - - 0x01FF8F 0F:FF7F: 8D 01 80
 	LDA #$07                        ;C - - - - - 0x01FF92 0F:FF82: A9 07
 ofs_0F_FF84:
-	STA ram_00F0                    ;C - - - - - 0x01FF94 0F:FF84: 85 F0
+	STA mmc3SelectShadow            ;C - - - - - 0x01FF94 0F:FF84: 85 F0
 	STA MMC3_BANK_SELECT            ;C - - - - - 0x01FF96 0F:FF86: 8D 00 80
 	LDA #$07                        ;C - - - - - 0x01FF99 0F:FF89: A9 07
 	STA MMC3_BANK_DATA              ;C - - - - - 0x01FF9B 0F:FF8B: 8D 01 80
@@ -4159,7 +4160,7 @@ loc_0F_FFA8:
 	JSR $8000                       ;C - - - - - 0x01FFB8 0F:FFA8: 20 00 80
 	LDA #$00                        ;C - - - - - 0x01FFBB 0F:FFAB: A9 00
 	STA ram_00F7                    ;C - - - - - 0x01FFBD 0F:FFAD: 85 F7
-	JMP sub_0F_FF4D                 ;C - - - - - 0x01FFBF 0F:FFAF: 4C 4D FF
+	JMP SetPrgBanks                 ;C - - - - - 0x01FFBF 0F:FFAF: 4C 4D FF
 loc_0F_FFB2:
 	INC ram_00F7                    ;C - - - - - 0x01FFC2 0F:FFB2: E6 F7
 	RTS                             ;C - - - - - 0x01FFC4 0F:FFB4: 60

@@ -1300,7 +1300,7 @@ loc_0D_AA6A:
 	LDA tbl_0F_FC33,Y               ;C - - - - - 0x01AA85 0D:AA75: B9 33 FC
 	TAY                             ;C - - - - - 0x01AA88 0D:AA78: A8
 	LDA ptr_00                      ;C - - - - - 0x01AA89 0D:AA79: A5 00
-	STA a:ram_00EB,Y                ;C - - - - - 0x01AA8B 0D:AA7B: 99 EB 00
+	STA a:chrBankShadow+3,Y         ;C - - - - - 0x01AA8B 0D:AA7B: 99 EB 00
 	RTS                             ;C - - - - - 0x01AA8E 0D:AA7E: 60
 loc_0D_AA7F:
 	LDA ram_0580                    ;C - - - - - 0x01AA8F 0D:AA7F: AD 80 05
@@ -1318,7 +1318,7 @@ loc_0D_AA96:
 	LDA #$94                        ;C - - - - - 0x01AAA6 0D:AA96: A9 94
 	JSR sub_0F_F288                 ;C - - - - - 0x01AAA8 0D:AA98: 20 88 F2
 	LDA #$1D                        ;C - - - - - 0x01AAAB 0D:AA9B: A9 1D
-	STA ram_00EB                    ;C - - - - - 0x01AAAD 0D:AA9D: 85 EB
+	STA chrBankShadow+3             ;C - - - - - 0x01AAAD 0D:AA9D: 85 EB
 	RTS                             ;C - - - - - 0x01AAAF 0D:AA9F: 60
 sub_0D_AAA0:
 	LDA ram_0320,X                  ;C - - - - - 0x01AAB0 0D:AAA0: BD 20 03
@@ -1340,7 +1340,7 @@ loc_0D_AABC:
 	LDA tbl_0F_FC33,Y               ;C - - - - - 0x01AAD1 0D:AAC1: B9 33 FC
 	TAY                             ;C - - - - - 0x01AAD4 0D:AAC4: A8
 	LDA ptr_00                      ;C - - - - - 0x01AAD5 0D:AAC5: A5 00
-	STA a:ram_00EB,Y                ;C - - - - - 0x01AAD7 0D:AAC7: 99 EB 00
+	STA a:chrBankShadow+3,Y         ;C - - - - - 0x01AAD7 0D:AAC7: 99 EB 00
 	RTS                             ;C - - - - - 0x01AADA 0D:AACA: 60
 tbl_0D_AACB:
 	.byte $80,$88,$8F,$98,$A1,$B7   ;- D 1 - - - 0x01AADB 0D:AACB:
@@ -1358,7 +1358,7 @@ loc_0D_AAE5:
 	LDA tbl_0F_FC33,Y               ;C - - - - - 0x01AAFA 0D:AAEA: B9 33 FC
 	TAY                             ;C - - - - - 0x01AAFD 0D:AAED: A8
 	LDA ptr_00                      ;C - - - - - 0x01AAFE 0D:AAEE: A5 00
-	STA a:ram_00EB,Y                ;C - - - - - 0x01AB00 0D:AAF0: 99 EB 00
+	STA a:chrBankShadow+3,Y         ;C - - - - - 0x01AB00 0D:AAF0: 99 EB 00
 	RTS                             ;C - - - - - 0x01AB03 0D:AAF3: 60
 tbl_0D_AAF4:
 	.word $8981, $9990, ofs_0E_D1A5-1;W 0x01AB04 0D:AAF4:
@@ -1376,7 +1376,7 @@ loc_0D_AB0E:
 	LDA tbl_0F_FC33,Y               ;C - - - - - 0x01AB23 0D:AB13: B9 33 FC
 	TAY                             ;C - - - - - 0x01AB26 0D:AB16: A8
 	LDA ptr_00                      ;C - - - - - 0x01AB27 0D:AB17: A5 00
-	STA a:ram_00EB,Y                ;C - - - - - 0x01AB29 0D:AB19: 99 EB 00
+	STA a:chrBankShadow+3,Y         ;C - - - - - 0x01AB29 0D:AB19: 99 EB 00
 	RTS                             ;C - - - - - 0x01AB2C 0D:AB1C: 60
 tbl_0D_AB1D:
 	.byte $83,$8A,$92,$9B,$A8,$D3   ;- D 1 - - - 0x01AB2D 0D:AB1D:

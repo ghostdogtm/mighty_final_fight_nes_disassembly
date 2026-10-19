@@ -6,11 +6,11 @@ sub_09_A000:
 	PHA                             ;C - - - - - 0x012011 09:A001: 48
 	TAX                             ;C - - - - - 0x012012 09:A002: AA
 	LDA tbl_09_A035,X               ;C - - - - - 0x012013 09:A003: BD 35 A0
-	STA ram_00EB                    ;C - - - - - 0x012016 09:A006: 85 EB
+	STA chrBankShadow+3             ;C - - - - - 0x012016 09:A006: 85 EB
 	LDA tbl_09_A036,X               ;C - - - - - 0x012018 09:A008: BD 36 A0
-	STA ram_00EC                    ;C - - - - - 0x01201B 09:A00B: 85 EC
+	STA chrBankShadow+4             ;C - - - - - 0x01201B 09:A00B: 85 EC
 	LDA tbl_09_A0B5,X               ;C - - - - - 0x01201D 09:A00D: BD B5 A0
-	STA ram_00ED                    ;C - - - - - 0x012020 09:A010: 85 ED
+	STA chrBankShadow+5             ;C - - - - - 0x012020 09:A010: 85 ED
 	PLA                             ;C - - - - - 0x012022 09:A012: 68
 sub_09_A013:
 	ASL A                           ;C - - - - - 0x012023 09:A013: 0A

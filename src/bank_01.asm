@@ -589,7 +589,7 @@ loc_01_A485:
 	LDY #$2C                        ;C - - - - - 0x0024A3 01:A493: A0 2C
 	JSR sub_0F_F449                 ;C - - - - - 0x0024A5 01:A495: 20 49 F4
 	LDA #$2E                        ;C - - - - - 0x0024A8 01:A498: A9 2E
-	STA ram_00ED                    ;C - - - - - 0x0024AA 01:A49A: 85 ED
+	STA chrBankShadow+5             ;C - - - - - 0x0024AA 01:A49A: 85 ED
 	RTS                             ;C - - - - - 0x0024AC 01:A49C: 60
 loc_01_A49D:
 	JSR sub_01_A031                 ;C - - - - - 0x0024AD 01:A49D: 20 31 A0
@@ -997,11 +997,11 @@ sub_01_A83A:
 	LDA tbl_01_A914,Y               ;C - - - - - 0x00286D 01:A85D: B9 14 A9
 	TAY                             ;C - - - - - 0x002870 01:A860: A8
 	LDA ptr_00                      ;C - - - - - 0x002871 01:A861: A5 00
-	STA a:ram_00EB,Y                ;C - - - - - 0x002873 01:A863: 99 EB 00
+	STA a:chrBankShadow+3,Y         ;C - - - - - 0x002873 01:A863: 99 EB 00
 	LDA tbl_01_A916,Y               ;C - - - - - 0x002876 01:A866: B9 16 A9
 	TAY                             ;C - - - - - 0x002879 01:A869: A8
 	LDA ptr_00+1                    ;C - - - - - 0x00287A 01:A86A: A5 01
-	STA a:ram_00EB,Y                ;C - - - - - 0x00287C 01:A86C: 99 EB 00
+	STA a:chrBankShadow+3,Y         ;C - - - - - 0x00287C 01:A86C: 99 EB 00
 loc_01_A86F:
 	RTS                             ;C - - - - - 0x00287F 01:A86F: 60
 tbl_01_A870:
@@ -1015,7 +1015,7 @@ loc_01_A876:
 	LDY #$2C                        ;C - - - - - 0x002888 01:A878: A0 2C
 	JSR sub_0F_F449                 ;C - - - - - 0x00288A 01:A87A: 20 49 F4
 	LDA #$2E                        ;C - - - - - 0x00288D 01:A87D: A9 2E
-	STA ram_00ED                    ;C - - - - - 0x00288F 01:A87F: 85 ED
+	STA chrBankShadow+5             ;C - - - - - 0x00288F 01:A87F: 85 ED
 	RTS                             ;C - - - - - 0x002891 01:A881: 60
 sub_01_A882:
 	LDA ram_05B0,X                  ;C - - - - - 0x002892 01:A882: BD B0 05
@@ -1033,11 +1033,11 @@ sub_01_A882:
 	LDA tbl_01_A914,Y               ;C - - - - - 0x0028AE 01:A89E: B9 14 A9
 	TAY                             ;C - - - - - 0x0028B1 01:A8A1: A8
 	LDA ptr_00                      ;C - - - - - 0x0028B2 01:A8A2: A5 00
-	STA a:ram_00EB,Y                ;C - - - - - 0x0028B4 01:A8A4: 99 EB 00
+	STA a:chrBankShadow+3,Y         ;C - - - - - 0x0028B4 01:A8A4: 99 EB 00
 	LDA tbl_01_A916,Y               ;C - - - - - 0x0028B7 01:A8A7: B9 16 A9
 	TAY                             ;C - - - - - 0x0028BA 01:A8AA: A8
 	LDA ptr_00+1                    ;C - - - - - 0x0028BB 01:A8AB: A5 01
-	STA a:ram_00EB,Y                ;C - - - - - 0x0028BD 01:A8AD: 99 EB 00
+	STA a:chrBankShadow+3,Y         ;C - - - - - 0x0028BD 01:A8AD: 99 EB 00
 loc_01_A8B0:
 	RTS                             ;C - - - - - 0x0028C0 01:A8B0: 60
 tbl_01_A8B1:
@@ -1062,11 +1062,11 @@ sub_01_A8B7:
 	LDA tbl_01_A914,Y               ;C - - - - - 0x0028E3 01:A8D3: B9 14 A9
 	TAY                             ;C - - - - - 0x0028E6 01:A8D6: A8
 	LDA ptr_00                      ;C - - - - - 0x0028E7 01:A8D7: A5 00
-	STA a:ram_00EB,Y                ;C - - - - - 0x0028E9 01:A8D9: 99 EB 00
+	STA a:chrBankShadow+3,Y         ;C - - - - - 0x0028E9 01:A8D9: 99 EB 00
 	LDA tbl_01_A916,Y               ;C - - - - - 0x0028EC 01:A8DC: B9 16 A9
 	TAY                             ;C - - - - - 0x0028EF 01:A8DF: A8
 	LDA ptr_00+1                    ;C - - - - - 0x0028F0 01:A8E0: A5 01
-	STA a:ram_00EB,Y                ;C - - - - - 0x0028F2 01:A8E2: 99 EB 00
+	STA a:chrBankShadow+3,Y         ;C - - - - - 0x0028F2 01:A8E2: 99 EB 00
 	INC ram_0590,X                  ;C - - - - - 0x0028F5 01:A8E5: FE 90 05
 loc_01_A8E8:
 	RTS                             ;C - - - - - 0x0028F8 01:A8E8: 60
@@ -1090,7 +1090,7 @@ sub_01_A8EF:
 	LDA tbl_01_A914,Y               ;C - - - - - 0x002916 01:A906: B9 14 A9
 	TAY                             ;C - - - - - 0x002919 01:A909: A8
 	LDA ptr_00                      ;C - - - - - 0x00291A 01:A90A: A5 00
-	STA a:ram_00EB,Y                ;C - - - - - 0x00291C 01:A90C: 99 EB 00
+	STA a:chrBankShadow+3,Y         ;C - - - - - 0x00291C 01:A90C: 99 EB 00
 loc_01_A90F:
 	RTS                             ;C - - - - - 0x00291F 01:A90F: 60
 tbl_01_A910:
@@ -1538,7 +1538,7 @@ loc_01_AC61:
 	LDY #$2C                        ;C - - - - - 0x002C8D 01:AC7D: A0 2C
 	JSR sub_0F_F449                 ;C - - - - - 0x002C8F 01:AC7F: 20 49 F4
 	LDA #$2E                        ;C - - - - - 0x002C92 01:AC82: A9 2E
-	STA ram_00ED                    ;C - - - - - 0x002C94 01:AC84: 85 ED
+	STA chrBankShadow+5             ;C - - - - - 0x002C94 01:AC84: 85 ED
 	RTS                             ;C - - - - - 0x002C96 01:AC86: 60
 loc_01_AC87:
 	LDA #$90                        ;C - - - - - 0x002C97 01:AC87: A9 90

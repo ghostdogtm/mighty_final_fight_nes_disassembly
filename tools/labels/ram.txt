@@ -35,3 +35,15 @@
 ; ---- misc
 0200 oamBuffer 256              ; OAM DMA source ($4014 <- $02)
 0600 palBuffer 32               ; palette buffer copied to $3F00 by NMI when palUpdateFlag is set
+
+; ---- MMC3 / PPU shadow registers (found in NMI 0E:C000-C0D0 and SetPrgBanks 0F:FF4D)
+00E8 chrBankShadow 6            ; shadows of MMC3 R0..R5 (CHR banks), written by NMI
+00F0 mmc3SelectShadow           ; last value written to $8000 (bank select)
+00F2 prgR6Shadow                ; last value written to R6 (PRG bank at $8000)
+00F3 prgR7Shadow                ; last value written to R7 (PRG bank at $A000)
+00F4 prgBank8000                ; wanted PRG bank in the $8000 window; applied by SetPrgBanks
+00F5 prgBankA000                ; wanted PRG bank in the $A000 window (stage-dependent, see stageBankTable)
+00F6 bankSwitchBusy             ; INC at entry / DEC at exit of SetPrgBanks
+00FA scrollY                    ; second PPUSCROLL write in NMI
+00FD nametableSelect            ; bit 0 ORed into PPUCTRL
+00FE ppuMaskBuf                 ; value written to PPUMASK by NMI
