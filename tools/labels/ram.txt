@@ -22,15 +22,15 @@
 00FF bufPPUCTRL                 ; (?) PPUCTRL shadow, NMI writes it with bit 7 cleared
 
 ; ---- object tables (index X = object slot; slot 0 = player, enemies start at slot $0C)
-031C objState                   ; enemy state: 00 killed, 80 alive
-033C objId                      ; object / enemy id (Poison 20/26/30, Two P 21/27/31, Bred 22/28/32, Axl 23/29/33,
+0310 objState       16   ; enemy state: 00 killed, 80 alive (array of 16 object slots; slot 0 = player; Data Crystal addresses are slot $0C)
+0330 objId          16   ; object / enemy id (Poison 20/26/30, Two P 21/27/31, Bred 22/28/32, Axl 23/29/33, (array of 16 object slots; slot 0 = player; Data Crystal addresses are slot $0C)
                                 ; El Gado 24/2A/34, Andore 25/2B/35, Thrasher 80, Sodom 81/83, Abigail 90, Belger 74,
                                 ; drums 72, go sign 6F, enemy killed 16, cyborg killed 9B)
-0360 objX                       ; X position (player at +0, enemies at +$0C ...)
-03C0 objY                       ; Y position
-0490 objLife                    ; enemy life; "one hit kills" cheat patches the SBC that subtracts from it
-04FC objSpriteAir               ; (?) sprite id while in the air
-05BC objSpriteDown              ; (?) sprite id while lying down
+0360 objX           16   ; X position (player at +0, enemies at +$0C ...) (array of 16 object slots; slot 0 = player; Data Crystal addresses are slot $0C)
+03C0 objY           16   ; Y position (array of 16 object slots; slot 0 = player; Data Crystal addresses are slot $0C)
+0490 objLife        16   ; enemy life; "one hit kills" cheat patches the SBC that subtracts from it (array of 16 object slots; slot 0 = player; Data Crystal addresses are slot $0C)
+04F0 objSpriteAir   16   ; (?) sprite id while in the air (array of 16 object slots; slot 0 = player; Data Crystal addresses are slot $0C)
+05B0 objSpriteDown  16   ; (?) sprite id while lying down (array of 16 object slots; slot 0 = player; Data Crystal addresses are slot $0C)
 
 ; ---- misc
 0200 oamBuffer 256              ; OAM DMA source ($4014 <- $02)
@@ -60,3 +60,53 @@
 007D irqScrollX                 ; copy of scrollX used by IrqSplit1/2
 007E irqNametable               ; copy of nametableSelect
 0780 vramQueue 128              ; queue: [len, ppuHi, ppuLo, data*len]...  (also vramBuffer: [hi(bit7=end), lo, len-1, data])
+
+
+; ---- object arrays: 16 slots per field, field f at $0300+$10*f (names of unnamed fields are placeholders)
+0300 objArr_0300 16
+0320 objArr_0320 16
+0340 objArr_0340 16
+0350 objArr_0350 16
+0370 objArr_0370 16
+0380 objArr_0380 16
+0390 objArr_0390 16
+03A0 objArr_03A0 16
+03B0 objArr_03B0 16
+03D0 objArr_03D0 16
+03E0 objArr_03E0 16
+03F0 objArr_03F0 16
+0400 objArr_0400 16
+0410 objArr_0410 16
+0420 objArr_0420 16
+0430 objArr_0430 16
+0440 objArr_0440 16
+0450 objArr_0450 16
+0460 objArr_0460 16
+0470 objArr_0470 16
+0480 objArr_0480 16
+04A0 objArr_04A0 16
+04B0 objArr_04B0 16
+04C0 objArr_04C0 16
+04D0 objArr_04D0 16
+04E0 objArr_04E0 16
+0500 objArr_0500 16
+0510 objArr_0510 16
+0520 objArr_0520 16
+0530 objArr_0530 16
+0540 objArr_0540 16
+0550 objArr_0550 16
+0560 objArr_0560 16
+0570 objArr_0570 16
+0580 objArr_0580 16
+0590 objArr_0590 16
+05A0 objArr_05A0 16
+05C0 objArr_05C0 16
+05D0 objArr_05D0 16
+05E0 objArr_05E0 16
+05F0 objArr_05F0 16
+
+; ---- cooperative task scheduler (bank 0F, FEBA..FF3F); 4 tasks x 4 bytes
+0080 taskTable 16               ; per task: +0 state (0 free, 1 waiting, 2 running, 4 ready, 8 new), +1 wait frames, +2 saved SP (or entry lo), +3 entry hi
+0090 nmiTickFlag                ; $FF set by NMI, makes the scheduler restart its scan
+0091 currentTask                ; index of the running task (0..3)
+0092 frameCounter               ; incremented every NMI

@@ -111,19 +111,19 @@ loc_0E_C0BA:
 	STA irqVector+1                 ;C - - - - - 0x01C0E8 0E:C0D8: 85 9D
 	LDX ram_009B                    ;C - - - - - 0x01C0EA 0E:C0DA: A6 9B
 	STA $E000,X                     ;C - - - - - 0x01C0EC 0E:C0DC: 9D 00 E0
-	INC ram_0092                    ;C - - - - - 0x01C0EF 0E:C0DF: E6 92
+	INC frameCounter                ;C - - - - - 0x01C0EF 0E:C0DF: E6 92
 	LDX #$FF                        ;C - - - - - 0x01C0F1 0E:C0E1: A2 FF
-	STX ram_0090                    ;C - - - - - 0x01C0F3 0E:C0E3: 86 90
+	STX nmiTickFlag                 ;C - - - - - 0x01C0F3 0E:C0E3: 86 90
 	INX                             ;C - - - - - 0x01C0F5 0E:C0E5: E8
 	LDY #$04                        ;C - - - - - 0x01C0F6 0E:C0E6: A0 04
 loc_0E_C0E8:
-	LDA ram_0080,X                  ;C - - - - - 0x01C0F8 0E:C0E8: B5 80
+	LDA taskTable,X                 ;C - - - - - 0x01C0F8 0E:C0E8: B5 80
 	CMP #$01                        ;C - - - - - 0x01C0FA 0E:C0EA: C9 01
 	BNE loc_0E_C0F6                 ;C - - - - - 0x01C0FC 0E:C0EC: D0 08
-	DEC ram_0081,X                  ;C - - - - - 0x01C0FE 0E:C0EE: D6 81
+	DEC taskTable+1,X               ;C - - - - - 0x01C0FE 0E:C0EE: D6 81
 	BNE loc_0E_C0F6                 ;C - - - - - 0x01C100 0E:C0F0: D0 04
 	LDA #$04                        ;C - - - - - 0x01C102 0E:C0F2: A9 04
-	STA ram_0080,X                  ;C - - - - - 0x01C104 0E:C0F4: 95 80
+	STA taskTable,X                 ;C - - - - - 0x01C104 0E:C0F4: 95 80
 loc_0E_C0F6:
 	INX                             ;C - - - - - 0x01C106 0E:C0F6: E8
 	INX                             ;C - - - - - 0x01C107 0E:C0F7: E8
@@ -470,25 +470,25 @@ sub_0E_C334:
 	LDX #$0F                        ;C - - - - - 0x01C344 0E:C334: A2 0F
 loc_0E_C336:
 	LDA #$00                        ;C - - - - - 0x01C346 0E:C336: A9 00
-	STA ram_0300,X                  ;C - - - - - 0x01C348 0E:C338: 9D 00 03
-	STA ram_0310,X                  ;C - - - - - 0x01C34B 0E:C33B: 9D 10 03
-	STA ram_0560,X                  ;C - - - - - 0x01C34E 0E:C33E: 9D 60 05
-	STA ram_0470,X                  ;C - - - - - 0x01C351 0E:C341: 9D 70 04
-	STA ram_04B0,X                  ;C - - - - - 0x01C354 0E:C344: 9D B0 04
-	STA ram_0320,X                  ;C - - - - - 0x01C357 0E:C347: 9D 20 03
-	STA ram_0330,X                  ;C - - - - - 0x01C35A 0E:C34A: 9D 30 03
-	STA ram_0440,X                  ;C - - - - - 0x01C35D 0E:C34D: 9D 40 04
-	STA ram_0450,X                  ;C - - - - - 0x01C360 0E:C350: 9D 50 04
+	STA objArr_0300,X               ;C - - - - - 0x01C348 0E:C338: 9D 00 03
+	STA objState,X                  ;C - - - - - 0x01C34B 0E:C33B: 9D 10 03
+	STA objArr_0560,X               ;C - - - - - 0x01C34E 0E:C33E: 9D 60 05
+	STA objArr_0470,X               ;C - - - - - 0x01C351 0E:C341: 9D 70 04
+	STA objArr_04B0,X               ;C - - - - - 0x01C354 0E:C344: 9D B0 04
+	STA objArr_0320,X               ;C - - - - - 0x01C357 0E:C347: 9D 20 03
+	STA objId,X                     ;C - - - - - 0x01C35A 0E:C34A: 9D 30 03
+	STA objArr_0440,X               ;C - - - - - 0x01C35D 0E:C34D: 9D 40 04
+	STA objArr_0450,X               ;C - - - - - 0x01C360 0E:C350: 9D 50 04
 	STA objLife,X                   ;C - - - - - 0x01C363 0E:C353: 9D 90 04
-	STA ram_04A0,X                  ;C - - - - - 0x01C366 0E:C356: 9D A0 04
+	STA objArr_04A0,X               ;C - - - - - 0x01C366 0E:C356: 9D A0 04
 	LDA #$FF                        ;C - - - - - 0x01C369 0E:C359: A9 FF
-	STA ram_0480,X                  ;C - - - - - 0x01C36B 0E:C35B: 9D 80 04
+	STA objArr_0480,X               ;C - - - - - 0x01C36B 0E:C35B: 9D 80 04
 	DEX                             ;C - - - - - 0x01C36E 0E:C35E: CA
 	BPL loc_0E_C336                 ;C - - - - - 0x01C36F 0E:C35F: 10 D5
 	RTS                             ;C - - - - - 0x01C371 0E:C361: 60
 sub_0E_C362:
 	JSR HideSprites                 ;C - - - - - 0x01C372 0E:C362: 20 1D C3
-	JSR sub_0F_FF31                 ;C - - - - - 0x01C375 0E:C365: 20 31 FF
+	JSR WaitFrame                   ;C - - - - - 0x01C375 0E:C365: 20 31 FF
 	LDA #$30                        ;C - - - - - 0x01C378 0E:C368: A9 30
 	LDX #$F0                        ;C - - - - - 0x01C37A 0E:C36A: A2 F0
 	BNE loc_0E_C371                 ;C - - - - - 0x01C37C 0E:C36C: D0 03
@@ -522,7 +522,7 @@ loc_0E_C390:
 	LDA ptr_0E                      ;C - - - - - 0x01C3A8 0E:C398: A5 0E
 loc_0E_C39A:
 	PHA                             ;C - - - - - 0x01C3AA 0E:C39A: 48
-	JSR sub_0F_FF31                 ;C - - - - - 0x01C3AB 0E:C39B: 20 31 FF
+	JSR WaitFrame                   ;C - - - - - 0x01C3AB 0E:C39B: 20 31 FF
 	PLA                             ;C - - - - - 0x01C3AE 0E:C39E: 68
 	SEC                             ;C - - - - - 0x01C3AF 0E:C39F: 38
 	SBC #$01                        ;C - - - - - 0x01C3B0 0E:C3A0: E9 01
@@ -560,7 +560,7 @@ loc_0E_C3C8:
 	STA ram_00E5                    ;C - - - - - 0x01C3E2 0E:C3D2: 85 E5
 	LDA ram_00E4                    ;C - - - - - 0x01C3E4 0E:C3D4: A5 E4
 	SBC ram_00E5                    ;C - - - - - 0x01C3E6 0E:C3D6: E5 E5
-	ADC ram_0092                    ;C - - - - - 0x01C3E8 0E:C3D8: 65 92
+	ADC frameCounter                ;C - - - - - 0x01C3E8 0E:C3D8: 65 92
 	STA ram_00E4                    ;C - - - - - 0x01C3EA 0E:C3DA: 85 E4
 	RTS                             ;C - - - - - 0x01C3EC 0E:C3DC: 60
 sub_0E_C3DD:
@@ -758,7 +758,7 @@ ofs_0E_C556:
 	STA PPUCTRL                     ;C - - - - - 0x01C56B 0E:C55B: 8D 00 20
 	LDA #$F0                        ;C - - - - - 0x01C56E 0E:C55E: A9 F0
 	JSR sub_0F_F34A                 ;C - - - - - 0x01C570 0E:C560: 20 4A F3
-	JSR sub_0F_FF31                 ;C - - - - - 0x01C573 0E:C563: 20 31 FF
+	JSR WaitFrame                   ;C - - - - - 0x01C573 0E:C563: 20 31 FF
 	LDA #$88                        ;C - - - - - 0x01C576 0E:C566: A9 88
 	STA ram_00E4                    ;C - - - - - 0x01C578 0E:C568: 85 E4
 	JSR sub_0E_C85C                 ;C - - - - - 0x01C57A 0E:C56A: 20 5C C8
@@ -772,7 +772,7 @@ ofs_0E_C556:
 	JSR ScreenOn                    ;C - - - - - 0x01C58C 0E:C57C: 20 6F C2
 	JSR sub_04_89C0                 ;C - - - - - bank=04 0x01C58F 0E:C57F: 20 C0 89
 	LDX #$B4                        ;C - - - - - 0x01C592 0E:C582: A2 B4
-	JSR sub_0F_FF2A                 ;C - - - - - 0x01C594 0E:C584: 20 2A FF
+	JSR WaitFrames                  ;C - - - - - 0x01C594 0E:C584: 20 2A FF
 	JSR sub_0E_C85C                 ;C - - - - - 0x01C597 0E:C587: 20 5C C8
 	LDX #$04                        ;C - - - - - 0x01C59A 0E:C58A: A2 04
 	STX prgBank8000                 ;C - - - - - 0x01C59C 0E:C58C: 86 F4
@@ -786,7 +786,7 @@ ofs_0E_C556:
 	LDA #$B4                        ;C - - - - - 0x01C5AF 0E:C59F: A9 B4
 	STA ram_0037                    ;C - - - - - 0x01C5B1 0E:C5A1: 85 37
 loc_0E_C5A3:
-	JSR sub_0F_FF31                 ;C - - - - - 0x01C5B3 0E:C5A3: 20 31 FF
+	JSR WaitFrame                   ;C - - - - - 0x01C5B3 0E:C5A3: 20 31 FF
 	LDA padPressed                  ;C - - - - - 0x01C5B6 0E:C5A6: A5 14
 	BNE loc_0E_C5B3                 ;C - - - - - 0x01C5B8 0E:C5A8: D0 09
 	LDA ram_0037                    ;C - - - - - 0x01C5BA 0E:C5AA: A5 37
@@ -884,29 +884,29 @@ loc_0E_C657:
 	JSR sub_04_8940                 ;C - - - - - bank=04 0x01C67E 0E:C66E: 20 40 89
 	JSR ScreenOn                    ;C - - - - - 0x01C681 0E:C671: 20 6F C2
 	LDA #$FF                        ;C - - - - - 0x01C684 0E:C674: A9 FF
-	STA ram_0500                    ;C - - - - - 0x01C686 0E:C676: 8D 00 05
-	STA ram_0510                    ;C - - - - - 0x01C689 0E:C679: 8D 10 05
+	STA objArr_0500                 ;C - - - - - 0x01C686 0E:C676: 8D 00 05
+	STA objArr_0510                 ;C - - - - - 0x01C689 0E:C679: 8D 10 05
 	LDA #$8B                        ;C - - - - - 0x01C68C 0E:C67C: A9 8B
-	STA ram_0520                    ;C - - - - - 0x01C68E 0E:C67E: 8D 20 05
+	STA objArr_0520                 ;C - - - - - 0x01C68E 0E:C67E: 8D 20 05
 loc_0E_C681:
 	LDA #$04                        ;C - - - - - 0x01C691 0E:C681: A9 04
 	STA ram_0097                    ;C - - - - - 0x01C693 0E:C683: 85 97
 	JSR HideSprites                 ;C - - - - - 0x01C695 0E:C685: 20 1D C3
 	JSR sub_0F_E9BC                 ;C - - - - - 0x01C698 0E:C688: 20 BC E9
-	JSR sub_0F_FF31                 ;C - - - - - 0x01C69B 0E:C68B: 20 31 FF
-	LDA ram_0500                    ;C - - - - - 0x01C69E 0E:C68E: AD 00 05
+	JSR WaitFrame                   ;C - - - - - 0x01C69B 0E:C68B: 20 31 FF
+	LDA objArr_0500                 ;C - - - - - 0x01C69E 0E:C68E: AD 00 05
 	BNE loc_0E_C6A7                 ;C - - - - - 0x01C6A1 0E:C691: D0 14
-	LDA ram_0510                    ;C - - - - - 0x01C6A3 0E:C693: AD 10 05
+	LDA objArr_0510                 ;C - - - - - 0x01C6A3 0E:C693: AD 10 05
 	BNE loc_0E_C6C9                 ;C - - - - - 0x01C6A6 0E:C696: D0 31
-	LDA ram_0520                    ;C - - - - - 0x01C6A8 0E:C698: AD 20 05
+	LDA objArr_0520                 ;C - - - - - 0x01C6A8 0E:C698: AD 20 05
 	BNE loc_0E_C6CF                 ;C - - - - - 0x01C6AB 0E:C69B: D0 32
 	LDA #$00                        ;C - - - - - 0x01C6AD 0E:C69D: A9 00
 	STA renderOffCount              ;C - - - - - 0x01C6AF 0E:C69F: 85 EE
 	JSR sub_0E_C36E                 ;C - - - - - 0x01C6B1 0E:C6A1: 20 6E C3
 	JMP RESET                       ;C - - - - - 0x01C6B4 0E:C6A4: 4C 00 FE
 loc_0E_C6A7:
-	DEC ram_0500                    ;C - - - - - 0x01C6B7 0E:C6A7: CE 00 05
-	LDA ram_0500                    ;C - - - - - 0x01C6BA 0E:C6AA: AD 00 05
+	DEC objArr_0500                 ;C - - - - - 0x01C6B7 0E:C6A7: CE 00 05
+	LDA objArr_0500                 ;C - - - - - 0x01C6BA 0E:C6AA: AD 00 05
 	CMP #$F0                        ;C - - - - - 0x01C6BD 0E:C6AD: C9 F0
 	BNE loc_0E_C6C6                 ;C - - - - - 0x01C6BF 0E:C6AF: D0 15
 	LDA #$32                        ;C - - - - - 0x01C6C1 0E:C6B1: A9 32
@@ -920,10 +920,10 @@ loc_0E_C6A7:
 loc_0E_C6C6:
 	JMP loc_0E_C6D2                 ;C - - - - - 0x01C6D6 0E:C6C6: 4C D2 C6
 loc_0E_C6C9:
-	DEC ram_0510                    ;C - - - - - 0x01C6D9 0E:C6C9: CE 10 05
+	DEC objArr_0510                 ;C - - - - - 0x01C6D9 0E:C6C9: CE 10 05
 	JMP loc_0E_C6D2                 ;C - - - - - 0x01C6DC 0E:C6CC: 4C D2 C6
 loc_0E_C6CF:
-	DEC ram_0520                    ;C - - - - - 0x01C6DF 0E:C6CF: CE 20 05
+	DEC objArr_0520                 ;C - - - - - 0x01C6DF 0E:C6CF: CE 20 05
 loc_0E_C6D2:
 	LDA padPressed                  ;C - - - - - 0x01C6E2 0E:C6D2: A5 14
 	AND #$10                        ;C - - - - - 0x01C6E4 0E:C6D4: 29 10
@@ -956,7 +956,7 @@ ofs_0E_C703:
 	JSR ScreenOn                    ;C - - - - - 0x01C720 0E:C710: 20 6F C2
 	JSR sub_04_8D00                 ;C - - - - - bank=04 0x01C723 0E:C713: 20 00 8D
 	LDX #$2D                        ;C - - - - - 0x01C726 0E:C716: A2 2D
-	JSR sub_0F_FF2A                 ;C - - - - - 0x01C728 0E:C718: 20 2A FF
+	JSR WaitFrames                  ;C - - - - - 0x01C728 0E:C718: 20 2A FF
 	JSR sub_0E_C85C                 ;C - - - - - 0x01C72B 0E:C71B: 20 5C C8
 	JSR ScreenOn                    ;C - - - - - 0x01C72E 0E:C71E: 20 6F C2
 	CLI                             ;C - - - - - 0x01C731 0E:C721: 58
@@ -969,8 +969,8 @@ ofs_0E_C703:
 	STA scrollY                     ;C - - - - - 0x01C73E 0E:C72E: 85 FA
 	STA ram_00F9                    ;C - - - - - 0x01C740 0E:C730: 85 F9
 	STA ram_0025                    ;C - - - - - 0x01C742 0E:C732: 85 25
-	STA ram_0380                    ;C - - - - - 0x01C744 0E:C734: 8D 80 03
-	STA ram_03E0                    ;C - - - - - 0x01C747 0E:C737: 8D E0 03
+	STA objArr_0380                 ;C - - - - - 0x01C744 0E:C734: 8D 80 03
+	STA objArr_03E0                 ;C - - - - - 0x01C747 0E:C737: 8D E0 03
 	STA totalEnemies                ;C - - - - - 0x01C74A 0E:C73A: 85 9E
 	STA ram_009F                    ;C - - - - - 0x01C74C 0E:C73C: 85 9F
 	STA ram_005A                    ;C - - - - - 0x01C74E 0E:C73E: 85 5A
@@ -997,7 +997,7 @@ loc_0E_C768:
 	LDA #$01                        ;C - - - - - 0x01C778 0E:C768: A9 01
 	STA ram_0010                    ;C - - - - - 0x01C77A 0E:C76A: 85 10
 	JSR sub_0F_E521                 ;C - - - - - 0x01C77C 0E:C76C: 20 21 E5
-	JSR sub_0F_FF31                 ;C - - - - - 0x01C77F 0E:C76F: 20 31 FF
+	JSR WaitFrame                   ;C - - - - - 0x01C77F 0E:C76F: 20 31 FF
 	LDA ram_0029                    ;C - - - - - 0x01C782 0E:C772: A5 29
 	BEQ loc_0E_C768                 ;C - - - - - 0x01C784 0E:C774: F0 F2
 	LDA #$0A                        ;C - - - - - 0x01C786 0E:C776: A9 0A
@@ -1025,17 +1025,17 @@ loc_0E_C768:
 	JSR sub_0E_C334                 ;C - - - - - 0x01C7B7 0E:C7A7: 20 34 C3
 	LDX #$00                        ;C - - - - - 0x01C7BA 0E:C7AA: A2 00
 	LDA #$D0                        ;C - - - - - 0x01C7BC 0E:C7AC: A9 D0
-	STA ram_0560                    ;C - - - - - 0x01C7BE 0E:C7AE: 8D 60 05
+	STA objArr_0560                 ;C - - - - - 0x01C7BE 0E:C7AE: 8D 60 05
 	LDA #$80                        ;C - - - - - 0x01C7C1 0E:C7B1: A9 80
-	STA ram_0300                    ;C - - - - - 0x01C7C3 0E:C7B3: 8D 00 03
+	STA objArr_0300                 ;C - - - - - 0x01C7C3 0E:C7B3: 8D 00 03
 	LDA #$30                        ;C - - - - - 0x01C7C6 0E:C7B6: A9 30
 	STA objX                        ;C - - - - - 0x01C7C8 0E:C7B8: 8D 60 03
 	LDA #$90                        ;C - - - - - 0x01C7CB 0E:C7BB: A9 90
 	STA objY                        ;C - - - - - 0x01C7CD 0E:C7BD: 8D C0 03
 	LDA #$00                        ;C - - - - - 0x01C7D0 0E:C7C0: A9 00
-	STA ram_0380                    ;C - - - - - 0x01C7D2 0E:C7C2: 8D 80 03
-	STA ram_03E0                    ;C - - - - - 0x01C7D5 0E:C7C5: 8D E0 03
-	STA ram_0320                    ;C - - - - - 0x01C7D8 0E:C7C8: 8D 20 03
+	STA objArr_0380                 ;C - - - - - 0x01C7D2 0E:C7C2: 8D 80 03
+	STA objArr_03E0                 ;C - - - - - 0x01C7D5 0E:C7C5: 8D E0 03
+	STA objArr_0320                 ;C - - - - - 0x01C7D8 0E:C7C8: 8D 20 03
 	STA ram_0067                    ;C - - - - - 0x01C7DB 0E:C7CB: 85 67
 	JSR sub_0F_F26E                 ;C - - - - - 0x01C7DD 0E:C7CD: 20 6E F2
 	LDY playerId                    ;C - - - - - 0x01C7E0 0E:C7D0: A4 34
@@ -1084,9 +1084,9 @@ loc_0E_C768:
 	STA ram_00BC                    ;C - - - - - 0x01C837 0E:C827: 85 BC
 	STA ram_00BE                    ;C - - - - - 0x01C839 0E:C829: 85 BE
 	STA ram_00BA                    ;C - - - - - 0x01C83B 0E:C82B: 85 BA
-	STA ram_05A0                    ;C - - - - - 0x01C83D 0E:C82D: 8D A0 05
-	STA ram_05A1                    ;C - - - - - 0x01C840 0E:C830: 8D A1 05
-	STA ram_05A2                    ;C - - - - - 0x01C843 0E:C833: 8D A2 05
+	STA objArr_05A0                 ;C - - - - - 0x01C83D 0E:C82D: 8D A0 05
+	STA objArr_05A0+1               ;C - - - - - 0x01C840 0E:C830: 8D A1 05
+	STA objArr_05A0+2               ;C - - - - - 0x01C843 0E:C833: 8D A2 05
 	STA ram_0150                    ;C - - - - - 0x01C846 0E:C836: 8D 50 01
 	JMP loc_0E_C8ED                 ;C - - - - - 0x01C849 0E:C839: 4C ED C8
 tbl_0E_C83C:
@@ -1112,7 +1112,7 @@ loc_0E_C851:
 sub_0E_C85C:
 	JSR sub_0E_C36E                 ;C - - - - - 0x01C86C 0E:C85C: 20 6E C3
 sub_0E_C85F:
-	JSR sub_0F_FF31                 ;C - - - - - 0x01C86F 0E:C85F: 20 31 FF
+	JSR WaitFrame                   ;C - - - - - 0x01C86F 0E:C85F: 20 31 FF
 	JSR ScreenOff                   ;C - - - - - 0x01C872 0E:C862: 20 65 C2
 	LDA #$04                        ;C - - - - - 0x01C875 0E:C865: A9 04
 	STA ram_0097                    ;C - - - - - 0x01C877 0E:C867: 85 97
@@ -1261,7 +1261,7 @@ loc_0E_C987:
 	STX prgBankA000                 ;C - - - - - 0x01C99C 0E:C98C: 86 F5
 	JSR SetPrgBanks                 ;C - - - - - 0x01C99E 0E:C98E: 20 4D FF
 	JSR sub_04_9800                 ;C - - - - - bank=04 0x01C9A1 0E:C991: 20 00 98
-	LDA objSpriteDown               ;C - - - - - 0x01C9A4 0E:C994: AD BC 05
+	LDA objSpriteDown+12            ;C - - - - - 0x01C9A4 0E:C994: AD BC 05
 	CMP #$07                        ;C - - - - - 0x01C9A7 0E:C997: C9 07
 	BEQ loc_0E_C99D                 ;C - - - - - 0x01C9A9 0E:C999: F0 02
 	BNE loc_0E_C9A7                 ;C - - - - - 0x01C9AB 0E:C99B: D0 0A
@@ -1274,7 +1274,7 @@ loc_0E_C9A7:
 	JSR sub_0E_C3B4                 ;C - - - - - 0x01C9B7 0E:C9A7: 20 B4 C3
 	LDA #$00                        ;C - - - - - 0x01C9BA 0E:C9AA: A9 00
 	STA renderOffCount              ;C - - - - - 0x01C9BC 0E:C9AC: 85 EE
-	JSR sub_0F_FF31                 ;C - - - - - 0x01C9BE 0E:C9AE: 20 31 FF
+	JSR WaitFrame                   ;C - - - - - 0x01C9BE 0E:C9AE: 20 31 FF
 	INC renderOffCount              ;C - - - - - 0x01C9C1 0E:C9B1: E6 EE
 	JMP loc_0E_C8ED                 ;C - - - - - 0x01C9C3 0E:C9B3: 4C ED C8
 sub_0E_C9B6:
@@ -1327,9 +1327,9 @@ loc_0E_CA3C:
 	CPY #$02                        ;C - - - - - 0x01CA56 0E:CA46: C0 02
 	BEQ loc_0E_CA54                 ;C - - - - - 0x01CA58 0E:CA48: F0 0A
 	LDA #$38                        ;C - - - - - 0x01CA5A 0E:CA4A: A9 38
-	STA ram_0420                    ;C - - - - - 0x01CA5C 0E:CA4C: 8D 20 04
+	STA objArr_0420                 ;C - - - - - 0x01CA5C 0E:CA4C: 8D 20 04
 	LDA #$04                        ;C - - - - - 0x01CA5F 0E:CA4F: A9 04
-	STA ram_0430                    ;C - - - - - 0x01CA61 0E:CA51: 8D 30 04
+	STA objArr_0430                 ;C - - - - - 0x01CA61 0E:CA51: 8D 30 04
 loc_0E_CA54:
 	LDA tbl_0F_E228,Y               ;C - - - - - 0x01CA64 0E:CA54: B9 28 E2
 	JSR sub_0F_F294                 ;C - - - - - 0x01CA67 0E:CA57: 20 94 F2
@@ -1349,9 +1349,9 @@ loc_0E_CA6D:
 	BNE loc_0E_CA3C                 ;C - - - - - 0x01CA85 0E:CA75: D0 C5
 loc_0E_CA77:
 	LDA #$38                        ;C - - - - - 0x01CA87 0E:CA77: A9 38
-	STA ram_0420                    ;C - - - - - 0x01CA89 0E:CA79: 8D 20 04
+	STA objArr_0420                 ;C - - - - - 0x01CA89 0E:CA79: 8D 20 04
 	LDA #$04                        ;C - - - - - 0x01CA8C 0E:CA7C: A9 04
-	STA ram_0430                    ;C - - - - - 0x01CA8E 0E:CA7E: 8D 30 04
+	STA objArr_0430                 ;C - - - - - 0x01CA8E 0E:CA7E: 8D 30 04
 	LDY playerId                    ;C - - - - - 0x01CA91 0E:CA81: A4 34
 	LDA tbl_0F_E1E9,Y               ;C - - - - - 0x01CA93 0E:CA83: B9 E9 E1
 	JSR sub_0F_F294                 ;C - - - - - 0x01CA96 0E:CA86: 20 94 F2
@@ -1368,13 +1368,13 @@ loc_0E_CA77:
 loc_0E_CAA2:
 	LDY playerId                    ;C - - - - - 0x01CAB2 0E:CAA2: A4 34
 	LDA tbl_0F_E1C1,Y               ;C - - - - - 0x01CAB4 0E:CAA4: B9 C1 E1
-	STA ram_0400                    ;C - - - - - 0x01CAB7 0E:CAA7: 8D 00 04
+	STA objArr_0400                 ;C - - - - - 0x01CAB7 0E:CAA7: 8D 00 04
 	LDA tbl_0F_E1C4,Y               ;C - - - - - 0x01CABA 0E:CAAA: B9 C4 E1
-	STA ram_0410                    ;C - - - - - 0x01CABD 0E:CAAD: 8D 10 04
+	STA objArr_0410                 ;C - - - - - 0x01CABD 0E:CAAD: 8D 10 04
 	LDA tbl_0F_E1C7,Y               ;C - - - - - 0x01CAC0 0E:CAB0: B9 C7 E1
-	STA ram_0420                    ;C - - - - - 0x01CAC3 0E:CAB3: 8D 20 04
+	STA objArr_0420                 ;C - - - - - 0x01CAC3 0E:CAB3: 8D 20 04
 	LDA tbl_0F_E1CA,Y               ;C - - - - - 0x01CAC6 0E:CAB6: B9 CA E1
-	STA ram_0430                    ;C - - - - - 0x01CAC9 0E:CAB9: 8D 30 04
+	STA objArr_0430                 ;C - - - - - 0x01CAC9 0E:CAB9: 8D 30 04
 	LDA padHeld                     ;C - - - - - 0x01CACC 0E:CABC: A5 16
 	CMP #$09                        ;C - - - - - 0x01CACE 0E:CABE: C9 09
 	BEQ loc_0E_CAD1                 ;C - - - - - 0x01CAD0 0E:CAC0: F0 0F
@@ -1388,11 +1388,11 @@ loc_0E_CAA2:
 loc_0E_CAD1:
 	LDY playerId                    ;C - - - - - 0x01CAE1 0E:CAD1: A4 34
 	LDA tbl_0F_E1D7,Y               ;C - - - - - 0x01CAE3 0E:CAD3: B9 D7 E1
-	STA ram_0400                    ;C - - - - - 0x01CAE6 0E:CAD6: 8D 00 04
-	STA ram_0420                    ;C - - - - - 0x01CAE9 0E:CAD9: 8D 20 04
+	STA objArr_0400                 ;C - - - - - 0x01CAE6 0E:CAD6: 8D 00 04
+	STA objArr_0420                 ;C - - - - - 0x01CAE9 0E:CAD9: 8D 20 04
 	LDA tbl_0F_E1DA,Y               ;C - - - - - 0x01CAEC 0E:CADC: B9 DA E1
-	STA ram_0410                    ;C - - - - - 0x01CAEF 0E:CADF: 8D 10 04
-	STA ram_0430                    ;C - - - - - 0x01CAF2 0E:CAE2: 8D 30 04
+	STA objArr_0410                 ;C - - - - - 0x01CAEF 0E:CADF: 8D 10 04
+	STA objArr_0430                 ;C - - - - - 0x01CAF2 0E:CAE2: 8D 30 04
 loc_0E_CAE5:
 	LDA padPressed                  ;C - - - - - 0x01CAF5 0E:CAE5: A5 14
 	CMP #$40                        ;C - - - - - 0x01CAF7 0E:CAE7: C9 40
@@ -1430,7 +1430,7 @@ loc_0E_CB22:
 	LDA ram_006F                    ;C - - - - - 0x01CB32 0E:CB22: A5 6F
 	JSR sub_0F_F294                 ;C - - - - - 0x01CB34 0E:CB24: 20 94 F2
 	LDY playerId                    ;C - - - - - 0x01CB37 0E:CB27: A4 34
-	LDA ram_0580                    ;C - - - - - 0x01CB39 0E:CB29: AD 80 05
+	LDA objArr_0580                 ;C - - - - - 0x01CB39 0E:CB29: AD 80 05
 	CMP tbl_0F_E288,Y               ;C - - - - - 0x01CB3C 0E:CB2C: D9 88 E2
 	BEQ loc_0E_CB53                 ;C - - - - - 0x01CB3F 0E:CB2F: F0 22
 	CMP tbl_0F_E28B,Y               ;C - - - - - 0x01CB41 0E:CB31: D9 8B E2
@@ -1441,18 +1441,18 @@ loc_0E_CB22:
 	BNE loc_0E_CB60                 ;C - - - - - 0x01CB4D 0E:CB3D: D0 21
 loc_0E_CB3F:
 	LDA #$E8                        ;C - - - - - 0x01CB4F 0E:CB3F: A9 E8
-	STA ram_0420                    ;C - - - - - 0x01CB51 0E:CB41: 8D 20 04
+	STA objArr_0420                 ;C - - - - - 0x01CB51 0E:CB41: 8D 20 04
 	LDA #$02                        ;C - - - - - 0x01CB54 0E:CB44: A9 02
-	STA ram_0430                    ;C - - - - - 0x01CB56 0E:CB46: 8D 30 04
+	STA objArr_0430                 ;C - - - - - 0x01CB56 0E:CB46: 8D 30 04
 	LDA objY                        ;C - - - - - 0x01CB59 0E:CB49: AD C0 03
 	STA ram_0036                    ;C - - - - - 0x01CB5C 0E:CB4C: 85 36
 	LDA tbl_0F_E23D,Y               ;C - - - - - 0x01CB5E 0E:CB4E: B9 3D E2
 	BNE loc_0E_CB60                 ;C - - - - - 0x01CB61 0E:CB51: D0 0D
 loc_0E_CB53:
 	LDA #$01                        ;C - - - - - 0x01CB63 0E:CB53: A9 01
-	STA ram_0570                    ;C - - - - - 0x01CB65 0E:CB55: 8D 70 05
+	STA objArr_0570                 ;C - - - - - 0x01CB65 0E:CB55: 8D 70 05
 	LDA #$00                        ;C - - - - - 0x01CB68 0E:CB58: A9 00
-	STA ram_0590                    ;C - - - - - 0x01CB6A 0E:CB5A: 8D 90 05
+	STA objArr_0590                 ;C - - - - - 0x01CB6A 0E:CB5A: 8D 90 05
 	LDA tbl_0F_E237,Y               ;C - - - - - 0x01CB6D 0E:CB5D: B9 37 E2
 loc_0E_CB60:
 	JSR sub_0F_F440                 ;C - - - - - 0x01CB70 0E:CB60: 20 40 F4
@@ -1497,9 +1497,9 @@ loc_0E_CBA3:
 	BEQ loc_0E_CBA0                 ;C - - - - - 0x01CBBF 0E:CBAF: F0 EF
 	CPY #$0E                        ;C - - - - - 0x01CBC1 0E:CBB1: C0 0E
 	BCS loc_0E_CBA0                 ;C - - - - - 0x01CBC3 0E:CBB3: B0 EB
-	LDA ram_0300,Y                  ;C - - - - - 0x01CBC5 0E:CBB5: B9 00 03
+	LDA objArr_0300,Y               ;C - - - - - 0x01CBC5 0E:CBB5: B9 00 03
 	BPL loc_0E_CBA0                 ;C - - - - - 0x01CBC8 0E:CBB8: 10 E6
-	LDA ram_0320,Y                  ;C - - - - - 0x01CBCA 0E:CBBA: B9 20 03
+	LDA objArr_0320,Y               ;C - - - - - 0x01CBCA 0E:CBBA: B9 20 03
 	CMP #$06                        ;C - - - - - 0x01CBCD 0E:CBBD: C9 06
 	BEQ loc_0E_CBA0                 ;C - - - - - 0x01CBCF 0E:CBBF: F0 DF
 	CMP #$03                        ;C - - - - - 0x01CBD1 0E:CBC1: C9 03
@@ -1518,7 +1518,7 @@ loc_0E_CBA3:
 	BEQ loc_0E_CBA0                 ;C - - - - - 0x01CBEB 0E:CBDB: F0 C3
 	CMP #$9D                        ;C - - - - - 0x01CBED 0E:CBDD: C9 9D
 	BEQ loc_0E_CBA0                 ;C - - - - - 0x01CBEF 0E:CBDF: F0 BF
-	LDA ram_04FF                    ;C - - - - - 0x01CBF1 0E:CBE1: AD FF 04
+	LDA objSpriteAir+15             ;C - - - - - 0x01CBF1 0E:CBE1: AD FF 04
 	BEQ loc_0E_CBEE                 ;C - - - - - 0x01CBF4 0E:CBE4: F0 08
 	TAY                             ;C - - - - - 0x01CBF6 0E:CBE6: A8
 	LDA objLife,Y                   ;C - - - - - 0x01CBF7 0E:CBE7: B9 90 04
@@ -1530,8 +1530,8 @@ loc_0E_CBEE:
 	SEC                             ;C - - - - - 0x01CC03 0E:CBF3: 38
 	SBC objX,Y                      ;C - - - - - 0x01CC04 0E:CBF4: F9 60 03
 	PHA                             ;C - - - - - 0x01CC07 0E:CBF7: 48
-	LDA ram_0380                    ;C - - - - - 0x01CC08 0E:CBF8: AD 80 03
-	SBC ram_0380,Y                  ;C - - - - - 0x01CC0B 0E:CBFB: F9 80 03
+	LDA objArr_0380                 ;C - - - - - 0x01CC08 0E:CBF8: AD 80 03
+	SBC objArr_0380,Y               ;C - - - - - 0x01CC0B 0E:CBFB: F9 80 03
 	PLA                             ;C - - - - - 0x01CC0E 0E:CBFE: 68
 	BCS loc_0E_CC06                 ;C - - - - - 0x01CC0F 0E:CBFF: B0 05
 	EOR #$FF                        ;C - - - - - 0x01CC11 0E:CC01: 49 FF
@@ -1566,12 +1566,12 @@ loc_0E_CC29:
 	STY ram_0039                    ;C - - - - - 0x01CC49 0E:CC39: 84 39
 	LDA playerId                    ;C - - - - - 0x01CC4B 0E:CC3B: A5 34
 	BNE loc_0E_CC52                 ;C - - - - - 0x01CC4D 0E:CC3D: D0 13
-	LDA ram_0460,Y                  ;c - - - - - 0x01CC4F 0E:CC3F: B9 60 04
+	LDA objArr_0460,Y               ;c - - - - - 0x01CC4F 0E:CC3F: B9 60 04
 	AND #$03                        ;c - - - - - 0x01CC52 0E:CC42: 29 03
 	CMP ram_0031                    ;c - - - - - 0x01CC54 0E:CC44: C5 31
 	BEQ loc_0E_CC4F                 ;c - - - - - 0x01CC56 0E:CC46: F0 07
 	LDA ram_0031                    ;c - - - - - 0x01CC58 0E:CC48: A5 31
-	STA ram_0460,Y                  ;c - - - - - 0x01CC5A 0E:CC4A: 99 60 04
+	STA objArr_0460,Y               ;c - - - - - 0x01CC5A 0E:CC4A: 99 60 04
 	BNE loc_0E_CC52                 ;c - - - - - 0x01CC5D 0E:CC4D: D0 03
 loc_0E_CC4F:
 	JSR sub_0E_CC85                 ;c - - - - - 0x01CC5F 0E:CC4F: 20 85 CC
@@ -1585,7 +1585,7 @@ loc_0E_CC52:
 	BEQ loc_0E_CC76                 ;C - - - - - 0x01CC70 0E:CC60: F0 14
 	JMP loc_0E_D7F2                 ;c - - - - - 0x01CC72 0E:CC62: 4C F2 D7
 loc_0E_CC65:
-	LDA ram_0460,Y                  ;c - - - - - 0x01CC75 0E:CC65: B9 60 04
+	LDA objArr_0460,Y               ;c - - - - - 0x01CC75 0E:CC65: B9 60 04
 	AND #$03                        ;c - - - - - 0x01CC78 0E:CC68: 29 03
 	CMP ram_0031                    ;c - - - - - 0x01CC7A 0E:CC6A: C5 31
 	BEQ loc_0E_CC70                 ;c - - - - - 0x01CC7C 0E:CC6C: F0 02
@@ -1595,7 +1595,7 @@ loc_0E_CC70:
 loc_0E_CC73:
 	JMP loc_0E_D88C                 ;c - - - - - 0x01CC83 0E:CC73: 4C 8C D8
 loc_0E_CC76:
-	LDA ram_0460,Y                  ;C - - - - - 0x01CC86 0E:CC76: B9 60 04
+	LDA objArr_0460,Y               ;C - - - - - 0x01CC86 0E:CC76: B9 60 04
 	AND #$03                        ;C - - - - - 0x01CC89 0E:CC79: 29 03
 	CMP ram_0031                    ;C - - - - - 0x01CC8B 0E:CC7B: C5 31
 	BNE loc_0E_CC82                 ;C - - - - - 0x01CC8D 0E:CC7D: D0 03
@@ -1610,10 +1610,10 @@ sub_0E_CC85:
 	CLC                             ;c - - - - - 0x01CC9D 0E:CC8D: 18
 	ADC tbl_0F_E1D3,Y               ;c - - - - - 0x01CC9E 0E:CC8E: 79 D3 E1
 	PHA                             ;c - - - - - 0x01CCA1 0E:CC91: 48
-	LDA ram_0380                    ;c - - - - - 0x01CCA2 0E:CC92: AD 80 03
+	LDA objArr_0380                 ;c - - - - - 0x01CCA2 0E:CC92: AD 80 03
 	ADC tbl_0F_E1D4,Y               ;c - - - - - 0x01CCA5 0E:CC95: 79 D4 E1
 	LDY ram_0039                    ;c - - - - - 0x01CCA8 0E:CC98: A4 39
-	STA ram_0380,Y                  ;c - - - - - 0x01CCAA 0E:CC9A: 99 80 03
+	STA objArr_0380,Y               ;c - - - - - 0x01CCAA 0E:CC9A: 99 80 03
 	PLA                             ;c - - - - - 0x01CCAD 0E:CC9D: 68
 	STA objX,Y                      ;c - - - - - 0x01CCAE 0E:CC9E: 99 60 03
 	RTS                             ;c - - - - - 0x01CCB1 0E:CCA1: 60
@@ -1632,14 +1632,14 @@ loc_0E_CCB5:
 	LDY playerId                    ;C - - - - - 0x01CCC5 0E:CCB5: A4 34
 	LDA weaponHeld                  ;C - - - - - 0x01CCC7 0E:CCB7: A5 A9
 	BNE loc_0E_CCCC                 ;C - - - - - 0x01CCC9 0E:CCB9: D0 11
-	LDA ram_0580                    ;C - - - - - 0x01CCCB 0E:CCBB: AD 80 05
+	LDA objArr_0580                 ;C - - - - - 0x01CCCB 0E:CCBB: AD 80 05
 	CMP tbl_0F_E273,Y               ;C - - - - - 0x01CCCE 0E:CCBE: D9 73 E2
 	BEQ loc_0E_CCDA                 ;C - - - - - 0x01CCD1 0E:CCC1: F0 17
 	LDA tbl_0F_E1E6,Y               ;C - - - - - 0x01CCD3 0E:CCC3: B9 E6 E1
 	JSR sub_0F_F294                 ;C - - - - - 0x01CCD6 0E:CCC6: 20 94 F2
 	JMP loc_0E_CCDA                 ;C - - - - - 0x01CCD9 0E:CCC9: 4C DA CC
 loc_0E_CCCC:
-	LDA ram_0580                    ;C - - - - - 0x01CCDC 0E:CCCC: AD 80 05
+	LDA objArr_0580                 ;C - - - - - 0x01CCDC 0E:CCCC: AD 80 05
 	CMP tbl_0F_E29A,Y               ;C - - - - - 0x01CCDF 0E:CCCF: D9 9A E2
 	BEQ loc_0E_CCDA                 ;C - - - - - 0x01CCE2 0E:CCD2: F0 06
 	LDA tbl_0F_E204,Y               ;C - - - - - 0x01CCE4 0E:CCD4: B9 04 E2
@@ -1681,9 +1681,9 @@ loc_0E_CD14:
 loc_0E_CD1A:
 	LDY playerId                    ;C - - - - - 0x01CD2A 0E:CD1A: A4 34
 	LDA tbl_0F_E1DD,Y               ;C - - - - - 0x01CD2C 0E:CD1C: B9 DD E1
-	STA ram_0420                    ;C - - - - - 0x01CD2F 0E:CD1F: 8D 20 04
+	STA objArr_0420                 ;C - - - - - 0x01CD2F 0E:CD1F: 8D 20 04
 	LDA tbl_0F_E1E0,Y               ;C - - - - - 0x01CD32 0E:CD22: B9 E0 E1
-	STA ram_0430                    ;C - - - - - 0x01CD35 0E:CD25: 8D 30 04
+	STA objArr_0430                 ;C - - - - - 0x01CD35 0E:CD25: 8D 30 04
 	LDA playerId                    ;C - - - - - 0x01CD38 0E:CD28: A5 34
 	CMP #$00                        ;C - - - - - 0x01CD3A 0E:CD2A: C9 00
 	BEQ loc_0E_CD36                 ;C - - - - - 0x01CD3C 0E:CD2C: F0 08
@@ -1718,11 +1718,11 @@ loc_0E_CD57:
 loc_0E_CD5C:
 	JMP loc_0E_CEA4                 ;C - - - - - 0x01CD6C 0E:CD5C: 4C A4 CE
 loc_0E_CD5F:
-	LDA ram_0300,Y                  ;C - - - - - 0x01CD6F 0E:CD5F: B9 00 03
+	LDA objArr_0300,Y               ;C - - - - - 0x01CD6F 0E:CD5F: B9 00 03
 	BPL loc_0E_CD57                 ;C - - - - - 0x01CD72 0E:CD62: 10 F3
-	LDA ram_0560,Y                  ;C - - - - - 0x01CD74 0E:CD64: B9 60 05
+	LDA objArr_0560,Y               ;C - - - - - 0x01CD74 0E:CD64: B9 60 05
 	BPL loc_0E_CD57                 ;C - - - - - 0x01CD77 0E:CD67: 10 EE
-	LDA ram_0320,Y                  ;C - - - - - 0x01CD79 0E:CD69: B9 20 03
+	LDA objArr_0320,Y               ;C - - - - - 0x01CD79 0E:CD69: B9 20 03
 	CMP #$1E                        ;C - - - - - 0x01CD7C 0E:CD6C: C9 1E
 	BCC loc_0E_CD57                 ;C - - - - - 0x01CD7E 0E:CD6E: 90 E7
 	CMP #$6F                        ;C - - - - - 0x01CD80 0E:CD70: C9 6F
@@ -1749,9 +1749,9 @@ loc_0E_CD5F:
 	BEQ loc_0E_CD57                 ;C - - - - - 0x01CDAA 0E:CD9A: F0 BB
 	CMP #$72                        ;C - - - - - 0x01CDAC 0E:CD9C: C9 72
 	BEQ loc_0E_CD57                 ;C - - - - - 0x01CDAE 0E:CD9E: F0 B7
-	LDA ram_04C0,Y                  ;C - - - - - 0x01CDB0 0E:CDA0: B9 C0 04
+	LDA objArr_04C0,Y               ;C - - - - - 0x01CDB0 0E:CDA0: B9 C0 04
 	BNE loc_0E_CD57                 ;C - - - - - 0x01CDB3 0E:CDA3: D0 B2
-	LDA ram_0580,Y                  ;C - - - - - 0x01CDB5 0E:CDA5: B9 80 05
+	LDA objArr_0580,Y               ;C - - - - - 0x01CDB5 0E:CDA5: B9 80 05
 	CMP #$A6                        ;C - - - - - 0x01CDB8 0E:CDA8: C9 A6
 ofs_0E_CDAA:
 	BEQ loc_0E_CD57                 ;C - - - - - 0x01CDBA 0E:CDAA: F0 AB
@@ -1777,8 +1777,8 @@ loc_0E_CDCA:
 	SEC                             ;C - - - - - 0x01CDE1 0E:CDD1: 38
 	SBC objX,Y                      ;C - - - - - 0x01CDE2 0E:CDD2: F9 60 03
 	PHA                             ;C - - - - - 0x01CDE5 0E:CDD5: 48
-	LDA ram_0380                    ;C - - - - - 0x01CDE6 0E:CDD6: AD 80 03
-	SBC ram_0380,Y                  ;C - - - - - 0x01CDE9 0E:CDD9: F9 80 03
+	LDA objArr_0380                 ;C - - - - - 0x01CDE6 0E:CDD6: AD 80 03
+	SBC objArr_0380,Y               ;C - - - - - 0x01CDE9 0E:CDD9: F9 80 03
 	PLA                             ;C - - - - - 0x01CDEC 0E:CDDC: 68
 	BCS loc_0E_CDE4                 ;C - - - - - 0x01CDED 0E:CDDD: B0 05
 	EOR #$FF                        ;C - - - - - 0x01CDEF 0E:CDDF: 49 FF
@@ -1847,10 +1847,10 @@ loc_0E_CE42:
 	CLC                             ;C - - - - - 0x01CE62 0E:CE52: 18
 	ADC tbl_0F_E1D3,Y               ;C - - - - - 0x01CE63 0E:CE53: 79 D3 E1
 	PHA                             ;C - - - - - 0x01CE66 0E:CE56: 48
-	LDA ram_0380                    ;C - - - - - 0x01CE67 0E:CE57: AD 80 03
+	LDA objArr_0380                 ;C - - - - - 0x01CE67 0E:CE57: AD 80 03
 	ADC tbl_0F_E1D4,Y               ;C - - - - - 0x01CE6A 0E:CE5A: 79 D4 E1
 	LDY ram_0039                    ;C - - - - - 0x01CE6D 0E:CE5D: A4 39
-	STA ram_0380,Y                  ;C - - - - - 0x01CE6F 0E:CE5F: 99 80 03
+	STA objArr_0380,Y               ;C - - - - - 0x01CE6F 0E:CE5F: 99 80 03
 	PLA                             ;C - - - - - 0x01CE72 0E:CE62: 68
 	STA objX,Y                      ;C - - - - - 0x01CE73 0E:CE63: 99 60 03
 	LDA padHeld                     ;C - - - - - 0x01CE76 0E:CE66: A5 16
@@ -1874,9 +1874,9 @@ loc_0E_CE85:
 loc_0E_CE89:
 	STA ram_0038                    ;C - - - - - 0x01CE99 0E:CE89: 85 38
 	LDY ram_0039                    ;C - - - - - 0x01CE9B 0E:CE8B: A4 39
-	STA ram_03F0,Y                  ;C - - - - - 0x01CE9D 0E:CE8D: 99 F0 03
+	STA objArr_03F0,Y               ;C - - - - - 0x01CE9D 0E:CE8D: 99 F0 03
 	LDA #$00                        ;C - - - - - 0x01CEA0 0E:CE90: A9 00
-	STA ram_0440,Y                  ;C - - - - - 0x01CEA2 0E:CE92: 99 40 04
+	STA objArr_0440,Y               ;C - - - - - 0x01CEA2 0E:CE92: 99 40 04
 	LDY playerId                    ;C - - - - - 0x01CEA5 0E:CE95: A4 34
 	LDA tbl_0F_E213,Y               ;C - - - - - 0x01CEA7 0E:CE97: B9 13 E2
 	JSR sub_0F_F294                 ;C - - - - - 0x01CEAA 0E:CE9A: 20 94 F2
@@ -1933,7 +1933,7 @@ loc_0E_CEED:
 	RTS                             ;c - - - - - 0x01CF09 0E:CEF9: 60
 loc_0E_CEFA:
 	LDY playerId                    ;C - - - - - 0x01CF0A 0E:CEFA: A4 34
-	LDA ram_0580                    ;C - - - - - 0x01CF0C 0E:CEFC: AD 80 05
+	LDA objArr_0580                 ;C - - - - - 0x01CF0C 0E:CEFC: AD 80 05
 	CMP tbl_0F_E297,Y               ;C - - - - - 0x01CF0F 0E:CEFF: D9 97 E2
 	BEQ loc_0E_CF32                 ;C - - - - - 0x01CF12 0E:CF02: F0 2E
 	CMP #$49                        ;C - - - - - 0x01CF14 0E:CF04: C9 49
@@ -1964,9 +1964,9 @@ loc_0E_CF32:
 sub_0E_CF33:
 	LDY #$0F                        ;C - - - - - 0x01CF43 0E:CF33: A0 0F
 loc_0E_CF35:
-	LDA ram_0300,Y                  ;C - - - - - 0x01CF45 0E:CF35: B9 00 03
+	LDA objArr_0300,Y               ;C - - - - - 0x01CF45 0E:CF35: B9 00 03
 	BPL loc_0E_CF80                 ;C - - - - - 0x01CF48 0E:CF38: 10 46
-	LDA ram_0320,Y                  ;C - - - - - 0x01CF4A 0E:CF3A: B9 20 03
+	LDA objArr_0320,Y               ;C - - - - - 0x01CF4A 0E:CF3A: B9 20 03
 	CMP #$69                        ;C - - - - - 0x01CF4D 0E:CF3D: C9 69
 	BEQ loc_0E_CF80                 ;C - - - - - 0x01CF4F 0E:CF3F: F0 3F
 	CMP #$10                        ;C - - - - - 0x01CF51 0E:CF41: C9 10
@@ -1991,8 +1991,8 @@ loc_0E_CF5F:
 	SEC                             ;C - - - - - 0x01CF76 0E:CF66: 38
 	SBC objX,Y                      ;C - - - - - 0x01CF77 0E:CF67: F9 60 03
 	PHA                             ;C - - - - - 0x01CF7A 0E:CF6A: 48
-	LDA ram_0380                    ;C - - - - - 0x01CF7B 0E:CF6B: AD 80 03
-	SBC ram_0380,Y                  ;C - - - - - 0x01CF7E 0E:CF6E: F9 80 03
+	LDA objArr_0380                 ;C - - - - - 0x01CF7B 0E:CF6B: AD 80 03
+	SBC objArr_0380,Y               ;C - - - - - 0x01CF7E 0E:CF6E: F9 80 03
 	PLA                             ;C - - - - - 0x01CF81 0E:CF71: 68
 	BCS loc_0E_CF79                 ;C - - - - - 0x01CF82 0E:CF72: B0 05
 	EOR #$FF                        ;c - - - - - 0x01CF84 0E:CF74: 49 FF
@@ -2018,22 +2018,22 @@ loc_0E_CF88:
 loc_0E_CF94:
 	LDY playerId                    ;C - - - - - 0x01CFA4 0E:CF94: A4 34
 	LDA tbl_0F_E279,Y               ;C - - - - - 0x01CFA6 0E:CF96: B9 79 E2
-	CMP ram_0580                    ;C - - - - - 0x01CFA9 0E:CF99: CD 80 05
+	CMP objArr_0580                 ;C - - - - - 0x01CFA9 0E:CF99: CD 80 05
 	BEQ loc_0E_CFEE                 ;C - - - - - 0x01CFAC 0E:CF9C: F0 50
 	LDA tbl_0F_E27C,Y               ;C - - - - - 0x01CFAE 0E:CF9E: B9 7C E2
-	CMP ram_0580                    ;C - - - - - 0x01CFB1 0E:CFA1: CD 80 05
+	CMP objArr_0580                 ;C - - - - - 0x01CFB1 0E:CFA1: CD 80 05
 	BEQ loc_0E_CFEE                 ;C - - - - - 0x01CFB4 0E:CFA4: F0 48
-	LDA ram_0430                    ;C - - - - - 0x01CFB6 0E:CFA6: AD 30 04
+	LDA objArr_0430                 ;C - - - - - 0x01CFB6 0E:CFA6: AD 30 04
 	BPL loc_0E_CFEE                 ;C - - - - - 0x01CFB9 0E:CFA9: 10 43
 	LDY playerId                    ;C - - - - - 0x01CFBB 0E:CFAB: A4 34
 	LDA tbl_0F_E27F,Y               ;C - - - - - 0x01CFBD 0E:CFAD: B9 7F E2
-	CMP ram_0580                    ;C - - - - - 0x01CFC0 0E:CFB0: CD 80 05
+	CMP objArr_0580                 ;C - - - - - 0x01CFC0 0E:CFB0: CD 80 05
 	BEQ loc_0E_CFC7                 ;C - - - - - 0x01CFC3 0E:CFB3: F0 12
 	LDA tbl_0F_E285,Y               ;C - - - - - 0x01CFC5 0E:CFB5: B9 85 E2
-	CMP ram_0580                    ;C - - - - - 0x01CFC8 0E:CFB8: CD 80 05
+	CMP objArr_0580                 ;C - - - - - 0x01CFC8 0E:CFB8: CD 80 05
 	BEQ loc_0E_CFC7                 ;C - - - - - 0x01CFCB 0E:CFBB: F0 0A
 	LDA tbl_0F_E282,Y               ;C - - - - - 0x01CFCD 0E:CFBD: B9 82 E2
-	CMP ram_0580                    ;C - - - - - 0x01CFD0 0E:CFC0: CD 80 05
+	CMP objArr_0580                 ;C - - - - - 0x01CFD0 0E:CFC0: CD 80 05
 	BEQ loc_0E_CFE6                 ;C - - - - - 0x01CFD3 0E:CFC3: F0 21
 	BNE loc_0E_CFEE                 ;C - - - - - 0x01CFD5 0E:CFC5: D0 27
 loc_0E_CFC7:
@@ -2048,10 +2048,10 @@ sub_0E_CFD1:
 	LDA #$24                        ;c - - - - - 0x01CFE5 0E:CFD5: A9 24
 	STA gameAction                  ;c - - - - - 0x01CFE7 0E:CFD7: 85 30
 	LDA #$80                        ;c - - - - - 0x01CFE9 0E:CFD9: A9 80
-	STA ram_0300                    ;c - - - - - 0x01CFEB 0E:CFDB: 8D 00 03
+	STA objArr_0300                 ;c - - - - - 0x01CFEB 0E:CFDB: 8D 00 03
 	RTS                             ;c - - - - - 0x01CFEE 0E:CFDE: 60
 loc_0E_CFDF:
-	LDA ram_0570                    ;C - - - - - 0x01CFEF 0E:CFDF: AD 70 05
+	LDA objArr_0570                 ;C - - - - - 0x01CFEF 0E:CFDF: AD 70 05
 	CMP #$03                        ;C - - - - - 0x01CFF2 0E:CFE2: C9 03
 	BNE loc_0E_CFEE                 ;C - - - - - 0x01CFF4 0E:CFE4: D0 08
 loc_0E_CFE6:
@@ -2106,13 +2106,13 @@ loc_0E_D03F:
 	LDA #$1C                        ;C - - - - - 0x01D04F 0E:D03F: A9 1C
 	JSR sub_0F_F34C                 ;C - - - - - 0x01D051 0E:D041: 20 4C F3
 	LDA #$00                        ;C - - - - - 0x01D054 0E:D044: A9 00
-	STA ram_0510                    ;C - - - - - 0x01D056 0E:D046: 8D 10 05
+	STA objArr_0510                 ;C - - - - - 0x01D056 0E:D046: 8D 10 05
 	RTS                             ;C - - - - - 0x01D059 0E:D049: 60
 loc_0E_D04A:
 	LDA playerId                    ;C - - - - - 0x01D05A 0E:D04A: A5 34
 	CMP #$01                        ;C - - - - - 0x01D05C 0E:D04C: C9 01
 	BNE loc_0E_D061                 ;C - - - - - 0x01D05E 0E:D04E: D0 11
-	LDA ram_0580                    ;C - - - - - 0x01D060 0E:D050: AD 80 05
+	LDA objArr_0580                 ;C - - - - - 0x01D060 0E:D050: AD 80 05
 	CMP #$3B                        ;C - - - - - 0x01D063 0E:D053: C9 3B
 	BNE loc_0E_D061                 ;C - - - - - 0x01D065 0E:D055: D0 0A
 	LDA padPressed                  ;C - - - - - 0x01D067 0E:D057: A5 14
@@ -2126,7 +2126,7 @@ loc_0E_D061:
 	BEQ loc_0E_D06A                 ;C - - - - - 0x01D075 0E:D065: F0 03
 	JMP loc_0E_D18E                 ;C - - - - - 0x01D077 0E:D067: 4C 8E D1
 loc_0E_D06A:
-	LDA ram_0430                    ;C - - - - - 0x01D07A 0E:D06A: AD 30 04
+	LDA objArr_0430                 ;C - - - - - 0x01D07A 0E:D06A: AD 30 04
 	BPL loc_0E_D076                 ;C - - - - - 0x01D07D 0E:D06D: 10 07
 	CMP #$FE                        ;C - - - - - 0x01D07F 0E:D06F: C9 FE
 	BCS loc_0E_D076                 ;C - - - - - 0x01D081 0E:D071: B0 03
@@ -2186,12 +2186,12 @@ loc_0E_D0D8:
 	JMP loc_0E_D18E                 ;c - - - - - 0x01D0EE 0E:D0DE: 4C 8E D1
 loc_0E_D0E1:
 	LDY playerId                    ;C - - - - - 0x01D0F1 0E:D0E1: A4 34
-	LDA ram_0580                    ;C - - - - - 0x01D0F3 0E:D0E3: AD 80 05
+	LDA objArr_0580                 ;C - - - - - 0x01D0F3 0E:D0E3: AD 80 05
 	CMP tbl_0F_E279,Y               ;C - - - - - 0x01D0F6 0E:D0E6: D9 79 E2
 	BNE loc_0E_D0EE                 ;C - - - - - 0x01D0F9 0E:D0E9: D0 03
 	JMP loc_0E_D18E                 ;C - - - - - 0x01D0FB 0E:D0EB: 4C 8E D1
 loc_0E_D0EE:
-	LDA ram_0580                    ;C - - - - - 0x01D0FE 0E:D0EE: AD 80 05
+	LDA objArr_0580                 ;C - - - - - 0x01D0FE 0E:D0EE: AD 80 05
 	CMP tbl_0F_E27C,Y               ;C - - - - - 0x01D101 0E:D0F1: D9 7C E2
 	BNE loc_0E_D0F9                 ;C - - - - - 0x01D104 0E:D0F4: D0 03
 	JMP loc_0E_D18E                 ;C - - - - - 0x01D106 0E:D0F6: 4C 8E D1
@@ -2276,10 +2276,10 @@ loc_0E_D185:
 loc_0E_D18E:
 	LDA ram_0035                    ;C - - - - - 0x01D19E 0E:D18E: A5 35
 	BNE loc_0E_D1F3                 ;C - - - - - 0x01D1A0 0E:D190: D0 61
-	LDA ram_0430                    ;C - - - - - 0x01D1A2 0E:D192: AD 30 04
+	LDA objArr_0430                 ;C - - - - - 0x01D1A2 0E:D192: AD 30 04
 	BMI loc_0E_D158                 ;C - - - - - 0x01D1A5 0E:D195: 30 C1
 	LDY playerId                    ;C - - - - - 0x01D1A7 0E:D197: A4 34
-	LDA ram_0580                    ;C - - - - - 0x01D1A9 0E:D199: AD 80 05
+	LDA objArr_0580                 ;C - - - - - 0x01D1A9 0E:D199: AD 80 05
 	CMP tbl_0F_E279,Y               ;C - - - - - 0x01D1AC 0E:D19C: D9 79 E2
 	BEQ loc_0E_D158                 ;C - - - - - 0x01D1AF 0E:D19F: F0 B7
 	LDA padHeld                     ;C - - - - - 0x01D1B1 0E:D1A1: A5 16
@@ -2291,7 +2291,7 @@ ofs_0E_D1A5:
 	CMP #$40                        ;C - - - - - 0x01D1BB 0E:D1AB: C9 40
 	BEQ loc_0E_D1C7                 ;C - - - - - 0x01D1BD 0E:D1AD: F0 18
 	LDY playerId                    ;C - - - - - 0x01D1BF 0E:D1AF: A4 34
-	LDA ram_0580                    ;C - - - - - 0x01D1C1 0E:D1B1: AD 80 05
+	LDA objArr_0580                 ;C - - - - - 0x01D1C1 0E:D1B1: AD 80 05
 	CMP tbl_0F_E27F,Y               ;C - - - - - 0x01D1C4 0E:D1B4: D9 7F E2
 	BEQ loc_0E_D1C7                 ;C - - - - - 0x01D1C7 0E:D1B7: F0 0E
 	LDY playerId                    ;C - - - - - 0x01D1C9 0E:D1B9: A4 34
@@ -2320,7 +2320,7 @@ loc_0E_D1C7:
 	STA objX                        ;c - - - - - 0x01D1F8 0E:D1E8: 8D 60 03
 	LDA ram_002D                    ;c - - - - - 0x01D1FB 0E:D1EB: A5 2D
 	ADC #$00                        ;c - - - - - 0x01D1FD 0E:D1ED: 69 00
-	STA ram_0380                    ;c - - - - - 0x01D1FF 0E:D1EF: 8D 80 03
+	STA objArr_0380                 ;c - - - - - 0x01D1FF 0E:D1EF: 8D 80 03
 	RTS                             ;c - - - - - 0x01D202 0E:D1F2: 60
 loc_0E_D1F3:
 	JMP loc_0E_D242                 ;C - - - - - 0x01D203 0E:D1F3: 4C 42 D2
@@ -2334,11 +2334,11 @@ loc_0E_D1F6:
 	LDA tbl_0F_E21C,Y               ;C - - - - - 0x01D214 0E:D204: B9 1C E2
 	JSR sub_0F_F294                 ;C - - - - - 0x01D217 0E:D207: 20 94 F2
 	LDA tbl_0F_E1CD,Y               ;C - - - - - 0x01D21A 0E:D20A: B9 CD E1
-	STA ram_0400                    ;C - - - - - 0x01D21D 0E:D20D: 8D 00 04
+	STA objArr_0400                 ;C - - - - - 0x01D21D 0E:D20D: 8D 00 04
 	LDA tbl_0F_E1D0,Y               ;C - - - - - 0x01D220 0E:D210: B9 D0 E1
-	STA ram_0410                    ;C - - - - - 0x01D223 0E:D213: 8D 10 04
+	STA objArr_0410                 ;C - - - - - 0x01D223 0E:D213: 8D 10 04
 	LDA #$90                        ;C - - - - - 0x01D226 0E:D216: A9 90
-	STA ram_0560                    ;C - - - - - 0x01D228 0E:D218: 8D 60 05
+	STA objArr_0560                 ;C - - - - - 0x01D228 0E:D218: 8D 60 05
 	RTS                             ;C - - - - - 0x01D22B 0E:D21B: 60
 loc_0E_D21C:
 	JSR sub_0F_F099                 ;C - - - - - 0x01D22C 0E:D21C: 20 99 F0
@@ -2350,21 +2350,21 @@ loc_0E_D21C:
 	LDA tbl_0F_E21C,Y               ;C - - - - - 0x01D23A 0E:D22A: B9 1C E2
 	JSR sub_0F_F294                 ;C - - - - - 0x01D23D 0E:D22D: 20 94 F2
 	LDA tbl_0F_E1CD,Y               ;C - - - - - 0x01D240 0E:D230: B9 CD E1
-	STA ram_0400                    ;C - - - - - 0x01D243 0E:D233: 8D 00 04
+	STA objArr_0400                 ;C - - - - - 0x01D243 0E:D233: 8D 00 04
 	LDA tbl_0F_E1D0,Y               ;C - - - - - 0x01D246 0E:D236: B9 D0 E1
-	STA ram_0410                    ;C - - - - - 0x01D249 0E:D239: 8D 10 04
+	STA objArr_0410                 ;C - - - - - 0x01D249 0E:D239: 8D 10 04
 	LDA #$D0                        ;C - - - - - 0x01D24C 0E:D23C: A9 D0
-	STA ram_0560                    ;C - - - - - 0x01D24E 0E:D23E: 8D 60 05
+	STA objArr_0560                 ;C - - - - - 0x01D24E 0E:D23E: 8D 60 05
 loc_0E_D241:
 	RTS                             ;C - - - - - 0x01D251 0E:D241: 60
 loc_0E_D242:
 	LDY playerId                    ;C - - - - - 0x01D252 0E:D242: A4 34
-	LDA ram_0580                    ;C - - - - - 0x01D254 0E:D244: AD 80 05
+	LDA objArr_0580                 ;C - - - - - 0x01D254 0E:D244: AD 80 05
 	CMP tbl_0F_E27F,Y               ;C - - - - - 0x01D257 0E:D247: D9 7F E2
 	BEQ loc_0E_D264                 ;C - - - - - 0x01D25A 0E:D24A: F0 18
 	CMP tbl_0F_E282,Y               ;C - - - - - 0x01D25C 0E:D24C: D9 82 E2
 	BNE loc_0E_D264                 ;C - - - - - 0x01D25F 0E:D24F: D0 13
-	LDA ram_0590                    ;c - - - - - 0x01D261 0E:D251: AD 90 05
+	LDA objArr_0590                 ;c - - - - - 0x01D261 0E:D251: AD 90 05
 	CMP #$04                        ;c - - - - - 0x01D264 0E:D254: C9 04
 	BNE loc_0E_D264                 ;c - - - - - 0x01D266 0E:D256: D0 0C
 	LDA tbl_0F_E1EC,Y               ;c - - - - - 0x01D268 0E:D258: B9 EC E1
@@ -2373,13 +2373,13 @@ loc_0E_D242:
 	JSR sub_0F_F440                 ;c - - - - - 0x01D271 0E:D261: 20 40 F4
 loc_0E_D264:
 	LDY playerId                    ;C - - - - - 0x01D274 0E:D264: A4 34
-	LDA ram_0580                    ;C - - - - - 0x01D276 0E:D266: AD 80 05
+	LDA objArr_0580                 ;C - - - - - 0x01D276 0E:D266: AD 80 05
 	CMP tbl_0F_E276,Y               ;C - - - - - 0x01D279 0E:D269: D9 76 E2
 	BNE loc_0E_D289                 ;C - - - - - 0x01D27C 0E:D26C: D0 1B
 	LDA playerId                    ;C - - - - - 0x01D27E 0E:D26E: A5 34
 	CMP #$01                        ;C - - - - - 0x01D280 0E:D270: C9 01
 	BEQ loc_0E_D27B                 ;C - - - - - 0x01D282 0E:D272: F0 07
-	LDA ram_0590                    ;C - - - - - 0x01D284 0E:D274: AD 90 05
+	LDA objArr_0590                 ;C - - - - - 0x01D284 0E:D274: AD 90 05
 	CMP #$04                        ;C - - - - - 0x01D287 0E:D277: C9 04
 	BNE loc_0E_D289                 ;C - - - - - 0x01D289 0E:D279: D0 0E
 loc_0E_D27B:
@@ -2407,7 +2407,7 @@ loc_0E_D289:
 	STA objX                        ;c - - - - - 0x01D2B6 0E:D2A6: 8D 60 03
 	LDA ram_002D                    ;c - - - - - 0x01D2B9 0E:D2A9: A5 2D
 	ADC #$00                        ;c - - - - - 0x01D2BB 0E:D2AB: 69 00
-	STA ram_0380                    ;c - - - - - 0x01D2BD 0E:D2AD: 8D 80 03
+	STA objArr_0380                 ;c - - - - - 0x01D2BD 0E:D2AD: 8D 80 03
 	RTS                             ;c - - - - - 0x01D2C0 0E:D2B0: 60
 loc_0E_D2B1:
 	JMP sub_0F_F183                 ;C - - - - - 0x01D2C1 0E:D2B1: 4C 83 F1
@@ -2432,9 +2432,9 @@ loc_0E_D2C8:
 	STA ram_00A4                    ;C - - - - - 0x01D2E0 0E:D2D0: 85 A4
 	STA playerInvincible            ;C - - - - - 0x01D2E2 0E:D2D2: 85 3B
 	STA ram_00BA                    ;C - - - - - 0x01D2E4 0E:D2D4: 85 BA
-	STA ram_0500                    ;C - - - - - 0x01D2E6 0E:D2D6: 8D 00 05
-	STA ram_0510                    ;C - - - - - 0x01D2E9 0E:D2D9: 8D 10 05
-	STA ram_0520                    ;C - - - - - 0x01D2EC 0E:D2DC: 8D 20 05
+	STA objArr_0500                 ;C - - - - - 0x01D2E6 0E:D2D6: 8D 00 05
+	STA objArr_0510                 ;C - - - - - 0x01D2E9 0E:D2D9: 8D 10 05
+	STA objArr_0520                 ;C - - - - - 0x01D2EC 0E:D2DC: 8D 20 05
 	JSR sub_0E_CEAA                 ;C - - - - - 0x01D2EF 0E:D2DF: 20 AA CE
 	LDY playerId                    ;C - - - - - 0x01D2F2 0E:D2E2: A4 34
 	LDA tbl_0F_E288,Y               ;C - - - - - 0x01D2F4 0E:D2E4: B9 88 E2
@@ -2455,7 +2455,7 @@ loc_0E_D2F8:
 	LDA tbl_0F_FCC5,Y               ;C - - - - - 0x01D30F 0E:D2FF: B9 C5 FC
 	STA ram_006E                    ;C - - - - - 0x01D312 0E:D302: 85 6E
 	LDA #$80                        ;C - - - - - 0x01D314 0E:D304: A9 80
-	STA ram_0300                    ;C - - - - - 0x01D316 0E:D306: 8D 00 03
+	STA objArr_0300                 ;C - - - - - 0x01D316 0E:D306: 8D 00 03
 	LDA objY                        ;C - - - - - 0x01D319 0E:D309: AD C0 03
 	STA ram_0036                    ;C - - - - - 0x01D31C 0E:D30C: 85 36
 	RTS                             ;C - - - - - 0x01D31E 0E:D30E: 60
@@ -2469,7 +2469,7 @@ loc_0E_D30F:
 	BMI loc_0E_D331                 ;C - - - - - 0x01D32B 0E:D31B: 30 14
 	LDY playerId                    ;C - - - - - 0x01D32D 0E:D31D: A4 34
 	BEQ loc_0E_D32E                 ;C - - - - - 0x01D32F 0E:D31F: F0 0D
-	LDA ram_0580                    ;C - - - - - 0x01D331 0E:D321: AD 80 05
+	LDA objArr_0580                 ;C - - - - - 0x01D331 0E:D321: AD 80 05
 	CMP tbl_0F_E29D,Y               ;C - - - - - 0x01D334 0E:D324: D9 9D E2
 	BEQ loc_0E_D331                 ;C - - - - - 0x01D337 0E:D327: F0 08
 	CMP tbl_0F_E2A0,Y               ;C - - - - - 0x01D339 0E:D329: D9 A0 E2
@@ -2498,7 +2498,7 @@ loc_0E_D346:
 	CMP #$40                        ;C - - - - - 0x01D362 0E:D352: C9 40
 	BNE loc_0E_D373                 ;C - - - - - 0x01D364 0E:D354: D0 1D
 	LDY playerId                    ;C - - - - - 0x01D366 0E:D356: A4 34
-	LDA ram_0580                    ;C - - - - - 0x01D368 0E:D358: AD 80 05
+	LDA objArr_0580                 ;C - - - - - 0x01D368 0E:D358: AD 80 05
 	CMP tbl_0F_E29D,Y               ;C - - - - - 0x01D36B 0E:D35B: D9 9D E2
 	BEQ loc_0E_D373                 ;C - - - - - 0x01D36E 0E:D35E: F0 13
 	CMP tbl_0F_E2A0,Y               ;C - - - - - 0x01D370 0E:D360: D9 A0 E2
@@ -2506,12 +2506,12 @@ loc_0E_D346:
 	LDA tbl_0F_FCCE,Y               ;C - - - - - 0x01D375 0E:D365: B9 CE FC
 	STA gameAction                  ;C - - - - - 0x01D378 0E:D368: 85 30
 	LDA #$80                        ;C - - - - - 0x01D37A 0E:D36A: A9 80
-	STA ram_0300                    ;C - - - - - 0x01D37C 0E:D36C: 8D 00 03
+	STA objArr_0300                 ;C - - - - - 0x01D37C 0E:D36C: 8D 00 03
 	JSR sub_0F_F436                 ;C - - - - - 0x01D37F 0E:D36F: 20 36 F4
 	RTS                             ;C - - - - - 0x01D382 0E:D372: 60
 loc_0E_D373:
 	LDY playerId                    ;C - - - - - 0x01D383 0E:D373: A4 34
-	LDA ram_0580                    ;C - - - - - 0x01D385 0E:D375: AD 80 05
+	LDA objArr_0580                 ;C - - - - - 0x01D385 0E:D375: AD 80 05
 	CMP tbl_0F_E288,Y               ;C - - - - - 0x01D388 0E:D378: D9 88 E2
 	BEQ loc_0E_D38A                 ;C - - - - - 0x01D38B 0E:D37B: F0 0D
 	CMP tbl_0F_E28B,Y               ;C - - - - - 0x01D38D 0E:D37D: D9 8B E2
@@ -2542,7 +2542,7 @@ tbl_0E_D3AD:
 tbl_0E_D3B0:
 	.hibytes ofs_0E_D3B3, ofs_0E_D47D, ofs_0E_D641;- D 2 - - - 0x01D3C0 0E:D3B0:
 ofs_0E_D3B3:
-	LDA ram_0580                    ;C - - J - - 0x01D3C3 0E:D3B3: AD 80 05
+	LDA objArr_0580                 ;C - - J - - 0x01D3C3 0E:D3B3: AD 80 05
 	CMP #$0D                        ;C - - - - - 0x01D3C6 0E:D3B6: C9 0D
 	BEQ loc_0E_D3F1                 ;C - - - - - 0x01D3C8 0E:D3B8: F0 37
 	CMP #$16                        ;C - - - - - 0x01D3CA 0E:D3BA: C9 16
@@ -2553,17 +2553,17 @@ ofs_0E_D3B3:
 	BNE loc_0E_D3C9                 ;C - - - - - 0x01D3D4 0E:D3C4: D0 03
 	JMP loc_0E_D438                 ;C - - - - - 0x01D3D6 0E:D3C6: 4C 38 D4
 loc_0E_D3C9:
-	LDA ram_0570                    ;C - - - - - 0x01D3D9 0E:D3C9: AD 70 05
+	LDA objArr_0570                 ;C - - - - - 0x01D3D9 0E:D3C9: AD 70 05
 	CMP #$01                        ;C - - - - - 0x01D3DC 0E:D3CC: C9 01
 	BNE loc_0E_D3D7                 ;C - - - - - 0x01D3DE 0E:D3CE: D0 07
 	JSR sub_0F_F43B                 ;C - - - - - 0x01D3E0 0E:D3D0: 20 3B F4
 	LDA #$08                        ;C - - - - - 0x01D3E3 0E:D3D3: A9 08
 	STA ram_00A7                    ;C - - - - - 0x01D3E5 0E:D3D5: 85 A7
 loc_0E_D3D7:
-	LDA ram_0570                    ;C - - - - - 0x01D3E7 0E:D3D7: AD 70 05
+	LDA objArr_0570                 ;C - - - - - 0x01D3E7 0E:D3D7: AD 70 05
 	CMP #$02                        ;C - - - - - 0x01D3EA 0E:D3DA: C9 02
 	BNE loc_0E_D3F0                 ;C - - - - - 0x01D3EC 0E:D3DC: D0 12
-	LDA ram_0590                    ;C - - - - - 0x01D3EE 0E:D3DE: AD 90 05
+	LDA objArr_0590                 ;C - - - - - 0x01D3EE 0E:D3DE: AD 90 05
 	CMP #$04                        ;C - - - - - 0x01D3F1 0E:D3E1: C9 04
 	BNE loc_0E_D3F0                 ;C - - - - - 0x01D3F3 0E:D3E3: D0 0B
 	JSR sub_0F_F436                 ;C - - - - - 0x01D3F5 0E:D3E5: 20 36 F4
@@ -2573,14 +2573,14 @@ loc_0E_D3D7:
 loc_0E_D3F0:
 	RTS                             ;C - - - - - 0x01D400 0E:D3F0: 60
 loc_0E_D3F1:
-	LDA ram_0570                    ;C - - - - - 0x01D401 0E:D3F1: AD 70 05
+	LDA objArr_0570                 ;C - - - - - 0x01D401 0E:D3F1: AD 70 05
 	CMP #$02                        ;C - - - - - 0x01D404 0E:D3F4: C9 02
 	BNE loc_0E_D400                 ;C - - - - - 0x01D406 0E:D3F6: D0 08
-	LDA ram_0590                    ;C - - - - - 0x01D408 0E:D3F8: AD 90 05
+	LDA objArr_0590                 ;C - - - - - 0x01D408 0E:D3F8: AD 90 05
 	BNE loc_0E_D400                 ;C - - - - - 0x01D40B 0E:D3FB: D0 03
 	JSR sub_0F_F428                 ;C - - - - - 0x01D40D 0E:D3FD: 20 28 F4
 loc_0E_D400:
-	LDA ram_0570                    ;C - - - - - 0x01D410 0E:D400: AD 70 05
+	LDA objArr_0570                 ;C - - - - - 0x01D410 0E:D400: AD 70 05
 	CMP #$03                        ;C - - - - - 0x01D413 0E:D403: C9 03
 	BNE loc_0E_D40D                 ;C - - - - - 0x01D415 0E:D405: D0 06
 	JSR sub_0F_F436                 ;C - - - - - 0x01D417 0E:D407: 20 36 F4
@@ -2588,22 +2588,22 @@ loc_0E_D400:
 loc_0E_D40D:
 	RTS                             ;C - - - - - 0x01D41D 0E:D40D: 60
 loc_0E_D40E:
-	LDA ram_0570                    ;C - - - - - 0x01D41E 0E:D40E: AD 70 05
+	LDA objArr_0570                 ;C - - - - - 0x01D41E 0E:D40E: AD 70 05
 	CMP #$02                        ;C - - - - - 0x01D421 0E:D411: C9 02
 	BNE loc_0E_D424                 ;C - - - - - 0x01D423 0E:D413: D0 0F
-	LDA ram_0590                    ;C - - - - - 0x01D425 0E:D415: AD 90 05
+	LDA objArr_0590                 ;C - - - - - 0x01D425 0E:D415: AD 90 05
 	BNE loc_0E_D424                 ;C - - - - - 0x01D428 0E:D418: D0 0A
 	JSR sub_0F_F43B                 ;C - - - - - 0x01D42A 0E:D41A: 20 3B F4
 	LDA #$06                        ;C - - - - - 0x01D42D 0E:D41D: A9 06
 	STA ram_00A7                    ;C - - - - - 0x01D42F 0E:D41F: 85 A7
 	JSR sub_0F_F430                 ;C - - - - - 0x01D431 0E:D421: 20 30 F4
 loc_0E_D424:
-	LDA ram_0570                    ;C - - - - - 0x01D434 0E:D424: AD 70 05
+	LDA objArr_0570                 ;C - - - - - 0x01D434 0E:D424: AD 70 05
 	CMP #$04                        ;C - - - - - 0x01D437 0E:D427: C9 04
 	BNE loc_0E_D42E                 ;C - - - - - 0x01D439 0E:D429: D0 03
 	JSR sub_0F_F436                 ;C - - - - - 0x01D43B 0E:D42B: 20 36 F4
 loc_0E_D42E:
-	LDA ram_0570                    ;C - - - - - 0x01D43E 0E:D42E: AD 70 05
+	LDA objArr_0570                 ;C - - - - - 0x01D43E 0E:D42E: AD 70 05
 	CMP #$05                        ;C - - - - - 0x01D441 0E:D431: C9 05
 	BNE loc_0E_D40D                 ;C - - - - - 0x01D443 0E:D433: D0 D8
 	JMP loc_0E_D45E                 ;C - - - - - 0x01D445 0E:D435: 4C 5E D4
@@ -2614,7 +2614,7 @@ loc_0E_D438:
 	LDA #$00                        ;C - - - - - 0x01D44F 0E:D43F: A9 00
 	STA ram_0037                    ;C - - - - - 0x01D451 0E:D441: 85 37
 	LDA #$80                        ;C - - - - - 0x01D453 0E:D443: A9 80
-	STA ram_0300                    ;C - - - - - 0x01D455 0E:D445: 8D 00 03
+	STA objArr_0300                 ;C - - - - - 0x01D455 0E:D445: 8D 00 03
 	STA ram_006E                    ;C - - - - - 0x01D458 0E:D448: 85 6E
 	LDA objY                        ;C - - - - - 0x01D45A 0E:D44A: AD C0 03
 	STA ram_0036                    ;C - - - - - 0x01D45D 0E:D44D: 85 36
@@ -2624,7 +2624,7 @@ ofs_0E_D45A:
 	JSR sub_0E_CEAA                 ;C - - J - - 0x01D46A 0E:D45A: 20 AA CE
 	RTS                             ;C - - - - - 0x01D46D 0E:D45D: 60
 loc_0E_D45E:
-	LDA ram_0580                    ;C - - - - - 0x01D46E 0E:D45E: AD 80 05
+	LDA objArr_0580                 ;C - - - - - 0x01D46E 0E:D45E: AD 80 05
 	CMP #$0D                        ;C - - - - - 0x01D471 0E:D461: C9 0D
 	BEQ loc_0E_D46B                 ;C - - - - - 0x01D473 0E:D463: F0 06
 	CMP #$16                        ;C - - - - - 0x01D475 0E:D465: C9 16
@@ -2644,7 +2644,7 @@ loc_0E_D477:
 	JSR sub_0E_D79A                 ;C - - - - - 0x01D487 0E:D477: 20 9A D7
 	JMP loc_0E_DD6A                 ;C - - - - - 0x01D48A 0E:D47A: 4C 6A DD
 ofs_0E_D47D:
-	LDA ram_0580                    ;C - - J - - 0x01D48D 0E:D47D: AD 80 05
+	LDA objArr_0580                 ;C - - J - - 0x01D48D 0E:D47D: AD 80 05
 	CMP #$0E                        ;C - - - - - 0x01D490 0E:D480: C9 0E
 	BEQ loc_0E_D4A9                 ;C - - - - - 0x01D492 0E:D482: F0 25
 	CMP #$55                        ;C - - - - - 0x01D494 0E:D484: C9 55
@@ -2690,10 +2690,10 @@ loc_0E_D4C4:
 	STA objY,Y                      ;c - - - - - 0x01D4D9 0E:D4C9: 99 C0 03
 	JMP loc_0E_D88C                 ;c - - - - - 0x01D4DC 0E:D4CC: 4C 8C D8
 loc_0E_D4CF:
-	LDA ram_0570                    ;C - - - - - 0x01D4DF 0E:D4CF: AD 70 05
+	LDA objArr_0570                 ;C - - - - - 0x01D4DF 0E:D4CF: AD 70 05
 	CMP #$04                        ;C - - - - - 0x01D4E2 0E:D4D2: C9 04
 	BNE loc_0E_D52B                 ;C - - - - - 0x01D4E4 0E:D4D4: D0 55
-	LDA ram_0590                    ;C - - - - - 0x01D4E6 0E:D4D6: AD 90 05
+	LDA objArr_0590                 ;C - - - - - 0x01D4E6 0E:D4D6: AD 90 05
 	CMP #$02                        ;C - - - - - 0x01D4E9 0E:D4D9: C9 02
 	BNE loc_0E_D52B                 ;C - - - - - 0x01D4EB 0E:D4DB: D0 4E
 	LDA #$55                        ;C - - - - - 0x01D4ED 0E:D4DD: A9 55
@@ -2702,30 +2702,30 @@ loc_0E_D4CF:
 loc_0E_D4E5:
 	RTS                             ;C - - - - - 0x01D4F5 0E:D4E5: 60
 loc_0E_D4E6:
-	LDA ram_0590                    ;C - - - - - 0x01D4F6 0E:D4E6: AD 90 05
+	LDA objArr_0590                 ;C - - - - - 0x01D4F6 0E:D4E6: AD 90 05
 	CMP #$04                        ;C - - - - - 0x01D4F9 0E:D4E9: C9 04
 	BNE loc_0E_D4E5                 ;C - - - - - 0x01D4FB 0E:D4EB: D0 F8
 	LDA #$56                        ;C - - - - - 0x01D4FD 0E:D4ED: A9 56
 	JMP loc_0E_D567                 ;C - - - - - 0x01D4FF 0E:D4EF: 4C 67 D5
 loc_0E_D4F2:
-	LDA ram_0570                    ;C - - - - - 0x01D502 0E:D4F2: AD 70 05
+	LDA objArr_0570                 ;C - - - - - 0x01D502 0E:D4F2: AD 70 05
 	CMP #$02                        ;C - - - - - 0x01D505 0E:D4F5: C9 02
 	BNE loc_0E_D4FF                 ;C - - - - - 0x01D507 0E:D4F7: D0 06
 	JSR sub_0F_F436                 ;C - - - - - 0x01D509 0E:D4F9: 20 36 F4
 	JMP loc_0E_D61F                 ;C - - - - - 0x01D50C 0E:D4FC: 4C 1F D6
 loc_0E_D4FF:
-	LDA ram_0570                    ;C - - - - - 0x01D50F 0E:D4FF: AD 70 05
+	LDA objArr_0570                 ;C - - - - - 0x01D50F 0E:D4FF: AD 70 05
 	CMP #$01                        ;C - - - - - 0x01D512 0E:D502: C9 01
 	BNE loc_0E_D4E5                 ;C - - - - - 0x01D514 0E:D504: D0 DF
-	LDA ram_0590                    ;C - - - - - 0x01D516 0E:D506: AD 90 05
+	LDA objArr_0590                 ;C - - - - - 0x01D516 0E:D506: AD 90 05
 	BNE loc_0E_D4E5                 ;C - - - - - 0x01D519 0E:D509: D0 DA
 	JSR sub_0F_F428                 ;C - - - - - 0x01D51B 0E:D50B: 20 28 F4
 	RTS                             ;C - - - - - 0x01D51E 0E:D50E: 60
 loc_0E_D50F:
-	LDA ram_0570                    ;C - - - - - 0x01D51F 0E:D50F: AD 70 05
+	LDA objArr_0570                 ;C - - - - - 0x01D51F 0E:D50F: AD 70 05
 	CMP #$04                        ;C - - - - - 0x01D522 0E:D512: C9 04
 	BNE loc_0E_D52B                 ;C - - - - - 0x01D524 0E:D514: D0 15
-	LDA ram_0590                    ;C - - - - - 0x01D526 0E:D516: AD 90 05
+	LDA objArr_0590                 ;C - - - - - 0x01D526 0E:D516: AD 90 05
 	CMP #$02                        ;C - - - - - 0x01D529 0E:D519: C9 02
 	BNE loc_0E_D52B                 ;C - - - - - 0x01D52B 0E:D51B: D0 0E
 	LDA #$02                        ;C - - - - - 0x01D52D 0E:D51D: A9 02
@@ -2736,33 +2736,33 @@ loc_0E_D522:
 	JSR sub_0F_F436                 ;C - - - - - 0x01D537 0E:D527: 20 36 F4
 	RTS                             ;C - - - - - 0x01D53A 0E:D52A: 60
 loc_0E_D52B:
-	LDA ram_0570                    ;C - - - - - 0x01D53B 0E:D52B: AD 70 05
+	LDA objArr_0570                 ;C - - - - - 0x01D53B 0E:D52B: AD 70 05
 	CMP #$01                        ;C - - - - - 0x01D53E 0E:D52E: C9 01
 	BNE loc_0E_D53A                 ;C - - - - - 0x01D540 0E:D530: D0 08
-	LDA ram_0590                    ;C - - - - - 0x01D542 0E:D532: AD 90 05
+	LDA objArr_0590                 ;C - - - - - 0x01D542 0E:D532: AD 90 05
 	BNE loc_0E_D53A                 ;C - - - - - 0x01D545 0E:D535: D0 03
 	JSR sub_0F_F428                 ;C - - - - - 0x01D547 0E:D537: 20 28 F4
 loc_0E_D53A:
-	LDA ram_0570                    ;C - - - - - 0x01D54A 0E:D53A: AD 70 05
+	LDA objArr_0570                 ;C - - - - - 0x01D54A 0E:D53A: AD 70 05
 	CMP #$02                        ;C - - - - - 0x01D54D 0E:D53D: C9 02
 	BNE loc_0E_D544                 ;C - - - - - 0x01D54F 0E:D53F: D0 03
 	JSR sub_0F_F436                 ;C - - - - - 0x01D551 0E:D541: 20 36 F4
 loc_0E_D544:
-	LDA ram_0570                    ;C - - - - - 0x01D554 0E:D544: AD 70 05
+	LDA objArr_0570                 ;C - - - - - 0x01D554 0E:D544: AD 70 05
 	CMP #$04                        ;C - - - - - 0x01D557 0E:D547: C9 04
 	BNE loc_0E_D553                 ;C - - - - - 0x01D559 0E:D549: D0 08
-	LDA ram_0590                    ;C - - - - - 0x01D55B 0E:D54B: AD 90 05
+	LDA objArr_0590                 ;C - - - - - 0x01D55B 0E:D54B: AD 90 05
 	BNE loc_0E_D553                 ;C - - - - - 0x01D55E 0E:D54E: D0 03
 	JSR sub_0F_F428                 ;C - - - - - 0x01D560 0E:D550: 20 28 F4
 loc_0E_D553:
-	LDA ram_0570                    ;C - - - - - 0x01D563 0E:D553: AD 70 05
+	LDA objArr_0570                 ;C - - - - - 0x01D563 0E:D553: AD 70 05
 	CMP #$05                        ;C - - - - - 0x01D566 0E:D556: C9 05
 	BNE loc_0E_D55D                 ;C - - - - - 0x01D568 0E:D558: D0 03
 	JSR sub_0F_F436                 ;c - - - - - 0x01D56A 0E:D55A: 20 36 F4
 loc_0E_D55D:
 	RTS                             ;C - - - - - 0x01D56D 0E:D55D: 60
 loc_0E_D55E:
-	LDA ram_0590                    ;C - - - - - 0x01D56E 0E:D55E: AD 90 05
+	LDA objArr_0590                 ;C - - - - - 0x01D56E 0E:D55E: AD 90 05
 	CMP #$04                        ;C - - - - - 0x01D571 0E:D561: C9 04
 	BNE loc_0E_D55D                 ;C - - - - - 0x01D573 0E:D563: D0 F8
 	LDA #$59                        ;C - - - - - 0x01D575 0E:D565: A9 59
@@ -2772,53 +2772,53 @@ loc_0E_D567:
 	JSR sub_0F_F440                 ;C - - - - - 0x01D57C 0E:D56C: 20 40 F4
 	RTS                             ;C - - - - - 0x01D57F 0E:D56F: 60
 loc_0E_D570:
-	LDA ram_0570                    ;C - - - - - 0x01D580 0E:D570: AD 70 05
+	LDA objArr_0570                 ;C - - - - - 0x01D580 0E:D570: AD 70 05
 	CMP #$02                        ;C - - - - - 0x01D583 0E:D573: C9 02
 	BNE loc_0E_D57D                 ;C - - - - - 0x01D585 0E:D575: D0 06
 	JSR sub_0F_F436                 ;C - - - - - 0x01D587 0E:D577: 20 36 F4
 	JMP loc_0E_D61F                 ;C - - - - - 0x01D58A 0E:D57A: 4C 1F D6
 loc_0E_D57D:
-	LDA ram_0570                    ;C - - - - - 0x01D58D 0E:D57D: AD 70 05
+	LDA objArr_0570                 ;C - - - - - 0x01D58D 0E:D57D: AD 70 05
 	CMP #$01                        ;C - - - - - 0x01D590 0E:D580: C9 01
 	BNE loc_0E_D55D                 ;C - - - - - 0x01D592 0E:D582: D0 D9
-	LDA ram_0590                    ;C - - - - - 0x01D594 0E:D584: AD 90 05
+	LDA objArr_0590                 ;C - - - - - 0x01D594 0E:D584: AD 90 05
 	BNE loc_0E_D55D                 ;C - - - - - 0x01D597 0E:D587: D0 D4
 	JSR sub_0F_F428                 ;C - - - - - 0x01D599 0E:D589: 20 28 F4
 	RTS                             ;C - - - - - 0x01D59C 0E:D58C: 60
 loc_0E_D58D:
-	LDA ram_0570                    ;C - - - - - 0x01D59D 0E:D58D: AD 70 05
+	LDA objArr_0570                 ;C - - - - - 0x01D59D 0E:D58D: AD 70 05
 	CMP #$02                        ;C - - - - - 0x01D5A0 0E:D590: C9 02
 	BNE loc_0E_D5A3                 ;C - - - - - 0x01D5A2 0E:D592: D0 0F
-	LDA ram_0590                    ;C - - - - - 0x01D5A4 0E:D594: AD 90 05
+	LDA objArr_0590                 ;C - - - - - 0x01D5A4 0E:D594: AD 90 05
 	BNE loc_0E_D5A3                 ;C - - - - - 0x01D5A7 0E:D597: D0 0A
 	JSR sub_0F_F43B                 ;C - - - - - 0x01D5A9 0E:D599: 20 3B F4
 	LDA #$06                        ;C - - - - - 0x01D5AC 0E:D59C: A9 06
 	STA ram_00A7                    ;C - - - - - 0x01D5AE 0E:D59E: 85 A7
 	JSR sub_0F_F430                 ;C - - - - - 0x01D5B0 0E:D5A0: 20 30 F4
 loc_0E_D5A3:
-	LDA ram_0570                    ;C - - - - - 0x01D5B3 0E:D5A3: AD 70 05
+	LDA objArr_0570                 ;C - - - - - 0x01D5B3 0E:D5A3: AD 70 05
 	CMP #$04                        ;C - - - - - 0x01D5B6 0E:D5A6: C9 04
 	BNE loc_0E_D5AD                 ;C - - - - - 0x01D5B8 0E:D5A8: D0 03
 	JSR sub_0F_F436                 ;C - - - - - 0x01D5BA 0E:D5AA: 20 36 F4
 loc_0E_D5AD:
-	LDA ram_0570                    ;C - - - - - 0x01D5BD 0E:D5AD: AD 70 05
+	LDA objArr_0570                 ;C - - - - - 0x01D5BD 0E:D5AD: AD 70 05
 	CMP #$06                        ;C - - - - - 0x01D5C0 0E:D5B0: C9 06
 	BNE loc_0E_D55D                 ;C - - - - - 0x01D5C2 0E:D5B2: D0 A9
 	JMP loc_0E_D61F                 ;C - - - - - 0x01D5C4 0E:D5B4: 4C 1F D6
 loc_0E_D5B7:
 	LDA #$80                        ;C - - - - - 0x01D5C7 0E:D5B7: A9 80
 	STA ram_006E                    ;C - - - - - 0x01D5C9 0E:D5B9: 85 6E
-	LDA ram_0570                    ;C - - - - - 0x01D5CB 0E:D5BB: AD 70 05
+	LDA objArr_0570                 ;C - - - - - 0x01D5CB 0E:D5BB: AD 70 05
 	CMP #$04                        ;C - - - - - 0x01D5CE 0E:D5BE: C9 04
 	BNE loc_0E_D5D1                 ;C - - - - - 0x01D5D0 0E:D5C0: D0 0F
-	LDA ram_0590                    ;C - - - - - 0x01D5D2 0E:D5C2: AD 90 05
+	LDA objArr_0590                 ;C - - - - - 0x01D5D2 0E:D5C2: AD 90 05
 	BNE loc_0E_D5D1                 ;C - - - - - 0x01D5D5 0E:D5C5: D0 0A
 	JSR sub_0F_F43B                 ;C - - - - - 0x01D5D7 0E:D5C7: 20 3B F4
 	LDA #$01                        ;C - - - - - 0x01D5DA 0E:D5CA: A9 01
 	STA ram_00A7                    ;C - - - - - 0x01D5DC 0E:D5CC: 85 A7
 	JSR sub_0F_F430                 ;C - - - - - 0x01D5DE 0E:D5CE: 20 30 F4
 loc_0E_D5D1:
-	LDA ram_0570                    ;C - - - - - 0x01D5E1 0E:D5D1: AD 70 05
+	LDA objArr_0570                 ;C - - - - - 0x01D5E1 0E:D5D1: AD 70 05
 	CMP #$06                        ;C - - - - - 0x01D5E4 0E:D5D4: C9 06
 	BNE loc_0E_D61E                 ;C - - - - - 0x01D5E6 0E:D5D6: D0 46
 	JSR sub_0F_F436                 ;C - - - - - 0x01D5E8 0E:D5D8: 20 36 F4
@@ -2835,7 +2835,7 @@ loc_0E_D5D1:
 loc_0E_D5F3:
 	LDY #$00                        ;C - - - - - 0x01D603 0E:D5F3: A0 00
 	JSR sub_0F_F119                 ;C - - - - - 0x01D605 0E:D5F5: 20 19 F1
-	LDA ram_0430                    ;C - - - - - 0x01D608 0E:D5F8: AD 30 04
+	LDA objArr_0430                 ;C - - - - - 0x01D608 0E:D5F8: AD 30 04
 	BPL loc_0E_D61E                 ;C - - - - - 0x01D60B 0E:D5FB: 10 21
 	LDA objY                        ;C - - - - - 0x01D60D 0E:D5FD: AD C0 03
 	CLC                             ;C - - - - - 0x01D610 0E:D600: 18
@@ -2857,7 +2857,7 @@ loc_0E_D613:
 loc_0E_D61E:
 	RTS                             ;C - - - - - 0x01D62E 0E:D61E: 60
 loc_0E_D61F:
-	LDA ram_0580                    ;C - - - - - 0x01D62F 0E:D61F: AD 80 05
+	LDA objArr_0580                 ;C - - - - - 0x01D62F 0E:D61F: AD 80 05
 	CMP #$56                        ;C - - - - - 0x01D632 0E:D622: C9 56
 	BEQ loc_0E_D62F                 ;C - - - - - 0x01D634 0E:D624: F0 09
 	CMP #$59                        ;C - - - - - 0x01D636 0E:D626: C9 59
@@ -2878,7 +2878,7 @@ loc_0E_D639:
 	JSR sub_0E_D79A                 ;C - - - - - 0x01D64B 0E:D63B: 20 9A D7
 	JMP loc_0E_DD6A                 ;C - - - - - 0x01D64E 0E:D63E: 4C 6A DD
 ofs_0E_D641:
-	LDA ram_0580                    ;C - - J - - 0x01D651 0E:D641: AD 80 05
+	LDA objArr_0580                 ;C - - J - - 0x01D651 0E:D641: AD 80 05
 	CMP #$0F                        ;C - - - - - 0x01D654 0E:D644: C9 0F
 	BEQ loc_0E_D66A                 ;C - - - - - 0x01D656 0E:D646: F0 22
 	CMP #$3F                        ;C - - - - - 0x01D658 0E:D648: C9 3F
@@ -2901,24 +2901,24 @@ loc_0E_D664:
 loc_0E_D667:
 	JMP sub_0E_D79A                 ;c - - - - - 0x01D677 0E:D667: 4C 9A D7
 loc_0E_D66A:
-	LDA ram_0570                    ;C - - - - - 0x01D67A 0E:D66A: AD 70 05
+	LDA objArr_0570                 ;C - - - - - 0x01D67A 0E:D66A: AD 70 05
 	CMP #$02                        ;C - - - - - 0x01D67D 0E:D66D: C9 02
 	BNE loc_0E_D680                 ;C - - - - - 0x01D67F 0E:D66F: D0 0F
-	LDA ram_0590                    ;C - - - - - 0x01D681 0E:D671: AD 90 05
+	LDA objArr_0590                 ;C - - - - - 0x01D681 0E:D671: AD 90 05
 	BNE loc_0E_D680                 ;C - - - - - 0x01D684 0E:D674: D0 0A
 	JSR sub_0F_F43B                 ;C - - - - - 0x01D686 0E:D676: 20 3B F4
 	LDA #$0B                        ;C - - - - - 0x01D689 0E:D679: A9 0B
 	STA ram_00A7                    ;C - - - - - 0x01D68B 0E:D67B: 85 A7
 	JSR sub_0F_F430                 ;C - - - - - 0x01D68D 0E:D67D: 20 30 F4
 loc_0E_D680:
-	LDA ram_0570                    ;C - - - - - 0x01D690 0E:D680: AD 70 05
+	LDA objArr_0570                 ;C - - - - - 0x01D690 0E:D680: AD 70 05
 	CMP #$03                        ;C - - - - - 0x01D693 0E:D683: C9 03
 	BNE loc_0E_D68F                 ;C - - - - - 0x01D695 0E:D685: D0 08
-	LDA ram_0590                    ;C - - - - - 0x01D697 0E:D687: AD 90 05
+	LDA objArr_0590                 ;C - - - - - 0x01D697 0E:D687: AD 90 05
 	BNE loc_0E_D68F                 ;C - - - - - 0x01D69A 0E:D68A: D0 03
 	JSR sub_0F_F436                 ;C - - - - - 0x01D69C 0E:D68C: 20 36 F4
 loc_0E_D68F:
-	LDA ram_0570                    ;C - - - - - 0x01D69F 0E:D68F: AD 70 05
+	LDA objArr_0570                 ;C - - - - - 0x01D69F 0E:D68F: AD 70 05
 	CMP #$05                        ;C - - - - - 0x01D6A2 0E:D692: C9 05
 	BNE loc_0E_D69B                 ;C - - - - - 0x01D6A4 0E:D694: D0 05
 	LDA #$3F                        ;C - - - - - 0x01D6A6 0E:D696: A9 3F
@@ -2926,29 +2926,29 @@ loc_0E_D68F:
 loc_0E_D69B:
 	RTS                             ;C - - - - - 0x01D6AB 0E:D69B: 60
 loc_0E_D69C:
-	LDA ram_0590                    ;C - - - - - 0x01D6AC 0E:D69C: AD 90 05
+	LDA objArr_0590                 ;C - - - - - 0x01D6AC 0E:D69C: AD 90 05
 	CMP #$04                        ;C - - - - - 0x01D6AF 0E:D69F: C9 04
 	BNE loc_0E_D69B                 ;C - - - - - 0x01D6B1 0E:D6A1: D0 F8
 	JMP loc_0E_D777                 ;C - - - - - 0x01D6B3 0E:D6A3: 4C 77 D7
 loc_0E_D6A6:
-	LDA ram_0570                    ;C - - - - - 0x01D6B6 0E:D6A6: AD 70 05
+	LDA objArr_0570                 ;C - - - - - 0x01D6B6 0E:D6A6: AD 70 05
 	CMP #$02                        ;C - - - - - 0x01D6B9 0E:D6A9: C9 02
 	BNE loc_0E_D6BC                 ;C - - - - - 0x01D6BB 0E:D6AB: D0 0F
-	LDA ram_0590                    ;C - - - - - 0x01D6BD 0E:D6AD: AD 90 05
+	LDA objArr_0590                 ;C - - - - - 0x01D6BD 0E:D6AD: AD 90 05
 	BNE loc_0E_D6BC                 ;C - - - - - 0x01D6C0 0E:D6B0: D0 0A
 	JSR sub_0F_F43B                 ;C - - - - - 0x01D6C2 0E:D6B2: 20 3B F4
 	LDA #$0B                        ;C - - - - - 0x01D6C5 0E:D6B5: A9 0B
 	STA ram_00A7                    ;C - - - - - 0x01D6C7 0E:D6B7: 85 A7
 	JSR sub_0F_F430                 ;C - - - - - 0x01D6C9 0E:D6B9: 20 30 F4
 loc_0E_D6BC:
-	LDA ram_0570                    ;C - - - - - 0x01D6CC 0E:D6BC: AD 70 05
+	LDA objArr_0570                 ;C - - - - - 0x01D6CC 0E:D6BC: AD 70 05
 	CMP #$03                        ;C - - - - - 0x01D6CF 0E:D6BF: C9 03
 	BNE loc_0E_D6CB                 ;C - - - - - 0x01D6D1 0E:D6C1: D0 08
-	LDA ram_0590                    ;C - - - - - 0x01D6D3 0E:D6C3: AD 90 05
+	LDA objArr_0590                 ;C - - - - - 0x01D6D3 0E:D6C3: AD 90 05
 	BNE loc_0E_D6CB                 ;C - - - - - 0x01D6D6 0E:D6C6: D0 03
 	JSR sub_0F_F436                 ;C - - - - - 0x01D6D8 0E:D6C8: 20 36 F4
 loc_0E_D6CB:
-	LDA ram_0570                    ;C - - - - - 0x01D6DB 0E:D6CB: AD 70 05
+	LDA objArr_0570                 ;C - - - - - 0x01D6DB 0E:D6CB: AD 70 05
 	CMP #$05                        ;C - - - - - 0x01D6DE 0E:D6CE: C9 05
 	BNE loc_0E_D69B                 ;C - - - - - 0x01D6E0 0E:D6D0: D0 C9
 	LDA #$4E                        ;C - - - - - 0x01D6E2 0E:D6D2: A9 4E
@@ -2960,30 +2960,30 @@ loc_0E_D6D4:
 loc_0E_D6DF:
 	RTS                             ;C - - - - - 0x01D6EF 0E:D6DF: 60
 loc_0E_D6E0:
-	LDA ram_0570                    ;C - - - - - 0x01D6F0 0E:D6E0: AD 70 05
+	LDA objArr_0570                 ;C - - - - - 0x01D6F0 0E:D6E0: AD 70 05
 	CMP #$04                        ;C - - - - - 0x01D6F3 0E:D6E3: C9 04
 	BNE loc_0E_D6F6                 ;C - - - - - 0x01D6F5 0E:D6E5: D0 0F
-	LDA ram_0590                    ;C - - - - - 0x01D6F7 0E:D6E7: AD 90 05
+	LDA objArr_0590                 ;C - - - - - 0x01D6F7 0E:D6E7: AD 90 05
 	BNE loc_0E_D6F6                 ;C - - - - - 0x01D6FA 0E:D6EA: D0 0A
 	JSR sub_0F_F43B                 ;C - - - - - 0x01D6FC 0E:D6EC: 20 3B F4
 	LDA #$0C                        ;C - - - - - 0x01D6FF 0E:D6EF: A9 0C
 	STA ram_00A7                    ;C - - - - - 0x01D701 0E:D6F1: 85 A7
 	JSR sub_0F_F430                 ;C - - - - - 0x01D703 0E:D6F3: 20 30 F4
 loc_0E_D6F6:
-	LDA ram_0570                    ;C - - - - - 0x01D706 0E:D6F6: AD 70 05
+	LDA objArr_0570                 ;C - - - - - 0x01D706 0E:D6F6: AD 70 05
 	CMP #$05                        ;C - - - - - 0x01D709 0E:D6F9: C9 05
 	BNE loc_0E_D700                 ;C - - - - - 0x01D70B 0E:D6FB: D0 03
 	JSR sub_0F_F436                 ;C - - - - - 0x01D70D 0E:D6FD: 20 36 F4
 loc_0E_D700:
-	LDA ram_0570                    ;C - - - - - 0x01D710 0E:D700: AD 70 05
+	LDA objArr_0570                 ;C - - - - - 0x01D710 0E:D700: AD 70 05
 	CMP #$07                        ;C - - - - - 0x01D713 0E:D703: C9 07
 	BNE loc_0E_D6DF                 ;C - - - - - 0x01D715 0E:D705: D0 D8
 	JMP loc_0E_D777                 ;C - - - - - 0x01D717 0E:D707: 4C 77 D7
 loc_0E_D70A:
-	LDA ram_0570                    ;C - - - - - 0x01D71A 0E:D70A: AD 70 05
+	LDA objArr_0570                 ;C - - - - - 0x01D71A 0E:D70A: AD 70 05
 	CMP #$04                        ;C - - - - - 0x01D71D 0E:D70D: C9 04
 	BNE loc_0E_D724                 ;C - - - - - 0x01D71F 0E:D70F: D0 13
-	LDA ram_0590                    ;C - - - - - 0x01D721 0E:D711: AD 90 05
+	LDA objArr_0590                 ;C - - - - - 0x01D721 0E:D711: AD 90 05
 	BNE loc_0E_D724                 ;C - - - - - 0x01D724 0E:D714: D0 0E
 	JSR sub_0F_F43B                 ;C - - - - - 0x01D726 0E:D716: 20 3B F4
 	LDA #$0D                        ;C - - - - - 0x01D729 0E:D719: A9 0D
@@ -2992,12 +2992,12 @@ loc_0E_D70A:
 	STA ram_00A6                    ;C - - - - - 0x01D72F 0E:D71F: 85 A6
 	JSR sub_0F_F430                 ;C - - - - - 0x01D731 0E:D721: 20 30 F4
 loc_0E_D724:
-	LDA ram_0570                    ;C - - - - - 0x01D734 0E:D724: AD 70 05
+	LDA objArr_0570                 ;C - - - - - 0x01D734 0E:D724: AD 70 05
 	CMP #$07                        ;C - - - - - 0x01D737 0E:D727: C9 07
 	BNE loc_0E_D72E                 ;C - - - - - 0x01D739 0E:D729: D0 03
 	JSR sub_0F_F436                 ;C - - - - - 0x01D73B 0E:D72B: 20 36 F4
 loc_0E_D72E:
-	LDA ram_0570                    ;C - - - - - 0x01D73E 0E:D72E: AD 70 05
+	LDA objArr_0570                 ;C - - - - - 0x01D73E 0E:D72E: AD 70 05
 	CMP #$0F                        ;C - - - - - 0x01D741 0E:D731: C9 0F
 	BNE loc_0E_D73A                 ;C - - - - - 0x01D743 0E:D733: D0 05
 	LDA objY                        ;c - - - - - 0x01D745 0E:D735: AD C0 03
@@ -3007,7 +3007,7 @@ loc_0E_D73A:
 	STA ram_006E                    ;C - - - - - 0x01D74C 0E:D73C: 85 6E
 	LDY #$02                        ;C - - - - - 0x01D74E 0E:D73E: A0 02
 	JSR sub_0F_F119                 ;C - - - - - 0x01D750 0E:D740: 20 19 F1
-	LDA ram_0430                    ;C - - - - - 0x01D753 0E:D743: AD 30 04
+	LDA objArr_0430                 ;C - - - - - 0x01D753 0E:D743: AD 30 04
 	BPL loc_0E_D776                 ;C - - - - - 0x01D756 0E:D746: 10 2E
 	LDA objY                        ;C - - - - - 0x01D758 0E:D748: AD C0 03
 	CLC                             ;C - - - - - 0x01D75B 0E:D74B: 18
@@ -3035,7 +3035,7 @@ loc_0E_D75E:
 loc_0E_D776:
 	RTS                             ;C - - - - - 0x01D786 0E:D776: 60
 loc_0E_D777:
-	LDA ram_0580                    ;C - - - - - 0x01D787 0E:D777: AD 80 05
+	LDA objArr_0580                 ;C - - - - - 0x01D787 0E:D777: AD 80 05
 	CMP #$3F                        ;C - - - - - 0x01D78A 0E:D77A: C9 3F
 	BEQ loc_0E_D788                 ;C - - - - - 0x01D78C 0E:D77C: F0 0A
 	CMP #$4E                        ;C - - - - - 0x01D78E 0E:D77E: C9 4E
@@ -3084,13 +3084,13 @@ ofs_0E_D7B8:
 	BEQ loc_0E_D829                 ;C - - - - - 0x01D7D4 0E:D7C4: F0 63
 	CMP ram_0031                    ;C - - - - - 0x01D7D6 0E:D7C6: C5 31
 	BEQ loc_0E_D7D4                 ;C - - - - - 0x01D7D8 0E:D7C8: F0 0A
-	LDA ram_0460,Y                  ;C - - - - - 0x01D7DA 0E:D7CA: B9 60 04
+	LDA objArr_0460,Y               ;C - - - - - 0x01D7DA 0E:D7CA: B9 60 04
 	EOR #$03                        ;C - - - - - 0x01D7DD 0E:D7CD: 49 03
-	STA ram_0460,Y                  ;C - - - - - 0x01D7DF 0E:D7CF: 99 60 04
+	STA objArr_0460,Y               ;C - - - - - 0x01D7DF 0E:D7CF: 99 60 04
 	BNE loc_0E_D7EB                 ;C - - - - - 0x01D7E2 0E:D7D2: D0 17
 loc_0E_D7D4:
 	LDA #$FF                        ;C - - - - - 0x01D7E4 0E:D7D4: A9 FF
-	STA ram_0470,Y                  ;C - - - - - 0x01D7E6 0E:D7D6: 99 70 04
+	STA objArr_0470,Y               ;C - - - - - 0x01D7E6 0E:D7D6: 99 70 04
 	LDA ram_0031                    ;C - - - - - 0x01D7E9 0E:D7D9: A5 31
 	AND #$01                        ;C - - - - - 0x01D7EB 0E:D7DB: 29 01
 	BEQ loc_0E_D7E6                 ;C - - - - - 0x01D7ED 0E:D7DD: F0 07
@@ -3109,20 +3109,20 @@ loc_0E_D7F2:
 	STA ram_006E                    ;C - - - - - 0x01D804 0E:D7F4: 85 6E
 	LDY ram_0039                    ;C - - - - - 0x01D806 0E:D7F6: A4 39
 	LDA #$04                        ;C - - - - - 0x01D808 0E:D7F8: A9 04
-	STA ram_0320,Y                  ;C - - - - - 0x01D80A 0E:D7FA: 99 20 03
+	STA objArr_0320,Y               ;C - - - - - 0x01D80A 0E:D7FA: 99 20 03
 	LDA #$80                        ;C - - - - - 0x01D80D 0E:D7FD: A9 80
-	STA ram_0300,Y                  ;C - - - - - 0x01D80F 0E:D7FF: 99 00 03
-	LDA ram_0460,Y                  ;C - - - - - 0x01D812 0E:D802: B9 60 04
+	STA objArr_0300,Y               ;C - - - - - 0x01D80F 0E:D7FF: 99 00 03
+	LDA objArr_0460,Y               ;C - - - - - 0x01D812 0E:D802: B9 60 04
 	AND #$01                        ;C - - - - - 0x01D815 0E:D805: 29 01
 	BEQ loc_0E_D813                 ;C - - - - - 0x01D817 0E:D807: F0 0A
-	LDA ram_0560,Y                  ;C - - - - - 0x01D819 0E:D809: B9 60 05
+	LDA objArr_0560,Y               ;C - - - - - 0x01D819 0E:D809: B9 60 05
 	AND #$BF                        ;C - - - - - 0x01D81C 0E:D80C: 29 BF
-	STA ram_0560,Y                  ;C - - - - - 0x01D81E 0E:D80E: 99 60 05
+	STA objArr_0560,Y               ;C - - - - - 0x01D81E 0E:D80E: 99 60 05
 	BNE loc_0E_D81B                 ;C - - - - - 0x01D821 0E:D811: D0 08
 loc_0E_D813:
-	LDA ram_0560,Y                  ;C - - - - - 0x01D823 0E:D813: B9 60 05
+	LDA objArr_0560,Y               ;C - - - - - 0x01D823 0E:D813: B9 60 05
 	ORA #$40                        ;C - - - - - 0x01D826 0E:D816: 09 40
-	STA ram_0560,Y                  ;C - - - - - 0x01D828 0E:D818: 99 60 05
+	STA objArr_0560,Y               ;C - - - - - 0x01D828 0E:D818: 99 60 05
 loc_0E_D81B:
 	LDA #$19                        ;C - - - - - 0x01D82B 0E:D81B: A9 19
 	STA ram_0037                    ;C - - - - - 0x01D82D 0E:D81D: 85 37
@@ -3150,14 +3150,14 @@ loc_0E_D83B:
 	STA ram_00BA                    ;C - - - - - 0x01D851 0E:D841: 85 BA
 	LDA #$FF                        ;C - - - - - 0x01D853 0E:D843: A9 FF
 	LDY ram_0039                    ;C - - - - - 0x01D855 0E:D845: A4 39
-	STA ram_03F0,Y                  ;C - - - - - 0x01D857 0E:D847: 99 F0 03
+	STA objArr_03F0,Y               ;C - - - - - 0x01D857 0E:D847: 99 F0 03
 	JSR sub_0E_CEAA                 ;C - - - - - 0x01D85A 0E:D84A: 20 AA CE
 	RTS                             ;C - - - - - 0x01D85D 0E:D84D: 60
 loc_0E_D84E:
 	LDA #$38                        ;C - - - - - 0x01D85E 0E:D84E: A9 38
-	STA ram_0420                    ;C - - - - - 0x01D860 0E:D850: 8D 20 04
+	STA objArr_0420                 ;C - - - - - 0x01D860 0E:D850: 8D 20 04
 	LDA #$04                        ;C - - - - - 0x01D863 0E:D853: A9 04
-	STA ram_0430                    ;C - - - - - 0x01D865 0E:D855: 8D 30 04
+	STA objArr_0430                 ;C - - - - - 0x01D865 0E:D855: 8D 30 04
 	LDY playerId                    ;C - - - - - 0x01D868 0E:D858: A4 34
 	LDA tbl_0F_E1E9,Y               ;C - - - - - 0x01D86A 0E:D85A: B9 E9 E1
 	JSR sub_0F_F294                 ;C - - - - - 0x01D86D 0E:D85D: 20 94 F2
@@ -3168,7 +3168,7 @@ loc_0E_D84E:
 	STA ram_00BA                    ;C - - - - - 0x01D87A 0E:D86A: 85 BA
 	LDA #$FF                        ;C - - - - - 0x01D87C 0E:D86C: A9 FF
 	LDY ram_0039                    ;C - - - - - 0x01D87E 0E:D86E: A4 39
-	STA ram_03F0,Y                  ;C - - - - - 0x01D880 0E:D870: 99 F0 03
+	STA objArr_03F0,Y               ;C - - - - - 0x01D880 0E:D870: 99 F0 03
 	LDA #$01                        ;C - - - - - 0x01D883 0E:D873: A9 01
 	STA gameAction                  ;C - - - - - 0x01D885 0E:D875: 85 30
 	LDA objY                        ;C - - - - - 0x01D887 0E:D877: AD C0 03
@@ -3187,7 +3187,7 @@ loc_0E_D88C:
 	LDA #$13                        ;C - - - - - 0x01D8A0 0E:D890: A9 13
 	STA gameAction                  ;C - - - - - 0x01D8A2 0E:D892: 85 30
 	LDA #$80                        ;C - - - - - 0x01D8A4 0E:D894: A9 80
-	STA ram_0300                    ;C - - - - - 0x01D8A6 0E:D896: 8D 00 03
+	STA objArr_0300                 ;C - - - - - 0x01D8A6 0E:D896: 8D 00 03
 	RTS                             ;C - - - - - 0x01D8A9 0E:D899: 60
 ofs_0E_D89A:
 	LDA padPressed                  ;C - - J - - 0x01D8AA 0E:D89A: A5 14
@@ -3201,25 +3201,25 @@ loc_0E_D8A8:
 	LDA #$15                        ;C - - - - - 0x01D8BA 0E:D8AA: A9 15
 	STA gameAction                  ;C - - - - - 0x01D8BC 0E:D8AC: 85 30
 	LDA #$80                        ;C - - - - - 0x01D8BE 0E:D8AE: A9 80
-	STA ram_0300                    ;C - - - - - 0x01D8C0 0E:D8B0: 8D 00 03
-	STA ram_0300,Y                  ;C - - - - - 0x01D8C3 0E:D8B3: 99 00 03
+	STA objArr_0300                 ;C - - - - - 0x01D8C0 0E:D8B0: 8D 00 03
+	STA objArr_0300,Y               ;C - - - - - 0x01D8C3 0E:D8B3: 99 00 03
 	RTS                             ;C - - - - - 0x01D8C6 0E:D8B6: 60
 loc_0E_D8B7:
 	LDY ram_0039                    ;C - - - - - 0x01D8C7 0E:D8B7: A4 39
 	LDA #$80                        ;C - - - - - 0x01D8C9 0E:D8B9: A9 80
-	STA ram_0300,Y                  ;C - - - - - 0x01D8CB 0E:D8BB: 99 00 03
+	STA objArr_0300,Y               ;C - - - - - 0x01D8CB 0E:D8BB: 99 00 03
 	LDA #$12                        ;C - - - - - 0x01D8CE 0E:D8BE: A9 12
 	STA gameAction                  ;C - - - - - 0x01D8D0 0E:D8C0: 85 30
 	LDA #$00                        ;C - - - - - 0x01D8D2 0E:D8C2: A9 00
 	STA ram_00B3                    ;C - - - - - 0x01D8D4 0E:D8C4: 85 B3
 	LDA #$4E                        ;C - - - - - 0x01D8D6 0E:D8C6: A9 4E
-	STA ram_0420                    ;C - - - - - 0x01D8D8 0E:D8C8: 8D 20 04
+	STA objArr_0420                 ;C - - - - - 0x01D8D8 0E:D8C8: 8D 20 04
 	LDA #$05                        ;C - - - - - 0x01D8DB 0E:D8CB: A9 05
-	STA ram_0430                    ;C - - - - - 0x01D8DD 0E:D8CD: 8D 30 04
+	STA objArr_0430                 ;C - - - - - 0x01D8DD 0E:D8CD: 8D 30 04
 	LDA #$80                        ;C - - - - - 0x01D8E0 0E:D8D0: A9 80
-	STA ram_0400                    ;C - - - - - 0x01D8E2 0E:D8D2: 8D 00 04
+	STA objArr_0400                 ;C - - - - - 0x01D8E2 0E:D8D2: 8D 00 04
 	LDA #$01                        ;C - - - - - 0x01D8E5 0E:D8D5: A9 01
-	STA ram_0410                    ;C - - - - - 0x01D8E7 0E:D8D7: 8D 10 04
+	STA objArr_0410                 ;C - - - - - 0x01D8E7 0E:D8D7: 8D 10 04
 	LDA objY                        ;C - - - - - 0x01D8EA 0E:D8DA: AD C0 03
 	STA ram_0036                    ;C - - - - - 0x01D8ED 0E:D8DD: 85 36
 	STA ram_00A6                    ;C - - - - - 0x01D8EF 0E:D8DF: 85 A6
@@ -3234,7 +3234,7 @@ loc_0E_D8E5:
 	BMI loc_0E_D8E2                 ;C - - - - - 0x01D8FD 0E:D8ED: 30 F3
 	DEC ram_0038                    ;C - - - - - 0x01D8FF 0E:D8EF: C6 38
 	LDA #$58                        ;C - - - - - 0x01D901 0E:D8F1: A9 58
-	CMP ram_0580                    ;C - - - - - 0x01D903 0E:D8F3: CD 80 05
+	CMP objArr_0580                 ;C - - - - - 0x01D903 0E:D8F3: CD 80 05
 	BEQ loc_0E_D900                 ;C - - - - - 0x01D906 0E:D8F6: F0 08
 	JSR sub_0F_F288                 ;C - - - - - 0x01D908 0E:D8F8: 20 88 F2
 	LDA #$08                        ;C - - - - - 0x01D90B 0E:D8FB: A9 08
@@ -3244,7 +3244,7 @@ loc_0E_D900:
 	LDA padHeld                     ;C - - - - - 0x01D912 0E:D902: A5 16
 	AND #$03                        ;C - - - - - 0x01D914 0E:D904: 29 03
 	BEQ loc_0E_D92D                 ;C - - - - - 0x01D916 0E:D906: F0 25
-	STA ram_0460                    ;C - - - - - 0x01D918 0E:D908: 8D 60 04
+	STA objArr_0460                 ;C - - - - - 0x01D918 0E:D908: 8D 60 04
 	AND #$01                        ;C - - - - - 0x01D91B 0E:D90B: 29 01
 	BEQ loc_0E_D95C                 ;C - - - - - 0x01D91D 0E:D90D: F0 4D
 	LDY #$00                        ;C - - - - - 0x01D91F 0E:D90F: A0 00
@@ -3271,17 +3271,17 @@ loc_0E_D930:
 	BEQ loc_0E_D959                 ;C - - - - - 0x01D948 0E:D938: F0 1F
 	BCS loc_0E_D959                 ;C - - - - - 0x01D94A 0E:D93A: B0 1D
 loc_0E_D93C:
-	LDA ram_0340,Y                  ;C - - - - - 0x01D94C 0E:D93C: B9 40 03
+	LDA objArr_0340,Y               ;C - - - - - 0x01D94C 0E:D93C: B9 40 03
 	CLC                             ;C - - - - - 0x01D94F 0E:D93F: 18
-	ADC ram_0400                    ;C - - - - - 0x01D950 0E:D940: 6D 00 04
-	STA ram_0340,Y                  ;C - - - - - 0x01D953 0E:D943: 99 40 03
+	ADC objArr_0400                 ;C - - - - - 0x01D950 0E:D940: 6D 00 04
+	STA objArr_0340,Y               ;C - - - - - 0x01D953 0E:D943: 99 40 03
 	LDA objX,Y                      ;C - - - - - 0x01D956 0E:D946: B9 60 03
-	ADC ram_0410                    ;C - - - - - 0x01D959 0E:D949: 6D 10 04
+	ADC objArr_0410                 ;C - - - - - 0x01D959 0E:D949: 6D 10 04
 	STA objX,Y                      ;C - - - - - 0x01D95C 0E:D94C: 99 60 03
 	BCC loc_0E_D959                 ;C - - - - - 0x01D95F 0E:D94F: 90 08
-	LDA ram_0380,Y                  ;c - - - - - 0x01D961 0E:D951: B9 80 03
+	LDA objArr_0380,Y               ;c - - - - - 0x01D961 0E:D951: B9 80 03
 	ADC #$00                        ;c - - - - - 0x01D964 0E:D954: 69 00
-	STA ram_0380,Y                  ;c - - - - - 0x01D966 0E:D956: 99 80 03
+	STA objArr_0380,Y               ;c - - - - - 0x01D966 0E:D956: 99 80 03
 loc_0E_D959:
 	JMP loc_0E_D9A3                 ;C - - - - - 0x01D969 0E:D959: 4C A3 D9
 loc_0E_D95C:
@@ -3307,17 +3307,17 @@ loc_0E_D97A:
 	BEQ loc_0E_D9A3                 ;C - - - - - 0x01D992 0E:D982: F0 1F
 	BCC loc_0E_D9A3                 ;C - - - - - 0x01D994 0E:D984: 90 1D
 loc_0E_D986:
-	LDA ram_0340,Y                  ;C - - - - - 0x01D996 0E:D986: B9 40 03
+	LDA objArr_0340,Y               ;C - - - - - 0x01D996 0E:D986: B9 40 03
 	SEC                             ;C - - - - - 0x01D999 0E:D989: 38
-	SBC ram_0400                    ;C - - - - - 0x01D99A 0E:D98A: ED 00 04
-	STA ram_0340,Y                  ;C - - - - - 0x01D99D 0E:D98D: 99 40 03
+	SBC objArr_0400                 ;C - - - - - 0x01D99A 0E:D98A: ED 00 04
+	STA objArr_0340,Y               ;C - - - - - 0x01D99D 0E:D98D: 99 40 03
 	LDA objX,Y                      ;C - - - - - 0x01D9A0 0E:D990: B9 60 03
-	SBC ram_0410                    ;C - - - - - 0x01D9A3 0E:D993: ED 10 04
+	SBC objArr_0410                 ;C - - - - - 0x01D9A3 0E:D993: ED 10 04
 	STA objX,Y                      ;C - - - - - 0x01D9A6 0E:D996: 99 60 03
 	BCS loc_0E_D9A3                 ;C - - - - - 0x01D9A9 0E:D999: B0 08
-	LDA ram_0380,Y                  ;C - - - - - 0x01D9AB 0E:D99B: B9 80 03
+	LDA objArr_0380,Y               ;C - - - - - 0x01D9AB 0E:D99B: B9 80 03
 	SBC #$00                        ;C - - - - - 0x01D9AE 0E:D99E: E9 00
-	STA ram_0380,Y                  ;C - - - - - 0x01D9B0 0E:D9A0: 99 80 03
+	STA objArr_0380,Y               ;C - - - - - 0x01D9B0 0E:D9A0: 99 80 03
 loc_0E_D9A3:
 	LDX #$00                        ;C - - - - - 0x01D9B3 0E:D9A3: A2 00
 	LDA padHeld                     ;C - - - - - 0x01D9B5 0E:D9A5: A5 16
@@ -3329,12 +3329,12 @@ loc_0E_D9A3:
 	JSR sub_0F_F0A2                 ;C - - - - - 0x01D9C1 0E:D9B1: 20 A2 F0
 	BCS loc_0E_D9E9                 ;C - - - - - 0x01D9C4 0E:D9B4: B0 33
 	LDY ram_0039                    ;C - - - - - 0x01D9C6 0E:D9B6: A4 39
-	LDA ram_03A0,Y                  ;C - - - - - 0x01D9C8 0E:D9B8: B9 A0 03
+	LDA objArr_03A0,Y               ;C - - - - - 0x01D9C8 0E:D9B8: B9 A0 03
 	CLC                             ;C - - - - - 0x01D9CB 0E:D9BB: 18
-	ADC ram_0420                    ;C - - - - - 0x01D9CC 0E:D9BC: 6D 20 04
-	STA ram_03A0,Y                  ;C - - - - - 0x01D9CF 0E:D9BF: 99 A0 03
+	ADC objArr_0420                 ;C - - - - - 0x01D9CC 0E:D9BC: 6D 20 04
+	STA objArr_03A0,Y               ;C - - - - - 0x01D9CF 0E:D9BF: 99 A0 03
 	LDA objY,Y                      ;C - - - - - 0x01D9D2 0E:D9C2: B9 C0 03
-	ADC ram_0430                    ;C - - - - - 0x01D9D5 0E:D9C5: 6D 30 04
+	ADC objArr_0430                 ;C - - - - - 0x01D9D5 0E:D9C5: 6D 30 04
 	STA objY,Y                      ;C - - - - - 0x01D9D8 0E:D9C8: 99 C0 03
 	CMP #$F0                        ;C - - - - - 0x01D9DB 0E:D9CB: C9 F0
 	BCC loc_0E_D9D4                 ;C - - - - - 0x01D9DD 0E:D9CD: 90 05
@@ -3372,13 +3372,13 @@ loc_0E_DA03:
 	BCS loc_0E_DA3C                 ;C - - - - - 0x01DA17 0E:DA07: B0 33
 	LDY playerId                    ;C - - - - - 0x01DA19 0E:DA09: A4 34
 	LDA tbl_0F_E1C1,Y               ;C - - - - - 0x01DA1B 0E:DA0B: B9 C1 E1
-	STA ram_0400                    ;C - - - - - 0x01DA1E 0E:DA0E: 8D 00 04
+	STA objArr_0400                 ;C - - - - - 0x01DA1E 0E:DA0E: 8D 00 04
 	LDA tbl_0F_E1C4,Y               ;C - - - - - 0x01DA21 0E:DA11: B9 C4 E1
-	STA ram_0410                    ;C - - - - - 0x01DA24 0E:DA14: 8D 10 04
+	STA objArr_0410                 ;C - - - - - 0x01DA24 0E:DA14: 8D 10 04
 	LDA tbl_0F_E1C7,Y               ;C - - - - - 0x01DA27 0E:DA17: B9 C7 E1
-	STA ram_0420                    ;C - - - - - 0x01DA2A 0E:DA1A: 8D 20 04
+	STA objArr_0420                 ;C - - - - - 0x01DA2A 0E:DA1A: 8D 20 04
 	LDA tbl_0F_E1CA,Y               ;C - - - - - 0x01DA2D 0E:DA1D: B9 CA E1
-	STA ram_0430                    ;C - - - - - 0x01DA30 0E:DA20: 8D 30 04
+	STA objArr_0430                 ;C - - - - - 0x01DA30 0E:DA20: 8D 30 04
 	LDA #$00                        ;C - - - - - 0x01DA33 0E:DA23: A9 00
 	STA ram_0038                    ;C - - - - - 0x01DA35 0E:DA25: 85 38
 	STA gameAction                  ;C - - - - - 0x01DA37 0E:DA27: 85 30
@@ -3396,46 +3396,46 @@ loc_0E_DA3C:
 	RTS                             ;C - - - - - 0x01DA4E 0E:DA3E: 60
 ofs_0E_DA3F:
 	LDX #$00                        ;C - - J - - 0x01DA4F 0E:DA3F: A2 00
-	LDA ram_0300                    ;C - - - - - 0x01DA51 0E:DA41: AD 00 03
+	LDA objArr_0300                 ;C - - - - - 0x01DA51 0E:DA41: AD 00 03
 	AND #$0F                        ;C - - - - - 0x01DA54 0E:DA44: 29 0F
 	BNE loc_0E_DA84                 ;C - - - - - 0x01DA56 0E:DA46: D0 3C
 	LDA ram_0031                    ;C - - - - - 0x01DA58 0E:DA48: A5 31
 	EOR #$03                        ;C - - - - - 0x01DA5A 0E:DA4A: 49 03
-	STA ram_0460                    ;C - - - - - 0x01DA5C 0E:DA4C: 8D 60 04
-	INC ram_0300                    ;C - - - - - 0x01DA5F 0E:DA4F: EE 00 03
+	STA objArr_0460                 ;C - - - - - 0x01DA5C 0E:DA4C: 8D 60 04
+	INC objArr_0300                 ;C - - - - - 0x01DA5F 0E:DA4F: EE 00 03
 	LDA #$28                        ;C - - - - - 0x01DA62 0E:DA52: A9 28
 	JSR sub_0F_F34C                 ;C - - - - - 0x01DA64 0E:DA54: 20 4C F3
 	LDA ram_005C                    ;C - - - - - 0x01DA67 0E:DA57: A5 5C
 	BMI loc_0E_DA70                 ;C - - - - - 0x01DA69 0E:DA59: 30 15
 	LDA #$E6                        ;C - - - - - 0x01DA6B 0E:DA5B: A9 E6
-	STA ram_0400                    ;C - - - - - 0x01DA6D 0E:DA5D: 8D 00 04
+	STA objArr_0400                 ;C - - - - - 0x01DA6D 0E:DA5D: 8D 00 04
 	LDA #$00                        ;C - - - - - 0x01DA70 0E:DA60: A9 00
-	STA ram_0410                    ;C - - - - - 0x01DA72 0E:DA62: 8D 10 04
+	STA objArr_0410                 ;C - - - - - 0x01DA72 0E:DA62: 8D 10 04
 	LDA #$E8                        ;C - - - - - 0x01DA75 0E:DA65: A9 E8
-	STA ram_0420                    ;C - - - - - 0x01DA77 0E:DA67: 8D 20 04
+	STA objArr_0420                 ;C - - - - - 0x01DA77 0E:DA67: 8D 20 04
 	LDA #$03                        ;C - - - - - 0x01DA7A 0E:DA6A: A9 03
-	STA ram_0430                    ;C - - - - - 0x01DA7C 0E:DA6C: 8D 30 04
+	STA objArr_0430                 ;C - - - - - 0x01DA7C 0E:DA6C: 8D 30 04
 	RTS                             ;C - - - - - 0x01DA7F 0E:DA6F: 60
 loc_0E_DA70:
 	LDA #$80                        ;C - - - - - 0x01DA80 0E:DA70: A9 80
-	STA ram_0400                    ;C - - - - - 0x01DA82 0E:DA72: 8D 00 04
+	STA objArr_0400                 ;C - - - - - 0x01DA82 0E:DA72: 8D 00 04
 	LDA #$01                        ;C - - - - - 0x01DA85 0E:DA75: A9 01
-	STA ram_0410                    ;C - - - - - 0x01DA87 0E:DA77: 8D 10 04
+	STA objArr_0410                 ;C - - - - - 0x01DA87 0E:DA77: 8D 10 04
 	LDA #$6E                        ;C - - - - - 0x01DA8A 0E:DA7A: A9 6E
-	STA ram_0420                    ;C - - - - - 0x01DA8C 0E:DA7C: 8D 20 04
+	STA objArr_0420                 ;C - - - - - 0x01DA8C 0E:DA7C: 8D 20 04
 	LDA #$04                        ;C - - - - - 0x01DA8F 0E:DA7F: A9 04
-	STA ram_0430                    ;C - - - - - 0x01DA91 0E:DA81: 8D 30 04
+	STA objArr_0430                 ;C - - - - - 0x01DA91 0E:DA81: 8D 30 04
 loc_0E_DA84:
-	LDA ram_0300                    ;C - - - - - 0x01DA94 0E:DA84: AD 00 03
+	LDA objArr_0300                 ;C - - - - - 0x01DA94 0E:DA84: AD 00 03
 	AND #$0F                        ;C - - - - - 0x01DA97 0E:DA87: 29 0F
 	CMP #$03                        ;C - - - - - 0x01DA99 0E:DA89: C9 03
 	BNE loc_0E_DA90                 ;C - - - - - 0x01DA9B 0E:DA8B: D0 03
 	JMP loc_0E_DB6C                 ;C - - - - - 0x01DA9D 0E:DA8D: 4C 6C DB
 loc_0E_DA90:
-	LDA ram_0460                    ;C - - - - - 0x01DAA0 0E:DA90: AD 60 04
+	LDA objArr_0460                 ;C - - - - - 0x01DAA0 0E:DA90: AD 60 04
 	AND #$01                        ;C - - - - - 0x01DAA3 0E:DA93: 29 01
 	BEQ loc_0E_DACE                 ;C - - - - - 0x01DAA5 0E:DA95: F0 37
-	LDA ram_0300                    ;C - - - - - 0x01DAA7 0E:DA97: AD 00 03
+	LDA objArr_0300                 ;C - - - - - 0x01DAA7 0E:DA97: AD 00 03
 	AND #$0F                        ;C - - - - - 0x01DAAA 0E:DA9A: 29 0F
 	CMP #$02                        ;C - - - - - 0x01DAAC 0E:DA9C: C9 02
 	BEQ loc_0E_DAC2                 ;C - - - - - 0x01DAAE 0E:DA9E: F0 22
@@ -3453,9 +3453,9 @@ loc_0E_DA90:
 	STA objX                        ;C - - - - - 0x01DAC5 0E:DAB5: 8D 60 03
 	LDA ram_002D                    ;C - - - - - 0x01DAC8 0E:DAB8: A5 2D
 	ADC #$00                        ;C - - - - - 0x01DACA 0E:DABA: 69 00
-	STA ram_0380                    ;C - - - - - 0x01DACC 0E:DABC: 8D 80 03
+	STA objArr_0380                 ;C - - - - - 0x01DACC 0E:DABC: 8D 80 03
 loc_0E_DABF:
-	INC ram_0300                    ;C - - - - - 0x01DACF 0E:DABF: EE 00 03
+	INC objArr_0300                 ;C - - - - - 0x01DACF 0E:DABF: EE 00 03
 loc_0E_DAC2:
 	JMP loc_0E_DB03                 ;C - - - - - 0x01DAD2 0E:DAC2: 4C 03 DB
 loc_0E_DAC5:
@@ -3464,7 +3464,7 @@ loc_0E_DAC5:
 loc_0E_DACB:
 	JMP loc_0E_DBD4                 ;C - - - - - 0x01DADB 0E:DACB: 4C D4 DB
 loc_0E_DACE:
-	LDA ram_0300                    ;C - - - - - 0x01DADE 0E:DACE: AD 00 03
+	LDA objArr_0300                 ;C - - - - - 0x01DADE 0E:DACE: AD 00 03
 	AND #$0F                        ;C - - - - - 0x01DAE1 0E:DAD1: 29 0F
 	CMP #$02                        ;C - - - - - 0x01DAE3 0E:DAD3: C9 02
 	BEQ loc_0E_DB03                 ;C - - - - - 0x01DAE5 0E:DAD5: F0 2C
@@ -3484,9 +3484,9 @@ loc_0E_DACE:
 	STA objX                        ;C - - - - - 0x01DB00 0E:DAF0: 8D 60 03
 	LDA ram_002D                    ;C - - - - - 0x01DB03 0E:DAF3: A5 2D
 	ADC #$00                        ;C - - - - - 0x01DB05 0E:DAF5: 69 00
-	STA ram_0380                    ;C - - - - - 0x01DB07 0E:DAF7: 8D 80 03
+	STA objArr_0380                 ;C - - - - - 0x01DB07 0E:DAF7: 8D 80 03
 loc_0E_DAFA:
-	INC ram_0300                    ;C - - - - - 0x01DB0A 0E:DAFA: EE 00 03
+	INC objArr_0300                 ;C - - - - - 0x01DB0A 0E:DAFA: EE 00 03
 	JMP loc_0E_DB03                 ;C - - - - - 0x01DB0D 0E:DAFD: 4C 03 DB
 loc_0E_DB00:
 	JSR sub_0F_F1A1                 ;C - - - - - 0x01DB10 0E:DB00: 20 A1 F1
@@ -3496,7 +3496,7 @@ loc_0E_DB03:
 	BCC loc_0E_DB0D                 ;C - - - - - 0x01DB18 0E:DB08: 90 03
 	JMP loc_0E_DB2C                 ;C - - - - - 0x01DB1A 0E:DB0A: 4C 2C DB
 loc_0E_DB0D:
-	LDA ram_0430                    ;C - - - - - 0x01DB1D 0E:DB0D: AD 30 04
+	LDA objArr_0430                 ;C - - - - - 0x01DB1D 0E:DB0D: AD 30 04
 	BPL loc_0E_DB6B                 ;C - - - - - 0x01DB20 0E:DB10: 10 59
 	LDA objY                        ;C - - - - - 0x01DB22 0E:DB12: AD C0 03
 	CLC                             ;C - - - - - 0x01DB25 0E:DB15: 18
@@ -3511,27 +3511,27 @@ loc_0E_DB0D:
 loc_0E_DB29:
 	JSR sub_0E_DC29                 ;C - - - - - 0x01DB39 0E:DB29: 20 29 DC
 loc_0E_DB2C:
-	INC ram_0300                    ;C - - - - - 0x01DB3C 0E:DB2C: EE 00 03
+	INC objArr_0300                 ;C - - - - - 0x01DB3C 0E:DB2C: EE 00 03
 	LDA ram_005C                    ;C - - - - - 0x01DB3F 0E:DB2F: A5 5C
 	BMI loc_0E_DB49                 ;C - - - - - 0x01DB41 0E:DB31: 30 16
 	LDA #$80                        ;C - - - - - 0x01DB43 0E:DB33: A9 80
-	STA ram_0400                    ;C - - - - - 0x01DB45 0E:DB35: 8D 00 04
+	STA objArr_0400                 ;C - - - - - 0x01DB45 0E:DB35: 8D 00 04
 	LDA #$00                        ;C - - - - - 0x01DB48 0E:DB38: A9 00
-	STA ram_0410                    ;C - - - - - 0x01DB4A 0E:DB3A: 8D 10 04
+	STA objArr_0410                 ;C - - - - - 0x01DB4A 0E:DB3A: 8D 10 04
 	LDA #$6E                        ;C - - - - - 0x01DB4D 0E:DB3D: A9 6E
-	STA ram_0420                    ;C - - - - - 0x01DB4F 0E:DB3F: 8D 20 04
+	STA objArr_0420                 ;C - - - - - 0x01DB4F 0E:DB3F: 8D 20 04
 	LDA #$01                        ;C - - - - - 0x01DB52 0E:DB42: A9 01
-	STA ram_0430                    ;C - - - - - 0x01DB54 0E:DB44: 8D 30 04
+	STA objArr_0430                 ;C - - - - - 0x01DB54 0E:DB44: 8D 30 04
 	BNE loc_0E_DB5D                 ;C - - - - - 0x01DB57 0E:DB47: D0 14
 loc_0E_DB49:
 	LDA #$00                        ;C - - - - - 0x01DB59 0E:DB49: A9 00
-	STA ram_0400                    ;C - - - - - 0x01DB5B 0E:DB4B: 8D 00 04
+	STA objArr_0400                 ;C - - - - - 0x01DB5B 0E:DB4B: 8D 00 04
 	LDA #$01                        ;C - - - - - 0x01DB5E 0E:DB4E: A9 01
-	STA ram_0410                    ;C - - - - - 0x01DB60 0E:DB50: 8D 10 04
+	STA objArr_0410                 ;C - - - - - 0x01DB60 0E:DB50: 8D 10 04
 	LDA #$6E                        ;C - - - - - 0x01DB63 0E:DB53: A9 6E
-	STA ram_0420                    ;C - - - - - 0x01DB65 0E:DB55: 8D 20 04
+	STA objArr_0420                 ;C - - - - - 0x01DB65 0E:DB55: 8D 20 04
 	LDA #$01                        ;C - - - - - 0x01DB68 0E:DB58: A9 01
-	STA ram_0430                    ;C - - - - - 0x01DB6A 0E:DB5A: 8D 30 04
+	STA objArr_0430                 ;C - - - - - 0x01DB6A 0E:DB5A: 8D 30 04
 loc_0E_DB5D:
 	LDY playerId                    ;C - - - - - 0x01DB6D 0E:DB5D: A4 34
 	LDA tbl_0F_E20D,Y               ;C - - - - - 0x01DB6F 0E:DB5F: B9 0D E2
@@ -3541,10 +3541,10 @@ loc_0E_DB5D:
 loc_0E_DB6B:
 	RTS                             ;C - - - - - 0x01DB7B 0E:DB6B: 60
 loc_0E_DB6C:
-	LDA ram_0460                    ;C - - - - - 0x01DB7C 0E:DB6C: AD 60 04
+	LDA objArr_0460                 ;C - - - - - 0x01DB7C 0E:DB6C: AD 60 04
 	AND #$01                        ;C - - - - - 0x01DB7F 0E:DB6F: 29 01
 	BEQ loc_0E_DBA3                 ;C - - - - - 0x01DB81 0E:DB71: F0 30
-	LDA ram_0300                    ;C - - - - - 0x01DB83 0E:DB73: AD 00 03
+	LDA objArr_0300                 ;C - - - - - 0x01DB83 0E:DB73: AD 00 03
 	AND #$0F                        ;C - - - - - 0x01DB86 0E:DB76: 29 0F
 	CMP #$04                        ;C - - - - - 0x01DB88 0E:DB78: C9 04
 	BEQ loc_0E_DB9A                 ;C - - - - - 0x01DB8A 0E:DB7A: F0 1E
@@ -3560,16 +3560,16 @@ loc_0E_DB6C:
 	STA objX                        ;C - - - - - 0x01DB9D 0E:DB8D: 8D 60 03
 	LDA ram_002D                    ;C - - - - - 0x01DBA0 0E:DB90: A5 2D
 	ADC #$00                        ;C - - - - - 0x01DBA2 0E:DB92: 69 00
-	STA ram_0380                    ;C - - - - - 0x01DBA4 0E:DB94: 8D 80 03
+	STA objArr_0380                 ;C - - - - - 0x01DBA4 0E:DB94: 8D 80 03
 loc_0E_DB97:
-	INC ram_0300                    ;C - - - - - 0x01DBA7 0E:DB97: EE 00 03
+	INC objArr_0300                 ;C - - - - - 0x01DBA7 0E:DB97: EE 00 03
 loc_0E_DB9A:
 	JMP loc_0E_DBFD                 ;C - - - - - 0x01DBAA 0E:DB9A: 4C FD DB
 loc_0E_DB9D:
 	JSR sub_0F_F183                 ;C - - - - - 0x01DBAD 0E:DB9D: 20 83 F1
 	JMP loc_0E_DBD4                 ;C - - - - - 0x01DBB0 0E:DBA0: 4C D4 DB
 loc_0E_DBA3:
-	LDA ram_0300                    ;C - - - - - 0x01DBB3 0E:DBA3: AD 00 03
+	LDA objArr_0300                 ;C - - - - - 0x01DBB3 0E:DBA3: AD 00 03
 	AND #$0F                        ;C - - - - - 0x01DBB6 0E:DBA6: 29 0F
 	CMP #$04                        ;C - - - - - 0x01DBB8 0E:DBA8: C9 04
 	BEQ loc_0E_DBCE                 ;C - - - - - 0x01DBBA 0E:DBAA: F0 22
@@ -3587,9 +3587,9 @@ loc_0E_DBA3:
 	STA objX                        ;c - - - - - 0x01DBD1 0E:DBC1: 8D 60 03
 	LDA ram_002D                    ;c - - - - - 0x01DBD4 0E:DBC4: A5 2D
 	ADC #$00                        ;c - - - - - 0x01DBD6 0E:DBC6: 69 00
-	STA ram_0380                    ;c - - - - - 0x01DBD8 0E:DBC8: 8D 80 03
+	STA objArr_0380                 ;c - - - - - 0x01DBD8 0E:DBC8: 8D 80 03
 loc_0E_DBCB:
-	INC ram_0300,X                  ;C - - - - - 0x01DBDB 0E:DBCB: FE 00 03
+	INC objArr_0300,X               ;C - - - - - 0x01DBDB 0E:DBCB: FE 00 03
 loc_0E_DBCE:
 	JMP loc_0E_DBD4                 ;C - - - - - 0x01DBDE 0E:DBCE: 4C D4 DB
 loc_0E_DBD1:
@@ -3600,7 +3600,7 @@ loc_0E_DBD4:
 	BCC loc_0E_DBDE                 ;C - - - - - 0x01DBE9 0E:DBD9: 90 03
 	JMP loc_0E_DBFD                 ;C - - - - - 0x01DBEB 0E:DBDB: 4C FD DB
 loc_0E_DBDE:
-	LDA ram_0430                    ;C - - - - - 0x01DBEE 0E:DBDE: AD 30 04
+	LDA objArr_0430                 ;C - - - - - 0x01DBEE 0E:DBDE: AD 30 04
 	BPL loc_0E_DC28                 ;C - - - - - 0x01DBF1 0E:DBE1: 10 45
 	LDA objY                        ;C - - - - - 0x01DBF3 0E:DBE3: AD C0 03
 	CLC                             ;C - - - - - 0x01DBF6 0E:DBE6: 18
@@ -3625,9 +3625,9 @@ loc_0E_DBFD:
 	LDA #$1F                        ;C - - - - - 0x01DC1F 0E:DC0F: A9 1F
 	STA gameAction                  ;C - - - - - 0x01DC21 0E:DC11: 85 30
 	LDA #$80                        ;C - - - - - 0x01DC23 0E:DC13: A9 80
-	STA ram_0300                    ;C - - - - - 0x01DC25 0E:DC15: 8D 00 03
+	STA objArr_0300                 ;C - - - - - 0x01DC25 0E:DC15: 8D 00 03
 	LDA #$00                        ;C - - - - - 0x01DC28 0E:DC18: A9 00
-	STA ram_0500                    ;C - - - - - 0x01DC2A 0E:DC1A: 8D 00 05
+	STA objArr_0500                 ;C - - - - - 0x01DC2A 0E:DC1A: 8D 00 05
 	STA ram_00A4                    ;C - - - - - 0x01DC2D 0E:DC1D: 85 A4
 	STA ram_00A6                    ;C - - - - - 0x01DC2F 0E:DC1F: 85 A6
 	LDA ram_0031                    ;C - - - - - 0x01DC31 0E:DC21: A5 31
@@ -3671,7 +3671,7 @@ loc_0E_DC6C:
 	LDA #$F2                        ;C - - - - - 0x01DC80 0E:DC70: A9 F2
 	JSR sub_0F_F34A                 ;C - - - - - 0x01DC82 0E:DC72: 20 4A F3
 	JSR sub_0E_C36E                 ;C - - - - - 0x01DC85 0E:DC75: 20 6E C3
-	JSR sub_0F_FF31                 ;C - - - - - 0x01DC88 0E:DC78: 20 31 FF
+	JSR WaitFrame                   ;C - - - - - 0x01DC88 0E:DC78: 20 31 FF
 	LDA #$00                        ;C - - - - - 0x01DC8B 0E:DC7B: A9 00
 	STA scrollX                     ;C - - - - - 0x01DC8D 0E:DC7D: 85 FC
 	STA scrollY                     ;C - - - - - 0x01DC8F 0E:DC7F: 85 FA
@@ -3737,8 +3737,8 @@ loc_0E_DCF0:
 	STA ram_00A3                    ;C - - - - - 0x01DD08 0E:DCF8: 85 A3
 	STA ram_00B3                    ;C - - - - - 0x01DD0A 0E:DCFA: 85 B3
 	STA ram_00BA                    ;C - - - - - 0x01DD0C 0E:DCFC: 85 BA
-	STA ram_0500                    ;C - - - - - 0x01DD0E 0E:DCFE: 8D 00 05
-	STA ram_0510                    ;C - - - - - 0x01DD11 0E:DD01: 8D 10 05
+	STA objArr_0500                 ;C - - - - - 0x01DD0E 0E:DCFE: 8D 00 05
+	STA objArr_0510                 ;C - - - - - 0x01DD11 0E:DD01: 8D 10 05
 	JSR sub_0E_CEAA                 ;C - - - - - 0x01DD14 0E:DD04: 20 AA CE
 	LDA playerId                    ;C - - - - - 0x01DD17 0E:DD07: A5 34
 	CMP #$01                        ;C - - - - - 0x01DD19 0E:DD09: C9 01
@@ -3766,20 +3766,20 @@ loc_0E_DD2D:
 	BEQ loc_0E_DD4A                 ;C - - - - - 0x01DD3F 0E:DD2F: F0 19
 	AND #$01                        ;C - - - - - 0x01DD41 0E:DD31: 29 01
 	BNE loc_0E_DD3F                 ;C - - - - - 0x01DD43 0E:DD33: D0 0A
-	LDA ram_0560                    ;C - - - - - 0x01DD45 0E:DD35: AD 60 05
+	LDA objArr_0560                 ;C - - - - - 0x01DD45 0E:DD35: AD 60 05
 	ORA #$04                        ;C - - - - - 0x01DD48 0E:DD38: 09 04
-	STA ram_0560                    ;C - - - - - 0x01DD4A 0E:DD3A: 8D 60 05
+	STA objArr_0560                 ;C - - - - - 0x01DD4A 0E:DD3A: 8D 60 05
 	BNE loc_0E_DD47                 ;C - - - - - 0x01DD4D 0E:DD3D: D0 08
 loc_0E_DD3F:
-	LDA ram_0560                    ;C - - - - - 0x01DD4F 0E:DD3F: AD 60 05
+	LDA objArr_0560                 ;C - - - - - 0x01DD4F 0E:DD3F: AD 60 05
 	AND #$FB                        ;C - - - - - 0x01DD52 0E:DD42: 29 FB
-	STA ram_0560                    ;C - - - - - 0x01DD54 0E:DD44: 8D 60 05
+	STA objArr_0560                 ;C - - - - - 0x01DD54 0E:DD44: 8D 60 05
 loc_0E_DD47:
 	DEC ram_0037                    ;C - - - - - 0x01DD57 0E:DD47: C6 37
 	RTS                             ;C - - - - - 0x01DD59 0E:DD49: 60
 loc_0E_DD4A:
 	LDA #$80                        ;C - - - - - 0x01DD5A 0E:DD4A: A9 80
-	STA ram_0300                    ;C - - - - - 0x01DD5C 0E:DD4C: 8D 00 03
+	STA objArr_0300                 ;C - - - - - 0x01DD5C 0E:DD4C: 8D 00 03
 ; GG SZKSNIVG infinite lives: DEC lives
 	DEC lives                       ;C - - - - - 0x01DD5F 0E:DD4F: C6 3E
 	LDA lives                       ;C - - - - - 0x01DD61 0E:DD51: A5 3E
@@ -3819,7 +3819,7 @@ ofs_0E_DD83:
 	STA gameAction                  ;C - - - - - 0x01DD9B 0E:DD8B: 85 30
 	RTS                             ;C - - - - - 0x01DD9D 0E:DD8D: 60
 loc_0E_DD8E:
-	LDA ram_0580                    ;C - - - - - 0x01DD9E 0E:DD8E: AD 80 05
+	LDA objArr_0580                 ;C - - - - - 0x01DD9E 0E:DD8E: AD 80 05
 	CMP #$45                        ;C - - - - - 0x01DDA1 0E:DD91: C9 45
 	BEQ loc_0E_DD9D                 ;C - - - - - 0x01DDA3 0E:DD93: F0 08
 	LDA ram_006F                    ;C - - - - - 0x01DDA5 0E:DD95: A5 6F
@@ -3828,9 +3828,9 @@ loc_0E_DD8E:
 	BNE loc_0E_DDC4                 ;C - - - - - 0x01DDAB 0E:DD9B: D0 27
 loc_0E_DD9D:
 	LDA #$01                        ;C - - - - - 0x01DDAD 0E:DD9D: A9 01
-	STA ram_0570                    ;C - - - - - 0x01DDAF 0E:DD9F: 8D 70 05
+	STA objArr_0570                 ;C - - - - - 0x01DDAF 0E:DD9F: 8D 70 05
 	LDA #$00                        ;C - - - - - 0x01DDB2 0E:DDA2: A9 00
-	STA ram_0590                    ;C - - - - - 0x01DDB4 0E:DDA4: 8D 90 05
+	STA objArr_0590                 ;C - - - - - 0x01DDB4 0E:DDA4: 8D 90 05
 	RTS                             ;C - - - - - 0x01DDB7 0E:DDA7: 60
 loc_0E_DDA8:
 	LDA ram_0037                    ;C - - - - - 0x01DDB8 0E:DDA8: A5 37
@@ -3853,8 +3853,8 @@ loc_0E_DDC4:
 	LDA ram_00A3                    ;C - - - - - 0x01DDD4 0E:DDC4: A5 A3
 	BEQ loc_0E_DDB7                 ;C - - - - - 0x01DDD6 0E:DDC6: F0 EF
 	LDA #$00                        ;C - - - - - 0x01DDD8 0E:DDC8: A9 00
-	STA ram_0570                    ;C - - - - - 0x01DDDA 0E:DDCA: 8D 70 05
-	STA ram_0590                    ;C - - - - - 0x01DDDD 0E:DDCD: 8D 90 05
+	STA objArr_0570                 ;C - - - - - 0x01DDDA 0E:DDCA: 8D 70 05
+	STA objArr_0590                 ;C - - - - - 0x01DDDD 0E:DDCD: 8D 90 05
 	STA ram_00A4                    ;C - - - - - 0x01DDE0 0E:DDD0: 85 A4
 	RTS                             ;C - - - - - 0x01DDE2 0E:DDD2: 60
 ofs_0E_DDD3:
@@ -3956,7 +3956,7 @@ ofs_0E_DE5E:
 	LDA #$04                        ;C - - - - - 0x01DE85 0E:DE75: A9 04
 	STA ram_0097                    ;C - - - - - 0x01DE87 0E:DE77: 85 97
 	JSR HideSprites                 ;C - - - - - 0x01DE89 0E:DE79: 20 1D C3
-	JSR sub_0F_FF31                 ;C - - - - - 0x01DE8C 0E:DE7C: 20 31 FF
+	JSR WaitFrame                   ;C - - - - - 0x01DE8C 0E:DE7C: 20 31 FF
 	JSR sub_0E_C334                 ;C - - - - - 0x01DE8F 0E:DE7F: 20 34 C3
 	LDA gameAction                  ;C - - - - - 0x01DE92 0E:DE82: A5 30
 	CMP #$07                        ;C - - - - - 0x01DE94 0E:DE84: C9 07
@@ -4002,7 +4002,7 @@ loc_0E_DE8B:
 	LDA #$04                        ;C - - - - - 0x01DEE7 0E:DED7: A9 04
 	STA ram_0097                    ;C - - - - - 0x01DEE9 0E:DED9: 85 97
 	JSR HideSprites                 ;C - - - - - 0x01DEEB 0E:DEDB: 20 1D C3
-	JSR sub_0F_FF31                 ;C - - - - - 0x01DEEE 0E:DEDE: 20 31 FF
+	JSR WaitFrame                   ;C - - - - - 0x01DEEE 0E:DEDE: 20 31 FF
 	JSR sub_0E_C334                 ;C - - - - - 0x01DEF1 0E:DEE1: 20 34 C3
 	JSR sub_0E_C8A6                 ;C - - - - - 0x01DEF4 0E:DEE4: 20 A6 C8
 	LDX #$0D                        ;C - - - - - 0x01DEF7 0E:DEE7: A2 0D
@@ -4025,7 +4025,7 @@ loc_0E_DE8B:
 	LDA #$04                        ;C - - - - - 0x01DF1F 0E:DF0F: A9 04
 	STA ram_0097                    ;C - - - - - 0x01DF21 0E:DF11: 85 97
 	JSR HideSprites                 ;C - - - - - 0x01DF23 0E:DF13: 20 1D C3
-	JSR sub_0F_FF31                 ;C - - - - - 0x01DF26 0E:DF16: 20 31 FF
+	JSR WaitFrame                   ;C - - - - - 0x01DF26 0E:DF16: 20 31 FF
 	JSR sub_0E_C334                 ;C - - - - - 0x01DF29 0E:DF19: 20 34 C3
 	JSR sub_0E_C8A6                 ;C - - - - - 0x01DF2C 0E:DF1C: 20 A6 C8
 	JSR ScreenOn                    ;C - - - - - 0x01DF2F 0E:DF1F: 20 6F C2
@@ -4108,7 +4108,7 @@ loc_0E_DFA4:
 	JSR ScreenOn                    ;C - - - - - 0x01DFD8 0E:DFC8: 20 6F C2
 	JSR sub_04_8D00                 ;C - - - - - bank=04 0x01DFDB 0E:DFCB: 20 00 8D
 	LDX #$2D                        ;C - - - - - 0x01DFDE 0E:DFCE: A2 2D
-	JSR sub_0F_FF2A                 ;C - - - - - 0x01DFE0 0E:DFD0: 20 2A FF
+	JSR WaitFrames                  ;C - - - - - 0x01DFE0 0E:DFD0: 20 2A FF
 	JSR sub_0E_C85C                 ;C - - - - - 0x01DFE3 0E:DFD3: 20 5C C8
 	JSR ScreenOn                    ;C - - - - - 0x01DFE6 0E:DFD6: 20 6F C2
 	JSR sub_0F_E143                 ;C - - - - - 0x01DFE9 0E:DFD9: 20 43 E1

@@ -16,10 +16,10 @@ bank  code(cdl) code(traced) data  unknown
 0C         6477          338    635      742
 0D         2990           48   3027     2127
 0E         7731          247    198       16
-0F         6106          386   1039      661
-all       47922         2559  56651    23940
+0F         6124          386   1039      643
+all       47940         2559  56651    23922
 
-Unknown bytes: 5325 fill (one repeated byte), 1944 code-like, 16671 other (probably data)
+Unknown bytes: 5325 fill (one repeated byte), 1926 code-like, 16671 other (probably data)
 
 CDL anomalies (code flag but not a valid instruction): 0
 
@@ -44,44 +44,44 @@ Traced code (instruction starts, verify by hand):
   00:834F  JSR sub_0F_F436
   00:8352  JSR sub_0E_CEAA
   00:8355  LDY ram_0039
-  00:8357  LDA ram_0330,Y
-  00:835A  STA ram_0320,Y
+  00:8357  LDA objId,Y
+  00:835A  STA objArr_0320,Y
   00:835D  LDA #$FF
-  00:835F  STA ram_03F0,Y
-  00:8362  LDA ram_0310,Y
-  00:8365  STA ram_0300,Y
+  00:835F  STA objArr_03F0,Y
+  00:8362  LDA objState,Y
+  00:8365  STA objArr_0300,Y
   00:8368  LDA #$00
-  00:836A  STA ram_0470,Y
+  00:836A  STA objArr_0470,Y
   00:836D  LDA objY
   00:8370  STA objY,Y
   00:8373  RTS
   00:8A4C  LDA padHeld
   00:8A4E  CMP #$48
   00:8A50  BNE loc_00_8A6D
-  00:8A52  INC ram_0300
+  00:8A52  INC objArr_0300
   00:8A55  LDA #$14
   00:8A57  JSR sub_0F_F294
   00:8A5A  LDA #$07
   00:8A5C  JSR sub_0F_F440
   00:8A5F  LDA #$33
-  00:8A61  STA ram_0420
+  00:8A61  STA objArr_0420
   00:8A64  LDA #$01
-  00:8A66  STA ram_0430
+  00:8A66  STA objArr_0430
   00:8A69  LDA #$FF
   00:8A6B  STA ram_006E
-  00:8A71  LDA ram_0300
+  00:8A71  LDA objArr_0300
   00:8A74  AND #$02
   00:8A76  BNE loc_00_8AB3
-  00:8A78  LDA ram_0570
+  00:8A78  LDA objArr_0570
   00:8A7B  CMP #$04
   00:8A7D  BNE loc_00_8A8E
-  00:8A7F  LDA ram_0590
+  00:8A7F  LDA objArr_0590
   00:8A82  BNE loc_00_8A8E
   00:8A84  JSR sub_0F_F43B
   00:8A87  LDA #$01
   00:8A89  STA ram_00A7
   00:8A8B  JSR sub_0F_F430
-  00:8A8E  LDA ram_0570
+  00:8A8E  LDA objArr_0570
   00:8A91  CMP #$06
   00:8A93  BNE loc_00_8A6D
   00:8A95  JSR sub_0F_F436
@@ -95,10 +95,10 @@ Traced code (instruction starts, verify by hand):
   00:8AAA  SEC
   00:8AAB  SBC #$20
   00:8AAD  STA objY
-  00:8AB0  INC ram_0300
+  00:8AB0  INC objArr_0300
   00:8AB3  LDY #$00
   00:8AB5  JSR sub_0F_F119
-  00:8AB8  LDA ram_0430
+  00:8AB8  LDA objArr_0430
   00:8ABB  BPL loc_00_8AFF
   00:8ABD  LDA objY
   00:8AC0  CLC
@@ -129,7 +129,7 @@ Traced code (instruction starts, verify by hand):
   00:8E9A  BNE loc_00_8E9E
   00:8EE7  INC ram_0062
   00:8F5D  LDA #$81
-  00:8F5F  STA ram_0300
+  00:8F5F  STA objArr_0300
   00:8F62  STA ram_006E
   00:8F64  LDA ram_0031
   00:8F66  AND #$01
@@ -146,7 +146,7 @@ Traced code (instruction starts, verify by hand):
   00:8F7F  JMP loc_00_8A55
   00:8FDF  LDA #$02
   00:8FE1  BNE loc_00_8FE5
-  00:9035  LDA ram_0580
+  00:9035  LDA objArr_0580
   00:9038  CMP tbl_0F_E29A,Y
   00:903B  BEQ loc_00_9049
   00:903D  LDA tbl_0F_E204,Y
@@ -176,15 +176,15 @@ Traced code (instruction starts, verify by hand):
   00:9610  LDA #$0E
   00:9612  STA gameAction
   00:9614  RTS
-  00:961F  LDA ram_0300
+  00:961F  LDA objArr_0300
   00:9622  AND #$0F
   00:9624  CMP #$02
   00:9626  BNE loc_00_9630
   00:9628  LDA #$B4
-  00:962A  STA ram_0500
-  00:962D  INC ram_0300
-  00:9630  DEC ram_0500
-  00:9633  LDA ram_0500
+  00:962A  STA objArr_0500
+  00:962D  INC objArr_0300
+  00:9630  DEC objArr_0500
+  00:9633  LDA objArr_0500
   00:9636  BNE loc_00_963C
   00:9638  LDA #$0E
   00:963A  STA gameAction
@@ -195,13 +195,13 @@ Traced code (instruction starts, verify by hand):
   00:9776  STY palUpdateFlag
   00:9778  RTS
   01:A146  LDA #$01
-  01:A148  STA ram_0460,X
-  01:A14B  LDA ram_0380,X
+  01:A148  STA objArr_0460,X
+  01:A14B  LDA objArr_0380,X
   01:A14E  BEQ loc_01_A155
   01:A150  LDA #$02
-  01:A152  STA ram_0460,X
+  01:A152  STA objArr_0460,X
   01:A155  LDA #$88
-  01:A157  STA ram_0300,X
+  01:A157  STA objArr_0300,X
   01:A15A  RTS
   01:A1C3  CMP #$02
   01:A1C5  BEQ loc_01_A1CB
@@ -210,28 +210,28 @@ Traced code (instruction starts, verify by hand):
   01:A1CB  LDA #$FE
   01:A1CD  STA objX,X
   01:A1D0  LDA #$01
-  01:A1D2  STA ram_0380,X
+  01:A1D2  STA objArr_0380,X
   01:A463  LDA #$81
-  01:A465  STA ram_0300,X
+  01:A465  STA objArr_0300,X
   01:A468  LDA #$00
-  01:A46A  STA ram_0500,X
+  01:A46A  STA objArr_0500,X
   01:A46D  LDA #$07
-  01:A46F  STA ram_0550,X
+  01:A46F  STA objArr_0550,X
   01:A472  RTS
   01:A4AE  JMP loc_01_A54C
   01:A4BF  JMP loc_01_A54C
-  01:A63B  LDA ram_05B0,X
+  01:A63B  LDA objSpriteDown,X
   01:A63E  AND #$08
   01:A640  BNE loc_01_A646
   01:A642  LDA #$80
   01:A644  BNE loc_01_A648
   01:A646  LDA #$84
-  01:A648  STA ram_0300,X
+  01:A648  STA objArr_0300,X
   01:A651  JSR sub_01_A882
-  01:A654  LDA ram_0380,X
+  01:A654  LDA objArr_0380,X
   01:A657  CMP #$01
   01:A659  BNE loc_01_A684
-  01:A65B  LDA ram_05B0,X
+  01:A65B  LDA objSpriteDown,X
   01:A65E  CMP #$07
   01:A660  BNE loc_01_A668
   01:A662  LDA #$20
@@ -241,27 +241,27 @@ Traced code (instruction starts, verify by hand):
   01:A66A  LDY #$09
   01:A66C  JSR sub_0F_FB3E
   01:A66F  BCC loc_01_A684
-  01:A671  LDA ram_05B0,X
+  01:A671  LDA objSpriteDown,X
   01:A674  SBC #$07
-  01:A676  STA ram_0510,X
+  01:A676  STA objArr_0510,X
   01:A679  LDA #$82
-  01:A67B  STA ram_0300,X
+  01:A67B  STA objArr_0300,X
   01:A67E  LDA #$00
-  01:A680  STA ram_0500,X
+  01:A680  STA objArr_0500,X
   01:A683  RTS
   01:A684  LDY #$04
   01:A686  JSR sub_01_A7E1
-  01:A689  LDA ram_0460,X
+  01:A689  LDA objArr_0460,X
   01:A68C  CMP #$01
   01:A68E  BNE loc_01_A6A1
-  01:A690  LDA ram_0380,X
+  01:A690  LDA objArr_0380,X
   01:A693  CMP #$01
   01:A695  BNE loc_01_A69E
   01:A697  LDA objX,X
   01:A69A  CMP #$18
   01:A69C  BCS loc_01_A6B2
   01:A69E  JMP sub_0F_F183
-  01:A6A1  LDA ram_0380,X
+  01:A6A1  LDA objArr_0380,X
   01:A6A4  CMP #$01
   01:A6A6  BNE loc_01_A6AF
   01:A6A8  LDA objX,X
@@ -269,14 +269,14 @@ Traced code (instruction starts, verify by hand):
   01:A6AD  BCC loc_01_A6B2
   01:A6AF  JMP sub_0F_F1A1
   01:A6B2  LDA #$81
-  01:A6B4  STA ram_0300,X
+  01:A6B4  STA objArr_0300,X
   01:A6B7  LDA #$00
-  01:A6B9  STA ram_0500,X
+  01:A6B9  STA objArr_0500,X
   01:A6BC  LDA #$07
-  01:A6BE  STA ram_0550,X
+  01:A6BE  STA objArr_0550,X
   01:A6C1  JMP sub_0F_F343
   01:A70B  LDA #$00
-  01:A70D  STA ram_03F0,X
+  01:A70D  STA objArr_03F0,X
   01:A710  LDA playerId
   01:A712  CMP #$02
   01:A714  BNE loc_01_A71C
@@ -285,18 +285,18 @@ Traced code (instruction starts, verify by hand):
   01:A75A  JSR sub_01_A83A
   01:A75D  SEC
   01:A75E  RTS
-  01:A7AC  LDA ram_0520,X
-  01:A7AF  STA ram_0530,X
+  01:A7AC  LDA objArr_0520,X
+  01:A7AF  STA objArr_0530,X
   01:A7B2  JMP loc_01_A7BB
   01:ABC8  LDA #$82
-  01:ABCA  STA ram_0300,X
+  01:ABCA  STA objArr_0300,X
   01:ABCD  LDA #$00
-  01:ABCF  STA ram_0500,X
+  01:ABCF  STA objArr_0500,X
   01:ABD2  LDA #$01
-  01:ABD4  STA ram_0510,X
+  01:ABD4  STA objArr_0510,X
   01:ABD7  RTS
   01:ABFC  LDA #$05
-  01:ABFE  STA ram_0460,X
+  01:ABFE  STA objArr_0460,X
   01:ADA3  CMP #$02
   01:ADA5  BCS loc_01_ADAF
   01:ADA7  LDA #$84
@@ -320,7 +320,7 @@ Traced code (instruction starts, verify by hand):
   03:B38B  AND #$10
   03:B38D  STA ptr_0E+1
   03:B45B  LDA #$00
-  03:B45D  STA ram_03F0,X
+  03:B45D  STA objArr_03F0,X
   03:B460  LDA playerId
   03:B462  CMP #$02
   03:B464  BNE loc_03_B46C
@@ -328,9 +328,9 @@ Traced code (instruction starts, verify by hand):
   03:B469  STA objY,X
   03:B72F  JSR sub_0F_F343
   03:B732  LDA #$00
-  03:B734  STA ram_0500,X
+  03:B734  STA objArr_0500,X
   03:B737  LDA #$87
-  03:B739  STA ram_0300,X
+  03:B739  STA objArr_0300,X
   03:B73C  RTS
   03:B774  LDA #$0F
   03:BB31  TYA
@@ -349,7 +349,7 @@ Traced code (instruction starts, verify by hand):
   03:BB46  TAY
   03:BB47  BNE loc_03_BB4D
   03:BBF4  LDA #$3C
-  03:BBF6  STA ram_0500,X
+  03:BBF6  STA objArr_0500,X
   03:BBF9  RTS
   03:BC76  CMP #$04
   03:BC78  BEQ loc_03_BCB4
@@ -358,12 +358,12 @@ Traced code (instruction starts, verify by hand):
   04:91E1  LDA #$02
   04:91E3  STA playerId
   04:93E4  LDA #$00
-  04:93E6  STA ram_0500
+  04:93E6  STA objArr_0500
   04:93E9  LDA #$54
   04:93EB  STA objY
   04:93EE  BNE loc_04_9398
   04:93FA  LDA #$FF
-  04:93FC  STA ram_0500
+  04:93FC  STA objArr_0500
   04:93FF  LDA #$64
   04:9401  STA objY
   04:9404  BNE loc_04_9410
@@ -410,7 +410,7 @@ Traced code (instruction starts, verify by hand):
   05:A790  RTI
   05:A79C  BVC loc_05_A7F6
   05:A79E  RTS
-  05:A81D  LDA ram_0500,X
+  05:A81D  LDA objArr_0500,X
   05:A820  STA ram_00AD
   05:A822  JMP loc_05_A82A
   05:A94E  JSR sub_0F_F183
@@ -434,11 +434,11 @@ Traced code (instruction starts, verify by hand):
   05:A9A7  CMP #$E8
   05:A9A9  BCS loc_05_A9BC
   05:A9AB  LDA #$69
-  05:A9AD  STA ram_0320,X
-  05:A9B0  STA ram_0330,X
+  05:A9AD  STA objArr_0320,X
+  05:A9B0  STA objId,X
   05:A9B3  LDA #$80
-  05:A9B5  STA ram_0300,X
-  05:A9B8  STA ram_0310,X
+  05:A9B5  STA objArr_0300,X
+  05:A9B8  STA objState,X
   05:AA22  CMP tbl_05_AA7F,Y
   05:AA25  BEQ loc_05_AA28
   05:AA27  RTS
@@ -578,7 +578,7 @@ Traced code (instruction starts, verify by hand):
   08:80A2  BEQ loc_08_809E
   08:80A4  STY totalEnemies
   08:80A6  RTS
-  08:80F3  LDA ram_0300,X
+  08:80F3  LDA objArr_0300,X
   08:80F6  BMI loc_08_80E3
   08:8104  RTS
   08:81E7  RTS
@@ -588,9 +588,9 @@ Traced code (instruction starts, verify by hand):
   08:9148  CMP #$FF
   08:914A  BEQ loc_08_9170
   08:914C  LDA #$00
-  08:914E  STA ram_05A0
-  08:9151  STA ram_05A1
-  08:9154  STA ram_05A2
+  08:914E  STA objArr_05A0
+  08:9151  STA objArr_05A0+1
+  08:9154  STA objArr_05A0+2
   08:9157  RTS
   08:9170  LDA #$07
   08:9172  STA ptr_00+1
@@ -611,22 +611,22 @@ Traced code (instruction starts, verify by hand):
   08:99BB  LDA tbl_08_99F4,Y
   08:99BE  JSR sub_09_A000
   08:99C1  RTS
-  09:AB34  LDA ram_0300
+  09:AB34  LDA objArr_0300
   09:AB37  AND #$0F
   09:AB39  BNE loc_09_AB7D
   09:AB3B  LDA #$73
-  09:AB3D  CMP ram_0580
+  09:AB3D  CMP objArr_0580
   09:AB40  BEQ loc_09_AB4A
   09:AB42  JSR sub_0F_F294
   09:AB45  LDA #$3F
   09:AB47  JSR sub_0F_F440
-  09:AB4A  LDA ram_0570
+  09:AB4A  LDA objArr_0570
   09:AB4D  BNE loc_09_AB59
-  09:AB4F  LDA ram_0590
+  09:AB4F  LDA objArr_0590
   09:AB52  BNE loc_09_AB59
   09:AB54  LDA #$16
   09:AB56  JSR sub_0F_F34C
-  09:AB59  LDA ram_0570
+  09:AB59  LDA objArr_0570
   09:AB5C  CMP #$06
   09:AB5E  BNE loc_09_AB77
   09:AB60  LDA #$13
@@ -634,34 +634,34 @@ Traced code (instruction starts, verify by hand):
   09:AB65  LDA #$03
   09:AB67  JSR sub_0F_F440
   09:AB6A  LDA #$38
-  09:AB6C  STA ram_0420
+  09:AB6C  STA objArr_0420
   09:AB6F  LDA #$04
-  09:AB71  STA ram_0430
-  09:AB74  INC ram_0300
+  09:AB71  STA objArr_0430
+  09:AB74  INC objArr_0300
   09:AB77  JSR sub_0F_F406
   09:AB7A  JMP loc_09_AB34
-  09:AB7D  LDA ram_0300
+  09:AB7D  LDA objArr_0300
   09:AB80  AND #$02
   09:AB82  BNE loc_09_AB95
-  09:AB84  LDA ram_0570
+  09:AB84  LDA objArr_0570
   09:AB87  CMP #$05
   09:AB89  BNE loc_09_AB9A
   09:AB8B  LDA #$05
-  09:AB8D  STA ram_0570
+  09:AB8D  STA objArr_0570
   09:AB90  LDA #$00
-  09:AB92  STA ram_0590
+  09:AB92  STA objArr_0590
   09:AB95  LDX #$00
   09:AB97  JSR sub_0F_F1FD
   09:AB9A  JSR sub_0F_F183
-  09:AB9D  LDA ram_0430
+  09:AB9D  LDA objArr_0430
   09:ABA0  BPL loc_09_ABB4
   09:ABA2  LDA #$3E
-  09:ABA4  CMP ram_0580
+  09:ABA4  CMP objArr_0580
   09:ABA7  BEQ loc_09_ABB4
   09:ABA9  JSR sub_0F_F294
   09:ABAC  LDA #$01
   09:ABAE  JSR sub_0F_F440
-  09:ABB1  INC ram_0300
+  09:ABB1  INC objArr_0300
   09:ABB4  LDA objY
   09:ABB7  CMP #$A9
   09:ABB9  BCC loc_09_ABCD
@@ -674,9 +674,9 @@ Traced code (instruction starts, verify by hand):
   09:ABCA  JMP sub_0F_F406
   09:ABCD  JMP loc_09_AB77
   0B:B3E9  LDA #$00
-  0B:B3EB  STA ram_0306
+  0B:B3EB  STA objArr_0300+6
   0B:B3EE  LDA #$80
-  0B:B3F0  STA ram_0300
+  0B:B3F0  STA objArr_0300
   0B:B3F3  LDA #$29
   0B:B3F5  STA gameAction
   0B:B3F7  LDA #$0C
@@ -695,13 +695,13 @@ Traced code (instruction starts, verify by hand):
   0B:B6FA  LDY #$3A
   0B:B6FC  JSR sub_0F_F449
   0B:B6FF  LDA #$80
-  0B:B701  STA ram_0300,X
+  0B:B701  STA objArr_0300,X
   0B:B704  JMP sub_0F_F343
   0B:B707  LDA #$00
   0B:B709  STA ram_00A3
   0B:B70B  JSR sub_0F_F343
   0B:B70E  LDA #$80
-  0B:B710  STA ram_0300,X
+  0B:B710  STA objArr_0300,X
   0B:B713  LDA ram_0038
   0B:B715  BMI loc_0B_B743
   0B:B717  CMP #$0C
@@ -713,10 +713,10 @@ Traced code (instruction starts, verify by hand):
   0B:B7C8  STA objY,X
   0B:B889  LDA tbl_0B_BD5C,Y
   0B:B8A3  LDA #$00
-  0B:B8A5  STA ram_05D0,X
-  0B:B8A8  DEC ram_0300,X
+  0B:B8A5  STA objArr_05D0,X
+  0B:B8A8  DEC objArr_0300,X
   0B:B8AB  RTS
-  0B:BBB9  LDA ram_0380,X
+  0B:BBB9  LDA objArr_0380,X
   0B:BBBC  CMP #$02
   0B:BBBE  BNE loc_0B_BBC7
   0B:BBC0  LDA objX,X
@@ -734,7 +734,7 @@ Traced code (instruction starts, verify by hand):
   0C:8713  STA ram_00BA
   0C:8715  JSR sub_0F_F436
   0C:8718  LDA #$80
-  0C:871A  STA ram_0300
+  0C:871A  STA objArr_0300
   0C:871D  LDY playerId
   0C:871F  LDA tbl_0F_E288,Y
   0C:8722  STA ram_006F
@@ -753,7 +753,7 @@ Traced code (instruction starts, verify by hand):
   0C:8DC1  STA objX,X
   0C:8DC4  LDA ram_002D
   0C:8DC6  ADC #$00
-  0C:8DC8  STA ram_0380,X
+  0C:8DC8  STA objArr_0380,X
   0C:8DCB  JMP loc_0C_8DEE
   0C:8DDF  LDA scrollX
   0C:8DE1  CLC
@@ -761,12 +761,12 @@ Traced code (instruction starts, verify by hand):
   0C:8DE4  STA objX,X
   0C:8DE7  LDA ram_002D
   0C:8DE9  ADC #$00
-  0C:8DEB  STA ram_0380,X
+  0C:8DEB  STA objArr_0380,X
   0C:8DEE  RTS
   0C:912D  LDA #$FE
-  0C:912F  STA ram_0430,X
+  0C:912F  STA objArr_0430,X
   0C:9132  LDA #$00
-  0C:9134  STA ram_0420,X
+  0C:9134  STA objArr_0420,X
   0C:9137  RTS
   0C:9204  CMP #$24
   0C:9206  BEQ loc_0C_9209
@@ -774,20 +774,20 @@ Traced code (instruction starts, verify by hand):
   0C:923C  CMP #$04
   0C:923E  BNE loc_0C_92A3
   0C:9240  LDA #$10
-  0C:9242  STA ram_0510,X
+  0C:9242  STA objArr_0510,X
   0C:9245  LDA #$08
-  0C:9247  STA ram_0540,X
+  0C:9247  STA objArr_0540,X
   0C:9312  JSR sub_0C_9C55
-  0C:93B5  LDA ram_0460,X
+  0C:93B5  LDA objArr_0460,X
   0C:93B8  AND #$02
   0C:93BA  TAY
   0C:93BB  LDA objX,X
   0C:93BE  CLC
   0C:93BF  ADC tbl_0F_FD0A,Y
   0C:93C2  PHA
-  0C:93C3  LDA ram_0380,X
+  0C:93C3  LDA objArr_0380,X
   0C:93C6  ADC tbl_0F_FD0B,Y
-  0C:93C9  STA ram_0380,X
+  0C:93C9  STA objArr_0380,X
   0C:93CC  PLA
   0C:93CD  STA objX,X
   0C:93D0  RTS
@@ -797,7 +797,7 @@ Traced code (instruction starts, verify by hand):
   0C:9401  STA objX,X
   0C:9404  LDA ram_002D
   0C:9406  ADC #$00
-  0C:9408  STA ram_0380,X
+  0C:9408  STA objArr_0380,X
   0C:940B  JMP loc_0C_942E
   0C:941F  LDA scrollX
   0C:9421  CLC
@@ -805,7 +805,7 @@ Traced code (instruction starts, verify by hand):
   0C:9424  STA objX,X
   0C:9427  LDA ram_002D
   0C:9429  ADC #$00
-  0C:942B  STA ram_0380,X
+  0C:942B  STA objArr_0380,X
   0C:942E  RTS
   0C:9482  LDA scrollX
   0C:9484  CLC
@@ -813,7 +813,7 @@ Traced code (instruction starts, verify by hand):
   0C:9487  STA objX,X
   0C:948A  LDA ram_002D
   0C:948C  ADC #$00
-  0C:948E  STA ram_0380,X
+  0C:948E  STA objArr_0380,X
   0C:9491  JMP loc_0C_94B4
   0C:94A5  LDA scrollX
   0C:94A7  CLC
@@ -821,7 +821,7 @@ Traced code (instruction starts, verify by hand):
   0C:94AA  STA objX,X
   0C:94AD  LDA ram_002D
   0C:94AF  ADC #$00
-  0C:94B1  STA ram_0380,X
+  0C:94B1  STA objArr_0380,X
   0C:94B4  RTS
   0C:94FF  LDA scrollX
   0C:9501  CLC
@@ -829,7 +829,7 @@ Traced code (instruction starts, verify by hand):
   0C:9504  STA objX,X
   0C:9507  LDA ram_002D
   0C:9509  ADC #$00
-  0C:950B  STA ram_0380,X
+  0C:950B  STA objArr_0380,X
   0C:950E  JMP loc_0C_9531
   0C:9522  LDA scrollX
   0C:9524  CLC
@@ -837,7 +837,7 @@ Traced code (instruction starts, verify by hand):
   0C:9527  STA objX,X
   0C:952A  LDA ram_002D
   0C:952C  ADC #$00
-  0C:952E  STA ram_0380,X
+  0C:952E  STA objArr_0380,X
   0C:9531  RTS
   0C:959F  LDA scrollX
   0C:95A1  CLC
@@ -845,14 +845,14 @@ Traced code (instruction starts, verify by hand):
   0C:95A4  STA objX,X
   0C:95A7  LDA ram_002D
   0C:95A9  ADC #$00
-  0C:95AB  STA ram_0380,X
+  0C:95AB  STA objArr_0380,X
   0C:9647  LDA scrollX
   0C:9649  CLC
   0C:964A  ADC #$F0
   0C:964C  STA objX,X
   0C:964F  LDA ram_002D
   0C:9651  ADC #$00
-  0C:9653  STA ram_0380,X
+  0C:9653  STA objArr_0380,X
   0C:9656  JMP loc_0C_965C
   0C:96D6  LDA scrollX
   0C:96D8  CLC
@@ -860,7 +860,7 @@ Traced code (instruction starts, verify by hand):
   0C:96DB  STA objX,X
   0C:96DE  LDA ram_002D
   0C:96E0  ADC #$00
-  0C:96E2  STA ram_0380,X
+  0C:96E2  STA objArr_0380,X
   0C:96E5  JMP loc_0C_96EB
   0C:9A9D  LDA scrollX
   0C:9A9F  CLC
@@ -868,7 +868,7 @@ Traced code (instruction starts, verify by hand):
   0C:9AA2  STA objX,X
   0C:9AA5  LDA ram_002D
   0C:9AA7  ADC #$00
-  0C:9AA9  STA ram_0380,X
+  0C:9AA9  STA objArr_0380,X
   0C:9AAC  JMP loc_0C_9AD8
   0C:9E2E  LDA #$01
   0C:9E30  BNE loc_0C_9E38
@@ -882,24 +882,24 @@ Traced code (instruction starts, verify by hand):
   0C:9F03  BEQ loc_0C_9F07
   0D:A042  STA objY,X
   0D:A1CE  LDA #$00
-  0D:A1D0  STA ram_03D0,X
+  0D:A1D0  STA objArr_03D0,X
   0D:A1D3  RTS
-  0D:A4DC  LDA ram_05B0,X
-  0D:A4DF  STA ram_03D0,X
+  0D:A4DC  LDA objSpriteDown,X
+  0D:A4DF  STA objArr_03D0,X
   0D:A4E2  RTS
   0D:A525  STA objX,X
   0D:A52F  STA objX,X
   0D:AB6B  LDA ptr_0E+1
   0D:AB6D  STA objY,X
   0D:AB70  LDA #$00
-  0D:AB72  STA ram_0420,X
-  0D:AB75  STA ram_0430,X
+  0D:AB72  STA objArr_0420,X
+  0D:AB75  STA objArr_0430,X
   0D:AB78  SEC
   0D:AB79  RTS
   0D:ABB7  SEC
   0D:ABB8  RTS
-  0D:AC04  LDA ram_0520,X
-  0D:AC07  STA ram_0530,X
+  0D:AC04  LDA objArr_0520,X
+  0D:AC07  STA objArr_0530,X
   0D:AC0A  JMP loc_0D_AC13
   0E:C2C7  LDA padPressed,X
   0E:C2C9  AND #$F0
@@ -910,16 +910,16 @@ Traced code (instruction starts, verify by hand):
   0E:C8F3  JMP loc_0E_C93B
   0E:CAF2  JMP loc_0E_CCDA
   0E:CAF5  JMP loc_0E_CA3C
-  0E:CC3F  LDA ram_0460,Y
+  0E:CC3F  LDA objArr_0460,Y
   0E:CC42  AND #$03
   0E:CC44  CMP ram_0031
   0E:CC46  BEQ loc_0E_CC4F
   0E:CC48  LDA ram_0031
-  0E:CC4A  STA ram_0460,Y
+  0E:CC4A  STA objArr_0460,Y
   0E:CC4D  BNE loc_0E_CC52
   0E:CC4F  JSR sub_0E_CC85
   0E:CC62  JMP loc_0E_D7F2
-  0E:CC65  LDA ram_0460,Y
+  0E:CC65  LDA objArr_0460,Y
   0E:CC68  AND #$03
   0E:CC6A  CMP ram_0031
   0E:CC6C  BEQ loc_0E_CC70
@@ -934,10 +934,10 @@ Traced code (instruction starts, verify by hand):
   0E:CC8D  CLC
   0E:CC8E  ADC tbl_0F_E1D3,Y
   0E:CC91  PHA
-  0E:CC92  LDA ram_0380
+  0E:CC92  LDA objArr_0380
   0E:CC95  ADC tbl_0F_E1D4,Y
   0E:CC98  LDY ram_0039
-  0E:CC9A  STA ram_0380,Y
+  0E:CC9A  STA objArr_0380,Y
   0E:CC9D  PLA
   0E:CC9E  STA objX,Y
   0E:CCA1  RTS
@@ -952,7 +952,7 @@ Traced code (instruction starts, verify by hand):
   0E:CFD5  LDA #$24
   0E:CFD7  STA gameAction
   0E:CFD9  LDA #$80
-  0E:CFDB  STA ram_0300
+  0E:CFDB  STA objArr_0300
   0E:CFDE  RTS
   0E:CFF4  JSR sub_0E_CFD1
   0E:CFF7  RTS
@@ -966,9 +966,9 @@ Traced code (instruction starts, verify by hand):
   0E:D1E8  STA objX
   0E:D1EB  LDA ram_002D
   0E:D1ED  ADC #$00
-  0E:D1EF  STA ram_0380
+  0E:D1EF  STA objArr_0380
   0E:D1F2  RTS
-  0E:D251  LDA ram_0590
+  0E:D251  LDA objArr_0590
   0E:D254  CMP #$04
   0E:D256  BNE loc_0E_D264
   0E:D258  LDA tbl_0F_E1EC,Y
@@ -981,7 +981,7 @@ Traced code (instruction starts, verify by hand):
   0E:D2A6  STA objX
   0E:D2A9  LDA ram_002D
   0E:D2AB  ADC #$00
-  0E:D2AD  STA ram_0380
+  0E:D2AD  STA objArr_0380
   0E:D2B0  RTS
   0E:D4A4  CMP #$35
   0E:D4A6  BEQ loc_0E_D4C4
@@ -1000,9 +1000,9 @@ Traced code (instruction starts, verify by hand):
   0E:D735  LDA objY
   0E:D738  STA ram_0036
   0E:D786  BNE sub_0E_D79A
-  0E:D951  LDA ram_0380,Y
+  0E:D951  LDA objArr_0380,Y
   0E:D954  ADC #$00
-  0E:D956  STA ram_0380,Y
+  0E:D956  STA objArr_0380,Y
   0E:D9CF  ADC #$0F
   0E:D9D1  STA objY,Y
   0E:DBBC  LDA scrollX
@@ -1011,7 +1011,7 @@ Traced code (instruction starts, verify by hand):
   0E:DBC1  STA objX
   0E:DBC4  LDA ram_002D
   0E:DBC6  ADC #$00
-  0E:DBC8  STA ram_0380
+  0E:DBC8  STA objArr_0380
   0E:DCDC  RTS
   0F:E2CD  JMP loc_0F_E473
   0F:E3F8  JSR sub_0E_CEAA
@@ -1020,7 +1020,7 @@ Traced code (instruction starts, verify by hand):
   0F:E3FF  STA ram_00BB
   0F:E401  STA ram_0035
   0F:E403  LDA #$80
-  0F:E405  STA ram_0300
+  0F:E405  STA objArr_0300
   0F:E408  RTS
   0F:E412  INC ram_002D
   0F:E414  RTS
@@ -1050,11 +1050,11 @@ Traced code (instruction starts, verify by hand):
   0F:E52E  JMP loc_0F_E53F
   0F:EA19  CPX #$00
   0F:EA1B  BEQ loc_0F_EA4D
-  0F:EA1D  LDA ram_03E0,X
+  0F:EA1D  LDA objArr_03E0,X
   0F:EA20  BMI loc_0F_EA30
   0F:EA22  BPL loc_0F_EA30
   0F:EA4B  BEQ loc_0F_EA30
-  0F:EAD6  LDA ram_0092
+  0F:EAD6  LDA frameCounter
   0F:EAD8  AND #$04
   0F:EADA  BNE loc_0F_EAEF
   0F:EB48  BCS loc_0F_EB8B
@@ -1065,24 +1065,24 @@ Traced code (instruction starts, verify by hand):
   0F:EC52  RTS
   0F:EC53  LDA ram_00F9
   0F:EC55  SEC
-  0F:EC56  SBC ram_0380,X
+  0F:EC56  SBC objArr_0380,X
   0F:EC59  BMI loc_0F_EC6E
   0F:EC5B  LDA objX,X
   0F:EC5E  CLC
   0F:EC5F  ADC #$10
   0F:EC61  STA objX,X
-  0F:EC64  LDA ram_0380,X
+  0F:EC64  LDA objArr_0380,X
   0F:EC67  ADC #$00
-  0F:EC69  STA ram_0380,X
+  0F:EC69  STA objArr_0380,X
   0F:EC6C  SEC
   0F:EC6D  RTS
   0F:EC6E  LDA objX,X
   0F:EC71  SEC
   0F:EC72  SBC #$10
   0F:EC74  STA objX,X
-  0F:EC77  LDA ram_0380,X
+  0F:EC77  LDA objArr_0380,X
   0F:EC7A  SBC #$00
-  0F:EC7C  STA ram_0380,X
+  0F:EC7C  STA objArr_0380,X
   0F:EC7F  SEC
   0F:EC80  RTS
   0F:ECFB  LDA #$00
@@ -1121,10 +1121,10 @@ Traced code (instruction starts, verify by hand):
   0F:EEBA  JMP loc_0F_EE6C
   0F:EF94  ADC #$0F
   0F:EF96  STA objY,X
-  0F:EF99  INC ram_03E0,X
+  0F:EF99  INC objArr_03E0,X
   0F:EFAF  SBC #$0F
   0F:EFB1  STA objY,X
-  0F:EFB4  DEC ram_03E0,X
+  0F:EFB4  DEC objArr_03E0,X
   0F:F029  LDA ram_0010
   0F:F02B  CMP #$40
   0F:F02D  BEQ loc_0F_F035
@@ -1132,7 +1132,7 @@ Traced code (instruction starts, verify by hand):
   0F:F031  BEQ loc_0F_F035
   0F:F033  CLC
   0F:F034  RTS
-  0F:F035  LDA ram_0430
+  0F:F035  LDA objArr_0430
   0F:F038  BMI loc_0F_F024
   0F:F03A  JSR sub_0F_F0DC
   0F:F03D  CLC
@@ -1144,7 +1144,7 @@ Traced code (instruction starts, verify by hand):
   0F:F082  BEQ loc_0F_F086
   0F:F084  CLC
   0F:F085  RTS
-  0F:F086  LDA ram_0430
+  0F:F086  LDA objArr_0430
   0F:F089  BMI loc_0F_F075
   0F:F08B  JSR sub_0F_F0DC
   0F:F08E  CLC
@@ -1161,36 +1161,36 @@ Traced code (instruction starts, verify by hand):
   0F:F0E0  LDA #$24
   0F:F0E2  STA gameAction
   0F:F0E4  LDA #$80
-  0F:F0E6  STA ram_0300
+  0F:F0E6  STA objArr_0300
   0F:F0E9  LDA ram_00BE
   0F:F0EB  CMP #$04
   0F:F0ED  BNE loc_0F_F0F6
   0F:F0EF  LDA #$FF
   0F:F0F1  LDY ram_0039
-  0F:F0F3  STA ram_03F0,Y
+  0F:F0F3  STA objArr_03F0,Y
   0F:F0F6  RTS
   0F:F168  JSR sub_0F_EF83
   0F:F16B  JSR sub_0F_F26E
   0F:F1D6  ADC #$0F
   0F:F1D8  STA objY,X
-  0F:F1DB  INC ram_03E0,X
+  0F:F1DB  INC objArr_03E0,X
   0F:F1F4  SBC #$0F
   0F:F1F6  STA objY,X
-  0F:F1F9  DEC ram_03E0,X
+  0F:F1F9  DEC objArr_03E0,X
   0F:F225  ADC #$0F
   0F:F227  STA objY,X
-  0F:F22A  INC ram_03E0,X
+  0F:F22A  INC objArr_03E0,X
   0F:F243  SBC #$0F
   0F:F245  STA objY,X
-  0F:F248  DEC ram_03E0,X
+  0F:F248  DEC objArr_03E0,X
   0F:F726  SEC
   0F:F727  RTS
   0F:F8D9  RTS
-  0F:F8DF  LDA ram_0581
+  0F:F8DF  LDA objArr_0580+1
   0F:F8E2  CMP #$74
   0F:F8E4  BNE loc_0F_F8ED
   0F:F8E6  LDA #$00
-  0F:F8E8  STA ram_0301
+  0F:F8E8  STA objArr_0300+1
   0F:F8EB  BEQ loc_0F_F8FE
   0F:F985  JSR sub_0F_F436
   0F:F988  LDA #$00
@@ -1254,7 +1254,6 @@ Code-like unknown runs (decode cleanly to the end, no BRK; review by hand):
      26  02:81E7
      23  09:AFE9
      22  0C:8BC0
-     18  0F:FF12
      18  0B:B30F
      18  0A:81EF
      17  09:B0AF
@@ -1395,7 +1394,6 @@ Unknown runs, longest first (len bank:addr):
      20  0A:9632
      20  09:B0FE
      20  07:B938
-     18  0F:FF12
      18  0D:AE4E
      18  0B:BFEE
      18  0B:B30F

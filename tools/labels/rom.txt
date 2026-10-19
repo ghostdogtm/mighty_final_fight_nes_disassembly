@@ -44,3 +44,13 @@ code 0E:C251-C264
 0E:C279 ReadPads                ; reads both pads (+ expansion bits) into padPressed/padHeld
 0E:C2D1 FillNametable           ; A=PPU high address, X=tile, Y=attribute fill value
 0E:C31D HideSprites             ; fills oamBuffer Y positions with $F8 from index ram_0097
+code 0F:FF12-FF23
+0F:FEBA SchedulerRestart        ; reset stack, fall into the scan
+0F:FEBD SchedulerLoop           ; picks the first ready task (state>=4), "new" task (8) is started via its entry address
+0F:FF02 StartTask               ; A=task index, ptr_93=entry address
+0F:FF12 KillTask                ; A=task index: state=0
+0F:FF1A KillCurrentTask         ; state=0 and jump to the scheduler
+0F:FF24 CurrentTaskSlot         ; X = currentTask*4
+0F:FF26 TaskSlot                ; X = A*4
+0F:FF2A WaitFrames              ; X = number of frames to wait
+0F:FF31 WaitFrame               ; yield to the scheduler for one frame (coroutine switch)
