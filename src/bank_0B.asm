@@ -1806,7 +1806,7 @@ ofs_0B_BD9B:
 	LDA #$00                        ;C - - - - - 0x017DB1 0B:BDA1: A9 00
 	STA gameAction                  ;C - - - - - 0x017DB3 0B:BDA3: 85 30
 	STX objSpriteAir+15             ;C - - - - - 0x017DB5 0B:BDA5: 8E FF 04
-	JSR sub_0E_C9B9                 ;C - - - - - 0x017DB8 0B:BDA8: 20 B9 C9
+	JSR RunGameAction               ;C - - - - - 0x017DB8 0B:BDA8: 20 B9 C9
 	LDX objSpriteAir+15             ;C - - - - - 0x017DBB 0B:BDAB: AE FF 04
 	LDA #$28                        ;C - - - - - 0x017DBE 0B:BDAE: A9 28
 	STA gameAction                  ;C - - - - - 0x017DC0 0B:BDB0: 85 30
@@ -1825,7 +1825,7 @@ ofs_0B_BDBF:
 	LDA #$01                        ;C - - - - - 0x017DDB 0B:BDCB: A9 01
 	STA gameAction                  ;C - - - - - 0x017DDD 0B:BDCD: 85 30
 	STX objSpriteAir+15             ;C - - - - - 0x017DDF 0B:BDCF: 8E FF 04
-	JSR sub_0E_C9B9                 ;C - - - - - 0x017DE2 0B:BDD2: 20 B9 C9
+	JSR RunGameAction               ;C - - - - - 0x017DE2 0B:BDD2: 20 B9 C9
 	LDX objSpriteAir+15             ;C - - - - - 0x017DE5 0B:BDD5: AE FF 04
 	LDA gameAction                  ;C - - - - - 0x017DE8 0B:BDD8: A5 30
 	CMP #$02                        ;C - - - - - 0x017DEA 0B:BDDA: C9 02
@@ -1922,7 +1922,7 @@ loc_0B_BE8E:
 	LDA #$00                        ;C - - - - - 0x017EA4 0B:BE94: A9 00
 	STA gameAction                  ;C - - - - - 0x017EA6 0B:BE96: 85 30
 	STX objSpriteAir+15             ;C - - - - - 0x017EA8 0B:BE98: 8E FF 04
-	JSR sub_0E_C9B9                 ;C - - - - - 0x017EAB 0B:BE9B: 20 B9 C9
+	JSR RunGameAction               ;C - - - - - 0x017EAB 0B:BE9B: 20 B9 C9
 	LDX objSpriteAir+15             ;C - - - - - 0x017EAE 0B:BE9E: AE FF 04
 	LDA objX                        ;C - - - - - 0x017EB1 0B:BEA1: AD 60 03
 	CMP #$1B                        ;C - - - - - 0x017EB4 0B:BEA4: C9 1B
@@ -1973,7 +1973,7 @@ loc_0B_BEF7:
 	LDA #$00                        ;C - - - - - 0x017F0B 0B:BEFB: A9 00
 	STA gameAction                  ;C - - - - - 0x017F0D 0B:BEFD: 85 30
 	STX objSpriteAir+15             ;C - - - - - 0x017F0F 0B:BEFF: 8E FF 04
-	JSR sub_0E_C9B9                 ;C - - - - - 0x017F12 0B:BF02: 20 B9 C9
+	JSR RunGameAction               ;C - - - - - 0x017F12 0B:BF02: 20 B9 C9
 	LDX objSpriteAir+15             ;C - - - - - 0x017F15 0B:BF05: AE FF 04
 	LDA #$28                        ;C - - - - - 0x017F18 0B:BF08: A9 28
 	STA gameAction                  ;C - - - - - 0x017F1A 0B:BF0A: 85 30

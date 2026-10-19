@@ -124,7 +124,7 @@ Traced code (instruction starts, verify by hand):
   00:8E30  STA ram_0062
   00:8E32  LDA #$09
   00:8E34  STA gameAction
-  00:8E36  JMP loc_0E_DC6C
+  00:8E36  JMP Act09_Continue
   00:8E98  LDA #$98
   00:8E9A  BNE loc_00_8E9E
   00:8EE7  INC ram_0062

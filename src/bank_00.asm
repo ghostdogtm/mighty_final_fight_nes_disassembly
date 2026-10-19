@@ -1747,7 +1747,7 @@ loc_00_8E02:
 	STA ram_0062                    ;c - - - - - 0x000E40 00:8E30: 85 62
 	LDA #$09                        ;c - - - - - 0x000E42 00:8E32: A9 09
 	STA gameAction                  ;c - - - - - 0x000E44 00:8E34: 85 30
-	JMP loc_0E_DC6C                 ;c - - - - - 0x000E46 00:8E36: 4C 6C DC
+	JMP Act09_Continue              ;c - - - - - 0x000E46 00:8E36: 4C 6C DC
 loc_00_8E39:
 	LDA #$25                        ;C - - - - - 0x000E49 00:8E39: A9 25
 	STA gameAction                  ;C - - - - - 0x000E4B 00:8E3B: 85 30
