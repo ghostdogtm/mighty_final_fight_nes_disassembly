@@ -105,9 +105,9 @@ loc_0E_C0BA:
 	LDA #$21                        ;C - - - - - 0x01C0DA 0E:C0CA: A9 21
 	STA MMC3_IRQ_LATCH              ;C - - - - - 0x01C0DC 0E:C0CC: 8D 00 C0
 	STA MMC3_IRQ_RELOAD             ;C - - - - - 0x01C0DF 0E:C0CF: 8D 01 C0
-	LDA #$4A                        ;C - - - - - 0x01C0E2 0E:C0D2: A9 4A
+	LDA #<loc_0E_C14A               ;C - - - - - 0x01C0E2 0E:C0D2: A9 4A
 	STA ptr_9C                      ;C - - - - - 0x01C0E4 0E:C0D4: 85 9C
-	LDA #$C1                        ;C - - - - - 0x01C0E6 0E:C0D6: A9 C1
+	LDA #>loc_0E_C14A               ;C - - - - - 0x01C0E6 0E:C0D6: A9 C1
 	STA ptr_9C+1                    ;C - - - - - 0x01C0E8 0E:C0D8: 85 9D
 	LDX ram_009B                    ;C - - - - - 0x01C0EA 0E:C0DA: A6 9B
 	STA $E000,X                     ;C - - - - - 0x01C0EC 0E:C0DC: 9D 00 E0
@@ -181,7 +181,7 @@ IRQ:
 	STA MMC3_IRQ_DISABLE            ;C - - - - - 0x01C151 0E:C141: 8D 00 E0
 	STA MMC3_IRQ_ENABLE             ;C - - - - - 0x01C154 0E:C144: 8D 01 E0
 	JMP (ptr_9C)                    ;C - - - - - 0x01C157 0E:C147: 6C 9C 00
-ofs_0E_C14A:
+loc_0E_C14A:
 	LDA stage                       ;C - - J - - 0x01C15A 0E:C14A: A5 61
 	CMP #$01                        ;C - - - - - 0x01C15C 0E:C14C: C9 01
 	BNE loc_0E_C177                 ;C - - - - - 0x01C15E 0E:C14E: D0 27
@@ -198,9 +198,9 @@ loc_0E_C15A:
 	STA PPUSCROLL                   ;C - - - - - 0x01C174 0E:C164: 8D 05 20
 	LDA #$4A                        ;C - - - - - 0x01C177 0E:C167: A9 4A
 	STA MMC3_IRQ_LATCH              ;C - - - - - 0x01C179 0E:C169: 8D 00 C0
-	LDA #$94                        ;C - - - - - 0x01C17C 0E:C16C: A9 94
+	LDA #<loc_0E_C194               ;C - - - - - 0x01C17C 0E:C16C: A9 94
 	STA ptr_9C                      ;C - - - - - 0x01C17E 0E:C16E: 85 9C
-	LDA #$C1                        ;C - - - - - 0x01C180 0E:C170: A9 C1
+	LDA #>loc_0E_C194               ;C - - - - - 0x01C180 0E:C170: A9 C1
 	STA ptr_9C+1                    ;C - - - - - 0x01C182 0E:C172: 85 9D
 	JMP loc_0E_C1D8                 ;C - - - - - 0x01C184 0E:C174: 4C D8 C1
 loc_0E_C177:
@@ -211,12 +211,12 @@ loc_0E_C177:
 	STA PPUSCROLL                   ;C - - - - - 0x01C191 0E:C181: 8D 05 20
 	LDA #$A1                        ;C - - - - - 0x01C194 0E:C184: A9 A1
 	STA MMC3_IRQ_LATCH              ;C - - - - - 0x01C196 0E:C186: 8D 00 C0
-	LDA #$B1                        ;C - - - - - 0x01C199 0E:C189: A9 B1
+	LDA #<loc_0E_C1B1               ;C - - - - - 0x01C199 0E:C189: A9 B1
 	STA ptr_9C                      ;C - - - - - 0x01C19B 0E:C18B: 85 9C
-	LDA #$C1                        ;C - - - - - 0x01C19D 0E:C18D: A9 C1
+	LDA #>loc_0E_C1B1               ;C - - - - - 0x01C19D 0E:C18D: A9 C1
 	STA ptr_9C+1                    ;C - - - - - 0x01C19F 0E:C18F: 85 9D
 	JMP loc_0E_C1D8                 ;C - - - - - 0x01C1A1 0E:C191: 4C D8 C1
-ofs_0E_C194:
+loc_0E_C194:
 	LDA PPUSTATUS                   ;C - - J - - 0x01C1A4 0E:C194: AD 02 20
 	LDA ram_007D                    ;C - - - - - 0x01C1A7 0E:C197: A5 7D
 	STA PPUSCROLL                   ;C - - - - - 0x01C1A9 0E:C199: 8D 05 20
@@ -224,12 +224,12 @@ ofs_0E_C194:
 	STA PPUSCROLL                   ;C - - - - - 0x01C1AE 0E:C19E: 8D 05 20
 	LDA #$57                        ;C - - - - - 0x01C1B1 0E:C1A1: A9 57
 	STA MMC3_IRQ_LATCH              ;C - - - - - 0x01C1B3 0E:C1A3: 8D 00 C0
-	LDA #$B1                        ;C - - - - - 0x01C1B6 0E:C1A6: A9 B1
+	LDA #<loc_0E_C1B1               ;C - - - - - 0x01C1B6 0E:C1A6: A9 B1
 	STA ptr_9C                      ;C - - - - - 0x01C1B8 0E:C1A8: 85 9C
-	LDA #$C1                        ;C - - - - - 0x01C1BA 0E:C1AA: A9 C1
+	LDA #>loc_0E_C1B1               ;C - - - - - 0x01C1BA 0E:C1AA: A9 C1
 	STA ptr_9C+1                    ;C - - - - - 0x01C1BC 0E:C1AC: 85 9D
 	JMP loc_0E_C1D8                 ;C - - - - - 0x01C1BE 0E:C1AE: 4C D8 C1
-ofs_0E_C1B1:
+loc_0E_C1B1:
 	LDA PPUSTATUS                   ;C - - J - - 0x01C1C1 0E:C1B1: AD 02 20
 	LDA #$00                        ;C - - - - - 0x01C1C4 0E:C1B4: A9 00
 	STA PPUSCROLL                   ;C - - - - - 0x01C1C6 0E:C1B6: 8D 05 20

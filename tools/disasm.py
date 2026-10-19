@@ -120,6 +120,7 @@ class Disasm:
         self.rom_user, self.force, self.user_notes = load_rom_labels(rom_lbl_path)
         self.refs = defaultdict(set)
         self.cur_site = None
+        self.immref = {}            # (bank, idx) of an immediate -> ('<'|'>', target bank, target idx)
         self.split = {}             # (bank, idx) -> ('lo'|'hi', target bank, target idx, adj) for split address tables
         self.hints = {}             # (site bank, idx) -> target bank for raw $8000-$BFFF operands
         self.hint_why = {}
@@ -409,6 +410,30 @@ class Disasm:
                     break
         return found
 
+    def detect_imm_pairs(self):
+        """LDx #lo / STx zp / LDx #hi / STx zp+1 where lo|hi<<8 is the address of known code."""
+        ST = ('STA', 'STX', 'STY')
+        for b in range(NBANKS):
+            k = self.kind[b]
+            L = [(i,) + self.decode(b, i) for i in range(BANK_SIZE) if k[i] == 1]
+            for n, (i, mn, mode, ln) in enumerate(L):
+                if mode != 'imm' or mn not in ('LDA', 'LDX', 'LDY') or n + 4 >= len(L):
+                    continue
+                s1 = L[n + 1]
+                if s1[1] not in ST or s1[2] not in ('zp', 'abs'):
+                    continue
+                a1 = self.operand(b, s1[0], s1[3])
+                for q in range(n + 2, min(n + 5, len(L) - 1)):
+                    i2 = L[q]
+                    s2 = L[q + 1]
+                    if i2[2] == 'imm' and i2[1] in ('LDA', 'LDX', 'LDY') and s2[1] in ST and s2[2] == s1[2]                             and self.operand(b, s2[0], s2[3]) == a1 + 1:
+                        v = self.rom[b][i + 1] | (self.rom[b][i2[0] + 1] << 8)
+                        r = self.resolve(b, v, guess=False) if v >= 0x8000 else None
+                        if r and self.kind[r[0]][r[1]] == 1:
+                            self.immref[(b, i)] = ('<', r[0], r[1])
+                            self.immref[(b, i2[0])] = ('>', r[0], r[1])
+                        break
+
     def try_split(self, sb, lo, hi, cnt):
         rl, rh = self.resolve(sb, lo), self.resolve(sb, hi)
         if not rl or not rh or rl[0] != rh[0] or (rl[0], rl[1]) in self.split:
@@ -485,6 +510,8 @@ class Disasm:
                     i += 2
                 else:
                     i += 1
+        for (tb, ti) in {(v[1], v[2]) for v in self.immref.values()}:
+            self.refs[(tb, ti)].add('loc')
         for (sb, si), (wh, tb, ti, adj) in self.split.items():
             if wh == 'lo':
                 self.refs[(tb, self.start_of(tb, ti))].add('ptr')
@@ -559,6 +586,9 @@ class Disasm:
             return mn + ' A'
         v = self.operand(b, i, n)
         if mode == 'imm':
+            if (b, i) in self.immref:
+                c, tb, ti = self.immref[(b, i)]
+                return '%s #%s%s' % (mn, c, self.labels[(tb, ti)])
             return '%s #$%02X' % (mn, v)
         if mode == 'rel':
             tb, t = self.rel_dest(b, i)
@@ -939,6 +969,7 @@ def main():
             if not (D.detect_tables() + D.detect_split_tables()):
                 break
         print('trace: %d instructions found, %d pointer-table targets' % (len(D.traced), len(D.table_targets)))
+    D.detect_imm_pairs()
     D.infer_banks()
     D.gather_refs()
     D.build_labels()
