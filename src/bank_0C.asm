@@ -1673,7 +1673,7 @@ loc_0C_8D9D:
 	BEQ loc_0C_8DD1                 ;C - - - - - 0x018DB2 0C:8DA2: F0 2D
 	LDA stage                       ;C - - - - - 0x018DB4 0C:8DA4: A5 61
 	BNE loc_0C_8DAE                 ;C - - - - - 0x018DB6 0C:8DA6: D0 06
-	LDA ram_00F9                    ;C - - - - - 0x018DB8 0C:8DA8: A5 F9
+	LDA scrollXPage                 ;C - - - - - 0x018DB8 0C:8DA8: A5 F9
 	CMP #$03                        ;C - - - - - 0x018DBA 0C:8DAA: C9 03
 	BEQ loc_0C_8DB2                 ;C - - - - - 0x018DBC 0C:8DAC: F0 04
 loc_0C_8DAE:
@@ -3344,7 +3344,7 @@ loc_0C_9B37:
 	JSR sub_0F_ECCF                 ;C - - - - - 0x019B49 0C:9B39: 20 CF EC
 	LDA ptr_0E+1                    ;C - - - - - 0x019B4C 0C:9B3C: A5 0F
 	STA objY,X                      ;C - - - - - 0x019B4E 0C:9B3E: 9D C0 03
-	LDA ram_0010                    ;C - - - - - 0x019B51 0C:9B41: A5 10
+	LDA spriteFlipMask              ;C - - - - - 0x019B51 0C:9B41: A5 10
 	AND #$40                        ;C - - - - - 0x019B53 0C:9B43: 29 40
 	BEQ loc_0C_9B61                 ;C - - - - - 0x019B55 0C:9B45: F0 1A
 	LDA objKind,X                   ;C - - - - - 0x019B57 0C:9B47: BD 20 03
@@ -3870,7 +3870,7 @@ loc_0C_9F5D:
 	STA objArr_04C0,X               ;C - - - - - 0x019F7D 0C:9F6D: 9D C0 04
 	LDA objXPage,X                  ;C - - - - - 0x019F80 0C:9F70: BD 80 03
 	SEC                             ;C - - - - - 0x019F83 0C:9F73: 38
-	SBC ram_00F9                    ;C - - - - - 0x019F84 0C:9F74: E5 F9
+	SBC scrollXPage                 ;C - - - - - 0x019F84 0C:9F74: E5 F9
 	LDA objX,X                      ;C - - - - - 0x019F86 0C:9F76: BD 60 03
 	SBC scrollX                     ;C - - - - - 0x019F89 0C:9F79: E5 FC
 	CMP #$40                        ;C - - - - - 0x019F8B 0C:9F7B: C9 40

@@ -120,3 +120,10 @@ text 09:A7E0-A99B               ; staff credits
 ; ---- sound driver (bank 06): song table, count in dat_06_8A40, entries (hi,lo) from 06:8A43
 bewords 06:8A43-8AAE
 06:8A40 songCount
+; ---- sprite engine (bank 0F)
+0F:E9BC DrawObjects             ; slots 15,14 first; then slots 0-15 ascending / 13-0 descending, alternating every frame (flicker order)
+0F:E9FE DrawObject              ; X = slot; objFlags: bit4 = world coords (subtract scroll), bit7 = on screen, bit2 = hidden, bit5 = sprite priority
+0F:EC33 DrawObjectOffscreen     ; object is off screen: removes it (or ignores it on stage 3 section 1)
+0F:EB93 animBankTable           ; objKind -> PRG bank at $8000 for its animation data ($0A or $02; +1 goes to $A000)
+note 0F:EA6F Animation data in the $8000/$A000 banks: anim id (objAnim & $7F) -> pointer ($8000+id lo, $8080+id hi). Anim = [frame count, ticks per frame, frame ids..., 0]. Frame id -> sprite list ($8100+id lo, $8200+id hi).
+note 0F:EAF0 Sprite list = [count|$80 (bit7: use bank $03 instead of $0B at $A000), offset-table index, (tile, attr) * count]; the offset table ($B100/$B200 + index) holds (dy, dx) per sprite.

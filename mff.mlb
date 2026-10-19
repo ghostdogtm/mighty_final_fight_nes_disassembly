@@ -3658,7 +3658,7 @@ P:1E9A4:tbl_0F_E9A4
 P:1E9AA:tbl_0F_E9AA
 P:1E9B0:tbl_0F_E9B0
 P:1E9B6:tbl_0F_E9B6
-P:1E9BC:sub_0F_E9BC
+P:1E9BC:DrawObjects
 P:1E9C6:loc_0F_E9C6
 P:1E9CF:loc_0F_E9CF
 P:1E9DA:loc_0F_E9DA
@@ -3666,7 +3666,7 @@ P:1E9E2:loc_0F_E9E2
 P:1E9EB:loc_0F_E9EB
 P:1E9EF:loc_0F_E9EF
 P:1E9F7:loc_0F_E9F7
-P:1E9FE:sub_0F_E9FE
+P:1E9FE:DrawObject
 P:1EA24:loc_0F_EA24
 P:1EA2C:loc_0F_EA2C
 P:1EA30:loc_0F_EA30
@@ -3694,9 +3694,9 @@ P:1EB86:loc_0F_EB86
 P:1EB8A:loc_0F_EB8A
 P:1EB8B:loc_0F_EB8B
 P:1EB8C:loc_0F_EB8C
-P:1EB93:tbl_0F_EB93
+P:1EB93:animBankTable
 P:1EBEC:tbl_0F_EBEC
-P:1EC33:sub_0F_EC33
+P:1EC33:DrawObjectOffscreen
 P:1EC41:loc_0F_EC41
 P:1EC43:loc_0F_EC43
 P:1EC53:loc_0F_EC53
@@ -4053,10 +4053,10 @@ R:9:ram_0009
 R:A:ptr_0A
 R:C:ptr_0C
 R:E:ptr_0E
-R:10:ram_0010
-R:11:ram_0011
-R:12:ram_0012
-R:13:ram_0013
+R:10:spriteFlipMask
+R:11:spritePriorityBit
+R:12:spriteBaseY
+R:13:spriteBaseX
 R:14:padPressed
 R:16:padHeld
 R:18:palUpdateFlag
@@ -4127,8 +4127,8 @@ R:90:nmiTickFlag
 R:91:currentTask
 R:92:frameCounter
 R:93:ptr_93
-R:95:ram_0095
-R:96:ram_0096
+R:95:drawOrderToggle
+R:96:drawSlot
 R:97:oamHideStart
 R:98:ram_0098
 R:99:ram_0099
@@ -4207,7 +4207,7 @@ R:F5:prgBankA000
 R:F6:bankSwitchBusy
 R:F7:ram_00F7
 R:F8:ram_00F8
-R:F9:ram_00F9
+R:F9:scrollXPage
 R:FA:scrollY
 R:FB:ram_00FB
 R:FC:scrollX

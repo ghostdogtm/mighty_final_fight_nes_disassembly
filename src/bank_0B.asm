@@ -1403,7 +1403,7 @@ loc_0B_BA0A:
 	BNE loc_0B_BA27                 ;C - - - - - 0x017A1F 0B:BA0F: D0 16
 	LDY #$01                        ;C - - - - - 0x017A21 0B:BA11: A0 01
 	JSR sub_0F_F0F7                 ;C - - - - - 0x017A23 0B:BA13: 20 F7 F0
-	LDA ram_0010                    ;C - - - - - 0x017A26 0B:BA16: A5 10
+	LDA spriteFlipMask              ;C - - - - - 0x017A26 0B:BA16: A5 10
 	AND #$50                        ;C - - - - - 0x017A28 0B:BA18: 29 50
 	BEQ loc_0B_BA3C                 ;C - - - - - 0x017A2A 0B:BA1A: F0 20
 	LDA objArr_0550,X               ;C - - - - - 0x017A2C 0B:BA1C: BD 50 05
@@ -1414,7 +1414,7 @@ loc_0B_BA0A:
 loc_0B_BA27:
 	LDY #$00                        ;C - - - - - 0x017A37 0B:BA27: A0 00
 	JSR sub_0F_F0A2                 ;C - - - - - 0x017A39 0B:BA29: 20 A2 F0
-	LDA ram_0010                    ;C - - - - - 0x017A3C 0B:BA2C: A5 10
+	LDA spriteFlipMask              ;C - - - - - 0x017A3C 0B:BA2C: A5 10
 	AND #$50                        ;C - - - - - 0x017A3E 0B:BA2E: 29 50
 	BEQ loc_0B_BA3C                 ;C - - - - - 0x017A40 0B:BA30: F0 0A
 	LDA objArr_0550,X               ;C - - - - - 0x017A42 0B:BA32: BD 50 05

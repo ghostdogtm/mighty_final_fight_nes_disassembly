@@ -880,7 +880,7 @@ loc_00_8728:
 	LDA tbl_00_8903,Y               ;C - - - - - 0x00073C 00:872C: B9 03 89
 	STA ram_00A7                    ;C - - - - - 0x00073F 00:872F: 85 A7
 	JSR ArmTimerA4                  ;C - - - - - 0x000741 00:8731: 20 3B F4
-	LDA ram_0095                    ;C - - - - - 0x000744 00:8734: A5 95
+	LDA drawOrderToggle             ;C - - - - - 0x000744 00:8734: A5 95
 	AND #$07                        ;C - - - - - 0x000746 00:8736: 29 07
 	BNE loc_00_873F                 ;C - - - - - 0x000748 00:8738: D0 05
 	LDA #$13                        ;C - - - - - 0x00074A 00:873A: A9 13
@@ -989,7 +989,7 @@ ofs_00_87F7:
 	LDA tbl_00_88A6,Y               ;C - - - - - 0x00080B 00:87FB: B9 A6 88
 	STA ram_00A7                    ;C - - - - - 0x00080E 00:87FE: 85 A7
 	JSR ArmTimerA4                  ;C - - - - - 0x000810 00:8800: 20 3B F4
-	LDA ram_0095                    ;C - - - - - 0x000813 00:8803: A5 95
+	LDA drawOrderToggle             ;C - - - - - 0x000813 00:8803: A5 95
 	AND #$07                        ;C - - - - - 0x000815 00:8805: 29 07
 	BNE loc_00_880E                 ;C - - - - - 0x000817 00:8807: D0 05
 	LDA #$25                        ;C - - - - - 0x000819 00:8809: A9 25
@@ -1045,7 +1045,7 @@ ofs_00_8864:
 	LDA tbl_00_88A6,Y               ;C - - - - - 0x000878 00:8868: B9 A6 88
 	STA ram_00A7                    ;C - - - - - 0x00087B 00:886B: 85 A7
 	JSR ArmTimerA4                  ;C - - - - - 0x00087D 00:886D: 20 3B F4
-	LDA ram_0095                    ;C - - - - - 0x000880 00:8870: A5 95
+	LDA drawOrderToggle             ;C - - - - - 0x000880 00:8870: A5 95
 	AND #$07                        ;C - - - - - 0x000882 00:8872: 29 07
 	BNE loc_00_887B                 ;C - - - - - 0x000884 00:8874: D0 05
 	LDA #$25                        ;C - - - - - 0x000886 00:8876: A9 25
@@ -1107,7 +1107,7 @@ loc_00_88D5:
 	LDA objFacing                   ;C - - - - - 0x0008F1 00:88E1: AD 60 04
 	EOR #$03                        ;C - - - - - 0x0008F4 00:88E4: 49 03
 	STA objFacing                   ;C - - - - - 0x0008F6 00:88E6: 8D 60 04
-	LDA ram_0095                    ;C - - - - - 0x0008F9 00:88E9: A5 95
+	LDA drawOrderToggle             ;C - - - - - 0x0008F9 00:88E9: A5 95
 	AND #$07                        ;C - - - - - 0x0008FB 00:88EB: 29 07
 	BNE loc_00_88F4                 ;C - - - - - 0x0008FD 00:88ED: D0 05
 	LDA #$13                        ;C - - - - - 0x0008FF 00:88EF: A9 13
@@ -1767,7 +1767,7 @@ loc_00_8E50:
 	CLC                             ;C - - - - - 0x000E62 00:8E52: 18
 	ADC #$38                        ;C - - - - - 0x000E63 00:8E53: 69 38
 	STA objX                        ;C - - - - - 0x000E65 00:8E55: 8D 60 03
-	LDA ram_00F9                    ;C - - - - - 0x000E68 00:8E58: A5 F9
+	LDA scrollXPage                 ;C - - - - - 0x000E68 00:8E58: A5 F9
 	ADC #$00                        ;C - - - - - 0x000E6A 00:8E5A: 69 00
 	STA objXPage                    ;C - - - - - 0x000E6C 00:8E5C: 8D 80 03
 loc_00_8E5F:
@@ -3050,21 +3050,21 @@ sub_00_9A00:
 	STA ptr_0E                      ;C - - - - - 0x001A21 00:9A11: 85 0E
 loc_00_9A13:
 	LDA #$00                        ;C - - - - - 0x001A23 00:9A13: A9 00
-	STA ram_0010                    ;C - - - - - 0x001A25 00:9A15: 85 10
-	STA ram_0012                    ;C - - - - - 0x001A27 00:9A17: 85 12
+	STA spriteFlipMask              ;C - - - - - 0x001A25 00:9A15: 85 10
+	STA spriteBaseY                 ;C - - - - - 0x001A27 00:9A17: 85 12
 loc_00_9A19:
 	LDA #$00                        ;C - - - - - 0x001A29 00:9A19: A9 00
-	STA ram_0011                    ;C - - - - - 0x001A2B 00:9A1B: 85 11
+	STA spritePriorityBit           ;C - - - - - 0x001A2B 00:9A1B: 85 11
 loc_00_9A1D:
 	LDA padPressed                  ;C - - - - - 0x001A2D 00:9A1D: A5 14
 	AND #$F0                        ;C - - - - - 0x001A2F 00:9A1F: 29 F0
 	BNE loc_00_9A91                 ;C - - - - - 0x001A31 00:9A21: D0 6E
-	LDX ram_0010                    ;C - - - - - 0x001A33 00:9A23: A6 10
+	LDX spriteFlipMask              ;C - - - - - 0x001A33 00:9A23: A6 10
 	LDA tbl_00_9A92,X               ;C - - - - - 0x001A35 00:9A25: BD 92 9A
 	STA vramQueue                   ;C - - - - - 0x001A38 00:9A28: 8D 80 07
 	LDA tbl_00_9A95,X               ;C - - - - - 0x001A3B 00:9A2B: BD 95 9A
 	CLC                             ;C - - - - - 0x001A3E 00:9A2E: 18
-	ADC ram_0011                    ;C - - - - - 0x001A3F 00:9A2F: 65 11
+	ADC spritePriorityBit           ;C - - - - - 0x001A3F 00:9A2F: 65 11
 	STA vramQueue+1                 ;C - - - - - 0x001A41 00:9A31: 8D 81 07
 	LDA #$00                        ;C - - - - - 0x001A44 00:9A34: A9 00
 	STA vramQueue+2                 ;C - - - - - 0x001A46 00:9A36: 8D 82 07
@@ -3079,19 +3079,19 @@ loc_00_9A1D:
 	LDA #$FF                        ;C - - - - - 0x001A5A 00:9A4A: A9 FF
 	STA vramQueue+4                 ;C - - - - - 0x001A5C 00:9A4C: 8D 84 07
 	STA vramUpdateFlag0             ;C - - - - - 0x001A5F 00:9A4F: 85 19
-	LDA ram_0010                    ;C - - - - - 0x001A61 00:9A51: A5 10
+	LDA spriteFlipMask              ;C - - - - - 0x001A61 00:9A51: A5 10
 	PHA                             ;C - - - - - 0x001A63 00:9A53: 48
-	LDA ram_0011                    ;C - - - - - 0x001A64 00:9A54: A5 11
+	LDA spritePriorityBit           ;C - - - - - 0x001A64 00:9A54: A5 11
 	PHA                             ;C - - - - - 0x001A66 00:9A56: 48
 	JSR sub_00_9A98                 ;C - - - - - 0x001A67 00:9A57: 20 98 9A
 	JSR sub_0F_F406                 ;C - - - - - 0x001A6A 00:9A5A: 20 06 F4
 	JSR WaitFrame                   ;C - - - - - 0x001A6D 00:9A5D: 20 31 FF
 	JSR WaitFrame                   ;C - - - - - 0x001A70 00:9A60: 20 31 FF
 	PLA                             ;C - - - - - 0x001A73 00:9A63: 68
-	STA ram_0011                    ;C - - - - - 0x001A74 00:9A64: 85 11
+	STA spritePriorityBit           ;C - - - - - 0x001A74 00:9A64: 85 11
 	PLA                             ;C - - - - - 0x001A76 00:9A66: 68
-	STA ram_0010                    ;C - - - - - 0x001A77 00:9A67: 85 10
-	INC ram_0011                    ;C - - - - - 0x001A79 00:9A69: E6 11
+	STA spriteFlipMask              ;C - - - - - 0x001A77 00:9A67: 85 10
+	INC spritePriorityBit           ;C - - - - - 0x001A79 00:9A69: E6 11
 	LDA frameCounter                ;C - - - - - 0x001A7B 00:9A6B: A5 92
 	AND #$01                        ;C - - - - - 0x001A7D 00:9A6D: 29 01
 	BNE loc_00_9A7A                 ;C - - - - - 0x001A7F 00:9A6F: D0 09
@@ -3102,8 +3102,8 @@ loc_00_9A1D:
 loc_00_9A7A:
 	JMP loc_00_9A1D                 ;C - - - - - 0x001A8A 00:9A7A: 4C 1D 9A
 loc_00_9A7D:
-	INC ram_0010                    ;C - - - - - 0x001A8D 00:9A7D: E6 10
-	LDA ram_0010                    ;C - - - - - 0x001A8F 00:9A7F: A5 10
+	INC spriteFlipMask              ;C - - - - - 0x001A8D 00:9A7D: E6 10
+	LDA spriteFlipMask              ;C - - - - - 0x001A8F 00:9A7F: A5 10
 	CMP #$03                        ;C - - - - - 0x001A91 00:9A81: C9 03
 	BNE loc_00_9A19                 ;C - - - - - 0x001A93 00:9A83: D0 94
 	JSR sub_00_9B16                 ;C - - - - - 0x001A95 00:9A85: 20 16 9B

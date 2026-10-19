@@ -331,7 +331,7 @@ sub_05_A851:
 	STY ptr_0E+1                    ;- - - - - - 0x00A866 05:A856: 84 0F
 	LDA objFacing,X                 ;- - - - - - 0x00A868 05:A858: BD 60 04
 	STA objFacing,Y                 ;- - - - - - 0x00A86B 05:A85B: 99 60 04
-	LDA ram_00F9                    ;- - - - - - 0x00A86E 05:A85E: A5 F9
+	LDA scrollXPage                 ;- - - - - - 0x00A86E 05:A85E: A5 F9
 	STA objXPage,Y                  ;- - - - - - 0x00A870 05:A860: 99 80 03
 	LDA objYPage                    ;- - - - - - 0x00A873 05:A863: AD E0 03
 	STA objYPage,Y                  ;- - - - - - 0x00A876 05:A866: 99 E0 03

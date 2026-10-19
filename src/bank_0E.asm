@@ -555,7 +555,7 @@ loc_0E_C3C8:
 	INX                             ;C - - - - - 0x01C3DA 0E:C3CA: E8
 	DEY                             ;C - - - - - 0x01C3DB 0E:C3CB: 88
 	BNE loc_0E_C3C8                 ;C - - - - - 0x01C3DC 0E:C3CC: D0 FA
-	LDA ram_0095                    ;C - - - - - 0x01C3DE 0E:C3CE: A5 95
+	LDA drawOrderToggle             ;C - - - - - 0x01C3DE 0E:C3CE: A5 95
 	EOR ram_00E4                    ;C - - - - - 0x01C3E0 0E:C3D0: 45 E4
 	STA ram_00E5                    ;C - - - - - 0x01C3E2 0E:C3D2: 85 E5
 	LDA ram_00E4                    ;C - - - - - 0x01C3E4 0E:C3D4: A5 E4
@@ -892,7 +892,7 @@ loc_0E_C681:
 	LDA #$04                        ;C - - - - - 0x01C691 0E:C681: A9 04
 	STA oamHideStart                ;C - - - - - 0x01C693 0E:C683: 85 97
 	JSR HideSprites                 ;C - - - - - 0x01C695 0E:C685: 20 1D C3
-	JSR sub_0F_E9BC                 ;C - - - - - 0x01C698 0E:C688: 20 BC E9
+	JSR DrawObjects                 ;C - - - - - 0x01C698 0E:C688: 20 BC E9
 	JSR WaitFrame                   ;C - - - - - 0x01C69B 0E:C68B: 20 31 FF
 	LDA objArr_0500                 ;C - - - - - 0x01C69E 0E:C68E: AD 00 05
 	BNE loc_0E_C6A7                 ;C - - - - - 0x01C6A1 0E:C691: D0 14
@@ -967,7 +967,7 @@ ofs_0E_C703:
 	STA ram_00FB                    ;C - - - - - 0x01C73A 0E:C72A: 85 FB
 	STA scrollX                     ;C - - - - - 0x01C73C 0E:C72C: 85 FC
 	STA scrollY                     ;C - - - - - 0x01C73E 0E:C72E: 85 FA
-	STA ram_00F9                    ;C - - - - - 0x01C740 0E:C730: 85 F9
+	STA scrollXPage                 ;C - - - - - 0x01C740 0E:C730: 85 F9
 	STA ram_0025                    ;C - - - - - 0x01C742 0E:C732: 85 25
 	STA objXPage                    ;C - - - - - 0x01C744 0E:C734: 8D 80 03
 	STA objYPage                    ;C - - - - - 0x01C747 0E:C737: 8D E0 03
@@ -995,7 +995,7 @@ ofs_0E_C703:
 	STA ram_0024                    ;C - - - - - 0x01C776 0E:C766: 85 24
 loc_0E_C768:
 	LDA #$01                        ;C - - - - - 0x01C778 0E:C768: A9 01
-	STA ram_0010                    ;C - - - - - 0x01C77A 0E:C76A: 85 10
+	STA spriteFlipMask              ;C - - - - - 0x01C77A 0E:C76A: 85 10
 	JSR sub_0F_E521                 ;C - - - - - 0x01C77C 0E:C76C: 20 21 E5
 	JSR WaitFrame                   ;C - - - - - 0x01C77F 0E:C76F: 20 31 FF
 	LDA ram_0029                    ;C - - - - - 0x01C782 0E:C772: A5 29
@@ -1123,7 +1123,7 @@ sub_0E_C85F:
 	STA scrollY                     ;C - - - - - 0x01C883 0E:C873: 85 FA
 	STA nametableSelect             ;C - - - - - 0x01C885 0E:C875: 85 FD
 	STA ram_00FB                    ;C - - - - - 0x01C887 0E:C877: 85 FB
-	STA ram_0095                    ;C - - - - - 0x01C889 0E:C879: 85 95
+	STA drawOrderToggle             ;C - - - - - 0x01C889 0E:C879: 85 95
 	LDA #$20                        ;C - - - - - 0x01C88B 0E:C87B: A9 20
 	LDX #$00                        ;C - - - - - 0x01C88D 0E:C87D: A2 00
 	LDY #$00                        ;C - - - - - 0x01C88F 0E:C87F: A0 00
@@ -1269,7 +1269,7 @@ loc_0E_C99D:
 	LDA #$04                        ;C - - - - - 0x01C9AD 0E:C99D: A9 04
 	STA oamHideStart                ;C - - - - - 0x01C9AF 0E:C99F: 85 97
 	JSR HideSprites                 ;C - - - - - 0x01C9B1 0E:C9A1: 20 1D C3
-	JSR sub_0F_E9BC                 ;C - - - - - 0x01C9B4 0E:C9A4: 20 BC E9
+	JSR DrawObjects                 ;C - - - - - 0x01C9B4 0E:C9A4: 20 BC E9
 loc_0E_C9A7:
 	JSR sub_0E_C3B4                 ;C - - - - - 0x01C9B7 0E:C9A7: 20 B4 C3
 	LDA #$00                        ;C - - - - - 0x01C9BA 0E:C9AA: A9 00
@@ -2041,7 +2041,7 @@ loc_0E_CF94:
 	BEQ loc_0E_CFE6                 ;C - - - - - 0x01CFD3 0E:CFC3: F0 21
 	BNE loc_0E_CFEE                 ;C - - - - - 0x01CFD5 0E:CFC5: D0 27
 loc_0E_CFC7:
-	LDA ram_0010                    ;C - - - - - 0x01CFD7 0E:CFC7: A5 10
+	LDA spriteFlipMask              ;C - - - - - 0x01CFD7 0E:CFC7: A5 10
 	CMP #$40                        ;C - - - - - 0x01CFD9 0E:CFC9: C9 40
 	BNE loc_0E_CFDF                 ;C - - - - - 0x01CFDB 0E:CFCB: D0 12
 	JSR sub_0E_CFD1                 ;c - - - - - 0x01CFDD 0E:CFCD: 20 D1 CF
@@ -2063,7 +2063,7 @@ loc_0E_CFE6:
 	LDA tbl_0F_E219,Y               ;C - - - - - 0x01CFF8 0E:CFE8: B9 19 E2
 	JSR SetPlayerAnim               ;C - - - - - 0x01CFFB 0E:CFEB: 20 94 F2
 loc_0E_CFEE:
-	LDA ram_0010                    ;C - - - - - 0x01CFFE 0E:CFEE: A5 10
+	LDA spriteFlipMask              ;C - - - - - 0x01CFFE 0E:CFEE: A5 10
 	CMP #$40                        ;C - - - - - 0x01D000 0E:CFF0: C9 40
 	BNE loc_0E_CFF8                 ;C - - - - - 0x01D002 0E:CFF2: D0 04
 	JSR sub_0E_CFD1                 ;c - - - - - 0x01D004 0E:CFF4: 20 D1 CF
@@ -2081,7 +2081,7 @@ loc_0E_CFF8:
 loc_0E_D00B:
 	STA objY                        ;C - - - - - 0x01D01B 0E:D00B: 8D C0 03
 loc_0E_D00E:
-	LDA ram_0010                    ;C - - - - - 0x01D01E 0E:D00E: A5 10
+	LDA spriteFlipMask              ;C - - - - - 0x01D01E 0E:D00E: A5 10
 	CMP #$40                        ;C - - - - - 0x01D020 0E:D010: C9 40
 	BCS loc_0E_D016                 ;C - - - - - 0x01D022 0E:D012: B0 02
 	BCC loc_0E_D01A                 ;C - - - - - 0x01D024 0E:D014: 90 04
@@ -3688,7 +3688,7 @@ Act09_Continue:
 	STA scrollY                     ;C - - - - - 0x01DC8F 0E:DC7F: 85 FA
 	STA nametableSelect             ;C - - - - - 0x01DC91 0E:DC81: 85 FD
 	STA ram_00FB                    ;C - - - - - 0x01DC93 0E:DC83: 85 FB
-	STA ram_00F9                    ;C - - - - - 0x01DC95 0E:DC85: 85 F9
+	STA scrollXPage                 ;C - - - - - 0x01DC95 0E:DC85: 85 F9
 	JSR ScreenOff                   ;C - - - - - 0x01DC97 0E:DC87: 20 65 C2
 	LDA #$04                        ;C - - - - - 0x01DC9A 0E:DC8A: A9 04
 	STA oamHideStart                ;C - - - - - 0x01DC9C 0E:DC8C: 85 97
@@ -3961,7 +3961,7 @@ Act07_SelectScreen:
 	STA scrollY                     ;C - - - - - 0x01DE78 0E:DE68: 85 FA
 	STA nametableSelect             ;C - - - - - 0x01DE7A 0E:DE6A: 85 FD
 	STA ram_00FB                    ;C - - - - - 0x01DE7C 0E:DE6C: 85 FB
-	STA ram_00F9                    ;C - - - - - 0x01DE7E 0E:DE6E: 85 F9
+	STA scrollXPage                 ;C - - - - - 0x01DE7E 0E:DE6E: 85 F9
 	STA renderOffCount              ;C - - - - - 0x01DE80 0E:DE70: 85 EE
 	JSR sub_0E_C36E                 ;C - - - - - 0x01DE82 0E:DE72: 20 6E C3
 	LDA #$04                        ;C - - - - - 0x01DE85 0E:DE75: A9 04

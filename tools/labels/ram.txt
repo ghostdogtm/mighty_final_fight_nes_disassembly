@@ -128,3 +128,12 @@
 00C0 soundBusy                  ; INC/DEC around SoundPlay; non-zero while a request is processed
 00CE soundPriority              ; priority of the current effect/song (request is ignored if lower)
 00D0 soundPtr 2                 ; read pointer into the current song stream
+
+; ---- sprite engine scratch
+0010 spriteFlipMask             ; $40 = flip horizontally (from objFlags bit 6)
+0011 spritePriorityBit          ; $20 = behind background (from objFlags bit 5)
+0012 spriteBaseY                ; object Y on screen
+0013 spriteBaseX                ; object X on screen (objX - scrollX)
+0095 drawOrderToggle            ; incremented every DrawObjects call: odd/even picks the slot order
+0096 drawSlot                   ; slot being drawn
+00F9 scrollXPage                ; high byte of scrollX (compared with objXPage)

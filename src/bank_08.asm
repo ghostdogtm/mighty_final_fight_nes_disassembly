@@ -697,7 +697,7 @@ spawnRecBelger:
 	.byte $BF,$2A,$BF,$A8,$74,$88,$1B,$A8,$3E,$CB,$ED,$8A,$3F,$0A,$1C,$23;- - - - - - 0x0108F9 08:88E9:
 	.byte $54,$0A,$BB,$4A,$B7,$CA,$DF;- - - - - - 0x010909 08:88F9:
 sub_08_8900:
-	LDA ram_00F9                    ;C - - - - - 0x010910 08:8900: A5 F9
+	LDA scrollXPage                 ;C - - - - - 0x010910 08:8900: A5 F9
 	BNE loc_08_8924                 ;C - - - - - 0x010912 08:8902: D0 20
 	LDA stage                       ;C - - - - - 0x010914 08:8904: A5 61
 	CMP #$02                        ;C - - - - - 0x010916 08:8906: C9 02
@@ -763,7 +763,7 @@ loc_08_8956:
 	BNE loc_08_8955                 ;C - - - - - 0x010977 08:8967: D0 EC
 	JSR sub_0F_F71A                 ;C - - - - - 0x010979 08:8969: 20 1A F7
 	BCS loc_08_892C                 ;C - - - - - 0x01097C 08:896C: B0 BE
-	LDA ram_00F9                    ;C - - - - - 0x01097E 08:896E: A5 F9
+	LDA scrollXPage                 ;C - - - - - 0x01097E 08:896E: A5 F9
 	STA objXPage,Y                  ;C - - - - - 0x010980 08:8970: 99 80 03
 	LDA objYPage                    ;C - - - - - 0x010983 08:8973: AD E0 03
 	STA objYPage,Y                  ;C - - - - - 0x010986 08:8976: 99 E0 03
@@ -840,7 +840,7 @@ tbl_08_8A1D:
 	.hibytes ofs_08_8A2C, ofs_08_8A76, ofs_08_8AAC, ofs_08_8AD3, ofs_08_8B1C, ofs_08_8B7C, ofs_08_8B9F, ofs_08_8BE8;- D 0 - - - 0x010A2D 08:8A1D:
 	.hibytes ofs_08_8C32, ofs_08_8C57, ofs_08_8C8C, ofs_08_8CBD, ofs_08_8CF5, ofs_08_8D3A, ofs_08_8D83;- D 0 - - - 0x010A35 08:8A25:
 ofs_08_8A2C:
-	LDY ram_00F9                    ;C - - J - - 0x010A3C 08:8A2C: A4 F9
+	LDY scrollXPage                 ;C - - J - - 0x010A3C 08:8A2C: A4 F9
 	LDA tbl_08_8A3B,Y               ;C - - - - - 0x010A3E 08:8A2E: B9 3B 8A
 	STA ptr_06                      ;C - - - - - 0x010A41 08:8A31: 85 06
 	LDA tbl_08_8A3F,Y               ;C - - - - - 0x010A43 08:8A33: B9 3F 8A
@@ -883,7 +883,7 @@ loc_08_8A72:
 loc_08_8A75:
 	RTS                             ;C - - - - - 0x010A85 08:8A75: 60
 ofs_08_8A76:
-	LDY ram_00F9                    ;C - - J - - 0x010A86 08:8A76: A4 F9
+	LDY scrollXPage                 ;C - - J - - 0x010A86 08:8A76: A4 F9
 	LDA tbl_08_8A85,Y               ;C - - - - - 0x010A88 08:8A78: B9 85 8A
 	STA ptr_06                      ;C - - - - - 0x010A8B 08:8A7B: 85 06
 	LDA tbl_08_8A89,Y               ;C - - - - - 0x010A8D 08:8A7D: B9 89 8A
@@ -913,7 +913,7 @@ loc_08_8AA8:
 ofs_08_8AAB:
 	RTS                             ;C - - - - - 0x010ABB 08:8AAB: 60
 ofs_08_8AAC:
-	LDY ram_00F9                    ;C - - J - - 0x010ABC 08:8AAC: A4 F9
+	LDY scrollXPage                 ;C - - J - - 0x010ABC 08:8AAC: A4 F9
 	LDA tbl_08_8ABB,Y               ;C - - - - - 0x010ABE 08:8AAE: B9 BB 8A
 	STA ptr_06                      ;C - - - - - 0x010AC1 08:8AB1: 85 06
 	LDA tbl_08_8ABD,Y               ;C - - - - - 0x010AC3 08:8AB3: B9 BD 8A
@@ -935,7 +935,7 @@ ofs_08_8ABF:
 loc_08_8AD2:
 	RTS                             ;C - - - - - 0x010AE2 08:8AD2: 60
 ofs_08_8AD3:
-	LDY ram_00F9                    ;C - - J - - 0x010AE3 08:8AD3: A4 F9
+	LDY scrollXPage                 ;C - - J - - 0x010AE3 08:8AD3: A4 F9
 	LDA tbl_08_8AE2,Y               ;C - - - - - 0x010AE5 08:8AD5: B9 E2 8A
 	STA ptr_06                      ;C - - - - - 0x010AE8 08:8AD8: 85 06
 	LDA tbl_08_8AE6,Y               ;C - - - - - 0x010AEA 08:8ADA: B9 E6 8A
@@ -976,7 +976,7 @@ loc_08_8B18:
 loc_08_8B1B:
 	RTS                             ;C - - - - - 0x010B2B 08:8B1B: 60
 ofs_08_8B1C:
-	LDY ram_00F9                    ;C - - J - - 0x010B2C 08:8B1C: A4 F9
+	LDY scrollXPage                 ;C - - J - - 0x010B2C 08:8B1C: A4 F9
 	LDA tbl_08_8B2B,Y               ;C - - - - - 0x010B2E 08:8B1E: B9 2B 8B
 	STA ptr_06                      ;C - - - - - 0x010B31 08:8B21: 85 06
 	LDA tbl_08_8B30,Y               ;C - - - - - 0x010B33 08:8B23: B9 30 8B
@@ -1029,7 +1029,7 @@ loc_08_8B78:
 loc_08_8B7B:
 	RTS                             ;C - - - - - 0x010B8B 08:8B7B: 60
 ofs_08_8B7C:
-	LDY ram_00F9                    ;C - - J - - 0x010B8C 08:8B7C: A4 F9
+	LDY scrollXPage                 ;C - - J - - 0x010B8C 08:8B7C: A4 F9
 	LDA tbl_08_8B8B,Y               ;C - - - - - 0x010B8E 08:8B7E: B9 8B 8B
 	STA ptr_06                      ;C - - - - - 0x010B91 08:8B81: 85 06
 	LDA tbl_08_8B8D,Y               ;C - - - - - 0x010B93 08:8B83: B9 8D 8B
@@ -1049,7 +1049,7 @@ ofs_08_8B8F:
 loc_08_8B9E:
 	RTS                             ;C - - - - - 0x010BAE 08:8B9E: 60
 ofs_08_8B9F:
-	LDY ram_00F9                    ;C - - J - - 0x010BAF 08:8B9F: A4 F9
+	LDY scrollXPage                 ;C - - J - - 0x010BAF 08:8B9F: A4 F9
 	LDA tbl_08_8BAE,Y               ;C - - - - - 0x010BB1 08:8BA1: B9 AE 8B
 	STA ptr_06                      ;C - - - - - 0x010BB4 08:8BA4: 85 06
 	LDA tbl_08_8BB2,Y               ;C - - - - - 0x010BB6 08:8BA6: B9 B2 8B
@@ -1090,7 +1090,7 @@ loc_08_8BE4:
 loc_08_8BE7:
 	RTS                             ;C - - - - - 0x010BF7 08:8BE7: 60
 ofs_08_8BE8:
-	LDY ram_00F9                    ;C - - J - - 0x010BF8 08:8BE8: A4 F9
+	LDY scrollXPage                 ;C - - J - - 0x010BF8 08:8BE8: A4 F9
 	LDA tbl_08_8BF7,Y               ;C - - - - - 0x010BFA 08:8BEA: B9 F7 8B
 	STA ptr_06                      ;C - - - - - 0x010BFD 08:8BED: 85 06
 	LDA tbl_08_8BFB,Y               ;C - - - - - 0x010BFF 08:8BEF: B9 FB 8B
@@ -1131,7 +1131,7 @@ loc_08_8C2E:
 loc_08_8C31:
 	RTS                             ;C - - - - - 0x010C41 08:8C31: 60
 ofs_08_8C32:
-	LDY ram_00F9                    ;C - - J - - 0x010C42 08:8C32: A4 F9
+	LDY scrollXPage                 ;C - - J - - 0x010C42 08:8C32: A4 F9
 	LDA tbl_08_8C41,Y               ;C - - - - - 0x010C44 08:8C34: B9 41 8C
 	STA ptr_06                      ;C - - - - - 0x010C47 08:8C37: 85 06
 	LDA tbl_08_8C42,Y               ;C - - - - - 0x010C49 08:8C39: B9 42 8C
@@ -1153,7 +1153,7 @@ ofs_08_8C43:
 loc_08_8C56:
 	RTS                             ;C - - - - - 0x010C66 08:8C56: 60
 ofs_08_8C57:
-	LDY ram_00F9                    ;C - - J - - 0x010C67 08:8C57: A4 F9
+	LDY scrollXPage                 ;C - - J - - 0x010C67 08:8C57: A4 F9
 	LDA tbl_08_8C66,Y               ;C - - - - - 0x010C69 08:8C59: B9 66 8C
 	STA ptr_06                      ;C - - - - - 0x010C6C 08:8C5C: 85 06
 	LDA tbl_08_8C6A,Y               ;C - - - - - 0x010C6E 08:8C5E: B9 6A 8C
@@ -1183,7 +1183,7 @@ loc_08_8C88:
 ofs_08_8C8B:
 	RTS                             ;C - - - - - 0x010C9B 08:8C8B: 60
 ofs_08_8C8C:
-	LDY ram_00F9                    ;C - - J - - 0x010C9C 08:8C8C: A4 F9
+	LDY scrollXPage                 ;C - - J - - 0x010C9C 08:8C8C: A4 F9
 	LDA tbl_08_8C9B,Y               ;C - - - - - 0x010C9E 08:8C8E: B9 9B 8C
 	STA ptr_06                      ;C - - - - - 0x010CA1 08:8C91: 85 06
 	LDA tbl_08_8CA0,Y               ;C - - - - - 0x010CA3 08:8C93: B9 A0 8C
@@ -1208,7 +1208,7 @@ loc_08_8CB9:
 loc_08_8CBC:
 	RTS                             ;C - - - - - 0x010CCC 08:8CBC: 60
 ofs_08_8CBD:
-	LDY ram_00F9                    ;C - - J - - 0x010CCD 08:8CBD: A4 F9
+	LDY scrollXPage                 ;C - - J - - 0x010CCD 08:8CBD: A4 F9
 	LDA tbl_08_8CCC,Y               ;C - - - - - 0x010CCF 08:8CBF: B9 CC 8C
 	STA ptr_06                      ;C - - - - - 0x010CD2 08:8CC2: 85 06
 	LDA tbl_08_8CCF,Y               ;C - - - - - 0x010CD4 08:8CC4: B9 CF 8C
@@ -1239,7 +1239,7 @@ ofs_08_8CE1:
 loc_08_8CF4:
 	RTS                             ;C - - - - - 0x010D04 08:8CF4: 60
 ofs_08_8CF5:
-	LDY ram_00F9                    ;C - - J - - 0x010D05 08:8CF5: A4 F9
+	LDY scrollXPage                 ;C - - J - - 0x010D05 08:8CF5: A4 F9
 	LDA tbl_08_8D04,Y               ;C - - - - - 0x010D07 08:8CF7: B9 04 8D
 	STA ptr_06                      ;C - - - - - 0x010D0A 08:8CFA: 85 06
 	LDA tbl_08_8D08,Y               ;C - - - - - 0x010D0C 08:8CFC: B9 08 8D
@@ -1277,7 +1277,7 @@ ofs_08_8D2A:
 loc_08_8D39:
 	RTS                             ;C - - - - - 0x010D49 08:8D39: 60
 ofs_08_8D3A:
-	LDY ram_00F9                    ;C - - J - - 0x010D4A 08:8D3A: A4 F9
+	LDY scrollXPage                 ;C - - J - - 0x010D4A 08:8D3A: A4 F9
 	LDA tbl_08_8D49,Y               ;C - - - - - 0x010D4C 08:8D3C: B9 49 8D
 	STA ptr_06                      ;C - - - - - 0x010D4F 08:8D3F: 85 06
 	LDA tbl_08_8D4D,Y               ;C - - - - - 0x010D51 08:8D41: B9 4D 8D
@@ -1317,7 +1317,7 @@ ofs_08_8D6F:
 loc_08_8D82:
 	RTS                             ;C - - - - - 0x010D92 08:8D82: 60
 ofs_08_8D83:
-	LDY ram_00F9                    ;C - - J - - 0x010D93 08:8D83: A4 F9
+	LDY scrollXPage                 ;C - - J - - 0x010D93 08:8D83: A4 F9
 	LDA tbl_08_8D92,Y               ;C - - - - - 0x010D95 08:8D85: B9 92 8D
 	STA ptr_06                      ;C - - - - - 0x010D98 08:8D88: 85 06
 	LDA tbl_08_8D95,Y               ;C - - - - - 0x010D9A 08:8D8A: B9 95 8D
@@ -1516,7 +1516,7 @@ loc_08_9056:
 	TAX                             ;C - - - - - 0x0110C7 08:90B7: AA
 	LDA tbl_08_964B,X               ;C - - - - - 0x0110C8 08:90B8: BD 4B 96
 	STA objX,Y                      ;C - - - - - 0x0110CB 08:90BB: 99 60 03
-	LDA ram_00F9                    ;C - - - - - 0x0110CE 08:90BE: A5 F9
+	LDA scrollXPage                 ;C - - - - - 0x0110CE 08:90BE: A5 F9
 	CLC                             ;C - - - - - 0x0110D0 08:90C0: 18
 	ADC tbl_08_966B,X               ;C - - - - - 0x0110D1 08:90C1: 7D 6B 96
 	STA objXPage,Y                  ;C - - - - - 0x0110D4 08:90C4: 99 80 03
@@ -1632,7 +1632,7 @@ loc_08_9174:
 	STA ptr_04                      ;C - - - - - 0x0111A6 08:9196: 85 04
 	LDA tbl_08_938B,Y               ;C - - - - - 0x0111A8 08:9198: B9 8B 93
 	STA ptr_04+1                    ;C - - - - - 0x0111AB 08:919B: 85 05
-	LDY ram_00F9                    ;C - - - - - 0x0111AD 08:919D: A4 F9
+	LDY scrollXPage                 ;C - - - - - 0x0111AD 08:919D: A4 F9
 	LDA (ptr_04),Y                  ;C - - - - - 0x0111AF 08:919F: B1 04
 	CLC                             ;C - - - - - 0x0111B1 08:91A1: 18
 	ADC ptr_00+1                    ;C - - - - - 0x0111B2 08:91A2: 65 01
@@ -2215,13 +2215,13 @@ tbl_08_9770:
 	.hibytes ofs_08_977F, ofs_08_9788, tbl_08_97B4, ofs_08_97CE, ofs_08_97FA, tbl_08_982F, ofs_08_9849, ofs_08_9875;- D 0 - - - 0x011780 08:9770:
 	.hibytes tbl_08_98A1, ofs_08_98BB, tbl_08_98E7, ofs_08_9901, ofs_08_9947, ofs_08_9973, ofs_08_999F;- - - - - - 0x011788 08:9778:
 ofs_08_977F:
-	LDY ram_00F9                    ;C - - J - - 0x01178F 08:977F: A4 F9
+	LDY scrollXPage                 ;C - - J - - 0x01178F 08:977F: A4 F9
 	LDA tbl_08_99C2,Y               ;C - - - - - 0x011791 08:9781: B9 C2 99
 	JSR sub_09_A000                 ;C - - - - - bank=09 0x011794 08:9784: 20 00 A0
 ofs_08_9787:
 	RTS                             ;C - - - - - 0x011797 08:9787: 60
 ofs_08_9788:
-	LDY ram_00F9                    ;C - - J - - 0x011798 08:9788: A4 F9
+	LDY scrollXPage                 ;C - - J - - 0x011798 08:9788: A4 F9
 	LDA tbl_08_9797,Y               ;C - - - - - 0x01179A 08:978A: B9 97 97
 	STA ptr_06                      ;C - - - - - 0x01179D 08:978D: 85 06
 	LDA tbl_08_979B,Y               ;C - - - - - 0x01179F 08:978F: B9 9B 97
@@ -2249,7 +2249,7 @@ tbl_08_97B4:
 	.byte $85,$06,$B9,$C5,$97,$85,$07,$6C,$06,$00,$87,$C7,$97,$97,$B9,$CA;- - - - - - 0x0117C9 08:97B9:
 	.byte $99,$20,$00,$A0,$60       ;- - - - - - 0x0117D9 08:97C9:
 ofs_08_97CE:
-	LDY ram_00F9                    ;C - - J - - 0x0117DE 08:97CE: A4 F9
+	LDY scrollXPage                 ;C - - J - - 0x0117DE 08:97CE: A4 F9
 	LDA tbl_08_97DD,Y               ;C - - - - - 0x0117E0 08:97D0: B9 DD 97
 	STA ptr_06                      ;C - - - - - 0x0117E3 08:97D3: 85 06
 	LDA tbl_08_97E1,Y               ;C - - - - - 0x0117E5 08:97D5: B9 E1 97
@@ -2272,7 +2272,7 @@ ofs_08_97F3:
 	JSR sub_09_A000                 ;c - - - - - bank=09 0x011806 08:97F6: 20 00 A0
 	RTS                             ;c - - - - - 0x011809 08:97F9: 60
 ofs_08_97FA:
-	LDY ram_00F9                    ;C - - J - - 0x01180A 08:97FA: A4 F9
+	LDY scrollXPage                 ;C - - J - - 0x01180A 08:97FA: A4 F9
 	LDA tbl_08_9809,Y               ;C - - - - - 0x01180C 08:97FC: B9 09 98
 	STA ptr_06                      ;C - - - - - 0x01180F 08:97FF: 85 06
 	LDA tbl_08_980E,Y               ;C - - - - - 0x011811 08:9801: B9 0E 98
@@ -2305,7 +2305,7 @@ tbl_08_982F:
 tbl_08_983E:
 	.byte $87,$42,$97,$98,$B9,$D5,$99,$20,$00,$A0,$60;- - - - - - 0x01184E 08:983E:
 ofs_08_9849:
-	LDY ram_00F9                    ;C - - J - - 0x011859 08:9849: A4 F9
+	LDY scrollXPage                 ;C - - J - - 0x011859 08:9849: A4 F9
 	LDA tbl_08_9858,Y               ;C - - - - - 0x01185B 08:984B: B9 58 98
 	STA ptr_06                      ;C - - - - - 0x01185E 08:984E: 85 06
 	LDA tbl_08_985C,Y               ;C - - - - - 0x011860 08:9850: B9 5C 98
@@ -2328,7 +2328,7 @@ ofs_08_986E:
 	JSR sub_09_A000                 ;c - - - - - bank=09 0x011881 08:9871: 20 00 A0
 	RTS                             ;c - - - - - 0x011884 08:9874: 60
 ofs_08_9875:
-	LDY ram_00F9                    ;C - - J - - 0x011885 08:9875: A4 F9
+	LDY scrollXPage                 ;C - - J - - 0x011885 08:9875: A4 F9
 	LDA tbl_08_9884,Y               ;C - - - - - 0x011887 08:9877: B9 84 98
 	STA ptr_06                      ;C - - - - - 0x01188A 08:987A: 85 06
 	LDA tbl_08_9888,Y               ;C - - - - - 0x01188C 08:987C: B9 88 98
@@ -2358,7 +2358,7 @@ tbl_08_98A1:
 tbl_08_98B0:
 	.byte $87,$B4,$97,$98,$B9,$E4,$99,$20,$00,$A0,$60;- - - - - - 0x0118C0 08:98B0:
 ofs_08_98BB:
-	LDY ram_00F9                    ;C - - J - - 0x0118CB 08:98BB: A4 F9
+	LDY scrollXPage                 ;C - - J - - 0x0118CB 08:98BB: A4 F9
 	LDA tbl_08_98CA,Y               ;C - - - - - 0x0118CD 08:98BD: B9 CA 98
 	STA ptr_06                      ;C - - - - - 0x0118D0 08:98C0: 85 06
 	LDA tbl_08_98CE,Y               ;C - - - - - 0x0118D2 08:98C2: B9 CE 98
@@ -2390,7 +2390,7 @@ tbl_08_98F6:
 	.byte $B9                       ;- - - - - - 0x01190A 08:98FA:
 	.byte $ED,$99,$20,$00,$A0,$60   ;- - - - - - 0x01190B 08:98FB:
 ofs_08_9901:
-	LDY ram_00F9                    ;C - - J - - 0x011911 08:9901: A4 F9
+	LDY scrollXPage                 ;C - - J - - 0x011911 08:9901: A4 F9
 	LDA tbl_08_9910,Y               ;C - - - - - 0x011913 08:9903: B9 10 99
 	STA ptr_06                      ;C - - - - - 0x011916 08:9906: 85 06
 	LDA tbl_08_9914,Y               ;C - - - - - 0x011918 08:9908: B9 14 99
@@ -2416,7 +2416,7 @@ tbl_08_9926:
 tbl_08_993C:
 	.byte $87,$40,$97,$99,$B9,$F5,$99,$20,$00,$A0,$60;- - - - - - 0x01194C 08:993C:
 ofs_08_9947:
-	LDY ram_00F9                    ;C - - J - - 0x011957 08:9947: A4 F9
+	LDY scrollXPage                 ;C - - J - - 0x011957 08:9947: A4 F9
 	LDA tbl_08_9956,Y               ;C - - - - - 0x011959 08:9949: B9 56 99
 	STA ptr_06                      ;C - - - - - 0x01195C 08:994C: 85 06
 	LDA tbl_08_995A,Y               ;C - - - - - 0x01195E 08:994E: B9 5A 99
@@ -2439,7 +2439,7 @@ ofs_08_996C:
 	JSR sub_09_A000                 ;c - - - - - bank=09 0x01197F 08:996F: 20 00 A0
 	RTS                             ;c - - - - - 0x011982 08:9972: 60
 ofs_08_9973:
-	LDY ram_00F9                    ;C - - J - - 0x011983 08:9973: A4 F9
+	LDY scrollXPage                 ;C - - J - - 0x011983 08:9973: A4 F9
 	LDA tbl_08_9982,Y               ;C - - - - - 0x011985 08:9975: B9 82 99
 	STA ptr_06                      ;C - - - - - 0x011988 08:9978: 85 06
 	LDA tbl_08_9986,Y               ;C - - - - - 0x01198A 08:997A: B9 86 99
@@ -2462,7 +2462,7 @@ ofs_08_9998:
 	JSR sub_09_A000                 ;c - - - - - bank=09 0x0119AB 08:999B: 20 00 A0
 	RTS                             ;c - - - - - 0x0119AE 08:999E: 60
 ofs_08_999F:
-	LDY ram_00F9                    ;C - - J - - 0x0119AF 08:999F: A4 F9
+	LDY scrollXPage                 ;C - - J - - 0x0119AF 08:999F: A4 F9
 	LDA tbl_08_99AE,Y               ;C - - - - - 0x0119B1 08:99A1: B9 AE 99
 	STA ptr_06                      ;C - - - - - 0x0119B4 08:99A4: 85 06
 	LDA tbl_08_99B1,Y               ;C - - - - - 0x0119B6 08:99A6: B9 B1 99

@@ -465,7 +465,7 @@ sub_03_B331:
 	LDY #$01                        ;C - - - - - 0x00734C 03:B33C: A0 01
 	JSR sub_0F_F0F7                 ;C - - - - - 0x00734E 03:B33E: 20 F7 F0
 	BCC loc_03_B363                 ;C - - - - - 0x007351 03:B341: 90 20
-	LDA ram_0010                    ;C - - - - - 0x007353 03:B343: A5 10
+	LDA spriteFlipMask              ;C - - - - - 0x007353 03:B343: A5 10
 	AND #$10                        ;C - - - - - 0x007355 03:B345: 29 10
 	BEQ loc_03_B363                 ;C - - - - - 0x007357 03:B347: F0 1A
 	STA ptr_0E+1                    ;C - - - - - 0x007359 03:B349: 85 0F
@@ -477,7 +477,7 @@ loc_03_B34D:
 	LDY #$00                        ;C - - - - - 0x007364 03:B354: A0 00
 	JSR sub_0F_F0A2                 ;C - - - - - 0x007366 03:B356: 20 A2 F0
 	BCC loc_03_B363                 ;C - - - - - 0x007369 03:B359: 90 08
-	LDA ram_0010                    ;C - - - - - 0x00736B 03:B35B: A5 10
+	LDA spriteFlipMask              ;C - - - - - 0x00736B 03:B35B: A5 10
 	AND #$10                        ;C - - - - - 0x00736D 03:B35D: 29 10
 	BEQ loc_03_B363                 ;C - - - - - 0x00736F 03:B35F: F0 02
 	STA ptr_0E+1                    ;C - - - - - 0x007371 03:B361: 85 0F
@@ -488,7 +488,7 @@ loc_03_B363:
 	LDY #$00                        ;C - - - - - 0x00737A 03:B36A: A0 00
 	JSR sub_0F_F000                 ;C - - - - - 0x00737C 03:B36C: 20 00 F0
 	BCC loc_03_B37B                 ;C - - - - - 0x00737F 03:B36F: 90 0A
-	LDA ram_0010                    ;c - - - - - 0x007381 03:B371: A5 10
+	LDA spriteFlipMask              ;c - - - - - 0x007381 03:B371: A5 10
 	AND #$10                        ;c - - - - - 0x007383 03:B373: 29 10
 	BEQ loc_03_B38F                 ;c - - - - - 0x007385 03:B375: F0 18
 	STA ptr_0E+1                    ;c - - - - - 0x007387 03:B377: 85 0F
@@ -500,7 +500,7 @@ loc_03_B37B:
 	LDY #$01                        ;C - - - - - 0x007392 03:B382: A0 01
 	JSR sub_0F_F051                 ;C - - - - - 0x007394 03:B384: 20 51 F0
 	BCC loc_03_B38F                 ;C - - - - - 0x007397 03:B387: 90 06
-	LDA ram_0010                    ;c - - - - - 0x007399 03:B389: A5 10
+	LDA spriteFlipMask              ;c - - - - - 0x007399 03:B389: A5 10
 	AND #$10                        ;c - - - - - 0x00739B 03:B38B: 29 10
 	STA ptr_0E+1                    ;c - - - - - 0x00739D 03:B38D: 85 0F
 loc_03_B38F:
@@ -2036,7 +2036,7 @@ loc_03_BFA6:
 loc_03_BFB0:
 	JSR ApplyVelXSub                ;C - - - - - 0x007FC0 03:BFB0: 20 A1 F1
 	LDA objXPage,X                  ;C - - - - - 0x007FC3 03:BFB3: BD 80 03
-	CMP ram_00F9                    ;C - - - - - 0x007FC6 03:BFB6: C5 F9
+	CMP scrollXPage                 ;C - - - - - 0x007FC6 03:BFB6: C5 F9
 	BNE loc_03_BFBB                 ;C - - - - - 0x007FC8 03:BFB8: D0 01
 	RTS                             ;C - - - - - 0x007FCA 03:BFBA: 60
 loc_03_BFBB:

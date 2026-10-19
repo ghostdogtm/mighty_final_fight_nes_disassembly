@@ -752,7 +752,7 @@ ofs_04_8ED4:
 	LDA #$02                        ;C - - - - - 0x008EF8 04:8EE8: A9 02
 	STA objVelXHi                   ;C - - - - - 0x008EFA 04:8EEA: 8D 10 04
 loc_04_8EED:
-	LDA ram_0095                    ;C - - - - - 0x008EFD 04:8EED: A5 95
+	LDA drawOrderToggle             ;C - - - - - 0x008EFD 04:8EED: A5 95
 	AND #$07                        ;C - - - - - 0x008EFF 04:8EEF: 29 07
 	BNE loc_04_8EF8                 ;C - - - - - 0x008F01 04:8EF1: D0 05
 	LDA #$13                        ;C - - - - - 0x008F03 04:8EF3: A9 13

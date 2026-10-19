@@ -52,7 +52,7 @@ loc_0F_E03B:
 	LDA #$00                        ;C - - - - - 0x01E077 0F:E067: A9 00
 	STA objYPage                    ;C - - - - - 0x01E079 0F:E069: 8D E0 03
 	STA objKind                     ;C - - - - - 0x01E07C 0F:E06C: 8D 20 03
-	LDA ram_00F9                    ;C - - - - - 0x01E07F 0F:E06F: A5 F9
+	LDA scrollXPage                 ;C - - - - - 0x01E07F 0F:E06F: A5 F9
 	STA objXPage                    ;C - - - - - 0x01E081 0F:E071: 8D 80 03
 	JSR sub_0F_F26E                 ;C - - - - - 0x01E084 0F:E074: 20 6E F2
 	JSR sub_0E_C8B4                 ;C - - - - - 0x01E087 0F:E077: 20 B4 C8
@@ -168,7 +168,7 @@ sub_0F_E143:
 	STA scrollY                     ;C - - - - - 0x01E157 0F:E147: 85 FA
 	STA nametableSelect             ;C - - - - - 0x01E159 0F:E149: 85 FD
 	STA ram_00FB                    ;C - - - - - 0x01E15B 0F:E14B: 85 FB
-	STA ram_00F9                    ;C - - - - - 0x01E15D 0F:E14D: 85 F9
+	STA scrollXPage                 ;C - - - - - 0x01E15D 0F:E14D: 85 F9
 	STA renderOffCount              ;C - - - - - 0x01E15F 0F:E14F: 85 EE
 	LDA #$01                        ;C - - - - - 0x01E161 0F:E151: A9 01
 	STA ram_0031                    ;C - - - - - 0x01E163 0F:E153: 85 31
@@ -408,7 +408,7 @@ loc_0F_E2C7:
 	JMP loc_0F_E473                 ;c - - - - - 0x01E2DD 0F:E2CD: 4C 73 E4
 loc_0F_E2D0:
 	LDA #$01                        ;C - - - - - 0x01E2E0 0F:E2D0: A9 01
-	STA ram_0010                    ;C - - - - - 0x01E2E2 0F:E2D2: 85 10
+	STA spriteFlipMask              ;C - - - - - 0x01E2E2 0F:E2D2: 85 10
 	STA ram_002E                    ;C - - - - - 0x01E2E4 0F:E2D4: 85 2E
 	LDA objX                        ;C - - - - - 0x01E2E6 0F:E2D6: AD 60 03
 	SEC                             ;C - - - - - 0x01E2E9 0F:E2D9: 38
@@ -444,7 +444,7 @@ loc_0F_E307:
 	STA ptr_00+1                    ;C - - - - - 0x01E31D 0F:E30D: 85 01
 loc_0F_E30F:
 	LDA #$02                        ;C - - - - - 0x01E31F 0F:E30F: A9 02
-	STA ram_0010                    ;C - - - - - 0x01E321 0F:E311: 85 10
+	STA spriteFlipMask              ;C - - - - - 0x01E321 0F:E311: 85 10
 	STA ram_002E                    ;C - - - - - 0x01E323 0F:E313: 85 2E
 	LDA ptr_00                      ;C - - - - - 0x01E325 0F:E315: A5 00
 	CMP #$80                        ;C - - - - - 0x01E327 0F:E317: C9 80
@@ -476,7 +476,7 @@ loc_0F_E335:
 	CLC                             ;C - - - - - 0x01E355 0F:E345: 18
 	ADC ptr_0E+1                    ;C - - - - - 0x01E356 0F:E346: 65 0F
 	STA objX                        ;C - - - - - 0x01E358 0F:E348: 8D 60 03
-	LDA ram_00F9                    ;C - - - - - 0x01E35B 0F:E34B: A5 F9
+	LDA scrollXPage                 ;C - - - - - 0x01E35B 0F:E34B: A5 F9
 	ADC #$00                        ;C - - - - - 0x01E35D 0F:E34D: 69 00
 	STA objXPage                    ;C - - - - - 0x01E35F 0F:E34F: 8D 80 03
 loc_0F_E352:
@@ -635,7 +635,7 @@ loc_0F_E463:
 	STA ram_00BB                    ;C - - - - - 0x01E477 0F:E467: 85 BB
 	LDA #$00                        ;C - - - - - 0x01E479 0F:E469: A9 00
 	STA scrollX                     ;C - - - - - 0x01E47B 0F:E46B: 85 FC
-	INC ram_00F9                    ;C - - - - - 0x01E47D 0F:E46D: E6 F9
+	INC scrollXPage                 ;C - - - - - 0x01E47D 0F:E46D: E6 F9
 loc_0F_E46F:
 	JMP loc_0F_E4DF                 ;C - - - - - 0x01E47F 0F:E46F: 4C DF E4
 	.byte $60                       ;- - - - - - 0x01E482 0F:E472:
@@ -713,7 +713,7 @@ loc_0F_E4EB:
 	LDA ram_0023                    ;C - - - - - 0x01E4FF 0F:E4EF: A5 23
 	AND #$0C                        ;C - - - - - 0x01E501 0F:E4F1: 29 0C
 	BEQ loc_0F_E506                 ;C - - - - - 0x01E503 0F:E4F3: F0 11
-	LDA ram_0010                    ;c - - - - - 0x01E505 0F:E4F5: A5 10
+	LDA spriteFlipMask              ;c - - - - - 0x01E505 0F:E4F5: A5 10
 	STA ram_0023                    ;c - - - - - 0x01E507 0F:E4F7: 85 23
 	AND #$01                        ;c - - - - - 0x01E509 0F:E4F9: 29 01
 	TAX                             ;c - - - - - 0x01E50B 0F:E4FB: AA
@@ -722,7 +722,7 @@ loc_0F_E4EB:
 	LDA tbl_0F_E60D,X               ;c - - - - - 0x01E511 0F:E501: BD 0D E6
 	STA ram_0024                    ;c - - - - - 0x01E514 0F:E504: 85 24
 loc_0F_E506:
-	LDA ram_0010                    ;C - - - - - 0x01E516 0F:E506: A5 10
+	LDA spriteFlipMask              ;C - - - - - 0x01E516 0F:E506: A5 10
 	AND #$01                        ;C - - - - - 0x01E518 0F:E508: 29 01
 	BEQ loc_0F_E511                 ;C - - - - - 0x01E51A 0F:E50A: F0 05
 	LDA ram_0025                    ;C - - - - - 0x01E51C 0F:E50C: A5 25
@@ -742,7 +742,7 @@ loc_0F_E51F:
 	SEC                             ;C - - - - - 0x01E52F 0F:E51F: 38
 	RTS                             ;C - - - - - 0x01E530 0F:E520: 60
 sub_0F_E521:
-	LDA ram_0010                    ;C - - - - - 0x01E531 0F:E521: A5 10
+	LDA spriteFlipMask              ;C - - - - - 0x01E531 0F:E521: A5 10
 	PHA                             ;C - - - - - 0x01E533 0F:E523: 48
 	AND #$01                        ;C - - - - - 0x01E534 0F:E524: 29 01
 	TAX                             ;C - - - - - 0x01E536 0F:E526: AA
@@ -781,7 +781,7 @@ loc_0F_E560:
 	JSR sub_0F_E60F                 ;C - - - - - 0x01E570 0F:E560: 20 0F E6
 	LDY ram_0028                    ;C - - - - - 0x01E573 0F:E563: A4 28
 	LDA ram_0640,Y                  ;C - - - - - 0x01E575 0F:E565: B9 40 06
-	STA ram_0011                    ;C - - - - - 0x01E578 0F:E568: 85 11
+	STA spritePriorityBit           ;C - - - - - 0x01E578 0F:E568: 85 11
 	LDA ram_0024                    ;C - - - - - 0x01E57A 0F:E56A: A5 24
 	AND #$03                        ;C - - - - - 0x01E57C 0F:E56C: 29 03
 	TAY                             ;C - - - - - 0x01E57E 0F:E56E: A8
@@ -801,12 +801,12 @@ loc_0F_E58F:
 	LDA ram_0024                    ;C - - - - - 0x01E59F 0F:E58F: A5 24
 	AND #$01                        ;C - - - - - 0x01E5A1 0F:E591: 29 01
 	BEQ loc_0F_E5BE                 ;C - - - - - 0x01E5A3 0F:E593: F0 29
-	LDA ram_0010                    ;C - - - - - 0x01E5A5 0F:E595: A5 10
+	LDA spriteFlipMask              ;C - - - - - 0x01E5A5 0F:E595: A5 10
 	AND tbl_0F_E603,Y               ;C - - - - - 0x01E5A7 0F:E597: 39 03 E6
-	STA ram_0010                    ;C - - - - - 0x01E5AA 0F:E59A: 85 10
-	LDA ram_0011                    ;C - - - - - 0x01E5AC 0F:E59C: A5 11
+	STA spriteFlipMask              ;C - - - - - 0x01E5AA 0F:E59A: 85 10
+	LDA spritePriorityBit           ;C - - - - - 0x01E5AC 0F:E59C: A5 11
 	AND tbl_0F_E607,Y               ;C - - - - - 0x01E5AE 0F:E59E: 39 07 E6
-	ORA ram_0010                    ;C - - - - - 0x01E5B1 0F:E5A1: 05 10
+	ORA spriteFlipMask              ;C - - - - - 0x01E5B1 0F:E5A1: 05 10
 	STA vramQueue+27,X              ;C - - - - - 0x01E5B3 0F:E5A3: 9D 9B 07
 	LDY ram_0028                    ;C - - - - - 0x01E5B6 0F:E5A6: A4 28
 	STA ram_0640,Y                  ;C - - - - - 0x01E5B8 0F:E5A8: 99 40 06
@@ -876,7 +876,7 @@ sub_0F_E60F:
 	LDY #$03                        ;C - - - - - 0x01E622 0F:E612: A0 03
 	STY ptr_02                      ;C - - - - - 0x01E624 0F:E614: 84 02
 	LDA #$00                        ;C - - - - - 0x01E626 0F:E616: A9 00
-	STA ram_0010                    ;C - - - - - 0x01E628 0F:E618: 85 10
+	STA spriteFlipMask              ;C - - - - - 0x01E628 0F:E618: 85 10
 loc_0F_E61A:
 	LDY ptr_02                      ;C - - - - - 0x01E62A 0F:E61A: A4 02
 	LDX tbl_0F_E64F,Y               ;C - - - - - 0x01E62C 0F:E61C: BE 4F E6
@@ -892,12 +892,12 @@ loc_0F_E61A:
 	STA ram_06C5,X                  ;C - - - - - 0x01E647 0F:E637: 9D C5 06
 	LDA $BF00,Y                     ;C - - - - - 0x01E64A 0F:E63A: B9 00 BF
 	AND #$03                        ;C - - - - - 0x01E64D 0F:E63D: 29 03
-	ORA ram_0010                    ;C - - - - - 0x01E64F 0F:E63F: 05 10
-	STA ram_0010                    ;C - - - - - 0x01E651 0F:E641: 85 10
+	ORA spriteFlipMask              ;C - - - - - 0x01E64F 0F:E63F: 05 10
+	STA spriteFlipMask              ;C - - - - - 0x01E651 0F:E641: 85 10
 	DEC ptr_02                      ;C - - - - - 0x01E653 0F:E643: C6 02
 	BMI loc_0F_E64E                 ;C - - - - - 0x01E655 0F:E645: 30 07
-	ASL ram_0010                    ;C - - - - - 0x01E657 0F:E647: 06 10
-	ASL ram_0010                    ;C - - - - - 0x01E659 0F:E649: 06 10
+	ASL spriteFlipMask              ;C - - - - - 0x01E657 0F:E647: 06 10
+	ASL spriteFlipMask              ;C - - - - - 0x01E659 0F:E649: 06 10
 	JMP loc_0F_E61A                 ;C - - - - - 0x01E65B 0F:E64B: 4C 1A E6
 loc_0F_E64E:
 	RTS                             ;C - - - - - 0x01E65E 0F:E64E: 60
@@ -1379,55 +1379,57 @@ tbl_0F_E9B0:
 	.byte $73,$73,$73,$73,$73,$74   ;- D 3 - I - 0x01E9C0 0F:E9B0:
 tbl_0F_E9B6:
 	.byte $73,$73,$73,$73,$73,$73   ;- D 3 - I - 0x01E9C6 0F:E9B6:
-sub_0F_E9BC:
+; slots 15,14 first; then slots 0-15 ascending / 13-0 descending, alternating every frame (flicker order)
+DrawObjects:
 	LDX #$0F                        ;C - - - - - 0x01E9CC 0F:E9BC: A2 0F
 	LDA objActive,X                 ;C - - - - - 0x01E9CE 0F:E9BE: BD 00 03
 	BPL loc_0F_E9C6                 ;C - - - - - 0x01E9D1 0F:E9C1: 10 03
-	JSR sub_0F_E9FE                 ;C - - - - - 0x01E9D3 0F:E9C3: 20 FE E9
+	JSR DrawObject                  ;C - - - - - 0x01E9D3 0F:E9C3: 20 FE E9
 loc_0F_E9C6:
 	DEX                             ;C - - - - - 0x01E9D6 0F:E9C6: CA
 	LDA objActive,X                 ;C - - - - - 0x01E9D7 0F:E9C7: BD 00 03
 	BPL loc_0F_E9CF                 ;C - - - - - 0x01E9DA 0F:E9CA: 10 03
-	JSR sub_0F_E9FE                 ;C - - - - - 0x01E9DC 0F:E9CC: 20 FE E9
+	JSR DrawObject                  ;C - - - - - 0x01E9DC 0F:E9CC: 20 FE E9
 loc_0F_E9CF:
-	INC ram_0095                    ;C - - - - - 0x01E9DF 0F:E9CF: E6 95
-	LDA ram_0095                    ;C - - - - - 0x01E9E1 0F:E9D1: A5 95
+	INC drawOrderToggle             ;C - - - - - 0x01E9DF 0F:E9CF: E6 95
+	LDA drawOrderToggle             ;C - - - - - 0x01E9E1 0F:E9D1: A5 95
 	LSR A                           ;C - - - - - 0x01E9E3 0F:E9D3: 4A
 	BCS loc_0F_E9EB                 ;C - - - - - 0x01E9E4 0F:E9D4: B0 15
 	LDX #$00                        ;C - - - - - 0x01E9E6 0F:E9D6: A2 00
-	STX ram_0096                    ;C - - - - - 0x01E9E8 0F:E9D8: 86 96
+	STX drawSlot                    ;C - - - - - 0x01E9E8 0F:E9D8: 86 96
 loc_0F_E9DA:
 	LDA objActive,X                 ;C - - - - - 0x01E9EA 0F:E9DA: BD 00 03
 	BPL loc_0F_E9E2                 ;C - - - - - 0x01E9ED 0F:E9DD: 10 03
-	JSR sub_0F_E9FE                 ;C - - - - - 0x01E9EF 0F:E9DF: 20 FE E9
+	JSR DrawObject                  ;C - - - - - 0x01E9EF 0F:E9DF: 20 FE E9
 loc_0F_E9E2:
-	INC ram_0096                    ;C - - - - - 0x01E9F2 0F:E9E2: E6 96
-	LDX ram_0096                    ;C - - - - - 0x01E9F4 0F:E9E4: A6 96
+	INC drawSlot                    ;C - - - - - 0x01E9F2 0F:E9E2: E6 96
+	LDX drawSlot                    ;C - - - - - 0x01E9F4 0F:E9E4: A6 96
 	CPX #$10                        ;C - - - - - 0x01E9F6 0F:E9E6: E0 10
 	BNE loc_0F_E9DA                 ;C - - - - - 0x01E9F8 0F:E9E8: D0 F0
 	RTS                             ;C - - - - - 0x01E9FA 0F:E9EA: 60
 loc_0F_E9EB:
 	LDX #$0D                        ;C - - - - - 0x01E9FB 0F:E9EB: A2 0D
-	STX ram_0096                    ;C - - - - - 0x01E9FD 0F:E9ED: 86 96
+	STX drawSlot                    ;C - - - - - 0x01E9FD 0F:E9ED: 86 96
 loc_0F_E9EF:
 	LDA objActive,X                 ;C - - - - - 0x01E9FF 0F:E9EF: BD 00 03
 	BPL loc_0F_E9F7                 ;C - - - - - 0x01EA02 0F:E9F2: 10 03
-	JSR sub_0F_E9FE                 ;C - - - - - 0x01EA04 0F:E9F4: 20 FE E9
+	JSR DrawObject                  ;C - - - - - 0x01EA04 0F:E9F4: 20 FE E9
 loc_0F_E9F7:
-	DEC ram_0096                    ;C - - - - - 0x01EA07 0F:E9F7: C6 96
-	LDX ram_0096                    ;C - - - - - 0x01EA09 0F:E9F9: A6 96
+	DEC drawSlot                    ;C - - - - - 0x01EA07 0F:E9F7: C6 96
+	LDX drawSlot                    ;C - - - - - 0x01EA09 0F:E9F9: A6 96
 	BPL loc_0F_E9EF                 ;C - - - - - 0x01EA0B 0F:E9FB: 10 F2
 	RTS                             ;C - - - - - 0x01EA0D 0F:E9FD: 60
-sub_0F_E9FE:
+; X = slot; objFlags: bit4 = world coords (subtract scroll), bit7 = on screen, bit2 = hidden, bit5 = sprite priority
+DrawObject:
 	LDA objFlags,X                  ;C - - - - - 0x01EA0E 0F:E9FE: BD 60 05
 	AND #$10                        ;C - - - - - 0x01EA11 0F:EA01: 29 10
 	BEQ loc_0F_EA58                 ;C - - - - - 0x01EA13 0F:EA03: F0 53
 	LDA objX,X                      ;C - - - - - 0x01EA15 0F:EA05: BD 60 03
 	SEC                             ;C - - - - - 0x01EA18 0F:EA08: 38
 	SBC scrollX                     ;C - - - - - 0x01EA19 0F:EA09: E5 FC
-	STA ram_0013                    ;C - - - - - 0x01EA1B 0F:EA0B: 85 13
+	STA spriteBaseX                 ;C - - - - - 0x01EA1B 0F:EA0B: 85 13
 	LDA objXPage,X                  ;C - - - - - 0x01EA1D 0F:EA0D: BD 80 03
-	SBC ram_00F9                    ;C - - - - - 0x01EA20 0F:EA10: E5 F9
+	SBC scrollXPage                 ;C - - - - - 0x01EA20 0F:EA10: E5 F9
 	BNE loc_0F_EA24                 ;C - - - - - 0x01EA22 0F:EA12: D0 10
 	LDA objYPage,X                  ;C - - - - - 0x01EA24 0F:EA14: BD E0 03
 	BEQ loc_0F_EA5D                 ;C - - - - - 0x01EA27 0F:EA17: F0 44
@@ -1437,7 +1439,7 @@ sub_0F_E9FE:
 	BMI loc_0F_EA30                 ;c - - - - - 0x01EA30 0F:EA20: 30 0E
 	BPL loc_0F_EA30                 ;c - - - - - 0x01EA32 0F:EA22: 10 0C
 loc_0F_EA24:
-	LDA ram_0013                    ;C - - - - - 0x01EA34 0F:EA24: A5 13
+	LDA spriteBaseX                 ;C - - - - - 0x01EA34 0F:EA24: A5 13
 	BCS loc_0F_EA2C                 ;C - - - - - 0x01EA36 0F:EA26: B0 04
 	EOR #$FF                        ;C - - - - - 0x01EA38 0F:EA28: 49 FF
 	ADC #$01                        ;C - - - - - 0x01EA3A 0F:EA2A: 69 01
@@ -1445,7 +1447,7 @@ loc_0F_EA2C:
 	CMP #$68                        ;C - - - - - 0x01EA3C 0F:EA2C: C9 68
 	BCC loc_0F_EA34                 ;C - - - - - 0x01EA3E 0F:EA2E: 90 04
 loc_0F_EA30:
-	JSR sub_0F_EC33                 ;C - - - - - 0x01EA40 0F:EA30: 20 33 EC
+	JSR DrawObjectOffscreen         ;C - - - - - 0x01EA40 0F:EA30: 20 33 EC
 	RTS                             ;C - - - - - 0x01EA43 0F:EA33: 60
 loc_0F_EA34:
 	CMP #$00                        ;C - - - - - 0x01EA44 0F:EA34: C9 00
@@ -1467,10 +1469,10 @@ loc_0F_EA4D:
 	JMP loc_0F_EA6F                 ;C - - - - - 0x01EA65 0F:EA55: 4C 6F EA
 loc_0F_EA58:
 	LDA objX,X                      ;C - - - - - 0x01EA68 0F:EA58: BD 60 03
-	STA ram_0013                    ;C - - - - - 0x01EA6B 0F:EA5B: 85 13
+	STA spriteBaseX                 ;C - - - - - 0x01EA6B 0F:EA5B: 85 13
 loc_0F_EA5D:
 	LDA objY,X                      ;C - - - - - 0x01EA6D 0F:EA5D: BD C0 03
-	STA ram_0012                    ;C - - - - - 0x01EA70 0F:EA60: 85 12
+	STA spriteBaseY                 ;C - - - - - 0x01EA70 0F:EA60: 85 12
 	LDA objFlags,X                  ;C - - - - - 0x01EA72 0F:EA62: BD 60 05
 	ORA #$80                        ;C - - - - - 0x01EA75 0F:EA65: 09 80
 	STA objFlags,X                  ;C - - - - - 0x01EA77 0F:EA67: 9D 60 05
@@ -1478,9 +1480,10 @@ loc_0F_EA5D:
 	BEQ loc_0F_EA6F                 ;C - - - - - 0x01EA7C 0F:EA6C: F0 01
 loc_0F_EA6E:
 	RTS                             ;C - - - - - 0x01EA7E 0F:EA6E: 60
+; 
 loc_0F_EA6F:
 	LDY objKind,X                   ;C - - - - - 0x01EA7F 0F:EA6F: BC 20 03
-	LDA tbl_0F_EB93,Y               ;C - - - - - 0x01EA82 0F:EA72: B9 93 EB
+	LDA animBankTable,Y             ;C - - - - - 0x01EA82 0F:EA72: B9 93 EB
 	STA prgBank8000                 ;C - - - - - 0x01EA85 0F:EA75: 85 F4
 	CLC                             ;C - - - - - 0x01EA87 0F:EA77: 18
 	ADC #$01                        ;C - - - - - 0x01EA88 0F:EA78: 69 01
@@ -1493,10 +1496,10 @@ loc_0F_EA6F:
 	PHA                             ;C - - - - - 0x01EA98 0F:EA88: 48
 	AND #$40                        ;C - - - - - 0x01EA99 0F:EA89: 29 40
 ofs_0F_EA8B:
-	STA ram_0010                    ;C - - - - - 0x01EA9B 0F:EA8B: 85 10
+	STA spriteFlipMask              ;C - - - - - 0x01EA9B 0F:EA8B: 85 10
 	PLA                             ;C - - - - - 0x01EA9D 0F:EA8D: 68
 	AND #$20                        ;C - - - - - 0x01EA9E 0F:EA8E: 29 20
-	STA ram_0011                    ;C - - - - - 0x01EAA0 0F:EA90: 85 11
+	STA spritePriorityBit           ;C - - - - - 0x01EAA0 0F:EA90: 85 11
 	LDA objAnim,X                   ;C - - - - - 0x01EAA2 0F:EA92: BD 80 05
 	BEQ loc_0F_EA6E                 ;C - - - - - 0x01EAA5 0F:EA95: F0 D7
 	AND #$7F                        ;C - - - - - 0x01EAA7 0F:EA97: 29 7F
@@ -1542,6 +1545,7 @@ loc_0F_EADC:
 	JMP loc_0F_EC81                 ;C - - - - - 0x01EAFC 0F:EAEC: 4C 81 EC
 loc_0F_EAEF:
 	RTS                             ;C - - - - - 0x01EAFF 0F:EAEF: 60
+; the offset table ($B100/$B200 + index) holds (dy, dx) per sprite.
 loc_0F_EAF0:
 	TAY                             ;C - - - - - 0x01EB00 0F:EAF0: A8
 	LDA $8100,Y                     ;C - - - - - 0x01EB01 0F:EAF1: B9 00 81
@@ -1584,7 +1588,7 @@ loc_0F_EB30:
 	INY                             ;C - - - - - 0x01EB44 0F:EB34: C8
 	LDA (ptr_02),Y                  ;C - - - - - 0x01EB45 0F:EB35: B1 02
 	STA oamBuffer+1,X               ;C - - - - - 0x01EB47 0F:EB37: 9D 01 02
-	LDA ram_0012                    ;C - - - - - 0x01EB4A 0F:EB3A: A5 12
+	LDA spriteBaseY                 ;C - - - - - 0x01EB4A 0F:EB3A: A5 12
 	CLC                             ;C - - - - - 0x01EB4C 0F:EB3C: 18
 	ADC (ptr_04+1),Y                ;C - - - - - 0x01EB4D 0F:EB3D: 71 05
 	STA oamBuffer,X                 ;C - - - - - 0x01EB4F 0F:EB3F: 9D 00 02
@@ -1600,19 +1604,19 @@ loc_0F_EB4C:
 	BCS loc_0F_EB8B                 ;C - - - - - 0x01EB61 0F:EB51: B0 38
 	INY                             ;C - - - - - 0x01EB63 0F:EB53: C8
 	LDA (ptr_02),Y                  ;C - - - - - 0x01EB64 0F:EB54: B1 02
-	EOR ram_0010                    ;C - - - - - 0x01EB66 0F:EB56: 45 10
-	ORA ram_0011                    ;C - - - - - 0x01EB68 0F:EB58: 05 11
+	EOR spriteFlipMask              ;C - - - - - 0x01EB66 0F:EB56: 45 10
+	ORA spritePriorityBit           ;C - - - - - 0x01EB68 0F:EB58: 05 11
 	STA oamBuffer+2,X               ;C - - - - - 0x01EB6A 0F:EB5A: 9D 02 02
 	LDA (ptr_04+1),Y                ;C - - - - - 0x01EB6D 0F:EB5D: B1 05
 	STA ptr_00+1                    ;C - - - - - 0x01EB6F 0F:EB5F: 85 01
-	LDA ram_0010                    ;C - - - - - 0x01EB71 0F:EB61: A5 10
+	LDA spriteFlipMask              ;C - - - - - 0x01EB71 0F:EB61: A5 10
 	BEQ loc_0F_EB6C                 ;C - - - - - 0x01EB73 0F:EB63: F0 07
 	LDA #$F8                        ;C - - - - - 0x01EB75 0F:EB65: A9 F8
 	SEC                             ;C - - - - - 0x01EB77 0F:EB67: 38
 	SBC ptr_00+1                    ;C - - - - - 0x01EB78 0F:EB68: E5 01
 	STA ptr_00+1                    ;C - - - - - 0x01EB7A 0F:EB6A: 85 01
 loc_0F_EB6C:
-	LDA ram_0013                    ;C - - - - - 0x01EB7C 0F:EB6C: A5 13
+	LDA spriteBaseX                 ;C - - - - - 0x01EB7C 0F:EB6C: A5 13
 	CLC                             ;C - - - - - 0x01EB7E 0F:EB6E: 18
 	ADC ptr_00+1                    ;C - - - - - 0x01EB7F 0F:EB6F: 65 01
 	STA oamBuffer+3,X               ;C - - - - - 0x01EB81 0F:EB71: 9D 03 02
@@ -1640,7 +1644,8 @@ loc_0F_EB8C:
 	LDA #$F8                        ;C - - - - - 0x01EB9C 0F:EB8C: A9 F8
 	STA oamBuffer,X                 ;C - - - - - 0x01EB9E 0F:EB8E: 9D 00 02
 	BNE loc_0F_EB86                 ;C - - - - - 0x01EBA1 0F:EB91: D0 F3
-tbl_0F_EB93:
+; objKind -> PRG bank at $8000 for its animation data ($0A or $02; +1 goes to $A000)
+animBankTable:
 	.byte $0A,$0A,$02,$02,$02,$02,$02,$02,$02,$0A;- D 3 - - - 0x01EBA3 0F:EB93:
 	.byte $0A,$0A,$0A,$0A           ;- - - - - - 0x01EBAD 0F:EB9D:
 	.byte $02,$02,$0A               ;- D 3 - - - 0x01EBB1 0F:EBA1:
@@ -1692,7 +1697,8 @@ tbl_0F_EBEC:
 	.byte $02                       ;- D 3 - - - 0x01EC3E 0F:EC2E:
 	.byte $02                       ;- - - - - - 0x01EC3F 0F:EC2F:
 	.byte $02,$02,$02               ;- D 3 - - - 0x01EC40 0F:EC30:
-sub_0F_EC33:
+; object is off screen: removes it (or ignores it on stage 3 section 1)
+DrawObjectOffscreen:
 	LDA stage                       ;C - - - - - 0x01EC43 0F:EC33: A5 61
 	CMP #$03                        ;C - - - - - 0x01EC45 0F:EC35: C9 03
 	BNE loc_0F_EC41                 ;C - - - - - 0x01EC47 0F:EC37: D0 08
@@ -1712,7 +1718,7 @@ loc_0F_EC43:
 	BNE loc_0F_EC43                 ;C - - - - - 0x01EC60 0F:EC50: D0 F1
 	RTS                             ;c - - - - - 0x01EC62 0F:EC52: 60
 loc_0F_EC53:
-	LDA ram_00F9                    ;c - - - - - 0x01EC63 0F:EC53: A5 F9
+	LDA scrollXPage                 ;c - - - - - 0x01EC63 0F:EC53: A5 F9
 	SEC                             ;c - - - - - 0x01EC65 0F:EC55: 38
 	SBC objXPage,X                  ;c - - - - - 0x01EC66 0F:EC56: FD 80 03
 	BMI loc_0F_EC6E                 ;c - - - - - 0x01EC69 0F:EC59: 30 13
@@ -1777,11 +1783,11 @@ sub_0F_ECCF:
 	PHA                             ;C - - - - - 0x01ECF5 0F:ECE5: 48
 	CLC                             ;C - - - - - 0x01ECF6 0F:ECE6: 18
 	ADC objY,X                      ;C - - - - - 0x01ECF7 0F:ECE7: 7D C0 03
-	STA ram_0011                    ;C - - - - - 0x01ECFA 0F:ECEA: 85 11
+	STA spritePriorityBit           ;C - - - - - 0x01ECFA 0F:ECEA: 85 11
 	PLA                             ;C - - - - - 0x01ECFC 0F:ECEC: 68
 	BMI loc_0F_ECF9                 ;C - - - - - 0x01ECFD 0F:ECED: 30 0A
 	BCS loc_0F_ECFB                 ;C - - - - - 0x01ECFF 0F:ECEF: B0 0A
-	LDA ram_0011                    ;C - - - - - 0x01ED01 0F:ECF1: A5 11
+	LDA spritePriorityBit           ;C - - - - - 0x01ED01 0F:ECF1: A5 11
 	CMP #$F0                        ;C - - - - - 0x01ED03 0F:ECF3: C9 F0
 	BCS loc_0F_ECFB                 ;C - - - - - 0x01ED05 0F:ECF5: B0 04
 	BCC loc_0F_ED08                 ;C - - - - - 0x01ED07 0F:ECF7: 90 0F
@@ -1798,7 +1804,7 @@ loc_0F_ECFF:
 loc_0F_ED08:
 	LDA ptr_02+1                    ;C - - - - - 0x01ED18 0F:ED08: A5 03
 	BNE loc_0F_ECFB                 ;C - - - - - 0x01ED1A 0F:ED0A: D0 EF
-	LDA ram_0011                    ;C - - - - - 0x01ED1C 0F:ED0C: A5 11
+	LDA spritePriorityBit           ;C - - - - - 0x01ED1C 0F:ED0C: A5 11
 	LSR A                           ;C - - - - - 0x01ED1E 0F:ED0E: 4A
 	LSR A                           ;C - - - - - 0x01ED1F 0F:ED0F: 4A
 	PHA                             ;C - - - - - 0x01ED20 0F:ED10: 48
@@ -1818,11 +1824,11 @@ loc_0F_ED08:
 loc_0F_ED29:
 	CLC                             ;C - - - - - 0x01ED39 0F:ED29: 18
 	ADC objX,X                      ;C - - - - - 0x01ED3A 0F:ED2A: 7D 60 03
-	STA ram_0012                    ;C - - - - - 0x01ED3D 0F:ED2D: 85 12
+	STA spriteBaseY                 ;C - - - - - 0x01ED3D 0F:ED2D: 85 12
 	LDA objXPage,X                  ;C - - - - - 0x01ED3F 0F:ED2F: BD 80 03
 	ADC ptr_04                      ;C - - - - - 0x01ED42 0F:ED32: 65 04
-	STA ram_0013                    ;C - - - - - 0x01ED44 0F:ED34: 85 13
-	LDA ram_0012                    ;C - - - - - 0x01ED46 0F:ED36: A5 12
+	STA spriteBaseX                 ;C - - - - - 0x01ED44 0F:ED34: 85 13
+	LDA spriteBaseY                 ;C - - - - - 0x01ED46 0F:ED36: A5 12
 	LSR A                           ;C - - - - - 0x01ED48 0F:ED38: 4A
 	LSR A                           ;C - - - - - 0x01ED49 0F:ED39: 4A
 	LSR A                           ;C - - - - - 0x01ED4A 0F:ED3A: 4A
@@ -1842,7 +1848,7 @@ loc_0F_ED49:
 	STA prgBankA000                 ;C - - - - - 0x01ED60 0F:ED50: 85 F5
 	JSR SetPrgBanks                 ;C - - - - - 0x01ED62 0F:ED52: 20 4D FF
 	LDX ptr_04                      ;C - - - - - 0x01ED65 0F:ED55: A6 04
-	LDY ram_0013                    ;C - - - - - 0x01ED67 0F:ED57: A4 13
+	LDY spriteBaseX                 ;C - - - - - 0x01ED67 0F:ED57: A4 13
 	JSR sub_0F_E66E                 ;C - - - - - 0x01ED69 0F:ED59: 20 6E E6
 loc_0F_ED5C:
 	JSR sub_0F_E653                 ;C - - - - - 0x01ED6C 0F:ED5C: 20 53 E6
@@ -1858,20 +1864,20 @@ loc_0F_ED5F:
 	BCC loc_0F_ED74                 ;C - - - - - 0x01ED80 0F:ED70: 90 02
 	STA ram_0041                    ;C - - - - - 0x01ED82 0F:ED72: 85 41
 loc_0F_ED74:
-	ORA ram_0010                    ;C - - - - - 0x01ED84 0F:ED74: 05 10
-	STA ram_0010                    ;C - - - - - 0x01ED86 0F:ED76: 85 10
+	ORA spriteFlipMask              ;C - - - - - 0x01ED84 0F:ED74: 05 10
+	STA spriteFlipMask              ;C - - - - - 0x01ED86 0F:ED76: 85 10
 	DEC ptr_02                      ;C - - - - - 0x01ED88 0F:ED78: C6 02
 	BMI loc_0F_EDB3                 ;C - - - - - 0x01ED8A 0F:ED7A: 30 37
 	INC ram_0040                    ;C - - - - - 0x01ED8C 0F:ED7C: E6 40
 	LDY ram_0040                    ;C - - - - - 0x01ED8E 0F:ED7E: A4 40
-	LDA ram_0012                    ;C - - - - - 0x01ED90 0F:ED80: A5 12
+	LDA spriteBaseY                 ;C - - - - - 0x01ED90 0F:ED80: A5 12
 	PHA                             ;C - - - - - 0x01ED92 0F:ED82: 48
 	AND #$10                        ;C - - - - - 0x01ED93 0F:ED83: 29 10
 	STA ptr_04                      ;C - - - - - 0x01ED95 0F:ED85: 85 04
 	PLA                             ;C - - - - - 0x01ED97 0F:ED87: 68
 	CLC                             ;C - - - - - 0x01ED98 0F:ED88: 18
 	ADC tbl_0F_EEF8,Y               ;C - - - - - 0x01ED99 0F:ED89: 79 F8 EE
-	STA ram_0012                    ;C - - - - - 0x01ED9C 0F:ED8C: 85 12
+	STA spriteBaseY                 ;C - - - - - 0x01ED9C 0F:ED8C: 85 12
 	AND #$10                        ;C - - - - - 0x01ED9E 0F:ED8E: 29 10
 	CMP ptr_04                      ;C - - - - - 0x01EDA0 0F:ED90: C5 04
 	BEQ loc_0F_ED5F                 ;C - - - - - 0x01EDA2 0F:ED92: F0 CB
@@ -1884,7 +1890,7 @@ loc_0F_ED74:
 	LDA ram_0028                    ;C - - - - - 0x01EDB0 0F:EDA0: A5 28
 	AND #$07                        ;C - - - - - 0x01EDB2 0F:EDA2: 29 07
 	BNE loc_0F_ED5C                 ;C - - - - - 0x01EDB4 0F:EDA4: D0 B6
-	INC ram_0013                    ;C - - - - - 0x01EDB6 0F:EDA6: E6 13
+	INC spriteBaseX                 ;C - - - - - 0x01EDB6 0F:EDA6: E6 13
 	DEC ram_0028                    ;C - - - - - 0x01EDB8 0F:EDA8: C6 28
 	LDA ram_0028                    ;C - - - - - 0x01EDBA 0F:EDAA: A5 28
 	AND #$38                        ;C - - - - - 0x01EDBC 0F:EDAC: 29 38
@@ -1910,11 +1916,11 @@ sub_0F_EDBA:
 loc_0F_EDD3:
 	CLC                             ;C - - - - - 0x01EDE3 0F:EDD3: 18
 	ADC objX,X                      ;C - - - - - 0x01EDE4 0F:EDD4: 7D 60 03
-	STA ram_0012                    ;C - - - - - 0x01EDE7 0F:EDD7: 85 12
+	STA spriteBaseY                 ;C - - - - - 0x01EDE7 0F:EDD7: 85 12
 	LDA objXPage,X                  ;C - - - - - 0x01EDE9 0F:EDD9: BD 80 03
 	ADC ptr_04                      ;C - - - - - 0x01EDEC 0F:EDDC: 65 04
-	STA ram_0013                    ;C - - - - - 0x01EDEE 0F:EDDE: 85 13
-	LDA ram_0012                    ;C - - - - - 0x01EDF0 0F:EDE0: A5 12
+	STA spriteBaseX                 ;C - - - - - 0x01EDEE 0F:EDDE: 85 13
+	LDA spriteBaseY                 ;C - - - - - 0x01EDF0 0F:EDE0: A5 12
 	LSR A                           ;C - - - - - 0x01EDF2 0F:EDE2: 4A
 	LSR A                           ;C - - - - - 0x01EDF3 0F:EDE3: 4A
 	LSR A                           ;C - - - - - 0x01EDF4 0F:EDE4: 4A
@@ -1932,7 +1938,7 @@ ofs_0F_EDED:
 	LDA objY,X                      ;C - - - - - 0x01EE06 0F:EDF6: BD C0 03
 	CLC                             ;C - - - - - 0x01EE09 0F:EDF9: 18
 	ADC tbl_0F_EF2F,Y               ;C - - - - - 0x01EE0A 0F:EDFA: 79 2F EF
-	STA ram_0011                    ;C - - - - - 0x01EE0D 0F:EDFD: 85 11
+	STA spritePriorityBit           ;C - - - - - 0x01EE0D 0F:EDFD: 85 11
 	LDA tbl_0F_EF2F,Y               ;C - - - - - 0x01EE0F 0F:EDFF: B9 2F EF
 	BPL loc_0F_EE08                 ;C - - - - - 0x01EE12 0F:EE02: 10 04
 	BCC loc_0F_EE18                 ;C - - - - - 0x01EE14 0F:EE04: 90 12
@@ -1940,27 +1946,27 @@ ofs_0F_EDED:
 loc_0F_EE08:
 	BCS loc_0F_EE12                 ;c - - - - - 0x01EE18 0F:EE08: B0 08
 loc_0F_EE0A:
-	LDA ram_0011                    ;C - - - - - 0x01EE1A 0F:EE0A: A5 11
+	LDA spritePriorityBit           ;C - - - - - 0x01EE1A 0F:EE0A: A5 11
 	CMP #$F0                        ;C - - - - - 0x01EE1C 0F:EE0C: C9 F0
 	BCC loc_0F_EE43                 ;C - - - - - 0x01EE1E 0F:EE0E: 90 33
 	BCS loc_0F_EE08                 ;c - - - - - 0x01EE20 0F:EE10: B0 F6
 loc_0F_EE12:
 	LDA #$EF                        ;c - - - - - 0x01EE22 0F:EE12: A9 EF
-	STA ram_0011                    ;c - - - - - 0x01EE24 0F:EE14: 85 11
+	STA spritePriorityBit           ;c - - - - - 0x01EE24 0F:EE14: 85 11
 	BNE loc_0F_EE43                 ;c - - - - - 0x01EE26 0F:EE16: D0 2B
 loc_0F_EE18:
 	LDA #$00                        ;c - - - - - 0x01EE28 0F:EE18: A9 00
-	STA ram_0011                    ;c - - - - - 0x01EE2A 0F:EE1A: 85 11
+	STA spritePriorityBit           ;c - - - - - 0x01EE2A 0F:EE1A: 85 11
 	BEQ loc_0F_EE43                 ;c - - - - - 0x01EE2C 0F:EE1C: F0 25
 loc_0F_EE1E:
-	LDA ram_0011                    ;c - - - - - 0x01EE2E 0F:EE1E: A5 11
+	LDA spritePriorityBit           ;c - - - - - 0x01EE2E 0F:EE1E: A5 11
 	CLC                             ;c - - - - - 0x01EE30 0F:EE20: 18
 	ADC tbl_0F_EF2F,Y               ;c - - - - - 0x01EE31 0F:EE21: 79 2F EF
-	STA ram_0011                    ;c - - - - - 0x01EE34 0F:EE24: 85 11
+	STA spritePriorityBit           ;c - - - - - 0x01EE34 0F:EE24: 85 11
 	CMP #$F0                        ;c - - - - - 0x01EE36 0F:EE26: C9 F0
 	BCC loc_0F_EE32                 ;c - - - - - 0x01EE38 0F:EE28: 90 08
 	ADC #$10                        ;c - - - - - 0x01EE3A 0F:EE2A: 69 10
-	STA ram_0011                    ;c - - - - - 0x01EE3C 0F:EE2C: 85 11
+	STA spritePriorityBit           ;c - - - - - 0x01EE3C 0F:EE2C: 85 11
 	INC ptr_04                      ;c - - - - - 0x01EE3E 0F:EE2E: E6 04
 	BEQ loc_0F_EE43                 ;c - - - - - 0x01EE40 0F:EE30: F0 11
 loc_0F_EE32:
@@ -1973,7 +1979,7 @@ loc_0F_EE32:
 	BPL loc_0F_EE1E                 ;c - - - - - 0x01EE4E 0F:EE3E: 10 DE
 	JMP loc_0F_EEDF                 ;c - - - - - 0x01EE50 0F:EE40: 4C DF EE
 loc_0F_EE43:
-	LDA ram_0011                    ;C - - - - - 0x01EE53 0F:EE43: A5 11
+	LDA spritePriorityBit           ;C - - - - - 0x01EE53 0F:EE43: A5 11
 	LSR A                           ;C - - - - - 0x01EE55 0F:EE45: 4A
 	LSR A                           ;C - - - - - 0x01EE56 0F:EE46: 4A
 	PHA                             ;C - - - - - 0x01EE57 0F:EE47: 48
@@ -1991,7 +1997,7 @@ loc_0F_EE43:
 	STA prgBankA000                 ;C - - - - - 0x01EE6D 0F:EE5D: 85 F5
 	JSR SetPrgBanks                 ;C - - - - - 0x01EE6F 0F:EE5F: 20 4D FF
 	LDX ptr_04                      ;C - - - - - 0x01EE72 0F:EE62: A6 04
-	LDY ram_0013                    ;C - - - - - 0x01EE74 0F:EE64: A4 13
+	LDY spriteBaseX                 ;C - - - - - 0x01EE74 0F:EE64: A4 13
 	JSR sub_0F_E66E                 ;C - - - - - 0x01EE76 0F:EE66: 20 6E E6
 loc_0F_EE69:
 	JSR sub_0F_E653                 ;C - - - - - 0x01EE79 0F:EE69: 20 53 E6
@@ -2007,20 +2013,20 @@ loc_0F_EE6C:
 	BCC loc_0F_EE81                 ;C - - - - - 0x01EE8D 0F:EE7D: 90 02
 	STA ram_0041                    ;C - - - - - 0x01EE8F 0F:EE7F: 85 41
 loc_0F_EE81:
-	ORA ram_0010                    ;C - - - - - 0x01EE91 0F:EE81: 05 10
-	STA ram_0010                    ;C - - - - - 0x01EE93 0F:EE83: 85 10
+	ORA spriteFlipMask              ;C - - - - - 0x01EE91 0F:EE81: 05 10
+	STA spriteFlipMask              ;C - - - - - 0x01EE93 0F:EE83: 85 10
 	DEC ptr_02                      ;C - - - - - 0x01EE95 0F:EE85: C6 02
 	BMI loc_0F_EEBD                 ;C - - - - - 0x01EE97 0F:EE87: 30 34
 	INC ram_0040                    ;C - - - - - 0x01EE99 0F:EE89: E6 40
 	LDY ram_0040                    ;C - - - - - 0x01EE9B 0F:EE8B: A4 40
-	LDA ram_0011                    ;C - - - - - 0x01EE9D 0F:EE8D: A5 11
+	LDA spritePriorityBit           ;C - - - - - 0x01EE9D 0F:EE8D: A5 11
 	PHA                             ;C - - - - - 0x01EE9F 0F:EE8F: 48
 	AND #$10                        ;C - - - - - 0x01EEA0 0F:EE90: 29 10
 	STA ptr_04                      ;C - - - - - 0x01EEA2 0F:EE92: 85 04
 	PLA                             ;C - - - - - 0x01EEA4 0F:EE94: 68
 	CLC                             ;C - - - - - 0x01EEA5 0F:EE95: 18
 	ADC tbl_0F_EF2F,Y               ;C - - - - - 0x01EEA6 0F:EE96: 79 2F EF
-	STA ram_0011                    ;C - - - - - 0x01EEA9 0F:EE99: 85 11
+	STA spritePriorityBit           ;C - - - - - 0x01EEA9 0F:EE99: 85 11
 	AND #$10                        ;C - - - - - 0x01EEAB 0F:EE9B: 29 10
 	CMP ptr_04                      ;C - - - - - 0x01EEAD 0F:EE9D: C5 04
 	BEQ loc_0F_EE6C                 ;C - - - - - 0x01EEAF 0F:EE9F: F0 CB
@@ -2049,7 +2055,7 @@ sub_0F_EEC4:
 	TXA                             ;C - - - - - 0x01EED5 0F:EEC5: 8A
 	PHA                             ;C - - - - - 0x01EED6 0F:EEC6: 48
 	LDA #$00                        ;C - - - - - 0x01EED7 0F:EEC7: A9 00
-	STA ram_0010                    ;C - - - - - 0x01EED9 0F:EEC9: 85 10
+	STA spriteFlipMask              ;C - - - - - 0x01EED9 0F:EEC9: 85 10
 	STA ram_0041                    ;C - - - - - 0x01EEDB 0F:EECB: 85 41
 	LDA prgBankA000                 ;C - - - - - 0x01EEDD 0F:EECD: A5 F5
 	STA ram_002F                    ;C - - - - - 0x01EEDF 0F:EECF: 85 2F
@@ -2096,19 +2102,19 @@ tbl_0F_EF2F:
 	.byte $01,$04,$FC,$04,$01,$FC,$FC,$04;- - - - - - 0x01EF55 0F:EF45:
 	.byte $01,$10,$F0,$20,$01,$F0,$F0,$20;- D 3 - - - 0x01EF5D 0F:EF4D:
 sub_0F_EF55:
-	LDA ram_0012                    ;C - - - - - 0x01EF65 0F:EF55: A5 12
+	LDA spriteBaseY                 ;C - - - - - 0x01EF65 0F:EF55: A5 12
 	AND #$0F                        ;C - - - - - 0x01EF67 0F:EF57: 29 0F
-	STA ram_0012                    ;C - - - - - 0x01EF69 0F:EF59: 85 12
+	STA spriteBaseY                 ;C - - - - - 0x01EF69 0F:EF59: 85 12
 	LDA objX,X                      ;C - - - - - 0x01EF6B 0F:EF5B: BD 60 03
 	SEC                             ;C - - - - - 0x01EF6E 0F:EF5E: 38
-	SBC ram_0012                    ;C - - - - - 0x01EF6F 0F:EF5F: E5 12
+	SBC spriteBaseY                 ;C - - - - - 0x01EF6F 0F:EF5F: E5 12
 	STA objX,X                      ;C - - - - - 0x01EF71 0F:EF61: 9D 60 03
 	LDA objXPage,X                  ;C - - - - - 0x01EF74 0F:EF64: BD 80 03
 	SBC #$00                        ;C - - - - - 0x01EF77 0F:EF67: E9 00
 	STA objXPage,X                  ;C - - - - - 0x01EF79 0F:EF69: 9D 80 03
 	RTS                             ;C - - - - - 0x01EF7C 0F:EF6C: 60
 sub_0F_EF6D:
-	LDA ram_0012                    ;C - - - - - 0x01EF7D 0F:EF6D: A5 12
+	LDA spriteBaseY                 ;C - - - - - 0x01EF7D 0F:EF6D: A5 12
 	AND #$0F                        ;C - - - - - 0x01EF7F 0F:EF6F: 29 0F
 	EOR #$0F                        ;C - - - - - 0x01EF81 0F:EF71: 49 0F
 	SEC                             ;C - - - - - 0x01EF83 0F:EF73: 38
@@ -2119,7 +2125,7 @@ sub_0F_EF6D:
 	STA objXPage,X                  ;C - - - - - 0x01EF8F 0F:EF7F: 9D 80 03
 	RTS                             ;C - - - - - 0x01EF92 0F:EF82: 60
 sub_0F_EF83:
-	LDA ram_0011                    ;C - - - - - 0x01EF93 0F:EF83: A5 11
+	LDA spritePriorityBit           ;C - - - - - 0x01EF93 0F:EF83: A5 11
 	AND #$0F                        ;C - - - - - 0x01EF95 0F:EF85: 29 0F
 	EOR #$0F                        ;C - - - - - 0x01EF97 0F:EF87: 49 0F
 	SEC                             ;C - - - - - 0x01EF99 0F:EF89: 38
@@ -2133,13 +2139,13 @@ sub_0F_EF83:
 loc_0F_EF9C:
 	RTS                             ;C - - - - - 0x01EFAC 0F:EF9C: 60
 sub_0F_EF9D:
-	LDA ram_0011                    ;C - - - - - 0x01EFAD 0F:EF9D: A5 11
+	LDA spritePriorityBit           ;C - - - - - 0x01EFAD 0F:EF9D: A5 11
 	PHA                             ;C - - - - - 0x01EFAF 0F:EF9F: 48
 	AND #$0F                        ;C - - - - - 0x01EFB0 0F:EFA0: 29 0F
-	STA ram_0011                    ;C - - - - - 0x01EFB2 0F:EFA2: 85 11
+	STA spritePriorityBit           ;C - - - - - 0x01EFB2 0F:EFA2: 85 11
 	LDA objY,X                      ;C - - - - - 0x01EFB4 0F:EFA4: BD C0 03
 	SEC                             ;C - - - - - 0x01EFB7 0F:EFA7: 38
-	SBC ram_0011                    ;C - - - - - 0x01EFB8 0F:EFA8: E5 11
+	SBC spritePriorityBit           ;C - - - - - 0x01EFB8 0F:EFA8: E5 11
 	STA objY,X                      ;C - - - - - 0x01EFBA 0F:EFAA: 9D C0 03
 	BCS loc_0F_EFB7                 ;C - - - - - 0x01EFBD 0F:EFAD: B0 08
 	SBC #$0F                        ;c - - - - - 0x01EFBF 0F:EFAF: E9 0F
@@ -2147,7 +2153,7 @@ sub_0F_EF9D:
 	DEC objYPage,X                  ;c - - - - - 0x01EFC4 0F:EFB4: DE E0 03
 loc_0F_EFB7:
 	PLA                             ;C - - - - - 0x01EFC7 0F:EFB7: 68
-	STA ram_0011                    ;C - - - - - 0x01EFC8 0F:EFB8: 85 11
+	STA spritePriorityBit           ;C - - - - - 0x01EFC8 0F:EFB8: 85 11
 	RTS                             ;C - - - - - 0x01EFCA 0F:EFBA: 60
 	.byte $00,$EC,$40,$25,$00,$01,$00,$10,$00,$00,$00,$02,$00,$01,$00,$00;- - - - - - 0x01EFCB 0F:EFBB:
 	.byte $01,$08,$40,$38,$00,$10,$01,$20,$00,$00,$40,$20,$00,$94,$10,$00;- - - - - - 0x01EFDB 0F:EFCB:
@@ -2167,7 +2173,7 @@ loc_0F_F011:
 	JSR ApplyVelXAdd                ;C - - - - - 0x01F021 0F:F011: 20 83 F1
 	JSR sub_0F_EDBA                 ;C - - - - - 0x01F024 0F:F014: 20 BA ED
 	CLC                             ;C - - - - - 0x01F027 0F:F017: 18
-	LDA ram_0010                    ;C - - - - - 0x01F028 0F:F018: A5 10
+	LDA spriteFlipMask              ;C - - - - - 0x01F028 0F:F018: A5 10
 	AND #$40                        ;C - - - - - 0x01F02A 0F:F01A: 29 40
 	BNE loc_0F_F025                 ;C - - - - - 0x01F02C 0F:F01C: D0 07
 	BEQ loc_0F_F024                 ;C - - - - - 0x01F02E 0F:F01E: F0 04
@@ -2179,7 +2185,7 @@ loc_0F_F024:
 loc_0F_F025:
 	CPX #$00                        ;C - - - - - 0x01F035 0F:F025: E0 00
 	BNE loc_0F_F020                 ;C - - - - - 0x01F037 0F:F027: D0 F7
-	LDA ram_0010                    ;c - - - - - 0x01F039 0F:F029: A5 10
+	LDA spriteFlipMask              ;c - - - - - 0x01F039 0F:F029: A5 10
 	CMP #$40                        ;c - - - - - 0x01F03B 0F:F02B: C9 40
 	BEQ loc_0F_F035                 ;c - - - - - 0x01F03D 0F:F02D: F0 06
 	CMP #$50                        ;c - - - - - 0x01F03F 0F:F02F: C9 50
@@ -2217,7 +2223,7 @@ loc_0F_F062:
 	JSR ApplyVelXSub                ;C - - - - - 0x01F072 0F:F062: 20 A1 F1
 	JSR sub_0F_EDBA                 ;C - - - - - 0x01F075 0F:F065: 20 BA ED
 	CLC                             ;C - - - - - 0x01F078 0F:F068: 18
-	LDA ram_0010                    ;C - - - - - 0x01F079 0F:F069: A5 10
+	LDA spriteFlipMask              ;C - - - - - 0x01F079 0F:F069: A5 10
 	AND #$40                        ;C - - - - - 0x01F07B 0F:F06B: 29 40
 	BNE loc_0F_F076                 ;C - - - - - 0x01F07D 0F:F06D: D0 07
 	BEQ loc_0F_F075                 ;C - - - - - 0x01F07F 0F:F06F: F0 04
@@ -2229,7 +2235,7 @@ loc_0F_F075:
 loc_0F_F076:
 	CPX #$00                        ;C - - - - - 0x01F086 0F:F076: E0 00
 	BNE loc_0F_F071                 ;C - - - - - 0x01F088 0F:F078: D0 F7
-	LDA ram_0010                    ;c - - - - - 0x01F08A 0F:F07A: A5 10
+	LDA spriteFlipMask              ;c - - - - - 0x01F08A 0F:F07A: A5 10
 	CMP #$40                        ;c - - - - - 0x01F08C 0F:F07C: C9 40
 	BEQ loc_0F_F086                 ;c - - - - - 0x01F08E 0F:F07E: F0 06
 	CMP #$50                        ;c - - - - - 0x01F090 0F:F080: C9 50
@@ -2264,7 +2270,7 @@ loc_0F_F0B0:
 	JSR ApplyVelYAdd                ;C - - - - - 0x01F0C0 0F:F0B0: 20 BF F1
 	JSR sub_0F_ECCF                 ;C - - - - - 0x01F0C3 0F:F0B3: 20 CF EC
 	CLC                             ;C - - - - - 0x01F0C6 0F:F0B6: 18
-	LDA ram_0010                    ;C - - - - - 0x01F0C7 0F:F0B7: A5 10
+	LDA spriteFlipMask              ;C - - - - - 0x01F0C7 0F:F0B7: A5 10
 	CMP #$10                        ;C - - - - - 0x01F0C9 0F:F0B9: C9 10
 	BNE loc_0F_F0C2                 ;C - - - - - 0x01F0CB 0F:F0BB: D0 05
 loc_0F_F0BD:
@@ -2315,7 +2321,7 @@ loc_0F_F105:
 	JSR sub_0F_F1DF                 ;C - - - - - 0x01F115 0F:F105: 20 DF F1
 	JSR sub_0F_ECCF                 ;C - - - - - 0x01F118 0F:F108: 20 CF EC
 	CLC                             ;C - - - - - 0x01F11B 0F:F10B: 18
-	LDA ram_0010                    ;C - - - - - 0x01F11C 0F:F10C: A5 10
+	LDA spriteFlipMask              ;C - - - - - 0x01F11C 0F:F10C: A5 10
 	CMP #$30                        ;C - - - - - 0x01F11E 0F:F10E: C9 30
 	BEQ loc_0F_F114                 ;C - - - - - 0x01F120 0F:F110: F0 02
 	BNE loc_0F_F118                 ;C - - - - - 0x01F122 0F:F112: D0 04
@@ -2340,7 +2346,7 @@ loc_0F_F127:
 	CPX #$00                        ;C - - - - - 0x01F145 0F:F135: E0 00
 	BNE loc_0F_F139                 ;C - - - - - 0x01F147 0F:F137: D0 00
 loc_0F_F139:
-	LDA ram_0010                    ;C - - - - - 0x01F149 0F:F139: A5 10
+	LDA spriteFlipMask              ;C - - - - - 0x01F149 0F:F139: A5 10
 	CMP #$10                        ;C - - - - - 0x01F14B 0F:F13B: C9 10
 	BEQ loc_0F_F146                 ;C - - - - - 0x01F14D 0F:F13D: F0 07
 	CMP #$40                        ;C - - - - - 0x01F14F 0F:F13F: C9 40
@@ -2356,7 +2362,7 @@ loc_0F_F14E:
 	JSR sub_0F_F22E                 ;C - - - - - 0x01F15F 0F:F14F: 20 2E F2
 	JSR ApplyGravity                ;C - - - - - 0x01F162 0F:F152: 20 4C F2
 	JSR sub_0F_ECCF                 ;C - - - - - 0x01F165 0F:F155: 20 CF EC
-	LDA ram_0010                    ;C - - - - - 0x01F168 0F:F158: A5 10
+	LDA spriteFlipMask              ;C - - - - - 0x01F168 0F:F158: A5 10
 	CMP #$30                        ;C - - - - - 0x01F16A 0F:F15A: C9 30
 	BEQ loc_0F_F16E                 ;C - - - - - 0x01F16C 0F:F15C: F0 10
 	CMP #$40                        ;C - - - - - 0x01F16E 0F:F15E: C9 40
@@ -2731,7 +2737,7 @@ sub_0F_F406:
 	LDA #$04                        ;C - - - - - 0x01F41E 0F:F40E: A9 04
 	STA oamHideStart                ;C - - - - - 0x01F420 0F:F410: 85 97
 	JSR HideSprites                 ;C - - - - - 0x01F422 0F:F412: 20 1D C3
-	JSR sub_0F_E9BC                 ;C - - - - - 0x01F425 0F:F415: 20 BC E9
+	JSR DrawObjects                 ;C - - - - - 0x01F425 0F:F415: 20 BC E9
 	LDA #$00                        ;C - - - - - 0x01F428 0F:F418: A9 00
 	STA nmiSkipFlag                 ;C - - - - - 0x01F42A 0F:F41A: 85 9A
 	JSR WaitFrame                   ;C - - - - - 0x01F42C 0F:F41C: 20 31 FF
@@ -3514,9 +3520,9 @@ loc_0F_F9DB:
 	RTS                             ;C - - - - - 0x01F9F4 0F:F9E4: 60
 sub_0F_F9E5:
 	LDA #$02                        ;C - - - - - 0x01F9F5 0F:F9E5: A9 02
-	STA ram_0010                    ;C - - - - - 0x01F9F7 0F:F9E7: 85 10
+	STA spriteFlipMask              ;C - - - - - 0x01F9F7 0F:F9E7: 85 10
 loc_0F_F9E9:
-	LDY ram_0010                    ;C - - - - - 0x01F9F9 0F:F9E9: A4 10
+	LDY spriteFlipMask              ;C - - - - - 0x01F9F9 0F:F9E9: A4 10
 	LDA objActive,Y                 ;C - - - - - 0x01F9FB 0F:F9EB: B9 00 03
 	BPL loc_0F_FA5D                 ;C - - - - - 0x01F9FE 0F:F9EE: 10 6D
 	LDA objFlags,Y                  ;C - - - - - 0x01FA00 0F:F9F0: B9 60 05
@@ -3590,9 +3596,9 @@ loc_0F_FA60:
 	JSR sub_0F_FA91                 ;C - - - - - 0x01FA8F 0F:FA7F: 20 91 FA
 	BCC loc_0F_FA90                 ;C - - - - - 0x01FA92 0F:FA82: 90 0C
 loc_0F_FA84:
-	DEC ram_0010                    ;C - - - - - 0x01FA94 0F:FA84: C6 10
+	DEC spriteFlipMask              ;C - - - - - 0x01FA94 0F:FA84: C6 10
 ofs_0F_FA86:
-	LDA ram_0010                    ;C - - - - - 0x01FA96 0F:FA86: A5 10
+	LDA spriteFlipMask              ;C - - - - - 0x01FA96 0F:FA86: A5 10
 	CMP #$00                        ;C - - - - - 0x01FA98 0F:FA88: C9 00
 	BEQ loc_0F_FA8F                 ;C - - - - - 0x01FA9A 0F:FA8A: F0 03
 	JMP loc_0F_F9E9                 ;C - - - - - 0x01FA9C 0F:FA8C: 4C E9 F9

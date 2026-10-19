@@ -312,12 +312,12 @@ Traced code (instruction starts, verify by hand):
   01:ADE8  BCS loc_01_ADEE
   01:ADEA  LDA #$0B
   01:ADEC  BNE loc_01_AE00
-  03:B371  LDA ram_0010
+  03:B371  LDA spriteFlipMask
   03:B373  AND #$10
   03:B375  BEQ loc_03_B38F
   03:B377  STA ptr_0E+1
   03:B379  BNE loc_03_B38F
-  03:B389  LDA ram_0010
+  03:B389  LDA spriteFlipMask
   03:B38B  AND #$10
   03:B38D  STA ptr_0E+1
   03:B45B  LDA #$00
@@ -1104,7 +1104,7 @@ Traced code (instruction starts, verify by hand):
   0F:E4E6  EOR #$FF
   0F:E4E8  CLC
   0F:E4E9  ADC #$01
-  0F:E4F5  LDA ram_0010
+  0F:E4F5  LDA spriteFlipMask
   0F:E4F7  STA ram_0023
   0F:E4F9  AND #$01
   0F:E4FB  TAX
@@ -1130,7 +1130,7 @@ Traced code (instruction starts, verify by hand):
   0F:EC3D  BNE loc_0F_EC41
   0F:EC3F  BEQ loc_0F_EC81
   0F:EC52  RTS
-  0F:EC53  LDA ram_00F9
+  0F:EC53  LDA scrollXPage
   0F:EC55  SEC
   0F:EC56  SBC objXPage,X
   0F:EC59  BMI loc_0F_EC6E
@@ -1161,19 +1161,19 @@ Traced code (instruction starts, verify by hand):
   0F:EE08  BCS loc_0F_EE12
   0F:EE10  BCS loc_0F_EE08
   0F:EE12  LDA #$EF
-  0F:EE14  STA ram_0011
+  0F:EE14  STA spritePriorityBit
   0F:EE16  BNE loc_0F_EE43
   0F:EE18  LDA #$00
-  0F:EE1A  STA ram_0011
+  0F:EE1A  STA spritePriorityBit
   0F:EE1C  BEQ loc_0F_EE43
-  0F:EE1E  LDA ram_0011
+  0F:EE1E  LDA spritePriorityBit
   0F:EE20  CLC
   0F:EE21  ADC tbl_0F_EF2F,Y
-  0F:EE24  STA ram_0011
+  0F:EE24  STA spritePriorityBit
   0F:EE26  CMP #$F0
   0F:EE28  BCC loc_0F_EE32
   0F:EE2A  ADC #$10
-  0F:EE2C  STA ram_0011
+  0F:EE2C  STA spritePriorityBit
   0F:EE2E  INC ptr_04
   0F:EE30  BEQ loc_0F_EE43
   0F:EE32  INY
@@ -1192,7 +1192,7 @@ Traced code (instruction starts, verify by hand):
   0F:EFAF  SBC #$0F
   0F:EFB1  STA objY,X
   0F:EFB4  DEC objYPage,X
-  0F:F029  LDA ram_0010
+  0F:F029  LDA spriteFlipMask
   0F:F02B  CMP #$40
   0F:F02D  BEQ loc_0F_F035
   0F:F02F  CMP #$50
@@ -1204,7 +1204,7 @@ Traced code (instruction starts, verify by hand):
   0F:F03A  JSR sub_0F_F0DC
   0F:F03D  CLC
   0F:F03E  RTS
-  0F:F07A  LDA ram_0010
+  0F:F07A  LDA spriteFlipMask
   0F:F07C  CMP #$40
   0F:F07E  BEQ loc_0F_F086
   0F:F080  CMP #$50

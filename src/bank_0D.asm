@@ -106,7 +106,7 @@ loc_0D_A0B7:
 	JSR ApplyVelXAdd                ;C - - - - - 0x01A0D3 0D:A0C3: 20 83 F1
 	LDY #$07                        ;C - - - - - 0x01A0D6 0D:A0C6: A0 07
 	JSR sub_0F_ECCF                 ;C - - - - - 0x01A0D8 0D:A0C8: 20 CF EC
-	LDA ram_0010                    ;C - - - - - 0x01A0DB 0D:A0CB: A5 10
+	LDA spriteFlipMask              ;C - - - - - 0x01A0DB 0D:A0CB: A5 10
 	AND #$40                        ;C - - - - - 0x01A0DD 0D:A0CD: 29 40
 	BEQ loc_0D_A0E0                 ;C - - - - - 0x01A0DF 0D:A0CF: F0 0F
 	RTS                             ;C - - - - - 0x01A0E1 0D:A0D1: 60
@@ -114,7 +114,7 @@ loc_0D_A0D2:
 	JSR ApplyVelXSub                ;C - - - - - 0x01A0E2 0D:A0D2: 20 A1 F1
 	LDY #$08                        ;C - - - - - 0x01A0E5 0D:A0D5: A0 08
 	JSR sub_0F_ECCF                 ;C - - - - - 0x01A0E7 0D:A0D7: 20 CF EC
-	LDA ram_0010                    ;C - - - - - 0x01A0EA 0D:A0DA: A5 10
+	LDA spriteFlipMask              ;C - - - - - 0x01A0EA 0D:A0DA: A5 10
 	AND #$40                        ;C - - - - - 0x01A0EC 0D:A0DC: 29 40
 	BNE loc_0D_A0B6                 ;C - - - - - 0x01A0EE 0D:A0DE: D0 D6
 loc_0D_A0E0:
@@ -1160,7 +1160,7 @@ sub_0D_A953:
 	LDY #$0A                        ;C - - - - - 0x01A970 0D:A960: A0 0A
 	JSR sub_0F_F0F7                 ;C - - - - - 0x01A972 0D:A962: 20 F7 F0
 	BCC loc_0D_A995                 ;C - - - - - 0x01A975 0D:A965: 90 2E
-	LDA ram_0010                    ;C - - - - - 0x01A977 0D:A967: A5 10
+	LDA spriteFlipMask              ;C - - - - - 0x01A977 0D:A967: A5 10
 	STA ptr_0E                      ;C - - - - - 0x01A979 0D:A969: 85 0E
 	AND #$50                        ;C - - - - - 0x01A97B 0D:A96B: 29 50
 	BEQ loc_0D_A995                 ;C - - - - - 0x01A97D 0D:A96D: F0 26
@@ -1174,7 +1174,7 @@ loc_0D_A976:
 	LDY #$09                        ;C - - - - - 0x01A98D 0D:A97D: A0 09
 	JSR sub_0F_F0A2                 ;C - - - - - 0x01A98F 0D:A97F: 20 A2 F0
 	BCC loc_0D_A995                 ;C - - - - - 0x01A992 0D:A982: 90 11
-	LDA ram_0010                    ;C - - - - - 0x01A994 0D:A984: A5 10
+	LDA spriteFlipMask              ;C - - - - - 0x01A994 0D:A984: A5 10
 	ORA ptr_0E                      ;C - - - - - 0x01A996 0D:A986: 05 0E
 	STA ptr_0E                      ;C - - - - - 0x01A998 0D:A988: 85 0E
 	AND #$50                        ;C - - - - - 0x01A99A 0D:A98A: 29 50
@@ -1189,7 +1189,7 @@ loc_0D_A995:
 	LDY #$08                        ;C - - - - - 0x01A9AC 0D:A99C: A0 08
 	JSR sub_0F_F000                 ;C - - - - - 0x01A9AE 0D:A99E: 20 00 F0
 	BCC loc_0D_A9B5                 ;C - - - - - 0x01A9B1 0D:A9A1: 90 12
-	LDA ram_0010                    ;C - - - - - 0x01A9B3 0D:A9A3: A5 10
+	LDA spriteFlipMask              ;C - - - - - 0x01A9B3 0D:A9A3: A5 10
 	ORA ptr_0E                      ;C - - - - - 0x01A9B5 0D:A9A5: 05 0E
 	STA ptr_0E                      ;C - - - - - 0x01A9B7 0D:A9A7: 85 0E
 	AND #$50                        ;C - - - - - 0x01A9B9 0D:A9A9: 29 50
@@ -1205,7 +1205,7 @@ loc_0D_A9B5:
 	LDY #$09                        ;C - - - - - 0x01A9CC 0D:A9BC: A0 09
 	JSR sub_0F_F051                 ;C - - - - - 0x01A9CE 0D:A9BE: 20 51 F0
 	BCC loc_0D_A9D3                 ;C - - - - - 0x01A9D1 0D:A9C1: 90 10
-	LDA ram_0010                    ;C - - - - - 0x01A9D3 0D:A9C3: A5 10
+	LDA spriteFlipMask              ;C - - - - - 0x01A9D3 0D:A9C3: A5 10
 	ORA ptr_0E                      ;C - - - - - 0x01A9D5 0D:A9C5: 05 0E
 	STA ptr_0E                      ;C - - - - - 0x01A9D7 0D:A9C7: 85 0E
 	AND #$50                        ;C - - - - - 0x01A9D9 0D:A9C9: 29 50
@@ -1236,7 +1236,7 @@ sub_0D_A9F6:
 	JSR sub_0C_9BE1                 ;C - - - - - bank=0C 0x01AA06 0D:A9F6: 20 E1 9B
 	LDY #$06                        ;C - - - - - 0x01AA09 0D:A9F9: A0 06
 	JSR sub_0F_ECCF                 ;C - - - - - 0x01AA0B 0D:A9FB: 20 CF EC
-	LDA ram_0010                    ;C - - - - - 0x01AA0E 0D:A9FE: A5 10
+	LDA spriteFlipMask              ;C - - - - - 0x01AA0E 0D:A9FE: A5 10
 	AND #$40                        ;C - - - - - 0x01AA10 0D:AA00: 29 40
 	BEQ loc_0D_AA1B                 ;C - - - - - 0x01AA12 0D:AA02: F0 17
 	LDA objKind,X                   ;C - - - - - 0x01AA14 0D:AA04: BD 20 03
@@ -1256,17 +1256,17 @@ sub_0D_AA1D:
 	JSR sub_0C_9BE1                 ;C - - - - - bank=0C 0x01AA2D 0D:AA1D: 20 E1 9B
 	LDY #$07                        ;C - - - - - 0x01AA30 0D:AA20: A0 07
 	JSR sub_0F_ECCF                 ;C - - - - - 0x01AA32 0D:AA22: 20 CF EC
-	LDA ram_0010                    ;C - - - - - 0x01AA35 0D:AA25: A5 10
+	LDA spriteFlipMask              ;C - - - - - 0x01AA35 0D:AA25: A5 10
 	AND #$40                        ;C - - - - - 0x01AA37 0D:AA27: 29 40
 	BNE loc_0D_AA49                 ;C - - - - - 0x01AA39 0D:AA29: D0 1E
 	LDY #$08                        ;C - - - - - 0x01AA3B 0D:AA2B: A0 08
 	JSR sub_0F_EDBA                 ;C - - - - - 0x01AA3D 0D:AA2D: 20 BA ED
-	LDA ram_0010                    ;C - - - - - 0x01AA40 0D:AA30: A5 10
+	LDA spriteFlipMask              ;C - - - - - 0x01AA40 0D:AA30: A5 10
 	AND #$40                        ;C - - - - - 0x01AA42 0D:AA32: 29 40
 	BNE loc_0D_AA45                 ;C - - - - - 0x01AA44 0D:AA34: D0 0F
 	LDY #$09                        ;C - - - - - 0x01AA46 0D:AA36: A0 09
 	JSR sub_0F_ECCF                 ;C - - - - - 0x01AA48 0D:AA38: 20 CF EC
-	LDA ram_0010                    ;C - - - - - 0x01AA4B 0D:AA3B: A5 10
+	LDA spriteFlipMask              ;C - - - - - 0x01AA4B 0D:AA3B: A5 10
 	AND #$40                        ;C - - - - - 0x01AA4D 0D:AA3D: 29 40
 	BNE loc_0D_AA55                 ;C - - - - - 0x01AA4F 0D:AA3F: D0 14
 	STA objArr_03D0,X               ;C - - - - - 0x01AA51 0D:AA41: 9D D0 03
