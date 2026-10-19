@@ -188,3 +188,6 @@ comment 0E:DEBC call into the switchable $8000 bank (bank depends on stage)
 06:81F1 SoundSilenceAll        ; silence channels not in the mask, enable channels via SNDCHN
 06:8252 SoundStreamTick        ; read command bytes of the current stream when its delay expires
 06:8386 SoundStreamByte        ; next byte from the stream at soundPtr
+06:8393 SoundChannelStep       ; per-channel step of a music stream (X = channel)
+06:83CD SoundNextNote          ; reads an event: <$20 command, >=$20 note (bits 7-5 duration, bits 4-0 pitch)
+06:8497 SoundCommand           ; stream command < $20 (jump table follows); see docs/sound_format.md

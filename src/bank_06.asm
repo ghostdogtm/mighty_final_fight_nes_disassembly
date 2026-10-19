@@ -107,7 +107,7 @@ loc_06_8099:
 	BNE loc_06_80A6                 ;C - - - - - 0x00C0AD 06:809D: D0 07
 	TXA                             ;C - - - - - 0x00C0AF 06:809F: 8A
 	PHA                             ;C - - - - - 0x00C0B0 06:80A0: 48
-	JSR sub_06_8393                 ;C - - - - - 0x00C0B1 06:80A1: 20 93 83
+	JSR SoundChannelStep            ;C - - - - - 0x00C0B1 06:80A1: 20 93 83
 	PLA                             ;C - - - - - 0x00C0B4 06:80A4: 68
 ofs_06_80A5:
 	TAX                             ;C - - - - - 0x00C0B5 06:80A5: AA
@@ -552,7 +552,8 @@ SoundStreamByte:
 	INC soundPtr+1                  ;C - - - - - 0x00C39E 06:838E: E6 D1
 loc_06_8390:
 	JMP SoundReadByte               ;C - - - - - 0x00C3A0 06:8390: 4C 3A 80
-sub_06_8393:
+; per-channel step of a music stream (X = channel)
+SoundChannelStep:
 	TXA                             ;C - - - - - 0x00C3A3 06:8393: 8A
 	ORA #$28                        ;C - - - - - 0x00C3A4 06:8394: 09 28
 	TAX                             ;C - - - - - 0x00C3A6 06:8396: AA
@@ -560,7 +561,7 @@ sub_06_8393:
 	ORA ram_072C,X                  ;C - - - - - 0x00C3AA 06:839A: 1D 2C 07
 	BEQ loc_06_83CC                 ;C - - - - - 0x00C3AD 06:839D: F0 2D
 	LDA ram_0738,X                  ;C - - - - - 0x00C3AF 06:839F: BD 38 07
-	BEQ loc_06_83CD                 ;C - - - - - 0x00C3B2 06:83A2: F0 29
+	BEQ SoundNextNote               ;C - - - - - 0x00C3B2 06:83A2: F0 29
 	LDY ram_0700,X                  ;C - - - - - 0x00C3B4 06:83A4: BC 00 07
 	BEQ loc_06_83AF                 ;C - - - - - 0x00C3B7 06:83A7: F0 06
 	JSR sub_06_8684                 ;C - - - - - 0x00C3B9 06:83A9: 20 84 86
@@ -579,16 +580,17 @@ loc_06_83BF:
 	SEC                             ;C - - - - - 0x00C3D2 06:83C2: 38
 	SBC ram_00C7                    ;C - - - - - 0x00C3D3 06:83C3: E5 C7
 	STA ram_0738,X                  ;C - - - - - 0x00C3D5 06:83C5: 9D 38 07
-	BEQ loc_06_83CD                 ;C - - - - - 0x00C3D8 06:83C8: F0 03
-	BCC loc_06_83CD                 ;C - - - - - 0x00C3DA 06:83CA: 90 01
+	BEQ SoundNextNote               ;C - - - - - 0x00C3D8 06:83C8: F0 03
+	BCC SoundNextNote               ;C - - - - - 0x00C3DA 06:83CA: 90 01
 loc_06_83CC:
 	RTS                             ;C - - - - - 0x00C3DC 06:83CC: 60
-loc_06_83CD:
+; reads an event: <$20 command, >=$20 note (bits 7-5 duration, bits 4-0 pitch)
+SoundNextNote:
 	JSR sub_06_8592                 ;C - - - - - 0x00C3DD 06:83CD: 20 92 85
 	CMP #$20                        ;C - - - - - 0x00C3E0 06:83D0: C9 20
 	BCS loc_06_83DA                 ;C - - - - - 0x00C3E2 06:83D2: B0 06
-	JSR sub_06_8497                 ;C - - - - - 0x00C3E4 06:83D4: 20 97 84
-	JMP loc_06_83CD                 ;C - - - - - 0x00C3E7 06:83D7: 4C CD 83
+	JSR SoundCommand                ;C - - - - - 0x00C3E4 06:83D4: 20 97 84
+	JMP SoundNextNote               ;C - - - - - 0x00C3E7 06:83D7: 4C CD 83
 loc_06_83DA:
 	PHA                             ;C - - - - - 0x00C3EA 06:83DA: 48
 	ROL A                           ;C - - - - - 0x00C3EB 06:83DB: 2A
@@ -697,7 +699,8 @@ loc_06_8491:
 	STA ram_0740,X                  ;C - - - - - 0x00C4A3 06:8493: 9D 40 07
 loc_06_8496:
 	RTS                             ;C - - - - - 0x00C4A6 06:8496: 60
-sub_06_8497:
+; stream command < $20 (jump table follows); see docs/sound_format.md
+SoundCommand:
 	CMP #$04                        ;C - - - - - 0x00C4A7 06:8497: C9 04
 	BCC loc_06_84A4                 ;C - - - - - 0x00C4A9 06:8499: 90 09
 	STA ram_00C4                    ;C - - - - - 0x00C4AB 06:849B: 85 C4
