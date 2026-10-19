@@ -722,7 +722,7 @@ loc_0E_C527:
 	STA ram_00F5                    ;C - - - - - 0x01C542 0E:C532: 85 F5
 	JSR sub_0F_FF4D                 ;C - - - - - 0x01C544 0E:C534: 20 4D FF
 	PLA                             ;C - - - - - 0x01C547 0E:C537: 68
-	JSR $A000                       ;C - - - - - 0x01C548 0E:C538: 20 00 A0
+	JSR sub_09_A000                 ;C - - - - - bank=09 0x01C548 0E:C538: 20 00 A0
 	JMP loc_0F_FF4C                 ;C - - - - - 0x01C54B 0E:C53B: 4C 4C FF
 tbl_0E_C53E:
 	.byte $0F,$0F,$36,$26,$0F,$0F,$30,$21;- D 2 - - - 0x01C54E 0E:C53E:
@@ -747,9 +747,9 @@ ofs_0E_C556:
 	STX ram_00F5                    ;C - - - - - 0x01C582 0E:C572: 86 F5
 	JSR sub_0F_FF4D                 ;C - - - - - 0x01C584 0E:C574: 20 4D FF
 	LDX #$04                        ;C - - - - - 0x01C587 0E:C577: A2 04
-	JSR $8000                       ;C - - - - - 0x01C589 0E:C579: 20 00 80
+	JSR sub_04_8000                 ;C - - - - - bank=04 0x01C589 0E:C579: 20 00 80
 	JSR sub_0E_C26F                 ;C - - - - - 0x01C58C 0E:C57C: 20 6F C2
-	JSR $89C0                       ;C - - - - - 0x01C58F 0E:C57F: 20 C0 89
+	JSR sub_04_89C0                 ;C - - - - - bank=04 0x01C58F 0E:C57F: 20 C0 89
 	LDX #$B4                        ;C - - - - - 0x01C592 0E:C582: A2 B4
 	JSR sub_0F_FF2A                 ;C - - - - - 0x01C594 0E:C584: 20 2A FF
 	JSR sub_0E_C85C                 ;C - - - - - 0x01C597 0E:C587: 20 5C C8
@@ -759,9 +759,9 @@ ofs_0E_C556:
 	STX ram_00F5                    ;C - - - - - 0x01C59F 0E:C58F: 86 F5
 	JSR sub_0F_FF4D                 ;C - - - - - 0x01C5A1 0E:C591: 20 4D FF
 	LDX #$00                        ;C - - - - - 0x01C5A4 0E:C594: A2 00
-	JSR $8000                       ;C - - - - - 0x01C5A6 0E:C596: 20 00 80
+	JSR sub_04_8000                 ;C - - - - - bank=04 0x01C5A6 0E:C596: 20 00 80
 	JSR sub_0E_C26F                 ;C - - - - - 0x01C5A9 0E:C599: 20 6F C2
-	JSR $8900                       ;C - - - - - 0x01C5AC 0E:C59C: 20 00 89
+	JSR sub_04_8900                 ;C - - - - - bank=04 0x01C5AC 0E:C59C: 20 00 89
 	LDA #$B4                        ;C - - - - - 0x01C5AF 0E:C59F: A9 B4
 	STA ram_0037                    ;C - - - - - 0x01C5B1 0E:C5A1: 85 37
 loc_0E_C5A3:
@@ -804,9 +804,9 @@ loc_0E_C5CE:
 	STX ram_00F5                    ;C - - - - - 0x01C5F9 0E:C5E9: 86 F5
 	JSR sub_0F_FF4D                 ;C - - - - - 0x01C5FB 0E:C5EB: 20 4D FF
 	LDX #$06                        ;C - - - - - 0x01C5FE 0E:C5EE: A2 06
-	JSR $8000                       ;C - - - - - 0x01C600 0E:C5F0: 20 00 80
+	JSR sub_04_8000                 ;C - - - - - bank=04 0x01C600 0E:C5F0: 20 00 80
 	JSR sub_0E_C26F                 ;C - - - - - 0x01C603 0E:C5F3: 20 6F C2
-	JSR $8B40                       ;C - - - - - 0x01C606 0E:C5F6: 20 40 8B
+	JSR sub_04_8B40                 ;C - - - - - bank=04 0x01C606 0E:C5F6: 20 40 8B
 	LDX #$00                        ;C - - - - - 0x01C609 0E:C5F9: A2 00
 	STX ram_00F4                    ;C - - - - - 0x01C60B 0E:C5FB: 86 F4
 	INX                             ;C - - - - - 0x01C60D 0E:C5FD: E8
@@ -814,13 +814,13 @@ loc_0E_C5CE:
 	JSR sub_0F_FF4D                 ;C - - - - - 0x01C610 0E:C600: 20 4D FF
 	LDA #$01                        ;C - - - - - 0x01C613 0E:C603: A9 01
 	STA ram_00B8                    ;C - - - - - 0x01C615 0E:C605: 85 B8
-	JSR $9A00                       ;C - - - - - 0x01C617 0E:C607: 20 00 9A
+	JSR sub_00_9A00                 ;C - - - - - bank=00 0x01C617 0E:C607: 20 00 9A
 	LDA ram_0016                    ;C - - - - - 0x01C61A 0E:C60A: A5 16
 	BNE loc_0E_C657                 ;C - - - - - 0x01C61C 0E:C60C: D0 49
 	JSR sub_0E_C888                 ;C - - - - - 0x01C61E 0E:C60E: 20 88 C8
 	LDA #$02                        ;C - - - - - 0x01C621 0E:C611: A9 02
 	STA ram_00B8                    ;C - - - - - 0x01C623 0E:C613: 85 B8
-	JSR $9A00                       ;C - - - - - 0x01C625 0E:C615: 20 00 9A
+	JSR sub_00_9A00                 ;C - - - - - bank=00 0x01C625 0E:C615: 20 00 9A
 	LDA ram_0016                    ;C - - - - - 0x01C628 0E:C618: A5 16
 	BNE loc_0E_C657                 ;C - - - - - 0x01C62A 0E:C61A: D0 3B
 	JSR sub_0E_C85C                 ;C - - - - - 0x01C62C 0E:C61C: 20 5C C8
@@ -830,9 +830,9 @@ loc_0E_C5CE:
 	STX ram_00F5                    ;C - - - - - 0x01C634 0E:C624: 86 F5
 	JSR sub_0F_FF4D                 ;C - - - - - 0x01C636 0E:C626: 20 4D FF
 	LDX #$07                        ;C - - - - - 0x01C639 0E:C629: A2 07
-	JSR $8000                       ;C - - - - - 0x01C63B 0E:C62B: 20 00 80
+	JSR sub_04_8000                 ;C - - - - - bank=04 0x01C63B 0E:C62B: 20 00 80
 	JSR sub_0E_C26F                 ;C - - - - - 0x01C63E 0E:C62E: 20 6F C2
-	JSR $8AC0                       ;C - - - - - 0x01C641 0E:C631: 20 C0 8A
+	JSR sub_04_8AC0                 ;C - - - - - bank=04 0x01C641 0E:C631: 20 C0 8A
 	LDX #$00                        ;C - - - - - 0x01C644 0E:C634: A2 00
 	STX ram_00F4                    ;C - - - - - 0x01C646 0E:C636: 86 F4
 	INX                             ;C - - - - - 0x01C648 0E:C638: E8
@@ -840,13 +840,13 @@ loc_0E_C5CE:
 	JSR sub_0F_FF4D                 ;C - - - - - 0x01C64B 0E:C63B: 20 4D FF
 	LDA #$03                        ;C - - - - - 0x01C64E 0E:C63E: A9 03
 	STA ram_00B8                    ;C - - - - - 0x01C650 0E:C640: 85 B8
-	JSR $9A00                       ;C - - - - - 0x01C652 0E:C642: 20 00 9A
+	JSR sub_00_9A00                 ;C - - - - - bank=00 0x01C652 0E:C642: 20 00 9A
 	LDA ram_0016                    ;C - - - - - 0x01C655 0E:C645: A5 16
 	BNE loc_0E_C657                 ;C - - - - - 0x01C657 0E:C647: D0 0E
 	JSR sub_0E_C888                 ;C - - - - - 0x01C659 0E:C649: 20 88 C8
 	LDA #$04                        ;C - - - - - 0x01C65C 0E:C64C: A9 04
 	STA ram_00B8                    ;C - - - - - 0x01C65E 0E:C64E: 85 B8
-	JSR $9A00                       ;C - - - - - 0x01C660 0E:C650: 20 00 9A
+	JSR sub_00_9A00                 ;C - - - - - bank=00 0x01C660 0E:C650: 20 00 9A
 	LDA ram_0016                    ;C - - - - - 0x01C663 0E:C653: A5 16
 	BNE loc_0E_C657                 ;C - - - - - 0x01C665 0E:C655: D0 00
 loc_0E_C657:
@@ -859,8 +859,8 @@ loc_0E_C657:
 	STX ram_00F5                    ;C - - - - - 0x01C674 0E:C664: 86 F5
 	JSR sub_0F_FF4D                 ;C - - - - - 0x01C676 0E:C666: 20 4D FF
 	LDX #$01                        ;C - - - - - 0x01C679 0E:C669: A2 01
-	JSR $8000                       ;C - - - - - 0x01C67B 0E:C66B: 20 00 80
-	JSR $8940                       ;C - - - - - 0x01C67E 0E:C66E: 20 40 89
+	JSR sub_04_8000                 ;C - - - - - bank=04 0x01C67B 0E:C66B: 20 00 80
+	JSR sub_04_8940                 ;C - - - - - bank=04 0x01C67E 0E:C66E: 20 40 89
 	JSR sub_0E_C26F                 ;C - - - - - 0x01C681 0E:C671: 20 6F C2
 	LDA #$FF                        ;C - - - - - 0x01C684 0E:C674: A9 FF
 	STA ram_0500                    ;C - - - - - 0x01C686 0E:C676: 8D 00 05
@@ -916,12 +916,12 @@ loc_0E_C6D2:
 	STX ram_00F5                    ;C - - - - - 0x01C6F5 0E:C6E5: 86 F5
 	JSR sub_0F_FF4D                 ;C - - - - - 0x01C6F7 0E:C6E7: 20 4D FF
 	LDX #$02                        ;C - - - - - 0x01C6FA 0E:C6EA: A2 02
-	JSR $8000                       ;C - - - - - 0x01C6FC 0E:C6EC: 20 00 80
+	JSR sub_04_8000                 ;C - - - - - bank=04 0x01C6FC 0E:C6EC: 20 00 80
 	JSR sub_0E_C26F                 ;C - - - - - 0x01C6FF 0E:C6EF: 20 6F C2
 	LDA #$00                        ;C - - - - - 0x01C702 0E:C6F2: A9 00
 	STA playerId                    ;C - - - - - 0x01C704 0E:C6F4: 85 34
 	STA ram_00BD                    ;C - - - - - 0x01C706 0E:C6F6: 85 BD
-	JSR $9100                       ;C - - - - - 0x01C708 0E:C6F8: 20 00 91
+	JSR sub_04_9100                 ;C - - - - - bank=04 0x01C708 0E:C6F8: 20 00 91
 	JSR sub_0E_C85C                 ;C - - - - - 0x01C70B 0E:C6FB: 20 5C C8
 	JSR sub_0E_C334                 ;C - - - - - 0x01C70E 0E:C6FE: 20 34 C3
 	LDX #$04                        ;C - - - - - 0x01C711 0E:C701: A2 04
@@ -931,9 +931,9 @@ ofs_0E_C703:
 	STX ram_00F5                    ;C - - - - - 0x01C716 0E:C706: 86 F5
 	JSR sub_0F_FF4D                 ;C - - - - - 0x01C718 0E:C708: 20 4D FF
 	LDX #$08                        ;C - - - - - 0x01C71B 0E:C70B: A2 08
-	JSR $8000                       ;C - - - - - 0x01C71D 0E:C70D: 20 00 80
+	JSR sub_04_8000                 ;C - - - - - bank=04 0x01C71D 0E:C70D: 20 00 80
 	JSR sub_0E_C26F                 ;C - - - - - 0x01C720 0E:C710: 20 6F C2
-	JSR $8D00                       ;C - - - - - 0x01C723 0E:C713: 20 00 8D
+	JSR sub_04_8D00                 ;C - - - - - bank=04 0x01C723 0E:C713: 20 00 8D
 	LDX #$2D                        ;C - - - - - 0x01C726 0E:C716: A2 2D
 	JSR sub_0F_FF2A                 ;C - - - - - 0x01C728 0E:C718: 20 2A FF
 	JSR sub_0E_C85C                 ;C - - - - - 0x01C72B 0E:C71B: 20 5C C8
@@ -982,7 +982,7 @@ loc_0E_C768:
 	LDA #$0A                        ;C - - - - - 0x01C786 0E:C776: A9 0A
 	STA ram_00F4                    ;C - - - - - 0x01C788 0E:C778: 85 F4
 	JSR sub_0F_FF4D                 ;C - - - - - 0x01C78A 0E:C77A: 20 4D FF
-	JSR $9C00                       ;C - - - - - 0x01C78D 0E:C77D: 20 00 9C
+	JSR sub_0A_9C00                 ;C - - - - - bank=0A 0x01C78D 0E:C77D: 20 00 9C
 	LDY stageData                   ;C - - - - - 0x01C790 0E:C780: A4 22
 	LDA tbl_0E_C1F8,Y               ;C - - - - - 0x01C792 0E:C782: B9 F8 C1
 	STA ram_00F5                    ;C - - - - - 0x01C795 0E:C785: 85 F5
@@ -1026,9 +1026,9 @@ loc_0E_C768:
 	INX                             ;C - - - - - 0x01C7EE 0E:C7DE: E8
 	STX ram_00F5                    ;C - - - - - 0x01C7EF 0E:C7DF: 86 F5
 	JSR sub_0F_FF4D                 ;C - - - - - 0x01C7F1 0E:C7E1: 20 4D FF
-	JSR $8000                       ;C - - - - - 0x01C7F4 0E:C7E4: 20 00 80
-	JSR $8038                       ;C - - - - - 0x01C7F7 0E:C7E7: 20 38 80
-	JSR $8080                       ;C - - - - - 0x01C7FA 0E:C7EA: 20 80 80
+	JSR sub_08_8000                 ;C - - - - - bank=08 0x01C7F4 0E:C7E4: 20 00 80
+	JSR sub_08_8038                 ;C - - - - - bank=08 0x01C7F7 0E:C7E7: 20 38 80
+	JSR sub_08_8080                 ;C - - - - - bank=08 0x01C7FA 0E:C7EA: 20 80 80
 ; GG PEVKTYIA/IE start lives: LDA #$05 / STA lives
 	LDA #$05                        ;C - - - - - 0x01C7FD 0E:C7ED: A9 05
 	STA lives                       ;C - - - - - 0x01C7FF 0E:C7EF: 85 3E
@@ -1118,7 +1118,7 @@ sub_0E_C888:
 	INX                             ;C - - - - - 0x01C8A2 0E:C892: E8
 	STX ram_00F5                    ;C - - - - - 0x01C8A3 0E:C893: 86 F5
 	JSR sub_0F_FF4D                 ;C - - - - - 0x01C8A5 0E:C895: 20 4D FF
-	JSR $8A40                       ;C - - - - - 0x01C8A8 0E:C898: 20 40 8A
+	JSR sub_04_8A40                 ;C - - - - - bank=04 0x01C8A8 0E:C898: 20 40 8A
 	LDX #$00                        ;C - - - - - 0x01C8AB 0E:C89B: A2 00
 	STX ram_00F4                    ;C - - - - - 0x01C8AD 0E:C89D: 86 F4
 	INX                             ;C - - - - - 0x01C8AF 0E:C89F: E8
@@ -1206,7 +1206,7 @@ loc_0E_C93B:
 	INX                             ;C - - - - - 0x01C952 0E:C942: E8
 	STX ram_00F5                    ;C - - - - - 0x01C953 0E:C943: 86 F5
 	JSR sub_0F_FF4D                 ;C - - - - - 0x01C955 0E:C945: 20 4D FF
-	JSR $8000                       ;C - - - - - 0x01C958 0E:C948: 20 00 80
+	JSR sub_00_8000                 ;C - - - - - bank=00 0x01C958 0E:C948: 20 00 80
 	JSR sub_0F_E2A3                 ;C - - - - - 0x01C95B 0E:C94B: 20 A3 E2
 	LDA objX                        ;C - - - - - 0x01C95E 0E:C94E: AD 60 03
 	STA ram_0027                    ;C - - - - - 0x01C961 0E:C951: 85 27
@@ -1217,15 +1217,15 @@ loc_0E_C93B:
 	INX                             ;C - - - - - 0x01C96B 0E:C95B: E8
 	STX ram_00F5                    ;C - - - - - 0x01C96C 0E:C95C: 86 F5
 	JSR sub_0F_FF4D                 ;C - - - - - 0x01C96E 0E:C95E: 20 4D FF
-	JSR $8080                       ;C - - - - - 0x01C971 0E:C961: 20 80 80
-	JSR $8900                       ;C - - - - - 0x01C974 0E:C964: 20 00 89
-	JSR $A300                       ;C - - - - - 0x01C977 0E:C967: 20 00 A3
+	JSR sub_08_8080                 ;C - - - - - bank=08 0x01C971 0E:C961: 20 80 80
+	JSR sub_08_8900                 ;C - - - - - bank=08 0x01C974 0E:C964: 20 00 89
+	JSR sub_09_A300                 ;C - - - - - bank=09 0x01C977 0E:C967: 20 00 A3
 	LDX #$0C                        ;C - - - - - 0x01C97A 0E:C96A: A2 0C
 	STX ram_00F4                    ;C - - - - - 0x01C97C 0E:C96C: 86 F4
 	INX                             ;C - - - - - 0x01C97E 0E:C96E: E8
 	STX ram_00F5                    ;C - - - - - 0x01C97F 0E:C96F: 86 F5
 	JSR sub_0F_FF4D                 ;C - - - - - 0x01C981 0E:C971: 20 4D FF
-	JSR $8000                       ;C - - - - - 0x01C984 0E:C974: 20 00 80
+	JSR sub_0C_8000                 ;C - - - - - bank=0C 0x01C984 0E:C974: 20 00 80
 	LDA gameAction                  ;C - - - - - 0x01C987 0E:C977: A5 30
 	CMP #$07                        ;C - - - - - 0x01C989 0E:C979: C9 07
 	BEQ loc_0E_C99D                 ;C - - - - - 0x01C98B 0E:C97B: F0 20
@@ -1239,7 +1239,7 @@ loc_0E_C987:
 	INX                             ;C - - - - - 0x01C99B 0E:C98B: E8
 	STX ram_00F5                    ;C - - - - - 0x01C99C 0E:C98C: 86 F5
 	JSR sub_0F_FF4D                 ;C - - - - - 0x01C99E 0E:C98E: 20 4D FF
-	JSR $9800                       ;C - - - - - 0x01C9A1 0E:C991: 20 00 98
+	JSR sub_04_9800                 ;C - - - - - bank=04 0x01C9A1 0E:C991: 20 00 98
 	LDA objSpriteDown               ;C - - - - - 0x01C9A4 0E:C994: AD BC 05
 	CMP #$07                        ;C - - - - - 0x01C9A7 0E:C997: C9 07
 	BEQ loc_0E_C99D                 ;C - - - - - 0x01C9A9 0E:C999: F0 02
@@ -3677,9 +3677,9 @@ loc_0E_DC6C:
 	LDA credits                     ;C - - - - - 0x01DCBA 0E:DCAA: A5 AF
 	BEQ loc_0E_DCD1                 ;C - - - - - 0x01DCBC 0E:DCAC: F0 23
 	LDX #$03                        ;C - - - - - 0x01DCBE 0E:DCAE: A2 03
-	JSR $8000                       ;C - - - - - 0x01DCC0 0E:DCB0: 20 00 80
+	JSR sub_04_8000                 ;C - - - - - bank=04 0x01DCC0 0E:DCB0: 20 00 80
 	JSR sub_0E_C26F                 ;C - - - - - 0x01DCC3 0E:DCB3: 20 6F C2
-	JSR $9300                       ;C - - - - - 0x01DCC6 0E:DCB6: 20 00 93
+	JSR sub_04_9300                 ;C - - - - - bank=04 0x01DCC6 0E:DCB6: 20 00 93
 	LDA gameAction                  ;C - - - - - 0x01DCC9 0E:DCB9: A5 30
 	CMP #$07                        ;C - - - - - 0x01DCCB 0E:DCBB: C9 07
 	BNE loc_0E_DCC0                 ;C - - - - - 0x01DCCD 0E:DCBD: D0 01
@@ -3695,9 +3695,9 @@ loc_0E_DCC0:
 	JSR sub_0F_FF4D                 ;C - - - - - 0x01DCDE 0E:DCCE: 20 4D FF
 loc_0E_DCD1:
 	LDX #$05                        ;C - - - - - 0x01DCE1 0E:DCD1: A2 05
-	JSR $8000                       ;C - - - - - 0x01DCE3 0E:DCD3: 20 00 80
+	JSR sub_04_8000                 ;C - - - - - bank=04 0x01DCE3 0E:DCD3: 20 00 80
 	JSR sub_0E_C26F                 ;C - - - - - 0x01DCE6 0E:DCD6: 20 6F C2
-	JSR $9500                       ;C - - - - - 0x01DCE9 0E:DCD9: 20 00 95
+	JSR sub_04_9500                 ;C - - - - - bank=04 0x01DCE9 0E:DCD9: 20 00 95
 	RTS                             ;c - - - - - 0x01DCEC 0E:DCDC: 60
 ofs_0E_DCDD:
 	LDA playerHealth                ;C - - J - - 0x01DCED 0E:DCDD: A5 3A
@@ -3972,7 +3972,7 @@ loc_0E_DE8B:
 	JSR sub_0F_FF4D                 ;C - - - - - 0x01DED6 0E:DEC6: 20 4D FF
 	LDA #$05                        ;C - - - - - 0x01DED9 0E:DEC9: A9 05
 	STA ram_00B8                    ;C - - - - - 0x01DEDB 0E:DECB: 85 B8
-	JSR $9A00                       ;C - - - - - 0x01DEDD 0E:DECD: 20 00 9A
+	JSR sub_00_9A00                 ;C - - - - - bank=00 0x01DEDD 0E:DECD: 20 00 9A
 	LDA #$00                        ;C - - - - - 0x01DEE0 0E:DED0: A9 00
 	STA ram_00EE                    ;C - - - - - 0x01DEE2 0E:DED2: 85 EE
 	JSR sub_0E_C36E                 ;C - - - - - 0x01DEE4 0E:DED4: 20 6E C3
@@ -3983,9 +3983,9 @@ loc_0E_DE8B:
 	JSR sub_0E_C334                 ;C - - - - - 0x01DEF1 0E:DEE1: 20 34 C3
 	JSR sub_0E_C8A6                 ;C - - - - - 0x01DEF4 0E:DEE4: 20 A6 C8
 	LDX #$0D                        ;C - - - - - 0x01DEF7 0E:DEE7: A2 0D
-	JSR $8000                       ;C - - - - - 0x01DEF9 0E:DEE9: 20 00 80
+	JSR sub_00_8000                 ;C - - - - - bank=00 0x01DEF9 0E:DEE9: 20 00 80
 	JSR sub_0E_C26F                 ;C - - - - - 0x01DEFC 0E:DEEC: 20 6F C2
-	JSR $8C00                       ;C - - - - - 0x01DEFF 0E:DEEF: 20 00 8C
+	JSR sub_00_8C00                 ;C - - - - - bank=00 0x01DEFF 0E:DEEF: 20 00 8C
 	LDX #$00                        ;C - - - - - 0x01DF02 0E:DEF2: A2 00
 	STX ram_00F4                    ;C - - - - - 0x01DF04 0E:DEF4: 86 F4
 	INX                             ;C - - - - - 0x01DF06 0E:DEF6: E8
@@ -3993,7 +3993,7 @@ loc_0E_DE8B:
 	JSR sub_0F_FF4D                 ;C - - - - - 0x01DF09 0E:DEF9: 20 4D FF
 	LDA #$06                        ;C - - - - - 0x01DF0C 0E:DEFC: A9 06
 	STA ram_00B8                    ;C - - - - - 0x01DF0E 0E:DEFE: 85 B8
-	JSR $9A00                       ;C - - - - - 0x01DF10 0E:DF00: 20 00 9A
+	JSR sub_00_9A00                 ;C - - - - - bank=00 0x01DF10 0E:DF00: 20 00 9A
 	LDA ram_0150                    ;C - - - - - 0x01DF13 0E:DF03: AD 50 01
 	BNE loc_0E_DF4D                 ;C - - - - - 0x01DF16 0E:DF06: D0 45
 	LDA #$00                        ;C - - - - - 0x01DF18 0E:DF08: A9 00
@@ -4006,7 +4006,7 @@ loc_0E_DE8B:
 	JSR sub_0E_C334                 ;C - - - - - 0x01DF29 0E:DF19: 20 34 C3
 	JSR sub_0E_C8A6                 ;C - - - - - 0x01DF2C 0E:DF1C: 20 A6 C8
 	JSR sub_0E_C26F                 ;C - - - - - 0x01DF2F 0E:DF1F: 20 6F C2
-	JSR $9600                       ;C - - - - - 0x01DF32 0E:DF22: 20 00 96
+	JSR sub_00_95FF+1               ;C - - - - - bank=00 0x01DF32 0E:DF22: 20 00 96
 	LDX #$08                        ;C - - - - - 0x01DF35 0E:DF25: A2 08
 	STX ram_00F4                    ;C - - - - - 0x01DF37 0E:DF27: 86 F4
 	INX                             ;C - - - - - 0x01DF39 0E:DF29: E8
@@ -4014,16 +4014,16 @@ loc_0E_DE8B:
 	JSR sub_0F_FF4D                 ;C - - - - - 0x01DF3C 0E:DF2C: 20 4D FF
 	LDA #$00                        ;C - - - - - 0x01DF3F 0E:DF2F: A9 00
 	STA ram_00B8                    ;C - - - - - 0x01DF41 0E:DF31: 85 B8
-	JSR $A700                       ;C - - - - - 0x01DF43 0E:DF33: 20 00 A7
+	JSR sub_09_A700                 ;C - - - - - bank=09 0x01DF43 0E:DF33: 20 00 A7
 	INC ram_00B8                    ;C - - - - - 0x01DF46 0E:DF36: E6 B8
-	JSR $A700                       ;C - - - - - 0x01DF48 0E:DF38: 20 00 A7
+	JSR sub_09_A700                 ;C - - - - - bank=09 0x01DF48 0E:DF38: 20 00 A7
 	INC ram_00B8                    ;C - - - - - 0x01DF4B 0E:DF3B: E6 B8
-	JSR $A700                       ;C - - - - - 0x01DF4D 0E:DF3D: 20 00 A7
+	JSR sub_09_A700                 ;C - - - - - bank=09 0x01DF4D 0E:DF3D: 20 00 A7
 	INC ram_00B8                    ;C - - - - - 0x01DF50 0E:DF40: E6 B8
-	JSR $A700                       ;C - - - - - 0x01DF52 0E:DF42: 20 00 A7
+	JSR sub_09_A700                 ;C - - - - - bank=09 0x01DF52 0E:DF42: 20 00 A7
 	INC ram_00B8                    ;C - - - - - 0x01DF55 0E:DF45: E6 B8
-	JSR $A700                       ;C - - - - - 0x01DF57 0E:DF47: 20 00 A7
-	JSR $AB00                       ;C - - - - - 0x01DF5A 0E:DF4A: 20 00 AB
+	JSR sub_09_A700                 ;C - - - - - bank=09 0x01DF57 0E:DF47: 20 00 A7
+	JSR sub_09_AB00                 ;C - - - - - bank=09 0x01DF5A 0E:DF4A: 20 00 AB
 loc_0E_DF4D:
 	JMP loc_0E_C8ED                 ;C - - - - - 0x01DF5D 0E:DF4D: 4C ED C8
 loc_0E_DF50:
@@ -4056,9 +4056,9 @@ loc_0E_DF77:
 	STX ram_00F5                    ;C - - - - - 0x01DF92 0E:DF82: 86 F5
 	JSR sub_0F_FF4D                 ;C - - - - - 0x01DF94 0E:DF84: 20 4D FF
 	LDX #$02                        ;C - - - - - 0x01DF97 0E:DF87: A2 02
-	JSR $8000                       ;C - - - - - 0x01DF99 0E:DF89: 20 00 80
+	JSR sub_04_8000                 ;C - - - - - bank=04 0x01DF99 0E:DF89: 20 00 80
 	JSR sub_0E_C26F                 ;C - - - - - 0x01DF9C 0E:DF8C: 20 6F C2
-	JSR $9100                       ;C - - - - - 0x01DF9F 0E:DF8F: 20 00 91
+	JSR sub_04_9100                 ;C - - - - - bank=04 0x01DF9F 0E:DF8F: 20 00 91
 	JSR sub_0E_C85C                 ;C - - - - - 0x01DFA2 0E:DF92: 20 5C C8
 	JSR sub_0E_C26F                 ;C - - - - - 0x01DFA5 0E:DF95: 20 6F C2
 	JSR sub_0F_E143                 ;C - - - - - 0x01DFA8 0E:DF98: 20 43 E1
@@ -4081,9 +4081,9 @@ loc_0E_DFA4:
 	LDY stage                       ;C - - - - - 0x01DFCF 0E:DFBF: A4 61
 	LDA tbl_0F_E15C,Y               ;C - - - - - 0x01DFD1 0E:DFC1: B9 5C E1
 	TAX                             ;C - - - - - 0x01DFD4 0E:DFC4: AA
-	JSR $8000                       ;C - - - - - 0x01DFD5 0E:DFC5: 20 00 80
+	JSR sub_04_8000                 ;C - - - - - bank=04 0x01DFD5 0E:DFC5: 20 00 80
 	JSR sub_0E_C26F                 ;C - - - - - 0x01DFD8 0E:DFC8: 20 6F C2
-	JSR $8D00                       ;C - - - - - 0x01DFDB 0E:DFCB: 20 00 8D
+	JSR sub_04_8D00                 ;C - - - - - bank=04 0x01DFDB 0E:DFCB: 20 00 8D
 	LDX #$2D                        ;C - - - - - 0x01DFDE 0E:DFCE: A2 2D
 	JSR sub_0F_FF2A                 ;C - - - - - 0x01DFE0 0E:DFD0: 20 2A FF
 	JSR sub_0E_C85C                 ;C - - - - - 0x01DFE3 0E:DFD3: 20 5C C8

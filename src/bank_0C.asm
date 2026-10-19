@@ -1,6 +1,7 @@
 .segment "BANK_0C"
 ; 0x018010-0x01A00F  CPU $8000-$9FFF
 
+sub_0C_8000:
 	JMP loc_0C_8003                 ;C D 0 - - - 0x018010 0C:8000: 4C 03 80
 loc_0C_8003:
 	LDA #$38                        ;C - - - - - 0x018013 0C:8003: A9 38
@@ -635,7 +636,7 @@ loc_0C_84FA:
 	RTS                             ;C - - - - - 0x01852B 0C:851B: 60
 loc_0C_851C:
 	LDY ram_05C0,X                  ;C - - - - - 0x01852C 0C:851C: BC C0 05
-	LDA $A897,Y                     ;C - - - - - 0x01852F 0C:851F: B9 97 A8
+	LDA tbl_0D_A897,Y               ;C - - - - - bank=0D 0x01852F 0C:851F: B9 97 A8
 	TAY                             ;C - - - - - 0x018532 0C:8522: A8
 	LDA ram_00E4                    ;C - - - - - 0x018533 0C:8523: A5 E4
 	AND #$0F                        ;C - - - - - 0x018535 0C:8525: 29 0F
@@ -2101,7 +2102,7 @@ loc_0C_90EC:
 loc_0C_9127:
 	RTS                             ;C - - - - - 0x019137 0C:9127: 60
 ofs_0C_9128:
-	JSR $A9F6                       ;C - - J - - 0x019138 0C:9128: 20 F6 A9
+	JSR sub_0D_A9F6                 ;C - - J - - bank=0D 0x019138 0C:9128: 20 F6 A9
 	BCC loc_0C_9138                 ;C - - - - - 0x01913B 0C:912B: 90 0B
 	LDA #$FE                        ;c - - - - - 0x01913D 0C:912D: A9 FE
 	STA ram_0430,X                  ;c - - - - - 0x01913F 0C:912F: 9D 30 04
@@ -2279,7 +2280,7 @@ loc_0C_92A3:
 	LDA gameAction                  ;C - - - - - 0x0192B3 0C:92A3: A5 30
 	CMP #$12                        ;C - - - - - 0x0192B5 0C:92A5: C9 12
 	BEQ loc_0C_92C9                 ;C - - - - - 0x0192B7 0C:92A7: F0 20
-	JSR $A9F6                       ;C - - - - - 0x0192B9 0C:92A9: 20 F6 A9
+	JSR sub_0D_A9F6                 ;C - - - - - bank=0D 0x0192B9 0C:92A9: 20 F6 A9
 	BCC loc_0C_92B9                 ;C - - - - - 0x0192BC 0C:92AC: 90 0B
 	LDA #$FD                        ;C - - - - - 0x0192BE 0C:92AE: A9 FD
 	STA ram_0430,X                  ;C - - - - - 0x0192C0 0C:92B0: 9D 30 04
@@ -3458,7 +3459,7 @@ sub_0C_9C29:
 	STA ram_0320,X                  ;C - - - - - 0x019C3C 0C:9C2C: 9D 20 03
 	LDA ram_0310,X                  ;C - - - - - 0x019C3F 0C:9C2F: BD 10 03
 	STA ram_0300,X                  ;C - - - - - 0x019C42 0C:9C32: 9D 00 03
-	JSR $AA1D                       ;C - - - - - 0x019C45 0C:9C35: 20 1D AA
+	JSR sub_0D_AA1D                 ;C - - - - - bank=0D 0x019C45 0C:9C35: 20 1D AA
 	LDA #$00                        ;C - - - - - 0x019C48 0C:9C38: A9 00
 	STA ram_0470,X                  ;C - - - - - 0x019C4A 0C:9C3A: 9D 70 04
 	STA ram_04E0,X                  ;C - - - - - 0x019C4D 0C:9C3D: 9D E0 04
@@ -3575,7 +3576,7 @@ loc_0C_9D02:
 	TAY                             ;C - - - - - 0x019D28 0C:9D18: A8
 	LDA tbl_0C_9D5B,Y               ;C - - - - - 0x019D29 0C:9D19: B9 5B 9D
 	STA ram_05B0,X                  ;C - - - - - 0x019D2C 0C:9D1C: 9D B0 05
-	JSR $AB29                       ;C - - - - - 0x019D2F 0C:9D1F: 20 29 AB
+	JSR sub_0D_AB29                 ;C - - - - - bank=0D 0x019D2F 0C:9D1F: 20 29 AB
 	BCC loc_0C_9D25                 ;C - - - - - 0x019D32 0C:9D22: 90 01
 	RTS                             ;C - - - - - 0x019D34 0C:9D24: 60
 loc_0C_9D25:
@@ -3683,7 +3684,7 @@ loc_0C_9E63:
 	STA ram_0410,X                  ;C - - - - - 0x019E8D 0C:9E7D: 9D 10 04
 	LDA ram_05C0,X                  ;C - - - - - 0x019E90 0C:9E80: BD C0 05
 	TAY                             ;C - - - - - 0x019E93 0C:9E83: A8
-	LDA $A897,Y                     ;C - - - - - 0x019E94 0C:9E84: B9 97 A8
+	LDA tbl_0D_A897,Y               ;C - - - - - bank=0D 0x019E94 0C:9E84: B9 97 A8
 	CLC                             ;C - - - - - 0x019E97 0C:9E87: 18
 	LDY ram_05B0,X                  ;C - - - - - 0x019E98 0C:9E88: BC B0 05
 	ADC tbl_0C_9EBF,Y               ;C - - - - - 0x019E9B 0C:9E8B: 79 BF 9E
@@ -3740,7 +3741,7 @@ loc_0C_9ECF:
 	STA ram_05D0,X                  ;C - - - - - 0x019EF6 0C:9EE6: 9D D0 05
 	LDA #$8D                        ;C - - - - - 0x019EF9 0C:9EE9: A9 8D
 	STA ram_0300,X                  ;C - - - - - 0x019EFB 0C:9EEB: 9D 00 03
-	JSR $AAAE                       ;C - - - - - 0x019EFE 0C:9EEE: 20 AE AA
+	JSR sub_0D_AAAE                 ;C - - - - - bank=0D 0x019EFE 0C:9EEE: 20 AE AA
 	JMP loc_0C_9FBB                 ;C - - - - - 0x019F01 0C:9EF1: 4C BB 9F
 ofs_0C_9EF4:
 	LDA #$00                        ;C - - J - - 0x019F04 0C:9EF4: A9 00

@@ -11,7 +11,7 @@
 	INX                             ;C - - - - - 0x01E01F 0F:E00F: E8
 	STX ram_00F5                    ;C - - - - - 0x01E020 0F:E010: 86 F5
 	JSR sub_0F_FF4D                 ;C - - - - - 0x01E022 0F:E012: 20 4D FF
-	JSR $9C00                       ;C - - - - - 0x01E025 0F:E015: 20 00 9C
+	JSR sub_0A_9C00                 ;C - - - - - bank=0A 0x01E025 0F:E015: 20 00 9C
 	LDY stage                       ;C - - - - - 0x01E028 0F:E018: A4 61
 	LDA tbl_0E_C1F8,Y               ;C - - - - - 0x01E02A 0F:E01A: B9 F8 C1
 	STA ram_00F5                    ;C - - - - - 0x01E02D 0F:E01D: 85 F5
@@ -62,9 +62,9 @@ loc_0F_E03B:
 	INX                             ;C - - - - - 0x01E091 0F:E081: E8
 	STX ram_00F5                    ;C - - - - - 0x01E092 0F:E082: 86 F5
 	JSR sub_0F_FF4D                 ;C - - - - - 0x01E094 0F:E084: 20 4D FF
-	JSR $8000                       ;C - - - - - 0x01E097 0F:E087: 20 00 80
-	JSR $8038                       ;C - - - - - 0x01E09A 0F:E08A: 20 38 80
-	JSR $8080                       ;C - - - - - 0x01E09D 0F:E08D: 20 80 80
+	JSR sub_08_8000                 ;C - - - - - bank=08 0x01E097 0F:E087: 20 00 80
+	JSR sub_08_8038                 ;C - - - - - bank=08 0x01E09A 0F:E08A: 20 38 80
+	JSR sub_08_8080                 ;C - - - - - bank=08 0x01E09D 0F:E08D: 20 80 80
 	LDA ram_0060                    ;C D 3 - I - 0x01E0A0 0F:E090: A5 60
 	CMP #$02                        ;C - - - - - 0x01E0A2 0F:E092: C9 02
 	BNE loc_0F_E0A3                 ;C - - - - - 0x01E0A4 0F:E094: D0 0D

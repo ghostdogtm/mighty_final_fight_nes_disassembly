@@ -35,6 +35,8 @@ HW_REGS = {0x2000: 'PPUCTRL', 0x2001: 'PPUMASK', 0x2002: 'PPUSTATUS', 0x2003: 'O
            0x400C: 'NOISE_VOL', 0x400E: 'NOISE_LO', 0x400F: 'NOISE_HI',
            0x4010: 'DMC_FREQ', 0x4011: 'DMC_RAW', 0x4012: 'DMC_START', 0x4013: 'DMC_LEN',
            0x4014: 'OAMDMA', 0x4015: 'SNDCHN', 0x4016: 'JOY1', 0x4017: 'JOY2'}
+BANK_REG_LO, BANK_REG_HI = 0xF4, 0xF5      # RAM shadows of MMC3 R6 ($8000 window) and R7 ($A000 window)
+PAIR_OF = {0: 1, 1: 0, 4: 5, 5: 4, 8: 9, 9: 8, 12: 13, 13: 12}   # banks always mapped together (F5 = F4+1)
 RESERVED = {o[0].lower() for o in OPS.values()} | {'a', 'x', 'y', 's', 'z'}
 
 
@@ -117,6 +119,9 @@ class Disasm:
         self.ram_user = load_ram_labels(ram_path)
         self.rom_user, self.force, self.user_notes = load_rom_labels(rom_lbl_path)
         self.refs = defaultdict(set)
+        self.cur_site = None
+        self.hints = {}             # (site bank, idx) -> target bank for raw $8000-$BFFF operands
+        self.hint_why = {}
         self.labels = {}
         self.ram_used = defaultdict(int)
         self.ram_defined = {}
@@ -152,6 +157,9 @@ class Disasm:
         if addr < 0x8000:
             return None
         idx = addr & 0x1FFF
+        h = self.hints.get((sb, self.cur_site)) if guess and addr < 0xC000 else None
+        if h is not None:
+            return h, idx, True
         if addr >= 0xC000:
             return (14 if addr < 0xE000 else 15), idx, False
         slot = 0 if addr < 0xA000 else 1
@@ -408,6 +416,7 @@ class Disasm:
                             self.refs[(t[0], self.start_of(t[0], t[1]))].add('loc')
                     elif mode in ('abs', 'abx', 'aby', 'ind'):
                         a = self.operand(b, i, n)
+                        self.cur_site = i
                         if a >= 0x8000 and mn not in STORES:
                             kn = 'sub' if mn == 'JSR' else 'loc' if mn == 'JMP' and mode == 'abs' else \
                                 'tbl' if mode in ('abx', 'aby') else 'dat'
@@ -417,6 +426,7 @@ class Disasm:
                     i += n
                 elif k[i] == 4 and (i & 1) == 0 and i + 1 < BANK_SIZE and k[i + 1] == 4:
                     v = (self.rom[b][i] | (self.rom[b][i + 1] << 8)) + self.word_adj.get((b, i), 0)
+                    self.cur_site = None
                     self.addref(b, v & 0xFFFF, 'ptr')
                     i += 2
                 else:
@@ -500,6 +510,7 @@ class Disasm:
         if mode in ('zp', 'zpx', 'zpy', 'izx', 'izy'):
             return {'zp': '%s %s', 'zpx': '%s %s,X', 'zpy': '%s %s,Y', 'izx': '%s (%s,X)',
                     'izy': '%s (%s),Y'}[mode] % (mn, self.ram_expr(v))
+        self.cur_site = i
         e = self.addr_expr(b, mn, mode, v)
         return {'abs': '%s %s', 'abx': '%s %s,X', 'aby': '%s %s,Y', 'ind': '%s (%s)'}[mode] % (mn, e)
 
@@ -570,9 +581,12 @@ class Disasm:
                              % (txt, fl, off0 + i, b, base + i))
                     i += n
                     continue
-                if mode in ('abs', 'abx', 'aby', 'ind') and self.operand(b, i, n) >= 0x8000 \
-                        and mn not in STORES and self.label_expr(b, self.operand(b, i, n))[1]:
-                    fl += ' bank?'
+                if mode in ('abs', 'abx', 'aby', 'ind') and self.operand(b, i, n) >= 0x8000                         and mn not in STORES:
+                    self.cur_site = i
+                    if (b, i) in self.hints and self.operand(b, i, n) < 0xC000:
+                        fl += ' bank=%02X' % self.hints[(b, i)]
+                    elif self.label_expr(b, self.operand(b, i, n))[1]:
+                        fl += ' bank?'
                 by = ' '.join('%02X' % x for x in rom[i:i + n])
                 o.append('\t%-32s;%s 0x%06X %02X:%04X: %s' % (txt, fl, off0 + i, b, base + i, by))
                 i += n
@@ -586,6 +600,7 @@ class Disasm:
                 while j + 1 < BANK_SIZE and k[j] == 4 and k[j + 1] == 4 and len(items) < 8 \
                         and (j == i or ((b, j) not in self.labels and (b, j + 1) not in self.labels)):
                     adj = self.word_adj.get((b, j), 0)
+                    self.cur_site = None
                     v = rom[j] | (rom[j + 1] << 8)
                     e = self.label_expr(b, (v + adj) & 0xFFFF)[0] if v + adj >= 0x8000 else None
                     items.append(e + '-1' if e and adj else e or '$%04X' % v)
@@ -682,6 +697,80 @@ class Disasm:
         w(os.path.join(out, 'mff.mlb'), '\n'.join(mlb) + '\n')
         self.write_report(os.path.join(out, 'docs', 'coverage.txt'))
 
+    def raw_operands(self):
+        res = []
+        for b in range(NBANKS):
+            i = 0
+            while i < BANK_SIZE:
+                if self.kind[b][i] == 1:
+                    mn, mode, n = self.decode(b, i)
+                    if mode in ('abs', 'abx', 'aby', 'ind') and self.operand(b, i, n) >= 0x8000:
+                        t = self.instr_text(b, i)
+                        if re.search(r'\$[89A-F][0-9A-F]{3}', t):
+                            res.append((b, i, t))
+                    i += n
+                else:
+                    i += 1
+        return res
+
+    def infer_banks(self):
+        """Fill self.hints for raw operands in $8000-$BFFF: (a) banks that are always mapped as a pair,
+        (b) linear tracking of immediate values stored to the R6/R7 shadow registers $F4/$F5."""
+        n_pair = n_track = 0
+        for b in range(NBANKS):
+            k = self.kind[b]
+            f4 = f5 = None
+            x = a = None
+            i = 0
+            while i < BANK_SIZE:
+                if k[i] != 1:
+                    i += 1
+                    continue
+                if (b, i) in self.refs or (b, i) in self.rom_user:     # control-flow merge: forget
+                    f4 = f5 = x = a = None
+                mn, mode, n = self.decode(b, i)
+                v = self.operand(b, i, n) if n > 1 else None
+                if mode == 'imm':
+                    if mn == 'LDX': x = v
+                    elif mn == 'LDA': a = v
+                elif mn == 'INX' and x is not None: x = (x + 1) & 0xFF
+                elif mn == 'DEX' and x is not None: x = (x - 1) & 0xFF
+                elif mn in ('LDX', 'LDA', 'TXA', 'TAX'):
+                    if mn == 'TXA': a = x
+                    elif mn == 'TAX': x = a
+                    elif mn == 'LDX': x = None
+                    else: a = None
+                elif mn == 'STX' and v in (BANK_REG_LO, BANK_REG_HI):
+                    if v == BANK_REG_LO: f4 = x
+                    else: f5 = x
+                elif mn == 'STA' and v in (BANK_REG_LO, BANK_REG_HI):
+                    if v == BANK_REG_LO: f4 = a
+                    else: f5 = a
+                elif mn in ('RTS', 'RTI', 'JMP'):
+                    f4 = f5 = x = a = None
+                elif mode == 'rel' or mn in ('PLA', 'ADC', 'SBC', 'AND', 'ORA', 'EOR', 'ASL', 'LSR', 'ROL', 'ROR',
+                                              'CLC', 'SEC', 'LDY', 'TYA', 'TSX', 'TXS'):
+                    if mn in ('PLA', 'ADC', 'SBC', 'AND', 'ORA', 'EOR', 'TYA') or mode == 'acc':
+                        a = None
+                    if mn == 'TSX':
+                        x = None
+                if mode in ('abs', 'abx', 'aby', 'ind') and v is not None and 0x8000 <= v < 0xC000:
+                    slot = 0 if v < 0xA000 else 1
+                    if mn not in STORES and b < 14 and b % 2 != slot and b in PAIR_OF:
+                        self.hints[(b, i)] = PAIR_OF[b]
+                        self.hint_why[(b, i)] = 'pair'
+                        n_pair += 1
+                    elif b >= 14:
+                        t = f5 if slot else f4
+                        if t is None and slot and f4 is not None and f4 in PAIR_OF and PAIR_OF[f4] == f4 + 1:
+                            t = f4 + 1 if f5 is None else None
+                        if t is not None and t < 14 and (t % 2 == slot) and mn not in STORES:
+                            self.hints[(b, i)] = t
+                            self.hint_why[(b, i)] = 'track'
+                            n_track += 1
+                i += n
+        return n_pair, n_track
+
     def looks_like_code(self, b, i, ln):
         end = i + ln
         if ln < 6:
@@ -734,6 +823,9 @@ class Disasm:
         o += ['  %02X:%04X' % (b, base_of(b) + i) for b, i in self.anomalies]
         o += ['', 'Traced code (instruction starts, verify by hand):']
         o += ['  %02X:%04X  %s' % (b, base_of(b) + i, self.instr_text(b, i)) for (b, i) in sorted(self.traced)]
+        raw = self.raw_operands()
+        o += ['', 'Raw ROM-address operands (do not relocate with the code): %d' % len(raw)]
+        o += ['  %02X:%04X  %s' % (b, base_of(b) + i, t) for b, i, t in raw]
         o += ['', 'Code-like unknown runs (decode cleanly to the end, no BRK; review by hand):']
         o += ['  %5d  %02X:%04X' % (ln, b, base_of(b) + i) for ln, b, i in sorted(cl_runs, reverse=True)]
         o += ['', 'Unknown runs, longest first (len bank:addr):']
@@ -775,6 +867,7 @@ def main():
             if not D.detect_tables():
                 break
         print('trace: %d instructions found, %d pointer-table targets' % (len(D.traced), len(D.table_targets)))
+    D.infer_banks()
     D.gather_refs()
     D.build_labels()
     D.pre_ram_scan()

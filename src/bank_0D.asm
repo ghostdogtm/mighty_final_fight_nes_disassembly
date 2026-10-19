@@ -583,7 +583,7 @@ ofs_0D_A494:
 	LDY #$18                        ;C - - - - - 0x01A4B8 0D:A4A8: A0 18
 	JMP sub_0F_F449                 ;C - - - - - 0x01A4BA 0D:A4AA: 4C 49 F4
 loc_0D_A4AD:
-	JMP $9CAD                       ;C - - - - - 0x01A4BD 0D:A4AD: 4C AD 9C
+	JMP sub_0C_9CAD                 ;C - - - - - bank=0C 0x01A4BD 0D:A4AD: 4C AD 9C
 loc_0D_A4B0:
 	INC ram_0500,X                  ;C - - - - - 0x01A4C0 0D:A4B0: FE 00 05
 	LDA ram_05B0,X                  ;C - - - - - 0x01A4C3 0D:A4B3: BD B0 05
@@ -616,7 +616,7 @@ loc_0D_A4E3:
 	STA ram_0300,X                  ;C - - - - - 0x01A500 0D:A4F0: 9D 00 03
 	LDA #$08                        ;C - - - - - 0x01A503 0D:A4F3: A9 08
 	STA ram_05D0,X                  ;C - - - - - 0x01A505 0D:A4F5: 9D D0 05
-	JMP $9CAD                       ;C - - - - - 0x01A508 0D:A4F8: 4C AD 9C
+	JMP sub_0C_9CAD                 ;C - - - - - bank=0C 0x01A508 0D:A4F8: 4C AD 9C
 loc_0D_A4FB:
 	LDA ram_0460,X                  ;C - - - - - 0x01A50B 0D:A4FB: BD 60 04
 	LDY ram_05B0,X                  ;C - - - - - 0x01A50E 0D:A4FE: BC B0 05
@@ -797,7 +797,7 @@ ofs_0D_A652:
 	BCS loc_0D_A669                 ;C - - - - - 0x01A674 0D:A664: B0 03
 	JMP loc_0D_A085                 ;C - - - - - 0x01A676 0D:A666: 4C 85 A0
 loc_0D_A669:
-	JSR $9CAD                       ;C - - - - - 0x01A679 0D:A669: 20 AD 9C
+	JSR sub_0C_9CAD                 ;C - - - - - bank=0C 0x01A679 0D:A669: 20 AD 9C
 	LDA #$18                        ;C - - - - - 0x01A67C 0D:A66C: A9 18
 	STA ram_05D0,X                  ;C - - - - - 0x01A67E 0D:A66E: 9D D0 05
 	INC ram_0500,X                  ;C - - - - - 0x01A681 0D:A671: FE 00 05
@@ -843,7 +843,7 @@ loc_0D_A6CD:
 	LDA #$00                        ;C - - - - - 0x01A6DD 0D:A6CD: A9 00
 	STA ram_0440,X                  ;C - - - - - 0x01A6DF 0D:A6CF: 9D 40 04
 	STA ram_0500,X                  ;C - - - - - 0x01A6E2 0D:A6D2: 9D 00 05
-	JMP $9CAD                       ;C - - - - - 0x01A6E5 0D:A6D5: 4C AD 9C
+	JMP sub_0C_9CAD                 ;C - - - - - bank=0C 0x01A6E5 0D:A6D5: 4C AD 9C
 loc_0D_A6D8:
 	JSR sub_0D_A9F6                 ;C - - - - - 0x01A6E8 0D:A6D8: 20 F6 A9
 	BCS loc_0D_A6CD                 ;C - - - - - 0x01A6EB 0D:A6DB: B0 F0
@@ -1084,7 +1084,7 @@ ofs_0D_A89C:
 	STA ram_0500,X                  ;C - - - - - 0x01A8DB 0D:A8CB: 9D 00 05
 	LDA #$8C                        ;C - - - - - 0x01A8DE 0D:A8CE: A9 8C
 	STA ram_0300,X                  ;C - - - - - 0x01A8E0 0D:A8D0: 9D 00 03
-	JMP $9CAD                       ;C - - - - - 0x01A8E3 0D:A8D3: 4C AD 9C
+	JMP sub_0C_9CAD                 ;C - - - - - bank=0C 0x01A8E3 0D:A8D3: 4C AD 9C
 loc_0D_A8D6:
 	LDA ram_05B0,X                  ;C - - - - - 0x01A8E6 0D:A8D6: BD B0 05
 	BNE loc_0D_A8DE                 ;C - - - - - 0x01A8E9 0D:A8D9: D0 03
@@ -1232,7 +1232,7 @@ sub_0D_A9EB:
 loc_0D_A9F3:
 	JMP sub_0F_F090                 ;C - - - - - 0x01AA03 0D:A9F3: 4C 90 F0
 sub_0D_A9F6:
-	JSR $9BE1                       ;C - - - - - 0x01AA06 0D:A9F6: 20 E1 9B
+	JSR sub_0C_9BE1                 ;C - - - - - bank=0C 0x01AA06 0D:A9F6: 20 E1 9B
 	LDY #$06                        ;C - - - - - 0x01AA09 0D:A9F9: A0 06
 	JSR sub_0F_ECCF                 ;C - - - - - 0x01AA0B 0D:A9FB: 20 CF EC
 	LDA ram_0010                    ;C - - - - - 0x01AA0E 0D:A9FE: A5 10
@@ -1252,7 +1252,7 @@ loc_0D_AA1B:
 	CLC                             ;C - - - - - 0x01AA2B 0D:AA1B: 18
 	RTS                             ;C - - - - - 0x01AA2C 0D:AA1C: 60
 sub_0D_AA1D:
-	JSR $9BE1                       ;C - - - - - 0x01AA2D 0D:AA1D: 20 E1 9B
+	JSR sub_0C_9BE1                 ;C - - - - - bank=0C 0x01AA2D 0D:AA1D: 20 E1 9B
 	LDY #$07                        ;C - - - - - 0x01AA30 0D:AA20: A0 07
 	JSR sub_0F_ECCF                 ;C - - - - - 0x01AA32 0D:AA22: 20 CF EC
 	LDA ram_0010                    ;C - - - - - 0x01AA35 0D:AA25: A5 10
@@ -1382,6 +1382,7 @@ tbl_0D_AB1D:
 	.byte $83,$8A,$92,$9B,$A8,$D3   ;- D 1 - - - 0x01AB2D 0D:AB1D:
 tbl_0D_AB23:
 	.byte $18,$1B,$1D,$1F,$20,$25   ;- D 1 - - - 0x01AB33 0D:AB23:
+sub_0D_AB29:
 	LDA ram_03F0,X                  ;C - - - - - 0x01AB39 0D:AB29: BD F0 03
 	BEQ loc_0D_AB82                 ;C - - - - - 0x01AB3C 0D:AB2C: F0 54
 	CMP #$FF                        ;C - - - - - 0x01AB3E 0D:AB2E: C9 FF
