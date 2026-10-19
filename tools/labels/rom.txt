@@ -215,3 +215,20 @@ rawsym B700 stageMetaBase
 0F:E66E StageScreenPtr         ; Y = screen index; ptr_20 = $AF00 + 64 * stageFieldNN[Y] of the current section
 comment 0F:E669 metatile table at $B700, 4 block ids per entry
 comment 0F:E6A5 map screens at $AF00, 64 bytes each
+; ---- enemy placement in bank 08 (level index = ram_0067, 0..14)
+08:8000 LoadSpawnLists         ; sets ptr_72..ptr_7A to the five parallel spawn arrays of the level in ram_0067
+08:81FE spawnXPageLo           ; lo/hi pointer tables (15 levels) to the arrays of X page
+08:820D spawnXPageHi
+08:821C spawnXLoLo             ; arrays of X low bytes
+08:822B spawnXLoHi
+08:823A spawnYPageLo           ; arrays of Y page
+08:8249 spawnYPageHi
+08:8258 spawnYLoLo             ; arrays of Y low bytes
+08:8267 spawnYLoHi
+08:8276 spawnTypeLo            ; arrays of enemy type numbers (index into enemyTypeTable)
+08:8285 spawnTypeHi
+08:8442 enemyTypeTable         ; 105 types x 4 bytes: objFlags, objKind, objAnim, objArr_0440 start value
+08:85E6 enemyStatTable         ; 105 types x 4 bytes: objLife (HP), objSpriteAir, objSpriteDown, unused
+08:80E4 SpawnEnemy             ; Y = index in the level list: builds the object from enemyTypeTable/enemyStatTable
+table 08:8442-85E5 4 enemy types: flags, kind (id), anim, field 0440
+table 08:85E6-8789 4 enemy stats: life, spriteAir, spriteDown, 0

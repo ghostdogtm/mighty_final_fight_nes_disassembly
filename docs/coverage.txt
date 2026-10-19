@@ -9,17 +9,17 @@ bank  code(cdl) code(traced) data  unknown
 05         1578           86   3995     2533
 06         2044          195   5749      204
 07            0            0   5663     2529
-08         2693          140   1839     3520
+08         2693          140   2316     3043
 09          745          156   3569     3722
 0A           32            0   6615     1545
 0B         2923          112   4647      510
 0C         6477          492    786      437
-0D         2990           48   3027     2127
+0D         2990           48   3025     2129
 0E         7731          247    198       16
 0F         6124          402   1074      592
-all       48068         2730  57044    23230
+all       48068         2730  57519    22755
 
-Unknown bytes: 9403 fill (one repeated byte), 158 code-like, 13669 other (probably data)
+Unknown bytes: 9403 fill (one repeated byte), 130 code-like, 13222 other (probably data)
 
 CDL anomalies (code flag but not a valid instruction): 0
 
@@ -570,7 +570,7 @@ Traced code (instruction starts, verify by hand):
   08:808E  LDY ram_009F
   08:8090  JSR sub_08_80C2
   08:8093  BNE loc_08_809C
-  08:8095  JSR sub_08_80E4
+  08:8095  JSR SpawnEnemy
   08:8098  DEC ram_009F
   08:809A  BNE loc_08_808E
   08:809C  LDY ram_009F
@@ -1285,12 +1285,9 @@ Code-like unknown runs (decode cleanly to the end, no BRK; review by hand):
      18  0B:B30F
      15  0C:8899
      15  03:B312
-     12  08:853A
      10  0E:D450
       9  0C:8997
       8  0C:89BB
-      8  08:85CA
-      8  08:85BE
       7  0B:B32A
       6  0D:AE72
       6  0C:89DD
@@ -1315,7 +1312,7 @@ Unknown runs, longest first (len bank:addr):
     480  09:B120
     466  09:A52E
     413  04:9663
-    375  08:8789
+    374  08:878A
     343  05:A5AC
     329  09:AD17
     324  07:B9BC
@@ -1357,14 +1354,10 @@ Unknown runs, longest first (len bank:addr):
      43  0F:FFB5
      43  04:9CC3
      42  0A:9728
-     41  08:871D
      40  0B:A5A4
      40  0B:A3AE
      40  0A:8A8B
-     40  08:857A
      40  01:BAD4
-     37  08:86ED
-     36  08:854A
      36  04:9D32
      36  02:9546
      36  02:904C
@@ -1377,8 +1370,6 @@ Unknown runs, longest first (len bank:addr):
      28  07:B96C
      28  01:BAA4
      25  0C:8803
-     25  08:8611
-     25  08:85F5
      25  02:82E7
      24  0F:EF35
      24  0D:B168
@@ -1423,7 +1414,6 @@ Unknown runs, longest first (len bank:addr):
      17  0D:B0EF
      17  0A:82EF
      17  09:B0AF
-     17  08:8749
      17  06:892E
      17  01:AFEF
      16  0F:FC00
@@ -1445,8 +1435,6 @@ Unknown runs, longest first (len bank:addr):
      16  09:AF70
      16  09:AEF0
      16  09:A16D
-     16  08:85A6
-     16  08:846E
      16  07:B0F0
      16  07:B0B0
      16  07:B070
@@ -1478,9 +1466,7 @@ Unknown runs, longest first (len bank:addr):
      15  03:BE7D
      15  03:B312
      14  0C:88D5
-     14  08:8452
      13  0A:9B96
-     13  08:86DD
      13  03:B2A4
      13  03:B1A4
      12  08:95DF
@@ -1488,7 +1474,6 @@ Unknown runs, longest first (len bank:addr):
      12  08:94F2
      12  08:946B
      12  08:93E4
-     12  08:853A
      12  07:A949
      12  05:A89C
      12  04:9D18
@@ -1497,6 +1482,7 @@ Unknown runs, longest first (len bank:addr):
      11  0A:847C
      11  09:B0F0
      11  09:A458
+     11  08:98EC
      10  0F:EBC9
      10  0E:D450
      10  0C:9FE2
@@ -1519,16 +1505,10 @@ Unknown runs, longest first (len bank:addr):
       9  0C:88B3
       9  0B:B27B
       9  0B:B17B
-      9  08:98EC
       9  08:959D
       9  08:9516
       9  08:948F
       9  08:9408
-      9  08:876D
-      9  08:8761
-      9  08:86D1
-      9  08:86A5
-      9  08:8659
       9  05:A59B
       9  03:B20F
       9  03:B10F
@@ -1539,9 +1519,6 @@ Unknown runs, longest first (len bank:addr):
       8  0A:8133
       8  09:A1D5
       8  08:99E3
-      8  08:85CA
-      8  08:85BE
-      8  08:84B6
       8  08:81F6
       8  08:8078
       8  07:A8D9
@@ -1664,15 +1641,6 @@ Unknown runs, longest first (len bank:addr):
       5  09:A4CF
       5  09:A0CE
       5  08:8DE7
-      5  08:8781
-      5  08:8695
-      5  08:868D
-      5  08:8685
-      5  08:8675
-      5  08:8669
-      5  08:864D
-      5  08:862D
-      5  08:8461
       5  07:AF69
       5  07:AF28
       5  05:AEC3
@@ -1719,11 +1687,6 @@ Unknown runs, longest first (len bank:addr):
       4  08:93F8
       4  08:93A1
       4  08:9034
-      4  08:85DE
-      4  08:8532
-      4  08:84D2
-      4  08:84C6
-      4  08:8482
       4  07:BFF2
       4  07:BEF2
       4  07:BDF2
@@ -1822,10 +1785,6 @@ Unknown runs, longest first (len bank:addr):
       3  08:9402
       3  08:93C2
       3  08:93AD
-      3  08:852E
-      3  08:84F3
-      3  08:848A
-      3  08:8467
       3  08:8035
       3  07:BF7E
       3  07:BF38
@@ -1950,6 +1909,7 @@ Unknown runs, longest first (len bank:addr):
       2  0D:BBAF
       2  0D:BB9E
       2  0D:BB97
+      2  0D:BB7F
       2  0D:AEDA
       2  0D:AEAA
       2  0D:AE7A
@@ -2025,10 +1985,6 @@ Unknown runs, longest first (len bank:addr):
       2  08:93B7
       2  08:939E
       2  08:8DCB
-      2  08:84EC
-      2  08:84E2
-      2  08:84AC
-      2  08:847F
       2  07:BFDD
       2  07:BFDA
       2  07:BFC3
@@ -2261,7 +2217,7 @@ Unknown runs, longest first (len bank:addr):
       1  0D:BBA2
       1  0D:BB91
       1  0D:BB88
-      1  0D:BB80
+      1  0D:BB7C
       1  0D:BB6A
       1  0D:BB54
       1  0D:BB44
@@ -2625,38 +2581,6 @@ Unknown runs, longest first (len bank:addr):
       1  08:8DCE
       1  08:8DC8
       1  08:8DC4
-      1  08:877D
-      1  08:8779
-      1  08:875D
-      1  08:8719
-      1  08:8715
-      1  08:86CD
-      1  08:86C9
-      1  08:86C5
-      1  08:86C1
-      1  08:86BD
-      1  08:86B9
-      1  08:86B5
-      1  08:86B1
-      1  08:86A1
-      1  08:869D
-      1  08:8681
-      1  08:867D
-      1  08:8671
-      1  08:8665
-      1  08:8655
-      1  08:8649
-      1  08:8645
-      1  08:8641
-      1  08:863D
-      1  08:8639
-      1  08:8635
-      1  08:85F1
-      1  08:85ED
-      1  08:85E9
-      1  08:84EA
-      1  08:84E5
-      1  08:84AA
       1  08:8441
       1  08:8439
       1  08:842D

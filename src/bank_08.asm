@@ -1,27 +1,28 @@
 .segment "BANK_08"
 ; 0x010010-0x01200F  CPU $8000-$9FFF
 
-sub_08_8000:
+; sets ptr_72..ptr_7A to the five parallel spawn arrays of the level in ram_0067
+LoadSpawnLists:
 	LDX ram_0067                    ;C D 0 - - - 0x010010 08:8000: A6 67
-	LDA tbl_08_81FE,X               ;C - - - - - 0x010012 08:8002: BD FE 81
+	LDA spawnXPageLo,X              ;C - - - - - 0x010012 08:8002: BD FE 81
 	STA ptr_74                      ;C - - - - - 0x010015 08:8005: 85 74
-	LDA tbl_08_820D,X               ;C - - - - - 0x010017 08:8007: BD 0D 82
+	LDA spawnXPageHi,X              ;C - - - - - 0x010017 08:8007: BD 0D 82
 	STA ptr_74+1                    ;C - - - - - 0x01001A 08:800A: 85 75
-	LDA tbl_08_821C,X               ;C - - - - - 0x01001C 08:800C: BD 1C 82
+	LDA spawnXLoLo,X                ;C - - - - - 0x01001C 08:800C: BD 1C 82
 	STA ptr_72                      ;C - - - - - 0x01001F 08:800F: 85 72
-	LDA tbl_08_822B,X               ;C - - - - - 0x010021 08:8011: BD 2B 82
+	LDA spawnXLoHi,X                ;C - - - - - 0x010021 08:8011: BD 2B 82
 	STA ptr_72+1                    ;C - - - - - 0x010024 08:8014: 85 73
-	LDA tbl_08_823A,X               ;C - - - - - 0x010026 08:8016: BD 3A 82
+	LDA spawnYPageLo,X              ;C - - - - - 0x010026 08:8016: BD 3A 82
 	STA ptr_78                      ;C - - - - - 0x010029 08:8019: 85 78
-	LDA tbl_08_8249,X               ;C - - - - - 0x01002B 08:801B: BD 49 82
+	LDA spawnYPageHi,X              ;C - - - - - 0x01002B 08:801B: BD 49 82
 	STA ptr_78+1                    ;C - - - - - 0x01002E 08:801E: 85 79
-	LDA tbl_08_8258,X               ;C - - - - - 0x010030 08:8020: BD 58 82
+	LDA spawnYLoLo,X                ;C - - - - - 0x010030 08:8020: BD 58 82
 	STA ptr_76                      ;C - - - - - 0x010033 08:8023: 85 76
-	LDA tbl_08_8267,X               ;C - - - - - 0x010035 08:8025: BD 67 82
+	LDA spawnYLoHi,X                ;C - - - - - 0x010035 08:8025: BD 67 82
 	STA ptr_76+1                    ;C - - - - - 0x010038 08:8028: 85 77
-	LDA tbl_08_8276,X               ;C - - - - - 0x01003A 08:802A: BD 76 82
+	LDA spawnTypeLo,X               ;C - - - - - 0x01003A 08:802A: BD 76 82
 	STA ptr_7A                      ;C - - - - - 0x01003D 08:802D: 85 7A
-	LDA tbl_08_8285,X               ;C - - - - - 0x01003F 08:802F: BD 85 82
+	LDA spawnTypeHi,X               ;C - - - - - 0x01003F 08:802F: BD 85 82
 	STA ptr_7A+1                    ;C - - - - - 0x010042 08:8032: 85 7B
 	RTS                             ;C - - - - - 0x010044 08:8034: 60
 	.byte $EE,$82,$DB               ;- - - - - - 0x010045 08:8035:
@@ -79,7 +80,7 @@ loc_08_808E:
 	LDY ram_009F                    ;c - - - - - 0x01009E 08:808E: A4 9F
 	JSR sub_08_80C2                 ;c - - - - - 0x0100A0 08:8090: 20 C2 80
 	BNE loc_08_809C                 ;c - - - - - 0x0100A3 08:8093: D0 07
-	JSR sub_08_80E4                 ;c - - - - - 0x0100A5 08:8095: 20 E4 80
+	JSR SpawnEnemy                  ;c - - - - - 0x0100A5 08:8095: 20 E4 80
 	DEC ram_009F                    ;c - - - - - 0x0100A8 08:8098: C6 9F
 	BNE loc_08_808E                 ;c - - - - - 0x0100AA 08:809A: D0 F2
 loc_08_809C:
@@ -95,7 +96,7 @@ loc_08_80A7:
 	LDY totalEnemies                ;C - - - - - 0x0100B7 08:80A7: A4 9E
 	JSR sub_08_80C2                 ;C - - - - - 0x0100B9 08:80A9: 20 C2 80
 	BNE loc_08_80B5                 ;C - - - - - 0x0100BC 08:80AC: D0 07
-	JSR sub_08_80E4                 ;C - - - - - 0x0100BE 08:80AE: 20 E4 80
+	JSR SpawnEnemy                  ;C - - - - - 0x0100BE 08:80AE: 20 E4 80
 	INC totalEnemies                ;C - - - - - 0x0100C1 08:80B1: E6 9E
 	BNE loc_08_80A7                 ;C - - - - - 0x0100C3 08:80B3: D0 F2
 loc_08_80B5:
@@ -130,7 +131,8 @@ loc_08_80DD:
 	SBC ram_00FB                    ;C - - - - - 0x0100F1 08:80E1: E5 FB
 loc_08_80E3:
 	RTS                             ;C - - - - - 0x0100F3 08:80E3: 60
-sub_08_80E4:
+; Y = index in the level list: builds the object from enemyTypeTable/enemyStatTable
+SpawnEnemy:
 	LDX #$0D                        ;C - - - - - 0x0100F4 08:80E4: A2 0D
 	TYA                             ;C - - - - - 0x0100F6 08:80E6: 98
 loc_08_80E7:
@@ -268,34 +270,39 @@ loc_08_81F2:
 	JSR SetAnimX                    ;C - - - - - 0x010202 08:81F2: 20 88 F2
 	RTS                             ;C - - - - - 0x010205 08:81F5: 60
 	.byte $01,$02,$04,$08,$10,$20,$40,$80;- - - - - - 0x010206 08:81F6:
-tbl_08_81FE:
+; lo/hi pointer tables (15 levels) to the arrays of X page
+spawnXPageLo:
 	.lobytes tbl_08_8294, tbl_08_82B7, tbl_08_82D0, tbl_08_82E4, tbl_08_8307, tbl_08_832F, tbl_08_833E, tbl_08_8361;- D 0 - - - 0x01020E 08:81FE:
 	.lobytes tbl_08_837F, tbl_08_838E, tbl_08_83A7, tbl_08_83C0, tbl_08_83DE, tbl_08_8401, tbl_08_842E;- D 0 - - - 0x010216 08:8206:
-tbl_08_820D:
+spawnXPageHi:
 	.hibytes tbl_08_8294, tbl_08_82B7, tbl_08_82D0, tbl_08_82E4, tbl_08_8307, tbl_08_832F, tbl_08_833E, tbl_08_8361;- D 0 - - - 0x01021D 08:820D:
 	.hibytes tbl_08_837F, tbl_08_838E, tbl_08_83A7, tbl_08_83C0, tbl_08_83DE, tbl_08_8401, tbl_08_842E;- D 0 - - - 0x010225 08:8215:
-tbl_08_821C:
+; arrays of X low bytes
+spawnXLoLo:
 	.lobytes tbl_08_829B, tbl_08_82BC, tbl_08_82D4, tbl_08_82EB, tbl_08_830F, tbl_08_8332, tbl_08_8345, tbl_08_8367;- D 0 - - - 0x01022C 08:821C:
 	.lobytes tbl_08_8382, tbl_08_8393, tbl_08_83AC, tbl_08_83C6, tbl_08_83E5, tbl_08_840A, tbl_08_8432;- D 0 - - - 0x010234 08:8224:
-tbl_08_822B:
+spawnXLoHi:
 	.hibytes tbl_08_829B, tbl_08_82BC, tbl_08_82D4, tbl_08_82EB, tbl_08_830F, tbl_08_8332, tbl_08_8345, tbl_08_8367;- D 0 - - - 0x01023B 08:822B:
 	.hibytes tbl_08_8382, tbl_08_8393, tbl_08_83AC, tbl_08_83C6, tbl_08_83E5, tbl_08_840A, tbl_08_8432;- D 0 - - - 0x010243 08:8233:
-tbl_08_823A:
+; arrays of Y page
+spawnYPageLo:
 	.lobytes tbl_08_82A2, tbl_08_82C1, tbl_08_82D8, tbl_08_82F2, tbl_08_8317, tbl_08_8335, tbl_08_834C, tbl_08_836D;- D 0 - - - 0x01024A 08:823A:
 	.lobytes tbl_08_8385, tbl_08_8398, tbl_08_83B1, tbl_08_83CC, tbl_08_83EC, tbl_08_8413, tbl_08_8436;- D 0 - - - 0x010252 08:8242:
-tbl_08_8249:
+spawnYPageHi:
 	.hibytes tbl_08_82A2, tbl_08_82C1, tbl_08_82D8, tbl_08_82F2, tbl_08_8317, tbl_08_8335, tbl_08_834C, tbl_08_836D;- D 0 - - - 0x010259 08:8249:
 	.hibytes tbl_08_8385, tbl_08_8398, tbl_08_83B1, tbl_08_83CC, tbl_08_83EC, tbl_08_8413, tbl_08_8436;- D 0 - - - 0x010261 08:8251:
-tbl_08_8258:
+; arrays of Y low bytes
+spawnYLoLo:
 	.lobytes tbl_08_82A9, tbl_08_82C6, tbl_08_82DC, tbl_08_82F9, tbl_08_831F, tbl_08_8338, tbl_08_8353, tbl_08_8373;- D 0 - - - 0x010268 08:8258:
 	.lobytes tbl_08_8388, tbl_08_839D, tbl_08_83B6, tbl_08_83D2, tbl_08_83F3, tbl_08_841C, tbl_08_843A;- D 0 - - - 0x010270 08:8260:
-tbl_08_8267:
+spawnYLoHi:
 	.hibytes tbl_08_82A9, tbl_08_82C6, tbl_08_82DC, tbl_08_82F9, tbl_08_831F, tbl_08_8338, tbl_08_8353, tbl_08_8373;- D 0 - - - 0x010277 08:8267:
 	.hibytes tbl_08_8388, tbl_08_839D, tbl_08_83B6, tbl_08_83D2, tbl_08_83F3, tbl_08_841C, tbl_08_843A;- D 0 - - - 0x01027F 08:826F:
-tbl_08_8276:
+; arrays of enemy type numbers (index into enemyTypeTable)
+spawnTypeLo:
 	.lobytes tbl_08_82B0, tbl_08_82CB, tbl_08_82E0, tbl_08_8300, tbl_08_8327, tbl_08_833B, tbl_08_835A, tbl_08_8379;- D 0 - - - 0x010286 08:8276:
 	.lobytes tbl_08_838B, tbl_08_83A2, tbl_08_83BB, tbl_08_83D8, tbl_08_83FA, tbl_08_8425, tbl_08_843E;- D 0 - - - 0x01028E 08:827E:
-tbl_08_8285:
+spawnTypeHi:
 	.hibytes tbl_08_82B0, tbl_08_82CB, tbl_08_82E0, tbl_08_8300, tbl_08_8327, tbl_08_833B, tbl_08_835A, tbl_08_8379;- D 0 - - - 0x010295 08:8285:
 	.hibytes tbl_08_838B, tbl_08_83A2, tbl_08_83BB, tbl_08_83D8, tbl_08_83FA, tbl_08_8425, tbl_08_843E;- D 0 - - - 0x01029D 08:828D:
 tbl_08_8294:
@@ -494,208 +501,259 @@ tbl_08_843A:
 tbl_08_843E:
 	.byte $03,$18,$17               ;- D 0 - I - 0x01044E 08:843E:
 	.byte $FF                       ;- - - - - - 0x010451 08:8441:
-	.byte $D0,$20,$80,$00,$D0,$21,$88,$00,$D0,$10,$60,$1F,$D0,$10,$61,$1F;- D 0 - I - 0x010452 08:8442:
-	.byte $D0,$10,$62,$1F,$D0,$10,$63,$1F,$D0,$13,$64,$1F,$D0,$11;- - - - - - 0x010462 08:8452:
-	.byte $65                       ;- D 0 - I - 0x010470 08:8460:
-	.byte $1F,$D0,$11,$66,$1F       ;- - - - - - 0x010471 08:8461:
-	.byte $D0                       ;- D 0 - I - 0x010476 08:8466:
-	.byte $12,$67,$1F               ;- - - - - - 0x010477 08:8467:
-	.byte $D0,$69,$40,$1F           ;- D 0 - I - 0x01047A 08:846A:
-	.byte $D0,$69,$5E,$1F,$D0,$69,$5D,$1F,$D4,$14,$00,$1F,$D4,$14,$00,$1F;- - - - - - 0x01047E 08:846E:
-	.byte $D4                       ;- D 0 - I - 0x01048E 08:847E:
-	.byte $15,$00                   ;- - - - - - 0x01048F 08:847F:
-	.byte $1F                       ;- D 0 - I - 0x010491 08:8481:
-	.byte $D4,$15,$00,$3F           ;- - - - - - 0x010492 08:8482:
-	.byte $D4,$94,$00,$00           ;- D 0 - I - 0x010496 08:8486:
-	.byte $D4,$64                   ;- - - - - - 0x01049A 08:848A:
+; 105 types x 4 bytes: objFlags, objKind, objAnim, objArr_0440 start value
+enemyTypeTable:
+	.byte $D0,$20,$80,$00           ;- D 0 - I - 0x010452 08:8442: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$21,$88,$00           ;- D 0 - I - 0x010456 08:8446: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$10,$60,$1F           ;- D 0 - I - 0x01045A 08:844A: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$10,$61,$1F           ;- D 0 - I - 0x01045E 08:844E: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$10,$62,$1F           ;- - - - - - 0x010462 08:8452: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$10,$63,$1F           ;- - - - - - 0x010466 08:8456: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$13,$64,$1F           ;- - - - - - 0x01046A 08:845A: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$11,$65,$1F           ;- - - - - - 0x01046E 08:845E: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$11,$66,$1F           ;- - - - - - 0x010472 08:8462: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$12,$67,$1F           ;- D 0 - I - 0x010476 08:8466: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$69,$40,$1F           ;- D 0 - I - 0x01047A 08:846A: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$69,$5E,$1F           ;- - - - - - 0x01047E 08:846E: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$69,$5D,$1F           ;- - - - - - 0x010482 08:8472: enemy types: flags, kind (id), anim, field 0440
+	.byte $D4,$14,$00,$1F           ;- - - - - - 0x010486 08:8476: enemy types: flags, kind (id), anim, field 0440
+	.byte $D4,$14,$00,$1F           ;- - - - - - 0x01048A 08:847A: enemy types: flags, kind (id), anim, field 0440
+	.byte $D4,$15,$00,$1F           ;- D 0 - I - 0x01048E 08:847E: enemy types: flags, kind (id), anim, field 0440
+	.byte $D4,$15,$00,$3F           ;- - - - - - 0x010492 08:8482: enemy types: flags, kind (id), anim, field 0440
+	.byte $D4,$94,$00,$00           ;- D 0 - I - 0x010496 08:8486: enemy types: flags, kind (id), anim, field 0440
+	.byte $D4,$64                   ;- - - - - - 0x01049A 08:848A: enemy types: flags, kind (id), anim, field 0440
 ; stage 1 boss, id $80
 spawnRecThrasher:
-	.byte $00                       ;- - - - - - 0x01049C 08:848C:
-	.byte $00,$D0,$80               ;- D 0 - I - 0x01049D 08:848D:
+	.byte $00,$00                   ;- - - - - - 0x01049C 08:848C:
+	.byte $D0,$80                   ;- D 0 - I - 0x01049E 08:848E: enemy types: flags, kind (id), anim, field 0440
 ; stage 2 boss, id $81
 spawnRecSodom1:
-	.byte $E4,$00,$D0,$81           ;- D 0 - I - 0x0104A0 08:8490:
+	.byte $E4,$00                   ;- D 0 - I - 0x0104A0 08:8490:
+	.byte $D0,$81                   ;- D 0 - I - 0x0104A2 08:8492: enemy types: flags, kind (id), anim, field 0440
 ; stage 3 boss, id $90
 spawnRecAbigail:
-	.byte $F0,$00,$D0,$90           ;- D 0 - I - 0x0104A4 08:8494:
+	.byte $F0,$00                   ;- D 0 - I - 0x0104A4 08:8494:
+	.byte $D0,$90                   ;- D 0 - I - 0x0104A6 08:8496: enemy types: flags, kind (id), anim, field 0440
 ; stage 4 boss, id $83
 spawnRecSodom2:
-	.byte $D9,$00,$D0,$83           ;- D 0 - I - 0x0104A8 08:8498:
+	.byte $D9,$00                   ;- D 0 - I - 0x0104A8 08:8498:
+	.byte $D0,$83                   ;- D 0 - I - 0x0104AA 08:849A: enemy types: flags, kind (id), anim, field 0440
 ; stage 5 boss, id $74
 spawnRecBelger:
-	.byte $F0,$00,$D0,$74,$BC,$00,$D0,$6E,$6B,$00,$D0,$68,$E4,$00;- D 0 - I - 0x0104AC 08:849C:
-	.byte $D0                       ;- - - - - - 0x0104BA 08:84AA:
-	.byte $6B                       ;- D 0 - I - 0x0104BB 08:84AB:
-	.byte $B7,$00                   ;- - - - - - 0x0104BC 08:84AC:
-	.byte $D0,$65,$00,$00,$D4,$61,$61,$00;- D 0 - I - 0x0104BE 08:84AE:
-	.byte $D0,$00,$00,$00,$D4,$63,$79,$00;- - - - - - 0x0104C6 08:84B6:
-	.byte $D4,$64,$00,$00,$D0,$22,$8F,$00;- D 0 - I - 0x0104CE 08:84BE:
-	.byte $D0,$23,$98,$00           ;- - - - - - 0x0104D6 08:84C6:
-	.byte $D0,$24,$A1,$00,$D0,$25,$B7,$00;- D 0 - I - 0x0104DA 08:84CA:
-	.byte $D0,$26,$80,$00           ;- - - - - - 0x0104E2 08:84D2:
-	.byte $D0,$27,$88,$00,$D0,$28,$8F,$00,$D0,$29,$98,$00;- D 0 - I - 0x0104E6 08:84D6:
-	.byte $D0,$2A                   ;- - - - - - 0x0104F2 08:84E2:
-	.byte $A1                       ;- D 0 - I - 0x0104F4 08:84E4:
-	.byte $00                       ;- - - - - - 0x0104F5 08:84E5:
-	.byte $D0,$2B,$B7,$00           ;- D 0 - I - 0x0104F6 08:84E6:
-	.byte $D0                       ;- - - - - - 0x0104FA 08:84EA:
-	.byte $30                       ;- D 0 - I - 0x0104FB 08:84EB:
-	.byte $80,$00                   ;- - - - - - 0x0104FC 08:84EC:
-	.byte $D0,$31,$88,$00,$D0       ;- D 0 - I - 0x0104FE 08:84EE:
-	.byte $32,$8F,$00               ;- - - - - - 0x010503 08:84F3:
-	.byte $D0,$33,$98,$00,$D0,$34,$A1,$00,$D0,$35,$B7;- D 0 - I - 0x010506 08:84F6:
-	.word loc_0E_D400, $8036, loc_0E_D400, $A13C, loc_0E_D400, $8037, loc_0E_D400;W 0x010511 08:8501:
-	.byte $3D,$A1,$00,$D4,$38,$80,$00,$D4,$3E,$A1,$00,$D0,$30,$80,$00,$D0;- D 0 - I - 0x01051F 08:850F:
-	.byte $31,$88,$00,$D0,$32,$8F,$00,$D0,$33,$98,$00,$D0,$34,$A1,$00;- D 0 - I - 0x01052F 08:851F:
-	.byte $D0,$35,$B7               ;- - - - - - 0x01053E 08:852E:
-	.byte $00                       ;- D 0 - I - 0x010541 08:8531:
-	.byte $D0,$40,$A2,$00           ;- - - - - - 0x010542 08:8532:
-	.byte $D0,$43,$A2,$00           ;- D 0 - I - 0x010546 08:8536:
-	.byte $D0,$41,$A2,$00,$D0,$44,$A2,$00,$D0,$42,$A2,$00;- - - - - - 0x01054A 08:853A:
-	.byte $D0,$45,$A2,$00           ;- D 0 - I - 0x010556 08:8546:
-	.byte $D0,$3B,$80,$00,$D0,$42,$88,$00,$D0,$45,$8F,$00,$D0,$48,$98,$00;- - - - - - 0x01055A 08:854A:
-	.byte $D0,$4E,$A1,$00,$D0,$4B,$B7,$00,$D0,$3F,$80,$00,$D0,$50,$88,$00;- - - - - - 0x01056A 08:855A:
-	.byte $D0,$53,$8F,$00           ;- - - - - - 0x01057A 08:856A:
-	.byte $D0,$56,$98,$00,$D0,$5C,$A1,$00,$D0,$59,$B7,$00;- D 0 - I - 0x01057E 08:856E:
-	.byte $D0,$4F,$80,$00,$D0,$51,$88,$00,$D0,$54,$8F,$00,$D0,$57,$98,$00;- - - - - - 0x01058A 08:857A:
-	.byte $D0,$5D,$A1,$00,$D0,$5A,$B7,$00,$D0,$5F,$80,$00,$D0,$52,$88,$00;- - - - - - 0x01059A 08:858A:
-	.byte $D0,$55,$8F,$00,$D0,$58,$98,$00;- - - - - - 0x0105AA 08:859A:
-	.byte $D0,$5E,$A1,$00           ;- D 0 - I - 0x0105B2 08:85A2:
-	.byte $D0,$5B,$B7,$00,$D4,$39,$B7,$00,$D4,$3A,$B7,$00,$D4,$3B,$B7,$00;- - - - - - 0x0105B6 08:85A6:
-	.byte $D0,$40,$A2,$00,$D0,$43,$A2,$00;- D 0 - I - 0x0105C6 08:85B6:
-	.byte $D0,$41,$A2,$00,$D0,$44,$A2,$00;- - - - - - 0x0105CE 08:85BE:
-	.byte $D0,$42,$A2,$00           ;- D 0 - I - 0x0105D6 08:85C6:
-	.byte $D0,$45,$A2,$00,$D0,$46,$A2,$00;- - - - - - 0x0105DA 08:85CA:
-	.byte $D0,$49,$A2,$00,$D0,$47,$A2,$00,$D0,$4A,$A2,$00;- D 0 - I - 0x0105E2 08:85D2:
-	.byte $D0,$48,$A2,$00           ;- - - - - - 0x0105EE 08:85DE:
-	.byte $D0,$4B,$A2,$00,$28,$04,$00;- D 0 - I - 0x0105F2 08:85E2:
-	.byte $00                       ;- - - - - - 0x0105F9 08:85E9:
-	.byte $28,$05,$01               ;- D 0 - I - 0x0105FA 08:85EA:
-	.byte $00                       ;- - - - - - 0x0105FD 08:85ED:
-	.byte $00,$FF,$00               ;- D 0 - I - 0x0105FE 08:85EE:
-	.byte $00                       ;- - - - - - 0x010601 08:85F1:
-	.byte $00,$FF,$00               ;- D 0 - I - 0x010602 08:85F2:
-	.byte $00,$00,$FF,$00,$00,$00,$FF,$00,$00,$00,$FF,$00,$00,$00,$FF,$00;- - - - - - 0x010605 08:85F5:
-	.byte $00,$00,$FF,$00,$00,$00,$FF,$00,$00;- - - - - - 0x010615 08:8605:
-	.byte $00,$FF,$00               ;- D 0 - I - 0x01061E 08:860E:
-	.byte $00,$00,$FF,$00,$00,$00,$FF,$00,$00,$00,$FF,$00,$00,$00,$FF,$00;- - - - - - 0x010621 08:8611:
-	.byte $00,$00,$FF,$00,$00,$00,$FF,$00,$00;- - - - - - 0x010631 08:8621:
-	.byte $00,$FF,$00               ;- D 0 - I - 0x01063A 08:862A:
-	.byte $00,$00,$FF,$00,$00       ;- - - - - - 0x01063D 08:862D:
-	.byte $48,$04,$07               ;- D 0 - I - 0x010642 08:8632:
-	.byte $00                       ;- - - - - - 0x010645 08:8635:
-	.byte $58,$04,$08               ;- D 0 - I - 0x010646 08:8636:
-	.byte $00                       ;- - - - - - 0x010649 08:8639:
-	.byte $68,$04,$09               ;- D 0 - I - 0x01064A 08:863A:
-	.byte $00                       ;- - - - - - 0x01064D 08:863D:
-	.byte $68,$04,$08               ;- D 0 - I - 0x01064E 08:863E:
-	.byte $00                       ;- - - - - - 0x010651 08:8641:
-	.byte $68,$04,$0B               ;- D 0 - I - 0x010652 08:8642:
-	.byte $00                       ;- - - - - - 0x010655 08:8645:
-	.byte $00,$FF,$00               ;- D 0 - I - 0x010656 08:8646:
-	.byte $00                       ;- - - - - - 0x010659 08:8649:
-	.byte $00,$FF,$00               ;- D 0 - I - 0x01065A 08:864A:
-	.byte $00,$00,$FF,$00,$00       ;- - - - - - 0x01065D 08:864D:
-	.byte $00,$FF,$00               ;- D 0 - I - 0x010662 08:8652:
-	.byte $00                       ;- - - - - - 0x010665 08:8655:
-	.byte $00,$FF,$00               ;- D 0 - I - 0x010666 08:8656:
-	.byte $00,$00,$FF,$00,$00,$00,$FF,$00,$00;- - - - - - 0x010669 08:8659:
-	.byte $00,$FF,$00               ;- D 0 - I - 0x010672 08:8662:
-	.byte $00                       ;- - - - - - 0x010675 08:8665:
-	.byte $28,$03,$02               ;- D 0 - I - 0x010676 08:8666:
-	.byte $00,$28,$04,$03,$00       ;- - - - - - 0x010679 08:8669:
-	.byte $28,$05,$04               ;- D 0 - I - 0x01067E 08:866E:
-	.byte $00                       ;- - - - - - 0x010681 08:8671:
-	.byte $68,$03,$05               ;- D 0 - I - 0x010682 08:8672:
-	.byte $00,$38,$04,$00,$00       ;- - - - - - 0x010685 08:8675:
-	.byte $38,$05,$01               ;- D 0 - I - 0x01068A 08:867A:
-	.byte $00                       ;- - - - - - 0x01068D 08:867D:
-	.byte $38,$03,$02               ;- D 0 - I - 0x01068E 08:867E:
-	.byte $00                       ;- - - - - - 0x010691 08:8681:
-	.byte $38,$04,$03               ;- D 0 - I - 0x010692 08:8682:
-	.byte $00,$38,$05,$04,$00       ;- - - - - - 0x010695 08:8685:
-	.byte $68,$03,$05               ;- D 0 - I - 0x01069A 08:868A:
-	.byte $00,$58,$04,$00,$00       ;- - - - - - 0x01069D 08:868D:
-	.byte $58,$05,$01               ;- D 0 - I - 0x0106A2 08:8692:
-	.byte $00,$58,$03,$02,$00       ;- - - - - - 0x0106A5 08:8695:
-	.byte $58,$04,$03               ;- D 0 - I - 0x0106AA 08:869A:
-	.byte $00                       ;- - - - - - 0x0106AD 08:869D:
-	.byte $58,$05,$04               ;- D 0 - I - 0x0106AE 08:869E:
-	.byte $00                       ;- - - - - - 0x0106B1 08:86A1:
-	.byte $68,$03,$05               ;- D 0 - I - 0x0106B2 08:86A2:
-	.byte $00,$38,$04,$00,$00,$38,$05,$04,$00;- - - - - - 0x0106B5 08:86A5:
-	.byte $40,$04,$00               ;- D 0 - I - 0x0106BE 08:86AE:
-	.byte $00                       ;- - - - - - 0x0106C1 08:86B1:
-	.byte $40,$05,$04               ;- D 0 - I - 0x0106C2 08:86B2:
-	.byte $00                       ;- - - - - - 0x0106C5 08:86B5:
-	.byte $58,$04,$00               ;- D 0 - I - 0x0106C6 08:86B6:
-	.byte $00                       ;- - - - - - 0x0106C9 08:86B9:
-	.byte $58,$05,$04               ;- D 0 - I - 0x0106CA 08:86BA:
-	.byte $00                       ;- - - - - - 0x0106CD 08:86BD:
-	.byte $28,$04,$00               ;- D 0 - I - 0x0106CE 08:86BE:
-	.byte $00                       ;- - - - - - 0x0106D1 08:86C1:
-	.byte $28,$05,$01               ;- D 0 - I - 0x0106D2 08:86C2:
-	.byte $00                       ;- - - - - - 0x0106D5 08:86C5:
-	.byte $28,$03,$02               ;- D 0 - I - 0x0106D6 08:86C6:
-	.byte $00                       ;- - - - - - 0x0106D9 08:86C9:
-	.byte $28,$04,$03               ;- D 0 - I - 0x0106DA 08:86CA:
-	.byte $00                       ;- - - - - - 0x0106DD 08:86CD:
-	.byte $28,$05,$04               ;- D 0 - I - 0x0106DE 08:86CE:
-	.byte $00,$58,$03,$05,$00,$30,$05,$01,$00;- - - - - - 0x0106E1 08:86D1:
-	.byte $30,$03,$02               ;- D 0 - I - 0x0106EA 08:86DA:
-	.byte $00,$30,$05,$01,$00,$30,$03,$02,$00,$30,$05,$01,$00;- - - - - - 0x0106ED 08:86DD:
-	.byte $30,$03,$02               ;- D 0 - I - 0x0106FA 08:86EA:
-	.byte $00,$58,$04,$00,$00,$58,$05,$01,$00,$58,$03,$02,$00,$58,$04,$03;- - - - - - 0x0106FD 08:86ED:
-	.byte $00,$58,$05,$04,$00,$68,$03,$05,$00,$40,$04,$00,$00,$40,$05,$01;- - - - - - 0x01070D 08:86FD:
-	.byte $00,$40,$03,$02,$00       ;- - - - - - 0x01071D 08:870D:
-	.byte $40,$04,$03               ;- D 0 - I - 0x010722 08:8712:
-	.byte $00                       ;- - - - - - 0x010725 08:8715:
-	.byte $40,$05,$04               ;- D 0 - I - 0x010726 08:8716:
-	.byte $00                       ;- - - - - - 0x010729 08:8719:
-	.byte $68,$03,$05               ;- D 0 - I - 0x01072A 08:871A:
-	.byte $00,$48,$04,$00,$00,$48,$05,$01,$00,$48,$03,$02,$00,$48,$04,$03;- - - - - - 0x01072D 08:871D:
-	.byte $00,$48,$05,$04,$00,$68,$03,$05,$00,$58,$04,$00,$00,$58,$05,$01;- - - - - - 0x01073D 08:872D:
-	.byte $00,$58,$03,$02,$00,$58,$04,$03,$00;- - - - - - 0x01074D 08:873D:
-	.byte $58,$05,$04               ;- D 0 - I - 0x010756 08:8746:
-	.byte $00,$68,$03,$05,$00,$68,$03,$05,$00,$68,$03,$05,$00,$68,$03,$05;- - - - - - 0x010759 08:8749:
-	.byte $00                       ;- - - - - - 0x010769 08:8759:
-	.byte $30,$05,$01               ;- D 0 - I - 0x01076A 08:875A:
-	.byte $00                       ;- - - - - - 0x01076D 08:875D:
-	.byte $30,$03,$02               ;- D 0 - I - 0x01076E 08:875E:
-	.byte $00,$48,$05,$01,$00,$48,$03,$02,$00;- - - - - - 0x010771 08:8761:
-	.byte $58,$05,$01               ;- D 0 - I - 0x01077A 08:876A:
-	.byte $00,$58,$03,$02,$00,$30,$05,$01,$00;- - - - - - 0x01077D 08:876D:
-	.byte $30,$03,$02               ;- D 0 - I - 0x010786 08:8776:
-	.byte $00                       ;- - - - - - 0x010789 08:8779:
-	.byte $48,$05,$01               ;- D 0 - I - 0x01078A 08:877A:
-	.byte $00                       ;- - - - - - 0x01078D 08:877D:
-	.byte $48,$03,$02               ;- D 0 - I - 0x01078E 08:877E:
-	.byte $00,$58,$05,$01,$00       ;- - - - - - 0x010791 08:8781:
-	.byte $58,$03,$02               ;- D 0 - I - 0x010796 08:8786:
-	.byte $00,$23,$01,$00,$41,$10,$00,$20,$04,$10,$10,$0D,$00,$30,$10,$88;- - - - - - 0x010799 08:8789:
-	.byte $00,$00,$01,$01,$00,$20,$00,$6F,$00,$11,$41,$20,$10,$34,$04,$00;- - - - - - 0x0107A9 08:8799:
-	.byte $40,$08,$04,$90,$00,$40,$41,$0C,$00,$59,$01,$10,$51,$40,$00,$04;- - - - - - 0x0107B9 08:87A9:
-	.byte $00,$A5,$01,$00,$00,$00,$04,$88,$00,$20,$01,$82,$01,$01,$00,$40;- - - - - - 0x0107C9 08:87B9:
-	.byte $00,$02,$00,$00,$04,$40,$10,$00,$00,$41,$10,$01,$00,$10,$00,$01;- - - - - - 0x0107D9 08:87C9:
-	.byte $00,$94,$00,$01,$10,$00,$10,$20,$01,$D9,$11,$13,$44,$80,$10,$08;- - - - - - 0x0107E9 08:87D9:
-	.byte $40,$10,$11,$02,$40,$0A,$44,$12,$00,$44,$00,$02,$04,$20,$10,$40;- - - - - - 0x0107F9 08:87E9:
-	.byte $02,$C0,$00,$00,$00,$00,$04,$8A,$FF,$8A,$1E,$AA,$FC,$28,$E9,$A8;- - - - - - 0x010809 08:87F9:
-	.byte $77,$82,$79,$0B,$A9,$92,$DD,$AA,$CD,$EA,$5B,$92,$FB,$38,$7E,$8A;- - - - - - 0x010819 08:8809:
-	.byte $4F,$2A,$CF,$6B,$FF,$AA,$7D,$63,$7B,$22,$36,$20,$FF,$A0,$16,$AA;- - - - - - 0x010829 08:8819:
-	.byte $D9,$A2,$DA,$A8,$AD,$92,$F6,$0A,$B3,$A4,$65,$38,$94,$28,$55,$88;- - - - - - 0x010839 08:8829:
-	.byte $EF,$EA,$F5,$28,$6F,$AA,$EE,$18,$D8,$A0,$F9,$83,$E2,$20,$9E,$A0;- - - - - - 0x010849 08:8839:
-	.byte $89,$82,$65,$A2,$77,$21,$C5,$0C,$9F,$A8,$F2,$EC,$F9,$9A,$DD,$A8;- - - - - - 0x010859 08:8849:
-	.byte $3B,$A0,$19,$92,$FF,$80,$D6,$F1,$C1,$AA,$CD,$08,$36,$2A,$EC,$02;- - - - - - 0x010869 08:8859:
-	.byte $4C,$E2,$EC,$2A,$7F,$22,$83,$2A,$BF,$21,$79,$2A,$51,$AA,$FD,$06;- - - - - - 0x010879 08:8869:
-	.byte $37,$BB,$26,$18,$D4,$A9,$0E,$8A,$ED,$02,$67,$2A,$DC,$0A,$92,$CA;- - - - - - 0x010889 08:8879:
-	.byte $87,$08,$47,$0A,$31,$02,$6B,$C0,$76,$9C,$9A,$22,$5F,$2B,$5B,$82;- - - - - - 0x010899 08:8889:
-	.byte $2E,$6E,$F7,$2A,$F6,$20,$D7,$8A,$81,$28,$1A,$04,$9C,$8A,$BF,$AC;- - - - - - 0x0108A9 08:8899:
-	.byte $0D,$02,$06,$82,$D7,$24,$AA,$78,$7B,$22,$11,$B0,$FE,$F2,$9E,$22;- - - - - - 0x0108B9 08:88A9:
-	.byte $FF,$2A,$FC,$81,$FF,$2A,$BE,$22,$A4,$2A,$E7,$A2,$7F,$2A,$19,$AA;- - - - - - 0x0108C9 08:88B9:
-	.byte $6A,$80,$90,$0A,$C1,$A2,$71,$32,$37,$A8,$7E,$18,$F8,$80,$2E,$00;- - - - - - 0x0108D9 08:88C9:
-	.byte $3E,$60,$FF,$0A,$FF,$86,$BB,$A3,$7C,$AA,$57,$0E,$DE,$28,$16,$20;- - - - - - 0x0108E9 08:88D9:
-	.byte $BF,$2A,$BF,$A8,$74,$88,$1B,$A8,$3E,$CB,$ED,$8A,$3F,$0A,$1C,$23;- - - - - - 0x0108F9 08:88E9:
-	.byte $54,$0A,$BB,$4A,$B7,$CA,$DF;- - - - - - 0x010909 08:88F9:
+	.byte $F0,$00                   ;- D 0 - I - 0x0104AC 08:849C:
+	.byte $D0,$74,$BC,$00           ;- D 0 - I - 0x0104AE 08:849E: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$6E,$6B,$00           ;- D 0 - I - 0x0104B2 08:84A2: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$68,$E4,$00           ;- D 0 - I - 0x0104B6 08:84A6: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$6B,$B7,$00           ;- - - - - - 0x0104BA 08:84AA: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$65,$00,$00           ;- D 0 - I - 0x0104BE 08:84AE: enemy types: flags, kind (id), anim, field 0440
+	.byte $D4,$61,$61,$00           ;- D 0 - I - 0x0104C2 08:84B2: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$00,$00,$00           ;- - - - - - 0x0104C6 08:84B6: enemy types: flags, kind (id), anim, field 0440
+	.byte $D4,$63,$79,$00           ;- - - - - - 0x0104CA 08:84BA: enemy types: flags, kind (id), anim, field 0440
+	.byte $D4,$64,$00,$00           ;- D 0 - I - 0x0104CE 08:84BE: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$22,$8F,$00           ;- D 0 - I - 0x0104D2 08:84C2: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$23,$98,$00           ;- - - - - - 0x0104D6 08:84C6: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$24,$A1,$00           ;- D 0 - I - 0x0104DA 08:84CA: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$25,$B7,$00           ;- D 0 - I - 0x0104DE 08:84CE: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$26,$80,$00           ;- - - - - - 0x0104E2 08:84D2: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$27,$88,$00           ;- D 0 - I - 0x0104E6 08:84D6: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$28,$8F,$00           ;- D 0 - I - 0x0104EA 08:84DA: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$29,$98,$00           ;- D 0 - I - 0x0104EE 08:84DE: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$2A,$A1,$00           ;- - - - - - 0x0104F2 08:84E2: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$2B,$B7,$00           ;- D 0 - I - 0x0104F6 08:84E6: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$30,$80,$00           ;- - - - - - 0x0104FA 08:84EA: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$31,$88,$00           ;- D 0 - I - 0x0104FE 08:84EE: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$32,$8F,$00           ;- D 0 - I - 0x010502 08:84F2: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$33,$98,$00           ;- D 0 - I - 0x010506 08:84F6: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$34,$A1,$00           ;- D 0 - I - 0x01050A 08:84FA: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$35,$B7,$00           ;- D 0 - I - 0x01050E 08:84FE: enemy types: flags, kind (id), anim, field 0440
+	.byte $D4,$36,$80,$00           ;- - - - - - 0x010512 08:8502: enemy types: flags, kind (id), anim, field 0440
+	.byte $D4,$3C,$A1,$00           ;- - - - - - 0x010516 08:8506: enemy types: flags, kind (id), anim, field 0440
+	.byte $D4,$37,$80,$00           ;- D 0 - I - 0x01051A 08:850A: enemy types: flags, kind (id), anim, field 0440
+	.byte $D4,$3D,$A1,$00           ;- D 0 - I - 0x01051E 08:850E: enemy types: flags, kind (id), anim, field 0440
+	.byte $D4,$38,$80,$00           ;- D 0 - I - 0x010522 08:8512: enemy types: flags, kind (id), anim, field 0440
+	.byte $D4,$3E,$A1,$00           ;- D 0 - I - 0x010526 08:8516: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$30,$80,$00           ;- D 0 - I - 0x01052A 08:851A: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$31,$88,$00           ;- D 0 - I - 0x01052E 08:851E: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$32,$8F,$00           ;- D 0 - I - 0x010532 08:8522: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$33,$98,$00           ;- D 0 - I - 0x010536 08:8526: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$34,$A1,$00           ;- D 0 - I - 0x01053A 08:852A: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$35,$B7,$00           ;- - - - - - 0x01053E 08:852E: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$40,$A2,$00           ;- - - - - - 0x010542 08:8532: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$43,$A2,$00           ;- D 0 - I - 0x010546 08:8536: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$41,$A2,$00           ;- - - - - - 0x01054A 08:853A: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$44,$A2,$00           ;- - - - - - 0x01054E 08:853E: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$42,$A2,$00           ;- - - - - - 0x010552 08:8542: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$45,$A2,$00           ;- D 0 - I - 0x010556 08:8546: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$3B,$80,$00           ;- - - - - - 0x01055A 08:854A: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$42,$88,$00           ;- - - - - - 0x01055E 08:854E: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$45,$8F,$00           ;- - - - - - 0x010562 08:8552: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$48,$98,$00           ;- - - - - - 0x010566 08:8556: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$4E,$A1,$00           ;- - - - - - 0x01056A 08:855A: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$4B,$B7,$00           ;- - - - - - 0x01056E 08:855E: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$3F,$80,$00           ;- - - - - - 0x010572 08:8562: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$50,$88,$00           ;- - - - - - 0x010576 08:8566: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$53,$8F,$00           ;- - - - - - 0x01057A 08:856A: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$56,$98,$00           ;- D 0 - I - 0x01057E 08:856E: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$5C,$A1,$00           ;- D 0 - I - 0x010582 08:8572: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$59,$B7,$00           ;- D 0 - I - 0x010586 08:8576: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$4F,$80,$00           ;- - - - - - 0x01058A 08:857A: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$51,$88,$00           ;- - - - - - 0x01058E 08:857E: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$54,$8F,$00           ;- - - - - - 0x010592 08:8582: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$57,$98,$00           ;- - - - - - 0x010596 08:8586: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$5D,$A1,$00           ;- - - - - - 0x01059A 08:858A: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$5A,$B7,$00           ;- - - - - - 0x01059E 08:858E: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$5F,$80,$00           ;- - - - - - 0x0105A2 08:8592: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$52,$88,$00           ;- - - - - - 0x0105A6 08:8596: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$55,$8F,$00           ;- - - - - - 0x0105AA 08:859A: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$58,$98,$00           ;- - - - - - 0x0105AE 08:859E: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$5E,$A1,$00           ;- D 0 - I - 0x0105B2 08:85A2: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$5B,$B7,$00           ;- - - - - - 0x0105B6 08:85A6: enemy types: flags, kind (id), anim, field 0440
+	.byte $D4,$39,$B7,$00           ;- - - - - - 0x0105BA 08:85AA: enemy types: flags, kind (id), anim, field 0440
+	.byte $D4,$3A,$B7,$00           ;- - - - - - 0x0105BE 08:85AE: enemy types: flags, kind (id), anim, field 0440
+	.byte $D4,$3B,$B7,$00           ;- - - - - - 0x0105C2 08:85B2: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$40,$A2,$00           ;- D 0 - I - 0x0105C6 08:85B6: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$43,$A2,$00           ;- D 0 - I - 0x0105CA 08:85BA: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$41,$A2,$00           ;- - - - - - 0x0105CE 08:85BE: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$44,$A2,$00           ;- - - - - - 0x0105D2 08:85C2: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$42,$A2,$00           ;- D 0 - I - 0x0105D6 08:85C6: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$45,$A2,$00           ;- - - - - - 0x0105DA 08:85CA: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$46,$A2,$00           ;- - - - - - 0x0105DE 08:85CE: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$49,$A2,$00           ;- D 0 - I - 0x0105E2 08:85D2: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$47,$A2,$00           ;- D 0 - I - 0x0105E6 08:85D6: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$4A,$A2,$00           ;- D 0 - I - 0x0105EA 08:85DA: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$48,$A2,$00           ;- - - - - - 0x0105EE 08:85DE: enemy types: flags, kind (id), anim, field 0440
+	.byte $D0,$4B,$A2,$00           ;- D 0 - I - 0x0105F2 08:85E2: enemy types: flags, kind (id), anim, field 0440
+; 105 types x 4 bytes: objLife (HP), objSpriteAir, objSpriteDown, unused
+enemyStatTable:
+	.byte $28,$04,$00,$00           ;- D 0 - I - 0x0105F6 08:85E6: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $28,$05,$01,$00           ;- D 0 - I - 0x0105FA 08:85EA: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $00,$FF,$00,$00           ;- D 0 - I - 0x0105FE 08:85EE: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $00,$FF,$00,$00           ;- D 0 - I - 0x010602 08:85F2: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $00,$FF,$00,$00           ;- - - - - - 0x010606 08:85F6: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $00,$FF,$00,$00           ;- - - - - - 0x01060A 08:85FA: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $00,$FF,$00,$00           ;- - - - - - 0x01060E 08:85FE: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $00,$FF,$00,$00           ;- - - - - - 0x010612 08:8602: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $00,$FF,$00,$00           ;- - - - - - 0x010616 08:8606: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $00,$FF,$00,$00           ;- - - - - - 0x01061A 08:860A: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $00,$FF,$00,$00           ;- D 0 - I - 0x01061E 08:860E: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $00,$FF,$00,$00           ;- - - - - - 0x010622 08:8612: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $00,$FF,$00,$00           ;- - - - - - 0x010626 08:8616: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $00,$FF,$00,$00           ;- - - - - - 0x01062A 08:861A: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $00,$FF,$00,$00           ;- - - - - - 0x01062E 08:861E: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $00,$FF,$00,$00           ;- - - - - - 0x010632 08:8622: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $00,$FF,$00,$00           ;- - - - - - 0x010636 08:8626: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $00,$FF,$00,$00           ;- D 0 - I - 0x01063A 08:862A: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $00,$FF,$00,$00           ;- - - - - - 0x01063E 08:862E: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $48,$04,$07,$00           ;- D 0 - I - 0x010642 08:8632: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $58,$04,$08,$00           ;- D 0 - I - 0x010646 08:8636: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $68,$04,$09,$00           ;- D 0 - I - 0x01064A 08:863A: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $68,$04,$08,$00           ;- D 0 - I - 0x01064E 08:863E: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $68,$04,$0B,$00           ;- D 0 - I - 0x010652 08:8642: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $00,$FF,$00,$00           ;- D 0 - I - 0x010656 08:8646: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $00,$FF,$00,$00           ;- D 0 - I - 0x01065A 08:864A: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $00,$FF,$00,$00           ;- - - - - - 0x01065E 08:864E: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $00,$FF,$00,$00           ;- D 0 - I - 0x010662 08:8652: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $00,$FF,$00,$00           ;- D 0 - I - 0x010666 08:8656: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $00,$FF,$00,$00           ;- - - - - - 0x01066A 08:865A: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $00,$FF,$00,$00           ;- - - - - - 0x01066E 08:865E: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $00,$FF,$00,$00           ;- D 0 - I - 0x010672 08:8662: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $28,$03,$02,$00           ;- D 0 - I - 0x010676 08:8666: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $28,$04,$03,$00           ;- - - - - - 0x01067A 08:866A: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $28,$05,$04,$00           ;- D 0 - I - 0x01067E 08:866E: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $68,$03,$05,$00           ;- D 0 - I - 0x010682 08:8672: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $38,$04,$00,$00           ;- - - - - - 0x010686 08:8676: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $38,$05,$01,$00           ;- D 0 - I - 0x01068A 08:867A: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $38,$03,$02,$00           ;- D 0 - I - 0x01068E 08:867E: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $38,$04,$03,$00           ;- D 0 - I - 0x010692 08:8682: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $38,$05,$04,$00           ;- - - - - - 0x010696 08:8686: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $68,$03,$05,$00           ;- D 0 - I - 0x01069A 08:868A: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $58,$04,$00,$00           ;- - - - - - 0x01069E 08:868E: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $58,$05,$01,$00           ;- D 0 - I - 0x0106A2 08:8692: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $58,$03,$02,$00           ;- - - - - - 0x0106A6 08:8696: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $58,$04,$03,$00           ;- D 0 - I - 0x0106AA 08:869A: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $58,$05,$04,$00           ;- D 0 - I - 0x0106AE 08:869E: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $68,$03,$05,$00           ;- D 0 - I - 0x0106B2 08:86A2: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $38,$04,$00,$00           ;- - - - - - 0x0106B6 08:86A6: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $38,$05,$04,$00           ;- - - - - - 0x0106BA 08:86AA: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $40,$04,$00,$00           ;- D 0 - I - 0x0106BE 08:86AE: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $40,$05,$04,$00           ;- D 0 - I - 0x0106C2 08:86B2: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $58,$04,$00,$00           ;- D 0 - I - 0x0106C6 08:86B6: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $58,$05,$04,$00           ;- D 0 - I - 0x0106CA 08:86BA: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $28,$04,$00,$00           ;- D 0 - I - 0x0106CE 08:86BE: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $28,$05,$01,$00           ;- D 0 - I - 0x0106D2 08:86C2: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $28,$03,$02,$00           ;- D 0 - I - 0x0106D6 08:86C6: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $28,$04,$03,$00           ;- D 0 - I - 0x0106DA 08:86CA: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $28,$05,$04,$00           ;- D 0 - I - 0x0106DE 08:86CE: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $58,$03,$05,$00           ;- - - - - - 0x0106E2 08:86D2: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $30,$05,$01,$00           ;- - - - - - 0x0106E6 08:86D6: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $30,$03,$02,$00           ;- D 0 - I - 0x0106EA 08:86DA: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $30,$05,$01,$00           ;- - - - - - 0x0106EE 08:86DE: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $30,$03,$02,$00           ;- - - - - - 0x0106F2 08:86E2: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $30,$05,$01,$00           ;- - - - - - 0x0106F6 08:86E6: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $30,$03,$02,$00           ;- D 0 - I - 0x0106FA 08:86EA: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $58,$04,$00,$00           ;- - - - - - 0x0106FE 08:86EE: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $58,$05,$01,$00           ;- - - - - - 0x010702 08:86F2: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $58,$03,$02,$00           ;- - - - - - 0x010706 08:86F6: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $58,$04,$03,$00           ;- - - - - - 0x01070A 08:86FA: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $58,$05,$04,$00           ;- - - - - - 0x01070E 08:86FE: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $68,$03,$05,$00           ;- - - - - - 0x010712 08:8702: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $40,$04,$00,$00           ;- - - - - - 0x010716 08:8706: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $40,$05,$01,$00           ;- - - - - - 0x01071A 08:870A: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $40,$03,$02,$00           ;- - - - - - 0x01071E 08:870E: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $40,$04,$03,$00           ;- D 0 - I - 0x010722 08:8712: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $40,$05,$04,$00           ;- D 0 - I - 0x010726 08:8716: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $68,$03,$05,$00           ;- D 0 - I - 0x01072A 08:871A: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $48,$04,$00,$00           ;- - - - - - 0x01072E 08:871E: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $48,$05,$01,$00           ;- - - - - - 0x010732 08:8722: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $48,$03,$02,$00           ;- - - - - - 0x010736 08:8726: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $48,$04,$03,$00           ;- - - - - - 0x01073A 08:872A: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $48,$05,$04,$00           ;- - - - - - 0x01073E 08:872E: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $68,$03,$05,$00           ;- - - - - - 0x010742 08:8732: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $58,$04,$00,$00           ;- - - - - - 0x010746 08:8736: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $58,$05,$01,$00           ;- - - - - - 0x01074A 08:873A: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $58,$03,$02,$00           ;- - - - - - 0x01074E 08:873E: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $58,$04,$03,$00           ;- - - - - - 0x010752 08:8742: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $58,$05,$04,$00           ;- D 0 - I - 0x010756 08:8746: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $68,$03,$05,$00           ;- - - - - - 0x01075A 08:874A: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $68,$03,$05,$00           ;- - - - - - 0x01075E 08:874E: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $68,$03,$05,$00           ;- - - - - - 0x010762 08:8752: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $68,$03,$05,$00           ;- - - - - - 0x010766 08:8756: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $30,$05,$01,$00           ;- D 0 - I - 0x01076A 08:875A: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $30,$03,$02,$00           ;- D 0 - I - 0x01076E 08:875E: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $48,$05,$01,$00           ;- - - - - - 0x010772 08:8762: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $48,$03,$02,$00           ;- - - - - - 0x010776 08:8766: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $58,$05,$01,$00           ;- D 0 - I - 0x01077A 08:876A: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $58,$03,$02,$00           ;- - - - - - 0x01077E 08:876E: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $30,$05,$01,$00           ;- - - - - - 0x010782 08:8772: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $30,$03,$02,$00           ;- D 0 - I - 0x010786 08:8776: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $48,$05,$01,$00           ;- D 0 - I - 0x01078A 08:877A: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $48,$03,$02,$00           ;- D 0 - I - 0x01078E 08:877E: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $58,$05,$01,$00           ;- - - - - - 0x010792 08:8782: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $58,$03,$02,$00           ;- D 0 - I - 0x010796 08:8786: enemy stats: life, spriteAir, spriteDown, 0
+	.byte $23,$01,$00,$41,$10,$00,$20,$04,$10,$10,$0D,$00,$30,$10,$88,$00;- - - - - - 0x01079A 08:878A:
+	.byte $00,$01,$01,$00,$20,$00,$6F,$00,$11,$41,$20,$10,$34,$04,$00,$40;- - - - - - 0x0107AA 08:879A:
+	.byte $08,$04,$90,$00,$40,$41,$0C,$00,$59,$01,$10,$51,$40,$00,$04,$00;- - - - - - 0x0107BA 08:87AA:
+	.byte $A5,$01,$00,$00,$00,$04,$88,$00,$20,$01,$82,$01,$01,$00,$40,$00;- - - - - - 0x0107CA 08:87BA:
+	.byte $02,$00,$00,$04,$40,$10,$00,$00,$41,$10,$01,$00,$10,$00,$01,$00;- - - - - - 0x0107DA 08:87CA:
+	.byte $94,$00,$01,$10,$00,$10,$20,$01,$D9,$11,$13,$44,$80,$10,$08,$40;- - - - - - 0x0107EA 08:87DA:
+	.byte $10,$11,$02,$40,$0A,$44,$12,$00,$44,$00,$02,$04,$20,$10,$40,$02;- - - - - - 0x0107FA 08:87EA:
+	.byte $C0,$00,$00,$00,$00,$04,$8A,$FF,$8A,$1E,$AA,$FC,$28,$E9,$A8,$77;- - - - - - 0x01080A 08:87FA:
+	.byte $82,$79,$0B,$A9,$92,$DD,$AA,$CD,$EA,$5B,$92,$FB,$38,$7E,$8A,$4F;- - - - - - 0x01081A 08:880A:
+	.byte $2A,$CF,$6B,$FF,$AA,$7D,$63,$7B,$22,$36,$20,$FF,$A0,$16,$AA,$D9;- - - - - - 0x01082A 08:881A:
+	.byte $A2,$DA,$A8,$AD,$92,$F6,$0A,$B3,$A4,$65,$38,$94,$28,$55,$88,$EF;- - - - - - 0x01083A 08:882A:
+	.byte $EA,$F5,$28,$6F,$AA,$EE,$18,$D8,$A0,$F9,$83,$E2,$20,$9E,$A0,$89;- - - - - - 0x01084A 08:883A:
+	.byte $82,$65,$A2,$77,$21,$C5,$0C,$9F,$A8,$F2,$EC,$F9,$9A,$DD,$A8,$3B;- - - - - - 0x01085A 08:884A:
+	.byte $A0,$19,$92,$FF,$80,$D6,$F1,$C1,$AA,$CD,$08,$36,$2A,$EC,$02,$4C;- - - - - - 0x01086A 08:885A:
+	.byte $E2,$EC,$2A,$7F,$22,$83,$2A,$BF,$21,$79,$2A,$51,$AA,$FD,$06,$37;- - - - - - 0x01087A 08:886A:
+	.byte $BB,$26,$18,$D4,$A9,$0E,$8A,$ED,$02,$67,$2A,$DC,$0A,$92,$CA,$87;- - - - - - 0x01088A 08:887A:
+	.byte $08,$47,$0A,$31,$02,$6B,$C0,$76,$9C,$9A,$22,$5F,$2B,$5B,$82,$2E;- - - - - - 0x01089A 08:888A:
+	.byte $6E,$F7,$2A,$F6,$20,$D7,$8A,$81,$28,$1A,$04,$9C,$8A,$BF,$AC,$0D;- - - - - - 0x0108AA 08:889A:
+	.byte $02,$06,$82,$D7,$24,$AA,$78,$7B,$22,$11,$B0,$FE,$F2,$9E,$22,$FF;- - - - - - 0x0108BA 08:88AA:
+	.byte $2A,$FC,$81,$FF,$2A,$BE,$22,$A4,$2A,$E7,$A2,$7F,$2A,$19,$AA,$6A;- - - - - - 0x0108CA 08:88BA:
+	.byte $80,$90,$0A,$C1,$A2,$71,$32,$37,$A8,$7E,$18,$F8,$80,$2E,$00,$3E;- - - - - - 0x0108DA 08:88CA:
+	.byte $60,$FF,$0A,$FF,$86,$BB,$A3,$7C,$AA,$57,$0E,$DE,$28,$16,$20,$BF;- - - - - - 0x0108EA 08:88DA:
+	.byte $2A,$BF,$A8,$74,$88,$1B,$A8,$3E,$CB,$ED,$8A,$3F,$0A,$1C,$23,$54;- - - - - - 0x0108FA 08:88EA:
+	.byte $0A,$BB,$4A,$B7,$CA,$DF   ;- - - - - - 0x01090A 08:88FA:
 sub_08_8900:
 	LDA scrollXPage                 ;C - - - - - 0x010910 08:8900: A5 F9
 	BNE loc_08_8924                 ;C - - - - - 0x010912 08:8902: D0 20
@@ -2383,11 +2441,10 @@ tbl_08_98E0:
 tbl_08_98E7:
 	.word ofs_0F_F9A3+1, $F6B9      ;W 0x0118F7 08:98E7:
 	.byte $98                       ;- - - - - - 0x0118FB 08:98EB:
-	.byte $85,$06,$B9,$F8,$98,$85,$07,$6C,$06;- - - - - - 0x0118FC 08:98EC:
-	.byte $00                       ;W 0x011905 08:98F5:
+	.byte $85,$06,$B9,$F8,$98,$85,$07,$6C,$06,$00;- - - - - - 0x0118FC 08:98EC:
 tbl_08_98F6:
-	.word ofs_0F_FA86+1, ofs_08_9896+1;W 0x011906 08:98F6:
-	.byte $B9                       ;- - - - - - 0x01190A 08:98FA:
+	.byte $87                       ;- - - - - - 0x011906 08:98F6:
+	.word ofs_08_97FA, $B998        ;W 0x011907 08:98F7:
 	.byte $ED,$99,$20,$00,$A0,$60   ;- - - - - - 0x01190B 08:98FB:
 ofs_08_9901:
 	LDY scrollXPage                 ;C - - J - - 0x011911 08:9901: A4 F9

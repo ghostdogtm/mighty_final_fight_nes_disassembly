@@ -1048,7 +1048,7 @@ loc_0E_C768:
 	INX                             ;C - - - - - 0x01C7EE 0E:C7DE: E8
 	STX prgBankA000                 ;C - - - - - 0x01C7EF 0E:C7DF: 86 F5
 	JSR SetPrgBanks                 ;C - - - - - 0x01C7F1 0E:C7E1: 20 4D FF
-	JSR sub_08_8000                 ;C - - - - - bank=08 0x01C7F4 0E:C7E4: 20 00 80
+	JSR LoadSpawnLists              ;C - - - - - bank=08 0x01C7F4 0E:C7E4: 20 00 80
 	JSR sub_08_8038                 ;C - - - - - bank=08 0x01C7F7 0E:C7E7: 20 38 80
 	JSR sub_08_8080                 ;C - - - - - bank=08 0x01C7FA 0E:C7EA: 20 80 80
 ; GG PEVKTYIA/IE start lives: LDA #$05 / STA lives

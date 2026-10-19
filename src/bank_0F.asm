@@ -62,7 +62,7 @@ loc_0F_E03B:
 	INX                             ;C - - - - - 0x01E091 0F:E081: E8
 	STX prgBankA000                 ;C - - - - - 0x01E092 0F:E082: 86 F5
 	JSR SetPrgBanks                 ;C - - - - - 0x01E094 0F:E084: 20 4D FF
-	JSR sub_08_8000                 ;C - - - - - bank=08 0x01E097 0F:E087: 20 00 80
+	JSR LoadSpawnLists              ;C - - - - - bank=08 0x01E097 0F:E087: 20 00 80
 	JSR sub_08_8038                 ;C - - - - - bank=08 0x01E09A 0F:E08A: 20 38 80
 	JSR sub_08_8080                 ;C - - - - - bank=08 0x01E09D 0F:E08D: 20 80 80
 	LDA stageSection                ;C D 3 - I - 0x01E0A0 0F:E090: A5 60
@@ -2518,7 +2518,6 @@ loc_0F_F27D:
 	LDA #$C0                        ;C - - - - - 0x01F28D 0F:F27D: A9 C0
 	STA objVelYLo,X                 ;C - - - - - 0x01F28F 0F:F27F: 9D 20 04
 	LDA #$FF                        ;C - - - - - 0x01F292 0F:F282: A9 FF
-ofs_0F_F284:
 	STA objVelYHi,X                 ;C - - - - - 0x01F294 0F:F284: 9D 30 04
 	RTS                             ;C - - - - - 0x01F297 0F:F287: 60
 ; A = anim id for slot X
@@ -3600,7 +3599,6 @@ loc_0F_FA60:
 	BCC loc_0F_FA90                 ;C - - - - - 0x01FA92 0F:FA82: 90 0C
 loc_0F_FA84:
 	DEC spriteFlipMask              ;C - - - - - 0x01FA94 0F:FA84: C6 10
-ofs_0F_FA86:
 	LDA spriteFlipMask              ;C - - - - - 0x01FA96 0F:FA86: A5 10
 	CMP #$00                        ;C - - - - - 0x01FA98 0F:FA88: C9 00
 	BEQ loc_0F_FA8F                 ;C - - - - - 0x01FA9A 0F:FA8A: F0 03
