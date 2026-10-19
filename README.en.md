@@ -77,11 +77,16 @@ A lowercase `c` means the code was found by tracing (the emulator never saw it; 
    opcode, `BRK`, or running into data).
 3. Finds pointer tables (including the "RTS trick", `.word label-1`): the anchor is a word pointing to code with the
    `J` flag, then the table is extended in both directions. Table targets are traced too.
-4. Names labels `sub_/loc_/ofs_/tbl_/dat_BB_AAAA`; references from the fixed banks into switchable banks stay raw
-   `$AAAA` when the bank is ambiguous (dispatcher calls like `JSR $A000` — about 136 places to resolve by hand).
+4. Names labels `sub_/loc_/ofs_/tbl_/dat_BB_AAAA`. The bank behind an `$8000–$BFFF` address is determined by (a) a single
+   CDL candidate, (b) banks that are always mapped as a pair (00/01, 04/05, 08/09, 0C/0D), (c) linear tracking of the values
+   stored to `prgBank8000/prgBankA000` ($F4/$F5) in the fixed banks. These operands carry `bank=NN` in the comment.
+5. Split address tables (low and high bytes separately, `LDA lo,Y` / `LDA hi,Y`) are emitted as `.lobytes`/`.hibytes`;
+   `LDA #lo / STA zp / LDA #hi / STA zp+1` pairs become `#<label` / `#>label`.
+6. Runs of identical bytes (8+) are collapsed into `.res N, $xx`.
 
 ## Known limitations
 - About 24 KB of PRG (≈19 %) was never seen by the CDL and tracing did not turn it into code — it is mostly data the
   game did not read during play. It stays as `.byte` (largest regions in `docs/coverage.txt`).
-- A relocation test (inserting a byte in the middle of a bank) is not automated: raw `$8000–$BFFF` operands from the
-  fixed banks will not move with the code.
+- 44 raw `$8000–$BFFF` operands remain (listed in `docs/coverage.txt`): stage-dependent table reads (`$AExx`/`$BFxx`) and
+  calls whose bank depends on the stage (`stageBankTable`) cannot be resolved statically.
+- The `comment BB:AAAA text` directive in `rom.txt` appends a comment to the end of a line.
