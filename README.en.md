@@ -59,6 +59,7 @@ in `tools/labels/*.txt` and regenerate.
 | `mff.mlb` | labels for Mesen (Debugger → Labels → Import) |
 | `docs/coverage.txt` | coverage: code/data/unknown per bank, traced code, largest unknown regions |
 | `tools/disasm.py`, `opcodes.py` | asm generator from ROM + CDL |
+| `tools/reloc_test.py` | relocation test: rebuilds with all switchable banks moved by $100; only address bytes may change |
 | `tools/chr_tool.py` | CHR ↔ 1 KB `.chr` ↔ PNG |
 | `tools/labels/ram.txt` | RAM names: `ADDR NAME [SIZE] ; comment` |
 | `tools/labels/rom.txt` | ROM labels `BB:ADDR name`, forced ranges `code\|data\|words BB:ADDR-ADDR`, `note BB:ADDR text` |
