@@ -1272,7 +1272,7 @@ tbl_0E_C9CA:
 	.byte $5A,$DD,$6A               ;- D 2 - - - 0x01C9E4 0E:C9D4:
 	.byte $B4                       ;- - - - - - 0x01C9E7 0E:C9D7:
 	.byte $5E,$B4,$B4,$B4,$B4,$B4,$B4,$B4,$B4,$B4,$B4,$B4,$B4,$B4,$B4,$B4;- D 2 - - - 0x01C9E8 0E:C9D8:
-	.byte $B4,$B4,$B4,$B4,$B4,$B4,$B4,$B4,$B4,$B4,$B4,$B4;- D 2 - - - 0x01C9F8 0E:C9E8:
+	.res 12, $B4                    ;- D 2 - - - 0x01C9F8 0E:C9E8: fill 12 bytes
 	.byte $B4                       ;- - - - - - 0x01CA04 0E:C9F4:
 tbl_0E_C9F5:
 	.byte $CA,$CF,$D2,$D3,$D7,$D9,$DA,$DE;- D 2 - - - 0x01CA05 0E:C9F5:
@@ -1280,7 +1280,7 @@ tbl_0E_C9F5:
 	.byte $D4,$DC,$DD               ;- D 2 - - - 0x01CA0F 0E:C9FF:
 	.byte $CC                       ;- - - - - - 0x01CA12 0E:CA02:
 	.byte $DE,$CC,$CC,$CC,$CC,$CC,$CC,$CC,$CC,$CC,$CC,$CC,$CC,$CC,$CC,$CC;- D 2 - - - 0x01CA13 0E:CA03:
-	.byte $CC,$CC,$CC,$CC,$CC,$CC,$CC,$CC,$CC,$CC,$CC,$CC;- D 2 - - - 0x01CA23 0E:CA13:
+	.res 12, $CC                    ;- D 2 - - - 0x01CA23 0E:CA13: fill 12 bytes
 	.byte $CC                       ;- - - - - - 0x01CA2F 0E:CA1F:
 ofs_0E_CA20:
 	LDA playerInvincible            ;C - - J - - 0x01CA30 0E:CA20: A5 3B

@@ -20,6 +20,7 @@ from opcodes import OPS, BRANCHES, STORES  # noqa: E402
 
 BANK_SIZE = 0x2000
 NBANKS = 16
+FILL_MIN = 8            # identical-byte runs of at least this length become .res
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 
@@ -581,6 +582,15 @@ class Disasm:
                 o.append('\t%-32s;W 0x%06X %02X:%04X:' % ('.word ' + ', '.join(items), off0 + i, b, base + i))
                 i = j
                 continue
+            if kd in (0, 3):                                 # run of identical bytes -> .res
+                j = i + 1
+                while j < BANK_SIZE and rom[j] == rom[i] and k[j] == kd and cdl[j] == cdl[i]                         and (b, j) not in self.labels and (b, j) not in self.notes                         and (b, j) not in self.user_notes_at:
+                    j += 1
+                if j - i >= FILL_MIN:
+                    o.append('	%-32s;%s 0x%06X %02X:%04X: fill %d bytes' % (
+                        '.res %d, $%02X' % (j - i, rom[i]), self.cdl_flags(cdl[i]), off0 + i, b, base + i, j - i))
+                    i = j
+                    continue
             j = i + 1 if kd == 4 else i                      # lone half of a word: emit as a single byte
             while kd != 4 and j < BANK_SIZE and j - i < 16 and k[j] in (0, 3) and \
                     (j == i or ((b, j) not in self.labels and (b, j) not in self.notes)) \

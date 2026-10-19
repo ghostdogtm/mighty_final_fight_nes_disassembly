@@ -1624,12 +1624,12 @@ tbl_0F_EB93:
 	.byte $0A,$0A                   ;- - - - - - 0x01EBB7 0F:EBA7:
 	.byte $02                       ;- D 3 - - - 0x01EBB9 0F:EBA9:
 	.byte $0A,$0A,$0A,$0A,$0A,$0A,$0A,$02;- - - - - - 0x01EBBA 0F:EBAA:
-	.byte $02,$02,$02,$02,$02,$02,$02,$02,$02,$02,$02,$02,$02;- D 3 - - - 0x01EBC2 0F:EBB2:
+	.res 13, $02                    ;- D 3 - - - 0x01EBC2 0F:EBB2: fill 13 bytes
 	.byte $02,$02                   ;- - - - - - 0x01EBCF 0F:EBBF:
 	.byte $02                       ;- D 3 - - - 0x01EBD1 0F:EBC1:
 	.byte $02                       ;- - - - - - 0x01EBD2 0F:EBC2:
 	.byte $02,$02,$02,$02,$02,$02   ;- D 3 - - - 0x01EBD3 0F:EBC3:
-	.byte $02,$02,$02,$02,$02,$02,$02,$02,$02,$02;- - - - - - 0x01EBD9 0F:EBC9:
+	.res 10, $02                    ;- - - - - - 0x01EBD9 0F:EBC9: fill 10 bytes
 	.byte $02                       ;- D 3 - - - 0x01EBE3 0F:EBD3:
 	.byte $02                       ;- - - - - - 0x01EBE4 0F:EBD4:
 	.byte $02,$02                   ;- D 3 - - - 0x01EBE5 0F:EBD5:
@@ -1639,7 +1639,7 @@ tbl_0F_EB93:
 	.byte $02                       ;- D 3 - - - 0x01EBEA 0F:EBDA:
 	.byte $02                       ;- - - - - - 0x01EBEB 0F:EBDB:
 	.byte $02,$02,$02               ;- D 3 - - - 0x01EBEC 0F:EBDC:
-	.byte $02,$02,$02,$02,$02,$02,$02,$02,$02,$02,$02,$02,$02;- - - - - - 0x01EBEF 0F:EBDF:
+	.res 13, $02                    ;- - - - - - 0x01EBEF 0F:EBDF: fill 13 bytes
 tbl_0F_EBEC:
 	.byte $02,$02,$02,$02,$02,$02,$02,$0A,$0A;- - - - - - 0x01EBFC 0F:EBEC:
 	.byte $0A,$0A                   ;- D 3 - - - 0x01EC05 0F:EBF5:
@@ -1659,7 +1659,7 @@ tbl_0F_EBEC:
 	.byte $02,$02                   ;- D 3 - - - 0x01EC23 0F:EC13:
 	.byte $02                       ;- - - - - - 0x01EC25 0F:EC15:
 	.byte $02                       ;- D 3 - - - 0x01EC26 0F:EC16:
-	.byte $02,$02,$02,$02,$02,$02,$02,$02,$02,$02,$02;- - - - - - 0x01EC27 0F:EC17:
+	.res 11, $02                    ;- - - - - - 0x01EC27 0F:EC17: fill 11 bytes
 	.byte $02,$02,$0A               ;- D 3 - - - 0x01EC32 0F:EC22:
 	.byte $0A,$0A,$02               ;- - - - - - 0x01EC35 0F:EC25:
 	.byte $0A                       ;- D 3 - - - 0x01EC38 0F:EC28:
