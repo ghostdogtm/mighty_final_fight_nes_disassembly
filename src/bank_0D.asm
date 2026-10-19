@@ -4,14 +4,14 @@
 	.byte $44                       ;C - - - - - 0x01A010 0D:A000: operand of the instruction at 0C:9FFF
 	LDA stage                       ;C - - - - - 0x01A011 0D:A001: A5 61
 	BNE loc_0D_A00B                 ;C - - - - - 0x01A013 0D:A003: D0 06
-	LDA ram_0060                    ;C - - - - - 0x01A015 0D:A005: A5 60
+	LDA stageSection                ;C - - - - - 0x01A015 0D:A005: A5 60
 	CMP #$01                        ;C - - - - - 0x01A017 0D:A007: C9 01
 	BEQ loc_0D_A017                 ;C - - - - - 0x01A019 0D:A009: F0 0C
 loc_0D_A00B:
 	LDA stage                       ;C - - - - - 0x01A01B 0D:A00B: A5 61
 	CMP #$03                        ;C - - - - - 0x01A01D 0D:A00D: C9 03
 	BNE loc_0D_A01B                 ;C - - - - - 0x01A01F 0D:A00F: D0 0A
-	LDA ram_0060                    ;C - - - - - 0x01A021 0D:A011: A5 60
+	LDA stageSection                ;C - - - - - 0x01A021 0D:A011: A5 60
 	CMP #$01                        ;C - - - - - 0x01A023 0D:A013: C9 01
 	BNE loc_0D_A01B                 ;C - - - - - 0x01A025 0D:A015: D0 04
 loc_0D_A017:
@@ -21,7 +21,7 @@ loc_0D_A01B:
 	LDA stage                       ;C - - - - - 0x01A02B 0D:A01B: A5 61
 	CMP #$01                        ;C - - - - - 0x01A02D 0D:A01D: C9 01
 	BNE loc_0D_A02B                 ;C - - - - - 0x01A02F 0D:A01F: D0 0A
-	LDA ram_0060                    ;C - - - - - 0x01A031 0D:A021: A5 60
+	LDA stageSection                ;C - - - - - 0x01A031 0D:A021: A5 60
 	CMP #$01                        ;C - - - - - 0x01A033 0D:A023: C9 01
 	BNE loc_0D_A02B                 ;C - - - - - 0x01A035 0D:A025: D0 04
 	LDY #$02                        ;C - - - - - 0x01A037 0D:A027: A0 02
@@ -634,7 +634,7 @@ loc_0D_A512:
 	LDA stage                       ;C - - - - - 0x01A522 0D:A512: A5 61
 	CMP #$03                        ;C - - - - - 0x01A524 0D:A514: C9 03
 	BNE loc_0D_A532                 ;C - - - - - 0x01A526 0D:A516: D0 1A
-	LDA ram_0060                    ;C - - - - - 0x01A528 0D:A518: A5 60
+	LDA stageSection                ;C - - - - - 0x01A528 0D:A518: A5 60
 	CMP #$01                        ;C - - - - - 0x01A52A 0D:A51A: C9 01
 	BNE loc_0D_A532                 ;C - - - - - 0x01A52C 0D:A51C: D0 14
 	LDA #$08                        ;C - - - - - 0x01A52E 0D:A51E: A9 08

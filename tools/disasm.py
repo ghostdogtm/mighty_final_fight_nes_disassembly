@@ -49,6 +49,9 @@ def text_char(c):
     return TEXT_CHARS.get(c, '<%02X>' % c)
 
 
+RAWSYMS = {}
+
+
 def base_of(b):
     return 0xC000 if b == 14 else 0xE000 if b == 15 else (0x8000 if b % 2 == 0 else 0xA000)
 
@@ -86,7 +89,9 @@ def load_rom_labels(path):
         if not parts:
             continue
         try:
-            if parts[0] == 'bewords':            # bewords BB:LO-HI -> big-endian address pairs (hi, lo)
+            if parts[0] == 'rawsym':             # rawsym AAAA name -> name = $AAAA in defines.inc, used for unresolved $8000-$BFFF operands
+                RAWSYMS[parse_addr(parts[1])] = parts[2]
+            elif parts[0] == 'bewords':            # bewords BB:LO-HI -> big-endian address pairs (hi, lo)
                 bs, rng = parts[1].split(':')
                 lo, _, hi = rng.partition('-')
                 b = int(bs, 16)
@@ -615,6 +620,8 @@ class Disasm:
             e, _ = self.label_expr(sb, addr)
             if e:
                 return e
+            if addr in RAWSYMS:
+                return RAWSYMS[addr]
         return '$%04X' % addr
 
     def instr_text(self, b, i):
@@ -863,6 +870,9 @@ class Disasm:
         d += ['%-22s = $%04X' % (nm, a) for a, nm in sorted(HW_REGS.items())]
         d += ['', '; MMC3 registers (write-only, mapped over PRG ROM space)']
         d += ['%-22s = $%04X' % (nm, a) for a, nm in sorted(MMC3_REGS.items())]
+        if RAWSYMS:
+            d += ['', '; names for raw $8000-$BFFF operands (bank depends on the stage / animation set)']
+            d += ['%-22s = $%04X' % (nm, a) for a, nm in sorted(RAWSYMS.items())]
         d += ['', '.include "ram.inc"', '']
         w(os.path.join(src, 'defines.inc'), '\n'.join(d))
 

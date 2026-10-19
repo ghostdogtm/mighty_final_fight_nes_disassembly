@@ -574,7 +574,7 @@ loc_04_8D41:
 	TAX                             ;C - - - - - 0x008D62 04:8D52: AA
 	LDY #$07                        ;C - - - - - 0x008D63 04:8D53: A0 07
 loc_04_8D55:
-	LDA tbl_0E_C53E,X               ;C - - - - - 0x008D65 04:8D55: BD 3E C5
+	LDA spritePalCody,X             ;C - - - - - 0x008D65 04:8D55: BD 3E C5
 	STA palBuffer+16,Y              ;C - - - - - 0x008D68 04:8D58: 99 10 06
 	STA ram_0630,Y                  ;C - - - - - 0x008D6B 04:8D5B: 99 30 06
 	DEX                             ;C - - - - - 0x008D6E 04:8D5E: CA
@@ -1165,7 +1165,7 @@ loc_04_9502:
 	TAX                             ;C - - - - - 0x009536 04:9526: AA
 	LDY #$07                        ;C - - - - - 0x009537 04:9527: A0 07
 loc_04_9529:
-	LDA tbl_0E_C53E,X               ;C - - - - - 0x009539 04:9529: BD 3E C5
+	LDA spritePalCody,X             ;C - - - - - 0x009539 04:9529: BD 3E C5
 	STA palBuffer+16,Y              ;C - - - - - 0x00953C 04:952C: 99 10 06
 	STA ram_0630,Y                  ;C - - - - - 0x00953F 04:952F: 99 30 06
 	DEX                             ;C - - - - - 0x009542 04:9532: CA

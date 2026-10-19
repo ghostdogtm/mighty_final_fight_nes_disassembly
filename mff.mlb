@@ -2997,7 +2997,7 @@ P:1C3B3:loc_0E_C3B3
 P:1C3B4:sub_0E_C3B4
 P:1C3B8:ofs_0E_C3B8
 P:1C3C8:loc_0E_C3C8
-P:1C3DD:sub_0E_C3DD
+P:1C3DD:LoadSectionGfx
 P:1C3F3:loc_0E_C3F3
 P:1C3FF:loc_0E_C3FF
 P:1C40B:loc_0E_C40B
@@ -3017,9 +3017,9 @@ P:1C4D6:loc_0E_C4D6
 P:1C4F6:loc_0E_C4F6
 P:1C507:loc_0E_C507
 P:1C527:loc_0E_C527
-P:1C53E:tbl_0E_C53E
-P:1C546:tbl_0E_C546
-P:1C54E:tbl_0E_C54E
+P:1C53E:spritePalCody
+P:1C546:spritePalGuy
+P:1C54E:spritePalHaggar
 P:1C556:ofs_0E_C556
 P:1C5A3:loc_0E_C5A3
 P:1C5AC:ofs_0E_C5AC
@@ -4100,7 +4100,7 @@ R:51:ram_0051
 R:54:ram_0054
 R:5A:ram_005A
 R:5C:ram_005C
-R:60:ram_0060
+R:60:stageSection
 R:61:stage
 R:62:ram_0062
 R:63:enemySpawnTimer

@@ -16,18 +16,18 @@
 	LDA stageBankTable,Y            ;C - - - - - 0x01E02A 0F:E01A: B9 F8 C1
 	STA prgBankA000                 ;C - - - - - 0x01E02D 0F:E01D: 85 F5
 	JSR SetPrgBanks                 ;C - - - - - 0x01E02F 0F:E01F: 20 4D FF
-	LDA ram_0060                    ;C - - - - - 0x01E032 0F:E022: A5 60
+	LDA stageSection                ;C - - - - - 0x01E032 0F:E022: A5 60
 	CMP #$01                        ;C - - - - - 0x01E034 0F:E024: C9 01
 	BEQ loc_0F_E032                 ;C - - - - - 0x01E036 0F:E026: F0 0A
 	CMP #$02                        ;C - - - - - 0x01E038 0F:E028: C9 02
 	BEQ loc_0F_E038                 ;C - - - - - 0x01E03A 0F:E02A: F0 0C
-	LDA $AE68                       ;C - - - - - 0x01E03C 0F:E02C: AD 68 AE
+	LDA stageField68_s0             ;C - - - - - 0x01E03C 0F:E02C: AD 68 AE
 	JMP loc_0F_E03B                 ;C - - - - - 0x01E03F 0F:E02F: 4C 3B E0
 loc_0F_E032:
-	LDA $AE98                       ;C - - - - - 0x01E042 0F:E032: AD 98 AE
+	LDA stageField68_s1             ;C - - - - - 0x01E042 0F:E032: AD 98 AE
 	JMP loc_0F_E03B                 ;C - - - - - 0x01E045 0F:E035: 4C 3B E0
 loc_0F_E038:
-	LDA $AEC8                       ;C - - - - - 0x01E048 0F:E038: AD C8 AE
+	LDA stageField68_s2             ;C - - - - - 0x01E048 0F:E038: AD C8 AE
 loc_0F_E03B:
 	PHA                             ;C - - - - - 0x01E04B 0F:E03B: 48
 	AND #$E0                        ;C - - - - - 0x01E04C 0F:E03C: 29 E0
@@ -38,7 +38,7 @@ loc_0F_E03B:
 	LDA #$00                        ;C - - - - - 0x01E055 0F:E045: A9 00
 	STA ram_002B                    ;C - - - - - 0x01E057 0F:E047: 85 2B
 	STA ram_002D                    ;C - - - - - 0x01E059 0F:E049: 85 2D
-	JSR sub_0E_C3DD                 ;C - - - - - 0x01E05B 0F:E04B: 20 DD C3
+	JSR LoadSectionGfx              ;C - - - - - 0x01E05B 0F:E04B: 20 DD C3
 	LDA #$00                        ;C - - - - - 0x01E05E 0F:E04E: A9 00
 	STA palUpdateFlag               ;C D 3 - I - 0x01E060 0F:E050: 85 18
 	JSR WaitFrame                   ;C - - - - - 0x01E062 0F:E052: 20 31 FF
@@ -65,7 +65,7 @@ loc_0F_E03B:
 	JSR sub_08_8000                 ;C - - - - - bank=08 0x01E097 0F:E087: 20 00 80
 	JSR sub_08_8038                 ;C - - - - - bank=08 0x01E09A 0F:E08A: 20 38 80
 	JSR sub_08_8080                 ;C - - - - - bank=08 0x01E09D 0F:E08D: 20 80 80
-	LDA ram_0060                    ;C D 3 - I - 0x01E0A0 0F:E090: A5 60
+	LDA stageSection                ;C D 3 - I - 0x01E0A0 0F:E090: A5 60
 	CMP #$02                        ;C - - - - - 0x01E0A2 0F:E092: C9 02
 	BNE loc_0F_E0A3                 ;C - - - - - 0x01E0A4 0F:E094: D0 0D
 	LDA stage                       ;C - - - - - 0x01E0A6 0F:E096: A5 61
@@ -111,7 +111,7 @@ loc_0F_E0A5:
 	STA objArr_05A0+2               ;C - - - - - 0x01E0F3 0F:E0E3: 8D A2 05
 	LDA stage                       ;C - - - - - 0x01E0F6 0F:E0E6: A5 61
 	BNE loc_0F_E10A                 ;C - - - - - 0x01E0F8 0F:E0E8: D0 20
-	LDA ram_0060                    ;C - - - - - 0x01E0FA 0F:E0EA: A5 60
+	LDA stageSection                ;C - - - - - 0x01E0FA 0F:E0EA: A5 60
 	AND #$01                        ;C - - - - - 0x01E0FC 0F:E0EC: 29 01
 	BEQ loc_0F_E0FE                 ;C - - - - - 0x01E0FE 0F:E0EE: F0 0E
 	LDA #$1B                        ;C - - - - - 0x01E100 0F:E0F0: A9 1B
@@ -121,7 +121,7 @@ loc_0F_E0A5:
 	STA objFlags                    ;C - - - - - 0x01E109 0F:E0F9: 8D 60 05
 	BNE loc_0F_E12C                 ;C - - - - - 0x01E10C 0F:E0FC: D0 2E
 loc_0F_E0FE:
-	LDA ram_0060                    ;C - - - - - 0x01E10E 0F:E0FE: A5 60
+	LDA stageSection                ;C - - - - - 0x01E10E 0F:E0FE: A5 60
 	CMP #$02                        ;C - - - - - 0x01E110 0F:E100: C9 02
 	BNE loc_0F_E12C                 ;C - - - - - 0x01E112 0F:E102: D0 28
 	LDA #$1C                        ;C - - - - - 0x01E114 0F:E104: A9 1C
@@ -131,7 +131,7 @@ loc_0F_E10A:
 	LDA stage                       ;C - - - - - 0x01E11A 0F:E10A: A5 61
 	CMP #$01                        ;C - - - - - 0x01E11C 0F:E10C: C9 01
 	BNE loc_0F_E11C                 ;C - - - - - 0x01E11E 0F:E10E: D0 0C
-	LDA ram_0060                    ;C - - - - - 0x01E120 0F:E110: A5 60
+	LDA stageSection                ;C - - - - - 0x01E120 0F:E110: A5 60
 	CMP #$02                        ;C - - - - - 0x01E122 0F:E112: C9 02
 	BNE loc_0F_E12C                 ;C - - - - - 0x01E124 0F:E114: D0 16
 	LDA #$20                        ;C - - - - - 0x01E126 0F:E116: A9 20
@@ -141,7 +141,7 @@ loc_0F_E11C:
 	LDA stage                       ;C - - - - - 0x01E12C 0F:E11C: A5 61
 	CMP #$04                        ;C - - - - - 0x01E12E 0F:E11E: C9 04
 	BNE loc_0F_E12C                 ;C - - - - - 0x01E130 0F:E120: D0 0A
-	LDA ram_0060                    ;C - - - - - 0x01E132 0F:E122: A5 60
+	LDA stageSection                ;C - - - - - 0x01E132 0F:E122: A5 60
 	CMP #$02                        ;C - - - - - 0x01E134 0F:E124: C9 02
 	BNE loc_0F_E12C                 ;C - - - - - 0x01E136 0F:E126: D0 04
 	LDA #$20                        ;C - - - - - 0x01E138 0F:E128: A9 20
@@ -194,7 +194,7 @@ sub_0F_E16B:
 	STA ptr_06                      ;C - - - - - 0x01E18A 0F:E17A: 85 06
 	LDA tbl_0F_E19E,Y               ;C - - - - - 0x01E18C 0F:E17C: B9 9E E1
 	STA ptr_06+1                    ;C - - - - - 0x01E18F 0F:E17F: 85 07
-	LDA ram_0060                    ;C - - - - - 0x01E191 0F:E181: A5 60
+	LDA stageSection                ;C - - - - - 0x01E191 0F:E181: A5 60
 	TAY                             ;C - - - - - 0x01E193 0F:E183: A8
 ofs_0F_E184:
 	LDA (ptr_04),Y                  ;C - - - - - 0x01E194 0F:E184: B1 04
@@ -487,7 +487,7 @@ loc_0F_E353:
 	BNE loc_0F_E3A0                 ;C - - - - - 0x01E367 0F:E357: D0 47
 	LDA stage                       ;C - - - - - 0x01E369 0F:E359: A5 61
 	BNE loc_0F_E373                 ;C - - - - - 0x01E36B 0F:E35B: D0 16
-	LDA ram_0060                    ;C - - - - - 0x01E36D 0F:E35D: A5 60
+	LDA stageSection                ;C - - - - - 0x01E36D 0F:E35D: A5 60
 	CMP #$01                        ;C - - - - - 0x01E36F 0F:E35F: C9 01
 	BNE loc_0F_E373                 ;C - - - - - 0x01E371 0F:E361: D0 10
 	LDA ram_002D                    ;C - - - - - 0x01E373 0F:E363: A5 2D
@@ -502,7 +502,7 @@ loc_0F_E373:
 	LDA stage                       ;C - - - - - 0x01E383 0F:E373: A5 61
 	CMP #$03                        ;C - - - - - 0x01E385 0F:E375: C9 03
 	BNE loc_0F_E38D                 ;C - - - - - 0x01E387 0F:E377: D0 14
-	LDA ram_0060                    ;C - - - - - 0x01E389 0F:E379: A5 60
+	LDA stageSection                ;C - - - - - 0x01E389 0F:E379: A5 60
 	BNE loc_0F_E38D                 ;C - - - - - 0x01E38B 0F:E37B: D0 10
 	LDA ram_002D                    ;C - - - - - 0x01E38D 0F:E37D: A5 2D
 	CMP #$02                        ;C - - - - - 0x01E38F 0F:E37F: C9 02
@@ -882,15 +882,15 @@ loc_0F_E61A:
 	LDX tbl_0F_E64F,Y               ;C - - - - - 0x01E62C 0F:E61C: BE 4F E6
 	LDA (ptr_00),Y                  ;C - - - - - 0x01E62F 0F:E61F: B1 00
 	TAY                             ;C - - - - - 0x01E631 0F:E621: A8
-	LDA $BB00,Y                     ;C - - - - - 0x01E632 0F:E622: B9 00 BB
+	LDA stageTableBB00,Y            ;C - - - - - 0x01E632 0F:E622: B9 00 BB
 	STA ram_06C0,X                  ;C - - - - - 0x01E635 0F:E625: 9D C0 06
-	LDA $BC00,Y                     ;C - - - - - 0x01E638 0F:E628: B9 00 BC
+	LDA stageTableBC00,Y            ;C - - - - - 0x01E638 0F:E628: B9 00 BC
 	STA ram_06C1,X                  ;C - - - - - 0x01E63B 0F:E62B: 9D C1 06
-	LDA $BD00,Y                     ;C - - - - - 0x01E63E 0F:E62E: B9 00 BD
+	LDA stageTableBD00,Y            ;C - - - - - 0x01E63E 0F:E62E: B9 00 BD
 	STA ram_06C4,X                  ;C - - - - - 0x01E641 0F:E631: 9D C4 06
-	LDA $BE00,Y                     ;C - - - - - 0x01E644 0F:E634: B9 00 BE
+	LDA stageTableBE00,Y            ;C - - - - - 0x01E644 0F:E634: B9 00 BE
 	STA ram_06C5,X                  ;C - - - - - 0x01E647 0F:E637: 9D C5 06
-	LDA $BF00,Y                     ;C - - - - - 0x01E64A 0F:E63A: B9 00 BF
+	LDA stageTableBF00,Y            ;C - - - - - 0x01E64A 0F:E63A: B9 00 BF
 	AND #$03                        ;C - - - - - 0x01E64D 0F:E63D: 29 03
 	ORA spriteFlipMask              ;C - - - - - 0x01E64F 0F:E63F: 05 10
 	STA spriteFlipMask              ;C - - - - - 0x01E651 0F:E641: 85 10
@@ -920,20 +920,20 @@ sub_0F_E653:
 	STA ptr_00+1                    ;C - - - - - 0x01E67B 0F:E66B: 85 01
 	RTS                             ;C - - - - - 0x01E67D 0F:E66D: 60
 sub_0F_E66E:
-	LDA ram_0060                    ;C - - - - - 0x01E67E 0F:E66E: A5 60
+	LDA stageSection                ;C - - - - - 0x01E67E 0F:E66E: A5 60
 	BEQ loc_0F_E67A                 ;C - - - - - 0x01E680 0F:E670: F0 08
 	CMP #$01                        ;C - - - - - 0x01E682 0F:E672: C9 01
 	BEQ loc_0F_E680                 ;C - - - - - 0x01E684 0F:E674: F0 0A
 	CMP #$02                        ;C - - - - - 0x01E686 0F:E676: C9 02
 	BEQ loc_0F_E686                 ;C - - - - - 0x01E688 0F:E678: F0 0C
 loc_0F_E67A:
-	LDA $AE60,Y                     ;C - - - - - 0x01E68A 0F:E67A: B9 60 AE
+	LDA stageField60_s0,Y           ;C - - - - - 0x01E68A 0F:E67A: B9 60 AE
 	JMP loc_0F_E689                 ;C - - - - - 0x01E68D 0F:E67D: 4C 89 E6
 loc_0F_E680:
-	LDA $AE90,Y                     ;C - - - - - 0x01E690 0F:E680: B9 90 AE
+	LDA stageField60_s1,Y           ;C - - - - - 0x01E690 0F:E680: B9 90 AE
 	JMP loc_0F_E689                 ;C - - - - - 0x01E693 0F:E683: 4C 89 E6
 loc_0F_E686:
-	LDA $AEC0,Y                     ;C - - - - - 0x01E696 0F:E686: B9 C0 AE
+	LDA stageField60_s2,Y           ;C - - - - - 0x01E696 0F:E686: B9 C0 AE
 loc_0F_E689:
 	PHA                             ;C - - - - - 0x01E699 0F:E689: 48
 	LDA #$00                        ;C - - - - - 0x01E69A 0F:E68A: A9 00
@@ -1458,7 +1458,7 @@ loc_0F_EA34:
 	LDA stage                       ;C - - - - - 0x01EA4F 0F:EA3F: A5 61
 	CMP #$03                        ;C - - - - - 0x01EA51 0F:EA41: C9 03
 	BNE loc_0F_EA4D                 ;C - - - - - 0x01EA53 0F:EA43: D0 08
-	LDA ram_0060                    ;C - - - - - 0x01EA55 0F:EA45: A5 60
+	LDA stageSection                ;C - - - - - 0x01EA55 0F:EA45: A5 60
 	CMP #$01                        ;C - - - - - 0x01EA57 0F:EA47: C9 01
 	BNE loc_0F_EA4D                 ;C - - - - - 0x01EA59 0F:EA49: D0 02
 	BEQ loc_0F_EA30                 ;c - - - - - 0x01EA5B 0F:EA4B: F0 E3
@@ -1504,9 +1504,9 @@ ofs_0F_EA8B:
 	BEQ loc_0F_EA6E                 ;C - - - - - 0x01EAA5 0F:EA95: F0 D7
 	AND #$7F                        ;C - - - - - 0x01EAA7 0F:EA97: 29 7F
 	TAY                             ;C - - - - - 0x01EAA9 0F:EA99: A8
-	LDA $8000,Y                     ;C - - - - - 0x01EAAA 0F:EA9A: B9 00 80
+	LDA animPtrLo,Y                 ;C - - - - - 0x01EAAA 0F:EA9A: B9 00 80
 	STA ptr_00                      ;C - - - - - 0x01EAAD 0F:EA9D: 85 00
-	LDA $8080,Y                     ;C - - - - - 0x01EAAF 0F:EA9F: B9 80 80
+	LDA animPtrHi,Y                 ;C - - - - - 0x01EAAF 0F:EA9F: B9 80 80
 	STA ptr_00+1                    ;C - - - - - 0x01EAB2 0F:EAA2: 85 01
 	LDA objAnimFlags,X              ;C - - - - - 0x01EAB4 0F:EAA4: BD 90 05
 	AND #$7F                        ;C - - - - - 0x01EAB7 0F:EAA7: 29 7F
@@ -1548,9 +1548,9 @@ loc_0F_EAEF:
 ; the offset table ($B100/$B200 + index) holds (dy, dx) per sprite.
 loc_0F_EAF0:
 	TAY                             ;C - - - - - 0x01EB00 0F:EAF0: A8
-	LDA $8100,Y                     ;C - - - - - 0x01EB01 0F:EAF1: B9 00 81
+	LDA frameListLo,Y               ;C - - - - - 0x01EB01 0F:EAF1: B9 00 81
 	STA ptr_02                      ;C - - - - - 0x01EB04 0F:EAF4: 85 02
-	LDA $8200,Y                     ;C - - - - - 0x01EB06 0F:EAF6: B9 00 82
+	LDA frameListHi,Y               ;C - - - - - 0x01EB06 0F:EAF6: B9 00 82
 	STA ptr_02+1                    ;C - - - - - 0x01EB09 0F:EAF9: 85 03
 ofs_0F_EAFB:
 	LDY #$00                        ;C - - - - - 0x01EB0B 0F:EAFB: A0 00
@@ -1573,11 +1573,11 @@ loc_0F_EB18:
 	LDY #$01                        ;C - - - - - 0x01EB28 0F:EB18: A0 01
 	LDA (ptr_02),Y                  ;C - - - - - 0x01EB2A 0F:EB1A: B1 02
 	TAX                             ;C - - - - - 0x01EB2C 0F:EB1C: AA
-	LDA $B100,X                     ;C - - - - - 0x01EB2D 0F:EB1D: BD 00 B1
+	LDA spriteOffsetLo,X            ;C - - - - - 0x01EB2D 0F:EB1D: BD 00 B1
 	SEC                             ;C - - - - - 0x01EB30 0F:EB20: 38
 	SBC #$02                        ;C - - - - - 0x01EB31 0F:EB21: E9 02
 	STA ptr_04+1                    ;C - - - - - 0x01EB33 0F:EB23: 85 05
-	LDA $B200,X                     ;C - - - - - 0x01EB35 0F:EB25: BD 00 B2
+	LDA spriteOffsetHi,X            ;C - - - - - 0x01EB35 0F:EB25: BD 00 B2
 	SBC #$00                        ;C - - - - - 0x01EB38 0F:EB28: E9 00
 	STA ptr_06                      ;C - - - - - 0x01EB3A 0F:EB2A: 85 06
 	LDX oamHideStart                ;C - - - - - 0x01EB3C 0F:EB2C: A6 97
@@ -1702,7 +1702,7 @@ DrawObjectOffscreen:
 	LDA stage                       ;C - - - - - 0x01EC43 0F:EC33: A5 61
 	CMP #$03                        ;C - - - - - 0x01EC45 0F:EC35: C9 03
 	BNE loc_0F_EC41                 ;C - - - - - 0x01EC47 0F:EC37: D0 08
-	LDA ram_0060                    ;c - - - - - 0x01EC49 0F:EC39: A5 60
+	LDA stageSection                ;c - - - - - 0x01EC49 0F:EC39: A5 60
 	CMP #$01                        ;c - - - - - 0x01EC4B 0F:EC3B: C9 01
 	BNE loc_0F_EC41                 ;c - - - - - 0x01EC4D 0F:EC3D: D0 02
 	BEQ loc_0F_EC81                 ;c - - - - - 0x01EC4F 0F:EC3F: F0 40
@@ -1856,7 +1856,7 @@ loc_0F_ED5F:
 	LDY ptr_02+1                    ;C - - - - - 0x01ED6F 0F:ED5F: A4 03
 	LDA (ptr_00),Y                  ;C - - - - - 0x01ED71 0F:ED61: B1 00
 	TAY                             ;C - - - - - 0x01ED73 0F:ED63: A8
-	LDA $BF00,Y                     ;C - - - - - 0x01ED74 0F:ED64: B9 00 BF
+	LDA stageTableBF00,Y            ;C - - - - - 0x01ED74 0F:ED64: B9 00 BF
 	AND #$F0                        ;C - - - - - 0x01ED77 0F:ED67: 29 F0
 	LDY ptr_02                      ;C - - - - - 0x01ED79 0F:ED69: A4 02
 	STA a:ptr_42,Y                  ;C - - - - - 0x01ED7B 0F:ED6B: 99 42 00
@@ -2005,7 +2005,7 @@ loc_0F_EE6C:
 	LDY ptr_02+1                    ;C - - - - - 0x01EE7C 0F:EE6C: A4 03
 	LDA (ptr_00),Y                  ;C - - - - - 0x01EE7E 0F:EE6E: B1 00
 	TAY                             ;C - - - - - 0x01EE80 0F:EE70: A8
-	LDA $BF00,Y                     ;C - - - - - 0x01EE81 0F:EE71: B9 00 BF
+	LDA stageTableBF00,Y            ;C - - - - - 0x01EE81 0F:EE71: B9 00 BF
 	AND #$F0                        ;C - - - - - 0x01EE84 0F:EE74: 29 F0
 	LDY ptr_02                      ;C - - - - - 0x01EE86 0F:EE76: A4 02
 	STA a:ptr_42,Y                  ;C - - - - - 0x01EE88 0F:EE78: 99 42 00

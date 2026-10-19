@@ -185,7 +185,7 @@ IrqSplit1:
 	LDA stage                       ;C - - J - - 0x01C15A 0E:C14A: A5 61
 	CMP #$01                        ;C - - - - - 0x01C15C 0E:C14C: C9 01
 	BNE loc_0E_C177                 ;C - - - - - 0x01C15E 0E:C14E: D0 27
-	LDA ram_0060                    ;C - - - - - 0x01C160 0E:C150: A5 60
+	LDA stageSection                ;C - - - - - 0x01C160 0E:C150: A5 60
 	CMP #$01                        ;C - - - - - 0x01C162 0E:C152: C9 01
 	BEQ loc_0E_C15A                 ;C - - - - - 0x01C164 0E:C154: F0 04
 	CMP #$02                        ;C - - - - - 0x01C166 0E:C156: C9 02
@@ -563,33 +563,34 @@ loc_0E_C3C8:
 	ADC frameCounter                ;C - - - - - 0x01C3E8 0E:C3D8: 65 92
 	STA ram_00E4                    ;C - - - - - 0x01C3EA 0E:C3DA: 85 E4
 	RTS                             ;C - - - - - 0x01C3EC 0E:C3DC: 60
-sub_0E_C3DD:
+; stage setup: CHR banks, sprite palette of the character (tbl_0E_C53E/C546/C54E) and 16-colour palette from the stage bank
+LoadSectionGfx:
 	LDY stageData                   ;C - - - - - 0x01C3ED 0E:C3DD: A4 22
 	LDA stageBankTable,Y            ;C - - - - - 0x01C3EF 0E:C3DF: B9 F8 C1
 	STA prgBankA000                 ;C - - - - - 0x01C3F2 0E:C3E2: 85 F5
 	JSR SetPrgBanks                 ;C - - - - - 0x01C3F4 0E:C3E4: 20 4D FF
-	LDA ram_0060                    ;C - - - - - 0x01C3F7 0E:C3E7: A5 60
+	LDA stageSection                ;C - - - - - 0x01C3F7 0E:C3E7: A5 60
 	BEQ loc_0E_C3F3                 ;C - - - - - 0x01C3F9 0E:C3E9: F0 08
 	CMP #$01                        ;C - - - - - 0x01C3FB 0E:C3EB: C9 01
 	BEQ loc_0E_C3FF                 ;C - - - - - 0x01C3FD 0E:C3ED: F0 10
 	CMP #$02                        ;C - - - - - 0x01C3FF 0E:C3EF: C9 02
 	BEQ loc_0E_C40B                 ;C - - - - - 0x01C401 0E:C3F1: F0 18
 loc_0E_C3F3:
-	LDA $AE78                       ;C - - - - - 0x01C403 0E:C3F3: AD 78 AE
+	LDA stageChr0_s0                ;C - - - - - 0x01C403 0E:C3F3: AD 78 AE
 	STA chrBankShadow               ;C - - - - - 0x01C406 0E:C3F6: 85 E8
-	LDA $AE79                       ;C - - - - - 0x01C408 0E:C3F8: AD 79 AE
+	LDA stageChr1_s0                ;C - - - - - 0x01C408 0E:C3F8: AD 79 AE
 	STA chrBankShadow+1             ;C - - - - - 0x01C40B 0E:C3FB: 85 E9
 	BNE loc_0E_C417                 ;C - - - - - 0x01C40D 0E:C3FD: D0 18
 loc_0E_C3FF:
-	LDA $AEA8                       ;C - - - - - 0x01C40F 0E:C3FF: AD A8 AE
+	LDA stageChr0_s1                ;C - - - - - 0x01C40F 0E:C3FF: AD A8 AE
 	STA chrBankShadow               ;C - - - - - 0x01C412 0E:C402: 85 E8
-	LDA $AEA9                       ;C - - - - - 0x01C414 0E:C404: AD A9 AE
+	LDA stageChr1_s1                ;C - - - - - 0x01C414 0E:C404: AD A9 AE
 	STA chrBankShadow+1             ;C - - - - - 0x01C417 0E:C407: 85 E9
 	BNE loc_0E_C417                 ;C - - - - - 0x01C419 0E:C409: D0 0C
 loc_0E_C40B:
-	LDA $AED8                       ;C - - - - - 0x01C41B 0E:C40B: AD D8 AE
+	LDA stageChr0_s2                ;C - - - - - 0x01C41B 0E:C40B: AD D8 AE
 	STA chrBankShadow               ;C - - - - - 0x01C41E 0E:C40E: 85 E8
-	LDA $AED9                       ;C - - - - - 0x01C420 0E:C410: AD D9 AE
+	LDA stageChr1_s2                ;C - - - - - 0x01C420 0E:C410: AD D9 AE
 	STA chrBankShadow+1             ;C - - - - - 0x01C423 0E:C413: 85 E9
 	BNE loc_0E_C417                 ;C - - - - - 0x01C425 0E:C415: D0 00
 loc_0E_C417:
@@ -601,21 +602,21 @@ loc_0E_C417:
 	CMP #$02                        ;C - - - - - 0x01C431 0E:C421: C9 02
 	BEQ loc_0E_C443                 ;C - - - - - 0x01C433 0E:C423: F0 1E
 loc_0E_C425:
-	LDA tbl_0E_C53E,X               ;C - - - - - 0x01C435 0E:C425: BD 3E C5
+	LDA spritePalCody,X             ;C - - - - - 0x01C435 0E:C425: BD 3E C5
 	STA palBuffer+16,X              ;C - - - - - 0x01C438 0E:C428: 9D 10 06
 	STA ram_0630,X                  ;C - - - - - 0x01C43B 0E:C42B: 9D 30 06
 	DEX                             ;C - - - - - 0x01C43E 0E:C42E: CA
 	BPL loc_0E_C425                 ;C - - - - - 0x01C43F 0E:C42F: 10 F4
 	JMP loc_0E_C44F                 ;C - - - - - 0x01C441 0E:C431: 4C 4F C4
 loc_0E_C434:
-	LDA tbl_0E_C546,X               ;C - - - - - 0x01C444 0E:C434: BD 46 C5
+	LDA spritePalGuy,X              ;C - - - - - 0x01C444 0E:C434: BD 46 C5
 	STA palBuffer+16,X              ;C - - - - - 0x01C447 0E:C437: 9D 10 06
 	STA ram_0630,X                  ;C - - - - - 0x01C44A 0E:C43A: 9D 30 06
 	DEX                             ;C - - - - - 0x01C44D 0E:C43D: CA
 	BPL loc_0E_C434                 ;C - - - - - 0x01C44E 0E:C43E: 10 F4
 	JMP loc_0E_C44F                 ;C - - - - - 0x01C450 0E:C440: 4C 4F C4
 loc_0E_C443:
-	LDA tbl_0E_C54E,X               ;C - - - - - 0x01C453 0E:C443: BD 4E C5
+	LDA spritePalHaggar,X           ;C - - - - - 0x01C453 0E:C443: BD 4E C5
 	STA palBuffer+16,X              ;C - - - - - 0x01C456 0E:C446: 9D 10 06
 	STA ram_0630,X                  ;C - - - - - 0x01C459 0E:C449: 9D 30 06
 	DEX                             ;C - - - - - 0x01C45C 0E:C44C: CA
@@ -624,26 +625,26 @@ loc_0E_C44F:
 	LDA ram_002B                    ;C - - - - - 0x01C45F 0E:C44F: A5 2B
 	ASL A                           ;C - - - - - 0x01C461 0E:C451: 0A
 	TAX                             ;C - - - - - 0x01C462 0E:C452: AA
-	LDA ram_0060                    ;C - - - - - 0x01C463 0E:C453: A5 60
+	LDA stageSection                ;C - - - - - 0x01C463 0E:C453: A5 60
 	BEQ loc_0E_C45F                 ;C - - - - - 0x01C465 0E:C455: F0 08
 	CMP #$01                        ;C - - - - - 0x01C467 0E:C457: C9 01
 	BEQ loc_0E_C469                 ;C - - - - - 0x01C469 0E:C459: F0 0E
 	CMP #$02                        ;C - - - - - 0x01C46B 0E:C45B: C9 02
 	BEQ loc_0E_C473                 ;C - - - - - 0x01C46D 0E:C45D: F0 14
 loc_0E_C45F:
-	LDA $AE70,X                     ;C - - - - - 0x01C46F 0E:C45F: BD 70 AE
+	LDA stagePalIdx_s0,X            ;C - - - - - 0x01C46F 0E:C45F: BD 70 AE
 	PHA                             ;C - - - - - 0x01C472 0E:C462: 48
-	LDA $AE71,X                     ;C - - - - - 0x01C473 0E:C463: BD 71 AE
+	LDA stagePalIdx1_s0,X           ;C - - - - - 0x01C473 0E:C463: BD 71 AE
 	JMP loc_0E_C47D                 ;C - - - - - 0x01C476 0E:C466: 4C 7D C4
 loc_0E_C469:
-	LDA $AEA0,X                     ;C - - - - - 0x01C479 0E:C469: BD A0 AE
+	LDA stagePalIdx_s1,X            ;C - - - - - 0x01C479 0E:C469: BD A0 AE
 	PHA                             ;C - - - - - 0x01C47C 0E:C46C: 48
-	LDA $AEA1,X                     ;C - - - - - 0x01C47D 0E:C46D: BD A1 AE
+	LDA stagePalIdx1_s1,X           ;C - - - - - 0x01C47D 0E:C46D: BD A1 AE
 	JMP loc_0E_C47D                 ;C - - - - - 0x01C480 0E:C470: 4C 7D C4
 loc_0E_C473:
-	LDA $AED0,X                     ;C - - - - - 0x01C483 0E:C473: BD D0 AE
+	LDA stagePalIdx_s2,X            ;C - - - - - 0x01C483 0E:C473: BD D0 AE
 	PHA                             ;C - - - - - 0x01C486 0E:C476: 48
-	LDA $AED1,X                     ;C - - - - - 0x01C487 0E:C477: BD D1 AE
+	LDA stagePalIdx1_s2,X           ;C - - - - - 0x01C487 0E:C477: BD D1 AE
 	JMP loc_0E_C47D                 ;C - - - - - 0x01C48A 0E:C47A: 4C 7D C4
 loc_0E_C47D:
 	ASL A                           ;C - - - - - 0x01C48D 0E:C47D: 0A
@@ -654,14 +655,14 @@ loc_0E_C47D:
 	ADC ptr_00                      ;C - - - - - 0x01C493 0E:C483: 65 00
 	TAY                             ;C - - - - - 0x01C495 0E:C485: A8
 	LDX #$00                        ;C - - - - - 0x01C496 0E:C486: A2 00
-	LDA ram_0060                    ;C - - - - - 0x01C498 0E:C488: A5 60
+	LDA stageSection                ;C - - - - - 0x01C498 0E:C488: A5 60
 	BEQ loc_0E_C494                 ;C - - - - - 0x01C49A 0E:C48A: F0 08
 	CMP #$01                        ;C - - - - - 0x01C49C 0E:C48C: C9 01
 	BEQ loc_0E_C4C5                 ;C - - - - - 0x01C49E 0E:C48E: F0 35
 	CMP #$02                        ;C - - - - - 0x01C4A0 0E:C490: C9 02
 	BEQ loc_0E_C4F6                 ;C - - - - - 0x01C4A2 0E:C492: F0 62
 loc_0E_C494:
-	LDA $AE7C,Y                     ;C - - - - - 0x01C4A4 0E:C494: B9 7C AE
+	LDA stagePalettes_s0,Y          ;C - - - - - 0x01C4A4 0E:C494: B9 7C AE
 	STA palBuffer,X                 ;C - - - - - 0x01C4A7 0E:C497: 9D 00 06
 	STA ram_0620,X                  ;C - - - - - 0x01C4AA 0E:C49A: 9D 20 06
 	INY                             ;C - - - - - 0x01C4AD 0E:C49D: C8
@@ -670,7 +671,7 @@ loc_0E_C494:
 	BNE loc_0E_C494                 ;C - - - - - 0x01C4B1 0E:C4A1: D0 F1
 	LDX #$00                        ;C - - - - - 0x01C4B3 0E:C4A3: A2 00
 loc_0E_C4A5:
-	LDA $AE7C,Y                     ;C - - - - - 0x01C4B5 0E:C4A5: B9 7C AE
+	LDA stagePalettes_s0,Y          ;C - - - - - 0x01C4B5 0E:C4A5: B9 7C AE
 	PHA                             ;C - - - - - 0x01C4B8 0E:C4A8: 48
 	AND #$80                        ;C - - - - - 0x01C4B9 0E:C4A9: 29 80
 	STA ram_0100,X                  ;C - - - - - 0x01C4BB 0E:C4AB: 9D 00 01
@@ -686,7 +687,7 @@ loc_0E_C4A5:
 	BNE loc_0E_C4A5                 ;C - - - - - 0x01C4D0 0E:C4C0: D0 E3
 	JMP loc_0E_C527                 ;C - - - - - 0x01C4D2 0E:C4C2: 4C 27 C5
 loc_0E_C4C5:
-	LDA $AEAC,Y                     ;C - - - - - 0x01C4D5 0E:C4C5: B9 AC AE
+	LDA stagePalettes_s1,Y          ;C - - - - - 0x01C4D5 0E:C4C5: B9 AC AE
 	STA palBuffer,X                 ;C - - - - - 0x01C4D8 0E:C4C8: 9D 00 06
 	STA ram_0620,X                  ;C - - - - - 0x01C4DB 0E:C4CB: 9D 20 06
 	INY                             ;C - - - - - 0x01C4DE 0E:C4CE: C8
@@ -695,7 +696,7 @@ loc_0E_C4C5:
 	BNE loc_0E_C4C5                 ;C - - - - - 0x01C4E2 0E:C4D2: D0 F1
 	LDX #$00                        ;C - - - - - 0x01C4E4 0E:C4D4: A2 00
 loc_0E_C4D6:
-	LDA $AEAC,Y                     ;C - - - - - 0x01C4E6 0E:C4D6: B9 AC AE
+	LDA stagePalettes_s1,Y          ;C - - - - - 0x01C4E6 0E:C4D6: B9 AC AE
 	PHA                             ;C - - - - - 0x01C4E9 0E:C4D9: 48
 	AND #$80                        ;C - - - - - 0x01C4EA 0E:C4DA: 29 80
 	STA ram_0100,X                  ;C - - - - - 0x01C4EC 0E:C4DC: 9D 00 01
@@ -711,7 +712,7 @@ loc_0E_C4D6:
 	BNE loc_0E_C4D6                 ;C - - - - - 0x01C501 0E:C4F1: D0 E3
 	JMP loc_0E_C527                 ;C - - - - - 0x01C503 0E:C4F3: 4C 27 C5
 loc_0E_C4F6:
-	LDA $AEDC,Y                     ;C - - - - - 0x01C506 0E:C4F6: B9 DC AE
+	LDA stagePalettes_s2,Y          ;C - - - - - 0x01C506 0E:C4F6: B9 DC AE
 	STA palBuffer,X                 ;C - - - - - 0x01C509 0E:C4F9: 9D 00 06
 	STA ram_0620,X                  ;C - - - - - 0x01C50C 0E:C4FC: 9D 20 06
 	INY                             ;C - - - - - 0x01C50F 0E:C4FF: C8
@@ -720,7 +721,7 @@ loc_0E_C4F6:
 	BNE loc_0E_C4F6                 ;C - - - - - 0x01C513 0E:C503: D0 F1
 	LDX #$00                        ;C - - - - - 0x01C515 0E:C505: A2 00
 loc_0E_C507:
-	LDA $AEDC,Y                     ;C - - - - - 0x01C517 0E:C507: B9 DC AE
+	LDA stagePalettes_s2,Y          ;C - - - - - 0x01C517 0E:C507: B9 DC AE
 	PHA                             ;C - - - - - 0x01C51A 0E:C50A: 48
 	AND #$80                        ;C - - - - - 0x01C51B 0E:C50B: 29 80
 	STA ram_0100,X                  ;C - - - - - 0x01C51D 0E:C50D: 9D 00 01
@@ -745,11 +746,11 @@ loc_0E_C527:
 	PLA                             ;C - - - - - 0x01C547 0E:C537: 68
 	JSR sub_09_A000                 ;C - - - - - bank=09 0x01C548 0E:C538: 20 00 A0
 	JMP loc_0F_FF4C                 ;C - - - - - 0x01C54B 0E:C53B: 4C 4C FF
-tbl_0E_C53E:
+spritePalCody:
 	.byte $0F,$0F,$36,$26,$0F,$0F,$30,$21;- D 2 - - - 0x01C54E 0E:C53E:
-tbl_0E_C546:
+spritePalGuy:
 	.byte $0F,$0F,$36,$26,$0F,$0F,$36,$15;- D 2 - - - 0x01C556 0E:C546:
-tbl_0E_C54E:
+spritePalHaggar:
 	.byte $0F,$0F,$36,$26,$0F,$0F,$30,$19;- D 2 - - - 0x01C55E 0E:C54E:
 ofs_0E_C556:
 	LDX #$BF                        ;C - - J - - 0x01C566 0E:C556: A2 BF
@@ -1008,7 +1009,7 @@ loc_0E_C768:
 	LDA stageBankTable,Y            ;C - - - - - 0x01C792 0E:C782: B9 F8 C1
 	STA prgBankA000                 ;C - - - - - 0x01C795 0E:C785: 85 F5
 	JSR SetPrgBanks                 ;C - - - - - 0x01C797 0E:C787: 20 4D FF
-	LDA $AE68                       ;C - - - - - 0x01C79A 0E:C78A: AD 68 AE
+	LDA stageField68_s0             ;C - - - - - 0x01C79A 0E:C78A: AD 68 AE
 	PHA                             ;C - - - - - 0x01C79D 0E:C78D: 48
 	AND #$E0                        ;C - - - - - 0x01C79E 0E:C78E: 29 E0
 	STA ram_002A                    ;C - - - - - 0x01C7A0 0E:C790: 85 2A
@@ -1018,7 +1019,7 @@ loc_0E_C768:
 	LDA #$00                        ;C - - - - - 0x01C7A7 0E:C797: A9 00
 	STA ram_002B                    ;C - - - - - 0x01C7A9 0E:C799: 85 2B
 	STA ram_002D                    ;C - - - - - 0x01C7AB 0E:C79B: 85 2D
-	JSR sub_0E_C3DD                 ;C - - - - - 0x01C7AD 0E:C79D: 20 DD C3
+	JSR LoadSectionGfx              ;C - - - - - 0x01C7AD 0E:C79D: 20 DD C3
 	LDA #$00                        ;C - - - - - 0x01C7B0 0E:C7A0: A9 00
 	STA palUpdateFlag               ;C - - - - - 0x01C7B2 0E:C7A2: 85 18
 	JSR sub_0E_C362                 ;C - - - - - 0x01C7B4 0E:C7A4: 20 62 C3
@@ -1063,7 +1064,7 @@ loc_0E_C768:
 	STA ram_00A5                    ;C - - - - - 0x01C80D 0E:C7FD: 85 A5
 	STA ram_0037                    ;C - - - - - 0x01C80F 0E:C7FF: 85 37
 	STA stage                       ;C - - - - - 0x01C811 0E:C801: 85 61
-	STA ram_0060                    ;C - - - - - 0x01C813 0E:C803: 85 60
+	STA stageSection                ;C - - - - - 0x01C813 0E:C803: 85 60
 	STA playerLevel                 ;C - - - - - 0x01C815 0E:C805: 85 6B
 	STA ram_00B3                    ;C - - - - - 0x01C817 0E:C807: 85 B3
 	STA playerExp                   ;C - - - - - 0x01C819 0E:C809: 85 6C
@@ -1160,7 +1161,7 @@ sub_0E_C8B4:
 	TAX                             ;C - - - - - 0x01C8C9 0E:C8B9: AA
 	LDY #$07                        ;C - - - - - 0x01C8CA 0E:C8BA: A0 07
 loc_0E_C8BC:
-	LDA tbl_0E_C53E,X               ;C - - - - - 0x01C8CC 0E:C8BC: BD 3E C5
+	LDA spritePalCody,X             ;C - - - - - 0x01C8CC 0E:C8BC: BD 3E C5
 	STA palBuffer+16,Y              ;C - - - - - 0x01C8CF 0E:C8BF: 99 10 06
 	STA ram_0630,Y                  ;C - - - - - 0x01C8D2 0E:C8C2: 99 30 06
 	DEX                             ;C - - - - - 0x01C8D5 0E:C8C5: CA
@@ -3647,7 +3648,7 @@ sub_0E_DC29:
 	STA ptr_04                      ;C - - - - - 0x01DC3E 0E:DC2E: 85 04
 	LDA tbl_0E_DC5E,Y               ;C - - - - - 0x01DC40 0E:DC30: B9 5E DC
 	STA ptr_04+1                    ;C - - - - - 0x01DC43 0E:DC33: 85 05
-	LDY ram_0060                    ;C - - - - - 0x01DC45 0E:DC35: A4 60
+	LDY stageSection                ;C - - - - - 0x01DC45 0E:DC35: A4 60
 	LDA objY                        ;C - - - - - 0x01DC47 0E:DC37: AD C0 03
 	CMP (ptr_04),Y                  ;C - - - - - 0x01DC4A 0E:DC3A: D1 04
 	BEQ loc_0E_DC40                 ;C - - - - - 0x01DC4C 0E:DC3C: F0 02
@@ -3976,12 +3977,12 @@ loc_0E_DE88:
 	JMP loc_0E_DF50                 ;C - - - - - 0x01DE98 0E:DE88: 4C 50 DF
 loc_0E_DE8B:
 	INC ram_0067                    ;C - - - - - 0x01DE9B 0E:DE8B: E6 67
-	INC ram_0060                    ;C - - - - - 0x01DE9D 0E:DE8D: E6 60
-	LDA ram_0060                    ;C - - - - - 0x01DE9F 0E:DE8F: A5 60
+	INC stageSection                ;C - - - - - 0x01DE9D 0E:DE8D: E6 60
+	LDA stageSection                ;C - - - - - 0x01DE9F 0E:DE8F: A5 60
 	CMP #$03                        ;C - - - - - 0x01DEA1 0E:DE91: C9 03
 	BCC loc_0E_DE88                 ;C - - - - - 0x01DEA3 0E:DE93: 90 F3
 	LDA #$00                        ;C - - - - - 0x01DEA5 0E:DE95: A9 00
-	STA ram_0060                    ;C - - - - - 0x01DEA7 0E:DE97: 85 60
+	STA stageSection                ;C - - - - - 0x01DEA7 0E:DE97: 85 60
 	INC stage                       ;C - - - - - 0x01DEA9 0E:DE99: E6 61
 	LDA stage                       ;C - - - - - 0x01DEAB 0E:DE9B: A5 61
 	CMP #$05                        ;C - - - - - 0x01DEAD 0E:DE9D: C9 05
@@ -3996,7 +3997,7 @@ loc_0E_DE8B:
 	STA ram_009B                    ;C - - - - - 0x01DEBF 0E:DEAF: 85 9B
 	JSR sub_0E_C8A6                 ;C - - - - - 0x01DEC1 0E:DEB1: 20 A6 C8
 	LDX #$06                        ;C - - - - - 0x01DEC4 0E:DEB4: A2 06
-	JSR $8000                       ;C - - - - - 0x01DEC6 0E:DEB6: 20 00 80
+	JSR animPtrLo                   ;C - - - - - 0x01DEC6 0E:DEB6: 20 00 80
 	JSR ScreenOn                    ;C - - - - - 0x01DEC9 0E:DEB9: 20 6F C2
 	JSR $9000                       ;C - - - - - 0x01DECC 0E:DEBC: 20 00 90
 	LDX #$00                        ;C - - - - - 0x01DECF 0E:DEBF: A2 00
@@ -4069,7 +4070,7 @@ loc_0E_DF50:
 	LDA ram_0051                    ;C - - - - - 0x01DF6A 0E:DF5A: A5 51
 	STA playerLevel                 ;C - - - - - 0x01DF6C 0E:DF5C: 85 6B
 	LDA #$00                        ;C - - - - - 0x01DF6E 0E:DF5E: A9 00
-	STA ram_0060                    ;C - - - - - 0x01DF70 0E:DF60: 85 60
+	STA stageSection                ;C - - - - - 0x01DF70 0E:DF60: 85 60
 	STA playerExp                   ;C - - - - - 0x01DF72 0E:DF62: 85 6C
 	STA playerExp+1                 ;C - - - - - 0x01DF74 0E:DF64: 85 6D
 	LDA stage                       ;C - - - - - 0x01DF76 0E:DF66: A5 61
@@ -4100,7 +4101,7 @@ loc_0E_DF77:
 	JSR sub_0E_DE33                 ;C - - - - - 0x01DFAE 0E:DF9E: 20 33 DE
 	JMP loc_0E_DFE9                 ;C - - - - - 0x01DFB1 0E:DFA1: 4C E9 DF
 loc_0E_DFA4:
-	LDA ram_0060                    ;C - - - - - 0x01DFB4 0E:DFA4: A5 60
+	LDA stageSection                ;C - - - - - 0x01DFB4 0E:DFA4: A5 60
 	BNE loc_0E_DFE2                 ;C - - - - - 0x01DFB6 0E:DFA6: D0 3A
 	LDA playerLevel                 ;C - - - - - 0x01DFB8 0E:DFA8: A5 6B
 	STA ram_0051                    ;C - - - - - 0x01DFBA 0E:DFAA: 85 51

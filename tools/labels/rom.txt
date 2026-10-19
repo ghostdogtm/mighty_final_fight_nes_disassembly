@@ -127,3 +127,40 @@ bewords 06:8A43-8AAE
 0F:EB93 animBankTable           ; objKind -> PRG bank at $8000 for its animation data ($0A or $02; +1 goes to $A000)
 note 0F:EA6F Animation data in the $8000/$A000 banks: anim id (objAnim & $7F) -> pointer ($8000+id lo, $8080+id hi). Anim = [frame count, ticks per frame, frame ids..., 0]. Frame id -> sprite list ($8100+id lo, $8200+id hi).
 note 0F:EAF0 Sprite list = [count|$80 (bit7: use bank $03 instead of $0B at $A000), offset-table index, (tile, attr) * count]; the offset table ($B100/$B200 + index) holds (dy, dx) per sprite.
+; ---- stage data in the $A000 bank of the current stage (section k adds $30)
+rawsym AE60 stageField60_s0
+rawsym AE68 stageField68_s0
+rawsym AE70 stagePalIdx_s0
+rawsym AE71 stagePalIdx1_s0
+rawsym AE78 stageChr0_s0
+rawsym AE79 stageChr1_s0
+rawsym AE7C stagePalettes_s0
+rawsym AE90 stageField60_s1
+rawsym AE98 stageField68_s1
+rawsym AEA0 stagePalIdx_s1
+rawsym AEA1 stagePalIdx1_s1
+rawsym AEA8 stageChr0_s1
+rawsym AEA9 stageChr1_s1
+rawsym AEAC stagePalettes_s1
+rawsym AEC0 stageField60_s2
+rawsym AEC8 stageField68_s2
+rawsym AED0 stagePalIdx_s2
+rawsym AED1 stagePalIdx1_s2
+rawsym AED8 stageChr0_s2
+rawsym AED9 stageChr1_s2
+rawsym AEDC stagePalettes_s2
+rawsym 8000 animPtrLo
+rawsym 8080 animPtrHi
+rawsym 8100 frameListLo
+rawsym 8200 frameListHi
+rawsym B100 spriteOffsetLo
+rawsym B200 spriteOffsetHi
+rawsym BF00 stageTableBF00
+rawsym BB00 stageTableBB00
+rawsym BC00 stageTableBC00
+rawsym BD00 stageTableBD00
+rawsym BE00 stageTableBE00
+0E:C3DD LoadSectionGfx          ; stage setup: CHR banks, sprite palette of the character (tbl_0E_C53E/C546/C54E) and 16-colour palette from the stage bank
+0E:C53E spritePalCody
+0E:C546 spritePalGuy
+0E:C54E spritePalHaggar

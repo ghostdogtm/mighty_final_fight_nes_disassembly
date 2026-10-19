@@ -1675,7 +1675,7 @@ ofs_00_8D8D:
 	LDA stage                       ;C - - - - - 0x000DA4 00:8D94: A5 61
 	CMP #$03                        ;C - - - - - 0x000DA6 00:8D96: C9 03
 	BNE loc_00_8DD1                 ;C - - - - - 0x000DA8 00:8D98: D0 37
-	LDA ram_0060                    ;C - - - - - 0x000DAA 00:8D9A: A5 60
+	LDA stageSection                ;C - - - - - 0x000DAA 00:8D9A: A5 60
 	CMP #$01                        ;C - - - - - 0x000DAC 00:8D9C: C9 01
 	BNE loc_00_8DD1                 ;C - - - - - 0x000DAE 00:8D9E: D0 31
 	LDA objX                        ;C - - - - - 0x000DB0 00:8DA0: AD 60 03
@@ -1937,7 +1937,7 @@ ofs_00_8FAF:
 loc_00_8FB6:
 	LDA stage                       ;C - - - - - 0x000FC6 00:8FB6: A5 61
 	BNE loc_00_8FC7                 ;C - - - - - 0x000FC8 00:8FB8: D0 0D
-	LDA ram_0060                    ;C - - - - - 0x000FCA 00:8FBA: A5 60
+	LDA stageSection                ;C - - - - - 0x000FCA 00:8FBA: A5 60
 	CMP #$01                        ;C - - - - - 0x000FCC 00:8FBC: C9 01
 	BNE loc_00_8FC7                 ;C - - - - - 0x000FCE 00:8FBE: D0 07
 	LDA ram_002D                    ;C - - - - - 0x000FD0 00:8FC0: A5 2D
@@ -1948,7 +1948,7 @@ loc_00_8FC7:
 	LDA stage                       ;C - - - - - 0x000FD7 00:8FC7: A5 61
 	CMP #$03                        ;C - - - - - 0x000FD9 00:8FC9: C9 03
 	BNE loc_00_8FD8                 ;C - - - - - 0x000FDB 00:8FCB: D0 0B
-	LDA ram_0060                    ;C - - - - - 0x000FDD 00:8FCD: A5 60
+	LDA stageSection                ;C - - - - - 0x000FDD 00:8FCD: A5 60
 	BNE loc_00_8FD8                 ;C - - - - - 0x000FDF 00:8FCF: D0 07
 	LDA ram_002D                    ;C - - - - - 0x000FE1 00:8FD1: A5 2D
 	CMP #$02                        ;C - - - - - 0x000FE3 00:8FD3: C9 02
@@ -2356,7 +2356,7 @@ loc_00_9309:
 	STA ram_0037                    ;C - - - - - 0x001319 00:9309: 85 37
 	LDA stage                       ;C - - - - - 0x00131B 00:930B: A5 61
 	BNE loc_00_9319                 ;C - - - - - 0x00131D 00:930D: D0 0A
-	LDA ram_0060                    ;C - - - - - 0x00131F 00:930F: A5 60
+	LDA stageSection                ;C - - - - - 0x00131F 00:930F: A5 60
 	CMP #$01                        ;C - - - - - 0x001321 00:9311: C9 01
 	BNE loc_00_9319                 ;C - - - - - 0x001323 00:9313: D0 04
 	LDA #$0F                        ;C - - - - - 0x001325 00:9315: A9 0F
@@ -2395,7 +2395,7 @@ loc_00_9359:
 	STA ptr_02                      ;C - - - - - 0x00136E 00:935E: 85 02
 	LDA tbl_00_937D,Y               ;C - - - - - 0x001370 00:9360: B9 7D 93
 	STA ptr_02+1                    ;C - - - - - 0x001373 00:9363: 85 03
-	LDA ram_0060                    ;C - - - - - 0x001375 00:9365: A5 60
+	LDA stageSection                ;C - - - - - 0x001375 00:9365: A5 60
 	TAY                             ;C - - - - - 0x001377 00:9367: A8
 	LDA (ptr_02),Y                  ;C - - - - - 0x001378 00:9368: B1 02
 	TAY                             ;C - - - - - 0x00137A 00:936A: A8
@@ -2807,7 +2807,7 @@ loc_00_96A5:
 	STA objArr_0500                 ;C - - - - - 0x0016D7 00:96C7: 8D 00 05
 	LDA stage                       ;C - - - - - 0x0016DA 00:96CA: A5 61
 	BNE loc_00_96DB                 ;C - - - - - 0x0016DC 00:96CC: D0 0D
-	LDA ram_0060                    ;C - - - - - 0x0016DE 00:96CE: A5 60
+	LDA stageSection                ;C - - - - - 0x0016DE 00:96CE: A5 60
 	CMP #$01                        ;C - - - - - 0x0016E0 00:96D0: C9 01
 	BEQ loc_00_96DC                 ;C - - - - - 0x0016E2 00:96D2: F0 08
 	CMP #$03                        ;c - - - - - 0x0016E4 00:96D4: C9 03
@@ -2960,7 +2960,7 @@ loc_00_983B:
 	JSR ApplyVelXAdd                ;C - - - - - 0x00184B 00:983B: 20 83 F1
 	LDA stage                       ;C - - - - - 0x00184E 00:983E: A5 61
 	BNE loc_00_985F                 ;C - - - - - 0x001850 00:9840: D0 1D
-	LDA ram_0060                    ;C - - - - - 0x001852 00:9842: A5 60
+	LDA stageSection                ;C - - - - - 0x001852 00:9842: A5 60
 	CMP #$01                        ;C - - - - - 0x001854 00:9844: C9 01
 	BNE loc_00_985E                 ;C - - - - - 0x001856 00:9846: D0 16
 	LDA objX                        ;C - - - - - 0x001858 00:9848: AD 60 03
@@ -2979,7 +2979,7 @@ loc_00_985F:
 	LDA stage                       ;C - - - - - 0x00186F 00:985F: A5 61
 	CMP #$04                        ;C - - - - - 0x001871 00:9861: C9 04
 	BNE loc_00_985E                 ;C - - - - - 0x001873 00:9863: D0 F9
-	LDA ram_0060                    ;C - - - - - 0x001875 00:9865: A5 60
+	LDA stageSection                ;C - - - - - 0x001875 00:9865: A5 60
 	CMP #$02                        ;C - - - - - 0x001877 00:9867: C9 02
 	BNE loc_00_985E                 ;C - - - - - 0x001879 00:9869: D0 F3
 	LDA objXPage                    ;C - - - - - 0x00187B 00:986B: AD 80 03

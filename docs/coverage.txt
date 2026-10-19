@@ -426,7 +426,7 @@ Traced code (instruction starts, verify by hand):
   05:A994  CMP #$A0
   05:A996  BCC loc_05_A9BC
   05:A998  BCS loc_05_A9AB
-  05:A99A  LDA ram_0060
+  05:A99A  LDA stageSection
   05:A99C  CMP #$01
   05:A99E  BNE loc_05_A9AB
   05:A9A0  LDA objX,X
@@ -1125,7 +1125,7 @@ Traced code (instruction starts, verify by hand):
   0F:EAD8  AND #$04
   0F:EADA  BNE loc_0F_EAEF
   0F:EB48  BCS loc_0F_EB8B
-  0F:EC39  LDA ram_0060
+  0F:EC39  LDA stageSection
   0F:EC3B  CMP #$01
   0F:EC3D  BNE loc_0F_EC41
   0F:EC3F  BEQ loc_0F_EC81
@@ -1276,49 +1276,10 @@ Traced code (instruction starts, verify by hand):
   0F:F98E  STA weaponHeld
   0F:F990  RTS
 
-Raw ROM-address operands (do not relocate with the code): 42
+Raw ROM-address operands (do not relocate with the code): 3
   0E:C0DC  STA $E000,X
-  0E:C3F3  LDA $AE78
-  0E:C3F8  LDA $AE79
-  0E:C3FF  LDA $AEA8
-  0E:C404  LDA $AEA9
-  0E:C40B  LDA $AED8
-  0E:C410  LDA $AED9
-  0E:C45F  LDA $AE70,X
-  0E:C463  LDA $AE71,X
-  0E:C469  LDA $AEA0,X
-  0E:C46D  LDA $AEA1,X
-  0E:C473  LDA $AED0,X
-  0E:C477  LDA $AED1,X
-  0E:C494  LDA $AE7C,Y
-  0E:C4A5  LDA $AE7C,Y
-  0E:C4C5  LDA $AEAC,Y
-  0E:C4D6  LDA $AEAC,Y
-  0E:C4F6  LDA $AEDC,Y
-  0E:C507  LDA $AEDC,Y
   0E:C5D5  JSR $9A00
-  0E:C78A  LDA $AE68
-  0E:DEB6  JSR $8000
   0E:DEBC  JSR $9000
-  0F:E02C  LDA $AE68
-  0F:E032  LDA $AE98
-  0F:E038  LDA $AEC8
-  0F:E622  LDA $BB00,Y
-  0F:E628  LDA $BC00,Y
-  0F:E62E  LDA $BD00,Y
-  0F:E634  LDA $BE00,Y
-  0F:E63A  LDA $BF00,Y
-  0F:E67A  LDA $AE60,Y
-  0F:E680  LDA $AE90,Y
-  0F:E686  LDA $AEC0,Y
-  0F:EA9A  LDA $8000,Y
-  0F:EA9F  LDA $8080,Y
-  0F:EAF1  LDA $8100,Y
-  0F:EAF6  LDA $8200,Y
-  0F:EB1D  LDA $B100,X
-  0F:EB25  LDA $B200,X
-  0F:ED64  LDA $BF00,Y
-  0F:EE71  LDA $BF00,Y
 
 Code-like unknown runs (decode cleanly to the end, no BRK; review by hand):
      18  0B:B30F

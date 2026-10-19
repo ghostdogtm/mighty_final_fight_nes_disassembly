@@ -50,4 +50,38 @@ MMC3_IRQ_RELOAD        = $C001
 MMC3_IRQ_DISABLE       = $E000
 MMC3_IRQ_ENABLE        = $E001
 
+; names for raw $8000-$BFFF operands (bank depends on the stage / animation set)
+animPtrLo              = $8000
+animPtrHi              = $8080
+frameListLo            = $8100
+frameListHi            = $8200
+stageField60_s0        = $AE60
+stageField68_s0        = $AE68
+stagePalIdx_s0         = $AE70
+stagePalIdx1_s0        = $AE71
+stageChr0_s0           = $AE78
+stageChr1_s0           = $AE79
+stagePalettes_s0       = $AE7C
+stageField60_s1        = $AE90
+stageField68_s1        = $AE98
+stagePalIdx_s1         = $AEA0
+stagePalIdx1_s1        = $AEA1
+stageChr0_s1           = $AEA8
+stageChr1_s1           = $AEA9
+stagePalettes_s1       = $AEAC
+stageField60_s2        = $AEC0
+stageField68_s2        = $AEC8
+stagePalIdx_s2         = $AED0
+stagePalIdx1_s2        = $AED1
+stageChr0_s2           = $AED8
+stageChr1_s2           = $AED9
+stagePalettes_s2       = $AEDC
+spriteOffsetLo         = $B100
+spriteOffsetHi         = $B200
+stageTableBB00         = $BB00
+stageTableBC00         = $BC00
+stageTableBD00         = $BD00
+stageTableBE00         = $BE00
+stageTableBF00         = $BF00
+
 .include "ram.inc"

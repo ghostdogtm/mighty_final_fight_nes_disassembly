@@ -137,3 +137,4 @@
 0095 drawOrderToggle            ; incremented every DrawObjects call: odd/even picks the slot order
 0096 drawSlot                   ; slot being drawn
 00F9 scrollXPage                ; high byte of scrollX (compared with objXPage)
+0060 stageSection           ; 0..2: section of the stage (selects the +$30 sets of stage tables)

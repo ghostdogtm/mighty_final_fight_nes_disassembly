@@ -478,7 +478,7 @@ loc_05_A991:
 	BCC loc_05_A9BC                 ;c - - - - - 0x00A9A6 05:A996: 90 24
 	BCS loc_05_A9AB                 ;c - - - - - 0x00A9A8 05:A998: B0 11
 loc_05_A99A:
-	LDA ram_0060                    ;c - - - - - 0x00A9AA 05:A99A: A5 60
+	LDA stageSection                ;c - - - - - 0x00A9AA 05:A99A: A5 60
 	CMP #$01                        ;c - - - - - 0x00A9AC 05:A99C: C9 01
 	BNE loc_05_A9AB                 ;c - - - - - 0x00A9AE 05:A99E: D0 0B
 	LDA objX,X                      ;c - - - - - 0x00A9B0 05:A9A0: BD 60 03
@@ -560,7 +560,7 @@ loc_05_AA28:
 	LDY stage                       ;C - - - - - 0x00AA3F 05:AA2F: A4 61
 	CPY #$04                        ;C - - - - - 0x00AA41 05:AA31: C0 04
 	BNE loc_05_AA3C                 ;C - - - - - 0x00AA43 05:AA33: D0 07
-	LDY ram_0060                    ;C - - - - - 0x00AA45 05:AA35: A4 60
+	LDY stageSection                ;C - - - - - 0x00AA45 05:AA35: A4 60
 	LDA tbl_05_AA64,Y               ;C - - - - - 0x00AA47 05:AA37: B9 64 AA
 	BNE loc_05_AA3F                 ;C - - - - - 0x00AA4A 05:AA3A: D0 03
 loc_05_AA3C:

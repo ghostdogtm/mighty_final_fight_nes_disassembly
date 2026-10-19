@@ -3721,7 +3721,7 @@ loc_0C_9E48:
 	LDA stage                       ;C - - - - - 0x019E5F 0C:9E4F: A5 61
 	CMP #$03                        ;C - - - - - 0x019E61 0C:9E51: C9 03
 	BNE loc_0C_9E5B                 ;C - - - - - 0x019E63 0C:9E53: D0 06
-	LDA ram_0060                    ;C - - - - - 0x019E65 0C:9E55: A5 60
+	LDA stageSection                ;C - - - - - 0x019E65 0C:9E55: A5 60
 	CMP #$01                        ;C - - - - - 0x019E67 0C:9E57: C9 01
 	BEQ loc_0C_9E63                 ;C - - - - - 0x019E69 0C:9E59: F0 08
 loc_0C_9E5B:
