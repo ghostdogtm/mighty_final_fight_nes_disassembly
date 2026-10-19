@@ -169,3 +169,8 @@ rawsym BE00 stageTableBE00
 0C:83AF enemyAILo               ; 160 entries; one handler per objKind (lo bytes)
 0C:844F enemyAIHi               ; hi bytes; the last 48 entries point into other banks ($A700.., $B300.., $A000..)
 0C:84EF EnemyAI_None            ; RTS handler used by unused kinds
+rawsym 9000 bankedEntry9000
+rawsym 9A00 bankedEntry9A00
+comment 0E:C0DC write to $E000+X (MMC3 IRQ disable/enable, X = ram_009B)
+comment 0E:C5D5 call into the switchable $8000 bank (bank depends on stage)
+comment 0E:DEBC call into the switchable $8000 bank (bank depends on stage)

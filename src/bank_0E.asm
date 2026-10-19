@@ -110,7 +110,7 @@ loc_0E_C0BA:
 	LDA #>IrqSplit1                 ;C - - - - - 0x01C0E6 0E:C0D6: A9 C1
 	STA irqVector+1                 ;C - - - - - 0x01C0E8 0E:C0D8: 85 9D
 	LDX ram_009B                    ;C - - - - - 0x01C0EA 0E:C0DA: A6 9B
-	STA $E000,X                     ;C - - - - - 0x01C0EC 0E:C0DC: 9D 00 E0
+	STA $E000,X                     ;C - - - - - 0x01C0EC 0E:C0DC: 9D 00 E0  ; write to $E000+X (MMC3 IRQ disable/enable, X = ram_009B)
 	INC frameCounter                ;C - - - - - 0x01C0EF 0E:C0DF: E6 92
 	LDX #$FF                        ;C - - - - - 0x01C0F1 0E:C0E1: A2 FF
 	STX nmiTickFlag                 ;C - - - - - 0x01C0F3 0E:C0E3: 86 90
@@ -814,7 +814,7 @@ loc_0E_C5CE:
 	JSR sub_0E_C888                 ;C - - - - - 0x01C5DE 0E:C5CE: 20 88 C8
 	LDA #$00                        ;C - - - - - 0x01C5E1 0E:C5D1: A9 00
 	STA ram_00B8                    ;C - - - - - 0x01C5E3 0E:C5D3: 85 B8
-	JSR $9A00                       ;C - - - - - 0x01C5E5 0E:C5D5: 20 00 9A
+	JSR bankedEntry9A00             ;C - - - - - 0x01C5E5 0E:C5D5: 20 00 9A  ; call into the switchable $8000 bank (bank depends on stage)
 	LDA padHeld                     ;C D 2 - I - 0x01C5E8 0E:C5D8: A5 16
 	BNE loc_0E_C657                 ;C - - - - - 0x01C5EA 0E:C5DA: D0 7B
 	LDA #$07                        ;C - - - - - 0x01C5EC 0E:C5DC: A9 07
@@ -3999,7 +3999,7 @@ loc_0E_DE8B:
 	LDX #$06                        ;C - - - - - 0x01DEC4 0E:DEB4: A2 06
 	JSR animPtrLo                   ;C - - - - - 0x01DEC6 0E:DEB6: 20 00 80
 	JSR ScreenOn                    ;C - - - - - 0x01DEC9 0E:DEB9: 20 6F C2
-	JSR $9000                       ;C - - - - - 0x01DECC 0E:DEBC: 20 00 90
+	JSR bankedEntry9000             ;C - - - - - 0x01DECC 0E:DEBC: 20 00 90  ; call into the switchable $8000 bank (bank depends on stage)
 	LDX #$00                        ;C - - - - - 0x01DECF 0E:DEBF: A2 00
 	STX prgBank8000                 ;C - - - - - 0x01DED1 0E:DEC1: 86 F4
 	INX                             ;C - - - - - 0x01DED3 0E:DEC3: E8

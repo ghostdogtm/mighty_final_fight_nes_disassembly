@@ -89,5 +89,5 @@ A lowercase `c` means the code was found by tracing (the emulator never saw it; 
 ## Known limitations
 - About 24 KB of PRG (≈19 %) was never seen by the CDL and tracing did not turn it into code — it is mostly data the
   game did not read during play. It stays as `.byte` (largest regions in `docs/coverage.txt`).
-- Operands in `$8000–$BFFF` whose bank depends on the stage or animation set (`stageBankTable`) cannot be resolved statically; they are named with `rawsym AAAA name` in `rom.txt` (`stagePalettes_s0`, `animPtrLo`, …). Three stay raw (listed in `docs/coverage.txt`).
+- Operands in `$8000–$BFFF` whose bank depends on the stage or animation set (`stageBankTable`) cannot be resolved statically; they are named with `rawsym AAAA name` in `rom.txt` (`stagePalettes_s0`, `animPtrLo`, …). One stays raw (listed in `docs/coverage.txt`).
 - `rom.txt` directives: `comment BB:AAAA text` appends a comment to a line; `bewords BB:LO-HI` emits big-endian address pairs (hi, lo) as `>label,<label`; `text BB:LO-HI` emits strings per line with the decoded text (tile = ASCII−$31 for A-Z, `$00` space, `$FE` newline, `$FF` end); `table BB:LO-HI N header` emits a range N bytes per row with a comment; `bank BB:AAAA TT` states the bank behind a raw `$8000–$BFFF` operand of the instruction at BB:AAAA.

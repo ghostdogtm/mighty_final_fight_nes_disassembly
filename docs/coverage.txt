@@ -1278,10 +1278,8 @@ Traced code (instruction starts, verify by hand):
   0F:F98E  STA weaponHeld
   0F:F990  RTS
 
-Raw ROM-address operands (do not relocate with the code): 3
+Raw ROM-address operands (do not relocate with the code): 1
   0E:C0DC  STA $E000,X
-  0E:C5D5  JSR $9A00
-  0E:DEBC  JSR $9000
 
 Code-like unknown runs (decode cleanly to the end, no BRK; review by hand):
      18  0B:B30F
