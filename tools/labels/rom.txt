@@ -112,3 +112,8 @@ table 0F:E1C1-E1D2 3 Cody, Guy, Haggar
 table 0F:E1E0-E2A2 3 Cody, Guy, Haggar
 0E:CEAA ResetPlayerStand       ; slot 0 gets the standing animation for the current weapon state
 0E:DCDD Act0B_Death            ; health<0: blink, then lives-- ; no lives left -> gameAction 9 (continue)
+; ---- text: tile = ASCII-$31 for A-Z ($10-$29), $00 space, $2A ' $2B . $2C , $75 ? $76 ! $78 - ; $FE newline, $FF end
+text 00:9B3A-9ECD               ; intro/ending story
+text 04:9DF3-9FFF               ; dialogue (continues in bank 05)
+text 05:A000-A4E8               ; boss/enemy taunts
+text 09:A7E0-A99B               ; staff credits

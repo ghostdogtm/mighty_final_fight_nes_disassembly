@@ -40,6 +40,15 @@ PAIR_OF = {0: 1, 1: 0, 4: 5, 5: 4, 8: 9, 9: 8, 12: 13, 13: 12}   # banks always 
 RESERVED = {o[0].lower() for o in OPS.values()} | {'a', 'x', 'y', 's', 'z'}
 
 
+TEXT_CHARS = {0x00: ' ', 0x2A: "'", 0x2B: '.', 0x2C: ',', 0x75: '?', 0x76: '!', 0x78: '-', 0xFE: '/', 0xFF: '$'}
+
+
+def text_char(c):
+    if 0x10 <= c <= 0x29:
+        return chr(c + 0x31)
+    return TEXT_CHARS.get(c, '<%02X>' % c)
+
+
 def base_of(b):
     return 0xC000 if b == 14 else 0xE000 if b == 15 else (0x8000 if b % 2 == 0 else 0xA000)
 
@@ -77,7 +86,13 @@ def load_rom_labels(path):
         if not parts:
             continue
         try:
-            if parts[0] == 'table':              # table BB:LO-HI N header text  -> N bytes per row
+            if parts[0] == 'text':               # text BB:LO-HI  -> strings, split at $FE/$FF, decoded in the comment
+                bs, rng = parts[1].split(':')
+                lo, _, hi = rng.partition('-')
+                b = int(bs, 16)
+                notes[(b, parse_addr(lo) - base_of(b), 's')] = (parse_addr(hi) - base_of(b),)
+                force.append(('data', b, parse_addr(lo) - base_of(b), parse_addr(hi) - base_of(b)))
+            elif parts[0] == 'table':              # table BB:LO-HI N header text  -> N bytes per row
                 bs, rng = parts[1].split(':')
                 lo, _, hi = rng.partition('-')
                 b = int(bs, 16)
@@ -645,8 +660,11 @@ class Disasm:
             self.user_cmts = {}
             self.user_bank = {}
             self.tables = []
+            self.texts = []
             for key, text in self.user_notes.items():
-                if len(key) == 3 and key[2] == 't':
+                if len(key) == 3 and key[2] == 's':
+                    self.texts.append((key[0], key[1], text[0]))
+                elif len(key) == 3 and key[2] == 't':
                     self.tables.append((key[0], key[1], text[1], text[0], text[2]))
                 elif len(key) == 3 and key[2] == 'b':
                     self.user_bank[(key[0], key[1])] = text
@@ -735,6 +753,17 @@ class Disasm:
                     i = j
                     continue
             j = i + 1 if kd == 4 else i                      # lone half of a word: emit as a single byte
+            if any(tb == b and tlo <= i <= thi for (tb, tlo, thi) in self.texts) and kd in (0, 3):
+                j = i
+                while j < BANK_SIZE and j - i < 24 and (j == i or ((b, j) not in self.labels and (b, j) not in self.notes))                         and not any(tb == b and thi < j for (tb, tlo, thi) in self.texts if tlo <= i <= thi):
+                    j += 1
+                    if rom[j - 1] in (0xFE, 0xFF):
+                        break
+                o.append('	%-32s;%s 0x%06X %02X:%04X: "%s"' % (
+                    '.byte ' + ','.join('$%02X' % x for x in rom[i:j]), self.cdl_flags(cdl[i]), off0 + i, b, base + i,
+                    ''.join(text_char(c) for c in rom[i:j])))
+                i = j
+                continue
             lim, hdr = 16, ''
             for (tb, tlo, thi, tn, tt) in self.tables:
                 if tb == b and tlo <= i <= thi:
