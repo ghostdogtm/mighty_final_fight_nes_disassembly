@@ -9,10 +9,10 @@ loc_0C_8003:
 	LDX #$01                        ;C - - - - - 0x018017 0C:8007: A2 01
 	STX ram_00EF                    ;C - - - - - 0x018019 0C:8009: 86 EF
 loc_0C_800B:
-	LDA objArr_0300,X               ;C - - - - - 0x01801B 0C:800B: BD 00 03
+	LDA objActive,X                 ;C - - - - - 0x01801B 0C:800B: BD 00 03
 	BPL loc_0C_805E                 ;C - - - - - 0x01801E 0C:800E: 10 4E
 	LDY #$0D                        ;C - - - - - 0x018020 0C:8010: A0 0D
-	LDA objArr_0320,X               ;C - - - - - 0x018022 0C:8012: BD 20 03
+	LDA objKind,X                   ;C - - - - - 0x018022 0C:8012: BD 20 03
 	CMP #$60                        ;C - - - - - 0x018025 0C:8015: C9 60
 	BCC loc_0C_802F                 ;C - - - - - 0x018027 0C:8017: 90 16
 	LDY #$05                        ;C - - - - - 0x018029 0C:8019: A0 05
@@ -46,7 +46,7 @@ loc_0C_803B:
 	PLA                             ;C - - - - - 0x018056 0C:8046: 68
 	TAX                             ;C - - - - - 0x018057 0C:8047: AA
 loc_0C_8048:
-	LDY objArr_0320,X               ;C - - - - - 0x018058 0C:8048: BC 20 03
+	LDY objKind,X                   ;C - - - - - 0x018058 0C:8048: BC 20 03
 	LDA tbl_0C_83AF,Y               ;C - - - - - 0x01805B 0C:804B: B9 AF 83
 	STA ptr_00                      ;C - - - - - 0x01805E 0C:804E: 85 00
 	LDA tbl_0C_844F,Y               ;C - - - - - 0x018060 0C:8050: B9 4F 84
@@ -68,7 +68,7 @@ loc_0C_8067:
 	DEC objArr_04B0,X               ;C - - - - - 0x01807C 0C:806C: DE B0 04
 	JMP loc_0C_81F0                 ;C - - - - - 0x01807F 0C:806F: 4C F0 81
 loc_0C_8072:
-	LDA objArr_0320,X               ;C - - - - - 0x018082 0C:8072: BD 20 03
+	LDA objKind,X                   ;C - - - - - 0x018082 0C:8072: BD 20 03
 	CMP #$04                        ;C - - - - - 0x018085 0C:8075: C9 04
 	BEQ loc_0C_808D                 ;C - - - - - 0x018087 0C:8077: F0 14
 	CMP #$08                        ;C - - - - - 0x018089 0C:8079: C9 08
@@ -87,23 +87,23 @@ loc_0C_8090:
 	JSR sub_0F_F9E5                 ;C - - - - - 0x0180A0 0C:8090: 20 E5 F9
 	BCS loc_0C_80C0                 ;C - - - - - 0x0180A3 0C:8093: B0 2B
 	LDY ptr_0E+1                    ;C - - - - - 0x0180A5 0C:8095: A4 0F
-	LDA objArr_0580,Y               ;C - - - - - 0x0180A7 0C:8097: B9 80 05
+	LDA objAnim,Y                   ;C - - - - - 0x0180A7 0C:8097: B9 80 05
 	CMP #$74                        ;C - - - - - 0x0180AA 0C:809A: C9 74
 	BEQ loc_0C_80AF                 ;C - - - - - 0x0180AC 0C:809C: F0 11
 	LDA #$00                        ;C - - - - - 0x0180AE 0C:809E: A9 00
-	STA objArr_0300,Y               ;C - - - - - 0x0180B0 0C:80A0: 99 00 03
+	STA objActive,Y                 ;C - - - - - 0x0180B0 0C:80A0: 99 00 03
 	STA objState,Y                  ;C - - - - - 0x0180B3 0C:80A3: 99 10 03
-	STA objArr_0560,Y               ;C - - - - - 0x0180B6 0C:80A6: 99 60 05
-	STA objArr_0320,Y               ;C - - - - - 0x0180B9 0C:80A9: 99 20 03
+	STA objFlags,Y                  ;C - - - - - 0x0180B6 0C:80A6: 99 60 05
+	STA objKind,Y                   ;C - - - - - 0x0180B9 0C:80A9: 99 20 03
 loc_0C_80AC:
 	JMP loc_0C_80D3                 ;C - - - - - 0x0180BC 0C:80AC: 4C D3 80
 loc_0C_80AF:
 	LDA #$00                        ;C - - - - - 0x0180BF 0C:80AF: A9 00
-	STA objArr_0590,Y               ;C - - - - - 0x0180C1 0C:80B1: 99 90 05
+	STA objAnimFlags,Y              ;C - - - - - 0x0180C1 0C:80B1: 99 90 05
 	LDA #$06                        ;C - - - - - 0x0180C4 0C:80B4: A9 06
-	STA objArr_0570,Y               ;C - - - - - 0x0180C6 0C:80B6: 99 70 05
+	STA objAnimFrame,Y              ;C - - - - - 0x0180C6 0C:80B6: 99 70 05
 	LDA #$09                        ;C - - - - - 0x0180C9 0C:80B9: A9 09
-	STA objArr_0320,Y               ;C - - - - - 0x0180CB 0C:80BB: 99 20 03
+	STA objKind,Y                   ;C - - - - - 0x0180CB 0C:80BB: 99 20 03
 	BNE loc_0C_80AC                 ;C - - - - - 0x0180CE 0C:80BE: D0 EC
 loc_0C_80C0:
 	JSR sub_0F_F738                 ;C - - - - - 0x0180D0 0C:80C0: 20 38 F7
@@ -119,7 +119,7 @@ loc_0C_80D3:
 	JSR sub_0C_84F0                 ;C - - - - - 0x0180E3 0C:80D3: 20 F0 84
 	LDA #$00                        ;C - - - - - 0x0180E6 0C:80D6: A9 00
 	STA objArr_0440,X               ;C - - - - - 0x0180E8 0C:80D8: 9D 40 04
-	LDA objArr_0580,X               ;C - - - - - 0x0180EB 0C:80DB: BD 80 05
+	LDA objAnim,X                   ;C - - - - - 0x0180EB 0C:80DB: BD 80 05
 	CMP #$84                        ;C - - - - - 0x0180EE 0C:80DE: C9 84
 	BEQ loc_0C_8108                 ;C - - - - - 0x0180F0 0C:80E0: F0 26
 	CMP #$AC                        ;C - - - - - 0x0180F2 0C:80E2: C9 AC
@@ -148,7 +148,7 @@ loc_0C_8108:
 	BMI loc_0C_80D0                 ;C - - - - - 0x018121 0C:8111: 30 BD
 	JMP loc_0C_819A                 ;C - - - - - 0x018123 0C:8113: 4C 9A 81
 loc_0C_8116:
-	LDA objArr_0320,X               ;C - - - - - 0x018126 0C:8116: BD 20 03
+	LDA objKind,X                   ;C - - - - - 0x018126 0C:8116: BD 20 03
 	CMP #$91                        ;C - - - - - 0x018129 0C:8119: C9 91
 	BEQ loc_0C_8131                 ;C - - - - - 0x01812B 0C:811B: F0 14
 	LDA ram_00A7                    ;C - - - - - 0x01812D 0C:811D: A5 A7
@@ -164,7 +164,7 @@ loc_0C_8131:
 	LDA objLife,X                   ;C - - - - - 0x018141 0C:8131: BD 90 04
 	BMI loc_0C_80D0                 ;C - - - - - 0x018144 0C:8134: 30 9A
 	LDA #$1E                        ;C - - - - - 0x018146 0C:8136: A9 1E
-	STA ram_00A3                    ;C - - - - - 0x018148 0C:8138: 85 A3
+	STA timerA3                     ;C - - - - - 0x018148 0C:8138: 85 A3
 	LDA objSpriteDown,X             ;C - - - - - 0x01814A 0C:813A: BD B0 05
 	CMP #$03                        ;C - - - - - 0x01814D 0C:813D: C9 03
 	BNE loc_0C_8146                 ;C - - - - - 0x01814F 0C:813F: D0 05
@@ -215,29 +215,29 @@ loc_0C_8146:
 	BNE loc_0C_81B5                 ;C - - - - - 0x0181A8 0C:8198: D0 1B
 loc_0C_819A:
 	LDA #$05                        ;C - - - - - 0x0181AA 0C:819A: A9 05
-	STA objArr_0320,X               ;C - - - - - 0x0181AC 0C:819C: 9D 20 03
+	STA objKind,X                   ;C - - - - - 0x0181AC 0C:819C: 9D 20 03
 	LDA #$8E                        ;C - - - - - 0x0181AF 0C:819F: A9 8E
-	STA objArr_0420,X               ;C - - - - - 0x0181B1 0C:81A1: 9D 20 04
+	STA objVelYLo,X                 ;C - - - - - 0x0181B1 0C:81A1: 9D 20 04
 	LDA #$03                        ;C - - - - - 0x0181B4 0C:81A4: A9 03
-	STA objArr_0430,X               ;C - - - - - 0x0181B6 0C:81A6: 9D 30 04
+	STA objVelYHi,X                 ;C - - - - - 0x0181B6 0C:81A6: 9D 30 04
 	BNE loc_0C_81B0                 ;C - - - - - 0x0181B9 0C:81A9: D0 05
 loc_0C_81AB:
 	LDA #$02                        ;C - - - - - 0x0181BB 0C:81AB: A9 02
-	STA objArr_0320,X               ;C - - - - - 0x0181BD 0C:81AD: 9D 20 03
+	STA objKind,X                   ;C - - - - - 0x0181BD 0C:81AD: 9D 20 03
 loc_0C_81B0:
 	LDA #$80                        ;C - - - - - 0x0181C0 0C:81B0: A9 80
-	STA objArr_0300,X               ;C - - - - - 0x0181C2 0C:81B2: 9D 00 03
+	STA objActive,X                 ;C - - - - - 0x0181C2 0C:81B2: 9D 00 03
 loc_0C_81B5:
 	JMP loc_0C_800B                 ;C - - - - - 0x0181C5 0C:81B5: 4C 0B 80
 loc_0C_81B8:
-	LDA objArr_0320,X               ;C - - - - - 0x0181C8 0C:81B8: BD 20 03
+	LDA objKind,X                   ;C - - - - - 0x0181C8 0C:81B8: BD 20 03
 	CMP #$06                        ;C - - - - - 0x0181CB 0C:81BB: C9 06
 	BEQ loc_0C_820E                 ;C - - - - - 0x0181CD 0C:81BD: F0 4F
 	CMP #$07                        ;C - - - - - 0x0181CF 0C:81BF: C9 07
 	BEQ loc_0C_820E                 ;C - - - - - 0x0181D1 0C:81C1: F0 4B
 	CMP #$74                        ;C - - - - - 0x0181D3 0C:81C3: C9 74
 	BEQ loc_0C_8211                 ;C - - - - - 0x0181D5 0C:81C5: F0 4A
-	LDA objArr_0580,X               ;C - - - - - 0x0181D7 0C:81C7: BD 80 05
+	LDA objAnim,X                   ;C - - - - - 0x0181D7 0C:81C7: BD 80 05
 	CMP #$7B                        ;C - - - - - 0x0181DA 0C:81CA: C9 7B
 	BEQ loc_0C_821F                 ;C - - - - - 0x0181DC 0C:81CC: F0 51
 	INC ram_0054                    ;C - - - - - 0x0181DE 0C:81CE: E6 54
@@ -258,7 +258,7 @@ loc_0C_81E7:
 loc_0C_81EB:
 	LDA #$07                        ;C - - - - - 0x0181FB 0C:81EB: A9 07
 loc_0C_81ED:
-	STA objArr_0320,X               ;C - - - - - 0x0181FD 0C:81ED: 9D 20 03
+	STA objKind,X                   ;C - - - - - 0x0181FD 0C:81ED: 9D 20 03
 loc_0C_81F0:
 	LDA ram_006E                    ;C - - - - - 0x018200 0C:81F0: A5 6E
 	BMI loc_0C_820E                 ;C - - - - - 0x018202 0C:81F2: 30 1A
@@ -279,31 +279,31 @@ loc_0C_8211:
 	INC ram_0054                    ;C - - - - - 0x018221 0C:8211: E6 54
 	JSR sub_0C_822F                 ;C - - - - - 0x018223 0C:8213: 20 2F 82
 	LDA #$9F                        ;C - - - - - 0x018226 0C:8216: A9 9F
-	STA objArr_0320,X               ;C - - - - - 0x018228 0C:8218: 9D 20 03
+	STA objKind,X                   ;C - - - - - 0x018228 0C:8218: 9D 20 03
 	JMP loc_0C_800B                 ;C - - - - - 0x01822B 0C:821B: 4C 0B 80
 loc_0C_821E:
 	RTS                             ;C - - - - - 0x01822E 0C:821E: 60
 loc_0C_821F:
 	LDA #$80                        ;C - - - - - 0x01822F 0C:821F: A9 80
-	STA objArr_0300,X               ;C - - - - - 0x018231 0C:8221: 9D 00 03
+	STA objActive,X                 ;C - - - - - 0x018231 0C:8221: 9D 00 03
 	LDA #$95                        ;C - - - - - 0x018234 0C:8224: A9 95
-	STA objArr_0320,X               ;C - - - - - 0x018236 0C:8226: 9D 20 03
+	STA objKind,X                   ;C - - - - - 0x018236 0C:8226: 9D 20 03
 	LDA #$7F                        ;C - - - - - 0x018239 0C:8229: A9 7F
-	JSR sub_0F_F288                 ;C - - - - - 0x01823B 0C:822B: 20 88 F2
+	JSR SetAnimX                    ;C - - - - - 0x01823B 0C:822B: 20 88 F2
 	RTS                             ;C - - - - - 0x01823E 0C:822E: 60
 sub_0C_822F:
 	LDA #$80                        ;C - - - - - 0x01823F 0C:822F: A9 80
-	STA objArr_0300,X               ;C - - - - - 0x018241 0C:8231: 9D 00 03
+	STA objActive,X                 ;C - - - - - 0x018241 0C:8231: 9D 00 03
 	LDA #$00                        ;C - - - - - 0x018244 0C:8234: A9 00
 	STA objArr_0440,X               ;C - - - - - 0x018246 0C:8236: 9D 40 04
-	STA ram_00A3                    ;C - - - - - 0x018249 0C:8239: 85 A3
+	STA timerA3                     ;C - - - - - 0x018249 0C:8239: 85 A3
 	LDA #$FF                        ;C - - - - - 0x01824B 0C:823B: A9 FF
 	STA objArr_0480,X               ;C - - - - - 0x01824D 0C:823D: 9D 80 04
 	RTS                             ;C - - - - - 0x018250 0C:8240: 60
 loc_0C_8241:
 	JMP loc_0C_83A8                 ;C - - - - - 0x018251 0C:8241: 4C A8 83
 sub_0C_8244:
-	LDA objArr_0300,X               ;C - - - - - 0x018254 0C:8244: BD 00 03
+	LDA objActive,X                 ;C - - - - - 0x018254 0C:8244: BD 00 03
 	AND #$0F                        ;C - - - - - 0x018257 0C:8247: 29 0F
 	BEQ loc_0C_821E                 ;C - - - - - 0x018259 0C:8249: F0 D3
 	LDA objArr_0540,X               ;C - - - - - 0x01825B 0C:824B: BD 40 05
@@ -313,8 +313,8 @@ sub_0C_8244:
 loc_0C_8254:
 	LDY #$0D                        ;C - - - - - 0x018264 0C:8254: A0 0D
 loc_0C_8256:
-	LDA objArr_0320,X               ;C - - - - - 0x018266 0C:8256: BD 20 03
-	CMP objArr_0320,Y               ;C - - - - - 0x018269 0C:8259: D9 20 03
+	LDA objKind,X                   ;C - - - - - 0x018266 0C:8256: BD 20 03
+	CMP objKind,Y                   ;C - - - - - 0x018269 0C:8259: D9 20 03
 	BEQ loc_0C_8241                 ;C - - - - - 0x01826C 0C:825C: F0 E3
 	LDA playerId                    ;C - - - - - 0x01826E 0C:825E: A5 34
 	CMP #$02                        ;C - - - - - 0x018270 0C:8260: C9 02
@@ -333,7 +333,7 @@ loc_0C_8278:
 	LDA objArr_04C0,X               ;C - - - - - 0x018288 0C:8278: BD C0 04
 	BNE loc_0C_8241                 ;C - - - - - 0x01828B 0C:827B: D0 C4
 loc_0C_827D:
-	LDA objArr_0300,Y               ;C - - - - - 0x01828D 0C:827D: B9 00 03
+	LDA objActive,Y                 ;C - - - - - 0x01828D 0C:827D: B9 00 03
 	BPL loc_0C_8241                 ;C - - - - - 0x018290 0C:8280: 10 BF
 	LDA objArr_03F0,Y               ;C - - - - - 0x018292 0C:8282: B9 F0 03
 	BNE loc_0C_8241                 ;C - - - - - 0x018295 0C:8285: D0 BA
@@ -348,7 +348,7 @@ loc_0C_827D:
 	BEQ loc_0C_829B                 ;C - - - - - 0x0182A7 0C:8297: F0 02
 	BNE loc_0C_8241                 ;C - - - - - 0x0182A9 0C:8299: D0 A6
 loc_0C_829B:
-	LDA objArr_0320,Y               ;C - - - - - 0x0182AB 0C:829B: B9 20 03
+	LDA objKind,Y                   ;C - - - - - 0x0182AB 0C:829B: B9 20 03
 	CMP #$16                        ;C - - - - - 0x0182AE 0C:829E: C9 16
 	BCC loc_0C_8241                 ;C - - - - - 0x0182B0 0C:82A0: 90 9F
 	CMP #$6F                        ;C - - - - - 0x0182B2 0C:82A2: C9 6F
@@ -377,11 +377,11 @@ loc_0C_829B:
 	BEQ loc_0C_8333                 ;C - - - - - 0x0182E0 0C:82D0: F0 61
 	CMP #$62                        ;C - - - - - 0x0182E2 0C:82D2: C9 62
 	BEQ loc_0C_8333                 ;C - - - - - 0x0182E4 0C:82D4: F0 5D
-	LDA objArr_0560,X               ;C - - - - - 0x0182E6 0C:82D6: BD 60 05
+	LDA objFlags,X                  ;C - - - - - 0x0182E6 0C:82D6: BD 60 05
 	BPL loc_0C_8333                 ;C - - - - - 0x0182E9 0C:82D9: 10 58
 	CMP #$80                        ;C - - - - - 0x0182EB 0C:82DB: C9 80
 	BCC loc_0C_8333                 ;C - - - - - 0x0182ED 0C:82DD: 90 54
-	LDA objArr_0560,Y               ;C - - - - - 0x0182EF 0C:82DF: B9 60 05
+	LDA objFlags,Y                  ;C - - - - - 0x0182EF 0C:82DF: B9 60 05
 	BPL loc_0C_8333                 ;C - - - - - 0x0182F2 0C:82E2: 10 4F
 	CMP #$80                        ;C - - - - - 0x0182F4 0C:82E4: C9 80
 	BCC loc_0C_8333                 ;C - - - - - 0x0182F6 0C:82E6: 90 4B
@@ -391,8 +391,8 @@ loc_0C_829B:
 	SEC                             ;C - - - - - 0x018300 0C:82F0: 38
 	SBC objX,Y                      ;C - - - - - 0x018301 0C:82F1: F9 60 03
 	STA ptr_00                      ;C - - - - - 0x018304 0C:82F4: 85 00
-	LDA objArr_0380,X               ;C - - - - - 0x018306 0C:82F6: BD 80 03
-	SBC objArr_0380,Y               ;C - - - - - 0x018309 0C:82F9: F9 80 03
+	LDA objXPage,X                  ;C - - - - - 0x018306 0C:82F6: BD 80 03
+	SBC objXPage,Y                  ;C - - - - - 0x018309 0C:82F9: F9 80 03
 	STA ptr_00+1                    ;C - - - - - 0x01830C 0C:82FC: 85 01
 	BPL loc_0C_830F                 ;C - - - - - 0x01830E 0C:82FE: 10 0F
 	CLC                             ;C - - - - - 0x018310 0C:8300: 18
@@ -439,7 +439,7 @@ loc_0C_8343:
 loc_0C_8347:
 	LDA #$00                        ;C - - - - - 0x018357 0C:8347: A9 00
 	STA objArr_0440,Y               ;C - - - - - 0x018359 0C:8349: 99 40 04
-	LDA objArr_0580,Y               ;C - - - - - 0x01835C 0C:834C: B9 80 05
+	LDA objAnim,Y                   ;C - - - - - 0x01835C 0C:834C: B9 80 05
 	CMP #$84                        ;C - - - - - 0x01835F 0C:834F: C9 84
 	BEQ loc_0C_8375                 ;C - - - - - 0x018361 0C:8351: F0 22
 	CMP #$AC                        ;C - - - - - 0x018363 0C:8353: C9 AC
@@ -468,13 +468,13 @@ loc_0C_837D:
 	STA objArr_0530,Y               ;C - - - - - 0x018390 0C:8380: 99 30 05
 loc_0C_8383:
 	LDA #$80                        ;C - - - - - 0x018393 0C:8383: A9 80
-	STA objArr_0300,Y               ;C - - - - - 0x018395 0C:8385: 99 00 03
+	STA objActive,Y                 ;C - - - - - 0x018395 0C:8385: 99 00 03
 	LDA #$03                        ;C - - - - - 0x018398 0C:8388: A9 03
-	STA objArr_0320,Y               ;C - - - - - 0x01839A 0C:838A: 99 20 03
+	STA objKind,Y                   ;C - - - - - 0x01839A 0C:838A: 99 20 03
 	LDA #$8E                        ;C - - - - - 0x01839D 0C:838D: A9 8E
-	STA objArr_0420,Y               ;C - - - - - 0x01839F 0C:838F: 99 20 04
+	STA objVelYLo,Y                 ;C - - - - - 0x01839F 0C:838F: 99 20 04
 	LDA #$03                        ;C - - - - - 0x0183A2 0C:8392: A9 03
-	STA objArr_0430,Y               ;C - - - - - 0x0183A4 0C:8394: 99 30 04
+	STA objVelYHi,Y                 ;C - - - - - 0x0183A4 0C:8394: 99 30 04
 	LDA objX                        ;C - - - - - 0x0183A7 0C:8397: AD 60 03
 	CMP objX,Y                      ;C - - - - - 0x0183AA 0C:839A: D9 60 03
 	BCC loc_0C_83A3                 ;C - - - - - 0x0183AD 0C:839D: 90 04
@@ -483,7 +483,7 @@ loc_0C_8383:
 loc_0C_83A3:
 	LDA #$01                        ;C - - - - - 0x0183B3 0C:83A3: A9 01
 loc_0C_83A5:
-	STA objArr_0460,Y               ;C - - - - - 0x0183B5 0C:83A5: 99 60 04
+	STA objFacing,Y                 ;C - - - - - 0x0183B5 0C:83A5: 99 60 04
 loc_0C_83A8:
 	DEY                             ;C - - - - - 0x0183B8 0C:83A8: 88
 	BEQ loc_0C_83AE                 ;C - - - - - 0x0183B9 0C:83A9: F0 03
@@ -619,15 +619,15 @@ sub_0C_84F0:
 loc_0C_84F7:
 	JMP loc_0C_8593                 ;C - - - - - 0x018507 0C:84F7: 4C 93 85
 loc_0C_84FA:
-	LDA objArr_0300,X               ;C - - - - - 0x01850A 0C:84FA: BD 00 03
+	LDA objActive,X                 ;C - - - - - 0x01850A 0C:84FA: BD 00 03
 	CMP #$85                        ;C - - - - - 0x01850D 0C:84FD: C9 85
 	BEQ loc_0C_84F7                 ;C - - - - - 0x01850F 0C:84FF: F0 F6
 	CMP #$88                        ;C - - - - - 0x018511 0C:8501: C9 88
 	BEQ loc_0C_84F7                 ;C - - - - - 0x018513 0C:8503: F0 F2
-	LDA objArr_0320,X               ;C - - - - - 0x018515 0C:8505: BD 20 03
+	LDA objKind,X                   ;C - - - - - 0x018515 0C:8505: BD 20 03
 	CMP objId,X                     ;C - - - - - 0x018518 0C:8508: DD 30 03
 	BNE loc_0C_84F7                 ;C - - - - - 0x01851B 0C:850B: D0 EA
-	LDA objArr_0300,X               ;C - - - - - 0x01851D 0C:850D: BD 00 03
+	LDA objActive,X                 ;C - - - - - 0x01851D 0C:850D: BD 00 03
 	CMP #$83                        ;C - - - - - 0x018520 0C:8510: C9 83
 	BNE loc_0C_851C                 ;C - - - - - 0x018522 0C:8512: D0 08
 	LDA objArr_0500,X               ;C - - - - - 0x018524 0C:8514: BD 00 05
@@ -682,7 +682,7 @@ loc_0C_8566:
 	LDA #$26                        ;C - - - - - 0x01857F 0C:856F: A9 26
 	JSR QueueSound                  ;C - - - - - 0x018581 0C:8571: 20 4C F3
 	LDA #$83                        ;C - - - - - 0x018584 0C:8574: A9 83
-	STA objArr_0300,X               ;C - - - - - 0x018586 0C:8576: 9D 00 03
+	STA objActive,X                 ;C - - - - - 0x018586 0C:8576: 9D 00 03
 	LDA #$00                        ;C - - - - - 0x018589 0C:8579: A9 00
 	STA objArr_0500,X               ;C - - - - - 0x01858B 0C:857B: 9D 00 05
 	STA objArr_04E0,X               ;C - - - - - 0x01858E 0C:857E: 9D E0 04
@@ -694,11 +694,11 @@ loc_0C_8566:
 loc_0C_858B:
 	STX ram_00A8                    ;C - - - - - 0x01859B 0C:858B: 86 A8
 loc_0C_858D:
-	JMP sub_0F_F343                 ;C - - - - - 0x01859D 0C:858D: 4C 43 F3
+	JMP FaceToPlayerFlag            ;C - - - - - 0x01859D 0C:858D: 4C 43 F3
 tbl_0C_8590:
 	.byte $08,$0A,$0E               ;- D 0 - - - 0x0185A0 0C:8590:
 loc_0C_8593:
-	LDA objArr_0320,X               ;C - - - - - 0x0185A3 0C:8593: BD 20 03
+	LDA objKind,X                   ;C - - - - - 0x0185A3 0C:8593: BD 20 03
 	BEQ loc_0C_85B6                 ;C - - - - - 0x0185A6 0C:8596: F0 1E
 	STX ram_00B0                    ;C - - - - - 0x0185A8 0C:8598: 86 B0
 	LDA #$00                        ;C - - - - - 0x0185AA 0C:859A: A9 00
@@ -917,9 +917,9 @@ loc_0C_870D:
 	STA ram_0038                    ;c - - - - - 0x01871F 0C:870F: 85 38
 	STA gameAction                  ;c - - - - - 0x018721 0C:8711: 85 30
 	STA ram_00BA                    ;c - - - - - 0x018723 0C:8713: 85 BA
-	JSR sub_0F_F436                 ;c - - - - - 0x018725 0C:8715: 20 36 F4
+	JSR ClearTimerA4                ;c - - - - - 0x018725 0C:8715: 20 36 F4
 	LDA #$80                        ;c - - - - - 0x018728 0C:8718: A9 80
-	STA objArr_0300                 ;c - - - - - 0x01872A 0C:871A: 8D 00 03
+	STA objActive                   ;c - - - - - 0x01872A 0C:871A: 8D 00 03
 	LDY playerId                    ;c - - - - - 0x01872D 0C:871D: A4 34
 	LDA tbl_0F_E288,Y               ;c - - - - - 0x01872F 0C:871F: B9 88 E2
 	STA ram_006F                    ;c - - - - - 0x018732 0C:8722: 85 6F
@@ -936,18 +936,18 @@ loc_0C_8733:
 	LDA tbl_0C_87A8,Y               ;C - - - - - 0x018748 0C:8738: B9 A8 87
 	STA ptr_02                      ;C - - - - - 0x01874B 0C:873B: 85 02
 	LDY ptr_00                      ;C - - - - - 0x01874D 0C:873D: A4 00
-	LDA objArr_0460,X               ;C - - - - - 0x01874F 0C:873F: BD 60 04
-	STA objArr_0460,Y               ;C - - - - - 0x018752 0C:8742: 99 60 04
-	LDA objArr_03E0,X               ;C - - - - - 0x018755 0C:8745: BD E0 03
-	STA objArr_03E0,Y               ;C - - - - - 0x018758 0C:8748: 99 E0 03
+	LDA objFacing,X                 ;C - - - - - 0x01874F 0C:873F: BD 60 04
+	STA objFacing,Y                 ;C - - - - - 0x018752 0C:8742: 99 60 04
+	LDA objYPage,X                  ;C - - - - - 0x018755 0C:8745: BD E0 03
+	STA objYPage,Y                  ;C - - - - - 0x018758 0C:8748: 99 E0 03
 	LDA objX,X                      ;C - - - - - 0x01875B 0C:874B: BD 60 03
 	CLC                             ;C - - - - - 0x01875E 0C:874E: 18
 	ADC ptr_00+1                    ;C - - - - - 0x01875F 0C:874F: 65 01
 	STA objX,Y                      ;C - - - - - 0x018761 0C:8751: 99 60 03
-	LDA objArr_0380,X               ;C - - - - - 0x018764 0C:8754: BD 80 03
+	LDA objXPage,X                  ;C - - - - - 0x018764 0C:8754: BD 80 03
 	ADC #$00                        ;C - - - - - 0x018767 0C:8757: 69 00
-	STA objArr_0380,Y               ;C - - - - - 0x018769 0C:8759: 99 80 03
-	CMP objArr_0380                 ;C - - - - - 0x01876C 0C:875C: CD 80 03
+	STA objXPage,Y                  ;C - - - - - 0x018769 0C:8759: 99 80 03
+	CMP objXPage                    ;C - - - - - 0x01876C 0C:875C: CD 80 03
 	BNE loc_0C_879A                 ;C - - - - - 0x01876F 0C:875F: D0 39
 	LDA objY,X                      ;C - - - - - 0x018771 0C:8761: BD C0 03
 	CLC                             ;C - - - - - 0x018774 0C:8764: 18
@@ -958,21 +958,21 @@ loc_0C_8733:
 	SBC ptr_02                      ;C - - - - - 0x01877E 0C:876E: E5 02
 	STA objY,Y                      ;C - - - - - 0x018780 0C:8770: 99 C0 03
 	LDA #$FD                        ;C - - - - - 0x018783 0C:8773: A9 FD
-	STA objArr_0580,Y               ;C - - - - - 0x018785 0C:8775: 99 80 05
+	STA objAnim,Y                   ;C - - - - - 0x018785 0C:8775: 99 80 05
 	LDA #$FF                        ;C - - - - - 0x018788 0C:8778: A9 FF
 	STA objLife,Y                   ;C - - - - - 0x01878A 0C:877A: 99 90 04
 	LDA #$0D                        ;C - - - - - 0x01878D 0C:877D: A9 0D
 	STA objSpriteDown,Y             ;C - - - - - 0x01878F 0C:877F: 99 B0 05
 	LDA #$06                        ;C - - - - - 0x018792 0C:8782: A9 06
-	STA objArr_0320,Y               ;C - - - - - 0x018794 0C:8784: 99 20 03
+	STA objKind,Y                   ;C - - - - - 0x018794 0C:8784: 99 20 03
 	STA objId,Y                     ;C - - - - - 0x018797 0C:8787: 99 30 03
 	LDA #$80                        ;C - - - - - 0x01879A 0C:878A: A9 80
-	STA objArr_0300,Y               ;C - - - - - 0x01879C 0C:878C: 99 00 03
+	STA objActive,Y                 ;C - - - - - 0x01879C 0C:878C: 99 00 03
 	LDA #$00                        ;C - - - - - 0x01879F 0C:878F: A9 00
-	STA objArr_0590,Y               ;C - - - - - 0x0187A1 0C:8791: 99 90 05
+	STA objAnimFlags,Y              ;C - - - - - 0x0187A1 0C:8791: 99 90 05
 	TYA                             ;C - - - - - 0x0187A4 0C:8794: 98
 	AND #$03                        ;C - - - - - 0x0187A5 0C:8795: 29 03
-	STA objArr_0570,Y               ;C - - - - - 0x0187A7 0C:8797: 99 70 05
+	STA objAnimFrame,Y              ;C - - - - - 0x0187A7 0C:8797: 99 70 05
 loc_0C_879A:
 	LDY #$02                        ;C - - - - - 0x0187AA 0C:879A: A0 02
 	DEC ptr_00                      ;C - - - - - 0x0187AC 0C:879C: C6 00
@@ -1242,7 +1242,7 @@ loc_0C_8A31:
 	LDY ram_00A7                    ;C - - - - - 0x018A53 0C:8A43: A4 A7
 	CPY #$03                        ;C - - - - - 0x018A55 0C:8A45: C0 03
 	BNE loc_0C_8A56                 ;C - - - - - 0x018A57 0C:8A47: D0 0D
-	LDA objArr_0580                 ;C - - - - - 0x018A59 0C:8A49: AD 80 05
+	LDA objAnim                     ;C - - - - - 0x018A59 0C:8A49: AD 80 05
 	CMP #$24                        ;C - - - - - 0x018A5C 0C:8A4C: C9 24
 	BNE loc_0C_8A56                 ;C - - - - - 0x018A5E 0C:8A4E: D0 06
 	LDA #$05                        ;C - - - - - 0x018A60 0C:8A50: A9 05
@@ -1373,10 +1373,10 @@ loc_0C_8B22:
 	BNE loc_0C_8B5B                 ;C - - - - - 0x018B48 0C:8B38: D0 21
 	LDY playerId                    ;C - - - - - 0x018B4A 0C:8B3A: A4 34
 	LDA tbl_0F_E210,Y               ;C - - - - - 0x018B4C 0C:8B3C: B9 10 E2
-	JSR sub_0F_F294                 ;C - - - - - 0x018B4F 0C:8B3F: 20 94 F2
+	JSR SetPlayerAnim               ;C - - - - - 0x018B4F 0C:8B3F: 20 94 F2
 	LDA tbl_0F_E258,Y               ;C - - - - - 0x018B52 0C:8B42: B9 58 E2
-	JSR sub_0F_F440                 ;C - - - - - 0x018B55 0C:8B45: 20 40 F4
-	LDA objArr_0320,X               ;C - - - - - 0x018B58 0C:8B48: BD 20 03
+	JSR SetChrBank2                 ;C - - - - - 0x018B55 0C:8B45: 20 40 F4
+	LDA objKind,X                   ;C - - - - - 0x018B58 0C:8B48: BD 20 03
 	AND #$0F                        ;C - - - - - 0x018B5B 0C:8B4B: 29 0F
 	TAY                             ;C - - - - - 0x018B5D 0C:8B4D: A8
 	LDA tbl_0C_8B5C,Y               ;C - - - - - 0x018B5E 0C:8B4E: B9 5C 8B
@@ -1407,7 +1407,7 @@ ofs_0C_8B64:
 	LDA playerHealth                ;C - - - - - 0x018B87 0C:8B77: A5 3A
 	CMP (ptr_02),Y                  ;C - - - - - 0x018B89 0C:8B79: D1 02
 	BEQ loc_0C_8B97                 ;C - - - - - 0x018B8B 0C:8B7B: F0 1A
-	LDA objArr_0580,X               ;C - - - - - 0x018B8D 0C:8B7D: BD 80 05
+	LDA objAnim,X                   ;C - - - - - 0x018B8D 0C:8B7D: BD 80 05
 	AND #$0F                        ;C - - - - - 0x018B90 0C:8B80: 29 0F
 	TAY                             ;C - - - - - 0x018B92 0C:8B82: A8
 	LDA playerHealth                ;C - - - - - 0x018B93 0C:8B83: A5 3A
@@ -1422,7 +1422,7 @@ ofs_0C_8B8B:
 	STA playerHealth                ;C - - - - - 0x018BA3 0C:8B93: 85 3A
 	BNE loc_0C_8BA6                 ;C - - - - - 0x018BA5 0C:8B95: D0 0F
 loc_0C_8B97:
-	LDA objArr_0580,X               ;C - - - - - 0x018BA7 0C:8B97: BD 80 05
+	LDA objAnim,X                   ;C - - - - - 0x018BA7 0C:8B97: BD 80 05
 	SEC                             ;C - - - - - 0x018BAA 0C:8B9A: 38
 	SBC #$60                        ;C - - - - - 0x018BAB 0C:8B9B: E9 60
 	TAY                             ;C - - - - - 0x018BAD 0C:8B9D: A8
@@ -1491,16 +1491,16 @@ sub_0C_8C00:
 loc_0C_8C08:
 	LDA #$0C                        ;C - - - - - 0x018C18 0C:8C08: A9 0C
 	STA ram_0037                    ;C - - - - - 0x018C1A 0C:8C0A: 85 37
-	JSR sub_0F_F2BE                 ;C - - - - - 0x018C1C 0C:8C0C: 20 BE F2
+	JSR ClearObject                 ;C - - - - - 0x018C1C 0C:8C0C: 20 BE F2
 	RTS                             ;C - - - - - 0x018C1F 0C:8C0F: 60
 loc_0C_8C10:
 	LDA #$29                        ;C - - - - - 0x018C20 0C:8C10: A9 29
 	STA gameAction                  ;C - - - - - 0x018C22 0C:8C12: 85 30
 	LDA #$80                        ;C - - - - - 0x018C24 0C:8C14: A9 80
-	STA objArr_0300                 ;C - - - - - 0x018C26 0C:8C16: 8D 00 03
+	STA objActive                   ;C - - - - - 0x018C26 0C:8C16: 8D 00 03
 	JMP loc_0C_8C08                 ;C - - - - - 0x018C29 0C:8C19: 4C 08 8C
 ofs_0C_8C1C:
-	LDA objArr_0300,X               ;C - - J - - 0x018C2C 0C:8C1C: BD 00 03
+	LDA objActive,X                 ;C - - J - - 0x018C2C 0C:8C1C: BD 00 03
 	AND #$0F                        ;C - - - - - 0x018C2F 0C:8C1F: 29 0F
 	TAY                             ;C - - - - - 0x018C31 0C:8C21: A8
 	LDA tbl_0C_8C2F,Y               ;C - - - - - 0x018C32 0C:8C22: B9 2F 8C
@@ -1522,7 +1522,7 @@ ofs_0C_8C3F:
 	LDA tbl_0F_FC5B,Y               ;C - - - - - 0x018C5D 0C:8C4D: B9 5B FC
 	CMP ptr_00                      ;C - - - - - 0x018C60 0C:8C50: C5 00
 	BEQ loc_0C_8C65                 ;C - - - - - 0x018C62 0C:8C52: F0 11
-	JSR sub_0F_F288                 ;C - - - - - 0x018C64 0C:8C54: 20 88 F2
+	JSR SetAnimX                    ;C - - - - - 0x018C64 0C:8C54: 20 88 F2
 	LDA tbl_0F_FC75,Y               ;C - - - - - 0x018C67 0C:8C57: B9 75 FC
 	STA ptr_00                      ;C - - - - - 0x018C6A 0C:8C5A: 85 00
 	LDA tbl_0F_FC33,Y               ;C - - - - - 0x018C6C 0C:8C5C: B9 33 FC
@@ -1532,23 +1532,23 @@ ofs_0C_8C3F:
 loc_0C_8C65:
 	LDA objY                        ;C - - - - - 0x018C75 0C:8C65: AD C0 03
 	STA objArr_0530,X               ;C - - - - - 0x018C78 0C:8C68: 9D 30 05
-	INC objArr_0300,X               ;C - - - - - 0x018C7B 0C:8C6B: FE 00 03
+	INC objActive,X                 ;C - - - - - 0x018C7B 0C:8C6B: FE 00 03
 	LDA objY,X                      ;C - - - - - 0x018C7E 0C:8C6E: BD C0 03
 	SEC                             ;C - - - - - 0x018C81 0C:8C71: 38
 	SBC #$0F                        ;C - - - - - 0x018C82 0C:8C72: E9 0F
 	STA objY,X                      ;C - - - - - 0x018C84 0C:8C74: 9D C0 03
 	LDA objArr_0470,X               ;C - - - - - 0x018C87 0C:8C77: BD 70 04
 	BEQ loc_0C_8C97                 ;C - - - - - 0x018C8A 0C:8C7A: F0 1B
-	LDA objArr_0460,X               ;C - - - - - 0x018C8C 0C:8C7C: BD 60 04
+	LDA objFacing,X                 ;C - - - - - 0x018C8C 0C:8C7C: BD 60 04
 	AND #$02                        ;C - - - - - 0x018C8F 0C:8C7F: 29 02
 	TAY                             ;C - - - - - 0x018C91 0C:8C81: A8
 	LDA objX,X                      ;C - - - - - 0x018C92 0C:8C82: BD 60 03
 	CLC                             ;C - - - - - 0x018C95 0C:8C85: 18
 	ADC tbl_0F_FCE2,Y               ;C - - - - - 0x018C96 0C:8C86: 79 E2 FC
 	PHA                             ;C - - - - - 0x018C99 0C:8C89: 48
-	LDA objArr_0380,X               ;C - - - - - 0x018C9A 0C:8C8A: BD 80 03
+	LDA objXPage,X                  ;C - - - - - 0x018C9A 0C:8C8A: BD 80 03
 	ADC tbl_0F_FCE3,Y               ;C - - - - - 0x018C9D 0C:8C8D: 79 E3 FC
-	STA objArr_0380,X               ;C - - - - - 0x018CA0 0C:8C90: 9D 80 03
+	STA objXPage,X                  ;C - - - - - 0x018CA0 0C:8C90: 9D 80 03
 	PLA                             ;C - - - - - 0x018CA3 0C:8C93: 68
 	STA objX,X                      ;C - - - - - 0x018CA4 0C:8C94: 9D 60 03
 loc_0C_8C97:
@@ -1556,19 +1556,19 @@ loc_0C_8C97:
 ofs_0C_8C98:
 	LDA objArr_0470,X               ;C - - J - - 0x018CA8 0C:8C98: BD 70 04
 	BNE loc_0C_8CC4                 ;C - - - - - 0x018CAB 0C:8C9B: D0 27
-	LDA objArr_0460,X               ;C - - - - - 0x018CAD 0C:8C9D: BD 60 04
+	LDA objFacing,X                 ;C - - - - - 0x018CAD 0C:8C9D: BD 60 04
 	AND #$02                        ;C - - - - - 0x018CB0 0C:8CA0: 29 02
 	TAY                             ;C - - - - - 0x018CB2 0C:8CA2: A8
 	LDA objX,X                      ;C - - - - - 0x018CB3 0C:8CA3: BD 60 03
 	CLC                             ;C - - - - - 0x018CB6 0C:8CA6: 18
 	ADC tbl_0F_FCD6,Y               ;C - - - - - 0x018CB7 0C:8CA7: 79 D6 FC
 	PHA                             ;C - - - - - 0x018CBA 0C:8CAA: 48
-	LDA objArr_0380,X               ;C - - - - - 0x018CBB 0C:8CAB: BD 80 03
+	LDA objXPage,X                  ;C - - - - - 0x018CBB 0C:8CAB: BD 80 03
 	ADC tbl_0F_FCD7,Y               ;C - - - - - 0x018CBE 0C:8CAE: 79 D7 FC
-	STA objArr_0380,X               ;C - - - - - 0x018CC1 0C:8CB1: 9D 80 03
+	STA objXPage,X                  ;C - - - - - 0x018CC1 0C:8CB1: 9D 80 03
 	PLA                             ;C - - - - - 0x018CC4 0C:8CB4: 68
 	STA objX,X                      ;C - - - - - 0x018CC5 0C:8CB5: 9D 60 03
-	INC objArr_0300,X               ;C - - - - - 0x018CC8 0C:8CB8: FE 00 03
+	INC objActive,X                 ;C - - - - - 0x018CC8 0C:8CB8: FE 00 03
 	LDA objY,X                      ;C - - - - - 0x018CCB 0C:8CBB: BD C0 03
 	SEC                             ;C - - - - - 0x018CCE 0C:8CBE: 38
 	SBC #$08                        ;C - - - - - 0x018CCF 0C:8CBF: E9 08
@@ -1581,23 +1581,23 @@ loc_0C_8CC4:
 	BEQ loc_0C_8CD9                 ;C - - - - - 0x018CDC 0C:8CCC: F0 0B
 	CMP #$0A                        ;C - - - - - 0x018CDE 0C:8CCE: C9 0A
 	BEQ loc_0C_8CD9                 ;C - - - - - 0x018CE0 0C:8CD0: F0 07
-	LDA objArr_0590                 ;C - - - - - 0x018CE2 0C:8CD2: AD 90 05
+	LDA objAnimFlags                ;C - - - - - 0x018CE2 0C:8CD2: AD 90 05
 	CMP #$04                        ;C - - - - - 0x018CE5 0C:8CD5: C9 04
 	BNE loc_0C_8D4B                 ;C - - - - - 0x018CE7 0C:8CD7: D0 72
 loc_0C_8CD9:
-	LDA objArr_0460,X               ;C - - - - - 0x018CE9 0C:8CD9: BD 60 04
+	LDA objFacing,X                 ;C - - - - - 0x018CE9 0C:8CD9: BD 60 04
 	AND #$02                        ;C - - - - - 0x018CEC 0C:8CDC: 29 02
 	TAY                             ;C - - - - - 0x018CEE 0C:8CDE: A8
 	LDA objX,X                      ;C - - - - - 0x018CEF 0C:8CDF: BD 60 03
 	CLC                             ;C - - - - - 0x018CF2 0C:8CE2: 18
 	ADC tbl_0F_FCE6,Y               ;C - - - - - 0x018CF3 0C:8CE3: 79 E6 FC
 	PHA                             ;C - - - - - 0x018CF6 0C:8CE6: 48
-	LDA objArr_0380,X               ;C - - - - - 0x018CF7 0C:8CE7: BD 80 03
+	LDA objXPage,X                  ;C - - - - - 0x018CF7 0C:8CE7: BD 80 03
 	ADC tbl_0F_FCE7,Y               ;C - - - - - 0x018CFA 0C:8CEA: 79 E7 FC
-	STA objArr_0380,X               ;C - - - - - 0x018CFD 0C:8CED: 9D 80 03
+	STA objXPage,X                  ;C - - - - - 0x018CFD 0C:8CED: 9D 80 03
 	PLA                             ;C - - - - - 0x018D00 0C:8CF0: 68
 	STA objX,X                      ;C - - - - - 0x018D01 0C:8CF1: 9D 60 03
-	INC objArr_0300,X               ;C - - - - - 0x018D04 0C:8CF4: FE 00 03
+	INC objActive,X                 ;C - - - - - 0x018D04 0C:8CF4: FE 00 03
 	LDA objY,X                      ;C - - - - - 0x018D07 0C:8CF7: BD C0 03
 	SEC                             ;C - - - - - 0x018D0A 0C:8CFA: 38
 	SBC #$08                        ;C - - - - - 0x018D0B 0C:8CFB: E9 08
@@ -1610,29 +1610,29 @@ ofs_0C_8D00:
 	BEQ loc_0C_8D15                 ;C - - - - - 0x018D18 0C:8D08: F0 0B
 	CMP #$0A                        ;C - - - - - 0x018D1A 0C:8D0A: C9 0A
 	BEQ loc_0C_8D15                 ;C - - - - - 0x018D1C 0C:8D0C: F0 07
-	LDA objArr_0570                 ;C - - - - - 0x018D1E 0C:8D0E: AD 70 05
+	LDA objAnimFrame                ;C - - - - - 0x018D1E 0C:8D0E: AD 70 05
 	CMP #$01                        ;C - - - - - 0x018D21 0C:8D11: C9 01
 	BNE loc_0C_8D4B                 ;C - - - - - 0x018D23 0C:8D13: D0 36
 loc_0C_8D15:
 	LDA objSpriteDown,X             ;C - - - - - 0x018D25 0C:8D15: BD B0 05
 	TAY                             ;C - - - - - 0x018D28 0C:8D18: A8
 	LDA tbl_0F_FC68,Y               ;C - - - - - 0x018D29 0C:8D19: B9 68 FC
-	JSR sub_0F_F288                 ;C - - - - - 0x018D2C 0C:8D1C: 20 88 F2
+	JSR SetAnimX                    ;C - - - - - 0x018D2C 0C:8D1C: 20 88 F2
 	LDA objArr_0470,X               ;C - - - - - 0x018D2F 0C:8D1F: BD 70 04
 	BNE loc_0C_8D4C                 ;C - - - - - 0x018D32 0C:8D22: D0 28
-	LDA objArr_0460,X               ;C - - - - - 0x018D34 0C:8D24: BD 60 04
+	LDA objFacing,X                 ;C - - - - - 0x018D34 0C:8D24: BD 60 04
 	AND #$02                        ;C - - - - - 0x018D37 0C:8D27: 29 02
 	TAY                             ;C - - - - - 0x018D39 0C:8D29: A8
 	LDA objX,X                      ;C - - - - - 0x018D3A 0C:8D2A: BD 60 03
 	CLC                             ;C - - - - - 0x018D3D 0C:8D2D: 18
 	ADC tbl_0F_FCDA,Y               ;C - - - - - 0x018D3E 0C:8D2E: 79 DA FC
 	PHA                             ;C - - - - - 0x018D41 0C:8D31: 48
-	LDA objArr_0380,X               ;C - - - - - 0x018D42 0C:8D32: BD 80 03
+	LDA objXPage,X                  ;C - - - - - 0x018D42 0C:8D32: BD 80 03
 	ADC tbl_0F_FCDB,Y               ;C - - - - - 0x018D45 0C:8D35: 79 DB FC
-	STA objArr_0380,X               ;C - - - - - 0x018D48 0C:8D38: 9D 80 03
+	STA objXPage,X                  ;C - - - - - 0x018D48 0C:8D38: 9D 80 03
 	PLA                             ;C - - - - - 0x018D4B 0C:8D3B: 68
 	STA objX,X                      ;C - - - - - 0x018D4C 0C:8D3C: 9D 60 03
-	INC objArr_0300,X               ;C - - - - - 0x018D4F 0C:8D3F: FE 00 03
+	INC objActive,X                 ;C - - - - - 0x018D4F 0C:8D3F: FE 00 03
 	LDA objY,X                      ;C - - - - - 0x018D52 0C:8D42: BD C0 03
 	SEC                             ;C - - - - - 0x018D55 0C:8D45: 38
 	SBC #$06                        ;C - - - - - 0x018D56 0C:8D46: E9 06
@@ -1647,23 +1647,23 @@ loc_0C_8D4C:
 	BEQ loc_0C_8D61                 ;C - - - - - 0x018D64 0C:8D54: F0 0B
 	CMP #$0A                        ;C - - - - - 0x018D66 0C:8D56: C9 0A
 	BEQ loc_0C_8D61                 ;C - - - - - 0x018D68 0C:8D58: F0 07
-	LDA objArr_0590                 ;C - - - - - 0x018D6A 0C:8D5A: AD 90 05
+	LDA objAnimFlags                ;C - - - - - 0x018D6A 0C:8D5A: AD 90 05
 	CMP #$04                        ;C - - - - - 0x018D6D 0C:8D5D: C9 04
 	BNE loc_0C_8D4B                 ;C - - - - - 0x018D6F 0C:8D5F: D0 EA
 loc_0C_8D61:
-	LDA objArr_0460,X               ;C - - - - - 0x018D71 0C:8D61: BD 60 04
+	LDA objFacing,X                 ;C - - - - - 0x018D71 0C:8D61: BD 60 04
 	AND #$02                        ;C - - - - - 0x018D74 0C:8D64: 29 02
 	TAY                             ;C - - - - - 0x018D76 0C:8D66: A8
 	LDA objX,X                      ;C - - - - - 0x018D77 0C:8D67: BD 60 03
 	CLC                             ;C - - - - - 0x018D7A 0C:8D6A: 18
 	ADC tbl_0F_FCEA,Y               ;C - - - - - 0x018D7B 0C:8D6B: 79 EA FC
 	PHA                             ;C - - - - - 0x018D7E 0C:8D6E: 48
-	LDA objArr_0380,X               ;C - - - - - 0x018D7F 0C:8D6F: BD 80 03
+	LDA objXPage,X                  ;C - - - - - 0x018D7F 0C:8D6F: BD 80 03
 	ADC tbl_0F_FCEB,Y               ;C - - - - - 0x018D82 0C:8D72: 79 EB FC
-	STA objArr_0380,X               ;C - - - - - 0x018D85 0C:8D75: 9D 80 03
+	STA objXPage,X                  ;C - - - - - 0x018D85 0C:8D75: 9D 80 03
 	PLA                             ;C - - - - - 0x018D88 0C:8D78: 68
 	STA objX,X                      ;C - - - - - 0x018D89 0C:8D79: 9D 60 03
-	INC objArr_0300,X               ;C - - - - - 0x018D8C 0C:8D7C: FE 00 03
+	INC objActive,X                 ;C - - - - - 0x018D8C 0C:8D7C: FE 00 03
 	LDA objY,X                      ;C - - - - - 0x018D8F 0C:8D7F: BD C0 03
 	SEC                             ;C - - - - - 0x018D92 0C:8D82: 38
 	SBC #$06                        ;C - - - - - 0x018D93 0C:8D83: E9 06
@@ -1676,11 +1676,11 @@ ofs_0C_8D88:
 	BEQ loc_0C_8D9D                 ;C - - - - - 0x018DA0 0C:8D90: F0 0B
 	CMP #$0A                        ;C - - - - - 0x018DA2 0C:8D92: C9 0A
 	BEQ loc_0C_8D9D                 ;C - - - - - 0x018DA4 0C:8D94: F0 07
-	LDA objArr_0570                 ;C - - - - - 0x018DA6 0C:8D96: AD 70 05
+	LDA objAnimFrame                ;C - - - - - 0x018DA6 0C:8D96: AD 70 05
 	CMP #$02                        ;C - - - - - 0x018DA9 0C:8D99: C9 02
 	BNE loc_0C_8D4B                 ;C - - - - - 0x018DAB 0C:8D9B: D0 AE
 loc_0C_8D9D:
-	LDA objArr_0460,X               ;C - - - - - 0x018DAD 0C:8D9D: BD 60 04
+	LDA objFacing,X                 ;C - - - - - 0x018DAD 0C:8D9D: BD 60 04
 	AND #$01                        ;C - - - - - 0x018DB0 0C:8DA0: 29 01
 	BEQ loc_0C_8DD1                 ;C - - - - - 0x018DB2 0C:8DA2: F0 2D
 	LDA stage                       ;C - - - - - 0x018DB4 0C:8DA4: A5 61
@@ -1703,7 +1703,7 @@ loc_0C_8DB2:
 	STA objX,X                      ;c - - - - - 0x018DD1 0C:8DC1: 9D 60 03
 	LDA ram_002D                    ;c - - - - - 0x018DD4 0C:8DC4: A5 2D
 	ADC #$00                        ;c - - - - - 0x018DD6 0C:8DC6: 69 00
-	STA objArr_0380,X               ;c - - - - - 0x018DD8 0C:8DC8: 9D 80 03
+	STA objXPage,X                  ;c - - - - - 0x018DD8 0C:8DC8: 9D 80 03
 	JMP loc_0C_8DEE                 ;c - - - - - 0x018DDB 0C:8DCB: 4C EE 8D
 loc_0C_8DCE:
 	JMP loc_0C_8DEF                 ;C - - - - - 0x018DDE 0C:8DCE: 4C EF 8D
@@ -1721,65 +1721,65 @@ loc_0C_8DD1:
 	STA objX,X                      ;c - - - - - 0x018DF4 0C:8DE4: 9D 60 03
 	LDA ram_002D                    ;c - - - - - 0x018DF7 0C:8DE7: A5 2D
 	ADC #$00                        ;c - - - - - 0x018DF9 0C:8DE9: 69 00
-	STA objArr_0380,X               ;c - - - - - 0x018DFB 0C:8DEB: 9D 80 03
+	STA objXPage,X                  ;c - - - - - 0x018DFB 0C:8DEB: 9D 80 03
 loc_0C_8DEE:
 	RTS                             ;c - - - - - 0x018DFE 0C:8DEE: 60
 loc_0C_8DEF:
 	LDA objArr_0470,X               ;C - - - - - 0x018DFF 0C:8DEF: BD 70 04
 	BNE loc_0C_8E1C                 ;C - - - - - 0x018E02 0C:8DF2: D0 28
-	LDA objArr_0460,X               ;C - - - - - 0x018E04 0C:8DF4: BD 60 04
+	LDA objFacing,X                 ;C - - - - - 0x018E04 0C:8DF4: BD 60 04
 	AND #$02                        ;C - - - - - 0x018E07 0C:8DF7: 29 02
 	TAY                             ;C - - - - - 0x018E09 0C:8DF9: A8
 	LDA objX,X                      ;C - - - - - 0x018E0A 0C:8DFA: BD 60 03
 	CLC                             ;C - - - - - 0x018E0D 0C:8DFD: 18
 	ADC tbl_0F_FCDE,Y               ;C - - - - - 0x018E0E 0C:8DFE: 79 DE FC
 	PHA                             ;C - - - - - 0x018E11 0C:8E01: 48
-	LDA objArr_0380,X               ;C - - - - - 0x018E12 0C:8E02: BD 80 03
+	LDA objXPage,X                  ;C - - - - - 0x018E12 0C:8E02: BD 80 03
 	ADC tbl_0F_FCDF,Y               ;C - - - - - 0x018E15 0C:8E05: 79 DF FC
-	STA objArr_0380,X               ;C - - - - - 0x018E18 0C:8E08: 9D 80 03
+	STA objXPage,X                  ;C - - - - - 0x018E18 0C:8E08: 9D 80 03
 	PLA                             ;C - - - - - 0x018E1B 0C:8E0B: 68
 	STA objX,X                      ;C - - - - - 0x018E1C 0C:8E0C: 9D 60 03
 	LDA objY,X                      ;C - - - - - 0x018E1F 0C:8E0F: BD C0 03
 	SEC                             ;C - - - - - 0x018E22 0C:8E12: 38
 	SBC #$06                        ;C - - - - - 0x018E23 0C:8E13: E9 06
 	STA objY,X                      ;C - - - - - 0x018E25 0C:8E15: 9D C0 03
-	INC objArr_0300,X               ;C - - - - - 0x018E28 0C:8E18: FE 00 03
+	INC objActive,X                 ;C - - - - - 0x018E28 0C:8E18: FE 00 03
 	RTS                             ;C - - - - - 0x018E2B 0C:8E1B: 60
 loc_0C_8E1C:
-	LDA objArr_0460,X               ;C - - - - - 0x018E2C 0C:8E1C: BD 60 04
+	LDA objFacing,X                 ;C - - - - - 0x018E2C 0C:8E1C: BD 60 04
 	AND #$02                        ;C - - - - - 0x018E2F 0C:8E1F: 29 02
 	TAY                             ;C - - - - - 0x018E31 0C:8E21: A8
 	LDA objX,X                      ;C - - - - - 0x018E32 0C:8E22: BD 60 03
 	CLC                             ;C - - - - - 0x018E35 0C:8E25: 18
 	ADC tbl_0F_FCEE,Y               ;C - - - - - 0x018E36 0C:8E26: 79 EE FC
 	PHA                             ;C - - - - - 0x018E39 0C:8E29: 48
-	LDA objArr_0380,X               ;C - - - - - 0x018E3A 0C:8E2A: BD 80 03
+	LDA objXPage,X                  ;C - - - - - 0x018E3A 0C:8E2A: BD 80 03
 	ADC tbl_0F_FCEF,Y               ;C - - - - - 0x018E3D 0C:8E2D: 79 EF FC
-	STA objArr_0380,X               ;C - - - - - 0x018E40 0C:8E30: 9D 80 03
+	STA objXPage,X                  ;C - - - - - 0x018E40 0C:8E30: 9D 80 03
 	PLA                             ;C - - - - - 0x018E43 0C:8E33: 68
 	STA objX,X                      ;C - - - - - 0x018E44 0C:8E34: 9D 60 03
 	LDA objY,X                      ;C - - - - - 0x018E47 0C:8E37: BD C0 03
 	SEC                             ;C - - - - - 0x018E4A 0C:8E3A: 38
 	SBC #$06                        ;C - - - - - 0x018E4B 0C:8E3B: E9 06
 	STA objY,X                      ;C - - - - - 0x018E4D 0C:8E3D: 9D C0 03
-	INC objArr_0300,X               ;C - - - - - 0x018E50 0C:8E40: FE 00 03
+	INC objActive,X                 ;C - - - - - 0x018E50 0C:8E40: FE 00 03
 ofs_0C_8E43:
 	LDA #$00                        ;C - - - - - 0x018E53 0C:8E43: A9 00
-	STA objArr_0400,X               ;C - - - - - 0x018E55 0C:8E45: 9D 00 04
+	STA objVelXLo,X                 ;C - - - - - 0x018E55 0C:8E45: 9D 00 04
 	LDA #$02                        ;C - - - - - 0x018E58 0C:8E48: A9 02
-	STA objArr_0410,X               ;C - - - - - 0x018E5A 0C:8E4A: 9D 10 04
+	STA objVelXHi,X                 ;C - - - - - 0x018E5A 0C:8E4A: 9D 10 04
 	LDA #$01                        ;C - - - - - 0x018E5D 0C:8E4D: A9 01
-	STA objArr_0420,X               ;C - - - - - 0x018E5F 0C:8E4F: 9D 20 04
+	STA objVelYLo,X                 ;C - - - - - 0x018E5F 0C:8E4F: 9D 20 04
 	LDA #$01                        ;C - - - - - 0x018E62 0C:8E52: A9 01
-	STA objArr_0430,X               ;C - - - - - 0x018E64 0C:8E54: 9D 30 04
-	INC objArr_0300,X               ;C - - - - - 0x018E67 0C:8E57: FE 00 03
+	STA objVelYHi,X                 ;C - - - - - 0x018E64 0C:8E54: 9D 30 04
+	INC objActive,X                 ;C - - - - - 0x018E67 0C:8E57: FE 00 03
 ofs_0C_8E5A:
-	LDA objArr_0590,X               ;C - - - - - 0x018E6A 0C:8E5A: BD 90 05
+	LDA objAnimFlags,X              ;C - - - - - 0x018E6A 0C:8E5A: BD 90 05
 	CMP #$0C                        ;C - - - - - 0x018E6D 0C:8E5D: C9 0C
 	BNE loc_0C_8E64                 ;C - - - - - 0x018E6F 0C:8E5F: D0 03
 	JSR sub_0C_9C55                 ;C - - - - - 0x018E71 0C:8E61: 20 55 9C
 loc_0C_8E64:
-	LDA objArr_0460,X               ;C - - - - - 0x018E74 0C:8E64: BD 60 04
+	LDA objFacing,X                 ;C - - - - - 0x018E74 0C:8E64: BD 60 04
 	AND #$01                        ;C - - - - - 0x018E77 0C:8E67: 29 01
 	BEQ loc_0C_8E91                 ;C - - - - - 0x018E79 0C:8E69: F0 26
 	LDA ram_00BC                    ;C - - - - - 0x018E7B 0C:8E6B: A5 BC
@@ -1795,10 +1795,10 @@ loc_0C_8E64:
 	STA objX,X                      ;C - - - - - 0x018E8E 0C:8E7E: 9D 60 03
 	LDA ram_002D                    ;C - - - - - 0x018E91 0C:8E81: A5 2D
 	ADC #$00                        ;C - - - - - 0x018E93 0C:8E83: 69 00
-	STA objArr_0380,X               ;C - - - - - 0x018E95 0C:8E85: 9D 80 03
+	STA objXPage,X                  ;C - - - - - 0x018E95 0C:8E85: 9D 80 03
 	JMP loc_0C_8EB4                 ;C - - - - - 0x018E98 0C:8E88: 4C B4 8E
 loc_0C_8E8B:
-	JSR sub_0F_F1A1                 ;C - - - - - 0x018E9B 0C:8E8B: 20 A1 F1
+	JSR ApplyVelXSub                ;C - - - - - 0x018E9B 0C:8E8B: 20 A1 F1
 	JMP loc_0C_8EB4                 ;C - - - - - 0x018E9E 0C:8E8E: 4C B4 8E
 loc_0C_8E91:
 	LDA ram_00BC                    ;C - - - - - 0x018EA1 0C:8E91: A5 BC
@@ -1814,13 +1814,13 @@ loc_0C_8E91:
 	STA objX,X                      ;C - - - - - 0x018EB4 0C:8EA4: 9D 60 03
 	LDA ram_002D                    ;C - - - - - 0x018EB7 0C:8EA7: A5 2D
 	ADC #$00                        ;C - - - - - 0x018EB9 0C:8EA9: 69 00
-	STA objArr_0380,X               ;C - - - - - 0x018EBB 0C:8EAB: 9D 80 03
+	STA objXPage,X                  ;C - - - - - 0x018EBB 0C:8EAB: 9D 80 03
 	JMP loc_0C_8EB4                 ;C - - - - - 0x018EBE 0C:8EAE: 4C B4 8E
 loc_0C_8EB1:
-	JSR sub_0F_F183                 ;C - - - - - 0x018EC1 0C:8EB1: 20 83 F1
+	JSR ApplyVelXAdd                ;C - - - - - 0x018EC1 0C:8EB1: 20 83 F1
 loc_0C_8EB4:
-	JSR sub_0F_F1FD                 ;C - - - - - 0x018EC4 0C:8EB4: 20 FD F1
-	LDA objArr_0430,X               ;C - - - - - 0x018EC7 0C:8EB7: BD 30 04
+	JSR ApplyVelY                   ;C - - - - - 0x018EC4 0C:8EB4: 20 FD F1
+	LDA objVelYHi,X                 ;C - - - - - 0x018EC7 0C:8EB7: BD 30 04
 	BPL loc_0C_8EC4                 ;C - - - - - 0x018ECA 0C:8EBA: 10 08
 	LDA objY,X                      ;C - - - - - 0x018ECC 0C:8EBC: BD C0 03
 	CMP objArr_0530,X               ;C - - - - - 0x018ECF 0C:8EBF: DD 30 05
@@ -1832,14 +1832,14 @@ loc_0C_8EC5:
 	STA objY,X                      ;C - - - - - 0x018ED8 0C:8EC8: 9D C0 03
 	JSR sub_0C_9B1F                 ;C - - - - - 0x018EDB 0C:8ECB: 20 1F 9B
 	LDA #$38                        ;C - - - - - 0x018EDE 0C:8ECE: A9 38
-	STA objArr_0420,X               ;C - - - - - 0x018EE0 0C:8ED0: 9D 20 04
+	STA objVelYLo,X                 ;C - - - - - 0x018EE0 0C:8ED0: 9D 20 04
 	LDA #$02                        ;C - - - - - 0x018EE3 0C:8ED3: A9 02
-	STA objArr_0430,X               ;C - - - - - 0x018EE5 0C:8ED5: 9D 30 04
+	STA objVelYHi,X                 ;C - - - - - 0x018EE5 0C:8ED5: 9D 30 04
 	LDA #$80                        ;C - - - - - 0x018EE8 0C:8ED8: A9 80
-	STA objArr_0400,X               ;C - - - - - 0x018EEA 0C:8EDA: 9D 00 04
+	STA objVelXLo,X                 ;C - - - - - 0x018EEA 0C:8EDA: 9D 00 04
 	LDA #$00                        ;C - - - - - 0x018EED 0C:8EDD: A9 00
-	STA objArr_0410,X               ;C - - - - - 0x018EEF 0C:8EDF: 9D 10 04
-	INC objArr_0300,X               ;C - - - - - 0x018EF2 0C:8EE2: FE 00 03
+	STA objVelXHi,X                 ;C - - - - - 0x018EEF 0C:8EDF: 9D 10 04
+	INC objActive,X                 ;C - - - - - 0x018EF2 0C:8EE2: FE 00 03
 ofs_0C_8EE5:
 	LDA objArr_04C0,X               ;C - - - - - 0x018EF5 0C:8EE5: BD C0 04
 	CMP #$FE                        ;C - - - - - 0x018EF8 0C:8EE8: C9 FE
@@ -1850,7 +1850,7 @@ ofs_0C_8EE5:
 loc_0C_8EF2:
 	JMP sub_0C_9BFC                 ;C - - - - - 0x018F02 0C:8EF2: 4C FC 9B
 loc_0C_8EF5:
-	LDA objArr_0460,X               ;C - - - - - 0x018F05 0C:8EF5: BD 60 04
+	LDA objFacing,X                 ;C - - - - - 0x018F05 0C:8EF5: BD 60 04
 	AND #$01                        ;C - - - - - 0x018F08 0C:8EF8: 29 01
 	BEQ loc_0C_8F22                 ;C - - - - - 0x018F0A 0C:8EFA: F0 26
 	LDA ram_00BC                    ;C - - - - - 0x018F0C 0C:8EFC: A5 BC
@@ -1866,10 +1866,10 @@ loc_0C_8EF5:
 	STA objX,X                      ;C - - - - - 0x018F1F 0C:8F0F: 9D 60 03
 	LDA ram_002D                    ;C - - - - - 0x018F22 0C:8F12: A5 2D
 	ADC #$00                        ;C - - - - - 0x018F24 0C:8F14: 69 00
-	STA objArr_0380,X               ;C - - - - - 0x018F26 0C:8F16: 9D 80 03
+	STA objXPage,X                  ;C - - - - - 0x018F26 0C:8F16: 9D 80 03
 	JMP loc_0C_8F45                 ;C - - - - - 0x018F29 0C:8F19: 4C 45 8F
 loc_0C_8F1C:
-	JSR sub_0F_F1A1                 ;C - - - - - 0x018F2C 0C:8F1C: 20 A1 F1
+	JSR ApplyVelXSub                ;C - - - - - 0x018F2C 0C:8F1C: 20 A1 F1
 	JMP loc_0C_8F45                 ;C - - - - - 0x018F2F 0C:8F1F: 4C 45 8F
 loc_0C_8F22:
 	LDA ram_00BC                    ;C - - - - - 0x018F32 0C:8F22: A5 BC
@@ -1885,13 +1885,13 @@ loc_0C_8F22:
 	STA objX,X                      ;C - - - - - 0x018F45 0C:8F35: 9D 60 03
 	LDA ram_002D                    ;C - - - - - 0x018F48 0C:8F38: A5 2D
 	ADC #$00                        ;C - - - - - 0x018F4A 0C:8F3A: 69 00
-	STA objArr_0380,X               ;C - - - - - 0x018F4C 0C:8F3C: 9D 80 03
+	STA objXPage,X                  ;C - - - - - 0x018F4C 0C:8F3C: 9D 80 03
 	JMP loc_0C_8F45                 ;C - - - - - 0x018F4F 0C:8F3F: 4C 45 8F
 loc_0C_8F42:
-	JSR sub_0F_F183                 ;C - - - - - 0x018F52 0C:8F42: 20 83 F1
+	JSR ApplyVelXAdd                ;C - - - - - 0x018F52 0C:8F42: 20 83 F1
 loc_0C_8F45:
-	JSR sub_0F_F1FD                 ;C - - - - - 0x018F55 0C:8F45: 20 FD F1
-	LDA objArr_0430,X               ;C - - - - - 0x018F58 0C:8F48: BD 30 04
+	JSR ApplyVelY                   ;C - - - - - 0x018F55 0C:8F45: 20 FD F1
+	LDA objVelYHi,X                 ;C - - - - - 0x018F58 0C:8F48: BD 30 04
 	BPL loc_0C_8F55                 ;C - - - - - 0x018F5B 0C:8F4B: 10 08
 	LDA objY,X                      ;C - - - - - 0x018F5D 0C:8F4D: BD C0 03
 	CMP objArr_0530,X               ;C - - - - - 0x018F60 0C:8F50: DD 30 05
@@ -1911,7 +1911,7 @@ loc_0C_8F56:
 	BPL loc_0C_8F80                 ;C - - - - - 0x018F7E 0C:8F6E: 10 10
 	LDA #$00                        ;C - - - - - 0x018F80 0C:8F70: A9 00
 	STA objArr_0440,X               ;C - - - - - 0x018F82 0C:8F72: 9D 40 04
-	INC objArr_0300,X               ;C - - - - - 0x018F85 0C:8F75: FE 00 03
+	INC objActive,X                 ;C - - - - - 0x018F85 0C:8F75: FE 00 03
 	INC ram_0054                    ;C - - - - - 0x018F88 0C:8F78: E6 54
 	JSR sub_0C_89E3                 ;C - - - - - 0x018F8A 0C:8F7A: 20 E3 89
 	JMP sub_0C_9C7A                 ;C - - - - - 0x018F8D 0C:8F7D: 4C 7A 9C
@@ -1934,9 +1934,9 @@ loc_0C_8F9E:
 loc_0C_8FA1:
 	RTS                             ;C - - - - - 0x018FB1 0C:8FA1: 60
 loc_0C_8FA2:
-	JMP sub_0F_F2BE                 ;C - - - - - 0x018FB2 0C:8FA2: 4C BE F2
+	JMP ClearObject                 ;C - - - - - 0x018FB2 0C:8FA2: 4C BE F2
 ofs_0C_8FA5:
-	LDA objArr_0300,X               ;C - - J - - 0x018FB5 0C:8FA5: BD 00 03
+	LDA objActive,X                 ;C - - J - - 0x018FB5 0C:8FA5: BD 00 03
 	AND #$0F                        ;C - - - - - 0x018FB8 0C:8FA8: 29 0F
 	TAY                             ;C - - - - - 0x018FBA 0C:8FAA: A8
 	LDA tbl_0C_8FB8,Y               ;C - - - - - 0x018FBB 0C:8FAB: B9 B8 8F
@@ -1957,46 +1957,46 @@ ofs_0C_8FC6:
 	STA objArr_0540,X               ;C - - - - - 0x018FE2 0C:8FD2: 9D 40 05
 	LDA #$10                        ;C - - - - - 0x018FE5 0C:8FD5: A9 10
 	STA objArr_0520,X               ;C - - - - - 0x018FE7 0C:8FD7: 9D 20 05
-	INC objArr_0300,X               ;C - - - - - 0x018FEA 0C:8FDA: FE 00 03
+	INC objActive,X                 ;C - - - - - 0x018FEA 0C:8FDA: FE 00 03
 	LDA objY,X                      ;C - - - - - 0x018FED 0C:8FDD: BD C0 03
 	SEC                             ;C - - - - - 0x018FF0 0C:8FE0: 38
 	SBC #$04                        ;C - - - - - 0x018FF1 0C:8FE1: E9 04
 	STA objY,X                      ;C - - - - - 0x018FF3 0C:8FE3: 9D C0 03
 	JSR sub_0C_9C55                 ;C - - - - - 0x018FF6 0C:8FE6: 20 55 9C
-	LDA objArr_0460,X               ;C - - - - - 0x018FF9 0C:8FE9: BD 60 04
+	LDA objFacing,X                 ;C - - - - - 0x018FF9 0C:8FE9: BD 60 04
 	AND #$01                        ;C - - - - - 0x018FFC 0C:8FEC: 29 01
 	BNE loc_0C_8FF6                 ;C - - - - - 0x018FFE 0C:8FEE: D0 06
 	JSR sub_0F_F099                 ;C - - - - - 0x019000 0C:8FF0: 20 99 F0
 	JMP loc_0C_8FF9                 ;C - - - - - 0x019003 0C:8FF3: 4C F9 8F
 loc_0C_8FF6:
-	JSR sub_0F_F090                 ;C - - - - - 0x019006 0C:8FF6: 20 90 F0
+	JSR SetObjFlag40                ;C - - - - - 0x019006 0C:8FF6: 20 90 F0
 loc_0C_8FF9:
 	LDA objArr_0470,X               ;C - - - - - 0x019009 0C:8FF9: BD 70 04
 	BNE loc_0C_901A                 ;C - - - - - 0x01900C 0C:8FFC: D0 1C
-	LDA objArr_0460,X               ;C - - - - - 0x01900E 0C:8FFE: BD 60 04
+	LDA objFacing,X                 ;C - - - - - 0x01900E 0C:8FFE: BD 60 04
 	AND #$02                        ;C - - - - - 0x019011 0C:9001: 29 02
 	TAY                             ;C - - - - - 0x019013 0C:9003: A8
 	LDA objX,X                      ;C - - - - - 0x019014 0C:9004: BD 60 03
 	CLC                             ;C - - - - - 0x019017 0C:9007: 18
 	ADC tbl_0F_FCF2,Y               ;C - - - - - 0x019018 0C:9008: 79 F2 FC
 	PHA                             ;C - - - - - 0x01901B 0C:900B: 48
-	LDA objArr_0380,X               ;C - - - - - 0x01901C 0C:900C: BD 80 03
+	LDA objXPage,X                  ;C - - - - - 0x01901C 0C:900C: BD 80 03
 	ADC tbl_0F_FCF3,Y               ;C - - - - - 0x01901F 0C:900F: 79 F3 FC
-	STA objArr_0380,X               ;C - - - - - 0x019022 0C:9012: 9D 80 03
+	STA objXPage,X                  ;C - - - - - 0x019022 0C:9012: 9D 80 03
 	PLA                             ;C - - - - - 0x019025 0C:9015: 68
 	STA objX,X                      ;C - - - - - 0x019026 0C:9016: 9D 60 03
 	RTS                             ;C - - - - - 0x019029 0C:9019: 60
 loc_0C_901A:
-	LDA objArr_0460,X               ;C - - - - - 0x01902A 0C:901A: BD 60 04
+	LDA objFacing,X                 ;C - - - - - 0x01902A 0C:901A: BD 60 04
 	AND #$02                        ;C - - - - - 0x01902D 0C:901D: 29 02
 	TAY                             ;C - - - - - 0x01902F 0C:901F: A8
 	LDA objX,X                      ;C - - - - - 0x019030 0C:9020: BD 60 03
 	CLC                             ;C - - - - - 0x019033 0C:9023: 18
 	ADC tbl_0F_FCF6,Y               ;C - - - - - 0x019034 0C:9024: 79 F6 FC
 	PHA                             ;C - - - - - 0x019037 0C:9027: 48
-	LDA objArr_0380,X               ;C - - - - - 0x019038 0C:9028: BD 80 03
+	LDA objXPage,X                  ;C - - - - - 0x019038 0C:9028: BD 80 03
 	ADC tbl_0F_FCF7,Y               ;C - - - - - 0x01903B 0C:902B: 79 F7 FC
-	STA objArr_0380,X               ;C - - - - - 0x01903E 0C:902E: 9D 80 03
+	STA objXPage,X                  ;C - - - - - 0x01903E 0C:902E: 9D 80 03
 	PLA                             ;C - - - - - 0x019041 0C:9031: 68
 	STA objX,X                      ;C - - - - - 0x019042 0C:9032: 9D 60 03
 	RTS                             ;C - - - - - 0x019045 0C:9035: 60
@@ -2008,27 +2008,27 @@ ofs_0C_9036:
 	BEQ loc_0C_9059                 ;C - - - - - 0x01904E 0C:903E: F0 19
 	CMP #$0A                        ;C - - - - - 0x019050 0C:9040: C9 0A
 	BEQ loc_0C_9059                 ;C - - - - - 0x019052 0C:9042: F0 15
-	LDA objArr_0570                 ;C - - - - - 0x019054 0C:9044: AD 70 05
+	LDA objAnimFrame                ;C - - - - - 0x019054 0C:9044: AD 70 05
 	CMP #$01                        ;C - - - - - 0x019057 0C:9047: C9 01
 	BNE loc_0C_9077                 ;C - - - - - 0x019059 0C:9049: D0 2C
-	LDA objArr_0590                 ;C - - - - - 0x01905B 0C:904B: AD 90 05
+	LDA objAnimFlags                ;C - - - - - 0x01905B 0C:904B: AD 90 05
 	BNE loc_0C_9077                 ;C - - - - - 0x01905E 0C:904E: D0 27
 	LDA objY,X                      ;C - - - - - 0x019060 0C:9050: BD C0 03
 	SEC                             ;C - - - - - 0x019063 0C:9053: 38
 	SBC #$07                        ;C - - - - - 0x019064 0C:9054: E9 07
 	STA objY,X                      ;C - - - - - 0x019066 0C:9056: 9D C0 03
 loc_0C_9059:
-	INC objArr_0300,X               ;C - - - - - 0x019069 0C:9059: FE 00 03
-	LDA objArr_0460,X               ;C - - - - - 0x01906C 0C:905C: BD 60 04
+	INC objActive,X                 ;C - - - - - 0x019069 0C:9059: FE 00 03
+	LDA objFacing,X                 ;C - - - - - 0x01906C 0C:905C: BD 60 04
 	AND #$02                        ;C - - - - - 0x01906F 0C:905F: 29 02
 	TAY                             ;C - - - - - 0x019071 0C:9061: A8
 	LDA objX,X                      ;C - - - - - 0x019072 0C:9062: BD 60 03
 	CLC                             ;C - - - - - 0x019075 0C:9065: 18
 	ADC tbl_0F_FCFA,Y               ;C - - - - - 0x019076 0C:9066: 79 FA FC
 	PHA                             ;C - - - - - 0x019079 0C:9069: 48
-	LDA objArr_0380,X               ;C - - - - - 0x01907A 0C:906A: BD 80 03
+	LDA objXPage,X                  ;C - - - - - 0x01907A 0C:906A: BD 80 03
 	ADC tbl_0F_FCFB,Y               ;C - - - - - 0x01907D 0C:906D: 79 FB FC
-	STA objArr_0380,X               ;C - - - - - 0x019080 0C:9070: 9D 80 03
+	STA objXPage,X                  ;C - - - - - 0x019080 0C:9070: 9D 80 03
 	PLA                             ;C - - - - - 0x019083 0C:9073: 68
 	STA objX,X                      ;C - - - - - 0x019084 0C:9074: 9D 60 03
 loc_0C_9077:
@@ -2041,27 +2041,27 @@ ofs_0C_9078:
 	BEQ loc_0C_9092                 ;C - - - - - 0x019090 0C:9080: F0 10
 	CMP #$0A                        ;C - - - - - 0x019092 0C:9082: C9 0A
 	BEQ loc_0C_9092                 ;C - - - - - 0x019094 0C:9084: F0 0C
-	LDA objArr_0570                 ;C - - - - - 0x019096 0C:9086: AD 70 05
+	LDA objAnimFrame                ;C - - - - - 0x019096 0C:9086: AD 70 05
 	CMP #$02                        ;C - - - - - 0x019099 0C:9089: C9 02
 	BNE loc_0C_90B9                 ;C - - - - - 0x01909B 0C:908B: D0 2C
-	LDA objArr_0590                 ;C - - - - - 0x01909D 0C:908D: AD 90 05
+	LDA objAnimFlags                ;C - - - - - 0x01909D 0C:908D: AD 90 05
 	BNE loc_0C_90B9                 ;C - - - - - 0x0190A0 0C:9090: D0 27
 loc_0C_9092:
-	INC objArr_0300,X               ;C - - - - - 0x0190A2 0C:9092: FE 00 03
+	INC objActive,X                 ;C - - - - - 0x0190A2 0C:9092: FE 00 03
 	LDA objY,X                      ;C - - - - - 0x0190A5 0C:9095: BD C0 03
 	SEC                             ;C - - - - - 0x0190A8 0C:9098: 38
 	SBC #$06                        ;C - - - - - 0x0190A9 0C:9099: E9 06
 	STA objY,X                      ;C - - - - - 0x0190AB 0C:909B: 9D C0 03
-	LDA objArr_0460,X               ;C - - - - - 0x0190AE 0C:909E: BD 60 04
+	LDA objFacing,X                 ;C - - - - - 0x0190AE 0C:909E: BD 60 04
 	AND #$02                        ;C - - - - - 0x0190B1 0C:90A1: 29 02
 	TAY                             ;C - - - - - 0x0190B3 0C:90A3: A8
 	LDA objX,X                      ;C - - - - - 0x0190B4 0C:90A4: BD 60 03
 	CLC                             ;C - - - - - 0x0190B7 0C:90A7: 18
 	ADC tbl_0F_FCFE,Y               ;C - - - - - 0x0190B8 0C:90A8: 79 FE FC
 	PHA                             ;C - - - - - 0x0190BB 0C:90AB: 48
-	LDA objArr_0380,X               ;C - - - - - 0x0190BC 0C:90AC: BD 80 03
+	LDA objXPage,X                  ;C - - - - - 0x0190BC 0C:90AC: BD 80 03
 	ADC tbl_0F_FCFF,Y               ;C - - - - - 0x0190BF 0C:90AF: 79 FF FC
-	STA objArr_0380,X               ;C - - - - - 0x0190C2 0C:90B2: 9D 80 03
+	STA objXPage,X                  ;C - - - - - 0x0190C2 0C:90B2: 9D 80 03
 	PLA                             ;C - - - - - 0x0190C5 0C:90B5: 68
 	STA objX,X                      ;C - - - - - 0x0190C6 0C:90B6: 9D 60 03
 loc_0C_90B9:
@@ -2074,15 +2074,15 @@ ofs_0C_90BA:
 	BEQ loc_0C_90EC                 ;C - - - - - 0x0190D2 0C:90C2: F0 28
 	CMP #$0A                        ;C - - - - - 0x0190D4 0C:90C4: C9 0A
 	BEQ loc_0C_90EC                 ;C - - - - - 0x0190D6 0C:90C6: F0 24
-	LDA objArr_0570                 ;C - - - - - 0x0190D8 0C:90C8: AD 70 05
+	LDA objAnimFrame                ;C - - - - - 0x0190D8 0C:90C8: AD 70 05
 	CMP #$03                        ;C - - - - - 0x0190DB 0C:90CB: C9 03
 	BNE loc_0C_9127                 ;C - - - - - 0x0190DD 0C:90CD: D0 58
-	LDA objArr_0590                 ;C - - - - - 0x0190DF 0C:90CF: AD 90 05
+	LDA objAnimFlags                ;C - - - - - 0x0190DF 0C:90CF: AD 90 05
 	BNE loc_0C_9127                 ;C - - - - - 0x0190E2 0C:90D2: D0 53
 	LDA objSpriteDown,X             ;C - - - - - 0x0190E4 0C:90D4: BD B0 05
 	TAY                             ;C - - - - - 0x0190E7 0C:90D7: A8
 	LDA tbl_0F_FC68,Y               ;C - - - - - 0x0190E8 0C:90D8: B9 68 FC
-	JSR sub_0F_F288                 ;C - - - - - 0x0190EB 0C:90DB: 20 88 F2
+	JSR SetAnimX                    ;C - - - - - 0x0190EB 0C:90DB: 20 88 F2
 	LDA tbl_0F_FC75,Y               ;C - - - - - 0x0190EE 0C:90DE: B9 75 FC
 	STA ptr_00                      ;C - - - - - 0x0190F1 0C:90E1: 85 00
 	LDA tbl_0F_FC33,Y               ;C - - - - - 0x0190F3 0C:90E3: B9 33 FC
@@ -2090,28 +2090,28 @@ ofs_0C_90BA:
 	LDA ptr_00                      ;C - - - - - 0x0190F7 0C:90E7: A5 00
 	STA a:chrBankShadow+3,Y         ;C - - - - - 0x0190F9 0C:90E9: 99 EB 00
 loc_0C_90EC:
-	INC objArr_0300,X               ;C - - - - - 0x0190FC 0C:90EC: FE 00 03
+	INC objActive,X                 ;C - - - - - 0x0190FC 0C:90EC: FE 00 03
 	LDA objY                        ;C - - - - - 0x0190FF 0C:90EF: AD C0 03
 	STA objY,X                      ;C - - - - - 0x019102 0C:90F2: 9D C0 03
 	STA objArr_0530,X               ;C - - - - - 0x019105 0C:90F5: 9D 30 05
 	LDA #$9E                        ;C - - - - - 0x019108 0C:90F8: A9 9E
-	STA objArr_0420,X               ;C - - - - - 0x01910A 0C:90FA: 9D 20 04
+	STA objVelYLo,X                 ;C - - - - - 0x01910A 0C:90FA: 9D 20 04
 	LDA #$03                        ;C - - - - - 0x01910D 0C:90FD: A9 03
-	STA objArr_0430,X               ;C - - - - - 0x01910F 0C:90FF: 9D 30 04
+	STA objVelYHi,X                 ;C - - - - - 0x01910F 0C:90FF: 9D 30 04
 	LDA #$99                        ;C - - - - - 0x019112 0C:9102: A9 99
-	STA objArr_0400,X               ;C - - - - - 0x019114 0C:9104: 9D 00 04
+	STA objVelXLo,X                 ;C - - - - - 0x019114 0C:9104: 9D 00 04
 	LDA #$00                        ;C - - - - - 0x019117 0C:9107: A9 00
-	STA objArr_0410,X               ;C - - - - - 0x019119 0C:9109: 9D 10 04
-	LDA objArr_0460,X               ;C - - - - - 0x01911C 0C:910C: BD 60 04
+	STA objVelXHi,X                 ;C - - - - - 0x019119 0C:9109: 9D 10 04
+	LDA objFacing,X                 ;C - - - - - 0x01911C 0C:910C: BD 60 04
 	AND #$02                        ;C - - - - - 0x01911F 0C:910F: 29 02
 	TAY                             ;C - - - - - 0x019121 0C:9111: A8
 	LDA objX,X                      ;C - - - - - 0x019122 0C:9112: BD 60 03
 	CLC                             ;C - - - - - 0x019125 0C:9115: 18
 	ADC tbl_0F_FD02,Y               ;C - - - - - 0x019126 0C:9116: 79 02 FD
 	PHA                             ;C - - - - - 0x019129 0C:9119: 48
-	LDA objArr_0380,X               ;C - - - - - 0x01912A 0C:911A: BD 80 03
+	LDA objXPage,X                  ;C - - - - - 0x01912A 0C:911A: BD 80 03
 	ADC tbl_0F_FD03,Y               ;C - - - - - 0x01912D 0C:911D: 79 03 FD
-	STA objArr_0380,X               ;C - - - - - 0x019130 0C:9120: 9D 80 03
+	STA objXPage,X                  ;C - - - - - 0x019130 0C:9120: 9D 80 03
 	PLA                             ;C - - - - - 0x019133 0C:9123: 68
 	STA objX,X                      ;C - - - - - 0x019134 0C:9124: 9D 60 03
 loc_0C_9127:
@@ -2120,9 +2120,9 @@ ofs_0C_9128:
 	JSR sub_0D_A9F6                 ;C - - J - - bank=0D 0x019138 0C:9128: 20 F6 A9
 	BCC loc_0C_9138                 ;C - - - - - 0x01913B 0C:912B: 90 0B
 	LDA #$FE                        ;c - - - - - 0x01913D 0C:912D: A9 FE
-	STA objArr_0430,X               ;c - - - - - 0x01913F 0C:912F: 9D 30 04
+	STA objVelYHi,X                 ;c - - - - - 0x01913F 0C:912F: 9D 30 04
 	LDA #$00                        ;c - - - - - 0x019142 0C:9132: A9 00
-	STA objArr_0420,X               ;c - - - - - 0x019144 0C:9134: 9D 20 04
+	STA objVelYLo,X                 ;c - - - - - 0x019144 0C:9134: 9D 20 04
 	RTS                             ;c - - - - - 0x019147 0C:9137: 60
 loc_0C_9138:
 	LDA objArr_0520,X               ;C - - - - - 0x019148 0C:9138: BD 20 05
@@ -2141,12 +2141,12 @@ loc_0C_9138:
 	LDA #$00                        ;C - - - - - 0x019167 0C:9157: A9 00
 	STA objArr_0440,X               ;C - - - - - 0x019169 0C:9159: 9D 40 04
 	LDA #$80                        ;C - - - - - 0x01916C 0C:915C: A9 80
-	STA objArr_0300,X               ;C - - - - - 0x01916E 0C:915E: 9D 00 03
+	STA objActive,X                 ;C - - - - - 0x01916E 0C:915E: 9D 00 03
 	LDA #$16                        ;C - - - - - 0x019171 0C:9161: A9 16
-	STA objArr_0320,X               ;C - - - - - 0x019173 0C:9163: 9D 20 03
-	LDA objArr_0460,X               ;C - - - - - 0x019176 0C:9166: BD 60 04
+	STA objKind,X                   ;C - - - - - 0x019173 0C:9163: 9D 20 03
+	LDA objFacing,X                 ;C - - - - - 0x019176 0C:9166: BD 60 04
 	EOR #$03                        ;C - - - - - 0x019179 0C:9169: 49 03
-	STA objArr_0460,X               ;C - - - - - 0x01917B 0C:916B: 9D 60 04
+	STA objFacing,X                 ;C - - - - - 0x01917B 0C:916B: 9D 60 04
 	RTS                             ;C - - - - - 0x01917E 0C:916E: 60
 loc_0C_916F:
 	DEC objArr_0520,X               ;C - - - - - 0x01917F 0C:916F: DE 20 05
@@ -2154,23 +2154,23 @@ loc_0C_916F:
 loc_0C_9173:
 	LDA ram_0151                    ;C - - - - - 0x019183 0C:9173: AD 51 01
 	STA ram_00A7                    ;C - - - - - 0x019186 0C:9176: 85 A7
-	INC objArr_0300,X               ;C - - - - - 0x019188 0C:9178: FE 00 03
-	INC objArr_0300,X               ;C - - - - - 0x01918B 0C:917B: FE 00 03
+	INC objActive,X                 ;C - - - - - 0x019188 0C:9178: FE 00 03
+	INC objActive,X                 ;C - - - - - 0x01918B 0C:917B: FE 00 03
 ofs_0C_917E:
 	LDA objArr_04C0,X               ;C - - - - - 0x01918E 0C:917E: BD C0 04
 	CMP #$FE                        ;C - - - - - 0x019191 0C:9181: C9 FE
 	BEQ loc_0C_91B3                 ;C - - - - - 0x019193 0C:9183: F0 2E
 	CMP #$FD                        ;C - - - - - 0x019195 0C:9185: C9 FD
 	BEQ loc_0C_91B3                 ;C - - - - - 0x019197 0C:9187: F0 2A
-	LDA objArr_0460,X               ;C - - - - - 0x019199 0C:9189: BD 60 04
+	LDA objFacing,X                 ;C - - - - - 0x019199 0C:9189: BD 60 04
 	AND #$01                        ;C - - - - - 0x01919C 0C:918C: 29 01
 	BEQ loc_0C_9196                 ;C - - - - - 0x01919E 0C:918E: F0 06
-	JSR sub_0F_F1A1                 ;C - - - - - 0x0191A0 0C:9190: 20 A1 F1
+	JSR ApplyVelXSub                ;C - - - - - 0x0191A0 0C:9190: 20 A1 F1
 	JMP loc_0C_9199                 ;C - - - - - 0x0191A3 0C:9193: 4C 99 91
 loc_0C_9196:
-	JSR sub_0F_F183                 ;C - - - - - 0x0191A6 0C:9196: 20 83 F1
+	JSR ApplyVelXAdd                ;C - - - - - 0x0191A6 0C:9196: 20 83 F1
 loc_0C_9199:
-	JSR sub_0F_F1FD                 ;C - - - - - 0x0191A9 0C:9199: 20 FD F1
+	JSR ApplyVelY                   ;C - - - - - 0x0191A9 0C:9199: 20 FD F1
 	LDA objY,X                      ;C - - - - - 0x0191AC 0C:919C: BD C0 03
 	CMP objArr_0530,X               ;C - - - - - 0x0191AF 0C:919F: DD 30 05
 	BCS loc_0C_91A5                 ;C - - - - - 0x0191B2 0C:91A2: B0 01
@@ -2186,11 +2186,11 @@ loc_0C_91B3:
 	RTS                             ;C - - - - - 0x0191C6 0C:91B6: 60
 ofs_0C_91B7:
 	LDA #$00                        ;C - - J - - 0x0191C7 0C:91B7: A9 00
-	STA objArr_0590,X               ;C - - - - - 0x0191C9 0C:91B9: 9D 90 05
-	LDA objArr_0300,X               ;C - - - - - 0x0191CC 0C:91BC: BD 00 03
+	STA objAnimFlags,X              ;C - - - - - 0x0191C9 0C:91B9: 9D 90 05
+	LDA objActive,X                 ;C - - - - - 0x0191CC 0C:91BC: BD 00 03
 	AND #$0F                        ;C - - - - - 0x0191CF 0C:91BF: 29 0F
 	BNE loc_0C_9226                 ;C - - - - - 0x0191D1 0C:91C1: D0 63
-	LDA objArr_0580                 ;C - - - - - 0x0191D3 0C:91C3: AD 80 05
+	LDA objAnim                     ;C - - - - - 0x0191D3 0C:91C3: AD 80 05
 	CMP #$48                        ;C - - - - - 0x0191D6 0C:91C6: C9 48
 	BNE loc_0C_91F4                 ;C - - - - - 0x0191D8 0C:91C8: D0 2A
 	LDA #$08                        ;C - - - - - 0x0191DA 0C:91CA: A9 08
@@ -2198,9 +2198,9 @@ ofs_0C_91B7:
 	LDA objSpriteDown,X             ;C - - - - - 0x0191DF 0C:91CF: BD B0 05
 	TAY                             ;C - - - - - 0x0191E2 0C:91D2: A8
 	LDA tbl_0F_FC41,Y               ;C - - - - - 0x0191E3 0C:91D3: B9 41 FC
-	CMP objArr_0580,X               ;C - - - - - 0x0191E6 0C:91D6: DD 80 05
+	CMP objAnim,X                   ;C - - - - - 0x0191E6 0C:91D6: DD 80 05
 	BEQ loc_0C_91F4                 ;C - - - - - 0x0191E9 0C:91D9: F0 19
-	JSR sub_0F_F288                 ;C - - - - - 0x0191EB 0C:91DB: 20 88 F2
+	JSR SetAnimX                    ;C - - - - - 0x0191EB 0C:91DB: 20 88 F2
 	LDA tbl_0F_FC4E,Y               ;C - - - - - 0x0191EE 0C:91DE: B9 4E FC
 	STA ptr_00                      ;C - - - - - 0x0191F1 0C:91E1: 85 00
 	LDA tbl_0F_FC33,Y               ;C - - - - - 0x0191F3 0C:91E3: B9 33 FC
@@ -2209,7 +2209,7 @@ ofs_0C_91B7:
 	STA a:chrBankShadow+3,Y         ;C - - - - - 0x0191F9 0C:91E9: 99 EB 00
 	LDA #$FF                        ;C - - - - - 0x0191FC 0C:91EC: A9 FF
 	STA objArr_04C0,X               ;C - - - - - 0x0191FE 0C:91EE: 9D C0 04
-	INC objArr_0300,X               ;C - - - - - 0x019201 0C:91F1: FE 00 03
+	INC objActive,X                 ;C - - - - - 0x019201 0C:91F1: FE 00 03
 loc_0C_91F4:
 	LDA gameAction                  ;C - - - - - 0x019204 0C:91F4: A5 30
 	BEQ loc_0C_9209                 ;C - - - - - 0x019206 0C:91F6: F0 11
@@ -2228,7 +2228,7 @@ loc_0C_9209:
 	LDA objY,X                      ;C - - - - - 0x01921E 0C:920E: BD C0 03
 	CMP objArr_0530,X               ;C - - - - - 0x019221 0C:9211: DD 30 05
 	BCS loc_0C_9219                 ;C - - - - - 0x019224 0C:9214: B0 03
-	JMP sub_0F_F1FD                 ;C - - - - - 0x019226 0C:9216: 4C FD F1
+	JMP ApplyVelY                   ;C - - - - - 0x019226 0C:9216: 4C FD F1
 loc_0C_9219:
 	LDA objArr_0530,X               ;C - - - - - 0x019229 0C:9219: BD 30 05
 	STA objY,X                      ;C - - - - - 0x01922C 0C:921C: 9D C0 03
@@ -2236,15 +2236,15 @@ loc_0C_9219:
 	JSR sub_0C_9C29                 ;C - - - - - 0x019232 0C:9222: 20 29 9C
 	RTS                             ;C - - - - - 0x019235 0C:9225: 60
 loc_0C_9226:
-	LDA objArr_0300,X               ;C - - - - - 0x019236 0C:9226: BD 00 03
+	LDA objActive,X                 ;C - - - - - 0x019236 0C:9226: BD 00 03
 	AND #$02                        ;C - - - - - 0x019239 0C:9229: 29 02
 	BEQ loc_0C_9230                 ;C - - - - - 0x01923B 0C:922B: F0 03
 	JMP loc_0C_92F0                 ;C - - - - - 0x01923D 0C:922D: 4C F0 92
 loc_0C_9230:
-	LDA objArr_0580                 ;C - - - - - 0x019240 0C:9230: AD 80 05
+	LDA objAnim                     ;C - - - - - 0x019240 0C:9230: AD 80 05
 	CMP #$49                        ;C - - - - - 0x019243 0C:9233: C9 49
 	BNE loc_0C_92A3                 ;C - - - - - 0x019245 0C:9235: D0 6C
-	LDA objArr_0590                 ;C - - - - - 0x019247 0C:9237: AD 90 05
+	LDA objAnimFlags                ;C - - - - - 0x019247 0C:9237: AD 90 05
 	BEQ loc_0C_924A                 ;C - - - - - 0x01924A 0C:923A: F0 0E
 	CMP #$04                        ;c - - - - - 0x01924C 0C:923C: C9 04
 	BNE loc_0C_92A3                 ;c - - - - - 0x01924E 0C:923E: D0 63
@@ -2258,7 +2258,7 @@ loc_0C_924A:
 	LDA tbl_0F_FC68,Y               ;C - - - - - 0x01925E 0C:924E: B9 68 FC
 	CMP ptr_00                      ;C - - - - - 0x019261 0C:9251: C5 00
 	BEQ loc_0C_9266                 ;C - - - - - 0x019263 0C:9253: F0 11
-	JSR sub_0F_F288                 ;C - - - - - 0x019265 0C:9255: 20 88 F2
+	JSR SetAnimX                    ;C - - - - - 0x019265 0C:9255: 20 88 F2
 	LDA tbl_0F_FC75,Y               ;C - - - - - 0x019268 0C:9258: B9 75 FC
 	STA ptr_00                      ;C - - - - - 0x01926B 0C:925B: 85 00
 	LDA tbl_0F_FC33,Y               ;C - - - - - 0x01926D 0C:925D: B9 33 FC
@@ -2266,10 +2266,10 @@ loc_0C_924A:
 	LDA ptr_00                      ;C - - - - - 0x019271 0C:9261: A5 00
 	STA a:chrBankShadow+3,Y         ;C - - - - - 0x019273 0C:9263: 99 EB 00
 loc_0C_9266:
-	LDA objArr_0460,X               ;C - - - - - 0x019276 0C:9266: BD 60 04
+	LDA objFacing,X                 ;C - - - - - 0x019276 0C:9266: BD 60 04
 	AND #$01                        ;C - - - - - 0x019279 0C:9269: 29 01
 	BNE loc_0C_9273                 ;C - - - - - 0x01927B 0C:926B: D0 06
-	JSR sub_0F_F090                 ;C - - - - - 0x01927D 0C:926D: 20 90 F0
+	JSR SetObjFlag40                ;C - - - - - 0x01927D 0C:926D: 20 90 F0
 	JMP loc_0C_9276                 ;C - - - - - 0x019280 0C:9270: 4C 76 92
 loc_0C_9273:
 	JSR sub_0F_F099                 ;C - - - - - 0x019283 0C:9273: 20 99 F0
@@ -2284,12 +2284,12 @@ loc_0C_9276:
 	STA objArr_0440,X               ;C - - - - - 0x019297 0C:9287: 9D 40 04
 	INC ram_0054                    ;C - - - - - 0x01929A 0C:928A: E6 54
 	LDA #$80                        ;C - - - - - 0x01929C 0C:928C: A9 80
-	STA objArr_0300,X               ;C - - - - - 0x01929E 0C:928E: 9D 00 03
+	STA objActive,X                 ;C - - - - - 0x01929E 0C:928E: 9D 00 03
 	LDA #$16                        ;C - - - - - 0x0192A1 0C:9291: A9 16
-	STA objArr_0320,X               ;C - - - - - 0x0192A3 0C:9293: 9D 20 03
-	LDA objArr_0460,X               ;C - - - - - 0x0192A6 0C:9296: BD 60 04
+	STA objKind,X                   ;C - - - - - 0x0192A3 0C:9293: 9D 20 03
+	LDA objFacing,X                 ;C - - - - - 0x0192A6 0C:9296: BD 60 04
 	EOR #$03                        ;C - - - - - 0x0192A9 0C:9299: 49 03
-	STA objArr_0460,X               ;C - - - - - 0x0192AB 0C:929B: 9D 60 04
+	STA objFacing,X                 ;C - - - - - 0x0192AB 0C:929B: 9D 60 04
 	LDA ram_00A6                    ;C - - - - - 0x0192AE 0C:929E: A5 A6
 	STA objArr_0530,X               ;C - - - - - 0x0192B0 0C:92A0: 9D 30 05
 loc_0C_92A3:
@@ -2299,9 +2299,9 @@ loc_0C_92A3:
 	JSR sub_0D_A9F6                 ;C - - - - - bank=0D 0x0192B9 0C:92A9: 20 F6 A9
 	BCC loc_0C_92B9                 ;C - - - - - 0x0192BC 0C:92AC: 90 0B
 	LDA #$FD                        ;C - - - - - 0x0192BE 0C:92AE: A9 FD
-	STA objArr_0430,X               ;C - - - - - 0x0192C0 0C:92B0: 9D 30 04
+	STA objVelYHi,X                 ;C - - - - - 0x0192C0 0C:92B0: 9D 30 04
 	LDA #$00                        ;C - - - - - 0x0192C3 0C:92B3: A9 00
-	STA objArr_0420,X               ;C - - - - - 0x0192C5 0C:92B5: 9D 20 04
+	STA objVelYLo,X                 ;C - - - - - 0x0192C5 0C:92B5: 9D 20 04
 	RTS                             ;C - - - - - 0x0192C8 0C:92B8: 60
 loc_0C_92B9:
 	LDA ram_00A6                    ;C - - - - - 0x0192C9 0C:92B9: A5 A6
@@ -2309,7 +2309,7 @@ loc_0C_92B9:
 	LDA objY,X                      ;C - - - - - 0x0192CE 0C:92BE: BD C0 03
 	CMP objArr_0530,X               ;C - - - - - 0x0192D1 0C:92C1: DD 30 05
 	BCS loc_0C_92CA                 ;C - - - - - 0x0192D4 0C:92C4: B0 04
-	JSR sub_0F_F1FD                 ;C - - - - - 0x0192D6 0C:92C6: 20 FD F1
+	JSR ApplyVelY                   ;C - - - - - 0x0192D6 0C:92C6: 20 FD F1
 loc_0C_92C9:
 	RTS                             ;C - - - - - 0x0192D9 0C:92C9: 60
 loc_0C_92CA:
@@ -2317,15 +2317,15 @@ loc_0C_92CA:
 	STA objY,X                      ;C - - - - - 0x0192DD 0C:92CD: 9D C0 03
 	JMP loc_0C_932E                 ;C - - - - - 0x0192E0 0C:92D0: 4C 2E 93
 loc_0C_92D3:
-	INC objArr_0300,X               ;C - - - - - 0x0192E3 0C:92D3: FE 00 03
+	INC objActive,X                 ;C - - - - - 0x0192E3 0C:92D3: FE 00 03
 	LDA #$9E                        ;C - - - - - 0x0192E6 0C:92D6: A9 9E
-	STA objArr_0420,X               ;C - - - - - 0x0192E8 0C:92D8: 9D 20 04
+	STA objVelYLo,X                 ;C - - - - - 0x0192E8 0C:92D8: 9D 20 04
 	LDA #$03                        ;C - - - - - 0x0192EB 0C:92DB: A9 03
-	STA objArr_0430,X               ;C - - - - - 0x0192ED 0C:92DD: 9D 30 04
+	STA objVelYHi,X                 ;C - - - - - 0x0192ED 0C:92DD: 9D 30 04
 	LDA #$99                        ;C - - - - - 0x0192F0 0C:92E0: A9 99
-	STA objArr_0400,X               ;C - - - - - 0x0192F2 0C:92E2: 9D 00 04
+	STA objVelXLo,X                 ;C - - - - - 0x0192F2 0C:92E2: 9D 00 04
 	LDA #$00                        ;C - - - - - 0x0192F5 0C:92E5: A9 00
-	STA objArr_0410,X               ;C - - - - - 0x0192F7 0C:92E7: 9D 10 04
+	STA objVelXHi,X                 ;C - - - - - 0x0192F7 0C:92E7: 9D 10 04
 	LDA objY,X                      ;C - - - - - 0x0192FA 0C:92EA: BD C0 03
 	STA objArr_0530,X               ;C - - - - - 0x0192FD 0C:92ED: 9D 30 05
 loc_0C_92F0:
@@ -2334,20 +2334,20 @@ loc_0C_92F0:
 	BEQ loc_0C_932E                 ;C - - - - - 0x019305 0C:92F5: F0 37
 	CMP #$FD                        ;C - - - - - 0x019307 0C:92F7: C9 FD
 	BEQ loc_0C_932E                 ;C - - - - - 0x019309 0C:92F9: F0 33
-	LDA objArr_0460,X               ;C - - - - - 0x01930B 0C:92FB: BD 60 04
+	LDA objFacing,X                 ;C - - - - - 0x01930B 0C:92FB: BD 60 04
 	AND #$01                        ;C - - - - - 0x01930E 0C:92FE: 29 01
 	BEQ loc_0C_9308                 ;C - - - - - 0x019310 0C:9300: F0 06
-	JSR sub_0F_F1A1                 ;C - - - - - 0x019312 0C:9302: 20 A1 F1
+	JSR ApplyVelXSub                ;C - - - - - 0x019312 0C:9302: 20 A1 F1
 	JMP loc_0C_930B                 ;C - - - - - 0x019315 0C:9305: 4C 0B 93
 loc_0C_9308:
-	JSR sub_0F_F183                 ;C - - - - - 0x019318 0C:9308: 20 83 F1
+	JSR ApplyVelXAdd                ;C - - - - - 0x019318 0C:9308: 20 83 F1
 loc_0C_930B:
-	LDA objArr_0590,X               ;C - - - - - 0x01931B 0C:930B: BD 90 05
+	LDA objAnimFlags,X              ;C - - - - - 0x01931B 0C:930B: BD 90 05
 	CMP #$14                        ;C - - - - - 0x01931E 0C:930E: C9 14
 	BNE loc_0C_9315                 ;C - - - - - 0x019320 0C:9310: D0 03
 	JSR sub_0C_9C55                 ;c - - - - - 0x019322 0C:9312: 20 55 9C
 loc_0C_9315:
-	JSR sub_0F_F1FD                 ;C - - - - - 0x019325 0C:9315: 20 FD F1
+	JSR ApplyVelY                   ;C - - - - - 0x019325 0C:9315: 20 FD F1
 	LDA objY,X                      ;C - - - - - 0x019328 0C:9318: BD C0 03
 	CMP objArr_0530,X               ;C - - - - - 0x01932B 0C:931B: DD 30 05
 	BCC loc_0C_9331                 ;C - - - - - 0x01932E 0C:931E: 90 11
@@ -2361,7 +2361,7 @@ loc_0C_932E:
 loc_0C_9331:
 	RTS                             ;C - - - - - 0x019341 0C:9331: 60
 ofs_0C_9332:
-	LDA objArr_0300,X               ;C - - J - - 0x019342 0C:9332: BD 00 03
+	LDA objActive,X                 ;C - - J - - 0x019342 0C:9332: BD 00 03
 	AND #$0F                        ;C - - - - - 0x019345 0C:9335: 29 0F
 	TAY                             ;C - - - - - 0x019347 0C:9337: A8
 	LDA tbl_0C_9345,Y               ;C - - - - - 0x019348 0C:9338: B9 45 93
@@ -2384,7 +2384,7 @@ ofs_0C_9357:
 	STA objArr_0540,X               ;C - - - - - 0x019373 0C:9363: 9D 40 05
 	LDA objY,X                      ;C - - - - - 0x019376 0C:9366: BD C0 03
 	STA objArr_0530,X               ;C - - - - - 0x019379 0C:9369: 9D 30 05
-	INC objArr_0300,X               ;C - - - - - 0x01937C 0C:936C: FE 00 03
+	INC objActive,X                 ;C - - - - - 0x01937C 0C:936C: FE 00 03
 	LDA objY,X                      ;C - - - - - 0x01937F 0C:936F: BD C0 03
 	SEC                             ;C - - - - - 0x019382 0C:9372: 38
 	SBC #$08                        ;C - - - - - 0x019383 0C:9373: E9 08
@@ -2394,7 +2394,7 @@ ofs_0C_9357:
 	LDA tbl_0F_FC5B,Y               ;C - - - - - 0x01938C 0C:937C: B9 5B FC
 	CMP ptr_00                      ;C - - - - - 0x01938F 0C:937F: C5 00
 	BEQ loc_0C_9394                 ;C - - - - - 0x019391 0C:9381: F0 11
-	JSR sub_0F_F288                 ;C - - - - - 0x019393 0C:9383: 20 88 F2
+	JSR SetAnimX                    ;C - - - - - 0x019393 0C:9383: 20 88 F2
 	LDA tbl_0F_FC75,Y               ;C - - - - - 0x019396 0C:9386: B9 75 FC
 	STA ptr_00                      ;C - - - - - 0x019399 0C:9389: 85 00
 	LDA tbl_0F_FC33,Y               ;C - - - - - 0x01939B 0C:938B: B9 33 FC
@@ -2404,30 +2404,30 @@ ofs_0C_9357:
 loc_0C_9394:
 	LDA objArr_0470,X               ;C - - - - - 0x0193A4 0C:9394: BD 70 04
 	BNE loc_0C_93B5                 ;C - - - - - 0x0193A7 0C:9397: D0 1C
-	LDA objArr_0460,X               ;C - - - - - 0x0193A9 0C:9399: BD 60 04
+	LDA objFacing,X                 ;C - - - - - 0x0193A9 0C:9399: BD 60 04
 	AND #$02                        ;C - - - - - 0x0193AC 0C:939C: 29 02
 	TAY                             ;C - - - - - 0x0193AE 0C:939E: A8
 	LDA objX,X                      ;C - - - - - 0x0193AF 0C:939F: BD 60 03
 	CLC                             ;C - - - - - 0x0193B2 0C:93A2: 18
 	ADC tbl_0F_FD06,Y               ;C - - - - - 0x0193B3 0C:93A3: 79 06 FD
 	PHA                             ;C - - - - - 0x0193B6 0C:93A6: 48
-	LDA objArr_0380,X               ;C - - - - - 0x0193B7 0C:93A7: BD 80 03
+	LDA objXPage,X                  ;C - - - - - 0x0193B7 0C:93A7: BD 80 03
 	ADC tbl_0F_FD07,Y               ;C - - - - - 0x0193BA 0C:93AA: 79 07 FD
-	STA objArr_0380,X               ;C - - - - - 0x0193BD 0C:93AD: 9D 80 03
+	STA objXPage,X                  ;C - - - - - 0x0193BD 0C:93AD: 9D 80 03
 	PLA                             ;C - - - - - 0x0193C0 0C:93B0: 68
 	STA objX,X                      ;C - - - - - 0x0193C1 0C:93B1: 9D 60 03
 	RTS                             ;C - - - - - 0x0193C4 0C:93B4: 60
 loc_0C_93B5:
-	LDA objArr_0460,X               ;c - - - - - 0x0193C5 0C:93B5: BD 60 04
+	LDA objFacing,X                 ;c - - - - - 0x0193C5 0C:93B5: BD 60 04
 	AND #$02                        ;c - - - - - 0x0193C8 0C:93B8: 29 02
 	TAY                             ;c - - - - - 0x0193CA 0C:93BA: A8
 	LDA objX,X                      ;c - - - - - 0x0193CB 0C:93BB: BD 60 03
 	CLC                             ;c - - - - - 0x0193CE 0C:93BE: 18
 	ADC tbl_0F_FD0A,Y               ;c - - - - - 0x0193CF 0C:93BF: 79 0A FD
 	PHA                             ;c - - - - - 0x0193D2 0C:93C2: 48
-	LDA objArr_0380,X               ;c - - - - - 0x0193D3 0C:93C3: BD 80 03
+	LDA objXPage,X                  ;c - - - - - 0x0193D3 0C:93C3: BD 80 03
 	ADC tbl_0F_FD0B,Y               ;c - - - - - 0x0193D6 0C:93C6: 79 0B FD
-	STA objArr_0380,X               ;c - - - - - 0x0193D9 0C:93C9: 9D 80 03
+	STA objXPage,X                  ;c - - - - - 0x0193D9 0C:93C9: 9D 80 03
 	PLA                             ;c - - - - - 0x0193DC 0C:93CC: 68
 	STA objX,X                      ;c - - - - - 0x0193DD 0C:93CD: 9D 60 03
 	RTS                             ;c - - - - - 0x0193E0 0C:93D0: 60
@@ -2439,12 +2439,12 @@ ofs_0C_93D1:
 	BEQ loc_0C_93E7                 ;C - - - - - 0x0193E9 0C:93D9: F0 0C
 	CMP #$0A                        ;C - - - - - 0x0193EB 0C:93DB: C9 0A
 	BEQ loc_0C_93E7                 ;C - - - - - 0x0193ED 0C:93DD: F0 08
-	LDA objArr_0570                 ;C - - - - - 0x0193EF 0C:93DF: AD 70 05
+	LDA objAnimFrame                ;C - - - - - 0x0193EF 0C:93DF: AD 70 05
 	CMP #$03                        ;C - - - - - 0x0193F2 0C:93E2: C9 03
 	BEQ loc_0C_93E7                 ;C - - - - - 0x0193F4 0C:93E4: F0 01
 	RTS                             ;C - - - - - 0x0193F6 0C:93E6: 60
 loc_0C_93E7:
-	LDA objArr_0460,X               ;C - - - - - 0x0193F7 0C:93E7: BD 60 04
+	LDA objFacing,X                 ;C - - - - - 0x0193F7 0C:93E7: BD 60 04
 	AND #$01                        ;C - - - - - 0x0193FA 0C:93EA: 29 01
 	BEQ loc_0C_9411                 ;C - - - - - 0x0193FC 0C:93EC: F0 23
 	LDA ram_00BC                    ;C - - - - - 0x0193FE 0C:93EE: A5 BC
@@ -2460,7 +2460,7 @@ loc_0C_93E7:
 	STA objX,X                      ;c - - - - - 0x019411 0C:9401: 9D 60 03
 	LDA ram_002D                    ;c - - - - - 0x019414 0C:9404: A5 2D
 	ADC #$00                        ;c - - - - - 0x019416 0C:9406: 69 00
-	STA objArr_0380,X               ;c - - - - - 0x019418 0C:9408: 9D 80 03
+	STA objXPage,X                  ;c - - - - - 0x019418 0C:9408: 9D 80 03
 	JMP loc_0C_942E                 ;c - - - - - 0x01941B 0C:940B: 4C 2E 94
 loc_0C_940E:
 	JMP loc_0C_942F                 ;C - - - - - 0x01941E 0C:940E: 4C 2F 94
@@ -2478,7 +2478,7 @@ loc_0C_9411:
 	STA objX,X                      ;c - - - - - 0x019434 0C:9424: 9D 60 03
 	LDA ram_002D                    ;c - - - - - 0x019437 0C:9427: A5 2D
 	ADC #$00                        ;c - - - - - 0x019439 0C:9429: 69 00
-	STA objArr_0380,X               ;c - - - - - 0x01943B 0C:942B: 9D 80 03
+	STA objXPage,X                  ;c - - - - - 0x01943B 0C:942B: 9D 80 03
 loc_0C_942E:
 	RTS                             ;c - - - - - 0x01943E 0C:942E: 60
 loc_0C_942F:
@@ -2486,17 +2486,17 @@ loc_0C_942F:
 	SEC                             ;C - - - - - 0x019442 0C:9432: 38
 	SBC #$08                        ;C - - - - - 0x019443 0C:9433: E9 08
 	STA objY,X                      ;C - - - - - 0x019445 0C:9435: 9D C0 03
-	INC objArr_0300,X               ;C - - - - - 0x019448 0C:9438: FE 00 03
-	LDA objArr_0460,X               ;C - - - - - 0x01944B 0C:943B: BD 60 04
+	INC objActive,X                 ;C - - - - - 0x019448 0C:9438: FE 00 03
+	LDA objFacing,X                 ;C - - - - - 0x01944B 0C:943B: BD 60 04
 	AND #$02                        ;C - - - - - 0x01944E 0C:943E: 29 02
 	TAY                             ;C - - - - - 0x019450 0C:9440: A8
 	LDA objX,X                      ;C - - - - - 0x019451 0C:9441: BD 60 03
 	CLC                             ;C - - - - - 0x019454 0C:9444: 18
 	ADC tbl_0F_FD0E,Y               ;C - - - - - 0x019455 0C:9445: 79 0E FD
 	PHA                             ;C - - - - - 0x019458 0C:9448: 48
-	LDA objArr_0380,X               ;C - - - - - 0x019459 0C:9449: BD 80 03
+	LDA objXPage,X                  ;C - - - - - 0x019459 0C:9449: BD 80 03
 	ADC tbl_0F_FD0F,Y               ;C - - - - - 0x01945C 0C:944C: 79 0F FD
-	STA objArr_0380,X               ;C - - - - - 0x01945F 0C:944F: 9D 80 03
+	STA objXPage,X                  ;C - - - - - 0x01945F 0C:944F: 9D 80 03
 	PLA                             ;C - - - - - 0x019462 0C:9452: 68
 	STA objX,X                      ;C - - - - - 0x019463 0C:9453: 9D 60 03
 	RTS                             ;C - - - - - 0x019466 0C:9456: 60
@@ -2508,12 +2508,12 @@ ofs_0C_9457:
 	BEQ loc_0C_946D                 ;C - - - - - 0x01946F 0C:945F: F0 0C
 	CMP #$0A                        ;C - - - - - 0x019471 0C:9461: C9 0A
 	BEQ loc_0C_946D                 ;C - - - - - 0x019473 0C:9463: F0 08
-	LDA objArr_0570                 ;C - - - - - 0x019475 0C:9465: AD 70 05
+	LDA objAnimFrame                ;C - - - - - 0x019475 0C:9465: AD 70 05
 	CMP #$05                        ;C - - - - - 0x019478 0C:9468: C9 05
 	BEQ loc_0C_946D                 ;C - - - - - 0x01947A 0C:946A: F0 01
 	RTS                             ;C - - - - - 0x01947C 0C:946C: 60
 loc_0C_946D:
-	LDA objArr_0460,X               ;C - - - - - 0x01947D 0C:946D: BD 60 04
+	LDA objFacing,X                 ;C - - - - - 0x01947D 0C:946D: BD 60 04
 	AND #$01                        ;C - - - - - 0x019480 0C:9470: 29 01
 	BEQ loc_0C_9497                 ;C - - - - - 0x019482 0C:9472: F0 23
 	LDA ram_00BC                    ;C - - - - - 0x019484 0C:9474: A5 BC
@@ -2529,7 +2529,7 @@ loc_0C_946D:
 	STA objX,X                      ;c - - - - - 0x019497 0C:9487: 9D 60 03
 	LDA ram_002D                    ;c - - - - - 0x01949A 0C:948A: A5 2D
 	ADC #$00                        ;c - - - - - 0x01949C 0C:948C: 69 00
-	STA objArr_0380,X               ;c - - - - - 0x01949E 0C:948E: 9D 80 03
+	STA objXPage,X                  ;c - - - - - 0x01949E 0C:948E: 9D 80 03
 	JMP loc_0C_94B4                 ;c - - - - - 0x0194A1 0C:9491: 4C B4 94
 loc_0C_9494:
 	JMP loc_0C_94B5                 ;C - - - - - 0x0194A4 0C:9494: 4C B5 94
@@ -2547,21 +2547,21 @@ loc_0C_9497:
 	STA objX,X                      ;c - - - - - 0x0194BA 0C:94AA: 9D 60 03
 	LDA ram_002D                    ;c - - - - - 0x0194BD 0C:94AD: A5 2D
 	ADC #$00                        ;c - - - - - 0x0194BF 0C:94AF: 69 00
-	STA objArr_0380,X               ;c - - - - - 0x0194C1 0C:94B1: 9D 80 03
+	STA objXPage,X                  ;c - - - - - 0x0194C1 0C:94B1: 9D 80 03
 loc_0C_94B4:
 	RTS                             ;c - - - - - 0x0194C4 0C:94B4: 60
 loc_0C_94B5:
-	INC objArr_0300,X               ;C - - - - - 0x0194C5 0C:94B5: FE 00 03
-	LDA objArr_0460,X               ;C - - - - - 0x0194C8 0C:94B8: BD 60 04
+	INC objActive,X                 ;C - - - - - 0x0194C5 0C:94B5: FE 00 03
+	LDA objFacing,X                 ;C - - - - - 0x0194C8 0C:94B8: BD 60 04
 	AND #$02                        ;C - - - - - 0x0194CB 0C:94BB: 29 02
 	TAY                             ;C - - - - - 0x0194CD 0C:94BD: A8
 	LDA objX,X                      ;C - - - - - 0x0194CE 0C:94BE: BD 60 03
 	CLC                             ;C - - - - - 0x0194D1 0C:94C1: 18
 	ADC tbl_0F_FD12,Y               ;C - - - - - 0x0194D2 0C:94C2: 79 12 FD
 	PHA                             ;C - - - - - 0x0194D5 0C:94C5: 48
-	LDA objArr_0380,X               ;C - - - - - 0x0194D6 0C:94C6: BD 80 03
+	LDA objXPage,X                  ;C - - - - - 0x0194D6 0C:94C6: BD 80 03
 	ADC tbl_0F_FD13,Y               ;C - - - - - 0x0194D9 0C:94C9: 79 13 FD
-	STA objArr_0380,X               ;C - - - - - 0x0194DC 0C:94CC: 9D 80 03
+	STA objXPage,X                  ;C - - - - - 0x0194DC 0C:94CC: 9D 80 03
 	PLA                             ;C - - - - - 0x0194DF 0C:94CF: 68
 	STA objX,X                      ;C - - - - - 0x0194E0 0C:94D0: 9D 60 03
 	RTS                             ;C - - - - - 0x0194E3 0C:94D3: 60
@@ -2573,12 +2573,12 @@ ofs_0C_94D4:
 	BEQ loc_0C_94EA                 ;C - - - - - 0x0194EC 0C:94DC: F0 0C
 	CMP #$0A                        ;C - - - - - 0x0194EE 0C:94DE: C9 0A
 	BEQ loc_0C_94EA                 ;C - - - - - 0x0194F0 0C:94E0: F0 08
-	LDA objArr_0570                 ;C - - - - - 0x0194F2 0C:94E2: AD 70 05
+	LDA objAnimFrame                ;C - - - - - 0x0194F2 0C:94E2: AD 70 05
 	CMP #$07                        ;C - - - - - 0x0194F5 0C:94E5: C9 07
 	BEQ loc_0C_94EA                 ;C - - - - - 0x0194F7 0C:94E7: F0 01
 	RTS                             ;C - - - - - 0x0194F9 0C:94E9: 60
 loc_0C_94EA:
-	LDA objArr_0460,X               ;C - - - - - 0x0194FA 0C:94EA: BD 60 04
+	LDA objFacing,X                 ;C - - - - - 0x0194FA 0C:94EA: BD 60 04
 	AND #$01                        ;C - - - - - 0x0194FD 0C:94ED: 29 01
 	BEQ loc_0C_9514                 ;C - - - - - 0x0194FF 0C:94EF: F0 23
 	LDA ram_00BC                    ;C - - - - - 0x019501 0C:94F1: A5 BC
@@ -2594,7 +2594,7 @@ loc_0C_94EA:
 	STA objX,X                      ;c - - - - - 0x019514 0C:9504: 9D 60 03
 	LDA ram_002D                    ;c - - - - - 0x019517 0C:9507: A5 2D
 	ADC #$00                        ;c - - - - - 0x019519 0C:9509: 69 00
-	STA objArr_0380,X               ;c - - - - - 0x01951B 0C:950B: 9D 80 03
+	STA objXPage,X                  ;c - - - - - 0x01951B 0C:950B: 9D 80 03
 	JMP loc_0C_9531                 ;c - - - - - 0x01951E 0C:950E: 4C 31 95
 loc_0C_9511:
 	JMP loc_0C_9532                 ;C - - - - - 0x019521 0C:9511: 4C 32 95
@@ -2612,21 +2612,21 @@ loc_0C_9514:
 	STA objX,X                      ;c - - - - - 0x019537 0C:9527: 9D 60 03
 	LDA ram_002D                    ;c - - - - - 0x01953A 0C:952A: A5 2D
 	ADC #$00                        ;c - - - - - 0x01953C 0C:952C: 69 00
-	STA objArr_0380,X               ;c - - - - - 0x01953E 0C:952E: 9D 80 03
+	STA objXPage,X                  ;c - - - - - 0x01953E 0C:952E: 9D 80 03
 loc_0C_9531:
 	RTS                             ;c - - - - - 0x019541 0C:9531: 60
 loc_0C_9532:
-	INC objArr_0300,X               ;C - - - - - 0x019542 0C:9532: FE 00 03
-	LDA objArr_0460,X               ;C - - - - - 0x019545 0C:9535: BD 60 04
+	INC objActive,X                 ;C - - - - - 0x019542 0C:9532: FE 00 03
+	LDA objFacing,X                 ;C - - - - - 0x019545 0C:9535: BD 60 04
 	AND #$02                        ;C - - - - - 0x019548 0C:9538: 29 02
 	TAY                             ;C - - - - - 0x01954A 0C:953A: A8
 	LDA objX,X                      ;C - - - - - 0x01954B 0C:953B: BD 60 03
 	CLC                             ;C - - - - - 0x01954E 0C:953E: 18
 	ADC tbl_0F_FD12,Y               ;C - - - - - 0x01954F 0C:953F: 79 12 FD
 	PHA                             ;C - - - - - 0x019552 0C:9542: 48
-	LDA objArr_0380,X               ;C - - - - - 0x019553 0C:9543: BD 80 03
+	LDA objXPage,X                  ;C - - - - - 0x019553 0C:9543: BD 80 03
 	ADC tbl_0F_FD13,Y               ;C - - - - - 0x019556 0C:9546: 79 13 FD
-	STA objArr_0380,X               ;C - - - - - 0x019559 0C:9549: 9D 80 03
+	STA objXPage,X                  ;C - - - - - 0x019559 0C:9549: 9D 80 03
 	PLA                             ;C - - - - - 0x01955C 0C:954C: 68
 	STA objX,X                      ;C - - - - - 0x01955D 0C:954D: 9D 60 03
 	RTS                             ;C - - - - - 0x019560 0C:9550: 60
@@ -2638,12 +2638,12 @@ ofs_0C_9551:
 	BEQ loc_0C_9567                 ;C - - - - - 0x019569 0C:9559: F0 0C
 	CMP #$0A                        ;C - - - - - 0x01956B 0C:955B: C9 0A
 	BEQ loc_0C_9567                 ;C - - - - - 0x01956D 0C:955D: F0 08
-	LDA objArr_0570                 ;C - - - - - 0x01956F 0C:955F: AD 70 05
+	LDA objAnimFrame                ;C - - - - - 0x01956F 0C:955F: AD 70 05
 	CMP #$09                        ;C - - - - - 0x019572 0C:9562: C9 09
 	BEQ loc_0C_9567                 ;C - - - - - 0x019574 0C:9564: F0 01
 	RTS                             ;C - - - - - 0x019576 0C:9566: 60
 loc_0C_9567:
-	LDA objArr_0460,X               ;C - - - - - 0x019577 0C:9567: BD 60 04
+	LDA objFacing,X                 ;C - - - - - 0x019577 0C:9567: BD 60 04
 	AND #$01                        ;C - - - - - 0x01957A 0C:956A: 29 01
 	BEQ loc_0C_9591                 ;C - - - - - 0x01957C 0C:956C: F0 23
 	LDA ram_00BC                    ;C - - - - - 0x01957E 0C:956E: A5 BC
@@ -2659,7 +2659,7 @@ loc_0C_9567:
 	STA objX,X                      ;C - - - - - 0x019591 0C:9581: 9D 60 03
 	LDA ram_002D                    ;C - - - - - 0x019594 0C:9584: A5 2D
 	ADC #$00                        ;C - - - - - 0x019596 0C:9586: 69 00
-	STA objArr_0380,X               ;C - - - - - 0x019598 0C:9588: 9D 80 03
+	STA objXPage,X                  ;C - - - - - 0x019598 0C:9588: 9D 80 03
 	JMP loc_0C_95AE                 ;C - - - - - 0x01959B 0C:958B: 4C AE 95
 loc_0C_958E:
 	JMP loc_0C_95AF                 ;C - - - - - 0x01959E 0C:958E: 4C AF 95
@@ -2677,39 +2677,39 @@ loc_0C_9591:
 	STA objX,X                      ;c - - - - - 0x0195B4 0C:95A4: 9D 60 03
 	LDA ram_002D                    ;c - - - - - 0x0195B7 0C:95A7: A5 2D
 	ADC #$00                        ;c - - - - - 0x0195B9 0C:95A9: 69 00
-	STA objArr_0380,X               ;c - - - - - 0x0195BB 0C:95AB: 9D 80 03
+	STA objXPage,X                  ;c - - - - - 0x0195BB 0C:95AB: 9D 80 03
 loc_0C_95AE:
 	RTS                             ;C - - - - - 0x0195BE 0C:95AE: 60
 loc_0C_95AF:
-	INC objArr_0300,X               ;C - - - - - 0x0195BF 0C:95AF: FE 00 03
-	LDA objArr_0460,X               ;C - - - - - 0x0195C2 0C:95B2: BD 60 04
+	INC objActive,X                 ;C - - - - - 0x0195BF 0C:95AF: FE 00 03
+	LDA objFacing,X                 ;C - - - - - 0x0195C2 0C:95B2: BD 60 04
 	AND #$02                        ;C - - - - - 0x0195C5 0C:95B5: 29 02
 	TAY                             ;C - - - - - 0x0195C7 0C:95B7: A8
 	LDA objX,X                      ;C - - - - - 0x0195C8 0C:95B8: BD 60 03
 	CLC                             ;C - - - - - 0x0195CB 0C:95BB: 18
 	ADC tbl_0F_FD12,Y               ;C - - - - - 0x0195CC 0C:95BC: 79 12 FD
 	PHA                             ;C - - - - - 0x0195CF 0C:95BF: 48
-	LDA objArr_0380,X               ;C - - - - - 0x0195D0 0C:95C0: BD 80 03
+	LDA objXPage,X                  ;C - - - - - 0x0195D0 0C:95C0: BD 80 03
 	ADC tbl_0F_FD13,Y               ;C - - - - - 0x0195D3 0C:95C3: 79 13 FD
-	STA objArr_0380,X               ;C - - - - - 0x0195D6 0C:95C6: 9D 80 03
+	STA objXPage,X                  ;C - - - - - 0x0195D6 0C:95C6: 9D 80 03
 	PLA                             ;C - - - - - 0x0195D9 0C:95C9: 68
 	STA objX,X                      ;C - - - - - 0x0195DA 0C:95CA: 9D 60 03
 	RTS                             ;C - - - - - 0x0195DD 0C:95CD: 60
 ofs_0C_95CE:
 	LDA #$00                        ;C - - J - - 0x0195DE 0C:95CE: A9 00
-	STA objArr_0400,X               ;C - - - - - 0x0195E0 0C:95D0: 9D 00 04
+	STA objVelXLo,X                 ;C - - - - - 0x0195E0 0C:95D0: 9D 00 04
 	LDA #$02                        ;C - - - - - 0x0195E3 0C:95D3: A9 02
-	STA objArr_0410,X               ;C - - - - - 0x0195E5 0C:95D5: 9D 10 04
+	STA objVelXHi,X                 ;C - - - - - 0x0195E5 0C:95D5: 9D 10 04
 	LDA #$01                        ;C - - - - - 0x0195E8 0C:95D8: A9 01
-	STA objArr_0420,X               ;C - - - - - 0x0195EA 0C:95DA: 9D 20 04
+	STA objVelYLo,X                 ;C - - - - - 0x0195EA 0C:95DA: 9D 20 04
 	LDA #$01                        ;C - - - - - 0x0195ED 0C:95DD: A9 01
-	STA objArr_0430,X               ;C - - - - - 0x0195EF 0C:95DF: 9D 30 04
+	STA objVelYHi,X                 ;C - - - - - 0x0195EF 0C:95DF: 9D 30 04
 	LDA objSpriteDown,X             ;C - - - - - 0x0195F2 0C:95E2: BD B0 05
 	TAY                             ;C - - - - - 0x0195F5 0C:95E5: A8
 	LDA tbl_0F_FC68,Y               ;C - - - - - 0x0195F6 0C:95E6: B9 68 FC
 	CMP ptr_00                      ;C - - - - - 0x0195F9 0C:95E9: C5 00
 	BEQ loc_0C_95FE                 ;C - - - - - 0x0195FB 0C:95EB: F0 11
-	JSR sub_0F_F288                 ;C - - - - - 0x0195FD 0C:95ED: 20 88 F2
+	JSR SetAnimX                    ;C - - - - - 0x0195FD 0C:95ED: 20 88 F2
 	LDA tbl_0F_FC75,Y               ;C - - - - - 0x019600 0C:95F0: B9 75 FC
 	STA ptr_00                      ;C - - - - - 0x019603 0C:95F3: 85 00
 	LDA tbl_0F_FC33,Y               ;C - - - - - 0x019605 0C:95F5: B9 33 FC
@@ -2717,15 +2717,15 @@ ofs_0C_95CE:
 	LDA ptr_00                      ;C - - - - - 0x019609 0C:95F9: A5 00
 	STA a:chrBankShadow+3,Y         ;C - - - - - 0x01960B 0C:95FB: 99 EB 00
 loc_0C_95FE:
-	INC objArr_0300,X               ;C - - - - - 0x01960E 0C:95FE: FE 00 03
+	INC objActive,X                 ;C - - - - - 0x01960E 0C:95FE: FE 00 03
 	RTS                             ;C - - - - - 0x019611 0C:9601: 60
 ofs_0C_9602:
-	LDA objArr_0590,X               ;C - - J - - 0x019612 0C:9602: BD 90 05
+	LDA objAnimFlags,X              ;C - - J - - 0x019612 0C:9602: BD 90 05
 	CMP #$10                        ;C - - - - - 0x019615 0C:9605: C9 10
 	BNE loc_0C_960C                 ;C - - - - - 0x019617 0C:9607: D0 03
 	JSR sub_0C_9C55                 ;C - - - - - 0x019619 0C:9609: 20 55 9C
 loc_0C_960C:
-	LDA objArr_0460,X               ;C - - - - - 0x01961C 0C:960C: BD 60 04
+	LDA objFacing,X                 ;C - - - - - 0x01961C 0C:960C: BD 60 04
 	AND #$01                        ;C - - - - - 0x01961F 0C:960F: 29 01
 	BEQ loc_0C_9639                 ;C - - - - - 0x019621 0C:9611: F0 26
 	LDA ram_00BC                    ;C - - - - - 0x019623 0C:9613: A5 BC
@@ -2741,10 +2741,10 @@ loc_0C_960C:
 	STA objX,X                      ;C - - - - - 0x019636 0C:9626: 9D 60 03
 	LDA ram_002D                    ;C - - - - - 0x019639 0C:9629: A5 2D
 	ADC #$00                        ;C - - - - - 0x01963B 0C:962B: 69 00
-	STA objArr_0380,X               ;C - - - - - 0x01963D 0C:962D: 9D 80 03
+	STA objXPage,X                  ;C - - - - - 0x01963D 0C:962D: 9D 80 03
 	JMP loc_0C_965C                 ;C - - - - - 0x019640 0C:9630: 4C 5C 96
 loc_0C_9633:
-	JSR sub_0F_F1A1                 ;C - - - - - 0x019643 0C:9633: 20 A1 F1
+	JSR ApplyVelXSub                ;C - - - - - 0x019643 0C:9633: 20 A1 F1
 	JMP loc_0C_965C                 ;C - - - - - 0x019646 0C:9636: 4C 5C 96
 loc_0C_9639:
 	LDA ram_00BC                    ;C - - - - - 0x019649 0C:9639: A5 BC
@@ -2760,13 +2760,13 @@ loc_0C_9639:
 	STA objX,X                      ;c - - - - - 0x01965C 0C:964C: 9D 60 03
 	LDA ram_002D                    ;c - - - - - 0x01965F 0C:964F: A5 2D
 	ADC #$00                        ;c - - - - - 0x019661 0C:9651: 69 00
-	STA objArr_0380,X               ;c - - - - - 0x019663 0C:9653: 9D 80 03
+	STA objXPage,X                  ;c - - - - - 0x019663 0C:9653: 9D 80 03
 	JMP loc_0C_965C                 ;c - - - - - 0x019666 0C:9656: 4C 5C 96
 loc_0C_9659:
-	JSR sub_0F_F183                 ;C - - - - - 0x019669 0C:9659: 20 83 F1
+	JSR ApplyVelXAdd                ;C - - - - - 0x019669 0C:9659: 20 83 F1
 loc_0C_965C:
-	JSR sub_0F_F1FD                 ;C - - - - - 0x01966C 0C:965C: 20 FD F1
-	LDA objArr_0430,X               ;C - - - - - 0x01966F 0C:965F: BD 30 04
+	JSR ApplyVelY                   ;C - - - - - 0x01966C 0C:965C: 20 FD F1
+	LDA objVelYHi,X                 ;C - - - - - 0x01966F 0C:965F: BD 30 04
 	BPL loc_0C_966C                 ;C - - - - - 0x019672 0C:9662: 10 08
 	LDA objY,X                      ;C - - - - - 0x019674 0C:9664: BD C0 03
 	CMP objArr_0530,X               ;C - - - - - 0x019677 0C:9667: DD 30 05
@@ -2778,21 +2778,21 @@ loc_0C_966D:
 	STA objY,X                      ;C - - - - - 0x019680 0C:9670: 9D C0 03
 	JSR sub_0C_9B1F                 ;C - - - - - 0x019683 0C:9673: 20 1F 9B
 	LDA #$38                        ;C - - - - - 0x019686 0C:9676: A9 38
-	STA objArr_0420,X               ;C - - - - - 0x019688 0C:9678: 9D 20 04
+	STA objVelYLo,X                 ;C - - - - - 0x019688 0C:9678: 9D 20 04
 	LDA #$02                        ;C - - - - - 0x01968B 0C:967B: A9 02
-	STA objArr_0430,X               ;C - - - - - 0x01968D 0C:967D: 9D 30 04
+	STA objVelYHi,X                 ;C - - - - - 0x01968D 0C:967D: 9D 30 04
 	LDA #$80                        ;C - - - - - 0x019690 0C:9680: A9 80
-	STA objArr_0400,X               ;C - - - - - 0x019692 0C:9682: 9D 00 04
+	STA objVelXLo,X                 ;C - - - - - 0x019692 0C:9682: 9D 00 04
 	LDA #$00                        ;C - - - - - 0x019695 0C:9685: A9 00
-	STA objArr_0410,X               ;C - - - - - 0x019697 0C:9687: 9D 10 04
-	INC objArr_0300,X               ;C - - - - - 0x01969A 0C:968A: FE 00 03
+	STA objVelXHi,X                 ;C - - - - - 0x019697 0C:9687: 9D 10 04
+	INC objActive,X                 ;C - - - - - 0x01969A 0C:968A: FE 00 03
 ofs_0C_968D:
 	LDA objArr_04C0,X               ;C - - - - - 0x01969D 0C:968D: BD C0 04
 	CMP #$FE                        ;C - - - - - 0x0196A0 0C:9690: C9 FE
 	BEQ loc_0C_96C5                 ;C - - - - - 0x0196A2 0C:9692: F0 31
 	CMP #$FD                        ;C - - - - - 0x0196A4 0C:9694: C9 FD
 	BEQ loc_0C_96C5                 ;C - - - - - 0x0196A6 0C:9696: F0 2D
-	LDA objArr_0460,X               ;C - - - - - 0x0196A8 0C:9698: BD 60 04
+	LDA objFacing,X                 ;C - - - - - 0x0196A8 0C:9698: BD 60 04
 	AND #$01                        ;C - - - - - 0x0196AB 0C:969B: 29 01
 	BEQ loc_0C_96C8                 ;C - - - - - 0x0196AD 0C:969D: F0 29
 	LDA ram_00BC                    ;C - - - - - 0x0196AF 0C:969F: A5 BC
@@ -2808,10 +2808,10 @@ ofs_0C_968D:
 	STA objX,X                      ;C - - - - - 0x0196C2 0C:96B2: 9D 60 03
 	LDA ram_002D                    ;C - - - - - 0x0196C5 0C:96B5: A5 2D
 	ADC #$00                        ;C - - - - - 0x0196C7 0C:96B7: 69 00
-	STA objArr_0380,X               ;C - - - - - 0x0196C9 0C:96B9: 9D 80 03
+	STA objXPage,X                  ;C - - - - - 0x0196C9 0C:96B9: 9D 80 03
 	JMP loc_0C_96EB                 ;C - - - - - 0x0196CC 0C:96BC: 4C EB 96
 loc_0C_96BF:
-	JSR sub_0F_F1A1                 ;C - - - - - 0x0196CF 0C:96BF: 20 A1 F1
+	JSR ApplyVelXSub                ;C - - - - - 0x0196CF 0C:96BF: 20 A1 F1
 	JMP loc_0C_96EB                 ;C - - - - - 0x0196D2 0C:96C2: 4C EB 96
 loc_0C_96C5:
 	JMP loc_0C_9730                 ;C - - - - - 0x0196D5 0C:96C5: 4C 30 97
@@ -2829,13 +2829,13 @@ loc_0C_96C8:
 	STA objX,X                      ;c - - - - - 0x0196EB 0C:96DB: 9D 60 03
 	LDA ram_002D                    ;c - - - - - 0x0196EE 0C:96DE: A5 2D
 	ADC #$00                        ;c - - - - - 0x0196F0 0C:96E0: 69 00
-	STA objArr_0380,X               ;c - - - - - 0x0196F2 0C:96E2: 9D 80 03
+	STA objXPage,X                  ;c - - - - - 0x0196F2 0C:96E2: 9D 80 03
 	JMP loc_0C_96EB                 ;c - - - - - 0x0196F5 0C:96E5: 4C EB 96
 loc_0C_96E8:
-	JSR sub_0F_F183                 ;C - - - - - 0x0196F8 0C:96E8: 20 83 F1
+	JSR ApplyVelXAdd                ;C - - - - - 0x0196F8 0C:96E8: 20 83 F1
 loc_0C_96EB:
-	JSR sub_0F_F1FD                 ;C - - - - - 0x0196FB 0C:96EB: 20 FD F1
-	LDA objArr_0430,X               ;C - - - - - 0x0196FE 0C:96EE: BD 30 04
+	JSR ApplyVelY                   ;C - - - - - 0x0196FB 0C:96EB: 20 FD F1
+	LDA objVelYHi,X                 ;C - - - - - 0x0196FE 0C:96EE: BD 30 04
 	BPL loc_0C_96FB                 ;C - - - - - 0x019701 0C:96F1: 10 08
 	LDA objY,X                      ;C - - - - - 0x019703 0C:96F3: BD C0 03
 	CMP objArr_0530,X               ;C - - - - - 0x019706 0C:96F6: DD 30 05
@@ -2856,7 +2856,7 @@ loc_0C_96FC:
 	JSR sub_0C_89E3                 ;C - - - - - 0x019726 0C:9716: 20 E3 89
 	LDA #$00                        ;C - - - - - 0x019729 0C:9719: A9 00
 	STA objArr_0440,X               ;C - - - - - 0x01972B 0C:971B: 9D 40 04
-	INC objArr_0300,X               ;C - - - - - 0x01972E 0C:971E: FE 00 03
+	INC objActive,X                 ;C - - - - - 0x01972E 0C:971E: FE 00 03
 	INC ram_0054                    ;C - - - - - 0x019731 0C:9721: E6 54
 	JMP sub_0C_9C7A                 ;C - - - - - 0x019733 0C:9723: 4C 7A 9C
 loc_0C_9726:
@@ -2867,50 +2867,50 @@ loc_0C_9726:
 loc_0C_9730:
 	JMP sub_0C_9BFC                 ;C - - - - - 0x019740 0C:9730: 4C FC 9B
 ofs_0C_9733:
-	LDA objArr_0300,X               ;C - - J - - 0x019743 0C:9733: BD 00 03
+	LDA objActive,X                 ;C - - J - - 0x019743 0C:9733: BD 00 03
 	AND #$0F                        ;C - - - - - 0x019746 0C:9736: 29 0F
 	BNE loc_0C_978A                 ;C - - - - - 0x019748 0C:9738: D0 50
 	STA objArr_0500,X               ;C - - - - - 0x01974A 0C:973A: 9D 00 05
-	STA objArr_0410,X               ;C - - - - - 0x01974D 0C:973D: 9D 10 04
+	STA objVelXHi,X                 ;C - - - - - 0x01974D 0C:973D: 9D 10 04
 	LDA #$99                        ;C - - - - - 0x019750 0C:9740: A9 99
-	STA objArr_0400,X               ;C - - - - - 0x019752 0C:9742: 9D 00 04
+	STA objVelXLo,X                 ;C - - - - - 0x019752 0C:9742: 9D 00 04
 	LDA ram_00A7                    ;C - - - - - 0x019755 0C:9745: A5 A7
 	CMP #$07                        ;C - - - - - 0x019757 0C:9747: C9 07
 	BNE loc_0C_975C                 ;C - - - - - 0x019759 0C:9749: D0 11
 	LDA #$CC                        ;C - - - - - 0x01975B 0C:974B: A9 CC
-	STA objArr_0400,X               ;C - - - - - 0x01975D 0C:974D: 9D 00 04
+	STA objVelXLo,X                 ;C - - - - - 0x01975D 0C:974D: 9D 00 04
 	LDA #$98                        ;C - - - - - 0x019760 0C:9750: A9 98
-	STA objArr_0420,X               ;C - - - - - 0x019762 0C:9752: 9D 20 04
+	STA objVelYLo,X                 ;C - - - - - 0x019762 0C:9752: 9D 20 04
 	LDA #$04                        ;C - - - - - 0x019765 0C:9755: A9 04
-	STA objArr_0430,X               ;C - - - - - 0x019767 0C:9757: 9D 30 04
+	STA objVelYHi,X                 ;C - - - - - 0x019767 0C:9757: 9D 30 04
 	BNE loc_0C_976A                 ;C - - - - - 0x01976A 0C:975A: D0 0E
 loc_0C_975C:
 	LDY playerLevel                 ;C - - - - - 0x01976C 0C:975C: A4 6B
 	LDA tbl_0C_9A33,Y               ;C - - - - - 0x01976E 0C:975E: B9 33 9A
-	STA objArr_0420,X               ;C - - - - - 0x019771 0C:9761: 9D 20 04
+	STA objVelYLo,X                 ;C - - - - - 0x019771 0C:9761: 9D 20 04
 	LDA tbl_0C_9A39,Y               ;C - - - - - 0x019774 0C:9764: B9 39 9A
-	STA objArr_0430,X               ;C - - - - - 0x019777 0C:9767: 9D 30 04
+	STA objVelYHi,X                 ;C - - - - - 0x019777 0C:9767: 9D 30 04
 loc_0C_976A:
 	JSR sub_0C_981B                 ;C - - - - - 0x01977A 0C:976A: 20 1B 98
-	INC objArr_0300,X               ;C - - - - - 0x01977D 0C:976D: FE 00 03
+	INC objActive,X                 ;C - - - - - 0x01977D 0C:976D: FE 00 03
 	JSR sub_0C_9C55                 ;C - - - - - 0x019780 0C:9770: 20 55 9C
 	LDA #$10                        ;C - - - - - 0x019783 0C:9773: A9 10
 	STA objArr_0510,X               ;C - - - - - 0x019785 0C:9775: 9D 10 05
-	JSR sub_0F_F314                 ;C - - - - - 0x019788 0C:9778: 20 14 F3
+	JSR FaceToPlayer                ;C - - - - - 0x019788 0C:9778: 20 14 F3
 	LDA ram_0031                    ;C - - - - - 0x01978B 0C:977B: A5 31
-	CMP objArr_0460,X               ;C - - - - - 0x01978D 0C:977D: DD 60 04
+	CMP objFacing,X                 ;C - - - - - 0x01978D 0C:977D: DD 60 04
 	BEQ loc_0C_9787                 ;C - - - - - 0x019790 0C:9780: F0 05
-	LDA objArr_0460,X               ;C - - - - - 0x019792 0C:9782: BD 60 04
+	LDA objFacing,X                 ;C - - - - - 0x019792 0C:9782: BD 60 04
 	EOR #$03                        ;C - - - - - 0x019795 0C:9785: 49 03
 loc_0C_9787:
-	STA objArr_0460,X               ;C - - - - - 0x019797 0C:9787: 9D 60 04
+	STA objFacing,X                 ;C - - - - - 0x019797 0C:9787: 9D 60 04
 loc_0C_978A:
 	LDA objArr_0500,X               ;C - - - - - 0x01979A 0C:978A: BD 00 05
 	CMP #$02                        ;C - - - - - 0x01979D 0C:978D: C9 02
 	BNE loc_0C_9794                 ;C - - - - - 0x01979F 0C:978F: D0 03
 	JMP loc_0C_9818                 ;C - - - - - 0x0197A1 0C:9791: 4C 18 98
 loc_0C_9794:
-	LDA objArr_0460,X               ;C - - - - - 0x0197A4 0C:9794: BD 60 04
+	LDA objFacing,X                 ;C - - - - - 0x0197A4 0C:9794: BD 60 04
 	AND #$01                        ;C - - - - - 0x0197A7 0C:9797: 29 01
 	BEQ loc_0C_97C1                 ;C - - - - - 0x0197A9 0C:9799: F0 26
 	LDA ram_00BC                    ;C - - - - - 0x0197AB 0C:979B: A5 BC
@@ -2926,10 +2926,10 @@ loc_0C_9794:
 	STA objX,X                      ;C - - - - - 0x0197BE 0C:97AE: 9D 60 03
 	LDA ram_002D                    ;C - - - - - 0x0197C1 0C:97B1: A5 2D
 	ADC #$00                        ;C - - - - - 0x0197C3 0C:97B3: 69 00
-	STA objArr_0380,X               ;C - - - - - 0x0197C5 0C:97B5: 9D 80 03
+	STA objXPage,X                  ;C - - - - - 0x0197C5 0C:97B5: 9D 80 03
 	JMP loc_0C_97E4                 ;C - - - - - 0x0197C8 0C:97B8: 4C E4 97
 loc_0C_97BB:
-	JSR sub_0F_F183                 ;C - - - - - 0x0197CB 0C:97BB: 20 83 F1
+	JSR ApplyVelXAdd                ;C - - - - - 0x0197CB 0C:97BB: 20 83 F1
 	JMP loc_0C_97E4                 ;C - - - - - 0x0197CE 0C:97BE: 4C E4 97
 loc_0C_97C1:
 	LDA ram_00BC                    ;C - - - - - 0x0197D1 0C:97C1: A5 BC
@@ -2945,13 +2945,13 @@ loc_0C_97C1:
 	STA objX,X                      ;C - - - - - 0x0197E4 0C:97D4: 9D 60 03
 	LDA ram_002D                    ;C - - - - - 0x0197E7 0C:97D7: A5 2D
 	ADC #$00                        ;C - - - - - 0x0197E9 0C:97D9: 69 00
-	STA objArr_0380,X               ;C - - - - - 0x0197EB 0C:97DB: 9D 80 03
+	STA objXPage,X                  ;C - - - - - 0x0197EB 0C:97DB: 9D 80 03
 	JMP loc_0C_97E4                 ;C - - - - - 0x0197EE 0C:97DE: 4C E4 97
 loc_0C_97E1:
-	JSR sub_0F_F1A1                 ;C - - - - - 0x0197F1 0C:97E1: 20 A1 F1
+	JSR ApplyVelXSub                ;C - - - - - 0x0197F1 0C:97E1: 20 A1 F1
 loc_0C_97E4:
-	JSR sub_0F_F1FD                 ;C - - - - - 0x0197F4 0C:97E4: 20 FD F1
-	LDA objArr_0430,X               ;C - - - - - 0x0197F7 0C:97E7: BD 30 04
+	JSR ApplyVelY                   ;C - - - - - 0x0197F4 0C:97E4: 20 FD F1
+	LDA objVelYHi,X                 ;C - - - - - 0x0197F7 0C:97E7: BD 30 04
 	BPL loc_0C_9817                 ;C - - - - - 0x0197FA 0C:97EA: 10 2B
 	LDA objY,X                      ;C - - - - - 0x0197FC 0C:97EC: BD C0 03
 	CMP objArr_0530,X               ;C - - - - - 0x0197FF 0C:97EF: DD 30 05
@@ -2962,11 +2962,11 @@ loc_0C_97E4:
 	LDA #$20                        ;C - - - - - 0x01980D 0C:97FD: A9 20
 	JSR QueueSound                  ;C - - - - - 0x01980F 0C:97FF: 20 4C F3
 	LDA #$38                        ;C - - - - - 0x019812 0C:9802: A9 38
-	STA objArr_0420,X               ;C - - - - - 0x019814 0C:9804: 9D 20 04
+	STA objVelYLo,X                 ;C - - - - - 0x019814 0C:9804: 9D 20 04
 	LDA #$02                        ;C - - - - - 0x019817 0C:9807: A9 02
-	STA objArr_0430,X               ;C - - - - - 0x019819 0C:9809: 9D 30 04
+	STA objVelYHi,X                 ;C - - - - - 0x019819 0C:9809: 9D 30 04
 	LDA #$80                        ;C - - - - - 0x01981C 0C:980C: A9 80
-	STA objArr_0400,X               ;C - - - - - 0x01981E 0C:980E: 9D 00 04
+	STA objVelXLo,X                 ;C - - - - - 0x01981E 0C:980E: 9D 00 04
 	INC objArr_0500,X               ;C - - - - - 0x019821 0C:9811: FE 00 05
 	JSR sub_0C_9C7A                 ;C - - - - - 0x019824 0C:9814: 20 7A 9C
 loc_0C_9817:
@@ -2974,49 +2974,49 @@ loc_0C_9817:
 loc_0C_9818:
 	JMP sub_0C_9BFC                 ;C - - - - - 0x019828 0C:9818: 4C FC 9B
 sub_0C_981B:
-	JSR sub_0F_F314                 ;C - - - - - 0x01982B 0C:981B: 20 14 F3
+	JSR FaceToPlayer                ;C - - - - - 0x01982B 0C:981B: 20 14 F3
 	LDA ram_0031                    ;C - - - - - 0x01982E 0C:981E: A5 31
-	CMP objArr_0460,X               ;C - - - - - 0x019830 0C:9820: DD 60 04
+	CMP objFacing,X                 ;C - - - - - 0x019830 0C:9820: DD 60 04
 	BEQ loc_0C_982E                 ;C - - - - - 0x019833 0C:9823: F0 09
-	LDA objArr_0460,X               ;C - - - - - 0x019835 0C:9825: BD 60 04
+	LDA objFacing,X                 ;C - - - - - 0x019835 0C:9825: BD 60 04
 	EOR #$03                        ;C - - - - - 0x019838 0C:9828: 49 03
-	STA objArr_0460,X               ;C - - - - - 0x01983A 0C:982A: 9D 60 04
+	STA objFacing,X                 ;C - - - - - 0x01983A 0C:982A: 9D 60 04
 	RTS                             ;C - - - - - 0x01983D 0C:982D: 60
 loc_0C_982E:
-	LDA objArr_0460,X               ;C - - - - - 0x01983E 0C:982E: BD 60 04
+	LDA objFacing,X                 ;C - - - - - 0x01983E 0C:982E: BD 60 04
 	AND #$01                        ;C - - - - - 0x019841 0C:9831: 29 01
 	BEQ loc_0C_9838                 ;C - - - - - 0x019843 0C:9833: F0 03
 	JMP sub_0F_F099                 ;C - - - - - 0x019845 0C:9835: 4C 99 F0
 loc_0C_9838:
-	JMP sub_0F_F090                 ;C - - - - - 0x019848 0C:9838: 4C 90 F0
+	JMP SetObjFlag40                ;C - - - - - 0x019848 0C:9838: 4C 90 F0
 ofs_0C_983B:
-	LDA objArr_0300,X               ;C - - J - - 0x01984B 0C:983B: BD 00 03
+	LDA objActive,X                 ;C - - J - - 0x01984B 0C:983B: BD 00 03
 	AND #$0F                        ;C - - - - - 0x01984E 0C:983E: 29 0F
 	BNE loc_0C_9874                 ;C - - - - - 0x019850 0C:9840: D0 32
 	STA objArr_0500,X               ;C - - - - - 0x019852 0C:9842: 9D 00 05
-	STA objArr_0410,X               ;C - - - - - 0x019855 0C:9845: 9D 10 04
+	STA objVelXHi,X                 ;C - - - - - 0x019855 0C:9845: 9D 10 04
 	LDA #$99                        ;C - - - - - 0x019858 0C:9848: A9 99
-	STA objArr_0400,X               ;C - - - - - 0x01985A 0C:984A: 9D 00 04
+	STA objVelXLo,X                 ;C - - - - - 0x01985A 0C:984A: 9D 00 04
 	LDA #$10                        ;C - - - - - 0x01985D 0C:984D: A9 10
 	STA objArr_0510,X               ;C - - - - - 0x01985F 0C:984F: 9D 10 05
-	LDA objArr_0320,X               ;C - - - - - 0x019862 0C:9852: BD 20 03
+	LDA objKind,X                   ;C - - - - - 0x019862 0C:9852: BD 20 03
 	CMP #$03                        ;C - - - - - 0x019865 0C:9855: C9 03
 	BNE loc_0C_985C                 ;C - - - - - 0x019867 0C:9857: D0 03
 	JMP loc_0C_986E                 ;C - - - - - 0x019869 0C:9859: 4C 6E 98
 loc_0C_985C:
-	JSR sub_0F_F314                 ;C - - - - - 0x01986C 0C:985C: 20 14 F3
+	JSR FaceToPlayer                ;C - - - - - 0x01986C 0C:985C: 20 14 F3
 	LDA ram_0031                    ;C - - - - - 0x01986F 0C:985F: A5 31
-	CMP objArr_0460,X               ;C - - - - - 0x019871 0C:9861: DD 60 04
+	CMP objFacing,X                 ;C - - - - - 0x019871 0C:9861: DD 60 04
 	BNE loc_0C_986B                 ;C - - - - - 0x019874 0C:9864: D0 05
-	LDA objArr_0460,X               ;C - - - - - 0x019876 0C:9866: BD 60 04
+	LDA objFacing,X                 ;C - - - - - 0x019876 0C:9866: BD 60 04
 	EOR #$03                        ;C - - - - - 0x019879 0C:9869: 49 03
 loc_0C_986B:
-	STA objArr_0460,X               ;C - - - - - 0x01987B 0C:986B: 9D 60 04
+	STA objFacing,X                 ;C - - - - - 0x01987B 0C:986B: 9D 60 04
 loc_0C_986E:
-	INC objArr_0300,X               ;C - - - - - 0x01987E 0C:986E: FE 00 03
+	INC objActive,X                 ;C - - - - - 0x01987E 0C:986E: FE 00 03
 	JSR sub_0C_9C55                 ;C - - - - - 0x019881 0C:9871: 20 55 9C
 loc_0C_9874:
-	LDA objArr_0320,X               ;C - - - - - 0x019884 0C:9874: BD 20 03
+	LDA objKind,X                   ;C - - - - - 0x019884 0C:9874: BD 20 03
 	CMP #$03                        ;C - - - - - 0x019887 0C:9877: C9 03
 	BNE loc_0C_9884                 ;C - - - - - 0x019889 0C:9879: D0 09
 	LDA objArr_0500,X               ;C - - - - - 0x01988B 0C:987B: BD 00 05
@@ -3028,7 +3028,7 @@ loc_0C_9884:
 	CMP #$02                        ;C - - - - - 0x019897 0C:9887: C9 02
 	BEQ loc_0C_98B8                 ;C - - - - - 0x019899 0C:9889: F0 2D
 loc_0C_988B:
-	LDA objArr_0460,X               ;C - - - - - 0x01989B 0C:988B: BD 60 04
+	LDA objFacing,X                 ;C - - - - - 0x01989B 0C:988B: BD 60 04
 	AND #$01                        ;C - - - - - 0x01989E 0C:988E: 29 01
 	BEQ loc_0C_98BB                 ;C - - - - - 0x0198A0 0C:9890: F0 29
 	LDA ram_00BC                    ;C - - - - - 0x0198A2 0C:9892: A5 BC
@@ -3044,10 +3044,10 @@ loc_0C_988B:
 	STA objX,X                      ;C - - - - - 0x0198B5 0C:98A5: 9D 60 03
 	LDA ram_002D                    ;C - - - - - 0x0198B8 0C:98A8: A5 2D
 	ADC #$00                        ;C - - - - - 0x0198BA 0C:98AA: 69 00
-	STA objArr_0380,X               ;C - - - - - 0x0198BC 0C:98AC: 9D 80 03
+	STA objXPage,X                  ;C - - - - - 0x0198BC 0C:98AC: 9D 80 03
 	JMP loc_0C_98DE                 ;C - - - - - 0x0198BF 0C:98AF: 4C DE 98
 loc_0C_98B2:
-	JSR sub_0F_F183                 ;C - - - - - 0x0198C2 0C:98B2: 20 83 F1
+	JSR ApplyVelXAdd                ;C - - - - - 0x0198C2 0C:98B2: 20 83 F1
 	JMP loc_0C_98DE                 ;C - - - - - 0x0198C5 0C:98B5: 4C DE 98
 loc_0C_98B8:
 	JMP loc_0C_9912                 ;C - - - - - 0x0198C8 0C:98B8: 4C 12 99
@@ -3065,13 +3065,13 @@ loc_0C_98BB:
 	STA objX,X                      ;C - - - - - 0x0198DE 0C:98CE: 9D 60 03
 	LDA ram_002D                    ;C - - - - - 0x0198E1 0C:98D1: A5 2D
 	ADC #$00                        ;C - - - - - 0x0198E3 0C:98D3: 69 00
-	STA objArr_0380,X               ;C - - - - - 0x0198E5 0C:98D5: 9D 80 03
+	STA objXPage,X                  ;C - - - - - 0x0198E5 0C:98D5: 9D 80 03
 	JMP loc_0C_98DE                 ;C - - - - - 0x0198E8 0C:98D8: 4C DE 98
 loc_0C_98DB:
-	JSR sub_0F_F1A1                 ;C - - - - - 0x0198EB 0C:98DB: 20 A1 F1
+	JSR ApplyVelXSub                ;C - - - - - 0x0198EB 0C:98DB: 20 A1 F1
 loc_0C_98DE:
-	JSR sub_0F_F1FD                 ;C - - - - - 0x0198EE 0C:98DE: 20 FD F1
-	LDA objArr_0430,X               ;C - - - - - 0x0198F1 0C:98E1: BD 30 04
+	JSR ApplyVelY                   ;C - - - - - 0x0198EE 0C:98DE: 20 FD F1
+	LDA objVelYHi,X                 ;C - - - - - 0x0198F1 0C:98E1: BD 30 04
 	BPL loc_0C_9911                 ;C - - - - - 0x0198F4 0C:98E4: 10 2B
 	LDA objY,X                      ;C - - - - - 0x0198F6 0C:98E6: BD C0 03
 	CMP objArr_0530,X               ;C - - - - - 0x0198F9 0C:98E9: DD 30 05
@@ -3082,17 +3082,17 @@ loc_0C_98DE:
 	LDA #$20                        ;C - - - - - 0x019907 0C:98F7: A9 20
 	JSR QueueSound                  ;C - - - - - 0x019909 0C:98F9: 20 4C F3
 	LDA #$38                        ;C - - - - - 0x01990C 0C:98FC: A9 38
-	STA objArr_0420,X               ;C - - - - - 0x01990E 0C:98FE: 9D 20 04
+	STA objVelYLo,X                 ;C - - - - - 0x01990E 0C:98FE: 9D 20 04
 	LDA #$02                        ;C - - - - - 0x019911 0C:9901: A9 02
-	STA objArr_0430,X               ;C - - - - - 0x019913 0C:9903: 9D 30 04
+	STA objVelYHi,X                 ;C - - - - - 0x019913 0C:9903: 9D 30 04
 	LDA #$80                        ;C - - - - - 0x019916 0C:9906: A9 80
-	STA objArr_0400,X               ;C - - - - - 0x019918 0C:9908: 9D 00 04
+	STA objVelXLo,X                 ;C - - - - - 0x019918 0C:9908: 9D 00 04
 	INC objArr_0500,X               ;C - - - - - 0x01991B 0C:990B: FE 00 05
 	JMP sub_0C_9C7A                 ;C - - - - - 0x01991E 0C:990E: 4C 7A 9C
 loc_0C_9911:
 	RTS                             ;C - - - - - 0x019921 0C:9911: 60
 loc_0C_9912:
-	LDA objArr_0320,X               ;C - - - - - 0x019922 0C:9912: BD 20 03
+	LDA objKind,X                   ;C - - - - - 0x019922 0C:9912: BD 20 03
 	CMP #$03                        ;C - - - - - 0x019925 0C:9915: C9 03
 	BEQ loc_0C_9923                 ;C - - - - - 0x019927 0C:9917: F0 0A
 	BNE loc_0C_9920                 ;C - - - - - 0x019929 0C:9919: D0 05
@@ -3102,7 +3102,7 @@ loc_0C_991B:
 loc_0C_9920:
 	JMP sub_0C_9BFC                 ;C - - - - - 0x019930 0C:9920: 4C FC 9B
 loc_0C_9923:
-	LDA objArr_0300,X               ;C - - - - - 0x019933 0C:9923: BD 00 03
+	LDA objActive,X                 ;C - - - - - 0x019933 0C:9923: BD 00 03
 	AND #$02                        ;C - - - - - 0x019936 0C:9926: 29 02
 	BNE loc_0C_994A                 ;C - - - - - 0x019938 0C:9928: D0 20
 	LDA objArr_04C0,X               ;C - - - - - 0x01993A 0C:992A: BD C0 04
@@ -3117,7 +3117,7 @@ loc_0C_9923:
 	STA ram_00A7                    ;C - - - - - 0x01994E 0C:993E: 85 A7
 	LDA objLife,X                   ;C - - - - - 0x019950 0C:9940: BD 90 04
 	BPL loc_0C_991B                 ;C - - - - - 0x019953 0C:9943: 10 D6
-	INC objArr_0300,X               ;C - - - - - 0x019955 0C:9945: FE 00 03
+	INC objActive,X                 ;C - - - - - 0x019955 0C:9945: FE 00 03
 	INC ram_0054                    ;C - - - - - 0x019958 0C:9948: E6 54
 loc_0C_994A:
 	DEC objArr_0510,X               ;C - - - - - 0x01995A 0C:994A: DE 10 05
@@ -3132,16 +3132,16 @@ loc_0C_995B:
 loc_0C_995E:
 	RTS                             ;C - - - - - 0x01996E 0C:995E: 60
 loc_0C_995F:
-	JMP sub_0F_F2BE                 ;C - - - - - 0x01996F 0C:995F: 4C BE F2
+	JMP ClearObject                 ;C - - - - - 0x01996F 0C:995F: 4C BE F2
 ofs_0C_9962:
-	LDA objArr_0300,X               ;C - - J - - 0x019972 0C:9962: BD 00 03
+	LDA objActive,X                 ;C - - J - - 0x019972 0C:9962: BD 00 03
 	AND #$0F                        ;C - - - - - 0x019975 0C:9965: 29 0F
 	BNE loc_0C_99A2                 ;C - - - - - 0x019977 0C:9967: D0 39
 	STA objArr_0500,X               ;C - - - - - 0x019979 0C:9969: 9D 00 05
-	STA objArr_0410,X               ;C - - - - - 0x01997C 0C:996C: 9D 10 04
+	STA objVelXHi,X                 ;C - - - - - 0x01997C 0C:996C: 9D 10 04
 	LDA #$99                        ;C - - - - - 0x01997F 0C:996F: A9 99
-	STA objArr_0400,X               ;C - - - - - 0x019981 0C:9971: 9D 00 04
-	LDA objArr_0580,X               ;C - - - - - 0x019984 0C:9974: BD 80 05
+	STA objVelXLo,X                 ;C - - - - - 0x019981 0C:9971: 9D 00 04
+	LDA objAnim,X                   ;C - - - - - 0x019984 0C:9974: BD 80 05
 	CMP #$BB                        ;C - - - - - 0x019987 0C:9977: C9 BB
 	BEQ loc_0C_9986                 ;C - - - - - 0x019989 0C:9979: F0 0B
 	CMP #$C7                        ;C - - - - - 0x01998B 0C:997B: C9 C7
@@ -3152,11 +3152,11 @@ ofs_0C_9962:
 loc_0C_9986:
 	LDY playerLevel                 ;C - - - - - 0x019996 0C:9986: A4 6B
 	LDA tbl_0C_9A33,Y               ;C - - - - - 0x019998 0C:9988: B9 33 9A
-	STA objArr_0420,X               ;C - - - - - 0x01999B 0C:998B: 9D 20 04
+	STA objVelYLo,X                 ;C - - - - - 0x01999B 0C:998B: 9D 20 04
 	LDA tbl_0C_9A39,Y               ;C - - - - - 0x01999E 0C:998E: B9 39 9A
-	STA objArr_0430,X               ;C - - - - - 0x0199A1 0C:9991: 9D 30 04
+	STA objVelYHi,X                 ;C - - - - - 0x0199A1 0C:9991: 9D 30 04
 	JSR sub_0C_981B                 ;C - - - - - 0x0199A4 0C:9994: 20 1B 98
-	INC objArr_0300,X               ;C - - - - - 0x0199A7 0C:9997: FE 00 03
+	INC objActive,X                 ;C - - - - - 0x0199A7 0C:9997: FE 00 03
 	JSR sub_0C_9C55                 ;C - - - - - 0x0199AA 0C:999A: 20 55 9C
 	LDA #$10                        ;C - - - - - 0x0199AD 0C:999D: A9 10
 	STA objArr_0510,X               ;C - - - - - 0x0199AF 0C:999F: 9D 10 05
@@ -3166,7 +3166,7 @@ loc_0C_99A2:
 	BNE loc_0C_99AC                 ;C - - - - - 0x0199B7 0C:99A7: D0 03
 	JMP loc_0C_9A2D                 ;C - - - - - 0x0199B9 0C:99A9: 4C 2D 9A
 loc_0C_99AC:
-	LDA objArr_0460,X               ;C - - - - - 0x0199BC 0C:99AC: BD 60 04
+	LDA objFacing,X                 ;C - - - - - 0x0199BC 0C:99AC: BD 60 04
 	AND #$01                        ;C - - - - - 0x0199BF 0C:99AF: 29 01
 	BEQ loc_0C_99D9                 ;C - - - - - 0x0199C1 0C:99B1: F0 26
 	LDA ram_00BC                    ;C - - - - - 0x0199C3 0C:99B3: A5 BC
@@ -3182,10 +3182,10 @@ loc_0C_99AC:
 	STA objX,X                      ;C - - - - - 0x0199D6 0C:99C6: 9D 60 03
 	LDA ram_002D                    ;C - - - - - 0x0199D9 0C:99C9: A5 2D
 	ADC #$00                        ;C - - - - - 0x0199DB 0C:99CB: 69 00
-	STA objArr_0380,X               ;C - - - - - 0x0199DD 0C:99CD: 9D 80 03
+	STA objXPage,X                  ;C - - - - - 0x0199DD 0C:99CD: 9D 80 03
 	JMP loc_0C_99FC                 ;C - - - - - 0x0199E0 0C:99D0: 4C FC 99
 loc_0C_99D3:
-	JSR sub_0F_F183                 ;C - - - - - 0x0199E3 0C:99D3: 20 83 F1
+	JSR ApplyVelXAdd                ;C - - - - - 0x0199E3 0C:99D3: 20 83 F1
 	JMP loc_0C_99FC                 ;C - - - - - 0x0199E6 0C:99D6: 4C FC 99
 loc_0C_99D9:
 	LDA ram_00BC                    ;C - - - - - 0x0199E9 0C:99D9: A5 BC
@@ -3201,13 +3201,13 @@ loc_0C_99D9:
 	STA objX,X                      ;C - - - - - 0x0199FC 0C:99EC: 9D 60 03
 	LDA ram_002D                    ;C - - - - - 0x0199FF 0C:99EF: A5 2D
 	ADC #$00                        ;C - - - - - 0x019A01 0C:99F1: 69 00
-	STA objArr_0380,X               ;C - - - - - 0x019A03 0C:99F3: 9D 80 03
+	STA objXPage,X                  ;C - - - - - 0x019A03 0C:99F3: 9D 80 03
 	JMP loc_0C_99FC                 ;C - - - - - 0x019A06 0C:99F6: 4C FC 99
 loc_0C_99F9:
-	JSR sub_0F_F1A1                 ;C - - - - - 0x019A09 0C:99F9: 20 A1 F1
+	JSR ApplyVelXSub                ;C - - - - - 0x019A09 0C:99F9: 20 A1 F1
 loc_0C_99FC:
-	JSR sub_0F_F1FD                 ;C - - - - - 0x019A0C 0C:99FC: 20 FD F1
-	LDA objArr_0430,X               ;C - - - - - 0x019A0F 0C:99FF: BD 30 04
+	JSR ApplyVelY                   ;C - - - - - 0x019A0C 0C:99FC: 20 FD F1
+	LDA objVelYHi,X                 ;C - - - - - 0x019A0F 0C:99FF: BD 30 04
 	BPL loc_0C_9A2C                 ;C - - - - - 0x019A12 0C:9A02: 10 28
 	LDA objY,X                      ;C - - - - - 0x019A14 0C:9A04: BD C0 03
 	CMP objArr_0530,X               ;C - - - - - 0x019A17 0C:9A07: DD 30 05
@@ -3218,11 +3218,11 @@ loc_0C_99FC:
 	LDA #$20                        ;C - - - - - 0x019A25 0C:9A15: A9 20
 	JSR QueueSound                  ;C - - - - - 0x019A27 0C:9A17: 20 4C F3
 	LDA #$38                        ;C - - - - - 0x019A2A 0C:9A1A: A9 38
-	STA objArr_0420,X               ;C - - - - - 0x019A2C 0C:9A1C: 9D 20 04
+	STA objVelYLo,X                 ;C - - - - - 0x019A2C 0C:9A1C: 9D 20 04
 	LDA #$02                        ;C - - - - - 0x019A2F 0C:9A1F: A9 02
-	STA objArr_0430,X               ;C - - - - - 0x019A31 0C:9A21: 9D 30 04
+	STA objVelYHi,X                 ;C - - - - - 0x019A31 0C:9A21: 9D 30 04
 	LDA #$80                        ;C - - - - - 0x019A34 0C:9A24: A9 80
-	STA objArr_0400,X               ;C - - - - - 0x019A36 0C:9A26: 9D 00 04
+	STA objVelXLo,X                 ;C - - - - - 0x019A36 0C:9A26: 9D 00 04
 	INC objArr_0500,X               ;C - - - - - 0x019A39 0C:9A29: FE 00 05
 loc_0C_9A2C:
 	RTS                             ;C - - - - - 0x019A3C 0C:9A2C: 60
@@ -3234,14 +3234,14 @@ tbl_0C_9A33:
 tbl_0C_9A39:
 	.byte $03,$03,$04,$04,$05,$05   ;- D 0 - - - 0x019A49 0C:9A39:
 ofs_0C_9A3F:
-	LDA objArr_0300,X               ;C - - J - - 0x019A4F 0C:9A3F: BD 00 03
+	LDA objActive,X                 ;C - - J - - 0x019A4F 0C:9A3F: BD 00 03
 	AND #$0F                        ;C - - - - - 0x019A52 0C:9A42: 29 0F
 	BNE loc_0C_9A7E                 ;C - - - - - 0x019A54 0C:9A44: D0 38
 	STA objArr_0500,X               ;C - - - - - 0x019A56 0C:9A46: 9D 00 05
-	STA objArr_0410,X               ;C - - - - - 0x019A59 0C:9A49: 9D 10 04
+	STA objVelXHi,X                 ;C - - - - - 0x019A59 0C:9A49: 9D 10 04
 	LDA #$99                        ;C - - - - - 0x019A5C 0C:9A4C: A9 99
-	STA objArr_0400,X               ;C - - - - - 0x019A5E 0C:9A4E: 9D 00 04
-	LDA objArr_0580,X               ;C - - - - - 0x019A61 0C:9A51: BD 80 05
+	STA objVelXLo,X                 ;C - - - - - 0x019A5E 0C:9A4E: 9D 00 04
+	LDA objAnim,X                   ;C - - - - - 0x019A61 0C:9A51: BD 80 05
 	CMP #$BB                        ;C - - - - - 0x019A64 0C:9A54: C9 BB
 	BEQ loc_0C_9A5F                 ;C - - - - - 0x019A66 0C:9A56: F0 07
 	CMP #$C7                        ;C - - - - - 0x019A68 0C:9A58: C9 C7
@@ -3249,15 +3249,15 @@ ofs_0C_9A3F:
 	JSR sub_0C_89E3                 ;C - - - - - 0x019A6C 0C:9A5C: 20 E3 89
 loc_0C_9A5F:
 	LDA #$9E                        ;C - - - - - 0x019A6F 0C:9A5F: A9 9E
-	STA objArr_0420,X               ;C - - - - - 0x019A71 0C:9A61: 9D 20 04
+	STA objVelYLo,X                 ;C - - - - - 0x019A71 0C:9A61: 9D 20 04
 	LDA #$03                        ;C - - - - - 0x019A74 0C:9A64: A9 03
-	STA objArr_0430,X               ;C - - - - - 0x019A76 0C:9A66: 9D 30 04
-	LDA objArr_0320,X               ;C - - - - - 0x019A79 0C:9A69: BD 20 03
+	STA objVelYHi,X                 ;C - - - - - 0x019A76 0C:9A66: 9D 30 04
+	LDA objKind,X                   ;C - - - - - 0x019A79 0C:9A69: BD 20 03
 	CMP #$16                        ;C - - - - - 0x019A7C 0C:9A6C: C9 16
 	BEQ loc_0C_9A73                 ;C - - - - - 0x019A7E 0C:9A6E: F0 03
 	JSR sub_0C_981B                 ;C - - - - - 0x019A80 0C:9A70: 20 1B 98
 loc_0C_9A73:
-	INC objArr_0300,X               ;C - - - - - 0x019A83 0C:9A73: FE 00 03
+	INC objActive,X                 ;C - - - - - 0x019A83 0C:9A73: FE 00 03
 	JSR sub_0C_9C55                 ;C - - - - - 0x019A86 0C:9A76: 20 55 9C
 	LDA #$10                        ;C - - - - - 0x019A89 0C:9A79: A9 10
 	STA objArr_0510,X               ;C - - - - - 0x019A8B 0C:9A7B: 9D 10 05
@@ -3267,7 +3267,7 @@ loc_0C_9A7E:
 	BNE loc_0C_9A88                 ;C - - - - - 0x019A93 0C:9A83: D0 03
 	JMP loc_0C_9B04                 ;C - - - - - 0x019A95 0C:9A85: 4C 04 9B
 loc_0C_9A88:
-	LDA objArr_0460,X               ;C - - - - - 0x019A98 0C:9A88: BD 60 04
+	LDA objFacing,X                 ;C - - - - - 0x019A98 0C:9A88: BD 60 04
 	AND #$01                        ;C - - - - - 0x019A9B 0C:9A8B: 29 01
 	BEQ loc_0C_9AB5                 ;C - - - - - 0x019A9D 0C:9A8D: F0 26
 	LDA ram_00BC                    ;C - - - - - 0x019A9F 0C:9A8F: A5 BC
@@ -3283,10 +3283,10 @@ loc_0C_9A88:
 	STA objX,X                      ;c - - - - - 0x019AB2 0C:9AA2: 9D 60 03
 	LDA ram_002D                    ;c - - - - - 0x019AB5 0C:9AA5: A5 2D
 	ADC #$00                        ;c - - - - - 0x019AB7 0C:9AA7: 69 00
-	STA objArr_0380,X               ;c - - - - - 0x019AB9 0C:9AA9: 9D 80 03
+	STA objXPage,X                  ;c - - - - - 0x019AB9 0C:9AA9: 9D 80 03
 	JMP loc_0C_9AD8                 ;c - - - - - 0x019ABC 0C:9AAC: 4C D8 9A
 loc_0C_9AAF:
-	JSR sub_0F_F183                 ;C - - - - - 0x019ABF 0C:9AAF: 20 83 F1
+	JSR ApplyVelXAdd                ;C - - - - - 0x019ABF 0C:9AAF: 20 83 F1
 	JMP loc_0C_9AD8                 ;C - - - - - 0x019AC2 0C:9AB2: 4C D8 9A
 loc_0C_9AB5:
 	LDA ram_00BC                    ;C - - - - - 0x019AC5 0C:9AB5: A5 BC
@@ -3302,13 +3302,13 @@ loc_0C_9AB5:
 	STA objX,X                      ;C - - - - - 0x019AD8 0C:9AC8: 9D 60 03
 	LDA ram_002D                    ;C - - - - - 0x019ADB 0C:9ACB: A5 2D
 	ADC #$00                        ;C - - - - - 0x019ADD 0C:9ACD: 69 00
-	STA objArr_0380,X               ;C - - - - - 0x019ADF 0C:9ACF: 9D 80 03
+	STA objXPage,X                  ;C - - - - - 0x019ADF 0C:9ACF: 9D 80 03
 	JMP loc_0C_9AD8                 ;C - - - - - 0x019AE2 0C:9AD2: 4C D8 9A
 loc_0C_9AD5:
-	JSR sub_0F_F1A1                 ;C - - - - - 0x019AE5 0C:9AD5: 20 A1 F1
+	JSR ApplyVelXSub                ;C - - - - - 0x019AE5 0C:9AD5: 20 A1 F1
 loc_0C_9AD8:
-	JSR sub_0F_F1FD                 ;C - - - - - 0x019AE8 0C:9AD8: 20 FD F1
-	LDA objArr_0430,X               ;C - - - - - 0x019AEB 0C:9ADB: BD 30 04
+	JSR ApplyVelY                   ;C - - - - - 0x019AE8 0C:9AD8: 20 FD F1
+	LDA objVelYHi,X                 ;C - - - - - 0x019AEB 0C:9ADB: BD 30 04
 	BPL loc_0C_9B03                 ;C - - - - - 0x019AEE 0C:9ADE: 10 23
 	LDA objY,X                      ;C - - - - - 0x019AF0 0C:9AE0: BD C0 03
 	CMP objArr_0530,X               ;C - - - - - 0x019AF3 0C:9AE3: DD 30 05
@@ -3317,11 +3317,11 @@ loc_0C_9AD8:
 	STA objY,X                      ;C - - - - - 0x019AFB 0C:9AEB: 9D C0 03
 	JSR sub_0C_9B1F                 ;C - - - - - 0x019AFE 0C:9AEE: 20 1F 9B
 	LDA #$38                        ;C - - - - - 0x019B01 0C:9AF1: A9 38
-	STA objArr_0420,X               ;C - - - - - 0x019B03 0C:9AF3: 9D 20 04
+	STA objVelYLo,X                 ;C - - - - - 0x019B03 0C:9AF3: 9D 20 04
 	LDA #$02                        ;C - - - - - 0x019B06 0C:9AF6: A9 02
-	STA objArr_0430,X               ;C - - - - - 0x019B08 0C:9AF8: 9D 30 04
+	STA objVelYHi,X                 ;C - - - - - 0x019B08 0C:9AF8: 9D 30 04
 	LDA #$80                        ;C - - - - - 0x019B0B 0C:9AFB: A9 80
-	STA objArr_0400,X               ;C - - - - - 0x019B0D 0C:9AFD: 9D 00 04
+	STA objVelXLo,X                 ;C - - - - - 0x019B0D 0C:9AFD: 9D 00 04
 	INC objArr_0500,X               ;C - - - - - 0x019B10 0C:9B00: FE 00 05
 loc_0C_9B03:
 	RTS                             ;C - - - - - 0x019B13 0C:9B03: 60
@@ -3339,7 +3339,7 @@ loc_0C_9B18:
 	JSR sub_0C_9B6B                 ;C - - - - - 0x019B28 0C:9B18: 20 6B 9B
 	RTS                             ;C - - - - - 0x019B2B 0C:9B1B: 60
 loc_0C_9B1C:
-	JMP sub_0F_F2BE                 ;C - - - - - 0x019B2C 0C:9B1C: 4C BE F2
+	JMP ClearObject                 ;C - - - - - 0x019B2C 0C:9B1C: 4C BE F2
 sub_0C_9B1F:
 	JSR sub_0C_9BE1                 ;C - - - - - 0x019B2F 0C:9B1F: 20 E1 9B
 	LDA objY,X                      ;C - - - - - 0x019B32 0C:9B22: BD C0 03
@@ -3359,10 +3359,10 @@ loc_0C_9B37:
 	LDA ram_0010                    ;C - - - - - 0x019B51 0C:9B41: A5 10
 	AND #$40                        ;C - - - - - 0x019B53 0C:9B43: 29 40
 	BEQ loc_0C_9B61                 ;C - - - - - 0x019B55 0C:9B45: F0 1A
-	LDA objArr_0320,X               ;C - - - - - 0x019B57 0C:9B47: BD 20 03
+	LDA objKind,X                   ;C - - - - - 0x019B57 0C:9B47: BD 20 03
 	STA objId,X                     ;C - - - - - 0x019B5A 0C:9B4A: 9D 30 03
 	LDA #$1F                        ;C - - - - - 0x019B5D 0C:9B4D: A9 1F
-	STA objArr_0320,X               ;C - - - - - 0x019B5F 0C:9B4F: 9D 20 03
+	STA objKind,X                   ;C - - - - - 0x019B5F 0C:9B4F: 9D 20 03
 	STA objArr_03D0,X               ;C - - - - - 0x019B62 0C:9B52: 9D D0 03
 	LDA #$00                        ;C - - - - - 0x019B65 0C:9B55: A9 00
 	STA objArr_0500,X               ;C - - - - - 0x019B67 0C:9B57: 9D 00 05
@@ -3373,14 +3373,14 @@ loc_0C_9B37:
 loc_0C_9B61:
 	RTS                             ;C - - - - - 0x019B71 0C:9B61: 60
 sub_0C_9B62:
-	LDA objArr_0560,X               ;C - - - - - 0x019B72 0C:9B62: BD 60 05
+	LDA objFlags,X                  ;C - - - - - 0x019B72 0C:9B62: BD 60 05
 	ORA #$04                        ;C - - - - - 0x019B75 0C:9B65: 09 04
-	STA objArr_0560,X               ;C - - - - - 0x019B77 0C:9B67: 9D 60 05
+	STA objFlags,X                  ;C - - - - - 0x019B77 0C:9B67: 9D 60 05
 	RTS                             ;C - - - - - 0x019B7A 0C:9B6A: 60
 sub_0C_9B6B:
-	LDA objArr_0560,X               ;C - - - - - 0x019B7B 0C:9B6B: BD 60 05
+	LDA objFlags,X                  ;C - - - - - 0x019B7B 0C:9B6B: BD 60 05
 	AND #$FB                        ;C - - - - - 0x019B7E 0C:9B6E: 29 FB
-	STA objArr_0560,X               ;C - - - - - 0x019B80 0C:9B70: 9D 60 05
+	STA objFlags,X                  ;C - - - - - 0x019B80 0C:9B70: 9D 60 05
 	RTS                             ;C - - - - - 0x019B83 0C:9B73: 60
 ofs_0C_9B74:
 	LDA #$FF                        ;C - - J - - 0x019B84 0C:9B74: A9 FF
@@ -3389,12 +3389,12 @@ ofs_0C_9B74:
 	BNE loc_0C_9BD9                 ;C - - - - - 0x019B8C 0C:9B7C: D0 5B
 	LDA objArr_03D0,X               ;C - - - - - 0x019B8E 0C:9B7E: BD D0 03
 	BNE loc_0C_9B86                 ;C - - - - - 0x019B91 0C:9B81: D0 03
-	STA objArr_0590,X               ;C - - - - - 0x019B93 0C:9B83: 9D 90 05
+	STA objAnimFlags,X              ;C - - - - - 0x019B93 0C:9B83: 9D 90 05
 loc_0C_9B86:
 	LDA #$00                        ;C - - - - - 0x019B96 0C:9B86: A9 00
-	STA objArr_0410,X               ;C - - - - - 0x019B98 0C:9B88: 9D 10 04
-	STA objArr_0400,X               ;C - - - - - 0x019B9B 0C:9B8B: 9D 00 04
-	JSR sub_0F_F1FD                 ;C - - - - - 0x019B9E 0C:9B8E: 20 FD F1
+	STA objVelXHi,X                 ;C - - - - - 0x019B98 0C:9B88: 9D 10 04
+	STA objVelXLo,X                 ;C - - - - - 0x019B9B 0C:9B8B: 9D 00 04
+	JSR ApplyVelY                   ;C - - - - - 0x019B9E 0C:9B8E: 20 FD F1
 	LDA objY,X                      ;C - - - - - 0x019BA1 0C:9B91: BD C0 03
 	CMP #$B0                        ;C - - - - - 0x019BA4 0C:9B94: C9 B0
 	BCC loc_0C_9BD8                 ;C - - - - - 0x019BA6 0C:9B96: 90 40
@@ -3410,7 +3410,7 @@ loc_0C_9B86:
 	LDA objArr_03F0,X               ;C - - - - - 0x019BBE 0C:9BAE: BD F0 03
 	CMP #$FF                        ;C - - - - - 0x019BC1 0C:9BB1: C9 FF
 	BEQ loc_0C_9BBC                 ;C - - - - - 0x019BC3 0C:9BB3: F0 07
-	LDA objArr_0580,X               ;C - - - - - 0x019BC5 0C:9BB5: BD 80 05
+	LDA objAnim,X                   ;C - - - - - 0x019BC5 0C:9BB5: BD 80 05
 	CMP #$9D                        ;C - - - - - 0x019BC8 0C:9BB8: C9 9D
 	BNE loc_0C_9BC3                 ;C - - - - - 0x019BCA 0C:9BBA: D0 07
 loc_0C_9BBC:
@@ -3433,12 +3433,12 @@ loc_0C_9BD9:
 	DEC objArr_05D0,X               ;C - - - - - 0x019BE9 0C:9BD9: DE D0 05
 	BNE loc_0C_9BD8                 ;C - - - - - 0x019BEC 0C:9BDC: D0 FA
 loc_0C_9BDE:
-	JMP sub_0F_F2BE                 ;C - - - - - 0x019BEE 0C:9BDE: 4C BE F2
+	JMP ClearObject                 ;C - - - - - 0x019BEE 0C:9BDE: 4C BE F2
 sub_0C_9BE1:
 	LDA objSpriteDown,X             ;C - - - - - 0x019BF1 0C:9BE1: BD B0 05
 	CMP #$07                        ;C - - - - - 0x019BF4 0C:9BE4: C9 07
 	BCS loc_0C_9BFB                 ;C - - - - - 0x019BF6 0C:9BE6: B0 13
-	LDA objArr_0380,X               ;C - - - - - 0x019BF8 0C:9BE8: BD 80 03
+	LDA objXPage,X                  ;C - - - - - 0x019BF8 0C:9BE8: BD 80 03
 	CMP #$03                        ;C - - - - - 0x019BFB 0C:9BEB: C9 03
 	BCC loc_0C_9BFB                 ;C - - - - - 0x019BFD 0C:9BED: 90 0C
 	BNE loc_0C_9BF8                 ;C - - - - - 0x019BFF 0C:9BEF: D0 07
@@ -3475,17 +3475,17 @@ loc_0C_9C24:
 	BNE loc_0C_9C54                 ;C - - - - - 0x019C37 0C:9C27: D0 2B
 sub_0C_9C29:
 	LDA objId,X                     ;C - - - - - 0x019C39 0C:9C29: BD 30 03
-	STA objArr_0320,X               ;C - - - - - 0x019C3C 0C:9C2C: 9D 20 03
+	STA objKind,X                   ;C - - - - - 0x019C3C 0C:9C2C: 9D 20 03
 	LDA objState,X                  ;C - - - - - 0x019C3F 0C:9C2F: BD 10 03
-	STA objArr_0300,X               ;C - - - - - 0x019C42 0C:9C32: 9D 00 03
+	STA objActive,X                 ;C - - - - - 0x019C42 0C:9C32: 9D 00 03
 	JSR sub_0D_AA1D                 ;C - - - - - bank=0D 0x019C45 0C:9C35: 20 1D AA
 	LDA #$00                        ;C - - - - - 0x019C48 0C:9C38: A9 00
 	STA objArr_0470,X               ;C - - - - - 0x019C4A 0C:9C3A: 9D 70 04
 	STA objArr_04E0,X               ;C - - - - - 0x019C4D 0C:9C3D: 9D E0 04
 	STA objArr_03F0,X               ;C - - - - - 0x019C50 0C:9C40: 9D F0 03
-	LDA objArr_0560,X               ;C - - - - - 0x019C53 0C:9C43: BD 60 05
+	LDA objFlags,X                  ;C - - - - - 0x019C53 0C:9C43: BD 60 05
 	ORA #$80                        ;C - - - - - 0x019C56 0C:9C46: 09 80
-	STA objArr_0560,X               ;C - - - - - 0x019C58 0C:9C48: 9D 60 05
+	STA objFlags,X                  ;C - - - - - 0x019C58 0C:9C48: 9D 60 05
 	LDY objSpriteDown,X             ;C - - - - - 0x019C5B 0C:9C4B: BC B0 05
 	LDA tbl_0F_FC82,Y               ;C - - - - - 0x019C5E 0C:9C4E: B9 82 FC
 	STA objArr_04C0,X               ;C - - - - - 0x019C61 0C:9C51: 9D C0 04
@@ -3495,9 +3495,9 @@ sub_0C_9C55:
 	LDA objSpriteDown,X             ;C - - - - - 0x019C65 0C:9C55: BD B0 05
 	TAY                             ;C - - - - - 0x019C68 0C:9C58: A8
 	LDA tbl_0F_FC8F,Y               ;C - - - - - 0x019C69 0C:9C59: B9 8F FC
-	CMP objArr_0580,X               ;C - - - - - 0x019C6C 0C:9C5C: DD 80 05
+	CMP objAnim,X                   ;C - - - - - 0x019C6C 0C:9C5C: DD 80 05
 	BEQ loc_0C_9C79                 ;C - - - - - 0x019C6F 0C:9C5F: F0 18
-	JSR sub_0F_F288                 ;C - - - - - 0x019C71 0C:9C61: 20 88 F2
+	JSR SetAnimX                    ;C - - - - - 0x019C71 0C:9C61: 20 88 F2
 	LDA objSpriteDown,X             ;C - - - - - 0x019C74 0C:9C64: BD B0 05
 	CMP #$06                        ;C - - - - - 0x019C77 0C:9C67: C9 06
 	BEQ loc_0C_9C79                 ;C - - - - - 0x019C79 0C:9C69: F0 0E
@@ -3513,9 +3513,9 @@ sub_0C_9C7A:
 	LDA objSpriteDown,X             ;C - - - - - 0x019C8A 0C:9C7A: BD B0 05
 	TAY                             ;C - - - - - 0x019C8D 0C:9C7D: A8
 	LDA tbl_0F_FCAB,Y               ;C - - - - - 0x019C8E 0C:9C7E: B9 AB FC
-	CMP objArr_0580,X               ;C - - - - - 0x019C91 0C:9C81: DD 80 05
+	CMP objAnim,X                   ;C - - - - - 0x019C91 0C:9C81: DD 80 05
 	BEQ loc_0C_9C9E                 ;C - - - - - 0x019C94 0C:9C84: F0 18
-	JSR sub_0F_F288                 ;C - - - - - 0x019C96 0C:9C86: 20 88 F2
+	JSR SetAnimX                    ;C - - - - - 0x019C96 0C:9C86: 20 88 F2
 	LDA objSpriteDown,X             ;C - - - - - 0x019C99 0C:9C89: BD B0 05
 	CMP #$06                        ;C - - - - - 0x019C9C 0C:9C8C: C9 06
 	BEQ loc_0C_9C9E                 ;C - - - - - 0x019C9E 0C:9C8E: F0 0E
@@ -3538,9 +3538,9 @@ sub_0C_9CAD:
 	LDA objSpriteDown,X             ;C - - - - - 0x019CBD 0C:9CAD: BD B0 05
 	TAY                             ;C - - - - - 0x019CC0 0C:9CB0: A8
 	LDA tbl_0C_9CD3,Y               ;C - - - - - 0x019CC1 0C:9CB1: B9 D3 9C
-	CMP objArr_0580,X               ;C - - - - - 0x019CC4 0C:9CB4: DD 80 05
+	CMP objAnim,X                   ;C - - - - - 0x019CC4 0C:9CB4: DD 80 05
 	BEQ loc_0C_9CD2                 ;C - - - - - 0x019CC7 0C:9CB7: F0 19
-	JSR sub_0F_F288                 ;C - - - - - 0x019CC9 0C:9CB9: 20 88 F2
+	JSR SetAnimX                    ;C - - - - - 0x019CC9 0C:9CB9: 20 88 F2
 	LDA tbl_0C_9CE0,Y               ;C - - - - - 0x019CCC 0C:9CBC: B9 E0 9C
 	STA ptr_00                      ;C - - - - - 0x019CCF 0C:9CBF: 85 00
 	LDA tbl_0F_FC33,Y               ;C - - - - - 0x019CD1 0C:9CC1: B9 33 FC
@@ -3589,7 +3589,7 @@ loc_0C_9D02:
 	ADC ram_00E5                    ;C - - - - - 0x019D1C 0C:9D0C: 65 E5
 	ADC ram_00E6                    ;C - - - - - 0x019D1E 0C:9D0E: 65 E6
 	STA ram_00E4                    ;C - - - - - 0x019D20 0C:9D10: 85 E4
-	LDA objArr_0320,X               ;C - - - - - 0x019D22 0C:9D12: BD 20 03
+	LDA objKind,X                   ;C - - - - - 0x019D22 0C:9D12: BD 20 03
 	SEC                             ;C - - - - - 0x019D25 0C:9D15: 38
 	SBC #$20                        ;C - - - - - 0x019D26 0C:9D16: E9 20
 	TAY                             ;C - - - - - 0x019D28 0C:9D18: A8
@@ -3600,7 +3600,7 @@ loc_0C_9D02:
 	RTS                             ;C - - - - - 0x019D34 0C:9D24: 60
 loc_0C_9D25:
 	JSR sub_0C_9FF6                 ;C - - - - - 0x019D35 0C:9D25: 20 F6 9F
-	LDA objArr_0300,X               ;C - - - - - 0x019D38 0C:9D28: BD 00 03
+	LDA objActive,X                 ;C - - - - - 0x019D38 0C:9D28: BD 00 03
 	AND #$0F                        ;C - - - - - 0x019D3B 0C:9D2B: 29 0F
 	TAY                             ;C - - - - - 0x019D3D 0C:9D2D: A8
 	LDA tbl_0C_9D3B,Y               ;C - - - - - 0x019D3E 0C:9D2E: B9 3B 9D
@@ -3617,7 +3617,7 @@ tbl_0C_9D5B:
 	.byte $00,$00,$00,$00           ;- - - - - - 0x019D77 0C:9D67:
 	.byte $00,$01,$02,$03,$04,$05   ;- D 0 - - - 0x019D7B 0C:9D6B:
 ofs_0C_9D71:
-	LDA objArr_0460,X               ;C - - J - - 0x019D81 0C:9D71: BD 60 04
+	LDA objFacing,X                 ;C - - J - - 0x019D81 0C:9D71: BD 60 04
 	AND #$01                        ;C - - - - - 0x019D84 0C:9D74: 29 01
 	BEQ loc_0C_9D8B                 ;C - - - - - 0x019D86 0C:9D76: F0 13
 	LDA objX,X                      ;C - - - - - 0x019D88 0C:9D78: BD 60 03
@@ -3625,20 +3625,20 @@ ofs_0C_9D71:
 	SBC scrollX                     ;C - - - - - 0x019D8C 0C:9D7C: E5 FC
 	CMP #$FA                        ;C - - - - - 0x019D8E 0C:9D7E: C9 FA
 	BCC loc_0C_9D85                 ;C - - - - - 0x019D90 0C:9D80: 90 03
-	JMP sub_0F_F2BE                 ;C - - - - - 0x019D92 0C:9D82: 4C BE F2
+	JMP ClearObject                 ;C - - - - - 0x019D92 0C:9D82: 4C BE F2
 loc_0C_9D85:
-	JSR sub_0F_F090                 ;C - - - - - 0x019D95 0C:9D85: 20 90 F0
-	JMP sub_0F_F183                 ;C - - - - - 0x019D98 0C:9D88: 4C 83 F1
+	JSR SetObjFlag40                ;C - - - - - 0x019D95 0C:9D85: 20 90 F0
+	JMP ApplyVelXAdd                ;C - - - - - 0x019D98 0C:9D88: 4C 83 F1
 loc_0C_9D8B:
 	LDA objX,X                      ;C - - - - - 0x019D9B 0C:9D8B: BD 60 03
 	SEC                             ;C - - - - - 0x019D9E 0C:9D8E: 38
 	SBC scrollX                     ;C - - - - - 0x019D9F 0C:9D8F: E5 FC
 	CMP #$08                        ;C - - - - - 0x019DA1 0C:9D91: C9 08
 	BCS loc_0C_9D98                 ;C - - - - - 0x019DA3 0C:9D93: B0 03
-	JMP sub_0F_F2BE                 ;C - - - - - 0x019DA5 0C:9D95: 4C BE F2
+	JMP ClearObject                 ;C - - - - - 0x019DA5 0C:9D95: 4C BE F2
 loc_0C_9D98:
 	JSR sub_0F_F099                 ;C - - - - - 0x019DA8 0C:9D98: 20 99 F0
-	JMP sub_0F_F1A1                 ;C - - - - - 0x019DAB 0C:9D9B: 4C A1 F1
+	JMP ApplyVelXSub                ;C - - - - - 0x019DAB 0C:9D9B: 4C A1 F1
 	LDY #$25                        ;c - - - - - 0x019DAE 0C:9D9E: A0 25
 	LDA #$01                        ;c - - - - - 0x019DB0 0C:9DA0: A9 01
 	BNE loc_0C_9DAE                 ;c - - - - - 0x019DB2 0C:9DA2: D0 0A
@@ -3653,7 +3653,7 @@ loc_0C_9DAE:
 	STA objArr_0510,X               ;c - - - - - 0x019DC2 0C:9DB2: 9D 10 05
 	LDA #$05                        ;c - - - - - 0x019DC5 0C:9DB5: A9 05
 	STA objSpriteDown,X             ;c - - - - - 0x019DC7 0C:9DB7: 9D B0 05
-	JSR sub_0F_F374                 ;c - - - - - 0x019DCA 0C:9DBA: 20 74 F3
+	JSR DistanceXToPlayer           ;c - - - - - 0x019DCA 0C:9DBA: 20 74 F3
 	CMP #$80                        ;c - - - - - 0x019DCD 0C:9DBD: C9 80
 	BCC loc_0C_9DC2                 ;c - - - - - 0x019DCF 0C:9DBF: 90 01
 	RTS                             ;c - - - - - 0x019DD1 0C:9DC1: 60
@@ -3661,30 +3661,30 @@ loc_0C_9DC2:
 	JSR sub_0F_FB5B                 ;c - - - - - 0x019DD2 0C:9DC2: 20 5B FB
 	TAY                             ;c - - - - - 0x019DD5 0C:9DC5: A8
 	LDA tbl_0D_A87E,Y               ;c - - - - - bank=0D 0x019DD6 0C:9DC6: B9 7E A8
-	STA objArr_0460,X               ;c - - - - - 0x019DD9 0C:9DC9: 9D 60 04
+	STA objFacing,X                 ;c - - - - - 0x019DD9 0C:9DC9: 9D 60 04
 	AND #$0C                        ;c - - - - - 0x019DDC 0C:9DCC: 29 0C
 	BNE loc_0C_9DE4                 ;c - - - - - 0x019DDE 0C:9DCE: D0 14
 	LDA #$4C                        ;c - - - - - 0x019DE0 0C:9DD0: A9 4C
-	STA objArr_0400,X               ;c - - - - - 0x019DE2 0C:9DD2: 9D 00 04
+	STA objVelXLo,X                 ;c - - - - - 0x019DE2 0C:9DD2: 9D 00 04
 	LDA #$02                        ;c - - - - - 0x019DE5 0C:9DD5: A9 02
-	STA objArr_0410,X               ;c - - - - - 0x019DE7 0C:9DD7: 9D 10 04
+	STA objVelXHi,X                 ;c - - - - - 0x019DE7 0C:9DD7: 9D 10 04
 	LDA #$00                        ;c - - - - - 0x019DEA 0C:9DDA: A9 00
-	STA objArr_0420,X               ;c - - - - - 0x019DEC 0C:9DDC: 9D 20 04
-	STA objArr_0430,X               ;c - - - - - 0x019DEF 0C:9DDF: 9D 30 04
+	STA objVelYLo,X                 ;c - - - - - 0x019DEC 0C:9DDC: 9D 20 04
+	STA objVelYHi,X                 ;c - - - - - 0x019DEF 0C:9DDF: 9D 30 04
 	BEQ loc_0C_9DF8                 ;c - - - - - 0x019DF2 0C:9DE2: F0 14
 loc_0C_9DE4:
 	LDA #$1F                        ;c - - - - - 0x019DF4 0C:9DE4: A9 1F
-	STA objArr_0400,X               ;c - - - - - 0x019DF6 0C:9DE6: 9D 00 04
+	STA objVelXLo,X                 ;c - - - - - 0x019DF6 0C:9DE6: 9D 00 04
 	LDA #$02                        ;c - - - - - 0x019DF9 0C:9DE9: A9 02
-	STA objArr_0410,X               ;c - - - - - 0x019DFB 0C:9DEB: 9D 10 04
+	STA objVelXHi,X                 ;c - - - - - 0x019DFB 0C:9DEB: 9D 10 04
 	LDA #$E1                        ;c - - - - - 0x019DFE 0C:9DEE: A9 E1
-	STA objArr_0420,X               ;c - - - - - 0x019E00 0C:9DF0: 9D 20 04
+	STA objVelYLo,X                 ;c - - - - - 0x019E00 0C:9DF0: 9D 20 04
 	LDA #$00                        ;c - - - - - 0x019E03 0C:9DF3: A9 00
-	STA objArr_0430,X               ;c - - - - - 0x019E05 0C:9DF5: 9D 30 04
+	STA objVelYHi,X                 ;c - - - - - 0x019E05 0C:9DF5: 9D 30 04
 loc_0C_9DF8:
 	LDA #$D2                        ;c - - - - - 0x019E08 0C:9DF8: A9 D2
 	LDY #$24                        ;c - - - - - 0x019E0A 0C:9DFA: A0 24
-	JSR sub_0F_F443                 ;c - - - - - 0x019E0C 0C:9DFC: 20 43 F4
+	JSR SetAnimXChr3                ;c - - - - - 0x019E0C 0C:9DFC: 20 43 F4
 	LDA objArr_05C0,X               ;c - - - - - 0x019E0F 0C:9DFF: BD C0 05
 	TAY                             ;c - - - - - 0x019E12 0C:9E02: A8
 	LDA tbl_0D_A897,Y               ;c - - - - - bank=0D 0x019E13 0C:9E03: B9 97 A8
@@ -3692,11 +3692,11 @@ loc_0C_9DF8:
 	ADC #$33                        ;c - - - - - 0x019E17 0C:9E07: 69 33
 	STA objArr_0450,X               ;c - - - - - 0x019E19 0C:9E09: 9D 50 04
 	LDA #$8E                        ;c - - - - - 0x019E1C 0C:9E0C: A9 8E
-	STA objArr_0300,X               ;c - - - - - 0x019E1E 0C:9E0E: 9D 00 03
+	STA objActive,X                 ;c - - - - - 0x019E1E 0C:9E0E: 9D 00 03
 	LDA #$03                        ;c - - - - - 0x019E21 0C:9E11: A9 03
 	STA objArr_0500,X               ;c - - - - - 0x019E23 0C:9E13: 9D 00 05
 	LDA objArr_0510,X               ;c - - - - - 0x019E26 0C:9E16: BD 10 05
-	STA objArr_0320,X               ;c - - - - - 0x019E29 0C:9E19: 9D 20 03
+	STA objKind,X                   ;c - - - - - 0x019E29 0C:9E19: 9D 20 03
 	STA objId,X                     ;c - - - - - 0x019E2C 0C:9E1C: 9D 30 03
 	RTS                             ;c - - - - - 0x019E2F 0C:9E1F: 60
 	.byte $A9,$01,$D0,$06           ;- - - - - - 0x019E30 0C:9E20:
@@ -3737,22 +3737,22 @@ loc_0C_9E48:
 	CMP #$01                        ;C - - - - - 0x019E67 0C:9E57: C9 01
 	BEQ loc_0C_9E63                 ;C - - - - - 0x019E69 0C:9E59: F0 08
 loc_0C_9E5B:
-	JSR sub_0F_F374                 ;C - - - - - 0x019E6B 0C:9E5B: 20 74 F3
+	JSR DistanceXToPlayer           ;C - - - - - 0x019E6B 0C:9E5B: 20 74 F3
 	CMP #$08                        ;C - - - - - 0x019E6E 0C:9E5E: C9 08
 	BCC loc_0C_9E63                 ;C - - - - - 0x019E70 0C:9E60: 90 01
 	RTS                             ;C - - - - - 0x019E72 0C:9E62: 60
 loc_0C_9E63:
-	LDA objArr_0560,X               ;C - - - - - 0x019E73 0C:9E63: BD 60 05
+	LDA objFlags,X                  ;C - - - - - 0x019E73 0C:9E63: BD 60 05
 	AND #$FB                        ;C - - - - - 0x019E76 0C:9E66: 29 FB
-	STA objArr_0560,X               ;C - - - - - 0x019E78 0C:9E68: 9D 60 05
-	LDA ram_0036                    ;C - - - - - 0x019E7B 0C:9E6B: A5 36
+	STA objFlags,X                  ;C - - - - - 0x019E78 0C:9E68: 9D 60 05
+	LDA playerGroundY               ;C - - - - - 0x019E7B 0C:9E6B: A5 36
 	STA objArr_0520,X               ;C - - - - - 0x019E7D 0C:9E6D: 9D 20 05
 	LDA #$FF                        ;C - - - - - 0x019E80 0C:9E70: A9 FF
-	STA objArr_0430,X               ;C - - - - - 0x019E82 0C:9E72: 9D 30 04
+	STA objVelYHi,X                 ;C - - - - - 0x019E82 0C:9E72: 9D 30 04
 	LDA #$00                        ;C - - - - - 0x019E85 0C:9E75: A9 00
-	STA objArr_0420,X               ;C - - - - - 0x019E87 0C:9E77: 9D 20 04
-	STA objArr_0400,X               ;C - - - - - 0x019E8A 0C:9E7A: 9D 00 04
-	STA objArr_0410,X               ;C - - - - - 0x019E8D 0C:9E7D: 9D 10 04
+	STA objVelYLo,X                 ;C - - - - - 0x019E87 0C:9E77: 9D 20 04
+	STA objVelXLo,X                 ;C - - - - - 0x019E8A 0C:9E7A: 9D 00 04
+	STA objVelXHi,X                 ;C - - - - - 0x019E8D 0C:9E7D: 9D 10 04
 	LDA objArr_05C0,X               ;C - - - - - 0x019E90 0C:9E80: BD C0 05
 	TAY                             ;C - - - - - 0x019E93 0C:9E83: A8
 	LDA tbl_0D_A897,Y               ;C - - - - - bank=0D 0x019E94 0C:9E84: B9 97 A8
@@ -3761,11 +3761,11 @@ loc_0C_9E63:
 	ADC tbl_0C_9EBF,Y               ;C - - - - - 0x019E9B 0C:9E8B: 79 BF 9E
 	STA objArr_0450,X               ;C - - - - - 0x019E9E 0C:9E8E: 9D 50 04
 	LDA tbl_0C_9EB3,Y               ;C - - - - - 0x019EA1 0C:9E91: B9 B3 9E
-	JSR sub_0F_F288                 ;C - - - - - 0x019EA4 0C:9E94: 20 88 F2
+	JSR SetAnimX                    ;C - - - - - 0x019EA4 0C:9E94: 20 88 F2
 	TYA                             ;C - - - - - 0x019EA7 0C:9E97: 98
 	BNE loc_0C_9E9F                 ;C - - - - - 0x019EA8 0C:9E98: D0 05
 	LDA #$06                        ;C - - - - - 0x019EAA 0C:9E9A: A9 06
-	STA objArr_0570,X               ;C - - - - - 0x019EAC 0C:9E9C: 9D 70 05
+	STA objAnimFrame,X              ;C - - - - - 0x019EAC 0C:9E9C: 9D 70 05
 loc_0C_9E9F:
 	LDA tbl_0C_9EB9,Y               ;C - - - - - 0x019EAF 0C:9E9F: B9 B9 9E
 	PHA                             ;C - - - - - 0x019EB2 0C:9EA2: 48
@@ -3774,7 +3774,7 @@ loc_0C_9E9F:
 	PLA                             ;C - - - - - 0x019EB7 0C:9EA7: 68
 	STA a:chrBankShadow+3,Y         ;C - - - - - 0x019EB8 0C:9EA8: 99 EB 00
 	LDA #$8F                        ;C - - - - - 0x019EBB 0C:9EAB: A9 8F
-	STA objArr_0300,X               ;C - - - - - 0x019EBD 0C:9EAD: 9D 00 03
+	STA objActive,X                 ;C - - - - - 0x019EBD 0C:9EAD: 9D 00 03
 	JMP loc_0C_9FBB                 ;C - - - - - 0x019EC0 0C:9EB0: 4C BB 9F
 tbl_0C_9EB3:
 	.byte $84                       ;- D 0 - - - 0x019EC3 0C:9EB3:
@@ -3802,7 +3802,7 @@ loc_0C_9ECF:
 	STA objArr_05C0,X               ;C - - - - - 0x019EDF 0C:9ECF: 9D C0 05
 	LDA #$00                        ;C - - - - - 0x019EE2 0C:9ED2: A9 00
 	STA objArr_0440,X               ;C - - - - - 0x019EE4 0C:9ED4: 9D 40 04
-	LDA objArr_0320,X               ;C - - - - - 0x019EE7 0C:9ED7: BD 20 03
+	LDA objKind,X                   ;C - - - - - 0x019EE7 0C:9ED7: BD 20 03
 	SEC                             ;C - - - - - 0x019EEA 0C:9EDA: 38
 	SBC #$36                        ;C - - - - - 0x019EEB 0C:9EDB: E9 36
 	TAY                             ;C - - - - - 0x019EED 0C:9EDD: A8
@@ -3811,7 +3811,7 @@ loc_0C_9ECF:
 	LDA #$78                        ;C - - - - - 0x019EF4 0C:9EE4: A9 78
 	STA objArr_05D0,X               ;C - - - - - 0x019EF6 0C:9EE6: 9D D0 05
 	LDA #$8D                        ;C - - - - - 0x019EF9 0C:9EE9: A9 8D
-	STA objArr_0300,X               ;C - - - - - 0x019EFB 0C:9EEB: 9D 00 03
+	STA objActive,X                 ;C - - - - - 0x019EFB 0C:9EEB: 9D 00 03
 	JSR sub_0D_AAAE                 ;C - - - - - bank=0D 0x019EFE 0C:9EEE: 20 AE AA
 	JMP loc_0C_9FBB                 ;C - - - - - 0x019F01 0C:9EF1: 4C BB 9F
 ofs_0C_9EF4:
@@ -3841,7 +3841,7 @@ loc_0C_9F14:
 	LDA #$04                        ;C - - - - - 0x019F27 0C:9F17: A9 04
 loc_0C_9F19:
 	STA objArr_05C0,X               ;C - - - - - 0x019F29 0C:9F19: 9D C0 05
-	LDA objArr_0320,X               ;C - - - - - 0x019F2C 0C:9F1C: BD 20 03
+	LDA objKind,X                   ;C - - - - - 0x019F2C 0C:9F1C: BD 20 03
 	SEC                             ;C - - - - - 0x019F2F 0C:9F1F: 38
 	SBC #$36                        ;C - - - - - 0x019F30 0C:9F20: E9 36
 	TAY                             ;C - - - - - 0x019F32 0C:9F22: A8
@@ -3849,20 +3849,20 @@ loc_0C_9F19:
 	STA objSpriteDown,X             ;C - - - - - 0x019F36 0C:9F26: 9D B0 05
 	LDA #$00                        ;C - - - - - 0x019F39 0C:9F29: A9 00
 	STA objArr_0440,X               ;C - - - - - 0x019F3B 0C:9F2B: 9D 40 04
-	LDA objArr_0300,X               ;C - - - - - 0x019F3E 0C:9F2E: BD 00 03
+	LDA objActive,X                 ;C - - - - - 0x019F3E 0C:9F2E: BD 00 03
 	LSR A                           ;C - - - - - 0x019F41 0C:9F31: 4A
 	BCS loc_0C_9F5D                 ;C - - - - - 0x019F42 0C:9F32: B0 29
-	INC objArr_0300,X               ;C - - - - - 0x019F44 0C:9F34: FE 00 03
+	INC objActive,X                 ;C - - - - - 0x019F44 0C:9F34: FE 00 03
 	LDY objSpriteDown,X             ;C - - - - - 0x019F47 0C:9F37: BC B0 05
 	DEY                             ;C - - - - - 0x019F4A 0C:9F3A: 88
 	TYA                             ;C - - - - - 0x019F4B 0C:9F3B: 98
 	ADC objArr_0540,X               ;C - - - - - 0x019F4C 0C:9F3C: 7D 40 05
 	TAY                             ;C - - - - - 0x019F4F 0C:9F3F: A8
-	STA objArr_0570,X               ;C - - - - - 0x019F50 0C:9F40: 9D 70 05
+	STA objAnimFrame,X              ;C - - - - - 0x019F50 0C:9F40: 9D 70 05
 	LDA #$A2                        ;C - - - - - 0x019F53 0C:9F43: A9 A2
-	STA objArr_0580,X               ;C - - - - - 0x019F55 0C:9F45: 9D 80 05
+	STA objAnim,X                   ;C - - - - - 0x019F55 0C:9F45: 9D 80 05
 	LDA #$00                        ;C - - - - - 0x019F58 0C:9F48: A9 00
-	STA objArr_0590,X               ;C - - - - - 0x019F5A 0C:9F4A: 9D 90 05
+	STA objAnimFlags,X              ;C - - - - - 0x019F5A 0C:9F4A: 9D 90 05
 	LDA tbl_0C_9F8D,Y               ;C - - - - - 0x019F5D 0C:9F4D: B9 8D 9F
 	PHA                             ;C - - - - - 0x019F60 0C:9F50: 48
 	LDY objSpriteDown,X             ;C - - - - - 0x019F61 0C:9F51: BC B0 05
@@ -3873,14 +3873,14 @@ loc_0C_9F19:
 	RTS                             ;C - - - - - 0x019F6C 0C:9F5C: 60
 loc_0C_9F5D:
 	LDA #$00                        ;C - - - - - 0x019F6D 0C:9F5D: A9 00
-	STA objArr_0590,X               ;C - - - - - 0x019F6F 0C:9F5F: 9D 90 05
+	STA objAnimFlags,X              ;C - - - - - 0x019F6F 0C:9F5F: 9D 90 05
 	LDA #$32                        ;C - - - - - 0x019F72 0C:9F62: A9 32
 	LDY #$32                        ;C - - - - - 0x019F74 0C:9F64: A0 32
 	JSR sub_0F_FB3E                 ;C - - - - - 0x019F76 0C:9F66: 20 3E FB
 	BCS loc_0C_9F7F                 ;C - - - - - 0x019F79 0C:9F69: B0 14
 	LDA #$FF                        ;C - - - - - 0x019F7B 0C:9F6B: A9 FF
 	STA objArr_04C0,X               ;C - - - - - 0x019F7D 0C:9F6D: 9D C0 04
-	LDA objArr_0380,X               ;C - - - - - 0x019F80 0C:9F70: BD 80 03
+	LDA objXPage,X                  ;C - - - - - 0x019F80 0C:9F70: BD 80 03
 	SEC                             ;C - - - - - 0x019F83 0C:9F73: 38
 	SBC ram_00F9                    ;C - - - - - 0x019F84 0C:9F74: E5 F9
 	LDA objX,X                      ;C - - - - - 0x019F86 0C:9F76: BD 60 03
@@ -3891,7 +3891,7 @@ loc_0C_9F7F:
 	LDA #$00                        ;C - - - - - 0x019F8F 0C:9F7F: A9 00
 	STA objArr_04C0,X               ;C - - - - - 0x019F91 0C:9F81: 9D C0 04
 	LDA #$80                        ;C - - - - - 0x019F94 0C:9F84: A9 80
-	STA objArr_0300,X               ;C - - - - - 0x019F96 0C:9F86: 9D 00 03
+	STA objActive,X                 ;C - - - - - 0x019F96 0C:9F86: 9D 00 03
 	JMP loc_0C_9FBB                 ;C - - - - - 0x019F99 0C:9F89: 4C BB 9F
 loc_0C_9F8C:
 	RTS                             ;C - - - - - 0x019F9C 0C:9F8C: 60
@@ -3918,12 +3918,12 @@ tbl_0C_9F91:
 	.byte $04                       ;- D 0 - - - 0x019FC9 0C:9FB9:
 	.byte $00                       ;- - - - - - 0x019FCA 0C:9FBA:
 loc_0C_9FBB:
-	LDA objArr_0320,X               ;C - - - - - 0x019FCB 0C:9FBB: BD 20 03
+	LDA objKind,X                   ;C - - - - - 0x019FCB 0C:9FBB: BD 20 03
 	SEC                             ;C - - - - - 0x019FCE 0C:9FBE: 38
 	SBC #$36                        ;C - - - - - 0x019FCF 0C:9FBF: E9 36
 	TAY                             ;C - - - - - 0x019FD1 0C:9FC1: A8
 	LDA tbl_0C_9FCC,Y               ;C - - - - - 0x019FD2 0C:9FC2: B9 CC 9F
-	STA objArr_0320,X               ;C - - - - - 0x019FD5 0C:9FC5: 9D 20 03
+	STA objKind,X                   ;C - - - - - 0x019FD5 0C:9FC5: 9D 20 03
 	STA objId,X                     ;C - - - - - 0x019FD8 0C:9FC8: 9D 30 03
 	RTS                             ;C - - - - - 0x019FDB 0C:9FCB: 60
 tbl_0C_9FCC:
@@ -3953,7 +3953,7 @@ tbl_0C_9FCC:
 	.byte $34                       ;- D 0 - - - 0x01A004 0C:9FF4:
 	.byte $30                       ;- - - - - - 0x01A005 0C:9FF5:
 sub_0C_9FF6:
-	LDA objArr_0300,X               ;C - - - - - 0x01A006 0C:9FF6: BD 00 03
+	LDA objActive,X                 ;C - - - - - 0x01A006 0C:9FF6: BD 00 03
 	CMP #$89                        ;C - - - - - 0x01A009 0C:9FF9: C9 89
 	.byte $F0, $48                  ;C - - - - - BEQ loc_0D_A045 0x01A00B 0C:9FFB: (branch to another bank, kept as bytes)
 	CMP #$8F                        ;C - - - - - 0x01A00D 0C:9FFD: C9 8F

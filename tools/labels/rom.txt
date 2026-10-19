@@ -83,3 +83,27 @@ bank 0F:FFA8 06
 code 01:A00C-A02E            ; 11 unused JMP $A030 stubs
 code 05:A832-A891            ; unreached object-spawn helpers (end of run checked by hand)
 data 02:81E7-8200            ; repeated $A4 pairs, not code
+; ---- fixed-bank helpers (object engine)
+0F:F294 SetPlayerAnim           ; A = anim id for slot 0; frame and flags reset
+0F:F288 SetAnimX                ; A = anim id for slot X
+0F:F2A0 SetAnimY                ; A = anim id for slot Y; keeps dir bit, sets objActive/objState=$80, objFlags=$10
+0F:F440 SetChrBank2             ; chrBankShadow+2 = A
+0F:F443 SetAnimXChr3            ; SetAnimX, chrBankShadow+3 = Y
+0F:F449 SetAnimXChr4            ; SetAnimX, chrBankShadow+4 = Y
+0F:F183 ApplyVelXAdd            ; slot X: 16.8 position += velocity (moving right)
+0F:F1A1 ApplyVelXSub            ; slot X: position -= velocity (moving left)
+0F:F1BF ApplyVelYAdd            ; slot X: Y += velocity, wraps at $F0 into objYPage
+0F:F20E ApplyVelYSub
+0F:F1FD ApplyVelY               ; picks Add/Sub from the sign of objVelYHi, then applies gravity
+0F:F24C ApplyGravity            ; objVelY -= ram_0099, clamped at -7
+0F:F374 DistanceXToPlayer       ; A = |objX[0] - objX[X]|, carry = direction
+0F:F2BE ClearObject             ; zeroes every field of slot X
+0F:F314 FaceToPlayer            ; objFacing[X] = 1/2 depending on side of player
+0F:F32E FacingToFlag            ; objFlags bit 6 from objFacing
+0F:F343 FaceToPlayerFlag        ; FaceToPlayer + FacingToFlag
+0F:F03F SetPlayerFlag40         ; objFlags[0] |= $40
+0F:F090 SetObjFlag40            ; objFlags[X] |= $40
+0F:F048 ClearPlayerFlag40       ; objFlags[0] &= $BF
+0F:F43B ArmTimerA4              ; timerA4 = $1E
+0F:F436 ClearTimerA4
+0F:F430 PlayHitSound            ; QueueSound $17

@@ -63,25 +63,25 @@
 
 
 ; ---- object arrays: 16 slots per field, field f at $0300+$10*f (names of unnamed fields are placeholders)
-0300 objArr_0300 16
-0320 objArr_0320 16
-0340 objArr_0340 16
+0300 objActive      16   ; 
+0320 objKind        16   ; 
+0340 objXFrac       16   ; 
 0350 objArr_0350 16
 0370 objArr_0370 16
-0380 objArr_0380 16
+0380 objXPage       16   ; 
 0390 objArr_0390 16
-03A0 objArr_03A0 16
+03A0 objYFrac       16   ; 
 03B0 objArr_03B0 16
 03D0 objArr_03D0 16
-03E0 objArr_03E0 16
+03E0 objYPage       16   ; incremented when Y wraps past $EF
 03F0 objArr_03F0 16
-0400 objArr_0400 16
-0410 objArr_0410 16
-0420 objArr_0420 16
-0430 objArr_0430 16
+0400 objVelXLo      16   ; 
+0410 objVelXHi      16   ; 
+0420 objVelYLo      16   ; 
+0430 objVelYHi      16   ; sign: negative = moving up
 0440 objArr_0440 16
 0450 objArr_0450 16
-0460 objArr_0460 16
+0460 objFacing      16   ; 1 = right, 2 = left (FaceToPlayer)
 0470 objArr_0470 16
 0480 objArr_0480 16
 04A0 objArr_04A0 16
@@ -95,10 +95,10 @@
 0530 objArr_0530 16
 0540 objArr_0540 16
 0550 objArr_0550 16
-0560 objArr_0560 16
-0570 objArr_0570 16
-0580 objArr_0580 16
-0590 objArr_0590 16
+0560 objFlags       16   ; bit 6 = horizontal flip (set from objFacing)
+0570 objAnimFrame   16   ; frame counter, reset by SetAnim
+0580 objAnim        16   ; animation id (SetPlayerAnim/SetAnimX)
+0590 objAnimFlags   16   ; bit 7 survives SetAnimY
 05A0 objArr_05A0 16
 05C0 objArr_05C0 16
 05D0 objArr_05D0 16
@@ -116,3 +116,10 @@
 00DA soundQueueWrite            ; write index (0..7)
 00DB soundQueueRead             ; read index (0..7)
 00DC soundQueue 8               ; ring buffer, $88 = empty
+
+; ---- misc found while naming the fixed-bank helpers
+0036 playerGroundY              ; player Y saved at the start of an action (used by FB5B/FBD9 range checks)
+0097 oamHideStart               ; first OAM byte offset cleared by HideSprites
+009A nmiSkipFlag                ; non-zero while an overlay routine runs; NMI skips its normal updates
+00A3 timerA3                    ; counted down every frame in Act00_Walk
+00A4 timerA4                    ; set to $1E by ArmTimerA4, cleared by ClearTimerA4

@@ -40,7 +40,7 @@ ram_0032               = $0032 ; 11
 ram_0033               = $0033 ; 1
 playerId               = $0034 ; 190 ; 00 Cody, 01 Guy, 02 Haggar
 ram_0035               = $0035 ; 23
-ram_0036               = $0036 ; 55
+playerGroundY          = $0036 ; 55 ; player Y saved at the start of an action (used by FB5B/FBD9 range checks)
 ram_0037               = $0037 ; 44
 ram_0038               = $0038 ; 15
 ram_0039               = $0039 ; 44
@@ -86,18 +86,18 @@ frameCounter           = $0092 ; 5 ; incremented every NMI
 ptr_93                 = $0093 ; 9 (size 2) ; auto: indirect pointer
 ram_0095               = $0095 ; 9
 ram_0096               = $0096 ; 6
-ram_0097               = $0097 ; 11
+oamHideStart           = $0097 ; 11 ; first OAM byte offset cleared by HideSprites
 ram_0098               = $0098 ; 6
 ram_0099               = $0099 ; 2
-ram_009A               = $009A ; 3
+nmiSkipFlag            = $009A ; 3 ; non-zero while an overlay routine runs; NMI skips its normal updates
 ram_009B               = $009B ; 5
 irqVector              = $009C ; 9 (size 2) ; current IRQ handler (JMP (irqVector) from IRQ); each raster split sets the next one
 totalEnemies           = $009E ; 6 ; number of enemies in the stage
 ram_009F               = $009F ; 6
 ram_00A0               = $00A0 ; 2
 ram_00A1               = $00A1 ; 2
-ram_00A3               = $00A3 ; 41
-ram_00A4               = $00A4 ; 23
+timerA3                = $00A3 ; 41 ; counted down every frame in Act00_Walk
+timerA4                = $00A4 ; 23 ; set to $1E by ArmTimerA4, cleared by ClearTimerA4
 ram_00A5               = $00A5 ; 2
 ram_00A6               = $00A6 ; 25
 ram_00A7               = $00A7 ; 72
@@ -188,29 +188,29 @@ ram_010F               = $010F ; 2
 ram_0150               = $0150 ; 3
 ram_0151               = $0151 ; 6
 oamBuffer              = $0200 ; 9 (size 256) ; OAM DMA source ($4014 <- $02)
-objArr_0300            = $0300 ; 428 (size 16)
+objActive              = $0300 ; 428 (size 16)
 objState               = $0310 ; 12 (size 16) ; enemy state: 00 killed, 80 alive (array of 16 object slots; slot 0 = player; Data Crystal addresses are slot $0C)
-objArr_0320            = $0320 ; 123 (size 16)
+objKind                = $0320 ; 123 (size 16)
 objId                  = $0330 ; 32 (size 16) ; object / enemy id (Poison 20/26/30, Two P 21/27/31, Bred 22/28/32, Axl 23/29/33, (array of 16 object slots; slot 0 = player; Data Crystal addresses are slot $0C)
-objArr_0340            = $0340 ; 12 (size 16)
+objXFrac               = $0340 ; 12 (size 16)
 objArr_0350            = $0350 ; 0 (size 16)
 objX                   = $0360 ; 340 (size 16) ; X position (player at +0, enemies at +$0C ...) (array of 16 object slots; slot 0 = player; Data Crystal addresses are slot $0C)
 objArr_0370            = $0370 ; 0 (size 16)
-objArr_0380            = $0380 ; 226 (size 16)
+objXPage               = $0380 ; 226 (size 16)
 objArr_0390            = $0390 ; 0 (size 16)
-objArr_03A0            = $03A0 ; 10 (size 16)
+objYFrac               = $03A0 ; 10 (size 16)
 objArr_03B0            = $03B0 ; 0 (size 16)
 objY                   = $03C0 ; 377 (size 16) ; Y position (array of 16 object slots; slot 0 = player; Data Crystal addresses are slot $0C)
 objArr_03D0            = $03D0 ; 12 (size 16)
-objArr_03E0            = $03E0 ; 73 (size 16)
+objYPage               = $03E0 ; 73 (size 16) ; incremented when Y wraps past $EF
 objArr_03F0            = $03F0 ; 28 (size 16)
-objArr_0400            = $0400 ; 112 (size 16)
-objArr_0410            = $0410 ; 107 (size 16)
-objArr_0420            = $0420 ; 114 (size 16)
-objArr_0430            = $0430 ; 150 (size 16)
+objVelXLo              = $0400 ; 112 (size 16)
+objVelXHi              = $0410 ; 107 (size 16)
+objVelYLo              = $0420 ; 114 (size 16)
+objVelYHi              = $0430 ; 150 (size 16) ; sign: negative = moving up
 objArr_0440            = $0440 ; 65 (size 16)
 objArr_0450            = $0450 ; 36 (size 16)
-objArr_0460            = $0460 ; 217 (size 16)
+objFacing              = $0460 ; 217 (size 16) ; 1 = right, 2 = left (FaceToPlayer)
 objArr_0470            = $0470 ; 24 (size 16)
 objArr_0480            = $0480 ; 6 (size 16)
 objLife                = $0490 ; 39 (size 16) ; enemy life; "one hit kills" cheat patches the SBC that subtracts from it (array of 16 object slots; slot 0 = player; Data Crystal addresses are slot $0C)
@@ -226,10 +226,10 @@ objArr_0520            = $0520 ; 65 (size 16)
 objArr_0530            = $0530 ; 71 (size 16)
 objArr_0540            = $0540 ; 29 (size 16)
 objArr_0550            = $0550 ; 37 (size 16)
-objArr_0560            = $0560 ; 143 (size 16)
-objArr_0570            = $0570 ; 163 (size 16)
-objArr_0580            = $0580 ; 128 (size 16)
-objArr_0590            = $0590 ; 128 (size 16)
+objFlags               = $0560 ; 143 (size 16) ; bit 6 = horizontal flip (set from objFacing)
+objAnimFrame           = $0570 ; 163 (size 16) ; frame counter, reset by SetAnim
+objAnim                = $0580 ; 128 (size 16) ; animation id (SetPlayerAnim/SetAnimX)
+objAnimFlags           = $0590 ; 128 (size 16) ; bit 7 survives SetAnimY
 objArr_05A0            = $05A0 ; 20 (size 16)
 objSpriteDown          = $05B0 ; 96 (size 16) ; (?) sprite id while lying down (array of 16 object slots; slot 0 = player; Data Crystal addresses are slot $0C)
 objArr_05C0            = $05C0 ; 45 (size 16)
