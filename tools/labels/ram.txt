@@ -48,3 +48,15 @@
 00FD nametableSelect            ; bit 0 ORed into PPUCTRL
 00FE ppuMaskBuf                 ; value written to PPUMASK by NMI
 009C irqVector 2                ; current IRQ handler (JMP (irqVector) from IRQ); each raster split sets the next one
+
+; ---- input / PPU update queues (NMI, bank 0E)
+0014 padPressed 2               ; buttons newly pressed this frame, player 1/2 (ReadPads); Up+Down / Left+Right cleared
+0016 padHeld 2                  ; raw button state of the previous read, player 1/2
+0064 vramQueueFlag              ; non-zero: NMI flushes vramQueue (FlushVramQueue)
+0065 vramQueueEnd               ; X index where the vramQueue flush stops; cleared afterwards
+00EE renderOffCount             ; >0 while the screen is blanked (ScreenOff/ScreenOn); NMI skips updates
+00FC scrollX                    ; copied to irqScrollX each NMI
+007C irqScrollY                 ; copy of $F8 for the IRQ splits
+007D irqScrollX                 ; copy of scrollX used by IrqSplit1/2
+007E irqNametable               ; copy of nametableSelect
+0780 vramQueue 128              ; queue: [len, ppuHi, ppuLo, data*len]...  (also vramBuffer: [hi(bit7=end), lo, len-1, data])

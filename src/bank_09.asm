@@ -296,13 +296,13 @@ loc_09_A719:
 loc_09_A71D:
 	LDX ram_0010                    ;C - - - - - 0x01272D 09:A71D: A6 10
 	LDA tbl_09_A782,X               ;C - - - - - 0x01272F 09:A71F: BD 82 A7
-	STA ram_0780                    ;C - - - - - 0x012732 09:A722: 8D 80 07
+	STA vramQueue                   ;C - - - - - 0x012732 09:A722: 8D 80 07
 	LDA tbl_09_A785,X               ;C - - - - - 0x012735 09:A725: BD 85 A7
 	CLC                             ;C - - - - - 0x012738 09:A728: 18
 	ADC ram_0011                    ;C - - - - - 0x012739 09:A729: 65 11
-	STA ram_0781                    ;C - - - - - 0x01273B 09:A72B: 8D 81 07
+	STA vramQueue+1                 ;C - - - - - 0x01273B 09:A72B: 8D 81 07
 	LDA #$00                        ;C - - - - - 0x01273E 09:A72E: A9 00
-	STA ram_0782                    ;C - - - - - 0x012740 09:A730: 8D 82 07
+	STA vramQueue+2                 ;C - - - - - 0x012740 09:A730: 8D 82 07
 	LDY ptr_0E                      ;C - - - - - 0x012743 09:A733: A4 0E
 	INC ptr_0E                      ;C - - - - - 0x012745 09:A735: E6 0E
 	LDA (ptr_0C),Y                  ;C - - - - - 0x012747 09:A737: B1 0C
@@ -310,9 +310,9 @@ loc_09_A71D:
 	BEQ loc_09_A77E                 ;C - - - - - 0x01274B 09:A73B: F0 41
 	CMP #$FE                        ;C - - - - - 0x01274D 09:A73D: C9 FE
 	BEQ loc_09_A76D                 ;C - - - - - 0x01274F 09:A73F: F0 2C
-	STA ram_0783                    ;C - - - - - 0x012751 09:A741: 8D 83 07
+	STA vramQueue+3                 ;C - - - - - 0x012751 09:A741: 8D 83 07
 	LDA #$FF                        ;C - - - - - 0x012754 09:A744: A9 FF
-	STA ram_0784                    ;C - - - - - 0x012756 09:A746: 8D 84 07
+	STA vramQueue+4                 ;C - - - - - 0x012756 09:A746: 8D 84 07
 	STA vramUpdateFlag0             ;C - - - - - 0x012759 09:A749: 85 19
 	LDA ram_0010                    ;C - - - - - 0x01275B 09:A74B: A5 10
 	PHA                             ;C - - - - - 0x01275D 09:A74D: 48
@@ -353,31 +353,31 @@ sub_09_A788:
 	RTS                             ;C - - - - - 0x01279D 09:A78D: 60
 sub_09_A78E:
 	LDA #$22                        ;C - - - - - 0x01279E 09:A78E: A9 22
-	STA ram_0784                    ;C - - - - - 0x0127A0 09:A790: 8D 84 07
+	STA vramQueue+4                 ;C - - - - - 0x0127A0 09:A790: 8D 84 07
 	LDA #$21                        ;C - - - - - 0x0127A3 09:A793: A9 21
-	STA ram_07B0                    ;C - - - - - 0x0127A5 09:A795: 8D B0 07
-	STA ram_079A                    ;C - - - - - 0x0127A8 09:A798: 8D 9A 07
+	STA vramQueue+48                ;C - - - - - 0x0127A5 09:A795: 8D B0 07
+	STA vramQueue+26                ;C - - - - - 0x0127A8 09:A798: 8D 9A 07
 	LDA #$27                        ;C - - - - - 0x0127AB 09:A79B: A9 27
-	STA ram_0785                    ;C - - - - - 0x0127AD 09:A79D: 8D 85 07
+	STA vramQueue+5                 ;C - - - - - 0x0127AD 09:A79D: 8D 85 07
 	LDA #$E7                        ;C - - - - - 0x0127B0 09:A7A0: A9 E7
-	STA ram_079B                    ;C - - - - - 0x0127B2 09:A7A2: 8D 9B 07
+	STA vramQueue+27                ;C - - - - - 0x0127B2 09:A7A2: 8D 9B 07
 	LDA #$A7                        ;C - - - - - 0x0127B5 09:A7A5: A9 A7
-	STA ram_07B1                    ;C - - - - - 0x0127B7 09:A7A7: 8D B1 07
+	STA vramQueue+49                ;C - - - - - 0x0127B7 09:A7A7: 8D B1 07
 	LDX #$12                        ;C - - - - - 0x0127BA 09:A7AA: A2 12
-	STX ram_0786                    ;C - - - - - 0x0127BC 09:A7AC: 8E 86 07
-	STX ram_079C                    ;C - - - - - 0x0127BF 09:A7AF: 8E 9C 07
-	STX ram_07B2                    ;C - - - - - 0x0127C2 09:A7B2: 8E B2 07
+	STX vramQueue+6                 ;C - - - - - 0x0127BC 09:A7AC: 8E 86 07
+	STX vramQueue+28                ;C - - - - - 0x0127BF 09:A7AF: 8E 9C 07
+	STX vramQueue+50                ;C - - - - - 0x0127C2 09:A7B2: 8E B2 07
 	LDY #$00                        ;C - - - - - 0x0127C5 09:A7B5: A0 00
 	LDA #$00                        ;C - - - - - 0x0127C7 09:A7B7: A9 00
 loc_09_A7B9:
-	STA ram_0787,Y                  ;C - - - - - 0x0127C9 09:A7B9: 99 87 07
-	STA ram_079D,Y                  ;C - - - - - 0x0127CC 09:A7BC: 99 9D 07
-	STA ram_07B3,Y                  ;C - - - - - 0x0127CF 09:A7BF: 99 B3 07
+	STA vramQueue+7,Y               ;C - - - - - 0x0127C9 09:A7B9: 99 87 07
+	STA vramQueue+29,Y              ;C - - - - - 0x0127CC 09:A7BC: 99 9D 07
+	STA vramQueue+51,Y              ;C - - - - - 0x0127CF 09:A7BF: 99 B3 07
 	INY                             ;C - - - - - 0x0127D2 09:A7C2: C8
 	DEX                             ;C - - - - - 0x0127D3 09:A7C3: CA
 	BPL loc_09_A7B9                 ;C - - - - - 0x0127D4 09:A7C4: 10 F3
 	LDA #$FF                        ;C - - - - - 0x0127D6 09:A7C6: A9 FF
-	STA ram_07C6                    ;C - - - - - 0x0127D8 09:A7C8: 8D C6 07
+	STA vramQueue+70                ;C - - - - - 0x0127D8 09:A7C8: 8D C6 07
 	STA vramUpdateFlag0             ;C - - - - - 0x0127DB 09:A7CB: 85 19
 	JMP sub_0F_FF31                 ;C - - - - - 0x0127DD 09:A7CD: 4C 31 FF
 sub_09_A7D0:

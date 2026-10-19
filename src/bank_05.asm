@@ -292,7 +292,7 @@ loc_05_A7D9:
 	BCS loc_05_A850                 ;C - - - - - 0x00A7F5 05:A7E5: B0 69
 	CMP #$0A                        ;C - - - - - 0x00A7F7 05:A7E7: C9 0A
 	BCC loc_05_A850                 ;C - - - - - 0x00A7F9 05:A7E9: 90 65
-	LDA ram_0014                    ;C - - - - - 0x00A7FB 05:A7EB: A5 14
+	LDA padPressed                  ;C - - - - - 0x00A7FB 05:A7EB: A5 14
 	CMP #$40                        ;C - - - - - 0x00A7FD 05:A7ED: C9 40
 	BNE loc_05_A850                 ;C - - - - - 0x00A7FF 05:A7EF: D0 5F
 	LDA #$2E                        ;C - - - - - 0x00A801 05:A7F1: A9 2E
@@ -382,7 +382,7 @@ loc_05_A8E7:
 	BEQ loc_05_A902                 ;C - - - - - 0x00A8FC 05:A8EC: F0 14
 	LDA objX,X                      ;C - - - - - 0x00A8FE 05:A8EE: BD 60 03
 	SEC                             ;C - - - - - 0x00A901 05:A8F1: 38
-	SBC ram_00FC                    ;C - - - - - 0x00A902 05:A8F2: E5 FC
+	SBC scrollX                     ;C - - - - - 0x00A902 05:A8F2: E5 FC
 	CMP #$FA                        ;C - - - - - 0x00A904 05:A8F4: C9 FA
 	BCC loc_05_A8FB                 ;C - - - - - 0x00A906 05:A8F6: 90 03
 	JMP sub_0F_F2BE                 ;C - - - - - 0x00A908 05:A8F8: 4C BE F2
@@ -394,7 +394,7 @@ loc_05_A902:
 	LDA objX,X                      ;C - - - - - 0x00A912 05:A902: BD 60 03
 ofs_05_A905:
 	SEC                             ;C - - - - - 0x00A915 05:A905: 38
-	SBC ram_00FC                    ;C - - - - - 0x00A916 05:A906: E5 FC
+	SBC scrollX                     ;C - - - - - 0x00A916 05:A906: E5 FC
 	CMP #$08                        ;C - - - - - 0x00A918 05:A908: C9 08
 	BCS loc_05_A90F                 ;C - - - - - 0x00A91A 05:A90A: B0 03
 	JMP sub_0F_F2BE                 ;C - - - - - 0x00A91C 05:A90C: 4C BE F2
@@ -508,7 +508,7 @@ loc_05_A9E4:
 	LDA ram_0300,X                  ;C - - - - - 0x00A9F4 05:A9E4: BD 00 03
 	AND #$0F                        ;C - - - - - 0x00A9F7 05:A9E7: 29 0F
 	BNE loc_05_AA18                 ;C - - - - - 0x00A9F9 05:A9E9: D0 2D
-	LDA ram_00FC                    ;C - - - - - 0x00A9FB 05:A9EB: A5 FC
+	LDA scrollX                     ;C - - - - - 0x00A9FB 05:A9EB: A5 FC
 	BNE loc_05_AA17                 ;C - - - - - 0x00A9FD 05:A9ED: D0 28
 	LDA gameAction                  ;C - - - - - 0x00A9FF 05:A9EF: A5 30
 	CMP #$01                        ;C - - - - - 0x00AA01 05:A9F1: C9 01
@@ -595,11 +595,11 @@ loc_05_AA82:
 	STA ram_0054                    ;C - - - - - 0x00AAAD 05:AA9D: 85 54
 	JSR sub_0F_F436                 ;C - - - - - 0x00AAAF 05:AA9F: 20 36 F4
 loc_05_AAA2:
-	LDA ram_00FC                    ;C - - - - - 0x00AAB2 05:AAA2: A5 FC
+	LDA scrollX                     ;C - - - - - 0x00AAB2 05:AAA2: A5 FC
 	BEQ loc_05_AAD3                 ;C - - - - - 0x00AAB4 05:AAA4: F0 2D
 	LDA #$00                        ;C - - - - - 0x00AAB6 05:AAA6: A9 00
 	STA ram_003F                    ;C - - - - - 0x00AAB8 05:AAA8: 85 3F
-	LDA ram_00FC                    ;C - - - - - 0x00AABA 05:AAAA: A5 FC
+	LDA scrollX                     ;C - - - - - 0x00AABA 05:AAAA: A5 FC
 	CMP #$28                        ;C - - - - - 0x00AABC 05:AAAC: C9 28
 	BCC loc_05_AAD3                 ;C - - - - - 0x00AABE 05:AAAE: 90 23
 	INC ram_00B5                    ;C - - - - - 0x00AAC0 05:AAB0: E6 B5

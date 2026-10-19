@@ -32,3 +32,15 @@ note 0E:C755 ; GG PASGIYAA..GASGIYAA start stage: LDA #$00 / STA stage
 0E:C14A IrqSplit1
 0E:C194 IrqSplit2
 0E:C1B1 IrqSplit3
+code 0E:C251-C264
+0E:C251 DisableNMI              ; bufPPUCTRL &= $11 ; PPUCTRL = bufPPUCTRL (not called by anything the CDL saw)
+0E:C25B EnableNMI               ; bufPPUCTRL |= $80 ; PPUCTRL = bufPPUCTRL
+0E:C1DF RefreshStageBank        ; prgBankA000 = stageBankTable[stageData] unless $13, then SetPrgBanks
+0E:C1FD FlushVramBuffer         ; clears vramUpdateFlag0 then falls into FlushVramBufferNoClear
+0E:C201 FlushVramBufferNoClear  ; writes records [hi(bit7=end), lo, len-1, data] from vramQueue to PPU
+0E:C222 FlushVramQueue          ; writes records [len, hi, lo, data] from vramQueue up to vramQueueEnd
+0E:C265 ScreenOff               ; renderOffCount++ ; PPUMASK = 0
+0E:C26F ScreenOn                ; renderOffCount-- ; PPUMASK = $18
+0E:C279 ReadPads                ; reads both pads (+ expansion bits) into padPressed/padHeld
+0E:C2D1 FillNametable           ; A=PPU high address, X=tile, Y=attribute fill value
+0E:C31D HideSprites             ; fills oamBuffer Y positions with $F8 from index ram_0097

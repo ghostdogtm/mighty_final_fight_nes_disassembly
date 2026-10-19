@@ -573,23 +573,23 @@
 	.byte $37,$A0,$F3,$4A,$6A,$2C,$3F,$4A,$BB,$AB,$63,$B8,$B5,$92,$D4,$AA;- - - - - - 0x015BF7 0A:9BE7:
 	.byte $E0,$A4,$71,$00,$78,$A2,$BF,$8C,$FA;- - - - - - 0x015C07 0A:9BF7:
 sub_0A_9C00:
-	LDX ram_0065                    ;C - - - - - 0x015C10 0A:9C00: A6 65
+	LDX vramQueueEnd                ;C - - - - - 0x015C10 0A:9C00: A6 65
 	LDY #$00                        ;C - - - - - 0x015C12 0A:9C02: A0 00
 loc_0A_9C04:
 	LDA tbl_0A_9C20,Y               ;C - - - - - 0x015C14 0A:9C04: B9 20 9C
 	CMP #$FF                        ;C - - - - - 0x015C17 0A:9C07: C9 FF
 	BEQ loc_0A_9C12                 ;C - - - - - 0x015C19 0A:9C09: F0 07
-	STA ram_0780,X                  ;C - - - - - 0x015C1B 0A:9C0B: 9D 80 07
+	STA vramQueue,X                 ;C - - - - - 0x015C1B 0A:9C0B: 9D 80 07
 	INY                             ;C - - - - - 0x015C1E 0A:9C0E: C8
 	INX                             ;C - - - - - 0x015C1F 0A:9C0F: E8
 	BNE loc_0A_9C04                 ;C - - - - - 0x015C20 0A:9C10: D0 F2
 loc_0A_9C12:
-	STX ram_0065                    ;C - - - - - 0x015C22 0A:9C12: 86 65
+	STX vramQueueEnd                ;C - - - - - 0x015C22 0A:9C12: 86 65
 	LDA #$00                        ;C - - - - - 0x015C24 0A:9C14: A9 00
 	STA ram_0066                    ;C - - - - - 0x015C26 0A:9C16: 85 66
 	JSR sub_0F_E954                 ;C - - - - - 0x015C28 0A:9C18: 20 54 E9
 	LDA #$FF                        ;C - - - - - 0x015C2B 0A:9C1B: A9 FF
-	STA ram_0064                    ;C - - - - - 0x015C2D 0A:9C1D: 85 64
+	STA vramQueueFlag               ;C - - - - - 0x015C2D 0A:9C1D: 85 64
 	RTS                             ;C - - - - - 0x015C2F 0A:9C1F: 60
 tbl_0A_9C20:
 	.byte $07,$20,$43,$0E,$0F,$0C,$0D,$1B,$1C,$19,$05,$20,$63,$1B,$1D,$1B;- D 0 - - - 0x015C30 0A:9C20:

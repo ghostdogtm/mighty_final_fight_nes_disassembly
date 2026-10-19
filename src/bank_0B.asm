@@ -1801,8 +1801,8 @@ loc_0B_BD7F:
 	JMP (ptr_00)                    ;C - - - - - 0x017DA8 0B:BD98: 6C 00 00
 ofs_0B_BD9B:
 	LDA #$80                        ;C - - J - - 0x017DAB 0B:BD9B: A9 80
-	STA ram_0014                    ;C - - - - - 0x017DAD 0B:BD9D: 85 14
-	STA ram_0016                    ;C - - - - - 0x017DAF 0B:BD9F: 85 16
+	STA padPressed                  ;C - - - - - 0x017DAD 0B:BD9D: 85 14
+	STA padHeld                     ;C - - - - - 0x017DAF 0B:BD9F: 85 16
 	LDA #$00                        ;C - - - - - 0x017DB1 0B:BDA1: A9 00
 	STA gameAction                  ;C - - - - - 0x017DB3 0B:BDA3: 85 30
 	STX ram_04FF                    ;C - - - - - 0x017DB5 0B:BDA5: 8E FF 04
@@ -1820,8 +1820,8 @@ ofs_0B_BDBF:
 	EOR #$FF                        ;C - - - - - 0x017DD1 0B:BDC1: 49 FF
 	AND #$03                        ;C - - - - - 0x017DD3 0B:BDC3: 29 03
 	STA ram_0032                    ;C - - - - - 0x017DD5 0B:BDC5: 85 32
-	STA ram_0014                    ;C - - - - - 0x017DD7 0B:BDC7: 85 14
-	STA ram_0016                    ;C - - - - - 0x017DD9 0B:BDC9: 85 16
+	STA padPressed                  ;C - - - - - 0x017DD7 0B:BDC7: 85 14
+	STA padHeld                     ;C - - - - - 0x017DD9 0B:BDC9: 85 16
 	LDA #$01                        ;C - - - - - 0x017DDB 0B:BDCB: A9 01
 	STA gameAction                  ;C - - - - - 0x017DDD 0B:BDCD: 85 30
 	STX ram_04FF                    ;C - - - - - 0x017DDF 0B:BDCF: 8E FF 04
@@ -1917,8 +1917,8 @@ sub_0B_BE79:
 	RTS                             ;C - - - - - 0x017E9D 0B:BE8D: 60
 loc_0B_BE8E:
 	LDA #$02                        ;C - - - - - 0x017E9E 0B:BE8E: A9 02
-	STA ram_0014                    ;C - - - - - 0x017EA0 0B:BE90: 85 14
-	STA ram_0016                    ;C - - - - - 0x017EA2 0B:BE92: 85 16
+	STA padPressed                  ;C - - - - - 0x017EA0 0B:BE90: 85 14
+	STA padHeld                     ;C - - - - - 0x017EA2 0B:BE92: 85 16
 	LDA #$00                        ;C - - - - - 0x017EA4 0B:BE94: A9 00
 	STA gameAction                  ;C - - - - - 0x017EA6 0B:BE96: 85 30
 	STX ram_04FF                    ;C - - - - - 0x017EA8 0B:BE98: 8E FF 04
@@ -1968,8 +1968,8 @@ loc_0B_BEF1:
 	BCC loc_0B_BF0D                 ;C - - - - - 0x017F03 0B:BEF3: 90 18
 	LDA #$02                        ;C - - - - - 0x017F05 0B:BEF5: A9 02
 loc_0B_BEF7:
-	STA ram_0014                    ;C - - - - - 0x017F07 0B:BEF7: 85 14
-	STA ram_0016                    ;C - - - - - 0x017F09 0B:BEF9: 85 16
+	STA padPressed                  ;C - - - - - 0x017F07 0B:BEF7: 85 14
+	STA padHeld                     ;C - - - - - 0x017F09 0B:BEF9: 85 16
 	LDA #$00                        ;C - - - - - 0x017F0B 0B:BEFB: A9 00
 	STA gameAction                  ;C - - - - - 0x017F0D 0B:BEFD: 85 30
 	STX ram_04FF                    ;C - - - - - 0x017F0F 0B:BEFF: 8E FF 04

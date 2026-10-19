@@ -1560,7 +1560,7 @@ loc_03_BBCB:
 	LDA ram_0300,X                  ;C - - - - - 0x007BDB 03:BBCB: BD 00 03
 	AND #$0F                        ;C - - - - - 0x007BDE 03:BBCE: 29 0F
 	BNE loc_03_BBDE                 ;C - - - - - 0x007BE0 03:BBD0: D0 0C
-	LDA ram_00FC                    ;C - - - - - 0x007BE2 03:BBD2: A5 FC
+	LDA scrollX                     ;C - - - - - 0x007BE2 03:BBD2: A5 FC
 	BNE loc_03_BBE6                 ;C - - - - - 0x007BE4 03:BBD4: D0 10
 	LDA #$3C                        ;C - - - - - 0x007BE6 03:BBD6: A9 3C
 	STA ram_0500,X                  ;C - - - - - 0x007BE8 03:BBD8: 9D 00 05

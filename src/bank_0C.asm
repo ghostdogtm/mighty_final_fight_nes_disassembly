@@ -1368,7 +1368,7 @@ loc_0C_8B22:
 	BCS loc_0C_8B5B                 ;C - - - - - 0x018B3E 0C:8B2E: B0 2B
 	CMP #$07                        ;C - - - - - 0x018B40 0C:8B30: C9 07
 	BCC loc_0C_8B5B                 ;C - - - - - 0x018B42 0C:8B32: 90 27
-	LDA ram_0014                    ;C - - - - - 0x018B44 0C:8B34: A5 14
+	LDA padPressed                  ;C - - - - - 0x018B44 0C:8B34: A5 14
 	CMP #$40                        ;C - - - - - 0x018B46 0C:8B36: C9 40
 	BNE loc_0C_8B5B                 ;C - - - - - 0x018B48 0C:8B38: D0 21
 	LDY playerId                    ;C - - - - - 0x018B4A 0C:8B3A: A4 34
@@ -1683,10 +1683,10 @@ loc_0C_8DAE:
 loc_0C_8DB2:
 	LDA objX,X                      ;C - - - - - 0x018DC2 0C:8DB2: BD 60 03
 	SEC                             ;C - - - - - 0x018DC5 0C:8DB5: 38
-	SBC ram_00FC                    ;C - - - - - 0x018DC6 0C:8DB6: E5 FC
+	SBC scrollX                     ;C - - - - - 0x018DC6 0C:8DB6: E5 FC
 	CMP #$10                        ;C - - - - - 0x018DC8 0C:8DB8: C9 10
 	BCS loc_0C_8DCE                 ;C - - - - - 0x018DCA 0C:8DBA: B0 12
-	LDA ram_00FC                    ;c - - - - - 0x018DCC 0C:8DBC: A5 FC
+	LDA scrollX                     ;c - - - - - 0x018DCC 0C:8DBC: A5 FC
 	CLC                             ;c - - - - - 0x018DCE 0C:8DBE: 18
 	ADC #$10                        ;c - - - - - 0x018DCF 0C:8DBF: 69 10
 	STA objX,X                      ;c - - - - - 0x018DD1 0C:8DC1: 9D 60 03
@@ -1701,10 +1701,10 @@ loc_0C_8DD1:
 	BEQ loc_0C_8DEF                 ;C - - - - - 0x018DE3 0C:8DD3: F0 1A
 	LDA objX,X                      ;C - - - - - 0x018DE5 0C:8DD5: BD 60 03
 	SEC                             ;C - - - - - 0x018DE8 0C:8DD8: 38
-	SBC ram_00FC                    ;C - - - - - 0x018DE9 0C:8DD9: E5 FC
+	SBC scrollX                     ;C - - - - - 0x018DE9 0C:8DD9: E5 FC
 	CMP #$F1                        ;C - - - - - 0x018DEB 0C:8DDB: C9 F1
 	BCC loc_0C_8DEF                 ;C - - - - - 0x018DED 0C:8DDD: 90 10
-	LDA ram_00FC                    ;c - - - - - 0x018DEF 0C:8DDF: A5 FC
+	LDA scrollX                     ;c - - - - - 0x018DEF 0C:8DDF: A5 FC
 	CLC                             ;c - - - - - 0x018DF1 0C:8DE1: 18
 	ADC #$F0                        ;c - - - - - 0x018DF2 0C:8DE2: 69 F0
 	STA objX,X                      ;c - - - - - 0x018DF4 0C:8DE4: 9D 60 03
@@ -1775,10 +1775,10 @@ loc_0C_8E64:
 	BEQ loc_0C_8E8B                 ;C - - - - - 0x018E7D 0C:8E6D: F0 1C
 	LDA objX,X                      ;C - - - - - 0x018E7F 0C:8E6F: BD 60 03
 	SEC                             ;C - - - - - 0x018E82 0C:8E72: 38
-	SBC ram_00FC                    ;C - - - - - 0x018E83 0C:8E73: E5 FC
+	SBC scrollX                     ;C - - - - - 0x018E83 0C:8E73: E5 FC
 	CMP #$10                        ;C - - - - - 0x018E85 0C:8E75: C9 10
 	BCS loc_0C_8E8B                 ;C - - - - - 0x018E87 0C:8E77: B0 12
-	LDA ram_00FC                    ;C - - - - - 0x018E89 0C:8E79: A5 FC
+	LDA scrollX                     ;C - - - - - 0x018E89 0C:8E79: A5 FC
 	CLC                             ;C - - - - - 0x018E8B 0C:8E7B: 18
 	ADC #$10                        ;C - - - - - 0x018E8C 0C:8E7C: 69 10
 	STA objX,X                      ;C - - - - - 0x018E8E 0C:8E7E: 9D 60 03
@@ -1794,10 +1794,10 @@ loc_0C_8E91:
 	BEQ loc_0C_8EB1                 ;C - - - - - 0x018EA3 0C:8E93: F0 1C
 	LDA objX,X                      ;C - - - - - 0x018EA5 0C:8E95: BD 60 03
 	SEC                             ;C - - - - - 0x018EA8 0C:8E98: 38
-	SBC ram_00FC                    ;C - - - - - 0x018EA9 0C:8E99: E5 FC
+	SBC scrollX                     ;C - - - - - 0x018EA9 0C:8E99: E5 FC
 	CMP #$F1                        ;C - - - - - 0x018EAB 0C:8E9B: C9 F1
 	BCC loc_0C_8EB1                 ;C - - - - - 0x018EAD 0C:8E9D: 90 12
-	LDA ram_00FC                    ;C - - - - - 0x018EAF 0C:8E9F: A5 FC
+	LDA scrollX                     ;C - - - - - 0x018EAF 0C:8E9F: A5 FC
 	CLC                             ;C - - - - - 0x018EB1 0C:8EA1: 18
 	ADC #$F0                        ;C - - - - - 0x018EB2 0C:8EA2: 69 F0
 	STA objX,X                      ;C - - - - - 0x018EB4 0C:8EA4: 9D 60 03
@@ -1846,10 +1846,10 @@ loc_0C_8EF5:
 	BEQ loc_0C_8F1C                 ;C - - - - - 0x018F0E 0C:8EFE: F0 1C
 	LDA objX,X                      ;C - - - - - 0x018F10 0C:8F00: BD 60 03
 	SEC                             ;C - - - - - 0x018F13 0C:8F03: 38
-	SBC ram_00FC                    ;C - - - - - 0x018F14 0C:8F04: E5 FC
+	SBC scrollX                     ;C - - - - - 0x018F14 0C:8F04: E5 FC
 	CMP #$10                        ;C - - - - - 0x018F16 0C:8F06: C9 10
 	BCS loc_0C_8F1C                 ;C - - - - - 0x018F18 0C:8F08: B0 12
-	LDA ram_00FC                    ;C - - - - - 0x018F1A 0C:8F0A: A5 FC
+	LDA scrollX                     ;C - - - - - 0x018F1A 0C:8F0A: A5 FC
 	CLC                             ;C - - - - - 0x018F1C 0C:8F0C: 18
 	ADC #$10                        ;C - - - - - 0x018F1D 0C:8F0D: 69 10
 	STA objX,X                      ;C - - - - - 0x018F1F 0C:8F0F: 9D 60 03
@@ -1865,10 +1865,10 @@ loc_0C_8F22:
 	BEQ loc_0C_8F42                 ;C - - - - - 0x018F34 0C:8F24: F0 1C
 	LDA objX,X                      ;C - - - - - 0x018F36 0C:8F26: BD 60 03
 	SEC                             ;C - - - - - 0x018F39 0C:8F29: 38
-	SBC ram_00FC                    ;C - - - - - 0x018F3A 0C:8F2A: E5 FC
+	SBC scrollX                     ;C - - - - - 0x018F3A 0C:8F2A: E5 FC
 	CMP #$F1                        ;C - - - - - 0x018F3C 0C:8F2C: C9 F1
 	BCC loc_0C_8F42                 ;C - - - - - 0x018F3E 0C:8F2E: 90 12
-	LDA ram_00FC                    ;C - - - - - 0x018F40 0C:8F30: A5 FC
+	LDA scrollX                     ;C - - - - - 0x018F40 0C:8F30: A5 FC
 	CLC                             ;C - - - - - 0x018F42 0C:8F32: 18
 	ADC #$F0                        ;C - - - - - 0x018F43 0C:8F33: 69 F0
 	STA objX,X                      ;C - - - - - 0x018F45 0C:8F35: 9D 60 03
@@ -2440,10 +2440,10 @@ loc_0C_93E7:
 	BEQ loc_0C_940E                 ;C - - - - - 0x019400 0C:93F0: F0 1C
 	LDA objX,X                      ;C - - - - - 0x019402 0C:93F2: BD 60 03
 	SEC                             ;C - - - - - 0x019405 0C:93F5: 38
-	SBC ram_00FC                    ;C - - - - - 0x019406 0C:93F6: E5 FC
+	SBC scrollX                     ;C - - - - - 0x019406 0C:93F6: E5 FC
 	CMP #$10                        ;C - - - - - 0x019408 0C:93F8: C9 10
 	BCS loc_0C_940E                 ;C - - - - - 0x01940A 0C:93FA: B0 12
-	LDA ram_00FC                    ;c - - - - - 0x01940C 0C:93FC: A5 FC
+	LDA scrollX                     ;c - - - - - 0x01940C 0C:93FC: A5 FC
 	CLC                             ;c - - - - - 0x01940E 0C:93FE: 18
 	ADC #$10                        ;c - - - - - 0x01940F 0C:93FF: 69 10
 	STA objX,X                      ;c - - - - - 0x019411 0C:9401: 9D 60 03
@@ -2458,10 +2458,10 @@ loc_0C_9411:
 	BEQ loc_0C_942F                 ;C - - - - - 0x019423 0C:9413: F0 1A
 	LDA objX,X                      ;C - - - - - 0x019425 0C:9415: BD 60 03
 	SEC                             ;C - - - - - 0x019428 0C:9418: 38
-	SBC ram_00FC                    ;C - - - - - 0x019429 0C:9419: E5 FC
+	SBC scrollX                     ;C - - - - - 0x019429 0C:9419: E5 FC
 	CMP #$F1                        ;C - - - - - 0x01942B 0C:941B: C9 F1
 	BCC loc_0C_942F                 ;C - - - - - 0x01942D 0C:941D: 90 10
-	LDA ram_00FC                    ;c - - - - - 0x01942F 0C:941F: A5 FC
+	LDA scrollX                     ;c - - - - - 0x01942F 0C:941F: A5 FC
 	CLC                             ;c - - - - - 0x019431 0C:9421: 18
 	ADC #$F0                        ;c - - - - - 0x019432 0C:9422: 69 F0
 	STA objX,X                      ;c - - - - - 0x019434 0C:9424: 9D 60 03
@@ -2509,10 +2509,10 @@ loc_0C_946D:
 	BEQ loc_0C_9494                 ;C - - - - - 0x019486 0C:9476: F0 1C
 	LDA objX,X                      ;C - - - - - 0x019488 0C:9478: BD 60 03
 	SEC                             ;C - - - - - 0x01948B 0C:947B: 38
-	SBC ram_00FC                    ;C - - - - - 0x01948C 0C:947C: E5 FC
+	SBC scrollX                     ;C - - - - - 0x01948C 0C:947C: E5 FC
 	CMP #$10                        ;C - - - - - 0x01948E 0C:947E: C9 10
 	BCS loc_0C_9494                 ;C - - - - - 0x019490 0C:9480: B0 12
-	LDA ram_00FC                    ;c - - - - - 0x019492 0C:9482: A5 FC
+	LDA scrollX                     ;c - - - - - 0x019492 0C:9482: A5 FC
 	CLC                             ;c - - - - - 0x019494 0C:9484: 18
 	ADC #$10                        ;c - - - - - 0x019495 0C:9485: 69 10
 	STA objX,X                      ;c - - - - - 0x019497 0C:9487: 9D 60 03
@@ -2527,10 +2527,10 @@ loc_0C_9497:
 	BEQ loc_0C_94B5                 ;C - - - - - 0x0194A9 0C:9499: F0 1A
 	LDA objX,X                      ;C - - - - - 0x0194AB 0C:949B: BD 60 03
 	SEC                             ;C - - - - - 0x0194AE 0C:949E: 38
-	SBC ram_00FC                    ;C - - - - - 0x0194AF 0C:949F: E5 FC
+	SBC scrollX                     ;C - - - - - 0x0194AF 0C:949F: E5 FC
 	CMP #$F1                        ;C - - - - - 0x0194B1 0C:94A1: C9 F1
 	BCC loc_0C_94B5                 ;C - - - - - 0x0194B3 0C:94A3: 90 10
-	LDA ram_00FC                    ;c - - - - - 0x0194B5 0C:94A5: A5 FC
+	LDA scrollX                     ;c - - - - - 0x0194B5 0C:94A5: A5 FC
 	CLC                             ;c - - - - - 0x0194B7 0C:94A7: 18
 	ADC #$F0                        ;c - - - - - 0x0194B8 0C:94A8: 69 F0
 	STA objX,X                      ;c - - - - - 0x0194BA 0C:94AA: 9D 60 03
@@ -2574,10 +2574,10 @@ loc_0C_94EA:
 	BEQ loc_0C_9511                 ;C - - - - - 0x019503 0C:94F3: F0 1C
 	LDA objX,X                      ;C - - - - - 0x019505 0C:94F5: BD 60 03
 	SEC                             ;C - - - - - 0x019508 0C:94F8: 38
-	SBC ram_00FC                    ;C - - - - - 0x019509 0C:94F9: E5 FC
+	SBC scrollX                     ;C - - - - - 0x019509 0C:94F9: E5 FC
 	CMP #$10                        ;C - - - - - 0x01950B 0C:94FB: C9 10
 	BCS loc_0C_9511                 ;C - - - - - 0x01950D 0C:94FD: B0 12
-	LDA ram_00FC                    ;c - - - - - 0x01950F 0C:94FF: A5 FC
+	LDA scrollX                     ;c - - - - - 0x01950F 0C:94FF: A5 FC
 	CLC                             ;c - - - - - 0x019511 0C:9501: 18
 	ADC #$10                        ;c - - - - - 0x019512 0C:9502: 69 10
 	STA objX,X                      ;c - - - - - 0x019514 0C:9504: 9D 60 03
@@ -2592,10 +2592,10 @@ loc_0C_9514:
 	BEQ loc_0C_9511                 ;C - - - - - 0x019526 0C:9516: F0 F9
 	LDA objX,X                      ;C - - - - - 0x019528 0C:9518: BD 60 03
 	SEC                             ;C - - - - - 0x01952B 0C:951B: 38
-	SBC ram_00FC                    ;C - - - - - 0x01952C 0C:951C: E5 FC
+	SBC scrollX                     ;C - - - - - 0x01952C 0C:951C: E5 FC
 	CMP #$F1                        ;C - - - - - 0x01952E 0C:951E: C9 F1
 	BCC loc_0C_9532                 ;C - - - - - 0x019530 0C:9520: 90 10
-	LDA ram_00FC                    ;c - - - - - 0x019532 0C:9522: A5 FC
+	LDA scrollX                     ;c - - - - - 0x019532 0C:9522: A5 FC
 	CLC                             ;c - - - - - 0x019534 0C:9524: 18
 	ADC #$F0                        ;c - - - - - 0x019535 0C:9525: 69 F0
 	STA objX,X                      ;c - - - - - 0x019537 0C:9527: 9D 60 03
@@ -2639,10 +2639,10 @@ loc_0C_9567:
 	BEQ loc_0C_958E                 ;C - - - - - 0x019580 0C:9570: F0 1C
 	LDA objX,X                      ;C - - - - - 0x019582 0C:9572: BD 60 03
 	SEC                             ;C - - - - - 0x019585 0C:9575: 38
-	SBC ram_00FC                    ;C - - - - - 0x019586 0C:9576: E5 FC
+	SBC scrollX                     ;C - - - - - 0x019586 0C:9576: E5 FC
 	CMP #$10                        ;C - - - - - 0x019588 0C:9578: C9 10
 	BCS loc_0C_958E                 ;C - - - - - 0x01958A 0C:957A: B0 12
-	LDA ram_00FC                    ;C - - - - - 0x01958C 0C:957C: A5 FC
+	LDA scrollX                     ;C - - - - - 0x01958C 0C:957C: A5 FC
 	CLC                             ;C - - - - - 0x01958E 0C:957E: 18
 	ADC #$10                        ;C - - - - - 0x01958F 0C:957F: 69 10
 	STA objX,X                      ;C - - - - - 0x019591 0C:9581: 9D 60 03
@@ -2657,10 +2657,10 @@ loc_0C_9591:
 	BEQ loc_0C_95AF                 ;C - - - - - 0x0195A3 0C:9593: F0 1A
 	LDA objX,X                      ;C - - - - - 0x0195A5 0C:9595: BD 60 03
 	SEC                             ;C - - - - - 0x0195A8 0C:9598: 38
-	SBC ram_00FC                    ;C - - - - - 0x0195A9 0C:9599: E5 FC
+	SBC scrollX                     ;C - - - - - 0x0195A9 0C:9599: E5 FC
 	CMP #$F1                        ;C - - - - - 0x0195AB 0C:959B: C9 F1
 	BCC loc_0C_95AF                 ;C - - - - - 0x0195AD 0C:959D: 90 10
-	LDA ram_00FC                    ;c - - - - - 0x0195AF 0C:959F: A5 FC
+	LDA scrollX                     ;c - - - - - 0x0195AF 0C:959F: A5 FC
 	CLC                             ;c - - - - - 0x0195B1 0C:95A1: 18
 	ADC #$F0                        ;c - - - - - 0x0195B2 0C:95A2: 69 F0
 	STA objX,X                      ;c - - - - - 0x0195B4 0C:95A4: 9D 60 03
@@ -2721,10 +2721,10 @@ loc_0C_960C:
 	BEQ loc_0C_9633                 ;C - - - - - 0x019625 0C:9615: F0 1C
 	LDA objX,X                      ;C - - - - - 0x019627 0C:9617: BD 60 03
 	SEC                             ;C - - - - - 0x01962A 0C:961A: 38
-	SBC ram_00FC                    ;C - - - - - 0x01962B 0C:961B: E5 FC
+	SBC scrollX                     ;C - - - - - 0x01962B 0C:961B: E5 FC
 	CMP #$10                        ;C - - - - - 0x01962D 0C:961D: C9 10
 	BCS loc_0C_9633                 ;C - - - - - 0x01962F 0C:961F: B0 12
-	LDA ram_00FC                    ;C - - - - - 0x019631 0C:9621: A5 FC
+	LDA scrollX                     ;C - - - - - 0x019631 0C:9621: A5 FC
 	CLC                             ;C - - - - - 0x019633 0C:9623: 18
 	ADC #$10                        ;C - - - - - 0x019634 0C:9624: 69 10
 	STA objX,X                      ;C - - - - - 0x019636 0C:9626: 9D 60 03
@@ -2740,10 +2740,10 @@ loc_0C_9639:
 	BEQ loc_0C_9659                 ;C - - - - - 0x01964B 0C:963B: F0 1C
 	LDA objX,X                      ;C - - - - - 0x01964D 0C:963D: BD 60 03
 	SEC                             ;C - - - - - 0x019650 0C:9640: 38
-	SBC ram_00FC                    ;C - - - - - 0x019651 0C:9641: E5 FC
+	SBC scrollX                     ;C - - - - - 0x019651 0C:9641: E5 FC
 	CMP #$F1                        ;C - - - - - 0x019653 0C:9643: C9 F1
 	BCC loc_0C_9659                 ;C - - - - - 0x019655 0C:9645: 90 12
-	LDA ram_00FC                    ;c - - - - - 0x019657 0C:9647: A5 FC
+	LDA scrollX                     ;c - - - - - 0x019657 0C:9647: A5 FC
 	CLC                             ;c - - - - - 0x019659 0C:9649: 18
 	ADC #$F0                        ;c - - - - - 0x01965A 0C:964A: 69 F0
 	STA objX,X                      ;c - - - - - 0x01965C 0C:964C: 9D 60 03
@@ -2788,10 +2788,10 @@ ofs_0C_968D:
 	BEQ loc_0C_96BF                 ;C - - - - - 0x0196B1 0C:96A1: F0 1C
 	LDA objX,X                      ;C - - - - - 0x0196B3 0C:96A3: BD 60 03
 	SEC                             ;C - - - - - 0x0196B6 0C:96A6: 38
-	SBC ram_00FC                    ;C - - - - - 0x0196B7 0C:96A7: E5 FC
+	SBC scrollX                     ;C - - - - - 0x0196B7 0C:96A7: E5 FC
 	CMP #$10                        ;C - - - - - 0x0196B9 0C:96A9: C9 10
 	BCS loc_0C_96BF                 ;C - - - - - 0x0196BB 0C:96AB: B0 12
-	LDA ram_00FC                    ;C - - - - - 0x0196BD 0C:96AD: A5 FC
+	LDA scrollX                     ;C - - - - - 0x0196BD 0C:96AD: A5 FC
 	CLC                             ;C - - - - - 0x0196BF 0C:96AF: 18
 	ADC #$10                        ;C - - - - - 0x0196C0 0C:96B0: 69 10
 	STA objX,X                      ;C - - - - - 0x0196C2 0C:96B2: 9D 60 03
@@ -2809,10 +2809,10 @@ loc_0C_96C8:
 	BEQ loc_0C_96E8                 ;C - - - - - 0x0196DA 0C:96CA: F0 1C
 	LDA objX,X                      ;C - - - - - 0x0196DC 0C:96CC: BD 60 03
 	SEC                             ;C - - - - - 0x0196DF 0C:96CF: 38
-	SBC ram_00FC                    ;C - - - - - 0x0196E0 0C:96D0: E5 FC
+	SBC scrollX                     ;C - - - - - 0x0196E0 0C:96D0: E5 FC
 	CMP #$F1                        ;C - - - - - 0x0196E2 0C:96D2: C9 F1
 	BCC loc_0C_96E8                 ;C - - - - - 0x0196E4 0C:96D4: 90 12
-	LDA ram_00FC                    ;c - - - - - 0x0196E6 0C:96D6: A5 FC
+	LDA scrollX                     ;c - - - - - 0x0196E6 0C:96D6: A5 FC
 	CLC                             ;c - - - - - 0x0196E8 0C:96D8: 18
 	ADC #$F0                        ;c - - - - - 0x0196E9 0C:96D9: 69 F0
 	STA objX,X                      ;c - - - - - 0x0196EB 0C:96DB: 9D 60 03
@@ -2906,10 +2906,10 @@ loc_0C_9794:
 	BEQ loc_0C_97BB                 ;C - - - - - 0x0197AD 0C:979D: F0 1C
 	LDA objX,X                      ;C - - - - - 0x0197AF 0C:979F: BD 60 03
 	SEC                             ;C - - - - - 0x0197B2 0C:97A2: 38
-	SBC ram_00FC                    ;C - - - - - 0x0197B3 0C:97A3: E5 FC
+	SBC scrollX                     ;C - - - - - 0x0197B3 0C:97A3: E5 FC
 	CMP #$F1                        ;C - - - - - 0x0197B5 0C:97A5: C9 F1
 	BCC loc_0C_97BB                 ;C - - - - - 0x0197B7 0C:97A7: 90 12
-	LDA ram_00FC                    ;C - - - - - 0x0197B9 0C:97A9: A5 FC
+	LDA scrollX                     ;C - - - - - 0x0197B9 0C:97A9: A5 FC
 	CLC                             ;C - - - - - 0x0197BB 0C:97AB: 18
 	ADC #$F0                        ;C - - - - - 0x0197BC 0C:97AC: 69 F0
 	STA objX,X                      ;C - - - - - 0x0197BE 0C:97AE: 9D 60 03
@@ -2925,10 +2925,10 @@ loc_0C_97C1:
 	BEQ loc_0C_97E1                 ;C - - - - - 0x0197D3 0C:97C3: F0 1C
 	LDA objX,X                      ;C - - - - - 0x0197D5 0C:97C5: BD 60 03
 	SEC                             ;C - - - - - 0x0197D8 0C:97C8: 38
-	SBC ram_00FC                    ;C - - - - - 0x0197D9 0C:97C9: E5 FC
+	SBC scrollX                     ;C - - - - - 0x0197D9 0C:97C9: E5 FC
 	CMP #$10                        ;C - - - - - 0x0197DB 0C:97CB: C9 10
 	BCS loc_0C_97E1                 ;C - - - - - 0x0197DD 0C:97CD: B0 12
-	LDA ram_00FC                    ;C - - - - - 0x0197DF 0C:97CF: A5 FC
+	LDA scrollX                     ;C - - - - - 0x0197DF 0C:97CF: A5 FC
 	CLC                             ;C - - - - - 0x0197E1 0C:97D1: 18
 	ADC #$10                        ;C - - - - - 0x0197E2 0C:97D2: 69 10
 	STA objX,X                      ;C - - - - - 0x0197E4 0C:97D4: 9D 60 03
@@ -3024,10 +3024,10 @@ loc_0C_988B:
 	BEQ loc_0C_98B2                 ;C - - - - - 0x0198A4 0C:9894: F0 1C
 	LDA objX,X                      ;C - - - - - 0x0198A6 0C:9896: BD 60 03
 	SEC                             ;C - - - - - 0x0198A9 0C:9899: 38
-	SBC ram_00FC                    ;C - - - - - 0x0198AA 0C:989A: E5 FC
+	SBC scrollX                     ;C - - - - - 0x0198AA 0C:989A: E5 FC
 	CMP #$F1                        ;C - - - - - 0x0198AC 0C:989C: C9 F1
 	BCC loc_0C_98B2                 ;C - - - - - 0x0198AE 0C:989E: 90 12
-	LDA ram_00FC                    ;C - - - - - 0x0198B0 0C:98A0: A5 FC
+	LDA scrollX                     ;C - - - - - 0x0198B0 0C:98A0: A5 FC
 	CLC                             ;C - - - - - 0x0198B2 0C:98A2: 18
 	ADC #$F0                        ;C - - - - - 0x0198B3 0C:98A3: 69 F0
 	STA objX,X                      ;C - - - - - 0x0198B5 0C:98A5: 9D 60 03
@@ -3045,10 +3045,10 @@ loc_0C_98BB:
 	BEQ loc_0C_98DB                 ;C - - - - - 0x0198CD 0C:98BD: F0 1C
 	LDA objX,X                      ;C - - - - - 0x0198CF 0C:98BF: BD 60 03
 	SEC                             ;C - - - - - 0x0198D2 0C:98C2: 38
-	SBC ram_00FC                    ;C - - - - - 0x0198D3 0C:98C3: E5 FC
+	SBC scrollX                     ;C - - - - - 0x0198D3 0C:98C3: E5 FC
 	CMP #$10                        ;C - - - - - 0x0198D5 0C:98C5: C9 10
 	BCS loc_0C_98DB                 ;C - - - - - 0x0198D7 0C:98C7: B0 12
-	LDA ram_00FC                    ;C - - - - - 0x0198D9 0C:98C9: A5 FC
+	LDA scrollX                     ;C - - - - - 0x0198D9 0C:98C9: A5 FC
 	CLC                             ;C - - - - - 0x0198DB 0C:98CB: 18
 	ADC #$10                        ;C - - - - - 0x0198DC 0C:98CC: 69 10
 	STA objX,X                      ;C - - - - - 0x0198DE 0C:98CE: 9D 60 03
@@ -3162,10 +3162,10 @@ loc_0C_99AC:
 	BEQ loc_0C_99D3                 ;C - - - - - 0x0199C5 0C:99B5: F0 1C
 	LDA objX,X                      ;C - - - - - 0x0199C7 0C:99B7: BD 60 03
 	SEC                             ;C - - - - - 0x0199CA 0C:99BA: 38
-	SBC ram_00FC                    ;C - - - - - 0x0199CB 0C:99BB: E5 FC
+	SBC scrollX                     ;C - - - - - 0x0199CB 0C:99BB: E5 FC
 	CMP #$F1                        ;C - - - - - 0x0199CD 0C:99BD: C9 F1
 	BCC loc_0C_99D3                 ;C - - - - - 0x0199CF 0C:99BF: 90 12
-	LDA ram_00FC                    ;C - - - - - 0x0199D1 0C:99C1: A5 FC
+	LDA scrollX                     ;C - - - - - 0x0199D1 0C:99C1: A5 FC
 	CLC                             ;C - - - - - 0x0199D3 0C:99C3: 18
 	ADC #$F0                        ;C - - - - - 0x0199D4 0C:99C4: 69 F0
 	STA objX,X                      ;C - - - - - 0x0199D6 0C:99C6: 9D 60 03
@@ -3181,10 +3181,10 @@ loc_0C_99D9:
 	BEQ loc_0C_99F9                 ;C - - - - - 0x0199EB 0C:99DB: F0 1C
 	LDA objX,X                      ;C - - - - - 0x0199ED 0C:99DD: BD 60 03
 	SEC                             ;C - - - - - 0x0199F0 0C:99E0: 38
-	SBC ram_00FC                    ;C - - - - - 0x0199F1 0C:99E1: E5 FC
+	SBC scrollX                     ;C - - - - - 0x0199F1 0C:99E1: E5 FC
 	CMP #$10                        ;C - - - - - 0x0199F3 0C:99E3: C9 10
 	BCS loc_0C_99F9                 ;C - - - - - 0x0199F5 0C:99E5: B0 12
-	LDA ram_00FC                    ;C - - - - - 0x0199F7 0C:99E7: A5 FC
+	LDA scrollX                     ;C - - - - - 0x0199F7 0C:99E7: A5 FC
 	CLC                             ;C - - - - - 0x0199F9 0C:99E9: 18
 	ADC #$10                        ;C - - - - - 0x0199FA 0C:99EA: 69 10
 	STA objX,X                      ;C - - - - - 0x0199FC 0C:99EC: 9D 60 03
@@ -3263,10 +3263,10 @@ loc_0C_9A88:
 	BEQ loc_0C_9AAF                 ;C - - - - - 0x019AA1 0C:9A91: F0 1C
 	LDA objX,X                      ;C - - - - - 0x019AA3 0C:9A93: BD 60 03
 	SEC                             ;C - - - - - 0x019AA6 0C:9A96: 38
-	SBC ram_00FC                    ;C - - - - - 0x019AA7 0C:9A97: E5 FC
+	SBC scrollX                     ;C - - - - - 0x019AA7 0C:9A97: E5 FC
 	CMP #$F1                        ;C - - - - - 0x019AA9 0C:9A99: C9 F1
 	BCC loc_0C_9AAF                 ;C - - - - - 0x019AAB 0C:9A9B: 90 12
-	LDA ram_00FC                    ;c - - - - - 0x019AAD 0C:9A9D: A5 FC
+	LDA scrollX                     ;c - - - - - 0x019AAD 0C:9A9D: A5 FC
 	CLC                             ;c - - - - - 0x019AAF 0C:9A9F: 18
 	ADC #$F0                        ;c - - - - - 0x019AB0 0C:9AA0: 69 F0
 	STA objX,X                      ;c - - - - - 0x019AB2 0C:9AA2: 9D 60 03
@@ -3282,10 +3282,10 @@ loc_0C_9AB5:
 	BEQ loc_0C_9AD5                 ;C - - - - - 0x019AC7 0C:9AB7: F0 1C
 	LDA objX,X                      ;C - - - - - 0x019AC9 0C:9AB9: BD 60 03
 	SEC                             ;C - - - - - 0x019ACC 0C:9ABC: 38
-	SBC ram_00FC                    ;C - - - - - 0x019ACD 0C:9ABD: E5 FC
+	SBC scrollX                     ;C - - - - - 0x019ACD 0C:9ABD: E5 FC
 	CMP #$10                        ;C - - - - - 0x019ACF 0C:9ABF: C9 10
 	BCS loc_0C_9AD5                 ;C - - - - - 0x019AD1 0C:9AC1: B0 12
-	LDA ram_00FC                    ;C - - - - - 0x019AD3 0C:9AC3: A5 FC
+	LDA scrollX                     ;C - - - - - 0x019AD3 0C:9AC3: A5 FC
 	CLC                             ;C - - - - - 0x019AD5 0C:9AC5: 18
 	ADC #$10                        ;C - - - - - 0x019AD6 0C:9AC6: 69 10
 	STA objX,X                      ;C - - - - - 0x019AD8 0C:9AC8: 9D 60 03
@@ -3611,7 +3611,7 @@ ofs_0C_9D71:
 	BEQ loc_0C_9D8B                 ;C - - - - - 0x019D86 0C:9D76: F0 13
 	LDA objX,X                      ;C - - - - - 0x019D88 0C:9D78: BD 60 03
 	SEC                             ;C - - - - - 0x019D8B 0C:9D7B: 38
-	SBC ram_00FC                    ;C - - - - - 0x019D8C 0C:9D7C: E5 FC
+	SBC scrollX                     ;C - - - - - 0x019D8C 0C:9D7C: E5 FC
 	CMP #$FA                        ;C - - - - - 0x019D8E 0C:9D7E: C9 FA
 	BCC loc_0C_9D85                 ;C - - - - - 0x019D90 0C:9D80: 90 03
 	JMP sub_0F_F2BE                 ;C - - - - - 0x019D92 0C:9D82: 4C BE F2
@@ -3621,7 +3621,7 @@ loc_0C_9D85:
 loc_0C_9D8B:
 	LDA objX,X                      ;C - - - - - 0x019D9B 0C:9D8B: BD 60 03
 	SEC                             ;C - - - - - 0x019D9E 0C:9D8E: 38
-	SBC ram_00FC                    ;C - - - - - 0x019D9F 0C:9D8F: E5 FC
+	SBC scrollX                     ;C - - - - - 0x019D9F 0C:9D8F: E5 FC
 	CMP #$08                        ;C - - - - - 0x019DA1 0C:9D91: C9 08
 	BCS loc_0C_9D98                 ;C - - - - - 0x019DA3 0C:9D93: B0 03
 	JMP sub_0F_F2BE                 ;C - - - - - 0x019DA5 0C:9D95: 4C BE F2
@@ -3821,7 +3821,7 @@ loc_0C_9F5D:
 	SEC                             ;C - - - - - 0x019F83 0C:9F73: 38
 	SBC ram_00F9                    ;C - - - - - 0x019F84 0C:9F74: E5 F9
 	LDA objX,X                      ;C - - - - - 0x019F86 0C:9F76: BD 60 03
-	SBC ram_00FC                    ;C - - - - - 0x019F89 0C:9F79: E5 FC
+	SBC scrollX                     ;C - - - - - 0x019F89 0C:9F79: E5 FC
 	CMP #$40                        ;C - - - - - 0x019F8B 0C:9F7B: C9 40
 	BCS loc_0C_9F8C                 ;C - - - - - 0x019F8D 0C:9F7D: B0 0D
 loc_0C_9F7F:

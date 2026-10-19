@@ -14,30 +14,30 @@ NMI:
 	STA PPUCTRL                     ;C - - - - - 0x01C01D 0E:C00D: 8D 00 20
 	LDA #$00                        ;C - - - - - 0x01C020 0E:C010: A9 00
 	STA PPUMASK                     ;C - - - - - 0x01C022 0E:C012: 8D 01 20
-	LDA ram_00EE                    ;C - - - - - 0x01C025 0E:C015: A5 EE
+	LDA renderOffCount              ;C - - - - - 0x01C025 0E:C015: A5 EE
 	ORA ram_009A                    ;C - - - - - 0x01C027 0E:C017: 05 9A
 	BEQ loc_0E_C01E                 ;C - - - - - 0x01C029 0E:C019: F0 03
 	JMP loc_0E_C09D                 ;C - - - - - 0x01C02B 0E:C01B: 4C 9D C0
 loc_0E_C01E:
-	LDA ram_0064                    ;C - - - - - 0x01C02E 0E:C01E: A5 64
+	LDA vramQueueFlag               ;C - - - - - 0x01C02E 0E:C01E: A5 64
 	BEQ loc_0E_C029                 ;C - - - - - 0x01C030 0E:C020: F0 07
 	LDX #$00                        ;C - - - - - 0x01C032 0E:C022: A2 00
-	STX ram_0064                    ;C - - - - - 0x01C034 0E:C024: 86 64
-	JSR sub_0E_C222                 ;C - - - - - 0x01C036 0E:C026: 20 22 C2
+	STX vramQueueFlag               ;C - - - - - 0x01C034 0E:C024: 86 64
+	JSR FlushVramQueue              ;C - - - - - 0x01C036 0E:C026: 20 22 C2
 loc_0E_C029:
-	LDA ram_00FC                    ;C - - - - - 0x01C039 0E:C029: A5 FC
-	STA ram_007D                    ;C - - - - - 0x01C03B 0E:C02B: 85 7D
+	LDA scrollX                     ;C - - - - - 0x01C039 0E:C029: A5 FC
+	STA irqScrollX                  ;C - - - - - 0x01C03B 0E:C02B: 85 7D
 	LDA nametableSelect             ;C - - - - - 0x01C03D 0E:C02D: A5 FD
-	STA ram_007E                    ;C - - - - - 0x01C03F 0E:C02F: 85 7E
+	STA irqNametable                ;C - - - - - 0x01C03F 0E:C02F: 85 7E
 	LDA ram_00F8                    ;C - - - - - 0x01C041 0E:C031: A5 F8
-	STA ram_007C                    ;C - - - - - 0x01C043 0E:C033: 85 7C
+	STA irqScrollY                  ;C - - - - - 0x01C043 0E:C033: 85 7C
 	LDA #$00                        ;C - - - - - 0x01C045 0E:C035: A9 00
 	STA OAMADDR                     ;C - - - - - 0x01C047 0E:C037: 8D 03 20
 	LDA #$02                        ;C - - - - - 0x01C04A 0E:C03A: A9 02
 	STA OAMDMA                      ;C - - - - - 0x01C04C 0E:C03C: 8D 14 40
 	LDA vramUpdateFlag0             ;C - - - - - 0x01C04F 0E:C03F: A5 19
 	BEQ loc_0E_C046                 ;C - - - - - 0x01C051 0E:C041: F0 03
-	JSR sub_0E_C1FD                 ;C - - - - - 0x01C053 0E:C043: 20 FD C1
+	JSR FlushVramBuffer             ;C - - - - - 0x01C053 0E:C043: 20 FD C1
 loc_0E_C046:
 	LDA vramUpdateFlag1             ;C - - - - - 0x01C056 0E:C046: A5 1A
 	BEQ loc_0E_C061                 ;C - - - - - 0x01C058 0E:C048: F0 17
@@ -47,7 +47,7 @@ loc_0E_C046:
 	STA PPUCTRL                     ;C - - - - - 0x01C060 0E:C050: 8D 00 20
 	LDX #$00                        ;C - - - - - 0x01C063 0E:C053: A2 00
 	STX vramUpdateFlag1             ;C - - - - - 0x01C065 0E:C055: 86 1A
-	JSR sub_0E_C201                 ;C - - - - - 0x01C067 0E:C057: 20 01 C2
+	JSR FlushVramBufferNoClear      ;C - - - - - 0x01C067 0E:C057: 20 01 C2
 	LDA bufPPUCTRL                  ;C - - - - - 0x01C06A 0E:C05A: A5 FF
 	AND #$7F                        ;C - - - - - 0x01C06C 0E:C05C: 29 7F
 	STA PPUCTRL                     ;C - - - - - 0x01C06E 0E:C05E: 8D 00 20
@@ -205,7 +205,7 @@ loc_0E_C15A:
 	JMP loc_0E_C1D8                 ;C - - - - - 0x01C184 0E:C174: 4C D8 C1
 loc_0E_C177:
 	LDA PPUSTATUS                   ;C - - - - - 0x01C187 0E:C177: AD 02 20
-	LDA ram_007D                    ;C - - - - - 0x01C18A 0E:C17A: A5 7D
+	LDA irqScrollX                  ;C - - - - - 0x01C18A 0E:C17A: A5 7D
 	STA PPUSCROLL                   ;C - - - - - 0x01C18C 0E:C17C: 8D 05 20
 	LDA #$22                        ;C - - - - - 0x01C18F 0E:C17F: A9 22
 	STA PPUSCROLL                   ;C - - - - - 0x01C191 0E:C181: 8D 05 20
@@ -218,7 +218,7 @@ loc_0E_C177:
 	JMP loc_0E_C1D8                 ;C - - - - - 0x01C1A1 0E:C191: 4C D8 C1
 IrqSplit2:
 	LDA PPUSTATUS                   ;C - - J - - 0x01C1A4 0E:C194: AD 02 20
-	LDA ram_007D                    ;C - - - - - 0x01C1A7 0E:C197: A5 7D
+	LDA irqScrollX                  ;C - - - - - 0x01C1A7 0E:C197: A5 7D
 	STA PPUSCROLL                   ;C - - - - - 0x01C1A9 0E:C199: 8D 05 20
 	LDA #$22                        ;C - - - - - 0x01C1AC 0E:C19C: A9 22
 	STA PPUSCROLL                   ;C - - - - - 0x01C1AE 0E:C19E: 8D 05 20
@@ -253,7 +253,8 @@ loc_0E_C1D8:
 	PLA                             ;C - - - - - 0x01C1EC 0E:C1DC: 68
 	PLP                             ;C - - - - - 0x01C1ED 0E:C1DD: 28
 	RTI                             ;C - - - - - 0x01C1EE 0E:C1DE: 40
-sub_0E_C1DF:
+; prgBankA000 = stageBankTable[stageData] unless $13, then SetPrgBanks
+RefreshStageBank:
 	TXA                             ;C - - - - - 0x01C1EF 0E:C1DF: 8A
 	PHA                             ;C - - - - - 0x01C1F0 0E:C1E0: 48
 	TYA                             ;C - - - - - 0x01C1F1 0E:C1E1: 98
@@ -274,18 +275,20 @@ loc_0E_C1F3:
 ; stageData -> PRG bank used in the $A000 window ($01,$05,$07,$09,$0D)
 stageBankTable:
 	.byte $01,$05,$07,$09,$0D       ;- D 2 - - - 0x01C208 0E:C1F8:
-sub_0E_C1FD:
+; clears vramUpdateFlag0 then falls into FlushVramBufferNoClear
+FlushVramBuffer:
 	LDX #$00                        ;C - - - - - 0x01C20D 0E:C1FD: A2 00
 	STX vramUpdateFlag0             ;C - - - - - 0x01C20F 0E:C1FF: 86 19
-sub_0E_C201:
-	LDA ram_0780,X                  ;C - - - - - 0x01C211 0E:C201: BD 80 07
+; writes records [hi(bit7=end), lo, len-1, data] from vramQueue to PPU
+FlushVramBufferNoClear:
+	LDA vramQueue,X                 ;C - - - - - 0x01C211 0E:C201: BD 80 07
 	BMI loc_0E_C221                 ;C - - - - - 0x01C214 0E:C204: 30 1B
 	STA PPUADDR                     ;C - - - - - 0x01C216 0E:C206: 8D 06 20
-	LDA ram_0781,X                  ;C - - - - - 0x01C219 0E:C209: BD 81 07
+	LDA vramQueue+1,X               ;C - - - - - 0x01C219 0E:C209: BD 81 07
 	STA PPUADDR                     ;C - - - - - 0x01C21C 0E:C20C: 8D 06 20
-	LDY ram_0782,X                  ;C - - - - - 0x01C21F 0E:C20F: BC 82 07
+	LDY vramQueue+2,X               ;C - - - - - 0x01C21F 0E:C20F: BC 82 07
 loc_0E_C212:
-	LDA ram_0783,X                  ;C - - - - - 0x01C222 0E:C212: BD 83 07
+	LDA vramQueue+3,X               ;C - - - - - 0x01C222 0E:C212: BD 83 07
 	STA PPUDATA                     ;C - - - - - 0x01C225 0E:C215: 8D 07 20
 	INX                             ;C - - - - - 0x01C228 0E:C218: E8
 	DEY                             ;C - - - - - 0x01C229 0E:C219: 88
@@ -293,50 +296,65 @@ loc_0E_C212:
 	INX                             ;C - - - - - 0x01C22C 0E:C21C: E8
 	INX                             ;C - - - - - 0x01C22D 0E:C21D: E8
 	INX                             ;C - - - - - 0x01C22E 0E:C21E: E8
-	BNE sub_0E_C201                 ;C - - - - - 0x01C22F 0E:C21F: D0 E0
+	BNE FlushVramBufferNoClear      ;C - - - - - 0x01C22F 0E:C21F: D0 E0
 loc_0E_C221:
 	RTS                             ;C - - - - - 0x01C231 0E:C221: 60
-sub_0E_C222:
+; writes records [len, hi, lo, data] from vramQueue up to vramQueueEnd
+FlushVramQueue:
 	LDA PPUSTATUS                   ;C - - - - - 0x01C232 0E:C222: AD 02 20
 loc_0E_C225:
 	LDA bufPPUCTRL                  ;C - - - - - 0x01C235 0E:C225: A5 FF
 	AND #$FE                        ;C - - - - - 0x01C237 0E:C227: 29 FE
 	STA PPUCTRL                     ;C - - - - - 0x01C239 0E:C229: 8D 00 20
-	LDY ram_0780,X                  ;C - - - - - 0x01C23C 0E:C22C: BC 80 07
+	LDY vramQueue,X                 ;C - - - - - 0x01C23C 0E:C22C: BC 80 07
 	INX                             ;C - - - - - 0x01C23F 0E:C22F: E8
-	LDA ram_0780,X                  ;C - - - - - 0x01C240 0E:C230: BD 80 07
+	LDA vramQueue,X                 ;C - - - - - 0x01C240 0E:C230: BD 80 07
 	STA PPUADDR                     ;C - - - - - 0x01C243 0E:C233: 8D 06 20
 	INX                             ;C - - - - - 0x01C246 0E:C236: E8
-	LDA ram_0780,X                  ;C - - - - - 0x01C247 0E:C237: BD 80 07
+	LDA vramQueue,X                 ;C - - - - - 0x01C247 0E:C237: BD 80 07
 	STA PPUADDR                     ;C - - - - - 0x01C24A 0E:C23A: 8D 06 20
 	INX                             ;C - - - - - 0x01C24D 0E:C23D: E8
 loc_0E_C23E:
-	LDA ram_0780,X                  ;C - - - - - 0x01C24E 0E:C23E: BD 80 07
+	LDA vramQueue,X                 ;C - - - - - 0x01C24E 0E:C23E: BD 80 07
 	STA PPUDATA                     ;C - - - - - 0x01C251 0E:C241: 8D 07 20
 	INX                             ;C - - - - - 0x01C254 0E:C244: E8
 	DEY                             ;C - - - - - 0x01C255 0E:C245: 88
 	BNE loc_0E_C23E                 ;C - - - - - 0x01C256 0E:C246: D0 F6
-	CPX ram_0065                    ;C - - - - - 0x01C258 0E:C248: E4 65
+	CPX vramQueueEnd                ;C - - - - - 0x01C258 0E:C248: E4 65
 	BNE loc_0E_C225                 ;C - - - - - 0x01C25A 0E:C24A: D0 D9
 	LDA #$00                        ;C - - - - - 0x01C25C 0E:C24C: A9 00
-	STA ram_0065                    ;C - - - - - 0x01C25E 0E:C24E: 85 65
+	STA vramQueueEnd                ;C - - - - - 0x01C25E 0E:C24E: 85 65
 	RTS                             ;C - - - - - 0x01C260 0E:C250: 60
-	.byte $A5,$FF,$29,$11,$85,$FF,$8D,$00,$20,$60,$A5,$FF,$09;- - - - - - 0x01C261 0E:C251:
-	.word $8580, $8DFF              ;W 0x01C26E 0E:C25E:
-	.byte $00,$20,$60               ;- - - - - - 0x01C272 0E:C262:
-sub_0E_C265:
-	INC ram_00EE                    ;C - - - - - 0x01C275 0E:C265: E6 EE
+; bufPPUCTRL &= $11 ; PPUCTRL = bufPPUCTRL (not called by anything the CDL saw)
+DisableNMI:
+	LDA bufPPUCTRL                  ;- - - - - - 0x01C261 0E:C251: A5 FF
+	AND #$11                        ;- - - - - - 0x01C263 0E:C253: 29 11
+	STA bufPPUCTRL                  ;- - - - - - 0x01C265 0E:C255: 85 FF
+	STA PPUCTRL                     ;- - - - - - 0x01C267 0E:C257: 8D 00 20
+	RTS                             ;- - - - - - 0x01C26A 0E:C25A: 60
+; bufPPUCTRL |= $80 ; PPUCTRL = bufPPUCTRL
+EnableNMI:
+	LDA bufPPUCTRL                  ;- - - - - - 0x01C26B 0E:C25B: A5 FF
+	ORA #$80                        ;- - - - - - 0x01C26D 0E:C25D: 09 80
+	STA bufPPUCTRL                  ;- - - - - - 0x01C26F 0E:C25F: 85 FF
+	STA PPUCTRL                     ;- - - - - - 0x01C271 0E:C261: 8D 00 20
+	RTS                             ;- - - - - - 0x01C274 0E:C264: 60
+; renderOffCount++ ; PPUMASK = 0
+ScreenOff:
+	INC renderOffCount              ;C - - - - - 0x01C275 0E:C265: E6 EE
 	LDA #$00                        ;C - - - - - 0x01C277 0E:C267: A9 00
 	STA ppuMaskBuf                  ;C - - - - - 0x01C279 0E:C269: 85 FE
 	STA PPUMASK                     ;C - - - - - 0x01C27B 0E:C26B: 8D 01 20
 	RTS                             ;C - - - - - 0x01C27E 0E:C26E: 60
-sub_0E_C26F:
-	DEC ram_00EE                    ;C - - - - - 0x01C27F 0E:C26F: C6 EE
+; renderOffCount-- ; PPUMASK = $18
+ScreenOn:
+	DEC renderOffCount              ;C - - - - - 0x01C27F 0E:C26F: C6 EE
 	LDA #$18                        ;C - - - - - 0x01C281 0E:C271: A9 18
 	STA ppuMaskBuf                  ;C - - - - - 0x01C283 0E:C273: 85 FE
 	STA PPUMASK                     ;C - - - - - 0x01C285 0E:C275: 8D 01 20
 	RTS                             ;C - - - - - 0x01C288 0E:C278: 60
-sub_0E_C279:
+; reads both pads (+ expansion bits) into padPressed/padHeld
+ReadPads:
 	LDX #$01                        ;C - - - - - 0x01C289 0E:C279: A2 01
 	STX JOY1                        ;C - - - - - 0x01C28B 0E:C27B: 8E 16 40
 	DEX                             ;C - - - - - 0x01C28E 0E:C27E: CA
@@ -345,51 +363,52 @@ sub_0E_C279:
 loc_0E_C284:
 	LDA JOY1                        ;C - - - - - 0x01C294 0E:C284: AD 16 40
 	LSR A                           ;C - - - - - 0x01C297 0E:C287: 4A
-	ROL ram_0014                    ;C - - - - - 0x01C298 0E:C288: 26 14
+	ROL padPressed                  ;C - - - - - 0x01C298 0E:C288: 26 14
 	LSR A                           ;C - - - - - 0x01C29A 0E:C28A: 4A
 	ROL ptr_00                      ;C - - - - - 0x01C29B 0E:C28B: 26 00
 	LDA JOY2                        ;C - - - - - 0x01C29D 0E:C28D: AD 17 40
 	LSR A                           ;C - - - - - 0x01C2A0 0E:C290: 4A
-	ROL ram_0015                    ;C - - - - - 0x01C2A1 0E:C291: 26 15
+	ROL padPressed+1                ;C - - - - - 0x01C2A1 0E:C291: 26 15
 	LSR A                           ;C - - - - - 0x01C2A3 0E:C293: 4A
 	ROL ptr_00+1                    ;C - - - - - 0x01C2A4 0E:C294: 26 01
 	DEX                             ;C - - - - - 0x01C2A6 0E:C296: CA
 	BNE loc_0E_C284                 ;C - - - - - 0x01C2A7 0E:C297: D0 EB
 	LDA ptr_00                      ;C - - - - - 0x01C2A9 0E:C299: A5 00
-	ORA ram_0014                    ;C - - - - - 0x01C2AB 0E:C29B: 05 14
-	STA ram_0014                    ;C - - - - - 0x01C2AD 0E:C29D: 85 14
+	ORA padPressed                  ;C - - - - - 0x01C2AB 0E:C29B: 05 14
+	STA padPressed                  ;C - - - - - 0x01C2AD 0E:C29D: 85 14
 	LDA ptr_00+1                    ;C - - - - - 0x01C2AF 0E:C29F: A5 01
-	ORA ram_0015                    ;C - - - - - 0x01C2B1 0E:C2A1: 05 15
-	STA ram_0015                    ;C - - - - - 0x01C2B3 0E:C2A3: 85 15
+	ORA padPressed+1                ;C - - - - - 0x01C2B1 0E:C2A1: 05 15
+	STA padPressed+1                ;C - - - - - 0x01C2B3 0E:C2A3: 85 15
 	LDX #$01                        ;C - - - - - 0x01C2B5 0E:C2A5: A2 01
 loc_0E_C2A7:
-	LDA ram_0014,X                  ;C - - - - - 0x01C2B7 0E:C2A7: B5 14
+	LDA padPressed,X                ;C - - - - - 0x01C2B7 0E:C2A7: B5 14
 	TAY                             ;C - - - - - 0x01C2B9 0E:C2A9: A8
-	EOR ram_0016,X                  ;C - - - - - 0x01C2BA 0E:C2AA: 55 16
-	AND ram_0014,X                  ;C - - - - - 0x01C2BC 0E:C2AC: 35 14
-	STA ram_0014,X                  ;C - - - - - 0x01C2BE 0E:C2AE: 95 14
-	STY ram_0016,X                  ;C - - - - - 0x01C2C0 0E:C2B0: 94 16
+	EOR padHeld,X                   ;C - - - - - 0x01C2BA 0E:C2AA: 55 16
+	AND padPressed,X                ;C - - - - - 0x01C2BC 0E:C2AC: 35 14
+	STA padPressed,X                ;C - - - - - 0x01C2BE 0E:C2AE: 95 14
+	STY padHeld,X                   ;C - - - - - 0x01C2C0 0E:C2B0: 94 16
 	DEX                             ;C - - - - - 0x01C2C2 0E:C2B2: CA
 	BPL loc_0E_C2A7                 ;C - - - - - 0x01C2C3 0E:C2B3: 10 F2
 	LDX #$03                        ;C - - - - - 0x01C2C5 0E:C2B5: A2 03
 loc_0E_C2B7:
-	LDA ram_0014,X                  ;C - - - - - 0x01C2C7 0E:C2B7: B5 14
+	LDA padPressed,X                ;C - - - - - 0x01C2C7 0E:C2B7: B5 14
 	AND #$0C                        ;C - - - - - 0x01C2C9 0E:C2B9: 29 0C
 	CMP #$0C                        ;C - - - - - 0x01C2CB 0E:C2BB: C9 0C
 	BEQ loc_0E_C2C7                 ;C - - - - - 0x01C2CD 0E:C2BD: F0 08
-	LDA ram_0014,X                  ;C - - - - - 0x01C2CF 0E:C2BF: B5 14
+	LDA padPressed,X                ;C - - - - - 0x01C2CF 0E:C2BF: B5 14
 	AND #$03                        ;C - - - - - 0x01C2D1 0E:C2C1: 29 03
 	CMP #$03                        ;C - - - - - 0x01C2D3 0E:C2C3: C9 03
 	BNE loc_0E_C2CD                 ;C - - - - - 0x01C2D5 0E:C2C5: D0 06
 loc_0E_C2C7:
-	LDA ram_0014,X                  ;c - - - - - 0x01C2D7 0E:C2C7: B5 14
+	LDA padPressed,X                ;c - - - - - 0x01C2D7 0E:C2C7: B5 14
 	AND #$F0                        ;c - - - - - 0x01C2D9 0E:C2C9: 29 F0
-	STA ram_0014,X                  ;c - - - - - 0x01C2DB 0E:C2CB: 95 14
+	STA padPressed,X                ;c - - - - - 0x01C2DB 0E:C2CB: 95 14
 loc_0E_C2CD:
 	DEX                             ;C - - - - - 0x01C2DD 0E:C2CD: CA
 	BPL loc_0E_C2B7                 ;C - - - - - 0x01C2DE 0E:C2CE: 10 E7
 	RTS                             ;C - - - - - 0x01C2E0 0E:C2D0: 60
-sub_0E_C2D1:
+; A=PPU high address, X=tile, Y=attribute fill value
+FillNametable:
 	STA ptr_00                      ;C - - - - - 0x01C2E1 0E:C2D1: 85 00
 	STX ptr_00+1                    ;C - - - - - 0x01C2E3 0E:C2D3: 86 01
 	STY ptr_02                      ;C - - - - - 0x01C2E5 0E:C2D5: 84 02
@@ -430,7 +449,8 @@ loc_0E_C314:
 loc_0E_C31A:
 	LDX ptr_00+1                    ;C - - - - - 0x01C32A 0E:C31A: A6 01
 	RTS                             ;C - - - - - 0x01C32C 0E:C31C: 60
-sub_0E_C31D:
+; fills oamBuffer Y positions with $F8 from index ram_0097
+HideSprites:
 	LDX ram_0097                    ;C - - - - - 0x01C32D 0E:C31D: A6 97
 	CPX #$04                        ;C - - - - - 0x01C32F 0E:C31F: E0 04
 	BNE loc_0E_C328                 ;C - - - - - 0x01C331 0E:C321: D0 05
@@ -467,7 +487,7 @@ loc_0E_C336:
 	BPL loc_0E_C336                 ;C - - - - - 0x01C36F 0E:C35F: 10 D5
 	RTS                             ;C - - - - - 0x01C371 0E:C361: 60
 sub_0E_C362:
-	JSR sub_0E_C31D                 ;C - - - - - 0x01C372 0E:C362: 20 1D C3
+	JSR HideSprites                 ;C - - - - - 0x01C372 0E:C362: 20 1D C3
 	JSR sub_0F_FF31                 ;C - - - - - 0x01C375 0E:C365: 20 31 FF
 	LDA #$30                        ;C - - - - - 0x01C378 0E:C368: A9 30
 	LDX #$F0                        ;C - - - - - 0x01C37A 0E:C36A: A2 F0
@@ -749,7 +769,7 @@ ofs_0E_C556:
 	JSR SetPrgBanks                 ;C - - - - - 0x01C584 0E:C574: 20 4D FF
 	LDX #$04                        ;C - - - - - 0x01C587 0E:C577: A2 04
 	JSR sub_04_8000                 ;C - - - - - bank=04 0x01C589 0E:C579: 20 00 80
-	JSR sub_0E_C26F                 ;C - - - - - 0x01C58C 0E:C57C: 20 6F C2
+	JSR ScreenOn                    ;C - - - - - 0x01C58C 0E:C57C: 20 6F C2
 	JSR sub_04_89C0                 ;C - - - - - bank=04 0x01C58F 0E:C57F: 20 C0 89
 	LDX #$B4                        ;C - - - - - 0x01C592 0E:C582: A2 B4
 	JSR sub_0F_FF2A                 ;C - - - - - 0x01C594 0E:C584: 20 2A FF
@@ -761,13 +781,13 @@ ofs_0E_C556:
 	JSR SetPrgBanks                 ;C - - - - - 0x01C5A1 0E:C591: 20 4D FF
 	LDX #$00                        ;C - - - - - 0x01C5A4 0E:C594: A2 00
 	JSR sub_04_8000                 ;C - - - - - bank=04 0x01C5A6 0E:C596: 20 00 80
-	JSR sub_0E_C26F                 ;C - - - - - 0x01C5A9 0E:C599: 20 6F C2
+	JSR ScreenOn                    ;C - - - - - 0x01C5A9 0E:C599: 20 6F C2
 	JSR sub_04_8900                 ;C - - - - - bank=04 0x01C5AC 0E:C59C: 20 00 89
 	LDA #$B4                        ;C - - - - - 0x01C5AF 0E:C59F: A9 B4
 	STA ram_0037                    ;C - - - - - 0x01C5B1 0E:C5A1: 85 37
 loc_0E_C5A3:
 	JSR sub_0F_FF31                 ;C - - - - - 0x01C5B3 0E:C5A3: 20 31 FF
-	LDA ram_0014                    ;C - - - - - 0x01C5B6 0E:C5A6: A5 14
+	LDA padPressed                  ;C - - - - - 0x01C5B6 0E:C5A6: A5 14
 	BNE loc_0E_C5B3                 ;C - - - - - 0x01C5B8 0E:C5A8: D0 09
 	LDA ram_0037                    ;C - - - - - 0x01C5BA 0E:C5AA: A5 37
 ofs_0E_C5AC:
@@ -794,7 +814,7 @@ loc_0E_C5CE:
 	LDA #$00                        ;C - - - - - 0x01C5E1 0E:C5D1: A9 00
 	STA ram_00B8                    ;C - - - - - 0x01C5E3 0E:C5D3: 85 B8
 	JSR $9A00                       ;C - - - - - 0x01C5E5 0E:C5D5: 20 00 9A
-	LDA ram_0016                    ;C D 2 - I - 0x01C5E8 0E:C5D8: A5 16
+	LDA padHeld                     ;C D 2 - I - 0x01C5E8 0E:C5D8: A5 16
 	BNE loc_0E_C657                 ;C - - - - - 0x01C5EA 0E:C5DA: D0 7B
 	LDA #$07                        ;C - - - - - 0x01C5EC 0E:C5DC: A9 07
 	JSR sub_0F_F34A                 ;C - - - - - 0x01C5EE 0E:C5DE: 20 4A F3
@@ -806,7 +826,7 @@ loc_0E_C5CE:
 	JSR SetPrgBanks                 ;C - - - - - 0x01C5FB 0E:C5EB: 20 4D FF
 	LDX #$06                        ;C - - - - - 0x01C5FE 0E:C5EE: A2 06
 	JSR sub_04_8000                 ;C - - - - - bank=04 0x01C600 0E:C5F0: 20 00 80
-	JSR sub_0E_C26F                 ;C - - - - - 0x01C603 0E:C5F3: 20 6F C2
+	JSR ScreenOn                    ;C - - - - - 0x01C603 0E:C5F3: 20 6F C2
 	JSR sub_04_8B40                 ;C - - - - - bank=04 0x01C606 0E:C5F6: 20 40 8B
 	LDX #$00                        ;C - - - - - 0x01C609 0E:C5F9: A2 00
 	STX prgBank8000                 ;C - - - - - 0x01C60B 0E:C5FB: 86 F4
@@ -816,13 +836,13 @@ loc_0E_C5CE:
 	LDA #$01                        ;C - - - - - 0x01C613 0E:C603: A9 01
 	STA ram_00B8                    ;C - - - - - 0x01C615 0E:C605: 85 B8
 	JSR sub_00_9A00                 ;C - - - - - bank=00 0x01C617 0E:C607: 20 00 9A
-	LDA ram_0016                    ;C - - - - - 0x01C61A 0E:C60A: A5 16
+	LDA padHeld                     ;C - - - - - 0x01C61A 0E:C60A: A5 16
 	BNE loc_0E_C657                 ;C - - - - - 0x01C61C 0E:C60C: D0 49
 	JSR sub_0E_C888                 ;C - - - - - 0x01C61E 0E:C60E: 20 88 C8
 	LDA #$02                        ;C - - - - - 0x01C621 0E:C611: A9 02
 	STA ram_00B8                    ;C - - - - - 0x01C623 0E:C613: 85 B8
 	JSR sub_00_9A00                 ;C - - - - - bank=00 0x01C625 0E:C615: 20 00 9A
-	LDA ram_0016                    ;C - - - - - 0x01C628 0E:C618: A5 16
+	LDA padHeld                     ;C - - - - - 0x01C628 0E:C618: A5 16
 	BNE loc_0E_C657                 ;C - - - - - 0x01C62A 0E:C61A: D0 3B
 	JSR sub_0E_C85C                 ;C - - - - - 0x01C62C 0E:C61C: 20 5C C8
 	LDX #$04                        ;C - - - - - 0x01C62F 0E:C61F: A2 04
@@ -832,7 +852,7 @@ loc_0E_C5CE:
 	JSR SetPrgBanks                 ;C - - - - - 0x01C636 0E:C626: 20 4D FF
 	LDX #$07                        ;C - - - - - 0x01C639 0E:C629: A2 07
 	JSR sub_04_8000                 ;C - - - - - bank=04 0x01C63B 0E:C62B: 20 00 80
-	JSR sub_0E_C26F                 ;C - - - - - 0x01C63E 0E:C62E: 20 6F C2
+	JSR ScreenOn                    ;C - - - - - 0x01C63E 0E:C62E: 20 6F C2
 	JSR sub_04_8AC0                 ;C - - - - - bank=04 0x01C641 0E:C631: 20 C0 8A
 	LDX #$00                        ;C - - - - - 0x01C644 0E:C634: A2 00
 	STX prgBank8000                 ;C - - - - - 0x01C646 0E:C636: 86 F4
@@ -842,13 +862,13 @@ loc_0E_C5CE:
 	LDA #$03                        ;C - - - - - 0x01C64E 0E:C63E: A9 03
 	STA ram_00B8                    ;C - - - - - 0x01C650 0E:C640: 85 B8
 	JSR sub_00_9A00                 ;C - - - - - bank=00 0x01C652 0E:C642: 20 00 9A
-	LDA ram_0016                    ;C - - - - - 0x01C655 0E:C645: A5 16
+	LDA padHeld                     ;C - - - - - 0x01C655 0E:C645: A5 16
 	BNE loc_0E_C657                 ;C - - - - - 0x01C657 0E:C647: D0 0E
 	JSR sub_0E_C888                 ;C - - - - - 0x01C659 0E:C649: 20 88 C8
 	LDA #$04                        ;C - - - - - 0x01C65C 0E:C64C: A9 04
 	STA ram_00B8                    ;C - - - - - 0x01C65E 0E:C64E: 85 B8
 	JSR sub_00_9A00                 ;C - - - - - bank=00 0x01C660 0E:C650: 20 00 9A
-	LDA ram_0016                    ;C - - - - - 0x01C663 0E:C653: A5 16
+	LDA padHeld                     ;C - - - - - 0x01C663 0E:C653: A5 16
 	BNE loc_0E_C657                 ;C - - - - - 0x01C665 0E:C655: D0 00
 loc_0E_C657:
 	LDA #$0C                        ;C - - - - - 0x01C667 0E:C657: A9 0C
@@ -862,7 +882,7 @@ loc_0E_C657:
 	LDX #$01                        ;C - - - - - 0x01C679 0E:C669: A2 01
 	JSR sub_04_8000                 ;C - - - - - bank=04 0x01C67B 0E:C66B: 20 00 80
 	JSR sub_04_8940                 ;C - - - - - bank=04 0x01C67E 0E:C66E: 20 40 89
-	JSR sub_0E_C26F                 ;C - - - - - 0x01C681 0E:C671: 20 6F C2
+	JSR ScreenOn                    ;C - - - - - 0x01C681 0E:C671: 20 6F C2
 	LDA #$FF                        ;C - - - - - 0x01C684 0E:C674: A9 FF
 	STA ram_0500                    ;C - - - - - 0x01C686 0E:C676: 8D 00 05
 	STA ram_0510                    ;C - - - - - 0x01C689 0E:C679: 8D 10 05
@@ -871,7 +891,7 @@ loc_0E_C657:
 loc_0E_C681:
 	LDA #$04                        ;C - - - - - 0x01C691 0E:C681: A9 04
 	STA ram_0097                    ;C - - - - - 0x01C693 0E:C683: 85 97
-	JSR sub_0E_C31D                 ;C - - - - - 0x01C695 0E:C685: 20 1D C3
+	JSR HideSprites                 ;C - - - - - 0x01C695 0E:C685: 20 1D C3
 	JSR sub_0F_E9BC                 ;C - - - - - 0x01C698 0E:C688: 20 BC E9
 	JSR sub_0F_FF31                 ;C - - - - - 0x01C69B 0E:C68B: 20 31 FF
 	LDA ram_0500                    ;C - - - - - 0x01C69E 0E:C68E: AD 00 05
@@ -881,7 +901,7 @@ loc_0E_C681:
 	LDA ram_0520                    ;C - - - - - 0x01C6A8 0E:C698: AD 20 05
 	BNE loc_0E_C6CF                 ;C - - - - - 0x01C6AB 0E:C69B: D0 32
 	LDA #$00                        ;C - - - - - 0x01C6AD 0E:C69D: A9 00
-	STA ram_00EE                    ;C - - - - - 0x01C6AF 0E:C69F: 85 EE
+	STA renderOffCount              ;C - - - - - 0x01C6AF 0E:C69F: 85 EE
 	JSR sub_0E_C36E                 ;C - - - - - 0x01C6B1 0E:C6A1: 20 6E C3
 	JMP RESET                       ;C - - - - - 0x01C6B4 0E:C6A4: 4C 00 FE
 loc_0E_C6A7:
@@ -905,7 +925,7 @@ loc_0E_C6C9:
 loc_0E_C6CF:
 	DEC ram_0520                    ;C - - - - - 0x01C6DF 0E:C6CF: CE 20 05
 loc_0E_C6D2:
-	LDA ram_0014                    ;C - - - - - 0x01C6E2 0E:C6D2: A5 14
+	LDA padPressed                  ;C - - - - - 0x01C6E2 0E:C6D2: A5 14
 	AND #$10                        ;C - - - - - 0x01C6E4 0E:C6D4: 29 10
 	BEQ loc_0E_C681                 ;C - - - - - 0x01C6E6 0E:C6D6: F0 A9
 	LDA #$30                        ;C - - - - - 0x01C6E8 0E:C6D8: A9 30
@@ -918,7 +938,7 @@ loc_0E_C6D2:
 	JSR SetPrgBanks                 ;C - - - - - 0x01C6F7 0E:C6E7: 20 4D FF
 	LDX #$02                        ;C - - - - - 0x01C6FA 0E:C6EA: A2 02
 	JSR sub_04_8000                 ;C - - - - - bank=04 0x01C6FC 0E:C6EC: 20 00 80
-	JSR sub_0E_C26F                 ;C - - - - - 0x01C6FF 0E:C6EF: 20 6F C2
+	JSR ScreenOn                    ;C - - - - - 0x01C6FF 0E:C6EF: 20 6F C2
 	LDA #$00                        ;C - - - - - 0x01C702 0E:C6F2: A9 00
 	STA playerId                    ;C - - - - - 0x01C704 0E:C6F4: 85 34
 	STA ram_00BD                    ;C - - - - - 0x01C706 0E:C6F6: 85 BD
@@ -933,19 +953,19 @@ ofs_0E_C703:
 	JSR SetPrgBanks                 ;C - - - - - 0x01C718 0E:C708: 20 4D FF
 	LDX #$08                        ;C - - - - - 0x01C71B 0E:C70B: A2 08
 	JSR sub_04_8000                 ;C - - - - - bank=04 0x01C71D 0E:C70D: 20 00 80
-	JSR sub_0E_C26F                 ;C - - - - - 0x01C720 0E:C710: 20 6F C2
+	JSR ScreenOn                    ;C - - - - - 0x01C720 0E:C710: 20 6F C2
 	JSR sub_04_8D00                 ;C - - - - - bank=04 0x01C723 0E:C713: 20 00 8D
 	LDX #$2D                        ;C - - - - - 0x01C726 0E:C716: A2 2D
 	JSR sub_0F_FF2A                 ;C - - - - - 0x01C728 0E:C718: 20 2A FF
 	JSR sub_0E_C85C                 ;C - - - - - 0x01C72B 0E:C71B: 20 5C C8
-	JSR sub_0E_C26F                 ;C - - - - - 0x01C72E 0E:C71E: 20 6F C2
+	JSR ScreenOn                    ;C - - - - - 0x01C72E 0E:C71E: 20 6F C2
 	CLI                             ;C - - - - - 0x01C731 0E:C721: 58
 	LDA #$01                        ;C - - - - - 0x01C732 0E:C722: A9 01
 	STA ram_009B                    ;C - - - - - 0x01C734 0E:C724: 85 9B
 	LDA #$00                        ;C - - - - - 0x01C736 0E:C726: A9 00
 	STA nametableSelect             ;C - - - - - 0x01C738 0E:C728: 85 FD
 	STA ram_00FB                    ;C - - - - - 0x01C73A 0E:C72A: 85 FB
-	STA ram_00FC                    ;C - - - - - 0x01C73C 0E:C72C: 85 FC
+	STA scrollX                     ;C - - - - - 0x01C73C 0E:C72C: 85 FC
 	STA scrollY                     ;C - - - - - 0x01C73E 0E:C72E: 85 FA
 	STA ram_00F9                    ;C - - - - - 0x01C740 0E:C730: 85 F9
 	STA ram_0025                    ;C - - - - - 0x01C742 0E:C732: 85 25
@@ -955,7 +975,7 @@ ofs_0E_C703:
 	STA ram_009F                    ;C - - - - - 0x01C74C 0E:C73C: 85 9F
 	STA ram_005A                    ;C - - - - - 0x01C74E 0E:C73E: 85 5A
 	STA ram_0033                    ;C - - - - - 0x01C750 0E:C740: 85 33
-	STA ram_00EE                    ;C - - - - - 0x01C752 0E:C742: 85 EE
+	STA renderOffCount              ;C - - - - - 0x01C752 0E:C742: 85 EE
 	JSR sub_0E_C334                 ;C - - - - - 0x01C754 0E:C744: 20 34 C3
 	LDA #$01                        ;C - - - - - 0x01C757 0E:C747: A9 01
 	STA MMC3_MIRRORING              ;C - - - - - 0x01C759 0E:C749: 8D 00 A0
@@ -1093,13 +1113,13 @@ sub_0E_C85C:
 	JSR sub_0E_C36E                 ;C - - - - - 0x01C86C 0E:C85C: 20 6E C3
 sub_0E_C85F:
 	JSR sub_0F_FF31                 ;C - - - - - 0x01C86F 0E:C85F: 20 31 FF
-	JSR sub_0E_C265                 ;C - - - - - 0x01C872 0E:C862: 20 65 C2
+	JSR ScreenOff                   ;C - - - - - 0x01C872 0E:C862: 20 65 C2
 	LDA #$04                        ;C - - - - - 0x01C875 0E:C865: A9 04
 	STA ram_0097                    ;C - - - - - 0x01C877 0E:C867: 85 97
-	JSR sub_0E_C31D                 ;C - - - - - 0x01C879 0E:C869: 20 1D C3
+	JSR HideSprites                 ;C - - - - - 0x01C879 0E:C869: 20 1D C3
 	JSR sub_0E_C844                 ;C - - - - - 0x01C87C 0E:C86C: 20 44 C8
 	LDA #$00                        ;C - - - - - 0x01C87F 0E:C86F: A9 00
-	STA ram_00FC                    ;C - - - - - 0x01C881 0E:C871: 85 FC
+	STA scrollX                     ;C - - - - - 0x01C881 0E:C871: 85 FC
 	STA scrollY                     ;C - - - - - 0x01C883 0E:C873: 85 FA
 	STA nametableSelect             ;C - - - - - 0x01C885 0E:C875: 85 FD
 	STA ram_00FB                    ;C - - - - - 0x01C887 0E:C877: 85 FB
@@ -1108,12 +1128,12 @@ sub_0E_C85F:
 	LDX #$00                        ;C - - - - - 0x01C88D 0E:C87D: A2 00
 	LDY #$00                        ;C - - - - - 0x01C88F 0E:C87F: A0 00
 ofs_0E_C881:
-	JSR sub_0E_C2D1                 ;C - - - - - 0x01C891 0E:C881: 20 D1 C2
-	JSR sub_0E_C31D                 ;C - - - - - 0x01C894 0E:C884: 20 1D C3
+	JSR FillNametable               ;C - - - - - 0x01C891 0E:C881: 20 D1 C2
+	JSR HideSprites                 ;C - - - - - 0x01C894 0E:C884: 20 1D C3
 	RTS                             ;C - - - - - 0x01C897 0E:C887: 60
 sub_0E_C888:
 	JSR sub_0E_C85C                 ;C - - - - - 0x01C898 0E:C888: 20 5C C8
-	JSR sub_0E_C26F                 ;C - - - - - 0x01C89B 0E:C88B: 20 6F C2
+	JSR ScreenOn                    ;C - - - - - 0x01C89B 0E:C88B: 20 6F C2
 	LDX #$04                        ;C - - - - - 0x01C89E 0E:C88E: A2 04
 	STX prgBank8000                 ;C - - - - - 0x01C8A0 0E:C890: 86 F4
 	INX                             ;C - - - - - 0x01C8A2 0E:C892: E8
@@ -1171,7 +1191,7 @@ loc_0E_C8FD:
 	BEQ loc_0E_C904                 ;C - - - - - 0x01C90F 0E:C8FF: F0 03
 	JMP loc_0E_C987                 ;C - - - - - 0x01C911 0E:C901: 4C 87 C9
 loc_0E_C904:
-	LDA ram_0014                    ;C - - - - - 0x01C914 0E:C904: A5 14
+	LDA padPressed                  ;C - - - - - 0x01C914 0E:C904: A5 14
 	AND #$10                        ;C - - - - - 0x01C916 0E:C906: 29 10
 	BEQ loc_0E_C934                 ;C - - - - - 0x01C918 0E:C908: F0 2A
 	LDA gameAction                  ;C - - - - - 0x01C91A 0E:C90A: A5 30
@@ -1211,7 +1231,7 @@ loc_0E_C93B:
 	JSR sub_0F_E2A3                 ;C - - - - - 0x01C95B 0E:C94B: 20 A3 E2
 	LDA objX                        ;C - - - - - 0x01C95E 0E:C94E: AD 60 03
 	STA ram_0027                    ;C - - - - - 0x01C961 0E:C951: 85 27
-	LDA ram_00FC                    ;C - - - - - 0x01C963 0E:C953: A5 FC
+	LDA scrollX                     ;C - - - - - 0x01C963 0E:C953: A5 FC
 	STA ram_0025                    ;C - - - - - 0x01C965 0E:C955: 85 25
 	LDX #$08                        ;C - - - - - 0x01C967 0E:C957: A2 08
 	STX prgBank8000                 ;C - - - - - 0x01C969 0E:C959: 86 F4
@@ -1248,14 +1268,14 @@ loc_0E_C987:
 loc_0E_C99D:
 	LDA #$04                        ;C - - - - - 0x01C9AD 0E:C99D: A9 04
 	STA ram_0097                    ;C - - - - - 0x01C9AF 0E:C99F: 85 97
-	JSR sub_0E_C31D                 ;C - - - - - 0x01C9B1 0E:C9A1: 20 1D C3
+	JSR HideSprites                 ;C - - - - - 0x01C9B1 0E:C9A1: 20 1D C3
 	JSR sub_0F_E9BC                 ;C - - - - - 0x01C9B4 0E:C9A4: 20 BC E9
 loc_0E_C9A7:
 	JSR sub_0E_C3B4                 ;C - - - - - 0x01C9B7 0E:C9A7: 20 B4 C3
 	LDA #$00                        ;C - - - - - 0x01C9BA 0E:C9AA: A9 00
-	STA ram_00EE                    ;C - - - - - 0x01C9BC 0E:C9AC: 85 EE
+	STA renderOffCount              ;C - - - - - 0x01C9BC 0E:C9AC: 85 EE
 	JSR sub_0F_FF31                 ;C - - - - - 0x01C9BE 0E:C9AE: 20 31 FF
-	INC ram_00EE                    ;C - - - - - 0x01C9C1 0E:C9B1: E6 EE
+	INC renderOffCount              ;C - - - - - 0x01C9C1 0E:C9B1: E6 EE
 	JMP loc_0E_C8ED                 ;C - - - - - 0x01C9C3 0E:C9B3: 4C ED C8
 sub_0E_C9B6:
 	JSR sub_0E_CED1                 ;C - - - - - 0x01C9C6 0E:C9B6: 20 D1 CE
@@ -1290,7 +1310,7 @@ loc_0E_CA26:
 	BEQ loc_0E_CA2C                 ;C - - - - - 0x01CA38 0E:CA28: F0 02
 	DEC ram_00A3                    ;C - - - - - 0x01CA3A 0E:CA2A: C6 A3
 loc_0E_CA2C:
-	LDA ram_0014                    ;C - - - - - 0x01CA3C 0E:CA2C: A5 14
+	LDA padPressed                  ;C - - - - - 0x01CA3C 0E:CA2C: A5 14
 	CMP #$80                        ;C - - - - - 0x01CA3E 0E:CA2E: C9 80
 	BEQ loc_0E_CA6D                 ;C - - - - - 0x01CA40 0E:CA30: F0 3B
 	CMP #$C0                        ;C - - - - - 0x01CA42 0E:CA32: C9 C0
@@ -1324,7 +1344,7 @@ loc_0E_CA54:
 loc_0E_CA6D:
 	LDA playerHealth                ;C - - - - - 0x01CA7D 0E:CA6D: A5 3A
 	BEQ loc_0E_CA77                 ;C - - - - - 0x01CA7F 0E:CA6F: F0 06
-	LDA ram_0016                    ;C - - - - - 0x01CA81 0E:CA71: A5 16
+	LDA padHeld                     ;C - - - - - 0x01CA81 0E:CA71: A5 16
 	AND #$40                        ;C - - - - - 0x01CA83 0E:CA73: 29 40
 	BNE loc_0E_CA3C                 ;C - - - - - 0x01CA85 0E:CA75: D0 C5
 loc_0E_CA77:
@@ -1355,7 +1375,7 @@ loc_0E_CAA2:
 	STA ram_0420                    ;C - - - - - 0x01CAC3 0E:CAB3: 8D 20 04
 	LDA tbl_0F_E1CA,Y               ;C - - - - - 0x01CAC6 0E:CAB6: B9 CA E1
 	STA ram_0430                    ;C - - - - - 0x01CAC9 0E:CAB9: 8D 30 04
-	LDA ram_0016                    ;C - - - - - 0x01CACC 0E:CABC: A5 16
+	LDA padHeld                     ;C - - - - - 0x01CACC 0E:CABC: A5 16
 	CMP #$09                        ;C - - - - - 0x01CACE 0E:CABE: C9 09
 	BEQ loc_0E_CAD1                 ;C - - - - - 0x01CAD0 0E:CAC0: F0 0F
 	CMP #$05                        ;C - - - - - 0x01CAD2 0E:CAC2: C9 05
@@ -1374,7 +1394,7 @@ loc_0E_CAD1:
 	STA ram_0410                    ;C - - - - - 0x01CAEF 0E:CADF: 8D 10 04
 	STA ram_0430                    ;C - - - - - 0x01CAF2 0E:CAE2: 8D 30 04
 loc_0E_CAE5:
-	LDA ram_0014                    ;C - - - - - 0x01CAF5 0E:CAE5: A5 14
+	LDA padPressed                  ;C - - - - - 0x01CAF5 0E:CAE5: A5 14
 	CMP #$40                        ;C - - - - - 0x01CAF7 0E:CAE7: C9 40
 	BEQ loc_0E_CAF8                 ;C - - - - - 0x01CAF9 0E:CAE9: F0 0D
 	CMP #$80                        ;C - - - - - 0x01CAFB 0E:CAEB: C9 80
@@ -1389,7 +1409,7 @@ loc_0E_CAF8:
 	STA ram_0036                    ;C - - - - - 0x01CB0B 0E:CAFB: 85 36
 	LDA playerHealth                ;C - - - - - 0x01CB0D 0E:CAFD: A5 3A
 	BEQ loc_0E_CB07                 ;C - - - - - 0x01CB0F 0E:CAFF: F0 06
-	LDA ram_0016                    ;C - - - - - 0x01CB11 0E:CB01: A5 16
+	LDA padHeld                     ;C - - - - - 0x01CB11 0E:CB01: A5 16
 	CMP #$C0                        ;C - - - - - 0x01CB13 0E:CB03: C9 C0
 	BEQ loc_0E_CAF5                 ;C - - - - - 0x01CB15 0E:CB05: F0 EE
 loc_0E_CB07:
@@ -1530,7 +1550,7 @@ loc_0E_CC06:
 loc_0E_CC18:
 	CMP #$14                        ;C - - - - - 0x01CC28 0E:CC18: C9 14
 	BCS loc_0E_CBA0                 ;C - - - - - 0x01CC2A 0E:CC1A: B0 84
-	LDA ram_0016                    ;C - - - - - 0x01CC2C 0E:CC1C: A5 16
+	LDA padHeld                     ;C - - - - - 0x01CC2C 0E:CC1C: A5 16
 	CMP #$44                        ;C - - - - - 0x01CC2E 0E:CC1E: C9 44
 	BEQ loc_0E_CC29                 ;C - - - - - 0x01CC30 0E:CC20: F0 07
 	CMP #$48                        ;C - - - - - 0x01CC32 0E:CC22: C9 48
@@ -1628,7 +1648,7 @@ loc_0E_CCDA:
 	LDA objY                        ;C - - - - - 0x01CCEA 0E:CCDA: AD C0 03
 	STA ram_0036                    ;C - - - - - 0x01CCED 0E:CCDD: 85 36
 	LDX #$00                        ;C - - - - - 0x01CCEF 0E:CCDF: A2 00
-	LDA ram_0016                    ;C - - - - - 0x01CCF1 0E:CCE1: A5 16
+	LDA padHeld                     ;C - - - - - 0x01CCF1 0E:CCE1: A5 16
 	AND #$03                        ;C - - - - - 0x01CCF3 0E:CCE3: 29 03
 	BEQ loc_0E_CCFA                 ;C - - - - - 0x01CCF5 0E:CCE5: F0 13
 	STA ram_0031                    ;C - - - - - 0x01CCF7 0E:CCE7: 85 31
@@ -1641,7 +1661,7 @@ loc_0E_CCF5:
 	LDY #$01                        ;C - - - - - 0x01CD05 0E:CCF5: A0 01
 	JSR sub_0F_F051                 ;C - - - - - 0x01CD07 0E:CCF7: 20 51 F0
 loc_0E_CCFA:
-	LDA ram_0016                    ;C - - - - - 0x01CD0A 0E:CCFA: A5 16
+	LDA padHeld                     ;C - - - - - 0x01CD0A 0E:CCFA: A5 16
 	AND #$0C                        ;C - - - - - 0x01CD0C 0E:CCFC: 29 0C
 	BEQ loc_0E_CD3B                 ;C - - - - - 0x01CD0E 0E:CCFE: F0 3B
 	AND #$04                        ;C - - - - - 0x01CD10 0E:CD00: 29 04
@@ -1676,7 +1696,7 @@ loc_0E_CD36:
 loc_0E_CD38:
 	JSR sub_0F_F0F7                 ;C - - - - - 0x01CD48 0E:CD38: 20 F7 F0
 loc_0E_CD3B:
-	LDA ram_0016                    ;C - - - - - 0x01CD4B 0E:CD3B: A5 16
+	LDA padHeld                     ;C - - - - - 0x01CD4B 0E:CD3B: A5 16
 	AND #$0F                        ;C - - - - - 0x01CD4D 0E:CD3D: 29 0F
 	BEQ loc_0E_CD5C                 ;C - - - - - 0x01CD4F 0E:CD3F: F0 1B
 	CMP #$05                        ;C - - - - - 0x01CD51 0E:CD41: C9 05
@@ -1813,7 +1833,7 @@ loc_0E_CE2E:
 loc_0E_CE38:
 	LDA objX                        ;C - - - - - 0x01CE48 0E:CE38: AD 60 03
 	SEC                             ;C - - - - - 0x01CE4B 0E:CE3B: 38
-	SBC ram_00FC                    ;C - - - - - 0x01CE4C 0E:CE3C: E5 FC
+	SBC scrollX                     ;C - - - - - 0x01CE4C 0E:CE3C: E5 FC
 	CMP #$24                        ;C - - - - - 0x01CE4E 0E:CE3E: C9 24
 	BCC loc_0E_CE11                 ;C - - - - - 0x01CE50 0E:CE40: 90 CF
 loc_0E_CE42:
@@ -1833,7 +1853,7 @@ loc_0E_CE42:
 	STA ram_0380,Y                  ;C - - - - - 0x01CE6F 0E:CE5F: 99 80 03
 	PLA                             ;C - - - - - 0x01CE72 0E:CE62: 68
 	STA objX,Y                      ;C - - - - - 0x01CE73 0E:CE63: 99 60 03
-	LDA ram_0016                    ;C - - - - - 0x01CE76 0E:CE66: A5 16
+	LDA padHeld                     ;C - - - - - 0x01CE76 0E:CE66: A5 16
 	AND #$03                        ;C - - - - - 0x01CE78 0E:CE68: 29 03
 	BEQ loc_0E_CEA4                 ;C - - - - - 0x01CE7A 0E:CE6A: F0 38
 	LDA #$04                        ;C - - - - - 0x01CE7C 0E:CE6C: A9 04
@@ -1864,7 +1884,7 @@ loc_0E_CE89:
 	JSR sub_0F_F440                 ;C - - - - - 0x01CEB0 0E:CEA0: 20 40 F4
 	RTS                             ;C - - - - - 0x01CEB3 0E:CEA3: 60
 loc_0E_CEA4:
-	LDA ram_0016                    ;C - - - - - 0x01CEB4 0E:CEA4: A5 16
+	LDA padHeld                     ;C - - - - - 0x01CEB4 0E:CEA4: A5 16
 	AND #$0F                        ;C - - - - - 0x01CEB6 0E:CEA6: 29 0F
 	BNE loc_0E_CEC1                 ;C - - - - - 0x01CEB8 0E:CEA8: D0 17
 sub_0E_CEAA:
@@ -2095,13 +2115,13 @@ loc_0E_D04A:
 	LDA ram_0580                    ;C - - - - - 0x01D060 0E:D050: AD 80 05
 	CMP #$3B                        ;C - - - - - 0x01D063 0E:D053: C9 3B
 	BNE loc_0E_D061                 ;C - - - - - 0x01D065 0E:D055: D0 0A
-	LDA ram_0014                    ;C - - - - - 0x01D067 0E:D057: A5 14
+	LDA padPressed                  ;C - - - - - 0x01D067 0E:D057: A5 14
 	CMP #$08                        ;C - - - - - 0x01D069 0E:D059: C9 08
 	BNE loc_0E_D061                 ;C - - - - - 0x01D06B 0E:D05B: D0 04
 	LDA #$05                        ;C - - - - - 0x01D06D 0E:D05D: A9 05
 	STA ram_00B3                    ;C - - - - - 0x01D06F 0E:D05F: 85 B3
 loc_0E_D061:
-	LDA ram_0014                    ;C - - - - - 0x01D071 0E:D061: A5 14
+	LDA padPressed                  ;C - - - - - 0x01D071 0E:D061: A5 14
 	CMP #$40                        ;C - - - - - 0x01D073 0E:D063: C9 40
 	BEQ loc_0E_D06A                 ;C - - - - - 0x01D075 0E:D065: F0 03
 	JMP loc_0E_D18E                 ;C - - - - - 0x01D077 0E:D067: 4C 8E D1
@@ -2114,7 +2134,7 @@ loc_0E_D06A:
 loc_0E_D076:
 	LDA ram_0035                    ;C - - - - - 0x01D086 0E:D076: A5 35
 	BNE loc_0E_D0D8                 ;C - - - - - 0x01D088 0E:D078: D0 5E
-	LDA ram_0016                    ;C - - - - - 0x01D08A 0E:D07A: A5 16
+	LDA padHeld                     ;C - - - - - 0x01D08A 0E:D07A: A5 16
 	AND #$0F                        ;C - - - - - 0x01D08C 0E:D07C: 29 0F
 	STA ptr_00                      ;C - - - - - 0x01D08E 0E:D07E: 85 00
 	CMP #$01                        ;C - - - - - 0x01D090 0E:D080: C9 01
@@ -2160,7 +2180,7 @@ loc_0E_D0BC:
 	STA ram_00A6                    ;C - - - - - 0x01D0E3 0E:D0D3: 85 A6
 	JMP loc_0E_D18E                 ;C - - - - - 0x01D0E5 0E:D0D5: 4C 8E D1
 loc_0E_D0D8:
-	LDA ram_0014                    ;C - - - - - 0x01D0E8 0E:D0D8: A5 14
+	LDA padPressed                  ;C - - - - - 0x01D0E8 0E:D0D8: A5 14
 	CMP #$40                        ;C - - - - - 0x01D0EA 0E:D0DA: C9 40
 	BEQ loc_0E_D0E1                 ;C - - - - - 0x01D0EC 0E:D0DC: F0 03
 	JMP loc_0E_D18E                 ;c - - - - - 0x01D0EE 0E:D0DE: 4C 8E D1
@@ -2179,7 +2199,7 @@ loc_0E_D0F9:
 	LDA ram_0031                    ;C - - - - - 0x01D109 0E:D0F9: A5 31
 	CMP ram_0032                    ;C - - - - - 0x01D10B 0E:D0FB: C5 32
 	BNE loc_0E_D159                 ;C - - - - - 0x01D10D 0E:D0FD: D0 5A
-	LDA ram_0016                    ;C - - - - - 0x01D10F 0E:D0FF: A5 16
+	LDA padHeld                     ;C - - - - - 0x01D10F 0E:D0FF: A5 16
 	AND #$0F                        ;C - - - - - 0x01D111 0E:D101: 29 0F
 	STA ptr_00                      ;C - - - - - 0x01D113 0E:D103: 85 00
 	CMP #$01                        ;C - - - - - 0x01D115 0E:D105: C9 01
@@ -2226,7 +2246,7 @@ loc_0E_D13F:
 loc_0E_D158:
 	RTS                             ;C - - - - - 0x01D168 0E:D158: 60
 loc_0E_D159:
-	LDA ram_0016                    ;C - - - - - 0x01D169 0E:D159: A5 16
+	LDA padHeld                     ;C - - - - - 0x01D169 0E:D159: A5 16
 	AND #$0F                        ;C - - - - - 0x01D16B 0E:D15B: 29 0F
 	STA ptr_00                      ;C - - - - - 0x01D16D 0E:D15D: 85 00
 	CMP #$04                        ;C - - - - - 0x01D16F 0E:D15F: C9 04
@@ -2262,12 +2282,12 @@ loc_0E_D18E:
 	LDA ram_0580                    ;C - - - - - 0x01D1A9 0E:D199: AD 80 05
 	CMP tbl_0F_E279,Y               ;C - - - - - 0x01D1AC 0E:D19C: D9 79 E2
 	BEQ loc_0E_D158                 ;C - - - - - 0x01D1AF 0E:D19F: F0 B7
-	LDA ram_0016                    ;C - - - - - 0x01D1B1 0E:D1A1: A5 16
+	LDA padHeld                     ;C - - - - - 0x01D1B1 0E:D1A1: A5 16
 	AND #$03                        ;C - - - - - 0x01D1B3 0E:D1A3: 29 03
 ofs_0E_D1A5:
 	BEQ loc_0E_D158                 ;C - - - - - 0x01D1B5 0E:D1A5: F0 B1
 	STA ptr_00                      ;C - - - - - 0x01D1B7 0E:D1A7: 85 00
-	LDA ram_0014                    ;C - - - - - 0x01D1B9 0E:D1A9: A5 14
+	LDA padPressed                  ;C - - - - - 0x01D1B9 0E:D1A9: A5 14
 	CMP #$40                        ;C - - - - - 0x01D1BB 0E:D1AB: C9 40
 	BEQ loc_0E_D1C7                 ;C - - - - - 0x01D1BD 0E:D1AD: F0 18
 	LDY playerId                    ;C - - - - - 0x01D1BF 0E:D1AF: A4 34
@@ -2291,10 +2311,10 @@ loc_0E_D1C7:
 	BMI loc_0E_D1F6                 ;C - - - - - 0x01D1E7 0E:D1D7: 30 1D
 	LDA objX                        ;C - - - - - 0x01D1E9 0E:D1D9: AD 60 03
 	SEC                             ;C - - - - - 0x01D1EC 0E:D1DC: 38
-	SBC ram_00FC                    ;C - - - - - 0x01D1ED 0E:D1DD: E5 FC
+	SBC scrollX                     ;C - - - - - 0x01D1ED 0E:D1DD: E5 FC
 	CMP #$F1                        ;C - - - - - 0x01D1EF 0E:D1DF: C9 F1
 	BCC loc_0E_D1F6                 ;C - - - - - 0x01D1F1 0E:D1E1: 90 13
-	LDA ram_00FC                    ;c - - - - - 0x01D1F3 0E:D1E3: A5 FC
+	LDA scrollX                     ;c - - - - - 0x01D1F3 0E:D1E3: A5 FC
 	CLC                             ;c - - - - - 0x01D1F5 0E:D1E5: 18
 	ADC #$F0                        ;c - - - - - 0x01D1F6 0E:D1E6: 69 F0
 	STA objX                        ;c - - - - - 0x01D1F8 0E:D1E8: 8D 60 03
@@ -2378,10 +2398,10 @@ loc_0E_D289:
 	BMI loc_0E_D2B1                 ;C - - - - - 0x01D2A5 0E:D295: 30 1A
 	LDA objX                        ;C - - - - - 0x01D2A7 0E:D297: AD 60 03
 	SEC                             ;C - - - - - 0x01D2AA 0E:D29A: 38
-	SBC ram_00FC                    ;C - - - - - 0x01D2AB 0E:D29B: E5 FC
+	SBC scrollX                     ;C - - - - - 0x01D2AB 0E:D29B: E5 FC
 	CMP #$F1                        ;C - - - - - 0x01D2AD 0E:D29D: C9 F1
 	BCC loc_0E_D2B1                 ;C - - - - - 0x01D2AF 0E:D29F: 90 10
-	LDA ram_00FC                    ;c - - - - - 0x01D2B1 0E:D2A1: A5 FC
+	LDA scrollX                     ;c - - - - - 0x01D2B1 0E:D2A1: A5 FC
 	CLC                             ;c - - - - - 0x01D2B3 0E:D2A3: 18
 	ADC #$F0                        ;c - - - - - 0x01D2B4 0E:D2A4: 69 F0
 	STA objX                        ;c - - - - - 0x01D2B6 0E:D2A6: 8D 60 03
@@ -2424,7 +2444,7 @@ loc_0E_D2EA:
 	DEC ram_00B3                    ;C - - - - - 0x01D2FA 0E:D2EA: C6 B3
 	LDA objY                        ;C - - - - - 0x01D2FC 0E:D2EC: AD C0 03
 	STA ram_0036                    ;C - - - - - 0x01D2FF 0E:D2EF: 85 36
-	LDA ram_0014                    ;C - - - - - 0x01D301 0E:D2F1: A5 14
+	LDA padPressed                  ;C - - - - - 0x01D301 0E:D2F1: A5 14
 	CMP #$40                        ;C - - - - - 0x01D303 0E:D2F3: C9 40
 	BEQ loc_0E_D2F8                 ;C - - - - - 0x01D305 0E:D2F5: F0 01
 	RTS                             ;C - - - - - 0x01D307 0E:D2F7: 60
@@ -2440,7 +2460,7 @@ loc_0E_D2F8:
 	STA ram_0036                    ;C - - - - - 0x01D31C 0E:D30C: 85 36
 	RTS                             ;C - - - - - 0x01D31E 0E:D30E: 60
 loc_0E_D30F:
-	LDA ram_0016                    ;C - - J - - 0x01D31F 0E:D30F: A5 16
+	LDA padHeld                     ;C - - J - - 0x01D31F 0E:D30F: A5 16
 	CMP #$C0                        ;C - - - - - 0x01D321 0E:D311: C9 C0
 	BNE loc_0E_D331                 ;C - - - - - 0x01D323 0E:D313: D0 1C
 	LDA playerHealth                ;C - - - - - 0x01D325 0E:D315: A5 3A
@@ -2469,11 +2489,11 @@ loc_0E_D340:
 	CMP #$01                        ;C - - - - - 0x01D352 0E:D342: C9 01
 	BCC loc_0E_D373                 ;C - - - - - 0x01D354 0E:D344: 90 2D
 loc_0E_D346:
-	LDA ram_0014                    ;C - - - - - 0x01D356 0E:D346: A5 14
+	LDA padPressed                  ;C - - - - - 0x01D356 0E:D346: A5 14
 	AND #$0F                        ;C - - - - - 0x01D358 0E:D348: 29 0F
 	CMP ram_0031                    ;C - - - - - 0x01D35A 0E:D34A: C5 31
 	BNE loc_0E_D373                 ;C - - - - - 0x01D35C 0E:D34C: D0 25
-	LDA ram_0016                    ;C - - - - - 0x01D35E 0E:D34E: A5 16
+	LDA padHeld                     ;C - - - - - 0x01D35E 0E:D34E: A5 16
 	AND #$F0                        ;C - - - - - 0x01D360 0E:D350: 29 F0
 	CMP #$40                        ;C - - - - - 0x01D362 0E:D352: C9 40
 	BNE loc_0E_D373                 ;C - - - - - 0x01D364 0E:D354: D0 1D
@@ -2500,7 +2520,7 @@ loc_0E_D373:
 	BEQ loc_0E_D38A                 ;C - - - - - 0x01D395 0E:D385: F0 03
 	JMP loc_0E_D39E                 ;C - - - - - 0x01D397 0E:D387: 4C 9E D3
 loc_0E_D38A:
-	LDA ram_0016                    ;C - - - - - 0x01D39A 0E:D38A: A5 16
+	LDA padHeld                     ;C - - - - - 0x01D39A 0E:D38A: A5 16
 	AND #$03                        ;C - - - - - 0x01D39C 0E:D38C: 29 03
 	BEQ loc_0E_D39E                 ;C - - - - - 0x01D39E 0E:D38E: F0 0E
 	STA ram_0031                    ;C - - - - - 0x01D3A0 0E:D390: 85 31
@@ -3055,11 +3075,11 @@ tbl_0E_D7B3:
 tbl_0E_D7B5:
 	.hibytes ofs_0E_D7B8, ofs_0E_D886, ofs_0E_D89A;- D 2 - - - 0x01D7C5 0E:D7B5:
 ofs_0E_D7B8:
-	LDA ram_0014                    ;C - - J - - 0x01D7C8 0E:D7B8: A5 14
+	LDA padPressed                  ;C - - J - - 0x01D7C8 0E:D7B8: A5 14
 	CMP #$40                        ;C - - - - - 0x01D7CA 0E:D7BA: C9 40
 	BNE loc_0E_D82E                 ;C - - - - - 0x01D7CC 0E:D7BC: D0 70
 	LDY ram_0039                    ;C - - - - - 0x01D7CE 0E:D7BE: A4 39
-	LDA ram_0016                    ;C - - - - - 0x01D7D0 0E:D7C0: A5 16
+	LDA padHeld                     ;C - - - - - 0x01D7D0 0E:D7C0: A5 16
 	AND #$0F                        ;C - - - - - 0x01D7D2 0E:D7C2: 29 0F
 	BEQ loc_0E_D829                 ;C - - - - - 0x01D7D4 0E:D7C4: F0 63
 	CMP ram_0031                    ;C - - - - - 0x01D7D6 0E:D7C6: C5 31
@@ -3116,7 +3136,7 @@ loc_0E_D829:
 	STA gameAction                  ;C - - - - - 0x01D83B 0E:D82B: 85 30
 	RTS                             ;C - - - - - 0x01D83D 0E:D82D: 60
 loc_0E_D82E:
-	LDA ram_0014                    ;C - - - - - 0x01D83E 0E:D82E: A5 14
+	LDA padPressed                  ;C - - - - - 0x01D83E 0E:D82E: A5 14
 	CMP #$80                        ;C - - - - - 0x01D840 0E:D830: C9 80
 	BEQ loc_0E_D84E                 ;C - - - - - 0x01D842 0E:D832: F0 1A
 	LDA ram_0038                    ;C - - - - - 0x01D844 0E:D834: A5 38
@@ -3158,7 +3178,7 @@ loc_0E_D84E:
 	JSR sub_0F_F34C                 ;C - - - - - 0x01D890 0E:D880: 20 4C F3
 	JMP loc_0E_CF88                 ;C - - - - - 0x01D893 0E:D883: 4C 88 CF
 ofs_0E_D886:
-	LDA ram_0014                    ;C - - J - - 0x01D896 0E:D886: A5 14
+	LDA padPressed                  ;C - - J - - 0x01D896 0E:D886: A5 14
 	CMP #$40                        ;C - - - - - 0x01D898 0E:D888: C9 40
 	BNE loc_0E_D82E                 ;C - - - - - 0x01D89A 0E:D88A: D0 A2
 loc_0E_D88C:
@@ -3170,7 +3190,7 @@ loc_0E_D88C:
 	STA ram_0300                    ;C - - - - - 0x01D8A6 0E:D896: 8D 00 03
 	RTS                             ;C - - - - - 0x01D8A9 0E:D899: 60
 ofs_0E_D89A:
-	LDA ram_0014                    ;C - - J - - 0x01D8AA 0E:D89A: A5 14
+	LDA padPressed                  ;C - - J - - 0x01D8AA 0E:D89A: A5 14
 	CMP #$40                        ;C - - - - - 0x01D8AC 0E:D89C: C9 40
 	BEQ loc_0E_D8A8                 ;C - - - - - 0x01D8AE 0E:D89E: F0 08
 	LDA objY                        ;C - - - - - 0x01D8B0 0E:D8A0: AD C0 03
@@ -3207,7 +3227,7 @@ loc_0E_D8B7:
 loc_0E_D8E2:
 	JMP loc_0E_D83B                 ;C - - - - - 0x01D8F2 0E:D8E2: 4C 3B D8
 loc_0E_D8E5:
-	LDA ram_0014                    ;C - - - - - 0x01D8F5 0E:D8E5: A5 14
+	LDA padPressed                  ;C - - - - - 0x01D8F5 0E:D8E5: A5 14
 	CMP #$80                        ;C - - - - - 0x01D8F7 0E:D8E7: C9 80
 	BEQ loc_0E_D8B7                 ;C - - - - - 0x01D8F9 0E:D8E9: F0 CC
 	LDA ram_0038                    ;C - - - - - 0x01D8FB 0E:D8EB: A5 38
@@ -3221,7 +3241,7 @@ loc_0E_D8E5:
 	JSR sub_0F_F440                 ;C - - - - - 0x01D90D 0E:D8FD: 20 40 F4
 loc_0E_D900:
 	LDX #$00                        ;C - - - - - 0x01D910 0E:D900: A2 00
-	LDA ram_0016                    ;C - - - - - 0x01D912 0E:D902: A5 16
+	LDA padHeld                     ;C - - - - - 0x01D912 0E:D902: A5 16
 	AND #$03                        ;C - - - - - 0x01D914 0E:D904: 29 03
 	BEQ loc_0E_D92D                 ;C - - - - - 0x01D916 0E:D906: F0 25
 	STA ram_0460                    ;C - - - - - 0x01D918 0E:D908: 8D 60 04
@@ -3236,7 +3256,7 @@ loc_0E_D900:
 	BEQ loc_0E_D930                 ;C - - - - - 0x01D92C 0E:D91C: F0 12
 	LDA objX                        ;C - - - - - 0x01D92E 0E:D91E: AD 60 03
 	SEC                             ;C - - - - - 0x01D931 0E:D921: 38
-	SBC ram_00FC                    ;C - - - - - 0x01D932 0E:D922: E5 FC
+	SBC scrollX                     ;C - - - - - 0x01D932 0E:D922: E5 FC
 	CMP #$F1                        ;C - - - - - 0x01D934 0E:D924: C9 F1
 	BEQ loc_0E_D959                 ;C - - - - - 0x01D936 0E:D926: F0 31
 	BCS loc_0E_D959                 ;C - - - - - 0x01D938 0E:D928: B0 2F
@@ -3246,7 +3266,7 @@ loc_0E_D92D:
 loc_0E_D930:
 	LDA objX,Y                      ;C - - - - - 0x01D940 0E:D930: B9 60 03
 	SEC                             ;C - - - - - 0x01D943 0E:D933: 38
-	SBC ram_00FC                    ;C - - - - - 0x01D944 0E:D934: E5 FC
+	SBC scrollX                     ;C - - - - - 0x01D944 0E:D934: E5 FC
 	CMP #$F9                        ;C - - - - - 0x01D946 0E:D936: C9 F9
 	BEQ loc_0E_D959                 ;C - - - - - 0x01D948 0E:D938: F0 1F
 	BCS loc_0E_D959                 ;C - - - - - 0x01D94A 0E:D93A: B0 1D
@@ -3274,7 +3294,7 @@ loc_0E_D95C:
 	BEQ loc_0E_D97A                 ;C - - - - - 0x01D979 0E:D969: F0 0F
 	LDA objX,Y                      ;C - - - - - 0x01D97B 0E:D96B: B9 60 03
 	SEC                             ;C - - - - - 0x01D97E 0E:D96E: 38
-	SBC ram_00FC                    ;C - - - - - 0x01D97F 0E:D96F: E5 FC
+	SBC scrollX                     ;C - - - - - 0x01D97F 0E:D96F: E5 FC
 	CMP #$11                        ;C - - - - - 0x01D981 0E:D971: C9 11
 	BEQ loc_0E_D9A3                 ;C - - - - - 0x01D983 0E:D973: F0 2E
 	BCC loc_0E_D9A3                 ;C - - - - - 0x01D985 0E:D975: 90 2C
@@ -3282,7 +3302,7 @@ loc_0E_D95C:
 loc_0E_D97A:
 	LDA objX                        ;C - - - - - 0x01D98A 0E:D97A: AD 60 03
 	SEC                             ;C - - - - - 0x01D98D 0E:D97D: 38
-	SBC ram_00FC                    ;C - - - - - 0x01D98E 0E:D97E: E5 FC
+	SBC scrollX                     ;C - - - - - 0x01D98E 0E:D97E: E5 FC
 	CMP #$18                        ;C - - - - - 0x01D990 0E:D980: C9 18
 	BEQ loc_0E_D9A3                 ;C - - - - - 0x01D992 0E:D982: F0 1F
 	BCC loc_0E_D9A3                 ;C - - - - - 0x01D994 0E:D984: 90 1D
@@ -3300,7 +3320,7 @@ loc_0E_D986:
 	STA ram_0380,Y                  ;C - - - - - 0x01D9B0 0E:D9A0: 99 80 03
 loc_0E_D9A3:
 	LDX #$00                        ;C - - - - - 0x01D9B3 0E:D9A3: A2 00
-	LDA ram_0016                    ;C - - - - - 0x01D9B5 0E:D9A5: A5 16
+	LDA padHeld                     ;C - - - - - 0x01D9B5 0E:D9A5: A5 16
 	AND #$0C                        ;C - - - - - 0x01D9B7 0E:D9A7: 29 0C
 	BEQ loc_0E_D9E9                 ;C - - - - - 0x01D9B9 0E:D9A9: F0 3E
 	AND #$04                        ;C - - - - - 0x01D9BB 0E:D9AB: 29 04
@@ -3332,7 +3352,7 @@ loc_0E_D9D7:
 	SBC #$08                        ;C - - - - - 0x01D9F4 0E:D9E4: E9 08
 	STA objY,Y                      ;C - - - - - 0x01D9F6 0E:D9E6: 99 C0 03
 loc_0E_D9E9:
-	LDA ram_0016                    ;C - - - - - 0x01D9F9 0E:D9E9: A5 16
+	LDA padHeld                     ;C - - - - - 0x01D9F9 0E:D9E9: A5 16
 	AND #$0F                        ;C - - - - - 0x01D9FB 0E:D9EB: 29 0F
 	BNE loc_0E_D9F9                 ;C - - - - - 0x01D9FD 0E:D9ED: D0 0A
 	LDA #$33                        ;C - - - - - 0x01D9FF 0E:D9EF: A9 33
@@ -3342,7 +3362,7 @@ loc_0E_D9E9:
 loc_0E_D9F9:
 	RTS                             ;C - - - - - 0x01DA09 0E:D9F9: 60
 ofs_0E_D9FA:
-	LDA ram_0014                    ;C - - J - - 0x01DA0A 0E:D9FA: A5 14
+	LDA padPressed                  ;C - - J - - 0x01DA0A 0E:D9FA: A5 14
 	CMP #$C0                        ;C - - - - - 0x01DA0C 0E:D9FC: C9 C0
 	BNE loc_0E_DA03                 ;C - - - - - 0x01DA0E 0E:D9FE: D0 03
 	JMP loc_0E_CA3C                 ;C - - - - - 0x01DA10 0E:DA00: 4C 3C CA
@@ -3423,11 +3443,11 @@ loc_0E_DA90:
 	BEQ loc_0E_DACB                 ;C - - - - - 0x01DAB2 0E:DAA2: F0 27
 	LDA objX                        ;C - - - - - 0x01DAB4 0E:DAA4: AD 60 03
 	SEC                             ;C - - - - - 0x01DAB7 0E:DAA7: 38
-	SBC ram_00FC                    ;C - - - - - 0x01DAB8 0E:DAA8: E5 FC
+	SBC scrollX                     ;C - - - - - 0x01DAB8 0E:DAA8: E5 FC
 	CMP #$E9                        ;C - - - - - 0x01DABA 0E:DAAA: C9 E9
 	BEQ loc_0E_DABF                 ;C - - - - - 0x01DABC 0E:DAAC: F0 11
 	BCC loc_0E_DAC5                 ;C - - - - - 0x01DABE 0E:DAAE: 90 15
-	LDA ram_00FC                    ;C - - - - - 0x01DAC0 0E:DAB0: A5 FC
+	LDA scrollX                     ;C - - - - - 0x01DAC0 0E:DAB0: A5 FC
 	CLC                             ;C - - - - - 0x01DAC2 0E:DAB2: 18
 	ADC #$E8                        ;C - - - - - 0x01DAC3 0E:DAB3: 69 E8
 	STA objX                        ;C - - - - - 0x01DAC5 0E:DAB5: 8D 60 03
@@ -3452,13 +3472,13 @@ loc_0E_DACE:
 	BEQ loc_0E_DACB                 ;C - - - - - 0x01DAE9 0E:DAD9: F0 F0
 	LDA objX                        ;C - - - - - 0x01DAEB 0E:DADB: AD 60 03
 	SEC                             ;C - - - - - 0x01DAEE 0E:DADE: 38
-	SBC ram_00FC                    ;C - - - - - 0x01DAEF 0E:DADF: E5 FC
+	SBC scrollX                     ;C - - - - - 0x01DAEF 0E:DADF: E5 FC
 	STA ptr_00                      ;C - - - - - 0x01DAF1 0E:DAE1: 85 00
 	LDA ptr_00                      ;C - - - - - 0x01DAF3 0E:DAE3: A5 00
 	CMP #$18                        ;C - - - - - 0x01DAF5 0E:DAE5: C9 18
 	BEQ loc_0E_DAFA                 ;C - - - - - 0x01DAF7 0E:DAE7: F0 11
 	BCS loc_0E_DB00                 ;C - - - - - 0x01DAF9 0E:DAE9: B0 15
-	LDA ram_00FC                    ;C - - - - - 0x01DAFB 0E:DAEB: A5 FC
+	LDA scrollX                     ;C - - - - - 0x01DAFB 0E:DAEB: A5 FC
 	CLC                             ;C - - - - - 0x01DAFD 0E:DAED: 18
 	ADC #$19                        ;C - - - - - 0x01DAFE 0E:DAEE: 69 19
 	STA objX                        ;C - - - - - 0x01DB00 0E:DAF0: 8D 60 03
@@ -3530,11 +3550,11 @@ loc_0E_DB6C:
 	BEQ loc_0E_DB9A                 ;C - - - - - 0x01DB8A 0E:DB7A: F0 1E
 	LDA objX                        ;C - - - - - 0x01DB8C 0E:DB7C: AD 60 03
 	SEC                             ;C - - - - - 0x01DB8F 0E:DB7F: 38
-	SBC ram_00FC                    ;C - - - - - 0x01DB90 0E:DB80: E5 FC
+	SBC scrollX                     ;C - - - - - 0x01DB90 0E:DB80: E5 FC
 	CMP #$E8                        ;C - - - - - 0x01DB92 0E:DB82: C9 E8
 	BEQ loc_0E_DB97                 ;C - - - - - 0x01DB94 0E:DB84: F0 11
 	BCC loc_0E_DB9D                 ;C - - - - - 0x01DB96 0E:DB86: 90 15
-	LDA ram_00FC                    ;C - - - - - 0x01DB98 0E:DB88: A5 FC
+	LDA scrollX                     ;C - - - - - 0x01DB98 0E:DB88: A5 FC
 	CLC                             ;C - - - - - 0x01DB9A 0E:DB8A: 18
 	ADC #$E9                        ;C - - - - - 0x01DB9B 0E:DB8B: 69 E9
 	STA objX                        ;C - - - - - 0x01DB9D 0E:DB8D: 8D 60 03
@@ -3555,13 +3575,13 @@ loc_0E_DBA3:
 	BEQ loc_0E_DBCE                 ;C - - - - - 0x01DBBA 0E:DBAA: F0 22
 	LDA objX                        ;C - - - - - 0x01DBBC 0E:DBAC: AD 60 03
 	SEC                             ;C - - - - - 0x01DBBF 0E:DBAF: 38
-	SBC ram_00FC                    ;C - - - - - 0x01DBC0 0E:DBB0: E5 FC
+	SBC scrollX                     ;C - - - - - 0x01DBC0 0E:DBB0: E5 FC
 	STA ptr_00                      ;C - - - - - 0x01DBC2 0E:DBB2: 85 00
 	LDA ptr_00                      ;C - - - - - 0x01DBC4 0E:DBB4: A5 00
 	CMP #$18                        ;C - - - - - 0x01DBC6 0E:DBB6: C9 18
 	BEQ loc_0E_DBCB                 ;C - - - - - 0x01DBC8 0E:DBB8: F0 11
 	BCS loc_0E_DBD1                 ;C - - - - - 0x01DBCA 0E:DBBA: B0 15
-	LDA ram_00FC                    ;c - - - - - 0x01DBCC 0E:DBBC: A5 FC
+	LDA scrollX                     ;c - - - - - 0x01DBCC 0E:DBBC: A5 FC
 	CLC                             ;c - - - - - 0x01DBCE 0E:DBBE: 18
 	ADC #$19                        ;c - - - - - 0x01DBCF 0E:DBBF: 69 19
 	STA objX                        ;c - - - - - 0x01DBD1 0E:DBC1: 8D 60 03
@@ -3647,27 +3667,27 @@ tbl_0E_DC5E:
 	.byte $82,$82,$82,$82           ;- D 2 - I - 0x01DC78 0E:DC68:
 loc_0E_DC6C:
 	LDA #$00                        ;C - - - - - 0x01DC7C 0E:DC6C: A9 00
-	STA ram_00EE                    ;C - - - - - 0x01DC7E 0E:DC6E: 85 EE
+	STA renderOffCount              ;C - - - - - 0x01DC7E 0E:DC6E: 85 EE
 	LDA #$F2                        ;C - - - - - 0x01DC80 0E:DC70: A9 F2
 	JSR sub_0F_F34A                 ;C - - - - - 0x01DC82 0E:DC72: 20 4A F3
 	JSR sub_0E_C36E                 ;C - - - - - 0x01DC85 0E:DC75: 20 6E C3
 	JSR sub_0F_FF31                 ;C - - - - - 0x01DC88 0E:DC78: 20 31 FF
 	LDA #$00                        ;C - - - - - 0x01DC8B 0E:DC7B: A9 00
-	STA ram_00FC                    ;C - - - - - 0x01DC8D 0E:DC7D: 85 FC
+	STA scrollX                     ;C - - - - - 0x01DC8D 0E:DC7D: 85 FC
 	STA scrollY                     ;C - - - - - 0x01DC8F 0E:DC7F: 85 FA
 	STA nametableSelect             ;C - - - - - 0x01DC91 0E:DC81: 85 FD
 	STA ram_00FB                    ;C - - - - - 0x01DC93 0E:DC83: 85 FB
 	STA ram_00F9                    ;C - - - - - 0x01DC95 0E:DC85: 85 F9
-	JSR sub_0E_C265                 ;C - - - - - 0x01DC97 0E:DC87: 20 65 C2
+	JSR ScreenOff                   ;C - - - - - 0x01DC97 0E:DC87: 20 65 C2
 	LDA #$04                        ;C - - - - - 0x01DC9A 0E:DC8A: A9 04
 	STA ram_0097                    ;C - - - - - 0x01DC9C 0E:DC8C: 85 97
-	JSR sub_0E_C31D                 ;C - - - - - 0x01DC9E 0E:DC8E: 20 1D C3
+	JSR HideSprites                 ;C - - - - - 0x01DC9E 0E:DC8E: 20 1D C3
 	JSR sub_0E_C334                 ;C - - - - - 0x01DCA1 0E:DC91: 20 34 C3
 	LDA #$20                        ;C - - - - - 0x01DCA4 0E:DC94: A9 20
 	LDX #$00                        ;C - - - - - 0x01DCA6 0E:DC96: A2 00
 	LDY #$00                        ;C - - - - - 0x01DCA8 0E:DC98: A0 00
-	JSR sub_0E_C2D1                 ;C - - - - - 0x01DCAA 0E:DC9A: 20 D1 C2
-	JSR sub_0E_C31D                 ;C - - - - - 0x01DCAD 0E:DC9D: 20 1D C3
+	JSR FillNametable               ;C - - - - - 0x01DCAA 0E:DC9A: 20 D1 C2
+	JSR HideSprites                 ;C - - - - - 0x01DCAD 0E:DC9D: 20 1D C3
 	LDX #$04                        ;C - - - - - 0x01DCB0 0E:DCA0: A2 04
 	STX prgBank8000                 ;C - - - - - 0x01DCB2 0E:DCA2: 86 F4
 	INX                             ;C - - - - - 0x01DCB4 0E:DCA4: E8
@@ -3677,7 +3697,7 @@ loc_0E_DC6C:
 	BEQ loc_0E_DCD1                 ;C - - - - - 0x01DCBC 0E:DCAC: F0 23
 	LDX #$03                        ;C - - - - - 0x01DCBE 0E:DCAE: A2 03
 	JSR sub_04_8000                 ;C - - - - - bank=04 0x01DCC0 0E:DCB0: 20 00 80
-	JSR sub_0E_C26F                 ;C - - - - - 0x01DCC3 0E:DCB3: 20 6F C2
+	JSR ScreenOn                    ;C - - - - - 0x01DCC3 0E:DCB3: 20 6F C2
 	JSR sub_04_9300                 ;C - - - - - bank=04 0x01DCC6 0E:DCB6: 20 00 93
 	LDA gameAction                  ;C - - - - - 0x01DCC9 0E:DCB9: A5 30
 	CMP #$07                        ;C - - - - - 0x01DCCB 0E:DCBB: C9 07
@@ -3685,7 +3705,7 @@ loc_0E_DC6C:
 	RTS                             ;C - - - - - 0x01DCCF 0E:DCBF: 60
 loc_0E_DCC0:
 	LDA #$00                        ;C - - - - - 0x01DCD0 0E:DCC0: A9 00
-	STA ram_00EE                    ;C - - - - - 0x01DCD2 0E:DCC2: 85 EE
+	STA renderOffCount              ;C - - - - - 0x01DCD2 0E:DCC2: 85 EE
 	JSR sub_0E_C85C                 ;C - - - - - 0x01DCD4 0E:DCC4: 20 5C C8
 	LDX #$04                        ;C - - - - - 0x01DCD7 0E:DCC7: A2 04
 	STX prgBank8000                 ;C - - - - - 0x01DCD9 0E:DCC9: 86 F4
@@ -3695,7 +3715,7 @@ loc_0E_DCC0:
 loc_0E_DCD1:
 	LDX #$05                        ;C - - - - - 0x01DCE1 0E:DCD1: A2 05
 	JSR sub_04_8000                 ;C - - - - - bank=04 0x01DCE3 0E:DCD3: 20 00 80
-	JSR sub_0E_C26F                 ;C - - - - - 0x01DCE6 0E:DCD6: 20 6F C2
+	JSR ScreenOn                    ;C - - - - - 0x01DCE6 0E:DCD6: 20 6F C2
 	JSR sub_04_9500                 ;C - - - - - bank=04 0x01DCE9 0E:DCD9: 20 00 95
 	RTS                             ;c - - - - - 0x01DCEC 0E:DCDC: 60
 ofs_0E_DCDD:
@@ -3789,7 +3809,7 @@ tbl_0E_DD7C:
 	.word ofs_0E_DDDD               ;W 0x01DD8C 0E:DD7C:
 	.byte $DD                       ;W 0x01DD8E 0E:DD7E:
 ofs_0E_DD7F:
-	LDA ram_0014                    ;C - - J - - 0x01DD8F 0E:DD7F: A5 14
+	LDA padPressed                  ;C - - J - - 0x01DD8F 0E:DD7F: A5 14
 	AND #$40                        ;C - - - - - 0x01DD91 0E:DD81: 29 40
 ofs_0E_DD83:
 	BEQ loc_0E_DDA8                 ;C - - - - - 0x01DD93 0E:DD83: F0 23
@@ -3838,7 +3858,7 @@ loc_0E_DDC4:
 	STA ram_00A4                    ;C - - - - - 0x01DDE0 0E:DDD0: 85 A4
 	RTS                             ;C - - - - - 0x01DDE2 0E:DDD2: 60
 ofs_0E_DDD3:
-	LDA ram_0014                    ;C - - J - - 0x01DDE3 0E:DDD3: A5 14
+	LDA padPressed                  ;C - - J - - 0x01DDE3 0E:DDD3: A5 14
 	AND #$40                        ;C - - - - - 0x01DDE5 0E:DDD5: 29 40
 	BEQ loc_0E_DDF0                 ;C - - - - - 0x01DDE7 0E:DDD7: F0 17
 	LDA ram_00A3                    ;C - - - - - 0x01DDE9 0E:DDD9: A5 A3
@@ -3865,7 +3885,7 @@ loc_0E_DDF0:
 	DEC ram_00A3                    ;C - - - - - 0x01DE0A 0E:DDFA: C6 A3
 	JMP loc_0E_DDE2                 ;C - - - - - 0x01DE0C 0E:DDFC: 4C E2 DD
 ofs_0E_DDFF:
-	LDA ram_0014                    ;C - - J - - 0x01DE0F 0E:DDFF: A5 14
+	LDA padPressed                  ;C - - J - - 0x01DE0F 0E:DDFF: A5 14
 	AND #$40                        ;C - - - - - 0x01DE11 0E:DE01: 29 40
 	BEQ loc_0E_DE21                 ;C - - - - - 0x01DE13 0E:DE03: F0 1C
 	LDA ram_00A3                    ;C - - - - - 0x01DE15 0E:DE05: A5 A3
@@ -3923,19 +3943,19 @@ tbl_0E_DE58:
 	.byte $68,$68                   ;- - - - - - 0x01DE6C 0E:DE5C:
 ofs_0E_DE5E:
 	LDA #$00                        ;C - - J - - 0x01DE6E 0E:DE5E: A9 00
-	STA ram_0065                    ;C D 2 - I - 0x01DE70 0E:DE60: 85 65
-	STA ram_0064                    ;C - - - - - 0x01DE72 0E:DE62: 85 64
+	STA vramQueueEnd                ;C D 2 - I - 0x01DE70 0E:DE60: 85 65
+	STA vramQueueFlag               ;C - - - - - 0x01DE72 0E:DE62: 85 64
 	STA ram_00B0                    ;C - - - - - 0x01DE74 0E:DE64: 85 B0
-	STA ram_00FC                    ;C - - - - - 0x01DE76 0E:DE66: 85 FC
+	STA scrollX                     ;C - - - - - 0x01DE76 0E:DE66: 85 FC
 	STA scrollY                     ;C - - - - - 0x01DE78 0E:DE68: 85 FA
 	STA nametableSelect             ;C - - - - - 0x01DE7A 0E:DE6A: 85 FD
 	STA ram_00FB                    ;C - - - - - 0x01DE7C 0E:DE6C: 85 FB
 	STA ram_00F9                    ;C - - - - - 0x01DE7E 0E:DE6E: 85 F9
-	STA ram_00EE                    ;C - - - - - 0x01DE80 0E:DE70: 85 EE
+	STA renderOffCount              ;C - - - - - 0x01DE80 0E:DE70: 85 EE
 	JSR sub_0E_C36E                 ;C - - - - - 0x01DE82 0E:DE72: 20 6E C3
 	LDA #$04                        ;C - - - - - 0x01DE85 0E:DE75: A9 04
 	STA ram_0097                    ;C - - - - - 0x01DE87 0E:DE77: 85 97
-	JSR sub_0E_C31D                 ;C - - - - - 0x01DE89 0E:DE79: 20 1D C3
+	JSR HideSprites                 ;C - - - - - 0x01DE89 0E:DE79: 20 1D C3
 	JSR sub_0F_FF31                 ;C - - - - - 0x01DE8C 0E:DE7C: 20 31 FF
 	JSR sub_0E_C334                 ;C - - - - - 0x01DE8F 0E:DE7F: 20 34 C3
 	LDA gameAction                  ;C - - - - - 0x01DE92 0E:DE82: A5 30
@@ -3966,7 +3986,7 @@ loc_0E_DE8B:
 	JSR sub_0E_C8A6                 ;C - - - - - 0x01DEC1 0E:DEB1: 20 A6 C8
 	LDX #$06                        ;C - - - - - 0x01DEC4 0E:DEB4: A2 06
 	JSR $8000                       ;C - - - - - 0x01DEC6 0E:DEB6: 20 00 80
-	JSR sub_0E_C26F                 ;C - - - - - 0x01DEC9 0E:DEB9: 20 6F C2
+	JSR ScreenOn                    ;C - - - - - 0x01DEC9 0E:DEB9: 20 6F C2
 	JSR $9000                       ;C - - - - - 0x01DECC 0E:DEBC: 20 00 90
 	LDX #$00                        ;C - - - - - 0x01DECF 0E:DEBF: A2 00
 	STX prgBank8000                 ;C - - - - - 0x01DED1 0E:DEC1: 86 F4
@@ -3977,17 +3997,17 @@ loc_0E_DE8B:
 	STA ram_00B8                    ;C - - - - - 0x01DEDB 0E:DECB: 85 B8
 	JSR sub_00_9A00                 ;C - - - - - bank=00 0x01DEDD 0E:DECD: 20 00 9A
 	LDA #$00                        ;C - - - - - 0x01DEE0 0E:DED0: A9 00
-	STA ram_00EE                    ;C - - - - - 0x01DEE2 0E:DED2: 85 EE
+	STA renderOffCount              ;C - - - - - 0x01DEE2 0E:DED2: 85 EE
 	JSR sub_0E_C36E                 ;C - - - - - 0x01DEE4 0E:DED4: 20 6E C3
 	LDA #$04                        ;C - - - - - 0x01DEE7 0E:DED7: A9 04
 	STA ram_0097                    ;C - - - - - 0x01DEE9 0E:DED9: 85 97
-	JSR sub_0E_C31D                 ;C - - - - - 0x01DEEB 0E:DEDB: 20 1D C3
+	JSR HideSprites                 ;C - - - - - 0x01DEEB 0E:DEDB: 20 1D C3
 	JSR sub_0F_FF31                 ;C - - - - - 0x01DEEE 0E:DEDE: 20 31 FF
 	JSR sub_0E_C334                 ;C - - - - - 0x01DEF1 0E:DEE1: 20 34 C3
 	JSR sub_0E_C8A6                 ;C - - - - - 0x01DEF4 0E:DEE4: 20 A6 C8
 	LDX #$0D                        ;C - - - - - 0x01DEF7 0E:DEE7: A2 0D
 	JSR sub_00_8000                 ;C - - - - - bank=00 0x01DEF9 0E:DEE9: 20 00 80
-	JSR sub_0E_C26F                 ;C - - - - - 0x01DEFC 0E:DEEC: 20 6F C2
+	JSR ScreenOn                    ;C - - - - - 0x01DEFC 0E:DEEC: 20 6F C2
 	JSR sub_00_8C00                 ;C - - - - - bank=00 0x01DEFF 0E:DEEF: 20 00 8C
 	LDX #$00                        ;C - - - - - 0x01DF02 0E:DEF2: A2 00
 	STX prgBank8000                 ;C - - - - - 0x01DF04 0E:DEF4: 86 F4
@@ -4000,15 +4020,15 @@ loc_0E_DE8B:
 	LDA ram_0150                    ;C - - - - - 0x01DF13 0E:DF03: AD 50 01
 	BNE loc_0E_DF4D                 ;C - - - - - 0x01DF16 0E:DF06: D0 45
 	LDA #$00                        ;C - - - - - 0x01DF18 0E:DF08: A9 00
-	STA ram_00EE                    ;C - - - - - 0x01DF1A 0E:DF0A: 85 EE
+	STA renderOffCount              ;C - - - - - 0x01DF1A 0E:DF0A: 85 EE
 	JSR sub_0E_C36E                 ;C - - - - - 0x01DF1C 0E:DF0C: 20 6E C3
 	LDA #$04                        ;C - - - - - 0x01DF1F 0E:DF0F: A9 04
 	STA ram_0097                    ;C - - - - - 0x01DF21 0E:DF11: 85 97
-	JSR sub_0E_C31D                 ;C - - - - - 0x01DF23 0E:DF13: 20 1D C3
+	JSR HideSprites                 ;C - - - - - 0x01DF23 0E:DF13: 20 1D C3
 	JSR sub_0F_FF31                 ;C - - - - - 0x01DF26 0E:DF16: 20 31 FF
 	JSR sub_0E_C334                 ;C - - - - - 0x01DF29 0E:DF19: 20 34 C3
 	JSR sub_0E_C8A6                 ;C - - - - - 0x01DF2C 0E:DF1C: 20 A6 C8
-	JSR sub_0E_C26F                 ;C - - - - - 0x01DF2F 0E:DF1F: 20 6F C2
+	JSR ScreenOn                    ;C - - - - - 0x01DF2F 0E:DF1F: 20 6F C2
 	JSR sub_00_95FF+1               ;C - - - - - bank=00 0x01DF32 0E:DF22: 20 00 96
 	LDX #$08                        ;C - - - - - 0x01DF35 0E:DF25: A2 08
 	STX prgBank8000                 ;C - - - - - 0x01DF37 0E:DF27: 86 F4
@@ -4060,10 +4080,10 @@ loc_0E_DF77:
 	JSR SetPrgBanks                 ;C - - - - - 0x01DF94 0E:DF84: 20 4D FF
 	LDX #$02                        ;C - - - - - 0x01DF97 0E:DF87: A2 02
 	JSR sub_04_8000                 ;C - - - - - bank=04 0x01DF99 0E:DF89: 20 00 80
-	JSR sub_0E_C26F                 ;C - - - - - 0x01DF9C 0E:DF8C: 20 6F C2
+	JSR ScreenOn                    ;C - - - - - 0x01DF9C 0E:DF8C: 20 6F C2
 	JSR sub_04_9100                 ;C - - - - - bank=04 0x01DF9F 0E:DF8F: 20 00 91
 	JSR sub_0E_C85C                 ;C - - - - - 0x01DFA2 0E:DF92: 20 5C C8
-	JSR sub_0E_C26F                 ;C - - - - - 0x01DFA5 0E:DF95: 20 6F C2
+	JSR ScreenOn                    ;C - - - - - 0x01DFA5 0E:DF95: 20 6F C2
 	JSR sub_0F_E143                 ;C - - - - - 0x01DFA8 0E:DF98: 20 43 E1
 	JSR sub_0F_E139                 ;C - - - - - 0x01DFAB 0E:DF9B: 20 39 E1
 	JSR sub_0E_DE33                 ;C - - - - - 0x01DFAE 0E:DF9E: 20 33 DE
@@ -4085,12 +4105,12 @@ loc_0E_DFA4:
 	LDA tbl_0F_E15C,Y               ;C - - - - - 0x01DFD1 0E:DFC1: B9 5C E1
 	TAX                             ;C - - - - - 0x01DFD4 0E:DFC4: AA
 	JSR sub_04_8000                 ;C - - - - - bank=04 0x01DFD5 0E:DFC5: 20 00 80
-	JSR sub_0E_C26F                 ;C - - - - - 0x01DFD8 0E:DFC8: 20 6F C2
+	JSR ScreenOn                    ;C - - - - - 0x01DFD8 0E:DFC8: 20 6F C2
 	JSR sub_04_8D00                 ;C - - - - - bank=04 0x01DFDB 0E:DFCB: 20 00 8D
 	LDX #$2D                        ;C - - - - - 0x01DFDE 0E:DFCE: A2 2D
 	JSR sub_0F_FF2A                 ;C - - - - - 0x01DFE0 0E:DFD0: 20 2A FF
 	JSR sub_0E_C85C                 ;C - - - - - 0x01DFE3 0E:DFD3: 20 5C C8
-	JSR sub_0E_C26F                 ;C - - - - - 0x01DFE6 0E:DFD6: 20 6F C2
+	JSR ScreenOn                    ;C - - - - - 0x01DFE6 0E:DFD6: 20 6F C2
 	JSR sub_0F_E143                 ;C - - - - - 0x01DFE9 0E:DFD9: 20 43 E1
 	JSR sub_0F_E139                 ;C - - - - - 0x01DFEC 0E:DFDC: 20 39 E1
 	JSR sub_0E_DE33                 ;C - - - - - 0x01DFEF 0E:DFDF: 20 33 DE

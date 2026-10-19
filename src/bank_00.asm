@@ -134,7 +134,7 @@ loc_00_8132:
 	JSR sub_0F_F000                 ;C - - - - - 0x00014B 00:813B: 20 00 F0
 	LDA objX                        ;C - - - - - 0x00014E 00:813E: AD 60 03
 	SEC                             ;C - - - - - 0x000151 00:8141: 38
-	SBC ram_00FC                    ;C - - - - - 0x000152 00:8142: E5 FC
+	SBC scrollX                     ;C - - - - - 0x000152 00:8142: E5 FC
 	CMP #$F0                        ;C - - - - - 0x000154 00:8144: C9 F0
 	BCC loc_00_815A                 ;C - - - - - 0x000156 00:8146: 90 12
 	JMP loc_00_8177                 ;C - - - - - 0x000158 00:8148: 4C 77 81
@@ -143,7 +143,7 @@ loc_00_814B:
 	JSR sub_0F_F051                 ;C - - - - - 0x00015D 00:814D: 20 51 F0
 	LDA objX                        ;C - - - - - 0x000160 00:8150: AD 60 03
 	SEC                             ;C - - - - - 0x000163 00:8153: 38
-	SBC ram_00FC                    ;C - - - - - 0x000164 00:8154: E5 FC
+	SBC scrollX                     ;C - - - - - 0x000164 00:8154: E5 FC
 	CMP #$18                        ;C - - - - - 0x000166 00:8156: C9 18
 	BCC loc_00_8177                 ;C - - - - - 0x000168 00:8158: 90 1D
 loc_00_815A:
@@ -436,7 +436,7 @@ loc_00_8374:
 loc_00_83A1:
 	LDA ram_0430                    ;C - - - - - 0x0003B1 00:83A1: AD 30 04
 	BMI loc_00_83BE                 ;C - - - - - 0x0003B4 00:83A4: 30 18
-	LDA ram_0014                    ;C - - - - - 0x0003B6 00:83A6: A5 14
+	LDA padPressed                  ;C - - - - - 0x0003B6 00:83A6: A5 14
 	CMP #$40                        ;C - - - - - 0x0003B8 00:83A8: C9 40
 	BNE loc_00_83BE                 ;C - - - - - 0x0003BA 00:83AA: D0 12
 	LDA #$0A                        ;C - - - - - 0x0003BC 00:83AC: A9 0A
@@ -468,7 +468,7 @@ loc_00_83DC:
 	LDA ram_0035                    ;C - - - - - 0x0003F1 00:83E1: A5 35
 	BNE loc_00_83F1                 ;C - - - - - 0x0003F3 00:83E3: D0 0C
 	LDX #$00                        ;C - - - - - 0x0003F5 00:83E5: A2 00
-	LDA ram_0016                    ;C - - - - - 0x0003F7 00:83E7: A5 16
+	LDA padHeld                     ;C - - - - - 0x0003F7 00:83E7: A5 16
 	AND #$03                        ;C - - - - - 0x0003F9 00:83E9: 29 03
 	BEQ loc_00_8446                 ;C - - - - - 0x0003FB 00:83EB: F0 59
 	INC ram_0035                    ;C - - - - - 0x0003FD 00:83ED: E6 35
@@ -479,7 +479,7 @@ loc_00_83F1:
 	BEQ loc_00_8447                 ;C - - - - - 0x000405 00:83F5: F0 50
 	LDA objX                        ;C - - - - - 0x000407 00:83F7: AD 60 03
 	SEC                             ;C - - - - - 0x00040A 00:83FA: 38
-	SBC ram_00FC                    ;C - - - - - 0x00040B 00:83FB: E5 FC
+	SBC scrollX                     ;C - - - - - 0x00040B 00:83FB: E5 FC
 	CMP #$F1                        ;C - - - - - 0x00040D 00:83FD: C9 F1
 	BEQ loc_00_8446                 ;C - - - - - 0x00040F 00:83FF: F0 45
 	BCS loc_00_8446                 ;C - - - - - 0x000411 00:8401: B0 43
@@ -490,7 +490,7 @@ loc_00_83F1:
 	BEQ loc_00_841D                 ;C - - - - - 0x00041C 00:840C: F0 0F
 	LDA objX                        ;C - - - - - 0x00041E 00:840E: AD 60 03
 	SEC                             ;C - - - - - 0x000421 00:8411: 38
-	SBC ram_00FC                    ;C - - - - - 0x000422 00:8412: E5 FC
+	SBC scrollX                     ;C - - - - - 0x000422 00:8412: E5 FC
 	CMP #$F1                        ;C - - - - - 0x000424 00:8414: C9 F1
 	BEQ loc_00_8446                 ;C - - - - - 0x000426 00:8416: F0 2E
 	BCS loc_00_8446                 ;C - - - - - 0x000428 00:8418: B0 2C
@@ -498,7 +498,7 @@ loc_00_83F1:
 loc_00_841D:
 	LDA objX,Y                      ;C - - - - - 0x00042D 00:841D: B9 60 03
 	SEC                             ;C - - - - - 0x000430 00:8420: 38
-	SBC ram_00FC                    ;C - - - - - 0x000431 00:8421: E5 FC
+	SBC scrollX                     ;C - - - - - 0x000431 00:8421: E5 FC
 	CMP #$F9                        ;C - - - - - 0x000433 00:8423: C9 F9
 	BEQ loc_00_8446                 ;C - - - - - 0x000435 00:8425: F0 1F
 	BCS loc_00_8446                 ;C - - - - - 0x000437 00:8427: B0 1D
@@ -519,7 +519,7 @@ loc_00_8446:
 loc_00_8447:
 	LDA objX                        ;C - - - - - 0x000457 00:8447: AD 60 03
 	SEC                             ;C - - - - - 0x00045A 00:844A: 38
-	SBC ram_00FC                    ;C - - - - - 0x00045B 00:844B: E5 FC
+	SBC scrollX                     ;C - - - - - 0x00045B 00:844B: E5 FC
 	CMP #$19                        ;C - - - - - 0x00045D 00:844D: C9 19
 	BEQ loc_00_8496                 ;C - - - - - 0x00045F 00:844F: F0 45
 	BCC loc_00_8496                 ;C - - - - - 0x000461 00:8451: 90 43
@@ -530,7 +530,7 @@ loc_00_8447:
 	BEQ loc_00_846D                 ;C - - - - - 0x00046C 00:845C: F0 0F
 	LDA objX,Y                      ;C - - - - - 0x00046E 00:845E: B9 60 03
 	SEC                             ;C - - - - - 0x000471 00:8461: 38
-	SBC ram_00FC                    ;C - - - - - 0x000472 00:8462: E5 FC
+	SBC scrollX                     ;C - - - - - 0x000472 00:8462: E5 FC
 	CMP #$11                        ;C - - - - - 0x000474 00:8464: C9 11
 	BEQ loc_00_8496                 ;C - - - - - 0x000476 00:8466: F0 2E
 	BCC loc_00_8496                 ;C - - - - - 0x000478 00:8468: 90 2C
@@ -538,7 +538,7 @@ loc_00_8447:
 loc_00_846D:
 	LDA objX                        ;C - - - - - 0x00047D 00:846D: AD 60 03
 	SEC                             ;C - - - - - 0x000480 00:8470: 38
-	SBC ram_00FC                    ;C - - - - - 0x000481 00:8471: E5 FC
+	SBC scrollX                     ;C - - - - - 0x000481 00:8471: E5 FC
 	CMP #$19                        ;C - - - - - 0x000483 00:8473: C9 19
 	BEQ loc_00_8496                 ;C - - - - - 0x000485 00:8475: F0 1F
 	BCC loc_00_8496                 ;C - - - - - 0x000487 00:8477: 90 1D
@@ -564,7 +564,7 @@ ofs_00_849C:
 	LDA ram_0300                    ;C - - J - - 0x0004AC 00:849C: AD 00 03
 	AND #$0F                        ;C - - - - - 0x0004AF 00:849F: 29 0F
 	BNE loc_00_8511                 ;C - - - - - 0x0004B1 00:84A1: D0 6E
-	LDA ram_0016                    ;C - - - - - 0x0004B3 00:84A3: A5 16
+	LDA padHeld                     ;C - - - - - 0x0004B3 00:84A3: A5 16
 	AND #$0F                        ;C - - - - - 0x0004B5 00:84A5: 29 0F
 	BEQ loc_00_8497                 ;C - - - - - 0x0004B7 00:84A7: F0 EE
 	CMP ram_0031                    ;C - - - - - 0x0004B9 00:84A9: C5 31
@@ -771,7 +771,7 @@ ofs_00_8643:
 	LDA #$80                        ;C - - - - - 0x00065A 00:864A: A9 80
 	STA ram_006E                    ;C - - - - - 0x00065C 00:864C: 85 6E
 	LDY ram_0039                    ;C - - - - - 0x00065E 00:864E: A4 39
-	LDA ram_0016                    ;C - - - - - 0x000660 00:8650: A5 16
+	LDA padHeld                     ;C - - - - - 0x000660 00:8650: A5 16
 	AND #$0F                        ;C - - - - - 0x000662 00:8652: 29 0F
 	BEQ loc_00_863E                 ;C - - - - - 0x000664 00:8654: F0 E8
 	CMP ram_0031                    ;C - - - - - 0x000666 00:8656: C5 31
@@ -867,7 +867,7 @@ loc_00_8711:
 	LDA ram_0570                    ;C - - - - - 0x000721 00:8711: AD 70 05
 	CMP #$06                        ;C - - - - - 0x000724 00:8714: C9 06
 	BCC loc_00_8728                 ;C - - - - - 0x000726 00:8716: 90 10
-	LDA ram_0016                    ;C - - - - - 0x000728 00:8718: A5 16
+	LDA padHeld                     ;C - - - - - 0x000728 00:8718: A5 16
 	CMP #$40                        ;C - - - - - 0x00072A 00:871A: C9 40
 	BNE loc_00_8728                 ;C - - - - - 0x00072C 00:871C: D0 0A
 	LDA #$33                        ;C - - - - - 0x00072E 00:871E: A9 33
@@ -942,13 +942,13 @@ loc_00_87AA:
 	LDA gameAction                  ;C - - - - - 0x0007BA 00:87AA: A5 30
 	CMP #$16                        ;C - - - - - 0x0007BC 00:87AC: C9 16
 	BNE loc_00_87B7                 ;C - - - - - 0x0007BE 00:87AE: D0 07
-	LDA ram_0016                    ;C - - - - - 0x0007C0 00:87B0: A5 16
+	LDA padHeld                     ;C - - - - - 0x0007C0 00:87B0: A5 16
 	BEQ loc_00_87B7                 ;C - - - - - 0x0007C2 00:87B2: F0 03
 	INC ram_0300                    ;C - - - - - 0x0007C4 00:87B4: EE 00 03
 loc_00_87B7:
 	RTS                             ;C - - - - - 0x0007C7 00:87B7: 60
 loc_00_87B8:
-	LDA ram_0016                    ;C - - - - - 0x0007C8 00:87B8: A5 16
+	LDA padHeld                     ;C - - - - - 0x0007C8 00:87B8: A5 16
 	AND #$03                        ;C - - - - - 0x0007CA 00:87BA: 29 03
 	BEQ loc_00_87D0                 ;C - - - - - 0x0007CC 00:87BC: F0 12
 	STA ram_0031                    ;C - - - - - 0x0007CE 00:87BE: 85 31
@@ -1076,7 +1076,7 @@ loc_00_88A2:
 tbl_00_88A6:
 	.byte $14,$15,$16,$17           ;- D 0 - - - 0x0008B6 00:88A6:
 ofs_00_88AA:
-	LDA ram_0016                    ;C - - J - - 0x0008BA 00:88AA: A5 16
+	LDA padHeld                     ;C - - J - - 0x0008BA 00:88AA: A5 16
 	CMP #$C1                        ;C - - - - - 0x0008BC 00:88AC: C9 C1
 	BEQ loc_00_88B6                 ;C - - - - - 0x0008BE 00:88AE: F0 06
 	CMP #$C2                        ;C - - - - - 0x0008C0 00:88B0: C9 C2
@@ -1261,7 +1261,7 @@ ofs_00_8A31:
 	LDA ram_0037                    ;C - - - - - 0x000A48 00:8A38: A5 37
 	BEQ loc_00_8A6E                 ;C - - - - - 0x000A4A 00:8A3A: F0 32
 	DEC ram_0037                    ;C - - - - - 0x000A4C 00:8A3C: C6 37
-	LDA ram_0016                    ;C - - - - - 0x000A4E 00:8A3E: A5 16
+	LDA padHeld                     ;C - - - - - 0x000A4E 00:8A3E: A5 16
 	AND #$04                        ;C - - - - - 0x000A50 00:8A40: 29 04
 	BEQ loc_00_8A46                 ;C - - - - - 0x000A52 00:8A42: F0 02
 	INC ram_00B3                    ;C - - - - - 0x000A54 00:8A44: E6 B3
@@ -1269,7 +1269,7 @@ loc_00_8A46:
 	LDA ram_00B3                    ;C - - - - - 0x000A56 00:8A46: A5 B3
 	CMP #$10                        ;C - - - - - 0x000A58 00:8A48: C9 10
 	BCC loc_00_8A6D                 ;C - - - - - 0x000A5A 00:8A4A: 90 21
-	LDA ram_0016                    ;c - - - - - 0x000A5C 00:8A4C: A5 16
+	LDA padHeld                     ;c - - - - - 0x000A5C 00:8A4C: A5 16
 	CMP #$48                        ;c - - - - - 0x000A5E 00:8A4E: C9 48
 	BNE loc_00_8A6D                 ;c - - - - - 0x000A60 00:8A50: D0 1B
 	INC ram_0300                    ;c - - - - - 0x000A62 00:8A52: EE 00 03
@@ -1586,7 +1586,7 @@ loc_00_8CDF:
 	LDA ram_0570                    ;C - - - - - 0x000CEF 00:8CDF: AD 70 05
 	CMP #$05                        ;C - - - - - 0x000CF2 00:8CE2: C9 05
 	BCS loc_00_8D0B                 ;C - - - - - 0x000CF4 00:8CE4: B0 25
-	LDA ram_0016                    ;C - - - - - 0x000CF6 00:8CE6: A5 16
+	LDA padHeld                     ;C - - - - - 0x000CF6 00:8CE6: A5 16
 	CMP #$48                        ;C - - - - - 0x000CF8 00:8CE8: C9 48
 	BNE loc_00_8D0B                 ;C - - - - - 0x000CFA 00:8CEA: D0 1F
 	LDA #$13                        ;C - - - - - 0x000CFC 00:8CEC: A9 13
@@ -1757,13 +1757,13 @@ ofs_00_8E3E:
 	LDA ram_0300                    ;C - - J - - 0x000E4E 00:8E3E: AD 00 03
 	AND #$0F                        ;C - - - - - 0x000E51 00:8E41: 29 0F
 	BNE loc_00_8E8F                 ;C - - - - - 0x000E53 00:8E43: D0 4A
-	LDA ram_00FC                    ;C - - - - - 0x000E55 00:8E45: A5 FC
+	LDA scrollX                     ;C - - - - - 0x000E55 00:8E45: A5 FC
 	BNE loc_00_8E50                 ;C - - - - - 0x000E57 00:8E47: D0 07
 	LDA #$38                        ;C - - - - - 0x000E59 00:8E49: A9 38
 	STA objX                        ;C - - - - - 0x000E5B 00:8E4B: 8D 60 03
 	BNE loc_00_8E5F                 ;C - - - - - 0x000E5E 00:8E4E: D0 0F
 loc_00_8E50:
-	LDA ram_00FC                    ;C - - - - - 0x000E60 00:8E50: A5 FC
+	LDA scrollX                     ;C - - - - - 0x000E60 00:8E50: A5 FC
 	CLC                             ;C - - - - - 0x000E62 00:8E52: 18
 	ADC #$38                        ;C - - - - - 0x000E63 00:8E53: 69 38
 	STA objX                        ;C - - - - - 0x000E65 00:8E55: 8D 60 03
@@ -1852,7 +1852,7 @@ ofs_00_8EEA:
 	LDA #$1B                        ;C - - - - - 0x000F19 00:8F09: A9 1B
 	JSR sub_0F_F34C                 ;C - - - - - 0x000F1B 00:8F0B: 20 4C F3
 loc_00_8F0E:
-	LDA ram_0016                    ;C - - - - - 0x000F1E 00:8F0E: A5 16
+	LDA padHeld                     ;C - - - - - 0x000F1E 00:8F0E: A5 16
 	CMP #$08                        ;C - - - - - 0x000F20 00:8F10: C9 08
 	BNE loc_00_8F16                 ;C - - - - - 0x000F22 00:8F12: D0 02
 	INC ram_00B3                    ;C - - - - - 0x000F24 00:8F14: E6 B3
@@ -1930,7 +1930,7 @@ loc_00_8F82:
 loc_00_8FAE:
 	RTS                             ;C - - - - - 0x000FBE 00:8FAE: 60
 ofs_00_8FAF:
-	LDA ram_00FC                    ;C - - J - - 0x000FBF 00:8FAF: A5 FC
+	LDA scrollX                     ;C - - J - - 0x000FBF 00:8FAF: A5 FC
 	CMP #$28                        ;C - - - - - 0x000FC1 00:8FB1: C9 28
 	BCS loc_00_8FB6                 ;C - - - - - 0x000FC3 00:8FB3: B0 01
 	RTS                             ;C - - - - - 0x000FC5 00:8FB5: 60
@@ -2108,7 +2108,7 @@ loc_00_9103:
 	STA ram_0037                    ;C - - - - - 0x001121 00:9111: 85 37
 	RTS                             ;C - - - - - 0x001123 00:9113: 60
 loc_00_9114:
-	LDA ram_0014                    ;C - - - - - 0x001124 00:9114: A5 14
+	LDA padPressed                  ;C - - - - - 0x001124 00:9114: A5 14
 	CMP #$01                        ;C - - - - - 0x001126 00:9116: C9 01
 	BEQ loc_00_9139                 ;C - - - - - 0x001128 00:9118: F0 1F
 	CMP #$02                        ;C - - - - - 0x00112A 00:911A: C9 02
@@ -2188,7 +2188,7 @@ loc_00_91B2:
 	RTS                             ;C - - - - - 0x0011C2 00:91B2: 60
 loc_00_91B3:
 	LDA #$40                        ;C - - - - - 0x0011C3 00:91B3: A9 40
-	STA ram_0014                    ;C - - - - - 0x0011C5 00:91B5: 85 14
+	STA padPressed                  ;C - - - - - 0x0011C5 00:91B5: 85 14
 	LDA #$00                        ;C - - - - - 0x0011C7 00:91B7: A9 00
 	STA ram_0035                    ;C - - - - - 0x0011C9 00:91B9: 85 35
 	STA ram_00A3                    ;C - - - - - 0x0011CB 00:91BB: 85 A3
@@ -2999,7 +2999,7 @@ sub_00_987A:
 	TAY                             ;C - - - - - 0x001899 00:9889: A8
 loc_00_988A:
 	LDA (ptr_00),Y                  ;C - - - - - 0x00189A 00:988A: B1 00
-	STA ram_0780,X                  ;C - - - - - 0x00189C 00:988C: 9D 80 07
+	STA vramQueue,X                 ;C - - - - - 0x00189C 00:988C: 9D 80 07
 	INX                             ;C - - - - - 0x00189F 00:988F: E8
 	INY                             ;C - - - - - 0x0018A0 00:9890: C8
 	CPY #$80                        ;C - - - - - 0x0018A1 00:9891: C0 80
@@ -3056,18 +3056,18 @@ loc_00_9A19:
 	LDA #$00                        ;C - - - - - 0x001A29 00:9A19: A9 00
 	STA ram_0011                    ;C - - - - - 0x001A2B 00:9A1B: 85 11
 loc_00_9A1D:
-	LDA ram_0014                    ;C - - - - - 0x001A2D 00:9A1D: A5 14
+	LDA padPressed                  ;C - - - - - 0x001A2D 00:9A1D: A5 14
 	AND #$F0                        ;C - - - - - 0x001A2F 00:9A1F: 29 F0
 	BNE loc_00_9A91                 ;C - - - - - 0x001A31 00:9A21: D0 6E
 	LDX ram_0010                    ;C - - - - - 0x001A33 00:9A23: A6 10
 	LDA tbl_00_9A92,X               ;C - - - - - 0x001A35 00:9A25: BD 92 9A
-	STA ram_0780                    ;C - - - - - 0x001A38 00:9A28: 8D 80 07
+	STA vramQueue                   ;C - - - - - 0x001A38 00:9A28: 8D 80 07
 	LDA tbl_00_9A95,X               ;C - - - - - 0x001A3B 00:9A2B: BD 95 9A
 	CLC                             ;C - - - - - 0x001A3E 00:9A2E: 18
 	ADC ram_0011                    ;C - - - - - 0x001A3F 00:9A2F: 65 11
-	STA ram_0781                    ;C - - - - - 0x001A41 00:9A31: 8D 81 07
+	STA vramQueue+1                 ;C - - - - - 0x001A41 00:9A31: 8D 81 07
 	LDA #$00                        ;C - - - - - 0x001A44 00:9A34: A9 00
-	STA ram_0782                    ;C - - - - - 0x001A46 00:9A36: 8D 82 07
+	STA vramQueue+2                 ;C - - - - - 0x001A46 00:9A36: 8D 82 07
 	LDY ptr_0E                      ;C - - - - - 0x001A49 00:9A39: A4 0E
 	INC ptr_0E                      ;C - - - - - 0x001A4B 00:9A3B: E6 0E
 	LDA (ptr_0C),Y                  ;C - - - - - 0x001A4D 00:9A3D: B1 0C
@@ -3075,9 +3075,9 @@ loc_00_9A1D:
 	BEQ loc_00_9A8E                 ;C - - - - - 0x001A51 00:9A41: F0 4B
 	CMP #$FE                        ;C - - - - - 0x001A53 00:9A43: C9 FE
 	BEQ loc_00_9A7D                 ;C - - - - - 0x001A55 00:9A45: F0 36
-	STA ram_0783                    ;C - - - - - 0x001A57 00:9A47: 8D 83 07
+	STA vramQueue+3                 ;C - - - - - 0x001A57 00:9A47: 8D 83 07
 	LDA #$FF                        ;C - - - - - 0x001A5A 00:9A4A: A9 FF
-	STA ram_0784                    ;C - - - - - 0x001A5C 00:9A4C: 8D 84 07
+	STA vramQueue+4                 ;C - - - - - 0x001A5C 00:9A4C: 8D 84 07
 	STA vramUpdateFlag0             ;C - - - - - 0x001A5F 00:9A4F: 85 19
 	LDA ram_0010                    ;C - - - - - 0x001A61 00:9A51: A5 10
 	PHA                             ;C - - - - - 0x001A63 00:9A53: 48
@@ -3143,39 +3143,39 @@ loc_00_9ABA:
 	RTS                             ;C - - - - - 0x001ACF 00:9ABF: 60
 sub_00_9AC0:
 	LDA #$23                        ;C - - - - - 0x001AD0 00:9AC0: A9 23
-	STA ram_0780                    ;C - - - - - 0x001AD2 00:9AC2: 8D 80 07
+	STA vramQueue                   ;C - - - - - 0x001AD2 00:9AC2: 8D 80 07
 	LDA #$79                        ;C - - - - - 0x001AD5 00:9AC5: A9 79
-	STA ram_0781                    ;C - - - - - 0x001AD7 00:9AC7: 8D 81 07
+	STA vramQueue+1                 ;C - - - - - 0x001AD7 00:9AC7: 8D 81 07
 	LDA #$00                        ;C - - - - - 0x001ADA 00:9ACA: A9 00
-	STA ram_0782                    ;C - - - - - 0x001ADC 00:9ACC: 8D 82 07
+	STA vramQueue+2                 ;C - - - - - 0x001ADC 00:9ACC: 8D 82 07
 	LDA #$00                        ;C - - - - - 0x001ADF 00:9ACF: A9 00
-	STA ram_0783                    ;C - - - - - 0x001AE1 00:9AD1: 8D 83 07
+	STA vramQueue+3                 ;C - - - - - 0x001AE1 00:9AD1: 8D 83 07
 	LDA #$23                        ;C - - - - - 0x001AE4 00:9AD4: A9 23
-	STA ram_0784                    ;C - - - - - 0x001AE6 00:9AD6: 8D 84 07
+	STA vramQueue+4                 ;C - - - - - 0x001AE6 00:9AD6: 8D 84 07
 	LDA #$22                        ;C - - - - - 0x001AE9 00:9AD9: A9 22
-	STA ram_07B0                    ;C - - - - - 0x001AEB 00:9ADB: 8D B0 07
-	STA ram_079A                    ;C - - - - - 0x001AEE 00:9ADE: 8D 9A 07
+	STA vramQueue+48                ;C - - - - - 0x001AEB 00:9ADB: 8D B0 07
+	STA vramQueue+26                ;C - - - - - 0x001AEE 00:9ADE: 8D 9A 07
 	LDA #$27                        ;C - - - - - 0x001AF1 00:9AE1: A9 27
-	STA ram_0785                    ;C - - - - - 0x001AF3 00:9AE3: 8D 85 07
+	STA vramQueue+5                 ;C - - - - - 0x001AF3 00:9AE3: 8D 85 07
 	LDA #$E7                        ;C - - - - - 0x001AF6 00:9AE6: A9 E7
-	STA ram_079B                    ;C - - - - - 0x001AF8 00:9AE8: 8D 9B 07
+	STA vramQueue+27                ;C - - - - - 0x001AF8 00:9AE8: 8D 9B 07
 	LDA #$A7                        ;C - - - - - 0x001AFB 00:9AEB: A9 A7
-	STA ram_07B1                    ;C - - - - - 0x001AFD 00:9AED: 8D B1 07
+	STA vramQueue+49                ;C - - - - - 0x001AFD 00:9AED: 8D B1 07
 	LDX #$12                        ;C - - - - - 0x001B00 00:9AF0: A2 12
-	STX ram_0786                    ;C - - - - - 0x001B02 00:9AF2: 8E 86 07
-	STX ram_079C                    ;C - - - - - 0x001B05 00:9AF5: 8E 9C 07
-	STX ram_07B2                    ;C - - - - - 0x001B08 00:9AF8: 8E B2 07
+	STX vramQueue+6                 ;C - - - - - 0x001B02 00:9AF2: 8E 86 07
+	STX vramQueue+28                ;C - - - - - 0x001B05 00:9AF5: 8E 9C 07
+	STX vramQueue+50                ;C - - - - - 0x001B08 00:9AF8: 8E B2 07
 	LDY #$00                        ;C - - - - - 0x001B0B 00:9AFB: A0 00
 	LDA #$00                        ;C - - - - - 0x001B0D 00:9AFD: A9 00
 loc_00_9AFF:
-	STA ram_0787,Y                  ;C - - - - - 0x001B0F 00:9AFF: 99 87 07
-	STA ram_079D,Y                  ;C - - - - - 0x001B12 00:9B02: 99 9D 07
-	STA ram_07B3,Y                  ;C - - - - - 0x001B15 00:9B05: 99 B3 07
+	STA vramQueue+7,Y               ;C - - - - - 0x001B0F 00:9AFF: 99 87 07
+	STA vramQueue+29,Y              ;C - - - - - 0x001B12 00:9B02: 99 9D 07
+	STA vramQueue+51,Y              ;C - - - - - 0x001B15 00:9B05: 99 B3 07
 	INY                             ;C - - - - - 0x001B18 00:9B08: C8
 	DEX                             ;C - - - - - 0x001B19 00:9B09: CA
 	BPL loc_00_9AFF                 ;C - - - - - 0x001B1A 00:9B0A: 10 F3
 	LDA #$FF                        ;C - - - - - 0x001B1C 00:9B0C: A9 FF
-	STA ram_07C6                    ;C - - - - - 0x001B1E 00:9B0E: 8D C6 07
+	STA vramQueue+70                ;C - - - - - 0x001B1E 00:9B0E: 8D C6 07
 	STA vramUpdateFlag0             ;C - - - - - 0x001B21 00:9B11: 85 19
 	JMP sub_0F_FF31                 ;C - - - - - 0x001B23 00:9B13: 4C 31 FF
 sub_00_9B16:
