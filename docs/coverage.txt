@@ -19,6 +19,8 @@ bank  code(cdl) code(traced) data  unknown
 0F         6106          386   1039      661
 all       47902         2212  56535    24423
 
+Unknown bytes: 5415 fill (one repeated byte), 2273 code-like, 16735 other (probably data)
+
 CDL anomalies (code flag but not a valid instruction): 0
 
 Traced code (instruction starts, verify by hand):
@@ -1050,6 +1052,47 @@ Traced code (instruction starts, verify by hand):
   0F:F98C  LDA #$FF
   0F:F98E  STA weaponHeld
   0F:F990  RTS
+
+Code-like unknown runs (decode cleanly to the end, no BRK; review by hand):
+   1361  05:B1AF
+    156  09:AB34
+    134  0C:9D9E
+    115  01:A651
+     65  05:A851
+     33  01:A00C
+     30  05:A832
+     30  00:961F
+     26  02:81E7
+     23  09:AFE9
+     22  0C:8BC0
+     18  0F:FF12
+     18  0B:B30F
+     18  0A:81EF
+     17  09:B0AF
+     16  0F:F70A
+     15  03:B312
+     14  0C:88D5
+     12  08:853A
+     10  0E:D450
+     10  0C:893E
+     10  0C:88F8
+     10  0C:886C
+      9  0C:8997
+      8  0C:89BB
+      8  08:85CA
+      8  08:85BE
+      7  0B:B32A
+      7  08:9998
+      7  08:996C
+      7  08:986E
+      7  08:97F3
+      6  0D:AE72
+      6  0C:89DD
+      6  0C:89D4
+      6  0C:89B1
+      6  0C:898E
+      6  09:A436
+      6  03:B306
 
 Unknown runs, longest first (len bank:addr):
    1424  01:B170

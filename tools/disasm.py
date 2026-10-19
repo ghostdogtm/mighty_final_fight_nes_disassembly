@@ -75,7 +75,10 @@ def load_rom_labels(path):
         if not parts:
             continue
         try:
-            if parts[0] == 'note':
+            if parts[0] == 'comment':
+                bs, a = parts[1].split(':')
+                notes[(int(bs, 16), parse_addr(a) - base_of(int(bs, 16)), 'c')] = comment.strip()
+            elif parts[0] == 'note':
                 bs, a = parts[1].split(':')
                 notes[(int(bs, 16), parse_addr(a) - base_of(int(bs, 16)))] = comment.strip()
             elif parts[0] in ('code', 'data', 'words'):
@@ -531,15 +534,23 @@ class Disasm:
     def emit_bank(self, b):
         if not hasattr(self, 'user_notes_at'):
             self.user_notes_at = {}
-            for (nb, ni), text in self.user_notes.items():
-                self.user_notes_at[(nb, self.start_of(nb, ni))] = text
+            self.user_cmts = {}
+            for key, text in self.user_notes.items():
+                if len(key) == 3:
+                    self.user_cmts[(key[0], self.start_of(key[0], key[1]))] = text
+                else:
+                    self.user_notes_at[(key[0], self.start_of(key[0], key[1]))] = text
         base, k, rom, cdl = base_of(b), self.kind[b], self.rom[b], self.cdl[b]
         off0 = 0x10 + b * BANK_SIZE
         o = ['.segment "BANK_%02X"' % b,
              '; 0x%06X-0x%06X  CPU $%04X-$%04X' % (off0, off0 + BANK_SIZE - 1, base, base + BANK_SIZE - 1), '']
         i = 0
+        pend = None
         while i < BANK_SIZE:
+            if pend:
+                o[-1] += '  ; ' + pend
             key = (b, i)
+            pend = self.user_cmts.get(key)
             if key in self.user_notes_at:
                 o.append('; ' + self.user_notes_at[key])
             if key in self.labels:
@@ -600,6 +611,8 @@ class Disasm:
                                                         self.cdl_flags(cdl[i]), off0 + i, b, base + i,
                                                         ' ' + self.notes[key] if key in self.notes else ''))
             i = j
+        if pend:
+            o[-1] += '  ; ' + pend
         return '\n'.join(o) + '\n'
 
     # ------------------------------------------------------------------ output files
@@ -669,6 +682,18 @@ class Disasm:
         w(os.path.join(out, 'mff.mlb'), '\n'.join(mlb) + '\n')
         self.write_report(os.path.join(out, 'docs', 'coverage.txt'))
 
+    def looks_like_code(self, b, i, ln):
+        end = i + ln
+        if ln < 6:
+            return False
+        j = i
+        while j < end:
+            d = self.decode(b, j)
+            if not d or d[0] == 'BRK' or j + d[2] > end:
+                return False
+            j += d[2]
+        return True
+
     def write_report(self, path):
         o = ['Coverage report (bytes). cdl = from CDL, traced = found by static tracing', '',
              'bank  code(cdl) code(traced) data  unknown']
@@ -692,10 +717,25 @@ class Disasm:
                 else:
                     i += 1
         o.append('all   %9d %12d %6d %8d' % tuple(tot))
+        fill = codelike = other = 0
+        cl_runs = []
+        for ln, b, i in runs:
+            seg = self.rom[b][i:i + ln]
+            if len(set(seg)) == 1:
+                fill += ln
+            elif self.looks_like_code(b, i, ln):
+                codelike += ln
+                cl_runs.append((ln, b, i))
+            else:
+                other += ln
+        o += ['', 'Unknown bytes: %d fill (one repeated byte), %d code-like, %d other (probably data)'
+              % (fill, codelike, other)]
         o += ['', 'CDL anomalies (code flag but not a valid instruction): %d' % len(self.anomalies)]
         o += ['  %02X:%04X' % (b, base_of(b) + i) for b, i in self.anomalies]
         o += ['', 'Traced code (instruction starts, verify by hand):']
         o += ['  %02X:%04X  %s' % (b, base_of(b) + i, self.instr_text(b, i)) for (b, i) in sorted(self.traced)]
+        o += ['', 'Code-like unknown runs (decode cleanly to the end, no BRK; review by hand):']
+        o += ['  %5d  %02X:%04X' % (ln, b, base_of(b) + i) for ln, b, i in sorted(cl_runs, reverse=True)]
         o += ['', 'Unknown runs, longest first (len bank:addr):']
         o += ['  %5d  %02X:%04X' % (ln, b, base_of(b) + i) for ln, b, i in sorted(runs, reverse=True)]
         with open(path, 'w', encoding='utf-8', newline='\n') as f:
