@@ -213,7 +213,7 @@ loc_05_A731:
 	CMP tbl_05_A7A2,Y               ;C - - - - - 0x00A764 05:A754: D9 A2 A7
 	BNE loc_05_A789                 ;C - - - - - 0x00A767 05:A757: D0 30
 	LDA #$22                        ;C - - - - - 0x00A769 05:A759: A9 22
-	JSR sub_0F_F34C                 ;C - - - - - 0x00A76B 05:A75B: 20 4C F3
+	JSR QueueSound                  ;C - - - - - 0x00A76B 05:A75B: 20 4C F3
 	LDY playerId                    ;C - - - - - 0x00A76E 05:A75E: A4 34
 	LDA tbl_05_A78A,Y               ;C - - - - - 0x00A770 05:A760: B9 8A A7
 	STA ptr_02                      ;C - - - - - 0x00A773 05:A763: 85 02
@@ -296,7 +296,7 @@ loc_05_A7D9:
 	CMP #$40                        ;C - - - - - 0x00A7FD 05:A7ED: C9 40
 	BNE loc_05_A850                 ;C - - - - - 0x00A7FF 05:A7EF: D0 5F
 	LDA #$2E                        ;C - - - - - 0x00A801 05:A7F1: A9 2E
-	JSR sub_0F_F34C                 ;C - - - - - 0x00A803 05:A7F3: 20 4C F3
+	JSR QueueSound                  ;C - - - - - 0x00A803 05:A7F3: 20 4C F3
 loc_05_A7F6:
 	LDY playerId                    ;C - - - - - 0x00A806 05:A7F6: A4 34
 	LDA tbl_0F_E210,Y               ;C - - - - - 0x00A808 05:A7F8: B9 10 E2
@@ -626,7 +626,7 @@ loc_05_AAD3:
 	LDA objArr_0520,X               ;C - - - - - 0x00AAEB 05:AADB: BD 20 05
 	BNE loc_05_AAEA                 ;C - - - - - 0x00AAEE 05:AADE: D0 0A
 	LDA #$31                        ;C - - - - - 0x00AAF0 05:AAE0: A9 31
-	JSR sub_0F_F34C                 ;C - - - - - 0x00AAF2 05:AAE2: 20 4C F3
+	JSR QueueSound                  ;C - - - - - 0x00AAF2 05:AAE2: 20 4C F3
 	LDA #$21                        ;C - - - - - 0x00AAF5 05:AAE5: A9 21
 	STA objArr_0520,X               ;C - - - - - 0x00AAF7 05:AAE7: 9D 20 05
 loc_05_AAEA:
@@ -707,7 +707,7 @@ loc_05_AB62:
 	STA objArr_0410,X               ;C - - - - - 0x00AB97 05:AB87: 9D 10 04
 	INC objArr_0300,X               ;C - - - - - 0x00AB9A 05:AB8A: FE 00 03
 	LDA #$2A                        ;C - - - - - 0x00AB9D 05:AB8D: A9 2A
-	JSR sub_0F_F34C                 ;C - - - - - 0x00AB9F 05:AB8F: 20 4C F3
+	JSR QueueSound                  ;C - - - - - 0x00AB9F 05:AB8F: 20 4C F3
 loc_05_AB92:
 	RTS                             ;C - - - - - 0x00ABA2 05:AB92: 60
 loc_05_AB93:
@@ -920,7 +920,7 @@ loc_05_AD65:
 	LDA objArr_0500,X               ;C - - - - - 0x00AD75 05:AD65: BD 00 05
 	BNE loc_05_AD72                 ;C - - - - - 0x00AD78 05:AD68: D0 08
 	LDA #$30                        ;C - - - - - 0x00AD7A 05:AD6A: A9 30
-	JSR sub_0F_F34C                 ;C - - - - - 0x00AD7C 05:AD6C: 20 4C F3
+	JSR QueueSound                  ;C - - - - - 0x00AD7C 05:AD6C: 20 4C F3
 	INC objArr_0500,X               ;C - - - - - 0x00AD7F 05:AD6F: FE 00 05
 loc_05_AD72:
 	LDA ram_0054                    ;C - - - - - 0x00AD82 05:AD72: A5 54
@@ -935,7 +935,7 @@ loc_05_AD81:
 	CMP #$02                        ;C - - - - - 0x00AD94 05:AD84: C9 02
 	BCS loc_05_AD90                 ;C - - - - - 0x00AD96 05:AD86: B0 08
 	LDA #$30                        ;C - - - - - 0x00AD98 05:AD88: A9 30
-	JSR sub_0F_F34C                 ;C - - - - - 0x00AD9A 05:AD8A: 20 4C F3
+	JSR QueueSound                  ;C - - - - - 0x00AD9A 05:AD8A: 20 4C F3
 	INC objArr_0500,X               ;C - - - - - 0x00AD9D 05:AD8D: FE 00 05
 loc_05_AD90:
 	LDA ram_0054                    ;C - - - - - 0x00ADA0 05:AD90: A5 54
@@ -949,7 +949,7 @@ loc_05_AD9D:
 	CMP #$03                        ;C - - - - - 0x00ADB0 05:ADA0: C9 03
 	BCS loc_05_ADAC                 ;C - - - - - 0x00ADB2 05:ADA2: B0 08
 	LDA #$30                        ;C - - - - - 0x00ADB4 05:ADA4: A9 30
-	JSR sub_0F_F34C                 ;C - - - - - 0x00ADB6 05:ADA6: 20 4C F3
+	JSR QueueSound                  ;C - - - - - 0x00ADB6 05:ADA6: 20 4C F3
 	INC objArr_0500,X               ;C - - - - - 0x00ADB9 05:ADA9: FE 00 05
 loc_05_ADAC:
 	LDA ram_0054                    ;C - - - - - 0x00ADBC 05:ADAC: A5 54
@@ -964,7 +964,7 @@ loc_05_ADB9:
 	BCS loc_05_ADC8                 ;C - - - - - 0x00ADCE 05:ADBE: B0 08
 	INC objArr_0500,X               ;C - - - - - 0x00ADD0 05:ADC0: FE 00 05
 	LDA #$30                        ;C - - - - - 0x00ADD3 05:ADC3: A9 30
-	JSR sub_0F_F34C                 ;C - - - - - 0x00ADD5 05:ADC5: 20 4C F3
+	JSR QueueSound                  ;C - - - - - 0x00ADD5 05:ADC5: 20 4C F3
 loc_05_ADC8:
 	LDA #$03                        ;C - - - - - 0x00ADD8 05:ADC8: A9 03
 	STA objArr_0570,X               ;C - - - - - 0x00ADDA 05:ADCA: 9D 70 05

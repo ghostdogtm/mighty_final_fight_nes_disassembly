@@ -600,7 +600,7 @@ loc_0B_B336:
 	JMP (ptr_00)                    ;C - - - - - 0x017356 0B:B346: 6C 00 00
 ofs_0B_B349:
 	LDA #$09                        ;C - - J - - 0x017359 0B:B349: A9 09
-	JSR sub_0F_F34A                 ;C - - - - - 0x01735B 0B:B34B: 20 4A F3
+	JSR QueueSoundSaved             ;C - - - - - 0x01735B 0B:B34B: 20 4A F3
 	LDA #$14                        ;C - - - - - 0x01735E 0B:B34E: A9 14
 	STA objArr_0500,X               ;C - - - - - 0x017360 0B:B350: 9D 00 05
 	LDA #$00                        ;C - - - - - 0x017363 0B:B353: A9 00
@@ -1096,7 +1096,7 @@ loc_0B_B77B:
 	STA objArr_0300,X               ;C - - - - - 0x01778D 0B:B77D: 9D 00 03
 	STA objState,X                  ;C - - - - - 0x017790 0B:B780: 9D 10 03
 	LDA #$F2                        ;C - - - - - 0x017793 0B:B783: A9 F2
-	JSR sub_0F_F34A                 ;C - - - - - 0x017795 0B:B785: 20 4A F3
+	JSR QueueSoundSaved             ;C - - - - - 0x017795 0B:B785: 20 4A F3
 	INC objArr_0510,X               ;C - - - - - 0x017798 0B:B788: FE 10 05
 	RTS                             ;C - - - - - 0x01779B 0B:B78B: 60
 loc_0B_B78C:
@@ -1149,9 +1149,9 @@ loc_0B_B7D7:
 	JMP (ptr_00)                    ;C - - - - - 0x0177FC 0B:B7EC: 6C 00 00
 loc_0B_B7EF:
 	LDA #$06                        ;C - - - - - 0x0177FF 0B:B7EF: A9 06
-	CMP ram_00D9                    ;C - - - - - 0x017801 0B:B7F1: C5 D9
+	CMP soundLast                   ;C - - - - - 0x017801 0B:B7F1: C5 D9
 	BEQ loc_0B_B7F8                 ;C - - - - - 0x017803 0B:B7F3: F0 03
-	JSR sub_0F_F34A                 ;C - - - - - 0x017805 0B:B7F5: 20 4A F3
+	JSR QueueSoundSaved             ;C - - - - - 0x017805 0B:B7F5: 20 4A F3
 loc_0B_B7F8:
 	LDA objArr_0300,X               ;C - - - - - 0x017808 0B:B7F8: BD 00 03
 	AND #$0F                        ;C - - - - - 0x01780B 0B:B7FB: 29 0F
@@ -1264,7 +1264,7 @@ loc_0B_B8E3:
 	LDA objArr_04D0,X               ;C - - - - - 0x0178F6 0B:B8E6: BD D0 04
 	BEQ loc_0B_B911                 ;C - - - - - 0x0178F9 0B:B8E9: F0 26
 	LDA #$18                        ;C - - - - - 0x0178FB 0B:B8EB: A9 18
-	JSR sub_0F_F34C                 ;C - - - - - 0x0178FD 0B:B8ED: 20 4C F3
+	JSR QueueSound                  ;C - - - - - 0x0178FD 0B:B8ED: 20 4C F3
 	LDA #$00                        ;C - - - - - 0x017900 0B:B8F0: A9 00
 	STA objArr_04D0,X               ;C - - - - - 0x017902 0B:B8F2: 9D D0 04
 	STA objArr_0400,X               ;C - - - - - 0x017905 0B:B8F5: 9D 00 04
@@ -1440,7 +1440,7 @@ loc_0B_BA4A:
 	LDA #$89                        ;C - - - - - 0x017A67 0B:BA57: A9 89
 	STA objArr_0300,X               ;C - - - - - 0x017A69 0B:BA59: 9D 00 03
 	LDA #$12                        ;C - - - - - 0x017A6C 0B:BA5C: A9 12
-	JSR sub_0F_F34C                 ;C - - - - - 0x017A6E 0B:BA5E: 20 4C F3
+	JSR QueueSound                  ;C - - - - - 0x017A6E 0B:BA5E: 20 4C F3
 	LDA #$C0                        ;C - - - - - 0x017A71 0B:BA61: A9 C0
 	LDY #$39                        ;C - - - - - 0x017A73 0B:BA63: A0 39
 	JMP sub_0F_F449                 ;C - - - - - 0x017A75 0B:BA65: 4C 49 F4
@@ -1480,7 +1480,7 @@ ofs_0B_BA9A:
 	BNE loc_0B_BAB0                 ;C - - - - - 0x017AB6 0B:BAA6: D0 08
 	JSR sub_0B_BBEC                 ;C - - - - - 0x017AB8 0B:BAA8: 20 EC BB
 	LDA #$2C                        ;C - - - - - 0x017ABB 0B:BAAB: A9 2C
-	JSR sub_0F_F34C                 ;C - - - - - 0x017ABD 0B:BAAD: 20 4C F3
+	JSR QueueSound                  ;C - - - - - 0x017ABD 0B:BAAD: 20 4C F3
 loc_0B_BAB0:
 	LDA objArr_0570,X               ;C - - - - - 0x017AC0 0B:BAB0: BD 70 05
 	CMP #$03                        ;C - - - - - 0x017AC3 0B:BAB3: C9 03
@@ -1842,7 +1842,7 @@ ofs_0B_BDE6:
 	LDA #$FF                        ;C - - - - - 0x017DFE 0B:BDEE: A9 FF
 	STA ram_0062                    ;C - - - - - 0x017E00 0B:BDF0: 85 62
 	LDA #$0F                        ;C - - - - - 0x017E02 0B:BDF2: A9 0F
-	JSR sub_0F_F34A                 ;C - - - - - 0x017E04 0B:BDF4: 20 4A F3
+	JSR QueueSoundSaved             ;C - - - - - 0x017E04 0B:BDF4: 20 4A F3
 	LDA #$50                        ;C - - - - - 0x017E07 0B:BDF7: A9 50
 	STA objArr_05D0,X               ;C - - - - - 0x017E09 0B:BDF9: 9D D0 05
 	LDA #$86                        ;C - - - - - 0x017E0C 0B:BDFC: A9 86
@@ -1893,7 +1893,7 @@ loc_0B_BE59:
 	AND #$07                        ;C - - - - - 0x017E6C 0B:BE5C: 29 07
 	BNE loc_0B_BE65                 ;C - - - - - 0x017E6E 0B:BE5E: D0 05
 	LDA #$13                        ;C - - - - - 0x017E70 0B:BE60: A9 13
-	JSR sub_0F_F34C                 ;C - - - - - 0x017E72 0B:BE62: 20 4C F3
+	JSR QueueSound                  ;C - - - - - 0x017E72 0B:BE62: 20 4C F3
 loc_0B_BE65:
 	INC objArr_05D0,X               ;C - - - - - 0x017E75 0B:BE65: FE D0 05
 	INC objX                        ;C - - - - - 0x017E78 0B:BE68: EE 60 03

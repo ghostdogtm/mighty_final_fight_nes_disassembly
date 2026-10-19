@@ -89,4 +89,4 @@ A lowercase `c` means the code was found by tracing (the emulator never saw it; 
   game did not read during play. It stays as `.byte` (largest regions in `docs/coverage.txt`).
 - 44 raw `$8000–$BFFF` operands remain (listed in `docs/coverage.txt`): stage-dependent table reads (`$AExx`/`$BFxx`) and
   calls whose bank depends on the stage (`stageBankTable`) cannot be resolved statically.
-- The `comment BB:AAAA text` directive in `rom.txt` appends a comment to the end of a line.
+- `rom.txt` directives: `comment BB:AAAA text` appends a comment to a line; `bank BB:AAAA TT` states the bank behind a raw `$8000–$BFFF` operand of the instruction at BB:AAAA.

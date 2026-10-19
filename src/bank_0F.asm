@@ -71,7 +71,7 @@ loc_0F_E03B:
 	LDA stage                       ;C - - - - - 0x01E0A6 0F:E096: A5 61
 	BEQ loc_0F_E09F                 ;C D 3 - I - 0x01E0A8 0F:E098: F0 05
 	LDA #$05                        ;C - - - - - 0x01E0AA 0F:E09A: A9 05
-	JSR sub_0F_F34A                 ;C - - - - - 0x01E0AC 0F:E09C: 20 4A F3
+	JSR QueueSoundSaved             ;C - - - - - 0x01E0AC 0F:E09C: 20 4A F3
 loc_0F_E09F:
 	LDA #$FF                        ;C - - - - - 0x01E0AF 0F:E09F: A9 FF
 	BNE loc_0F_E0A5                 ;C - - - - - 0x01E0B1 0F:E0A1: D0 02
@@ -2592,21 +2592,23 @@ sub_0F_F343:
 	JSR sub_0F_F314                 ;C - - - - - 0x01F353 0F:F343: 20 14 F3
 	JSR sub_0F_F32E                 ;C - - - - - 0x01F356 0F:F346: 20 2E F3
 	RTS                             ;C - - - - - 0x01F359 0F:F349: 60
-sub_0F_F34A:
-	STA ram_00D9                    ;C - - - - - 0x01F35A 0F:F34A: 85 D9
-sub_0F_F34C:
+; ram_00D9 = A, then QueueSound
+QueueSoundSaved:
+	STA soundLast                   ;C - - - - - 0x01F35A 0F:F34A: 85 D9
+; A = sound/music id -> 8-entry ring buffer soundQueue ($88 = empty slot)
+QueueSound:
 	STX ptr_00                      ;C - - - - - 0x01F35C 0F:F34C: 86 00
-	LDX ram_00DA                    ;C - - - - - 0x01F35E 0F:F34E: A6 DA
+	LDX soundQueueWrite             ;C - - - - - 0x01F35E 0F:F34E: A6 DA
 	STA ptr_00+1                    ;C - - - - - 0x01F360 0F:F350: 85 01
-	LDA ram_00DC,X                  ;C - - - - - 0x01F362 0F:F352: B5 DC
+	LDA soundQueue,X                ;C - - - - - 0x01F362 0F:F352: B5 DC
 	CMP #$88                        ;C - - - - - 0x01F364 0F:F354: C9 88
 	BNE loc_0F_F362                 ;C - - - - - 0x01F366 0F:F356: D0 0A
 	LDA ptr_00+1                    ;C - - - - - 0x01F368 0F:F358: A5 01
-	STA ram_00DC,X                  ;C - - - - - 0x01F36A 0F:F35A: 95 DC
+	STA soundQueue,X                ;C - - - - - 0x01F36A 0F:F35A: 95 DC
 	INX                             ;C - - - - - 0x01F36C 0F:F35C: E8
 	TXA                             ;C - - - - - 0x01F36D 0F:F35D: 8A
 	AND #$07                        ;C - - - - - 0x01F36E 0F:F35E: 29 07
-	STA ram_00DA                    ;C - - - - - 0x01F370 0F:F360: 85 DA
+	STA soundQueueWrite             ;C - - - - - 0x01F370 0F:F360: 85 DA
 loc_0F_F362:
 	LDX ptr_00                      ;C - - - - - 0x01F372 0F:F362: A6 00
 	RTS                             ;C - - - - - 0x01F374 0F:F364: 60
@@ -2732,7 +2734,7 @@ sub_0F_F428:
 	STA ram_00A7                    ;C - - - - - 0x01F43E 0F:F42E: 85 A7
 sub_0F_F430:
 	LDA #$17                        ;C - - - - - 0x01F440 0F:F430: A9 17
-	JSR sub_0F_F34C                 ;C - - - - - 0x01F442 0F:F432: 20 4C F3
+	JSR QueueSound                  ;C - - - - - 0x01F442 0F:F432: 20 4C F3
 	RTS                             ;C - - - - - 0x01F445 0F:F435: 60
 sub_0F_F436:
 	LDA #$00                        ;C - - - - - 0x01F446 0F:F436: A9 00
@@ -3996,7 +3998,7 @@ loc_0F_FE42:
 	LDY #$07                        ;C - - - - - 0x01FE5D 0F:FE4D: A0 07
 	LDA #$88                        ;C - - - - - 0x01FE5F 0F:FE4F: A9 88
 loc_0F_FE51:
-	STA ram_00DC,X                  ;C - - - - - 0x01FE61 0F:FE51: 95 DC
+	STA soundQueue,X                ;C - - - - - 0x01FE61 0F:FE51: 95 DC
 	DEX                             ;C - - - - - 0x01FE63 0F:FE53: CA
 	BPL loc_0F_FE51                 ;C - - - - - 0x01FE64 0F:FE54: 10 FB
 	LDA #$18                        ;C - - - - - 0x01FE66 0F:FE56: A9 18
@@ -4186,23 +4188,24 @@ ofs_0F_FF84:
 	STA MMC3_BANK_SELECT            ;C - - - - - 0x01FF96 0F:FF86: 8D 00 80
 	LDA #$07                        ;C - - - - - 0x01FF99 0F:FF89: A9 07
 	STA MMC3_BANK_DATA              ;C - - - - - 0x01FF9B 0F:FF8B: 8D 01 80
-loc_0F_FF8E:
-	LDX ram_00DB                    ;C - - - - - 0x01FF9E 0F:FF8E: A6 DB
-	LDA ram_00DC,X                  ;C - - - - - 0x01FFA0 0F:FF90: B5 DC
+; drains soundQueue into the driver (06:8003), then runs one driver frame (06:8000)
+SoundStep:
+	LDX soundQueueRead              ;C - - - - - 0x01FF9E 0F:FF8E: A6 DB
+	LDA soundQueue,X                ;C - - - - - 0x01FFA0 0F:FF90: B5 DC
 	CMP #$88                        ;C - - - - - 0x01FFA2 0F:FF92: C9 88
 	BEQ loc_0F_FFA8                 ;C - - - - - 0x01FFA4 0F:FF94: F0 12
 	PHA                             ;C - - - - - 0x01FFA6 0F:FF96: 48
 	LDA #$88                        ;C - - - - - 0x01FFA7 0F:FF97: A9 88
-	STA ram_00DC,X                  ;C - - - - - 0x01FFA9 0F:FF99: 95 DC
+	STA soundQueue,X                ;C - - - - - 0x01FFA9 0F:FF99: 95 DC
 	INX                             ;C - - - - - 0x01FFAB 0F:FF9B: E8
 	TXA                             ;C - - - - - 0x01FFAC 0F:FF9C: 8A
 	AND #$07                        ;C - - - - - 0x01FFAD 0F:FF9D: 29 07
-	STA ram_00DB                    ;C - - - - - 0x01FFAF 0F:FF9F: 85 DB
+	STA soundQueueRead              ;C - - - - - 0x01FFAF 0F:FF9F: 85 DB
 	PLA                             ;C - - - - - 0x01FFB1 0F:FFA1: 68
-	JSR $8003                       ;C - - - - - 0x01FFB2 0F:FFA2: 20 03 80
-	JMP loc_0F_FF8E                 ;C - - - - - 0x01FFB5 0F:FFA5: 4C 8E FF
+	JSR SoundPlay                   ;C - - - - - bank=06 0x01FFB2 0F:FFA2: 20 03 80
+	JMP SoundStep                   ;C - - - - - 0x01FFB5 0F:FFA5: 4C 8E FF
 loc_0F_FFA8:
-	JSR $8000                       ;C - - - - - 0x01FFB8 0F:FFA8: 20 00 80
+	JSR SoundFrame                  ;C - - - - - bank=06 0x01FFB8 0F:FFA8: 20 00 80
 	LDA #$00                        ;C - - - - - 0x01FFBB 0F:FFAB: A9 00
 	STA ram_00F7                    ;C - - - - - 0x01FFBD 0F:FFAD: 85 F7
 	JMP SetPrgBanks                 ;C - - - - - 0x01FFBF 0F:FFAF: 4C 4D FF

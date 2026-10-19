@@ -1,7 +1,11 @@
 .segment "BANK_06"
 ; 0x00C010-0x00E00F  CPU $8000-$9FFF
 
+; per-frame update of the sound driver
+SoundFrame:
 	JMP loc_06_806C                 ;C D 0 - - - 0x00C010 06:8000: 4C 6C 80
+; A = sound/music id
+SoundPlay:
 	JMP loc_06_80FE                 ;C - - - - - 0x00C013 06:8003: 4C FE 80
 sub_06_8006:
 	LDA #$00                        ;C - - - - - 0x00C016 06:8006: A9 00

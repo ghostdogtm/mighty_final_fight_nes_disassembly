@@ -997,7 +997,7 @@ loc_03_B779:
 	LDA objArr_04D0,X               ;C - - - - - 0x007789 03:B779: BD D0 04
 	BEQ loc_03_B788                 ;C - - - - - 0x00778C 03:B77C: F0 0A
 	LDA #$18                        ;C - - - - - 0x00778E 03:B77E: A9 18
-	JSR sub_0F_F34C                 ;C - - - - - 0x007790 03:B780: 20 4C F3
+	JSR QueueSound                  ;C - - - - - 0x007790 03:B780: 20 4C F3
 	LDA #$00                        ;C - - - - - 0x007793 03:B783: A9 00
 	STA objArr_04D0,X               ;C - - - - - 0x007795 03:B785: 9D D0 04
 loc_03_B788:
@@ -1222,7 +1222,7 @@ loc_03_B93A:
 	LDA objArr_0590,X               ;C - - - - - 0x007954 03:B944: BD 90 05
 	BNE loc_03_B977                 ;C - - - - - 0x007957 03:B947: D0 2E
 	LDA #$1F                        ;C - - - - - 0x007959 03:B949: A9 1F
-	JSR sub_0F_F34C                 ;C - - - - - 0x00795B 03:B94B: 20 4C F3
+	JSR QueueSound                  ;C - - - - - 0x00795B 03:B94B: 20 4C F3
 	DEC objArr_05E0,X               ;C - - - - - 0x00795E 03:B94E: DE E0 05
 	BEQ loc_03_B962                 ;C - - - - - 0x007961 03:B951: F0 0F
 	LDA #$07                        ;C - - - - - 0x007963 03:B953: A9 07
@@ -1588,7 +1588,7 @@ loc_03_BBFA:
 	CMP #$06                        ;C - - - - - 0x007C10 03:BC00: C9 06
 	BCS loc_03_BBE7                 ;C - - - - - 0x007C12 03:BC02: B0 E3
 	LDA #$29                        ;C - - - - - 0x007C14 03:BC04: A9 29
-	JSR sub_0F_F34C                 ;C - - - - - 0x007C16 03:BC06: 20 4C F3
+	JSR QueueSound                  ;C - - - - - 0x007C16 03:BC06: 20 4C F3
 	JSR sub_0F_F71A                 ;C - - - - - 0x007C19 03:BC09: 20 1A F7
 	BCS loc_03_BBEF                 ;C - - - - - 0x007C1C 03:BC0C: B0 E1
 	STY ptr_00                      ;C - - - - - 0x007C1E 03:BC0E: 84 00

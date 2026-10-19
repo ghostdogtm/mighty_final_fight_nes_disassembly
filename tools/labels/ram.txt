@@ -110,3 +110,9 @@
 0090 nmiTickFlag                ; $FF set by NMI, makes the scheduler restart its scan
 0091 currentTask                ; index of the running task (0..3)
 0092 frameCounter               ; incremented every NMI
+
+; ---- sound request ring buffer
+00D9 soundLast                  ; last id passed to QueueSoundSaved
+00DA soundQueueWrite            ; write index (0..7)
+00DB soundQueueRead             ; read index (0..7)
+00DC soundQueue 8               ; ring buffer, $88 = empty

@@ -329,7 +329,7 @@ loc_09_A71D:
 	AND #$03                        ;C - - - - - 0x012771 09:A761: 29 03
 	BNE loc_09_A76A                 ;C - - - - - 0x012773 09:A763: D0 05
 	LDA #$2B                        ;C - - - - - 0x012775 09:A765: A9 2B
-	JSR sub_0F_F34C                 ;C - - - - - 0x012777 09:A767: 20 4C F3
+	JSR QueueSound                  ;C - - - - - 0x012777 09:A767: 20 4C F3
 loc_09_A76A:
 	JMP loc_09_A71D                 ;C - - - - - 0x01277A 09:A76A: 4C 1D A7
 loc_09_A76D:
@@ -488,7 +488,7 @@ loc_09_AB4A:
 	LDA objArr_0590                 ;c - - - - - 0x012B5F 09:AB4F: AD 90 05
 	BNE loc_09_AB59                 ;c - - - - - 0x012B62 09:AB52: D0 05
 	LDA #$16                        ;c - - - - - 0x012B64 09:AB54: A9 16
-	JSR sub_0F_F34C                 ;c - - - - - 0x012B66 09:AB56: 20 4C F3
+	JSR QueueSound                  ;c - - - - - 0x012B66 09:AB56: 20 4C F3
 loc_09_AB59:
 	LDA objArr_0570                 ;c - - - - - 0x012B69 09:AB59: AD 70 05
 	CMP #$06                        ;c - - - - - 0x012B6C 09:AB5C: C9 06
@@ -556,13 +556,13 @@ loc_09_ABDF:
 	LDA objArr_0590                 ;C - - - - - 0x012BF4 09:ABE4: AD 90 05
 	BNE loc_09_ABEE                 ;C - - - - - 0x012BF7 09:ABE7: D0 05
 	LDA #$1B                        ;C - - - - - 0x012BF9 09:ABE9: A9 1B
-	JSR sub_0F_F34C                 ;C - - - - - 0x012BFB 09:ABEB: 20 4C F3
+	JSR QueueSound                  ;C - - - - - 0x012BFB 09:ABEB: 20 4C F3
 loc_09_ABEE:
 	LDA objArr_0570                 ;C - - - - - 0x012BFE 09:ABEE: AD 70 05
 	CMP #$0B                        ;C - - - - - 0x012C01 09:ABF1: C9 0B
 	BNE loc_09_ABFA                 ;C - - - - - 0x012C03 09:ABF3: D0 05
 	LDA #$34                        ;C - - - - - 0x012C05 09:ABF5: A9 34
-	JSR sub_0F_F34C                 ;C - - - - - 0x012C07 09:ABF7: 20 4C F3
+	JSR QueueSound                  ;C - - - - - 0x012C07 09:ABF7: 20 4C F3
 loc_09_ABFA:
 	LDA objArr_0570                 ;C - - - - - 0x012C0A 09:ABFA: AD 70 05
 	CMP #$13                        ;C - - - - - 0x012C0D 09:ABFD: C9 13
@@ -655,7 +655,7 @@ loc_09_ACB7:
 	LDA #$0A                        ;C - - - - - 0x012CD1 09:ACC1: A9 0A
 	JSR sub_0F_F440                 ;C - - - - - 0x012CD3 09:ACC3: 20 40 F4
 	LDA #$2C                        ;C - - - - - 0x012CD6 09:ACC6: A9 2C
-	JSR sub_0F_F34C                 ;C - - - - - 0x012CD8 09:ACC8: 20 4C F3
+	JSR QueueSound                  ;C - - - - - 0x012CD8 09:ACC8: 20 4C F3
 loc_09_ACCB:
 	LDX #$00                        ;C - - - - - 0x012CDB 09:ACCB: A2 00
 	JSR sub_0F_F03F                 ;C - - - - - 0x012CDD 09:ACCD: 20 3F F0
@@ -676,7 +676,7 @@ loc_09_ACF0:
 	LDA objArr_0570                 ;C - - - - - 0x012D00 09:ACF0: AD 70 05
 	BNE loc_09_ACFA                 ;C - - - - - 0x012D03 09:ACF3: D0 05
 	LDA #$1D                        ;C - - - - - 0x012D05 09:ACF5: A9 1D
-	JSR sub_0F_F34C                 ;C - - - - - 0x012D07 09:ACF7: 20 4C F3
+	JSR QueueSound                  ;C - - - - - 0x012D07 09:ACF7: 20 4C F3
 loc_09_ACFA:
 	LDA objArr_0570                 ;C - - - - - 0x012D0A 09:ACFA: AD 70 05
 	CMP #$0C                        ;C - - - - - 0x012D0D 09:ACFD: C9 0C

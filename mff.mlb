@@ -1234,6 +1234,8 @@ P:ADB9:loc_05_ADB9
 P:ADC8:loc_05_ADC8
 P:ADCD:loc_05_ADCD
 P:B7CA:tbl_05_B7CA
+P:C000:SoundFrame
+P:C003:SoundPlay
 P:C006:sub_06_8006
 P:C00C:loc_06_800C
 P:C01F:loc_06_801F
@@ -3785,8 +3787,8 @@ P:1F314:sub_0F_F314
 P:1F32D:loc_0F_F32D
 P:1F32E:sub_0F_F32E
 P:1F343:sub_0F_F343
-P:1F34A:sub_0F_F34A
-P:1F34C:sub_0F_F34C
+P:1F34A:QueueSoundSaved
+P:1F34C:QueueSound
 P:1F362:loc_0F_F362
 P:1F365:sub_0F_F365
 P:1F373:loc_0F_F373
@@ -4008,7 +4010,7 @@ P:1FF4C:loc_0F_FF4C
 P:1FF4D:SetPrgBanks
 P:1FF72:sub_0F_FF72
 P:1FF84:ofs_0F_FF84
-P:1FF8E:loc_0F_FF8E
+P:1FF8E:SoundStep
 P:1FFA8:loc_0F_FFA8
 P:1FFB2:loc_0F_FFB2
 P:1FFE0:tbl_0F_FFE0
@@ -4160,10 +4162,10 @@ R:D5:ram_00D5
 R:D6:ram_00D6
 R:D7:ram_00D7
 R:D8:ram_00D8
-R:D9:ram_00D9
-R:DA:ram_00DA
-R:DB:ram_00DB
-R:DC:ram_00DC
+R:D9:soundLast
+R:DA:soundQueueWrite
+R:DB:soundQueueRead
+R:DC:soundQueue
 R:E4:ram_00E4
 R:E5:ram_00E5
 R:E6:ram_00E6

@@ -147,10 +147,10 @@ ram_00D5               = $00D5 ; 4
 ram_00D6               = $00D6 ; 9
 ram_00D7               = $00D7 ; 4
 ram_00D8               = $00D8 ; 3
-ram_00D9               = $00D9 ; 3
-ram_00DA               = $00DA ; 2
-ram_00DB               = $00DB ; 2
-ram_00DC               = $00DC ; 5
+soundLast              = $00D9 ; 3 ; last id passed to QueueSoundSaved
+soundQueueWrite        = $00DA ; 2 ; write index (0..7)
+soundQueueRead         = $00DB ; 2 ; read index (0..7)
+soundQueue             = $00DC ; 5 (size 8) ; ring buffer, $88 = empty
 ram_00E4               = $00E4 ; 49
 ram_00E5               = $00E5 ; 24
 ram_00E6               = $00E6 ; 10

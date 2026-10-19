@@ -400,7 +400,7 @@ loc_0D_A309:
 loc_0D_A319:
 	LDA #$18                        ;C - - - - - 0x01A329 0D:A319: A9 18
 loc_0D_A31B:
-	JSR sub_0F_F34C                 ;C - - - - - 0x01A32B 0D:A31B: 20 4C F3
+	JSR QueueSound                  ;C - - - - - 0x01A32B 0D:A31B: 20 4C F3
 	LDA #$00                        ;C - - - - - 0x01A32E 0D:A31E: A9 00
 	STA objArr_04D0,X               ;C - - - - - 0x01A330 0D:A320: 9D D0 04
 loc_0D_A323:
@@ -771,7 +771,7 @@ loc_0D_A5EE:
 	LDA #$BB                        ;C - - - - - 0x01A63C 0D:A62C: A9 BB
 	JSR sub_0F_F2A0                 ;C - - - - - 0x01A63E 0D:A62E: 20 A0 F2
 	LDA #$1B                        ;C - - - - - 0x01A641 0D:A631: A9 1B
-	JSR sub_0F_F34C                 ;C - - - - - 0x01A643 0D:A633: 20 4C F3
+	JSR QueueSound                  ;C - - - - - 0x01A643 0D:A633: 20 4C F3
 	LDA #$87                        ;C - - - - - 0x01A646 0D:A636: A9 87
 	STA objArr_0440,Y               ;C - - - - - 0x01A648 0D:A638: 99 40 04
 	LDA #$06                        ;C - - - - - 0x01A64B 0D:A63B: A9 06
@@ -1020,7 +1020,7 @@ loc_0D_A83A:
 	DEC objArr_05E0,X               ;C - - - - - 0x01A856 0D:A846: DE E0 05
 	BNE loc_0D_A855                 ;C - - - - - 0x01A859 0D:A849: D0 0A
 	LDA #$2A                        ;C - - - - - 0x01A85B 0D:A84B: A9 2A
-	JSR sub_0F_F34C                 ;C - - - - - 0x01A85D 0D:A84D: 20 4C F3
+	JSR QueueSound                  ;C - - - - - 0x01A85D 0D:A84D: 20 4C F3
 	LDA #$10                        ;C - - - - - 0x01A860 0D:A850: A9 10
 	STA objArr_05E0,X               ;C - - - - - 0x01A862 0D:A852: 9D E0 05
 loc_0D_A855:

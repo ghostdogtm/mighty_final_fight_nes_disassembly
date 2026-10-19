@@ -36,7 +36,7 @@ Traced code (instruction starts, verify by hand):
   00:82F3  BNE loc_00_82F7
   00:8311  JSR sub_0F_F26E
   00:8342  LDA #$1C
-  00:8344  JSR sub_0F_F34C
+  00:8344  JSR QueueSound
   00:8347  LDA #$02
   00:8349  STA gameAction
   00:834B  LDA #$03
@@ -399,7 +399,7 @@ Traced code (instruction starts, verify by hand):
   04:9BA2  BNE loc_04_9BA8
   04:9BA4  INC credits
   04:9BA6  LDA #$30
-  04:9BA8  JSR sub_0F_F34C
+  04:9BA8  JSR QueueSound
   04:9BAB  INC ram_00AA
   04:9BAD  RTS
   05:A5A4  ASL ram_0041
@@ -625,7 +625,7 @@ Traced code (instruction starts, verify by hand):
   09:AB4F  LDA objArr_0590
   09:AB52  BNE loc_09_AB59
   09:AB54  LDA #$16
-  09:AB56  JSR sub_0F_F34C
+  09:AB56  JSR QueueSound
   09:AB59  LDA objArr_0570
   09:AB5C  CMP #$06
   09:AB5E  BNE loc_09_AB77
@@ -1199,7 +1199,7 @@ Traced code (instruction starts, verify by hand):
   0F:F98E  STA weaponHeld
   0F:F990  RTS
 
-Raw ROM-address operands (do not relocate with the code): 44
+Raw ROM-address operands (do not relocate with the code): 42
   0E:C0DC  STA $E000,X
   0E:C3F3  LDA $AE78
   0E:C3F8  LDA $AE79
@@ -1242,8 +1242,6 @@ Raw ROM-address operands (do not relocate with the code): 44
   0F:EB25  LDA $B200,X
   0F:ED64  LDA $BF00,Y
   0F:EE71  LDA $BF00,Y
-  0F:FFA2  JSR $8003
-  0F:FFA8  JSR $8000
 
 Code-like unknown runs (decode cleanly to the end, no BRK; review by hand):
    1361  05:B1AF

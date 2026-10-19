@@ -77,7 +77,10 @@ def load_rom_labels(path):
         if not parts:
             continue
         try:
-            if parts[0] == 'comment':
+            if parts[0] == 'bank':               # bank BB:AAAA TT  -> raw $8000-$BFFF operand at BB:AAAA refers to bank TT
+                bs, ad = parts[1].split(':')
+                notes[(int(bs, 16), parse_addr(ad) - base_of(int(bs, 16)), 'b')] = int(parts[2], 16)
+            elif parts[0] == 'comment':
                 bs, a = parts[1].split(':')
                 notes[(int(bs, 16), parse_addr(a) - base_of(int(bs, 16)), 'c')] = ' '.join(parts[2:]) or comment.strip()
             elif parts[0] == 'note':
@@ -633,8 +636,11 @@ class Disasm:
         if not hasattr(self, 'user_notes_at'):
             self.user_notes_at = {}
             self.user_cmts = {}
+            self.user_bank = {}
             for key, text in self.user_notes.items():
-                if len(key) == 3:
+                if len(key) == 3 and key[2] == 'b':
+                    self.user_bank[(key[0], key[1])] = text
+                elif len(key) == 3:
                     self.user_cmts[(key[0], self.start_of(key[0], key[1]))] = text
                 else:
                     self.user_notes_at[(key[0], self.start_of(key[0], key[1]))] = text
@@ -871,6 +877,10 @@ class Disasm:
                             self.hint_why[(b, i)] = 'track'
                             n_track += 1
                 i += n
+        for key, v in self.user_notes.items():
+            if len(key) == 3 and key[2] == 'b':
+                self.hints[(key[0], key[1])] = v
+                self.hint_why[(key[0], key[1])] = 'user'
         return n_pair, n_track
 
     def looks_like_code(self, b, i, ln):

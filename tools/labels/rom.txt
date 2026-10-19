@@ -71,3 +71,11 @@ code 0F:FF12-FF23
 0E:DCDD Act0B
 0E:DD6A Act0C                   ; per-character handler via table
 0E:CCB4 ActNone                 ; RTS, used for every unused gameAction value
+; ---- sound: banks 06/07 are mapped while the NMI sound step runs (0F:FF8E)
+bank 0F:FFA2 06
+bank 0F:FFA8 06
+0F:F34A QueueSoundSaved         ; ram_00D9 = A, then QueueSound
+0F:F34C QueueSound              ; A = sound/music id -> 8-entry ring buffer soundQueue ($88 = empty slot)
+0F:FF8E SoundStep               ; drains soundQueue into the driver (06:8003), then runs one driver frame (06:8000)
+06:8000 SoundFrame              ; per-frame update of the sound driver
+06:8003 SoundPlay               ; A = sound/music id

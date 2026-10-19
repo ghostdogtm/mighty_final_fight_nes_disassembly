@@ -531,7 +531,7 @@ tbl_04_8C48:
 	.byte $CE,$83,$A7,$11,$D9,$7C,$02,$05;- - - - - - 0x008D08 04:8CF8:
 sub_04_8D00:
 	LDA #$F0                        ;C - - - - - 0x008D10 04:8D00: A9 F0
-	JSR sub_0F_F34A                 ;C - - - - - 0x008D12 04:8D02: 20 4A F3
+	JSR QueueSoundSaved             ;C - - - - - 0x008D12 04:8D02: 20 4A F3
 	LDY #$0F                        ;C - - - - - 0x008D15 04:8D05: A0 0F
 	LDA playerId                    ;C - - - - - 0x008D17 04:8D07: A5 34
 	BEQ loc_04_8D13                 ;C - - - - - 0x008D19 04:8D09: F0 08
@@ -635,7 +635,7 @@ ofs_04_8DD8:
 	LDA #$3F                        ;C - - - - - 0x008DF2 04:8DE2: A9 3F
 	JSR sub_0F_F440                 ;C - - - - - 0x008DF4 04:8DE4: 20 40 F4
 	LDA #$16                        ;C - - - - - 0x008DF7 04:8DE7: A9 16
-	JSR sub_0F_F34C                 ;C - - - - - 0x008DF9 04:8DE9: 20 4C F3
+	JSR QueueSound                  ;C - - - - - 0x008DF9 04:8DE9: 20 4C F3
 loc_04_8DEC:
 	LDA objArr_0570                 ;C - - - - - 0x008DFC 04:8DEC: AD 70 05
 	CMP #$10                        ;C - - - - - 0x008DFF 04:8DEF: C9 10
@@ -710,7 +710,7 @@ loc_04_8E65:
 	LDA objArr_03E0                 ;C - - - - - 0x008E99 04:8E89: AD E0 03
 	STA objArr_03E0+1               ;C - - - - - 0x008E9C 04:8E8C: 8D E1 03
 	LDA #$1B                        ;C - - - - - 0x008E9F 04:8E8F: A9 1B
-	JSR sub_0F_F34C                 ;C - - - - - 0x008EA1 04:8E91: 20 4C F3
+	JSR QueueSound                  ;C - - - - - 0x008EA1 04:8E91: 20 4C F3
 	LDY #$01                        ;C - - - - - 0x008EA4 04:8E94: A0 01
 	LDA #$5F                        ;C - - - - - 0x008EA6 04:8E96: A9 5F
 	JSR sub_0F_F2A0                 ;C - - - - - 0x008EA8 04:8E98: 20 A0 F2
@@ -756,7 +756,7 @@ loc_04_8EED:
 	AND #$07                        ;C - - - - - 0x008EFF 04:8EEF: 29 07
 	BNE loc_04_8EF8                 ;C - - - - - 0x008F01 04:8EF1: D0 05
 	LDA #$13                        ;C - - - - - 0x008F03 04:8EF3: A9 13
-	JSR sub_0F_F34C                 ;C - - - - - 0x008F05 04:8EF5: 20 4C F3
+	JSR QueueSound                  ;C - - - - - 0x008F05 04:8EF5: 20 4C F3
 loc_04_8EF8:
 	LDX #$00                        ;C - - - - - 0x008F08 04:8EF8: A2 00
 	JSR sub_0F_F090                 ;C - - - - - 0x008F0A 04:8EFA: 20 90 F0
@@ -892,7 +892,7 @@ loc_04_9112:
 	LDA #$6E                        ;C - - - - - 0x009187 04:9177: A9 6E
 	JSR sub_0F_F288                 ;C - - - - - 0x009189 04:9179: 20 88 F2
 	LDA #$0D                        ;C - - - - - 0x00918C 04:917C: A9 0D
-	JSR sub_0F_F34A                 ;C - - - - - 0x00918E 04:917E: 20 4A F3
+	JSR QueueSoundSaved             ;C - - - - - 0x00918E 04:917E: 20 4A F3
 loc_04_9181:
 	LDA padPressed                  ;C - - - - - 0x009191 04:9181: A5 14
 	CMP #$04                        ;C - - - - - 0x009193 04:9183: C9 04
@@ -902,7 +902,7 @@ loc_04_9181:
 	AND #$F0                        ;C - - - - - 0x00919B 04:918B: 29 F0
 	BEQ loc_04_91F2                 ;C - - - - - 0x00919D 04:918D: F0 63
 	LDA #$30                        ;C - - - - - 0x00919F 04:918F: A9 30
-	JSR sub_0F_F34C                 ;C - - - - - 0x0091A1 04:9191: 20 4C F3
+	JSR QueueSound                  ;C - - - - - 0x0091A1 04:9191: 20 4C F3
 	LDA #$00                        ;C - - - - - 0x0091A4 04:9194: A9 00
 	STA objArr_0570                 ;C - - - - - 0x0091A6 04:9196: 8D 70 05
 	STA objArr_0590                 ;C - - - - - 0x0091A9 04:9199: 8D 90 05
@@ -948,7 +948,7 @@ loc_04_91DB:
 	STA playerId                    ;c - - - - - 0x0091F3 04:91E3: 85 34
 loc_04_91E5:
 	LDA #$2F                        ;C - - - - - 0x0091F5 04:91E5: A9 2F
-	JSR sub_0F_F34C                 ;C - - - - - 0x0091F7 04:91E7: 20 4C F3
+	JSR QueueSound                  ;C - - - - - 0x0091F7 04:91E7: 20 4C F3
 	LDY playerId                    ;C - - - - - 0x0091FA 04:91EA: A4 34
 	LDA tbl_04_91F8,Y               ;C - - - - - 0x0091FC 04:91EC: B9 F8 91
 	STA objY                        ;C - - - - - 0x0091FF 04:91EF: 8D C0 03
@@ -1000,7 +1000,7 @@ loc_04_9305:
 	LDA #$23                        ;C - - - - - 0x009334 04:9324: A9 23
 	STA chrBankShadow+4             ;C - - - - - 0x009336 04:9326: 85 EC
 	LDA #$0A                        ;C - - - - - 0x009338 04:9328: A9 0A
-	JSR sub_0F_F34A                 ;C - - - - - 0x00933A 04:932A: 20 4A F3
+	JSR QueueSoundSaved             ;C - - - - - 0x00933A 04:932A: 20 4A F3
 	JSR sub_04_942A                 ;C - - - - - 0x00933D 04:932D: 20 2A 94
 	LDA #$72                        ;C - - - - - 0x009340 04:9330: A9 72
 	JSR sub_0F_F294                 ;C - - - - - 0x009342 04:9332: 20 94 F2
@@ -1072,7 +1072,7 @@ loc_04_93CB:
 	JMP loc_04_9413                 ;C - - - - - 0x0093DB 04:93CB: 4C 13 94
 loc_04_93CE:
 	LDA #$2F                        ;C - - - - - 0x0093DE 04:93CE: A9 2F
-	JSR sub_0F_F34C                 ;C - - - - - 0x0093E0 04:93D0: 20 4C F3
+	JSR QueueSound                  ;C - - - - - 0x0093E0 04:93D0: 20 4C F3
 	LDA objArr_0500                 ;C - - - - - 0x0093E3 04:93D3: AD 00 05
 	BNE loc_04_93E4                 ;C - - - - - 0x0093E6 04:93D6: D0 0C
 	LDA #$FF                        ;C - - - - - 0x0093E8 04:93D8: A9 FF
@@ -1088,7 +1088,7 @@ loc_04_93E4:
 	BNE loc_04_9398                 ;c - - - - - 0x0093FE 04:93EE: D0 A8
 loc_04_93F0:
 	LDA #$2F                        ;C - - - - - 0x009400 04:93F0: A9 2F
-	JSR sub_0F_F34C                 ;C - - - - - 0x009402 04:93F2: 20 4C F3
+	JSR QueueSound                  ;C - - - - - 0x009402 04:93F2: 20 4C F3
 	LDA objArr_0500                 ;C - - - - - 0x009405 04:93F5: AD 00 05
 	BNE loc_04_9406                 ;C - - - - - 0x009408 04:93F8: D0 0C
 	LDA #$FF                        ;c - - - - - 0x00940A 04:93FA: A9 FF
@@ -1113,7 +1113,7 @@ loc_04_941B:
 	DEC credits                     ;C - - - - - 0x00942B 04:941B: C6 AF
 	JSR sub_04_942A                 ;C - - - - - 0x00942D 04:941D: 20 2A 94
 	LDA #$30                        ;C - - - - - 0x009430 04:9420: A9 30
-	JSR sub_0F_F34C                 ;C - - - - - 0x009432 04:9422: 20 4C F3
+	JSR QueueSound                  ;C - - - - - 0x009432 04:9422: 20 4C F3
 	LDA #$07                        ;C - - - - - 0x009435 04:9425: A9 07
 	STA gameAction                  ;C - - - - - 0x009437 04:9427: 85 30
 	RTS                             ;C - - - - - 0x009439 04:9429: 60
@@ -1160,7 +1160,7 @@ loc_04_9502:
 	LDA tbl_0F_E255,Y               ;C - - - - - 0x009528 04:9518: B9 55 E2
 	JSR sub_0F_F440                 ;C - - - - - 0x00952B 04:951B: 20 40 F4
 	LDA #$0B                        ;C - - - - - 0x00952E 04:951E: A9 0B
-	JSR sub_0F_F34A                 ;C - - - - - 0x009530 04:9520: 20 4A F3
+	JSR QueueSoundSaved             ;C - - - - - 0x009530 04:9520: 20 4A F3
 	LDA tbl_0E_C8DA,Y               ;C - - - - - 0x009533 04:9523: B9 DA C8
 	TAX                             ;C - - - - - 0x009536 04:9526: AA
 	LDY #$07                        ;C - - - - - 0x009537 04:9527: A0 07
@@ -1235,7 +1235,7 @@ loc_04_9616:
 	STA chrBankShadow+1             ;C - - - - - 0x00963B 04:962B: 85 E9
 	LDY lives                       ;C - - - - - 0x00963D 04:962D: A4 3E
 	LDA tbl_04_965E,Y               ;C - - - - - 0x00963F 04:962F: B9 5E 96
-	JSR sub_0F_F34A                 ;C - - - - - 0x009642 04:9632: 20 4A F3
+	JSR QueueSoundSaved             ;C - - - - - 0x009642 04:9632: 20 4A F3
 	RTS                             ;C - - - - - 0x009645 04:9635: 60
 tbl_04_9636:
 	.byte $0F,$20,$0F,$0F,$0F,$0F,$0F,$0F,$0F,$0F,$0F,$0F,$0F,$0F,$0F,$0F;- D 0 - - - 0x009646 04:9636:
@@ -1465,7 +1465,7 @@ loc_04_9960:
 	BEQ loc_04_996E                 ;C - - - - - 0x009975 04:9965: F0 07
 	LDY #$00                        ;C - - - - - 0x009977 04:9967: A0 00
 	LDA (ptr_0C),Y                  ;C - - - - - 0x009979 04:9969: B1 0C
-	JSR sub_0F_F34C                 ;C - - - - - 0x00997B 04:996B: 20 4C F3
+	JSR QueueSound                  ;C - - - - - 0x00997B 04:996B: 20 4C F3
 loc_04_996E:
 	LDA #$01                        ;C - - - - - 0x00997E 04:996E: A9 01
 	STA vramQueue,X                 ;C - - - - - 0x009980 04:9970: 9D 80 07
@@ -1549,7 +1549,7 @@ loc_04_99ED:
 	AND #$03                        ;C - - - - - 0x009A0A 04:99FA: 29 03
 	BEQ loc_04_9A09                 ;C - - - - - 0x009A0C 04:99FC: F0 0B
 	LDA #$2F                        ;C - - - - - 0x009A0E 04:99FE: A9 2F
-	JSR sub_0F_F34C                 ;C - - - - - 0x009A10 04:9A00: 20 4C F3
+	JSR QueueSound                  ;C - - - - - 0x009A10 04:9A00: 20 4C F3
 	LDA ram_00B4                    ;C - - - - - 0x009A13 04:9A03: A5 B4
 	EOR #$80                        ;C - - - - - 0x009A15 04:9A05: 49 80
 	STA ram_00B4                    ;C - - - - - 0x009A17 04:9A07: 85 B4
@@ -1732,7 +1732,7 @@ loc_04_9B37:
 	ADC ram_0008                    ;C - - - - - 0x009B48 04:9B38: 65 08
 	STA playerHealth                ;C - - - - - 0x009B4A 04:9B3A: 85 3A
 	LDA #$2E                        ;C - - - - - 0x009B4C 04:9B3C: A9 2E
-	JSR sub_0F_F34C                 ;C - - - - - 0x009B4E 04:9B3E: 20 4C F3
+	JSR QueueSound                  ;C - - - - - 0x009B4E 04:9B3E: 20 4C F3
 	TXA                             ;C - - - - - 0x009B51 04:9B41: 8A
 	CLC                             ;C - - - - - 0x009B52 04:9B42: 18
 	ADC playerLevel                 ;C - - - - - 0x009B53 04:9B43: 65 6B
@@ -1790,7 +1790,7 @@ loc_04_9BA4:
 	INC credits                     ;c - - - - - 0x009BB4 04:9BA4: E6 AF
 	LDA #$30                        ;c - - - - - 0x009BB6 04:9BA6: A9 30
 loc_04_9BA8:
-	JSR sub_0F_F34C                 ;c - - - - - 0x009BB8 04:9BA8: 20 4C F3
+	JSR QueueSound                  ;c - - - - - 0x009BB8 04:9BA8: 20 4C F3
 	INC ram_00AA                    ;c - - - - - 0x009BBB 04:9BAB: E6 AA
 	RTS                             ;c - - - - - 0x009BBD 04:9BAD: 60
 tbl_04_9BAE:
