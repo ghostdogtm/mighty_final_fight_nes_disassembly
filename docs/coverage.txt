@@ -9,17 +9,17 @@ bank  code(cdl) code(traced) data  unknown
 05         1578           86   3855     2673
 06         2044          195   5746      207
 07            0            0   5663     2529
-08         2693          140   1832     3527
+08         2693          140   1839     3520
 09          745          156   3569     3722
 0A           32            0   6615     1545
 0B         2923          112   4647      510
-0C         6477          490    635      590
+0C         6477          488    636      591
 0D         2990           48   3027     2127
 0E         7731          247    198       16
-0F         6124          402   1039      627
-all       48068         2728  56677    23599
+0F         6124          402   1074      592
+all       48068         2726  56720    23558
 
-Unknown bytes: 9430 fill (one repeated byte), 158 code-like, 14011 other (probably data)
+Unknown bytes: 9430 fill (one repeated byte), 158 code-like, 13970 other (probably data)
 
 CDL anomalies (code flag but not a valid instruction): 0
 
@@ -42,7 +42,7 @@ Traced code (instruction starts, verify by hand):
   00:834B  LDA #$03
   00:834D  STA ram_0037
   00:834F  JSR ClearTimerA4
-  00:8352  JSR sub_0E_CEAA
+  00:8352  JSR ResetPlayerStand
   00:8355  LDY ram_0039
   00:8357  LDA objId,Y
   00:835A  STA objKind,Y
@@ -191,7 +191,7 @@ Traced code (instruction starts, verify by hand):
   00:963C  RTS
   00:96D4  CMP #$03
   00:96D6  BEQ loc_00_96DC
-  00:96D8  JSR sub_0E_CEAA
+  00:96D8  JSR ResetPlayerStand
   00:9776  STY palUpdateFlag
   00:9778  RTS
   01:A030  RTS
@@ -739,12 +739,10 @@ Traced code (instruction starts, verify by hand):
   0C:871D  LDY playerId
   0C:871F  LDA tbl_0F_E288,Y
   0C:8722  STA ram_006F
-  0C:8724  JSR sub_0E_CEAA
+  0C:8724  JSR ResetPlayerStand
   0C:8727  LDA objY
   0C:872A  STA objY,X
   0C:8BB0  RTI
-  0C:8BC0  PLA
-  0C:8BC1  PLA
   0C:8BC2  LDA #$2E
   0C:8BC4  JSR QueueSound
   0C:8BC7  LDA credits
@@ -1083,7 +1081,7 @@ Traced code (instruction starts, verify by hand):
   0E:DBC8  STA objXPage
   0E:DCDC  RTS
   0F:E2CD  JMP loc_0F_E473
-  0F:E3F8  JSR sub_0E_CEAA
+  0F:E3F8  JSR ResetPlayerStand
   0F:E3FB  LDA #$00
   0F:E3FD  STA gameAction
   0F:E3FF  STA ram_00BB
@@ -1639,9 +1637,6 @@ Unknown runs, longest first (len bank:addr):
       6  0F:EF25
       6  0F:ECC9
       6  0F:EC08
-      6  0F:E261
-      6  0F:E231
-      6  0F:E1F5
       6  0D:AED2
       6  0D:AEA2
       6  0D:AE72
@@ -1818,8 +1813,6 @@ Unknown runs, longest first (len bank:addr):
       3  0F:F8B9
       3  0F:F6DB
       3  0F:EC25
-      3  0F:E294
-      3  0F:E240
       3  0D:BFF5
       3  0D:BEF5
       3  0D:BDF5
@@ -1971,11 +1964,7 @@ Unknown runs, longest first (len bank:addr):
       2  0F:EC11
       2  0F:EBBF
       2  0F:EBA7
-      2  0F:E26B
-      2  0F:E25E
-      2  0F:E23D
-      2  0F:E223
-      2  0F:E216
+      2  0F:E879
       2  0E:DE5C
       2  0D:BFFC
       2  0D:BFDE
@@ -2036,6 +2025,7 @@ Unknown runs, longest first (len bank:addr):
       2  0C:9EC0
       2  0C:9EBA
       2  0C:9EB4
+      2  0C:8BC0
       2  0C:8BB5
       2  0C:894D
       2  0C:893B
@@ -2288,7 +2278,6 @@ Unknown runs, longest first (len bank:addr):
       1  0F:EBD4
       1  0F:EBC2
       1  0F:EBA4
-      1  0F:E879
       1  0F:E86E
       1  0F:E609
       1  0F:E607
@@ -2296,8 +2285,6 @@ Unknown runs, longest first (len bank:addr):
       1  0F:E603
       1  0F:E601
       1  0F:E472
-      1  0F:E24E
-      1  0F:E24C
       1  0F:E15C
       1  0E:DE57
       1  0E:DE54
@@ -2409,7 +2396,6 @@ Unknown runs, longest first (len bank:addr):
       1  0C:9CA9
       1  0C:9CA5
       1  0C:8BBC
-      1  0C:8B5D
       1  0C:89CE
       1  0C:89CA
       1  0C:89C4
@@ -2703,13 +2689,6 @@ Unknown runs, longest first (len bank:addr):
       1  09:A0B6
       1  08:99EC
       1  08:99C2
-      1  08:977A
-      1  08:9778
-      1  08:9775
-      1  08:976B
-      1  08:9769
-      1  08:9766
-      1  08:9763
       1  08:975C
       1  08:975A
       1  08:9757

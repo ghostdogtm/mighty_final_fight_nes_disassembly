@@ -73,7 +73,7 @@ loc_00_80AE:
 	STA gameAction                  ;C - - - - - 0x0000CB 00:80BB: 85 30
 	LDA #$03                        ;C - - - - - 0x0000CD 00:80BD: A9 03
 	STA ram_0037                    ;C - - - - - 0x0000CF 00:80BF: 85 37
-	JSR sub_0E_CEAA                 ;C - - - - - 0x0000D1 00:80C1: 20 AA CE
+	JSR ResetPlayerStand            ;C - - - - - 0x0000D1 00:80C1: 20 AA CE
 loc_00_80C4:
 	RTS                             ;C - - - - - 0x0000D4 00:80C4: 60
 ofs_00_80C5:
@@ -237,7 +237,7 @@ loc_00_81FA:
 	LDY playerId                    ;C - - - - - 0x00021E 00:820E: A4 34
 	LDA tbl_0F_E288,Y               ;C - - - - - 0x000220 00:8210: B9 88 E2
 	STA ram_006F                    ;C - - - - - 0x000223 00:8213: 85 6F
-	JSR sub_0E_CEAA                 ;C - - - - - 0x000225 00:8215: 20 AA CE
+	JSR ResetPlayerStand            ;C - - - - - 0x000225 00:8215: 20 AA CE
 loc_00_8218:
 	RTS                             ;C - - - - - 0x000228 00:8218: 60
 tbl_00_8219:
@@ -311,7 +311,7 @@ loc_00_829C:
 	LDY playerId                    ;C - - - - - 0x0002B0 00:82A0: A4 34
 	LDA tbl_0F_E288,Y               ;C - - - - - 0x0002B2 00:82A2: B9 88 E2
 	STA ram_006F                    ;C - - - - - 0x0002B5 00:82A5: 85 6F
-	JSR sub_0E_CEAA                 ;C - - - - - 0x0002B7 00:82A7: 20 AA CE
+	JSR ResetPlayerStand            ;C - - - - - 0x0002B7 00:82A7: 20 AA CE
 loc_00_82AA:
 	RTS                             ;C - - - - - 0x0002BA 00:82AA: 60
 tbl_00_82AB:
@@ -400,7 +400,7 @@ loc_00_833B:
 	LDA #$03                        ;c - - - - - 0x00035B 00:834B: A9 03
 	STA ram_0037                    ;c - - - - - 0x00035D 00:834D: 85 37
 	JSR ClearTimerA4                ;c - - - - - 0x00035F 00:834F: 20 36 F4
-	JSR sub_0E_CEAA                 ;c - - - - - 0x000362 00:8352: 20 AA CE
+	JSR ResetPlayerStand            ;c - - - - - 0x000362 00:8352: 20 AA CE
 	LDY ram_0039                    ;c - - - - - 0x000365 00:8355: A4 39
 	LDA objId,Y                     ;c - - - - - 0x000367 00:8357: B9 30 03
 	STA objKind,Y                   ;c - - - - - 0x00036A 00:835A: 99 20 03
@@ -908,7 +908,7 @@ loc_00_874D:
 	LDY playerId                    ;C - - - - - 0x000778 00:8768: A4 34
 	LDA tbl_0F_E288,Y               ;C - - - - - 0x00077A 00:876A: B9 88 E2
 	STA ram_006F                    ;C - - - - - 0x00077D 00:876D: 85 6F
-	JSR sub_0E_CEAA                 ;C - - - - - 0x00077F 00:876F: 20 AA CE
+	JSR ResetPlayerStand            ;C - - - - - 0x00077F 00:876F: 20 AA CE
 	LDA ram_00BF                    ;C - - - - - 0x000782 00:8772: A5 BF
 	BEQ loc_00_8783                 ;C - - - - - 0x000784 00:8774: F0 0D
 	LDA playerHealth                ;C - - - - - 0x000786 00:8776: A5 3A
@@ -1024,7 +1024,7 @@ loc_00_8832:
 	LDY playerId                    ;C - - - - - 0x000854 00:8844: A4 34
 	LDA tbl_0F_E288,Y               ;C - - - - - 0x000856 00:8846: B9 88 E2
 	STA ram_006F                    ;C - - - - - 0x000859 00:8849: 85 6F
-	JSR sub_0E_CEAA                 ;C - - - - - 0x00085B 00:884B: 20 AA CE
+	JSR ResetPlayerStand            ;C - - - - - 0x00085B 00:884B: 20 AA CE
 loc_00_884E:
 	LDA ram_00BF                    ;C - - - - - 0x00085E 00:884E: A5 BF
 	BEQ loc_00_885F                 ;C - - - - - 0x000860 00:8850: F0 0D
@@ -1349,7 +1349,7 @@ loc_00_8AD3:
 	STA timerA4                     ;C - - - - - 0x000AFF 00:8AEF: 85 A4
 	STA playerInvincible            ;C - - - - - 0x000B01 00:8AF1: 85 3B
 	STA ram_00B3                    ;C - - - - - 0x000B03 00:8AF3: 85 B3
-	JSR sub_0E_CEAA                 ;C - - - - - 0x000B05 00:8AF5: 20 AA CE
+	JSR ResetPlayerStand            ;C - - - - - 0x000B05 00:8AF5: 20 AA CE
 	LDY playerId                    ;C - - - - - 0x000B08 00:8AF8: A4 34
 	LDA tbl_0F_E288,Y               ;C - - - - - 0x000B0A 00:8AFA: B9 88 E2
 	STA ram_006F                    ;C - - - - - 0x000B0D 00:8AFD: 85 6F
@@ -1437,7 +1437,7 @@ loc_00_8B98:
 	LDY playerId                    ;C - - - - - 0x000BB6 00:8BA6: A4 34
 	LDA tbl_0F_E288,Y               ;C - - - - - 0x000BB8 00:8BA8: B9 88 E2
 	STA ram_006F                    ;C - - - - - 0x000BBB 00:8BAB: 85 6F
-	JSR sub_0E_CEAA                 ;C - - - - - 0x000BBD 00:8BAD: 20 AA CE
+	JSR ResetPlayerStand            ;C - - - - - 0x000BBD 00:8BAD: 20 AA CE
 	RTS                             ;C - - - - - 0x000BC0 00:8BB0: 60
 ofs_00_8BB1:
 	LDY ram_0039                    ;C - - J - - 0x000BC1 00:8BB1: A4 39
@@ -1661,7 +1661,7 @@ loc_00_8D6F:
 	LDY playerId                    ;C - - - - - 0x000D8E 00:8D7E: A4 34
 	LDA tbl_0F_E288,Y               ;C - - - - - 0x000D90 00:8D80: B9 88 E2
 	STA ram_006F                    ;C - - - - - 0x000D93 00:8D83: 85 6F
-	JSR sub_0E_CEAA                 ;C - - - - - 0x000D95 00:8D85: 20 AA CE
+	JSR ResetPlayerStand            ;C - - - - - 0x000D95 00:8D85: 20 AA CE
 loc_00_8D88:
 	RTS                             ;C - - - - - 0x000D98 00:8D88: 60
 tbl_00_8D89:
@@ -1824,7 +1824,7 @@ loc_00_8E9E:
 	STA timerA3                     ;C - - - - - 0x000EDE 00:8ECE: 85 A3
 	STA ram_00AD                    ;C - - - - - 0x000EE0 00:8ED0: 85 AD
 	STA ram_00B3                    ;C - - - - - 0x000EE2 00:8ED2: 85 B3
-	JSR sub_0E_CEAA                 ;C - - - - - 0x000EE4 00:8ED4: 20 AA CE
+	JSR ResetPlayerStand            ;C - - - - - 0x000EE4 00:8ED4: 20 AA CE
 	JSR sub_0F_F26E                 ;C - - - - - 0x000EE7 00:8ED7: 20 6E F2
 	LDY playerId                    ;C - - - - - 0x000EEA 00:8EDA: A4 34
 	LDA tbl_0F_E288,Y               ;C - - - - - 0x000EEC 00:8EDC: B9 88 E2
@@ -1926,7 +1926,7 @@ loc_00_8F82:
 	STA objVelXLo                   ;C - - - - - 0x000FB2 00:8FA2: 8D 00 04
 	LDA tbl_0F_E1C4,Y               ;C - - - - - 0x000FB5 00:8FA5: B9 C4 E1
 	STA objVelXHi                   ;C - - - - - 0x000FB8 00:8FA8: 8D 10 04
-	JSR sub_0E_CEAA                 ;C - - - - - 0x000FBB 00:8FAB: 20 AA CE
+	JSR ResetPlayerStand            ;C - - - - - 0x000FBB 00:8FAB: 20 AA CE
 loc_00_8FAE:
 	RTS                             ;C - - - - - 0x000FBE 00:8FAE: 60
 ofs_00_8FAF:
@@ -1964,7 +1964,7 @@ loc_00_8FE3:
 	LDA #$01                        ;C - - - - - 0x000FF3 00:8FE3: A9 01
 loc_00_8FE5:
 	STA ram_0031                    ;C - - - - - 0x000FF5 00:8FE5: 85 31
-	JSR sub_0E_CEAA                 ;C - - - - - 0x000FF7 00:8FE7: 20 AA CE
+	JSR ResetPlayerStand            ;C - - - - - 0x000FF7 00:8FE7: 20 AA CE
 	LDA #$00                        ;C - - - - - 0x000FFA 00:8FEA: A9 00
 	STA gameAction                  ;C - - - - - 0x000FFC 00:8FEC: 85 30
 	STA ram_00BB                    ;C - - - - - 0x000FFE 00:8FEE: 85 BB
@@ -2316,7 +2316,7 @@ loc_00_92C1:
 	LDA objActive                   ;C - - - - - 0x0012D1 00:92C1: AD 00 03
 	AND #$0F                        ;C - - - - - 0x0012D4 00:92C4: 29 0F
 	BNE loc_00_92D3                 ;C - - - - - 0x0012D6 00:92C6: D0 0B
-	JSR sub_0E_CEAA                 ;C - - - - - 0x0012D8 00:92C8: 20 AA CE
+	JSR ResetPlayerStand            ;C - - - - - 0x0012D8 00:92C8: 20 AA CE
 	LDA #$10                        ;C - - - - - 0x0012DB 00:92CB: A9 10
 	STA objArr_0500                 ;C - - - - - 0x0012DD 00:92CD: 8D 00 05
 	INC objActive                   ;C - - - - - 0x0012E0 00:92D0: EE 00 03
@@ -2611,7 +2611,7 @@ loc_00_950F:
 	STA timerA4                     ;C - - - - - 0x001539 00:9529: 85 A4
 	STA playerInvincible            ;C - - - - - 0x00153B 00:952B: 85 3B
 	STA ram_00B3                    ;C - - - - - 0x00153D 00:952D: 85 B3
-	JSR sub_0E_CEAA                 ;C - - - - - 0x00153F 00:952F: 20 AA CE
+	JSR ResetPlayerStand            ;C - - - - - 0x00153F 00:952F: 20 AA CE
 	LDA #$80                        ;C - - - - - 0x001542 00:9532: A9 80
 	STA objActive+15                ;C - - - - - 0x001544 00:9534: 8D 0F 03
 	STA objFlags+15                 ;C - - - - - 0x001547 00:9537: 8D 6F 05
@@ -2772,7 +2772,7 @@ loc_00_9662:
 	LDY #$00                        ;C - - - - - 0x00168A 00:967A: A0 00
 	JSR sub_00_987A                 ;C - - - - - 0x00168C 00:967C: 20 7A 98
 	INC objActive                   ;C - - - - - 0x00168F 00:967F: EE 00 03
-	JSR sub_0E_CEAA                 ;C - - - - - 0x001692 00:9682: 20 AA CE
+	JSR ResetPlayerStand            ;C - - - - - 0x001692 00:9682: 20 AA CE
 loc_00_9685:
 	RTS                             ;C - - - - - 0x001695 00:9685: 60
 loc_00_9686:
@@ -2812,7 +2812,7 @@ loc_00_96A5:
 	BEQ loc_00_96DC                 ;C - - - - - 0x0016E2 00:96D2: F0 08
 	CMP #$03                        ;c - - - - - 0x0016E4 00:96D4: C9 03
 	BEQ loc_00_96DC                 ;c - - - - - 0x0016E6 00:96D6: F0 04
-	JSR sub_0E_CEAA                 ;c - - - - - 0x0016E8 00:96D8: 20 AA CE
+	JSR ResetPlayerStand            ;c - - - - - 0x0016E8 00:96D8: 20 AA CE
 loc_00_96DB:
 	RTS                             ;C - - - - - 0x0016EB 00:96DB: 60
 loc_00_96DC:
@@ -2972,7 +2972,7 @@ loc_00_984F:
 	LDA #$00                        ;C - - - - - 0x001864 00:9854: A9 00
 	STA gameAction                  ;C - - - - - 0x001866 00:9856: 85 30
 	STA objArr_0500                 ;C - - - - - 0x001868 00:9858: 8D 00 05
-	JSR sub_0E_CEAA                 ;C - - - - - 0x00186B 00:985B: 20 AA CE
+	JSR ResetPlayerStand            ;C - - - - - 0x00186B 00:985B: 20 AA CE
 loc_00_985E:
 	RTS                             ;C - - - - - 0x00186E 00:985E: 60
 loc_00_985F:

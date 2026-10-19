@@ -1290,14 +1290,14 @@ RunGameAction:
 	JMP (ptr_00)                    ;C - - - - - 0x01C9D7 0E:C9C7: 6C 00 00
 gameActionLo:
 	.lobytes Act00_Walk, Act01_Jump, Act02_ActionEnd, Act03_Punch, Act04_Grab, Act05_Hit, Act06_Fall, Act07_SelectScreen;- D 2 - - - 0x01C9DA 0E:C9CA:
-	.lobytes ActNone, Act09_Continue, Act0A, Act0B, Act0C, ActNone, Act07_SelectScreen, ActNone;- - - - - - 0x01C9E2 0E:C9D2:
+	.lobytes ActNone, Act09_Continue, Act0A, Act0B_Death, Act0C, ActNone, Act07_SelectScreen, ActNone;- - - - - - 0x01C9E2 0E:C9D2:
 	.lobytes ActNone, ActNone, ActNone, ActNone, ActNone, ActNone, ActNone, ActNone;- D 2 - - - 0x01C9EA 0E:C9DA:
 	.lobytes ActNone, ActNone, ActNone, ActNone, ActNone, ActNone, ActNone, ActNone;- D 2 - - - 0x01C9F2 0E:C9E2:
 	.lobytes ActNone, ActNone, ActNone, ActNone, ActNone, ActNone, ActNone, ActNone;- D 2 - - - 0x01C9FA 0E:C9EA:
 	.lobytes ActNone, ActNone, ActNone;- D 2 - - - 0x01CA02 0E:C9F2:
 gameActionHi:
 	.hibytes Act00_Walk, Act01_Jump, Act02_ActionEnd, Act03_Punch, Act04_Grab, Act05_Hit, Act06_Fall, Act07_SelectScreen;- D 2 - - - 0x01CA05 0E:C9F5:
-	.hibytes ActNone, Act09_Continue, Act0A, Act0B, Act0C, ActNone, Act07_SelectScreen, ActNone;- - - - - - 0x01CA0D 0E:C9FD:
+	.hibytes ActNone, Act09_Continue, Act0A, Act0B_Death, Act0C, ActNone, Act07_SelectScreen, ActNone;- - - - - - 0x01CA0D 0E:C9FD:
 	.hibytes ActNone, ActNone, ActNone, ActNone, ActNone, ActNone, ActNone, ActNone;- D 2 - - - 0x01CA15 0E:CA05:
 	.hibytes ActNone, ActNone, ActNone, ActNone, ActNone, ActNone, ActNone, ActNone;- D 2 - - - 0x01CA1D 0E:CA0D:
 	.hibytes ActNone, ActNone, ActNone, ActNone, ActNone, ActNone, ActNone, ActNone;- D 2 - - - 0x01CA25 0E:CA15:
@@ -1890,7 +1890,8 @@ loc_0E_CEA4:
 	LDA padHeld                     ;C - - - - - 0x01CEB4 0E:CEA4: A5 16
 	AND #$0F                        ;C - - - - - 0x01CEB6 0E:CEA6: 29 0F
 	BNE loc_0E_CEC1                 ;C - - - - - 0x01CEB8 0E:CEA8: D0 17
-sub_0E_CEAA:
+; slot 0 gets the standing animation for the current weapon state
+ResetPlayerStand:
 	LDA objY                        ;C - - - - - 0x01CEBA 0E:CEAA: AD C0 03
 	STA playerGroundY               ;C - - - - - 0x01CEBD 0E:CEAD: 85 36
 	LDA weaponHeld                  ;C - - - - - 0x01CEBF 0E:CEAF: A5 A9
@@ -2104,7 +2105,7 @@ loc_0E_D01A:
 	JSR SetChrBank2                 ;C - - - - - 0x01D046 0E:D036: 20 40 F4
 	JMP loc_0E_D03F                 ;C - - - - - 0x01D049 0E:D039: 4C 3F D0
 loc_0E_D03C:
-	JSR sub_0E_CEAA                 ;C - - - - - 0x01D04C 0E:D03C: 20 AA CE
+	JSR ResetPlayerStand            ;C - - - - - 0x01D04C 0E:D03C: 20 AA CE
 loc_0E_D03F:
 	LDA #$1C                        ;C - - - - - 0x01D04F 0E:D03F: A9 1C
 	JSR QueueSound                  ;C - - - - - 0x01D051 0E:D041: 20 4C F3
@@ -2439,7 +2440,7 @@ loc_0E_D2C8:
 	STA objArr_0500                 ;C - - - - - 0x01D2E6 0E:D2D6: 8D 00 05
 	STA objArr_0510                 ;C - - - - - 0x01D2E9 0E:D2D9: 8D 10 05
 	STA objArr_0520                 ;C - - - - - 0x01D2EC 0E:D2DC: 8D 20 05
-	JSR sub_0E_CEAA                 ;C - - - - - 0x01D2EF 0E:D2DF: 20 AA CE
+	JSR ResetPlayerStand            ;C - - - - - 0x01D2EF 0E:D2DF: 20 AA CE
 	LDY playerId                    ;C - - - - - 0x01D2F2 0E:D2E2: A4 34
 	LDA tbl_0F_E288,Y               ;C - - - - - 0x01D2F4 0E:D2E4: B9 88 E2
 	STA ram_006F                    ;C - - - - - 0x01D2F7 0E:D2E7: 85 6F
@@ -2625,7 +2626,7 @@ loc_0E_D438:
 	RTS                             ;C - - - - - 0x01D45F 0E:D44F: 60
 	.byte $A9,$00,$85,$A4,$85,$30,$85,$A3,$F0,$04;- - - - - - 0x01D460 0E:D450:
 Act0A:
-	JSR sub_0E_CEAA                 ;C - - J - - 0x01D46A 0E:D45A: 20 AA CE
+	JSR ResetPlayerStand            ;C - - J - - 0x01D46A 0E:D45A: 20 AA CE
 	RTS                             ;C - - - - - 0x01D46D 0E:D45D: 60
 loc_0E_D45E:
 	LDA objAnim                     ;C - - - - - 0x01D46E 0E:D45E: AD 80 05
@@ -2857,7 +2858,7 @@ loc_0E_D613:
 	STA timerA4                     ;C - - - - - 0x01D625 0E:D615: 85 A4
 	STA gameAction                  ;C - - - - - 0x01D627 0E:D617: 85 30
 	STA timerA3                     ;C - - - - - 0x01D629 0E:D619: 85 A3
-	JSR sub_0E_CEAA                 ;C - - - - - 0x01D62B 0E:D61B: 20 AA CE
+	JSR ResetPlayerStand            ;C - - - - - 0x01D62B 0E:D61B: 20 AA CE
 loc_0E_D61E:
 	RTS                             ;C - - - - - 0x01D62E 0E:D61E: 60
 loc_0E_D61F:
@@ -3156,7 +3157,7 @@ loc_0E_D83B:
 	LDA #$FF                        ;C - - - - - 0x01D853 0E:D843: A9 FF
 	LDY ram_0039                    ;C - - - - - 0x01D855 0E:D845: A4 39
 	STA objArr_03F0,Y               ;C - - - - - 0x01D857 0E:D847: 99 F0 03
-	JSR sub_0E_CEAA                 ;C - - - - - 0x01D85A 0E:D84A: 20 AA CE
+	JSR ResetPlayerStand            ;C - - - - - 0x01D85A 0E:D84A: 20 AA CE
 	RTS                             ;C - - - - - 0x01D85D 0E:D84D: 60
 loc_0E_D84E:
 	LDA #$38                        ;C - - - - - 0x01D85E 0E:D84E: A9 38
@@ -3391,7 +3392,7 @@ loc_0E_DA03:
 	STA ram_0035                    ;C - - - - - 0x01DA3B 0E:DA2B: 85 35
 	STA ram_00BA                    ;C - - - - - 0x01DA3D 0E:DA2D: 85 BA
 	STA playerInvincible            ;C - - - - - 0x01DA3F 0E:DA2F: 85 3B
-	JSR sub_0E_CEAA                 ;C - - - - - 0x01DA41 0E:DA31: 20 AA CE
+	JSR ResetPlayerStand            ;C - - - - - 0x01DA41 0E:DA31: 20 AA CE
 	LDY playerId                    ;C - - - - - 0x01DA44 0E:DA34: A4 34
 	LDA tbl_0F_E288,Y               ;C - - - - - 0x01DA46 0E:DA36: B9 88 E2
 	STA ram_006F                    ;C - - - - - 0x01DA49 0E:DA39: 85 6F
@@ -3666,10 +3667,15 @@ loc_0E_DC40:
 loc_0E_DC58:
 	RTS                             ;C - - - - - 0x01DC68 0E:DC58: 60
 tbl_0E_DC59:
-	.byte $63,$66,$69,$63,$69       ;- D 2 - - - 0x01DC69 0E:DC59:
+	.lobytes tbl_0E_DC63, tbl_0E_DC66, tbl_0E_DC69, tbl_0E_DC63, tbl_0E_DC69;- D 2 - - - 0x01DC69 0E:DC59:
 tbl_0E_DC5E:
-	.word Act0B-1, Act0B-1, $82DC, $8272, $9282;W 0x01DC6E 0E:DC5E:
-	.byte $82,$82,$82,$82           ;- D 2 - I - 0x01DC78 0E:DC68:
+	.hibytes tbl_0E_DC63, tbl_0E_DC66, tbl_0E_DC69, tbl_0E_DC63, tbl_0E_DC69;- D 2 - - - 0x01DC6E 0E:DC5E:
+tbl_0E_DC63:
+	.byte $82,$72,$82               ;- D 2 - I - 0x01DC73 0E:DC63:
+tbl_0E_DC66:
+	.byte $82,$92,$82               ;- D 2 - I - 0x01DC76 0E:DC66:
+tbl_0E_DC69:
+	.byte $82,$82,$82               ;- D 2 - I - 0x01DC79 0E:DC69:
 Act09_Continue:
 	LDA #$00                        ;C - - - - - 0x01DC7C 0E:DC6C: A9 00
 	STA renderOffCount              ;C - - - - - 0x01DC7E 0E:DC6E: 85 EE
@@ -3723,7 +3729,8 @@ loc_0E_DCD1:
 	JSR ScreenOn                    ;C - - - - - 0x01DCE6 0E:DCD6: 20 6F C2
 	JSR sub_04_9500                 ;C - - - - - bank=04 0x01DCE9 0E:DCD9: 20 00 95
 	RTS                             ;c - - - - - 0x01DCEC 0E:DCDC: 60
-Act0B:
+; health<0: blink, then lives-- ; no lives left -> gameAction 9 (continue)
+Act0B_Death:
 	LDA playerHealth                ;C - - J - - 0x01DCED 0E:DCDD: A5 3A
 	BMI loc_0E_DD2D                 ;C - - - - - 0x01DCEF 0E:DCDF: 30 4C
 	LDA #$00                        ;C - - - - - 0x01DCF1 0E:DCE1: A9 00
@@ -3744,7 +3751,7 @@ loc_0E_DCF0:
 	STA ram_00BA                    ;C - - - - - 0x01DD0C 0E:DCFC: 85 BA
 	STA objArr_0500                 ;C - - - - - 0x01DD0E 0E:DCFE: 8D 00 05
 	STA objArr_0510                 ;C - - - - - 0x01DD11 0E:DD01: 8D 10 05
-	JSR sub_0E_CEAA                 ;C - - - - - 0x01DD14 0E:DD04: 20 AA CE
+	JSR ResetPlayerStand            ;C - - - - - 0x01DD14 0E:DD04: 20 AA CE
 	LDA playerId                    ;C - - - - - 0x01DD17 0E:DD07: A5 34
 	CMP #$01                        ;C - - - - - 0x01DD19 0E:DD09: C9 01
 	BEQ loc_0E_DD25                 ;C - - - - - 0x01DD1B 0E:DD0B: F0 18
@@ -3809,11 +3816,9 @@ Act0C:
 	STA ptr_04+1                    ;C - - - - - 0x01DD84 0E:DD74: 85 05
 	JMP (ptr_04)                    ;C - - - - - 0x01DD86 0E:DD76: 6C 04 00
 tbl_0E_DD79:
-	.byte $7F,$D3                   ;- D 2 - - - 0x01DD89 0E:DD79:
-	.byte $FF                       ;W 0x01DD8B 0E:DD7B:
+	.lobytes ofs_0E_DD7F, ofs_0E_DDD3, ofs_0E_DDFF;- D 2 - - - 0x01DD89 0E:DD79:
 tbl_0E_DD7C:
-	.word ofs_0E_DDDD               ;W 0x01DD8C 0E:DD7C:
-	.byte $DD                       ;W 0x01DD8E 0E:DD7E:
+	.hibytes ofs_0E_DD7F, ofs_0E_DDD3, ofs_0E_DDFF;- D 2 - - - 0x01DD8C 0E:DD7C:
 ofs_0E_DD7F:
 	LDA padPressed                  ;C - - J - - 0x01DD8F 0E:DD7F: A5 14
 	AND #$40                        ;C - - - - - 0x01DD91 0E:DD81: 29 40
@@ -3847,7 +3852,7 @@ loc_0E_DDA8:
 	DEC timerA3                     ;C - - - - - 0x01DDC2 0E:DDB2: C6 A3
 	JMP loc_0E_DD8E                 ;C - - - - - 0x01DDC4 0E:DDB4: 4C 8E DD
 loc_0E_DDB7:
-	JSR sub_0E_CEAA                 ;C - - - - - 0x01DDC7 0E:DDB7: 20 AA CE
+	JSR ResetPlayerStand            ;C - - - - - 0x01DDC7 0E:DDB7: 20 AA CE
 ofs_0E_DDBA:
 	LDA #$00                        ;C - - - - - 0x01DDCA 0E:DDBA: A9 00
 	STA gameAction                  ;C - - - - - 0x01DDCC 0E:DDBC: 85 30
@@ -3869,7 +3874,6 @@ ofs_0E_DDD3:
 	BEQ loc_0E_DDF0                 ;C - - - - - 0x01DDE7 0E:DDD7: F0 17
 	LDA timerA3                     ;C - - - - - 0x01DDE9 0E:DDD9: A5 A3
 	BNE loc_0E_DDC1                 ;C - - - - - 0x01DDEB 0E:DDDB: D0 E4
-ofs_0E_DDDD:
 	LDA #$03                        ;C - - - - - 0x01DDED 0E:DDDD: A9 03
 	STA gameAction                  ;C - - - - - 0x01DDEF 0E:DDDF: 85 30
 	RTS                             ;C - - - - - 0x01DDF1 0E:DDE1: 60

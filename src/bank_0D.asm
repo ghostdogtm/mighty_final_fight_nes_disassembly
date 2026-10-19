@@ -1574,12 +1574,9 @@ ofs_0D_AC8E:
 	STA objVelYHi,X                 ;C - - - - - 0x01ACB3 0D:ACA3: 9D 30 04
 	RTS                             ;C - - - - - 0x01ACB6 0D:ACA6: 60
 tbl_0D_ACA7:
-	.byte $75,$8E,$4B               ;- D 1 - - - 0x01ACB7 0D:ACA7:
-	.word $8E60                     ;W 0x01ACBA 0D:ACAA:
-	.byte $60                       ;W 0x01ACBC 0D:ACAC:
+	.lobytes ofs_0D_AC75, ofs_0D_AC8E, ofs_0D_AC4B, ofs_0D_AC60, ofs_0D_AC8E, ofs_0D_AC60;- D 1 - - - 0x01ACB7 0D:ACA7:
 tbl_0D_ACAD:
-	.byte $AC                       ;- D 1 - - - 0x01ACBD 0D:ACAD:
-	.byte $AC,$AC,$AC,$AC,$AC       ;- D 1 - - - 0x01ACBE 0D:ACAE:
+	.hibytes ofs_0D_AC75, ofs_0D_AC8E, ofs_0D_AC4B, ofs_0D_AC60, ofs_0D_AC8E, ofs_0D_AC60;- D 1 - - - 0x01ACBD 0D:ACAD:
 sub_0D_ACB3:
 	STY ptr_0E+1                    ;C - - - - - 0x01ACC3 0D:ACB3: 84 0F
 	LDA objSpriteDown,X             ;C - - - - - 0x01ACC5 0D:ACB5: BD B0 05
@@ -1731,10 +1728,9 @@ tbl_0D_B091:
 	.byte $1F,$1F,$1F,$1F,$1F,$1F,$1F;- D 1 - I - 0x01B0F8 0D:B0E8:
 	.byte $1F,$20,$20,$20,$20,$20,$20,$20,$20,$20,$20,$20,$20,$20,$20,$20;- - - - - - 0x01B0FF 0D:B0EF:
 	.byte $20                       ;- - - - - - 0x01B10F 0D:B0FF:
-	.word $8D8C, $8F8E, $9190, $9291, $938C, $8F8E, $9490, $9695;W 0x01B110 0D:B100:
-	.word $9897, $9A99              ;W 0x01B120 0D:B110:
-	.byte $9B,$06,$9C,$9D,$9E,$9F,$A0,$A1,$A2,$A3,$A4,$A5,$1E,$1E,$1E,$1E;- D 1 - I - 0x01B124 0D:B114:
-	.byte $1E,$1E,$1E,$1E           ;- D 1 - I - 0x01B134 0D:B124:
+	.word $8D8C, $8F8E, $9190, $9291;W 0x01B110 0D:B100:
+	.byte $8C,$93,$8E,$8F,$90,$94,$95,$96,$97,$98,$99,$9A,$9B,$06,$9C,$9D;- D 1 - I - 0x01B118 0D:B108:
+	.byte $9E,$9F,$A0,$A1,$A2,$A3,$A4,$A5,$1E,$1E,$1E,$1E,$1E,$1E,$1E,$1E;- D 1 - I - 0x01B128 0D:B118:
 	.res 8, $1F                     ;- - - - - - 0x01B138 0D:B128: fill 8 bytes
 	.res 16, $20                    ;- - - - - - 0x01B140 0D:B130: fill 16 bytes
 	.byte $91,$91,$91,$91,$92,$91,$91,$91,$94,$A6,$94,$95,$96,$A6,$94,$A6;- D 1 - I - 0x01B150 0D:B140:

@@ -923,7 +923,7 @@ loc_0C_870D:
 	LDY playerId                    ;c - - - - - 0x01872D 0C:871D: A4 34
 	LDA tbl_0F_E288,Y               ;c - - - - - 0x01872F 0C:871F: B9 88 E2
 	STA ram_006F                    ;c - - - - - 0x018732 0C:8722: 85 6F
-	JSR sub_0E_CEAA                 ;c - - - - - 0x018734 0C:8724: 20 AA CE
+	JSR ResetPlayerStand            ;c - - - - - 0x018734 0C:8724: 20 AA CE
 	LDA objY                        ;c - - - - - 0x018737 0C:8727: AD C0 03
 	STA objY,X                      ;c - - - - - 0x01873A 0C:872A: 9D C0 03
 loc_0C_872D:
@@ -996,19 +996,13 @@ tbl_0C_87B6:
 tbl_0C_87BC:
 	.hibytes ofs_0C_8638, ofs_0C_863D, ofs_0C_8642, ofs_0C_8647, ofs_0C_864C, ofs_0C_8651;- D 0 - - - 0x0187CC 0C:87BC:
 tbl_0C_87C2:
-	.byte $56,$5B,$60,$65,$6A       ;- D 0 - - - 0x0187D2 0C:87C2:
-	.byte $6F                       ;W 0x0187D7 0C:87C7:
+	.lobytes ofs_0C_8656, ofs_0C_865B, ofs_0C_8660, ofs_0C_8665, ofs_0C_866A, ofs_0C_866F;- D 0 - - - 0x0187D2 0C:87C2:
 tbl_0C_87C8:
-	.word loc_0C_8686, loc_0C_8686  ;W 0x0187D8 0C:87C8:
-	.byte $86                       ;- D 0 - - - 0x0187DC 0C:87CC:
-	.byte $86                       ;- D 0 - - - 0x0187DD 0C:87CD:
+	.hibytes ofs_0C_8656, ofs_0C_865B, ofs_0C_8660, ofs_0C_8665, ofs_0C_866A, ofs_0C_866F;- D 0 - - - 0x0187D8 0C:87C8:
 tbl_0C_87CE:
-	.byte $74,$79,$7E               ;- D 0 - - - 0x0187DE 0C:87CE:
-	.byte $83                       ;W 0x0187E1 0C:87D1:
+	.lobytes ofs_0C_8674, ofs_0C_8679, ofs_0C_867E, ofs_0C_8683;- D 0 - - - 0x0187DE 0C:87CE:
 tbl_0C_87D2:
-	.word loc_0C_8686               ;W 0x0187E2 0C:87D2:
-	.byte $86                       ;- D 0 - - - 0x0187E4 0C:87D4:
-	.byte $86                       ;- D 0 - - - 0x0187E5 0C:87D5:
+	.hibytes ofs_0C_8674, ofs_0C_8679, ofs_0C_867E, ofs_0C_8683;- D 0 - - - 0x0187E2 0C:87D2:
 tbl_0C_87D6:
 	.byte $02                       ;- D 0 - - - 0x0187E6 0C:87D6:
 	.byte $09,$08,$04               ;- - - - - - 0x0187E7 0C:87D7:
@@ -1387,14 +1381,9 @@ loc_0C_8B22:
 loc_0C_8B5B:
 	RTS                             ;C - - - - - 0x018B6B 0C:8B5B: 60
 tbl_0C_8B5C:
-	.byte $64                       ;- D 0 - - - 0x018B6C 0C:8B5C:
-	.byte $C2                       ;- - - - - - 0x018B6D 0C:8B5D:
-	.byte $D6                       ;- D 0 - - - 0x018B6E 0C:8B5E:
-	.byte $ED                       ;W 0x018B6F 0C:8B5F:
+	.lobytes ofs_0C_8B64, ofs_0C_8BC2, ofs_0C_8BD6, ofs_0C_8BED;- D 0 - - - 0x018B6C 0C:8B5C:
 tbl_0C_8B60:
-	.word ofs_0C_8B8B               ;W 0x018B70 0C:8B60:
-	.byte $8B                       ;- D 0 - - - 0x018B72 0C:8B62:
-	.byte $8B                       ;- D 0 - - - 0x018B73 0C:8B63:
+	.hibytes ofs_0C_8B64, ofs_0C_8BC2, ofs_0C_8BD6, ofs_0C_8BED;- D 0 - - - 0x018B70 0C:8B60:
 ofs_0C_8B64:
 	LDA #$26                        ;C - - J - - 0x018B74 0C:8B64: A9 26
 	JSR QueueSound                  ;C - - - - - 0x018B76 0C:8B66: 20 4C F3
@@ -1414,7 +1403,6 @@ ofs_0C_8B64:
 	CLC                             ;C - - - - - 0x018B95 0C:8B85: 18
 	ADC tbl_0F_FCC0,Y               ;C - - - - - 0x018B96 0C:8B86: 79 C0 FC
 	STA playerHealth                ;C - - - - - 0x018B99 0C:8B89: 85 3A
-ofs_0C_8B8B:
 	LDY playerLevel                 ;C - - - - - 0x018B9B 0C:8B8B: A4 6B
 	LDA (ptr_02),Y                  ;C - - - - - 0x018B9D 0C:8B8D: B1 02
 	CMP playerHealth                ;C - - - - - 0x018B9F 0C:8B8F: C5 3A
@@ -1446,8 +1434,8 @@ tbl_0C_8BB6:
 tbl_0C_8BBC:
 	.byte $50                       ;- - - - - - 0x018BCC 0C:8BBC:
 	.byte $58,$60,$68               ;- D 0 - I - 0x018BCD 0C:8BBD:
-	PLA                             ;c - - - - - 0x018BD0 0C:8BC0: 68
-	PLA                             ;c - - - - - 0x018BD1 0C:8BC1: 68
+	.byte $68,$68                   ;- - - - - - 0x018BD0 0C:8BC0:
+ofs_0C_8BC2:
 	LDA #$2E                        ;c - - - - - 0x018BD2 0C:8BC2: A9 2E
 	JSR QueueSound                  ;c - - - - - 0x018BD4 0C:8BC4: 20 4C F3
 	LDA credits                     ;c - - - - - 0x018BD7 0C:8BC7: A5 AF

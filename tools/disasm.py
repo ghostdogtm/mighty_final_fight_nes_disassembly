@@ -77,7 +77,14 @@ def load_rom_labels(path):
         if not parts:
             continue
         try:
-            if parts[0] == 'bank':               # bank BB:AAAA TT  -> raw $8000-$BFFF operand at BB:AAAA refers to bank TT
+            if parts[0] == 'table':              # table BB:LO-HI N header text  -> N bytes per row
+                bs, rng = parts[1].split(':')
+                lo, _, hi = rng.partition('-')
+                b = int(bs, 16)
+                notes[(b, parse_addr(lo) - base_of(b), 't')] = (int(parts[2]), parse_addr(hi) - base_of(b),
+                                                                ' '.join(parts[3:]) or comment.strip())
+                force.append(('data', b, parse_addr(lo) - base_of(b), parse_addr(hi) - base_of(b)))
+            elif parts[0] == 'bank':               # bank BB:AAAA TT  -> raw $8000-$BFFF operand at BB:AAAA refers to bank TT
                 bs, ad = parts[1].split(':')
                 notes[(int(bs, 16), parse_addr(ad) - base_of(int(bs, 16)), 'b')] = int(parts[2], 16)
             elif parts[0] == 'comment':
@@ -358,7 +365,7 @@ class Disasm:
             k, r = self.kind[b], self.rom[b]
             for adj, mn in ((0, min_abs), (1, min_rts)):
                 def val(p, strict):
-                    if p < 0 or p + 1 >= BANK_SIZE or k[p] not in (0, 3) or k[p + 1] not in (0, 3):
+                    if p < 0 or p + 1 >= BANK_SIZE or k[p] not in (0, 3) or k[p + 1] not in (0, 3) or (b, p) in self.split or (b, p + 1) in self.split:
                         return False
                     v = ((r[p] | (r[p + 1] << 8)) + adj) & 0xFFFF
                     ts = self._target_kinds(b, v)
@@ -637,8 +644,11 @@ class Disasm:
             self.user_notes_at = {}
             self.user_cmts = {}
             self.user_bank = {}
+            self.tables = []
             for key, text in self.user_notes.items():
-                if len(key) == 3 and key[2] == 'b':
+                if len(key) == 3 and key[2] == 't':
+                    self.tables.append((key[0], key[1], text[1], text[0], text[2]))
+                elif len(key) == 3 and key[2] == 'b':
                     self.user_bank[(key[0], key[1])] = text
                 elif len(key) == 3:
                     self.user_cmts[(key[0], self.start_of(key[0], key[1]))] = text
@@ -725,14 +735,20 @@ class Disasm:
                     i = j
                     continue
             j = i + 1 if kd == 4 else i                      # lone half of a word: emit as a single byte
-            while kd != 4 and j < BANK_SIZE and j - i < 16 and k[j] in (0, 3) and \
+            lim, hdr = 16, ''
+            for (tb, tlo, thi, tn, tt) in self.tables:
+                if tb == b and tlo <= i <= thi:
+                    lim = min(tn - ((i - tlo) % tn), thi + 1 - i)
+                    hdr = tt if (i - tlo) % tn == 0 and lim == tn else ''
+            while kd != 4 and j < BANK_SIZE and j - i < lim and k[j] in (0, 3) and \
                     (j == i or ((b, j) not in self.labels and (b, j) not in self.notes)) \
                     and (b, j) not in self.split \
                     and (k[j] == 3) == (k[i] == 3):
                 j += 1
             o.append('\t%-32s;%s 0x%06X %02X:%04X:%s' % ('.byte ' + ','.join('$%02X' % x for x in rom[i:j]),
                                                         self.cdl_flags(cdl[i]), off0 + i, b, base + i,
-                                                        ' ' + self.notes[key] if key in self.notes else ''))
+                                                        ' ' + self.notes[key] if key in self.notes else
+                                                        ' ' + hdr if hdr else ''))
             i = j
         if pend:
             o[-1] += '  ; ' + pend
@@ -1023,7 +1039,8 @@ def main():
     if not a.no_trace:
         for rnd in range(8):
             D.trace()
-            if not (D.detect_tables() + D.detect_split_tables()):
+            n_split = D.detect_split_tables()
+            if not (n_split + D.detect_tables()):
                 break
         n_adopt = D.adopt_code_like()
         if n_adopt:

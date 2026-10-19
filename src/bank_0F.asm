@@ -231,17 +231,17 @@ tbl_0F_E1BB:
 tbl_0F_E1BE:
 	.byte $30,$30,$30               ;- D 3 - I - 0x01E1CE 0F:E1BE:
 tbl_0F_E1C1:
-	.byte $4C,$80,$19               ;- D 3 - - - 0x01E1D1 0F:E1C1:
+	.byte $4C,$80,$19               ;- D 3 - - - 0x01E1D1 0F:E1C1: Cody, Guy, Haggar
 tbl_0F_E1C4:
-	.byte $01,$01,$01               ;- D 3 - - - 0x01E1D4 0F:E1C4:
+	.byte $01,$01,$01               ;- D 3 - - - 0x01E1D4 0F:E1C4: Cody, Guy, Haggar
 tbl_0F_E1C7:
-	.byte $00,$33,$CC               ;- D 3 - - - 0x01E1D7 0F:E1C7:
+	.byte $00,$33,$CC               ;- D 3 - - - 0x01E1D7 0F:E1C7: Cody, Guy, Haggar
 tbl_0F_E1CA:
-	.byte $01,$01,$00               ;- D 3 - - - 0x01E1DA 0F:E1CA:
+	.byte $01,$01,$00               ;- D 3 - - - 0x01E1DA 0F:E1CA: Cody, Guy, Haggar
 tbl_0F_E1CD:
-	.byte $80,$B3,$33               ;- D 3 - - - 0x01E1DD 0F:E1CD:
+	.byte $80,$B3,$33               ;- D 3 - - - 0x01E1DD 0F:E1CD: Cody, Guy, Haggar
 tbl_0F_E1D0:
-	.byte $01,$01,$01               ;- D 3 - - - 0x01E1E0 0F:E1D0:
+	.byte $01,$01,$01               ;- D 3 - - - 0x01E1E0 0F:E1D0: Cody, Guy, Haggar
 tbl_0F_E1D3:
 	.byte $0F                       ;- D 3 - - - 0x01E1E3 0F:E1D3:
 tbl_0F_E1D4:
@@ -255,135 +255,131 @@ tbl_0F_E1DD:
 	.word $E6B3                     ;W 0x01E1ED 0F:E1DD:
 	.byte $80                       ;W 0x01E1EF 0F:E1DF:
 tbl_0F_E1E0:
-	.byte $00,$00,$00               ;- D 3 - - - 0x01E1F0 0F:E1E0:
+	.byte $00,$00,$00               ;- D 3 - - - 0x01E1F0 0F:E1E0: Cody, Guy, Haggar
 tbl_0F_E1E3:
-	.byte $01,$02,$03               ;- D 3 - - - 0x01E1F3 0F:E1E3:
+	.byte $01,$02,$03               ;- D 3 - - - 0x01E1F3 0F:E1E3: Cody, Guy, Haggar
 tbl_0F_E1E6:
-	.byte $04,$05,$06               ;- D 3 - - - 0x01E1F6 0F:E1E6:
+	.byte $04,$05,$06               ;- D 3 - - - 0x01E1F6 0F:E1E6: Cody, Guy, Haggar
 tbl_0F_E1E9:
-	.byte $07,$08,$09               ;- D 3 - - - 0x01E1F9 0F:E1E9:
+	.byte $07,$08,$09               ;- D 3 - - - 0x01E1F9 0F:E1E9: Cody, Guy, Haggar
 tbl_0F_E1EC:
-	.byte $0A,$0B,$0C               ;- D 3 - - - 0x01E1FC 0F:E1EC:
+	.byte $0A,$0B,$0C               ;- D 3 - - - 0x01E1FC 0F:E1EC: Cody, Guy, Haggar
 tbl_0F_E1EF:
-	.byte $0D,$0E,$0F               ;- D 3 - - - 0x01E1FF 0F:E1EF:
+	.byte $0D,$0E,$0F               ;- D 3 - - - 0x01E1FF 0F:E1EF: Cody, Guy, Haggar
 tbl_0F_E1F2:
-	.byte $10,$11,$12               ;- D 3 - - - 0x01E202 0F:E1F2:
-	.byte $13,$14,$15,$16,$17,$18   ;- - - - - - 0x01E205 0F:E1F5:
+	.byte $10,$11,$12               ;- D 3 - - - 0x01E202 0F:E1F2: Cody, Guy, Haggar
+	.byte $13,$14,$15               ;- - - - - - 0x01E205 0F:E1F5: Cody, Guy, Haggar
+	.byte $16,$17,$18               ;- - - - - - 0x01E208 0F:E1F8: Cody, Guy, Haggar
 tbl_0F_E1FB:
-	.byte $19,$1A,$1B               ;- D 3 - - - 0x01E20B 0F:E1FB:
+	.byte $19,$1A,$1B               ;- D 3 - - - 0x01E20B 0F:E1FB: Cody, Guy, Haggar
 tbl_0F_E1FE:
-	.byte $1C,$1D,$1E               ;- D 3 - - - 0x01E20E 0F:E1FE:
+	.byte $1C,$1D,$1E               ;- D 3 - - - 0x01E20E 0F:E1FE: Cody, Guy, Haggar
 tbl_0F_E201:
-	.byte $1F,$20,$21               ;- D 3 - - - 0x01E211 0F:E201:
+	.byte $1F,$20,$21               ;- D 3 - - - 0x01E211 0F:E201: Cody, Guy, Haggar
 tbl_0F_E204:
-	.byte $53,$05,$54               ;- D 3 - - - 0x01E214 0F:E204:
+	.byte $53,$05,$54               ;- D 3 - - - 0x01E214 0F:E204: Cody, Guy, Haggar
 tbl_0F_E207:
-	.byte $25,$26,$27               ;- D 3 - - - 0x01E217 0F:E207:
+	.byte $25,$26,$27               ;- D 3 - - - 0x01E217 0F:E207: Cody, Guy, Haggar
 tbl_0F_E20A:
-	.byte $28,$29,$2A               ;- D 3 - - - 0x01E21A 0F:E20A:
+	.byte $28,$29,$2A               ;- D 3 - - - 0x01E21A 0F:E20A: Cody, Guy, Haggar
 tbl_0F_E20D:
-	.byte $2B,$2C,$2D               ;- D 3 - - - 0x01E21D 0F:E20D:
+	.byte $2B,$2C,$2D               ;- D 3 - - - 0x01E21D 0F:E20D: Cody, Guy, Haggar
 tbl_0F_E210:
-	.byte $2E,$2F,$30               ;- D 3 - - - 0x01E220 0F:E210:
+	.byte $2E,$2F,$30               ;- D 3 - - - 0x01E220 0F:E210: Cody, Guy, Haggar
 tbl_0F_E213:
-	.byte $31,$32,$33               ;- D 3 - - - 0x01E223 0F:E213:
+	.byte $31,$32,$33               ;- D 3 - - - 0x01E223 0F:E213: Cody, Guy, Haggar
 tbl_0F_E216:
-	.byte $34,$35                   ;- - - - - - 0x01E226 0F:E216:
-	.byte $36                       ;- D 3 - - - 0x01E228 0F:E218:
+	.byte $34,$35,$36               ;- - - - - - 0x01E226 0F:E216: Cody, Guy, Haggar
 tbl_0F_E219:
-	.byte $37,$38,$39               ;- D 3 - - - 0x01E229 0F:E219:
+	.byte $37,$38,$39               ;- D 3 - - - 0x01E229 0F:E219: Cody, Guy, Haggar
 tbl_0F_E21C:
-	.byte $3A,$3B,$3C               ;- D 3 - - - 0x01E22C 0F:E21C:
+	.byte $3A,$3B,$3C               ;- D 3 - - - 0x01E22C 0F:E21C: Cody, Guy, Haggar
 tbl_0F_E21F:
-	.byte $42,$02,$44               ;- D 3 - - - 0x01E22F 0F:E21F:
+	.byte $42,$02,$44               ;- D 3 - - - 0x01E22F 0F:E21F: Cody, Guy, Haggar
 tbl_0F_E222:
-	.byte $45                       ;- D 3 - - - 0x01E232 0F:E222:
-	.byte $46,$47                   ;- - - - - - 0x01E233 0F:E223:
+	.byte $45,$46,$47               ;- D 3 - - - 0x01E232 0F:E222: Cody, Guy, Haggar
 tbl_0F_E225:
-	.byte $4A,$46,$47               ;- D 3 - - - 0x01E235 0F:E225:
+	.byte $4A,$46,$47               ;- D 3 - - - 0x01E235 0F:E225: Cody, Guy, Haggar
 tbl_0F_E228:
-	.byte $6C,$6A                   ;- D 3 - - - 0x01E238 0F:E228:
+	.byte $6C,$6A                   ;- D 3 - - - 0x01E238 0F:E228: Cody, Guy, Haggar
 dat_0F_E22A:
 	.byte $57                       ;- D 3 - - - 0x01E23A 0F:E22A:
 tbl_0F_E22B:
-	.byte $00,$04,$08               ;- D 3 - - - 0x01E23B 0F:E22B:
+	.byte $00,$04,$08               ;- D 3 - - - 0x01E23B 0F:E22B: Cody, Guy, Haggar
 tbl_0F_E22E:
-	.byte $01,$05,$12               ;- D 3 - - - 0x01E23E 0F:E22E:
-	.byte $07,$05,$12,$07,$05,$12   ;- - - - - - 0x01E241 0F:E231:
+	.byte $01,$05,$12               ;- D 3 - - - 0x01E23E 0F:E22E: Cody, Guy, Haggar
+	.byte $07,$05,$12               ;- - - - - - 0x01E241 0F:E231: Cody, Guy, Haggar
+	.byte $07,$05,$12               ;- - - - - - 0x01E244 0F:E234: Cody, Guy, Haggar
 tbl_0F_E237:
-	.byte $02,$06,$09               ;- D 3 - - - 0x01E247 0F:E237:
+	.byte $02,$06,$09               ;- D 3 - - - 0x01E247 0F:E237: Cody, Guy, Haggar
 tbl_0F_E23A:
-	.byte $03,$07,$09               ;- D 3 - - - 0x01E24A 0F:E23A:
+	.byte $03,$07,$09               ;- D 3 - - - 0x01E24A 0F:E23A: Cody, Guy, Haggar
 tbl_0F_E23D:
-	.byte $03,$07                   ;- - - - - - 0x01E24D 0F:E23D:
-	.byte $10                       ;- D 3 - - - 0x01E24F 0F:E23F:
-	.byte $02,$06,$09               ;- - - - - - 0x01E250 0F:E240:
+	.byte $03,$07,$10               ;- - - - - - 0x01E24D 0F:E23D: Cody, Guy, Haggar
+	.byte $02,$06,$09               ;- - - - - - 0x01E250 0F:E240: Cody, Guy, Haggar
 tbl_0F_E243:
-	.byte $02,$06,$13               ;- D 3 - - - 0x01E253 0F:E243:
+	.byte $02,$06,$13               ;- D 3 - - - 0x01E253 0F:E243: Cody, Guy, Haggar
 tbl_0F_E246:
-	.byte $02,$06,$13               ;- D 3 - - - 0x01E256 0F:E246:
+	.byte $02,$06,$13               ;- D 3 - - - 0x01E256 0F:E246: Cody, Guy, Haggar
 tbl_0F_E249:
-	.byte $01,$05,$13               ;- D 3 - - - 0x01E259 0F:E249:
+	.byte $01,$05,$13               ;- D 3 - - - 0x01E259 0F:E249: Cody, Guy, Haggar
 tbl_0F_E24C:
-	.byte $23                       ;- - - - - - 0x01E25C 0F:E24C:
-	.byte $18                       ;- D 3 - - - 0x01E25D 0F:E24D:
-	.byte $00                       ;- - - - - - 0x01E25E 0F:E24E:
+	.byte $23,$18,$00               ;- - - - - - 0x01E25C 0F:E24C: Cody, Guy, Haggar
 tbl_0F_E24F:
-	.byte $0D,$15,$11               ;- D 3 - - - 0x01E25F 0F:E24F:
+	.byte $0D,$15,$11               ;- D 3 - - - 0x01E25F 0F:E24F: Cody, Guy, Haggar
 tbl_0F_E252:
-	.byte $0D,$15,$13               ;- D 3 - - - 0x01E262 0F:E252:
+	.byte $0D,$15,$13               ;- D 3 - - - 0x01E262 0F:E252: Cody, Guy, Haggar
 tbl_0F_E255:
-	.byte $0D,$15,$12               ;- D 3 - - - 0x01E265 0F:E255:
+	.byte $0D,$15,$12               ;- D 3 - - - 0x01E265 0F:E255: Cody, Guy, Haggar
 tbl_0F_E258:
-	.byte $00,$04,$0B               ;- D 3 - - - 0x01E268 0F:E258:
+	.byte $00,$04,$0B               ;- D 3 - - - 0x01E268 0F:E258: Cody, Guy, Haggar
 tbl_0F_E25B:
-	.byte $0C,$14,$08               ;- D 3 - - - 0x01E26B 0F:E25B:
+	.byte $0C,$14,$08               ;- D 3 - - - 0x01E26B 0F:E25B: Cody, Guy, Haggar
 tbl_0F_E25E:
-	.byte $0C,$14                   ;- - - - - - 0x01E26E 0F:E25E:
-	.byte $0B                       ;- D 3 - - - 0x01E270 0F:E260:
-	.byte $07,$07,$07,$00,$06,$00   ;- - - - - - 0x01E271 0F:E261:
+	.byte $0C,$14,$0B               ;- - - - - - 0x01E26E 0F:E25E: Cody, Guy, Haggar
+	.byte $07,$07,$07               ;- - - - - - 0x01E271 0F:E261: Cody, Guy, Haggar
+	.byte $00,$06,$00               ;- - - - - - 0x01E274 0F:E264: Cody, Guy, Haggar
 tbl_0F_E267:
-	.byte $00,$04,$08               ;- D 3 - - - 0x01E277 0F:E267:
+	.byte $00,$04,$08               ;- D 3 - - - 0x01E277 0F:E267: Cody, Guy, Haggar
 tbl_0F_E26A:
-	.byte $03                       ;- D 3 - - - 0x01E27A 0F:E26A:
-	.byte $16,$0B                   ;- - - - - - 0x01E27B 0F:E26B:
+	.byte $03,$16,$0B               ;- D 3 - - - 0x01E27A 0F:E26A: Cody, Guy, Haggar
 tbl_0F_E26D:
-	.byte $03,$16,$11               ;- D 3 - - - 0x01E27D 0F:E26D:
+	.byte $03,$16,$11               ;- D 3 - - - 0x01E27D 0F:E26D: Cody, Guy, Haggar
 tbl_0F_E270:
-	.byte $0E,$17                   ;- D 3 - - - 0x01E280 0F:E270:
+	.byte $0E,$17                   ;- D 3 - - - 0x01E280 0F:E270: Cody, Guy, Haggar
 dat_0F_E272:
 	.byte $0F                       ;- D 3 - - - 0x01E282 0F:E272:
 tbl_0F_E273:
-	.byte $04,$05,$06               ;- D 3 - - - 0x01E283 0F:E273:
+	.byte $04,$05,$06               ;- D 3 - - - 0x01E283 0F:E273: Cody, Guy, Haggar
 tbl_0F_E276:
-	.byte $1F,$20,$21               ;- D 3 - - - 0x01E286 0F:E276:
+	.byte $1F,$20,$21               ;- D 3 - - - 0x01E286 0F:E276: Cody, Guy, Haggar
 tbl_0F_E279:
-	.byte $1C,$1D,$1E               ;- D 3 - - - 0x01E289 0F:E279:
+	.byte $1C,$1D,$1E               ;- D 3 - - - 0x01E289 0F:E279: Cody, Guy, Haggar
 tbl_0F_E27C:
-	.byte $1F,$20,$21               ;- D 3 - - - 0x01E28C 0F:E27C:
+	.byte $1F,$20,$21               ;- D 3 - - - 0x01E28C 0F:E27C: Cody, Guy, Haggar
 tbl_0F_E27F:
-	.byte $0A,$0B,$0C               ;- D 3 - - - 0x01E28F 0F:E27F:
+	.byte $0A,$0B,$0C               ;- D 3 - - - 0x01E28F 0F:E27F: Cody, Guy, Haggar
 tbl_0F_E282:
-	.byte $07,$08,$09               ;- D 3 - - - 0x01E292 0F:E282:
+	.byte $07,$08,$09               ;- D 3 - - - 0x01E292 0F:E282: Cody, Guy, Haggar
 tbl_0F_E285:
-	.byte $3A,$3B,$3C               ;- D 3 - - - 0x01E295 0F:E285:
+	.byte $3A,$3B,$3C               ;- D 3 - - - 0x01E295 0F:E285: Cody, Guy, Haggar
 tbl_0F_E288:
-	.byte $0D,$0E,$0F               ;- D 3 - - - 0x01E298 0F:E288:
+	.byte $0D,$0E,$0F               ;- D 3 - - - 0x01E298 0F:E288: Cody, Guy, Haggar
 tbl_0F_E28B:
-	.byte $16,$17,$18               ;- D 3 - - - 0x01E29B 0F:E28B:
+	.byte $16,$17,$18               ;- D 3 - - - 0x01E29B 0F:E28B: Cody, Guy, Haggar
 tbl_0F_E28E:
-	.byte $45,$46,$47               ;- D 3 - - - 0x01E29E 0F:E28E:
+	.byte $45,$46,$47               ;- D 3 - - - 0x01E29E 0F:E28E: Cody, Guy, Haggar
 tbl_0F_E291:
-	.byte $13,$14,$15               ;- D 3 - - - 0x01E2A1 0F:E291:
-	.byte $10,$11,$12               ;- - - - - - 0x01E2A4 0F:E294:
+	.byte $13,$14,$15               ;- D 3 - - - 0x01E2A1 0F:E291: Cody, Guy, Haggar
+	.byte $10,$11,$12               ;- - - - - - 0x01E2A4 0F:E294: Cody, Guy, Haggar
 tbl_0F_E297:
-	.byte $34,$35,$52               ;- D 3 - - - 0x01E2A7 0F:E297:
+	.byte $34,$35,$52               ;- D 3 - - - 0x01E2A7 0F:E297: Cody, Guy, Haggar
 tbl_0F_E29A:
-	.byte $53,$05,$54               ;- D 3 - - - 0x01E2AA 0F:E29A:
+	.byte $53,$05,$54               ;- D 3 - - - 0x01E2AA 0F:E29A: Cody, Guy, Haggar
 tbl_0F_E29D:
-	.byte $00,$14,$15               ;- D 3 - - - 0x01E2AD 0F:E29D:
+	.byte $00,$14,$15               ;- D 3 - - - 0x01E2AD 0F:E29D: Cody, Guy, Haggar
 tbl_0F_E2A0:
-	.byte $00,$5B,$15               ;- D 3 - - - 0x01E2B0 0F:E2A0:
+	.byte $00,$5B,$15               ;- D 3 - - - 0x01E2B0 0F:E2A0: Cody, Guy, Haggar
 sub_0F_E2A3:
 	LDA gameAction                  ;C - - - - - 0x01E2B3 0F:E2A3: A5 30
 	CMP #$06                        ;C - - - - - 0x01E2B5 0F:E2A5: C9 06
@@ -517,7 +513,7 @@ loc_0F_E373:
 	STA objActive                   ;C - - - - - 0x01E399 0F:E389: 8D 00 03
 	RTS                             ;C - - - - - 0x01E39C 0F:E38C: 60
 loc_0F_E38D:
-	JSR sub_0E_CEAA                 ;C - - - - - 0x01E39D 0F:E38D: 20 AA CE
+	JSR ResetPlayerStand            ;C - - - - - 0x01E39D 0F:E38D: 20 AA CE
 	LDA #$00                        ;C - - - - - 0x01E3A0 0F:E390: A9 00
 	STA gameAction                  ;C - - - - - 0x01E3A2 0F:E392: 85 30
 	STA ram_00BB                    ;C - - - - - 0x01E3A4 0F:E394: 85 BB
@@ -574,7 +570,7 @@ ofs_0F_E3CD:
 loc_0F_E3F7:
 	RTS                             ;C - - - - - 0x01E407 0F:E3F7: 60
 loc_0F_E3F8:
-	JSR sub_0E_CEAA                 ;c - - - - - 0x01E408 0F:E3F8: 20 AA CE
+	JSR ResetPlayerStand            ;c - - - - - 0x01E408 0F:E3F8: 20 AA CE
 	LDA #$00                        ;c - - - - - 0x01E40B 0F:E3FB: A9 00
 	STA gameAction                  ;c - - - - - 0x01E40D 0F:E3FD: 85 30
 	STA ram_00BB                    ;c - - - - - 0x01E40F 0F:E3FF: 85 BB
@@ -1213,17 +1209,19 @@ tbl_0F_E86F:
 	.byte $06,$07,$08,$09,$0A,$0B   ;- D 3 - - - 0x01E87F 0F:E86F:
 tbl_0F_E875:
 	.byte $0A,$0B,$0C,$0D           ;- D 3 - - - 0x01E885 0F:E875:
-	.byte $0D                       ;- - - - - - 0x01E889 0F:E879:
-	.byte $0D                       ;W 0x01E88A 0F:E87A:
+	.byte $0D,$0D                   ;- - - - - - 0x01E889 0F:E879:
 tbl_0F_E87B:
-	.word $8B81                     ;W 0x01E88B 0F:E87B:
-	.byte $95                       ;W 0x01E88D 0F:E87D:
+	.lobytes tbl_0F_E881, tbl_0F_E88B, tbl_0F_E895;- D 3 - - - 0x01E88B 0F:E87B:
 tbl_0F_E87E:
-	.word ofs_0F_E8E8               ;W 0x01E88E 0F:E87E:
-	.byte $E8,$00,$33,$00           ;- D 3 - - - 0x01E890 0F:E880:
+	.hibytes tbl_0F_E881, tbl_0F_E88B, tbl_0F_E895;- D 3 - - - 0x01E88E 0F:E87E:
+tbl_0F_E881:
+	.byte $00,$33,$00               ;- D 3 - I - 0x01E891 0F:E881:
 tbl_0F_E884:
-	.byte $54,$00,$90,$01,$47,$02,$50,$00,$27,$00,$45,$00,$74,$01,$22,$02;- D 3 - I - 0x01E894 0F:E884:
-	.byte $10,$01,$25,$01,$93,$03,$70;- D 3 - I - 0x01E8A4 0F:E894:
+	.byte $54,$00,$90,$01,$47,$02,$50;- D 3 - I - 0x01E894 0F:E884:
+tbl_0F_E88B:
+	.byte $00,$27,$00,$45,$00,$74,$01,$22,$02,$10;- D 3 - I - 0x01E89B 0F:E88B:
+tbl_0F_E895:
+	.byte $01,$25,$01,$93,$03,$70   ;- D 3 - I - 0x01E8A5 0F:E895:
 sub_0F_E89B:
 	LDY #$02                        ;C - - - - - 0x01E8AB 0F:E89B: A0 02
 loc_0F_E89D:
@@ -1271,7 +1269,6 @@ loc_0F_E8C9:
 	LSR A                           ;C - - - - - 0x01E8F4 0F:E8E4: 4A
 	LSR A                           ;C - - - - - 0x01E8F5 0F:E8E5: 4A
 	STA ptr_00                      ;C - - - - - 0x01E8F6 0F:E8E6: 85 00
-ofs_0F_E8E8:
 	BEQ loc_0F_E93F                 ;C - - - - - 0x01E8F8 0F:E8E8: F0 55
 	INC ram_00B1                    ;C - - - - - 0x01E8FA 0F:E8EA: E6 B1
 	LDA ram_00B1                    ;C - - - - - 0x01E8FC 0F:E8EC: A5 B1

@@ -68,7 +68,7 @@ code 0F:FF12-FF23
 0E:DE5E Act07_SelectScreen      ; also used for action $0E (skip stage): resets scroll/queues, rebuilds screen
 0E:DC6C Act09_Continue
 0E:D45A Act0A
-0E:DCDD Act0B
+
 0E:DD6A Act0C                   ; per-character handler via table
 0E:CCB4 ActNone                 ; RTS, used for every unused gameAction value
 ; ---- sound: banks 06/07 are mapped while the NMI sound step runs (0F:FF8E)
@@ -107,3 +107,8 @@ data 02:81E7-8200            ; repeated $A4 pairs, not code
 0F:F43B ArmTimerA4              ; timerA4 = $1E
 0F:F436 ClearTimerA4
 0F:F430 PlayHitSound            ; QueueSound $17
+; ---- per-character parameter tables (index = playerId: Cody, Guy, Haggar)
+table 0F:E1C1-E1D2 3 Cody, Guy, Haggar
+table 0F:E1E0-E2A2 3 Cody, Guy, Haggar
+0E:CEAA ResetPlayerStand       ; slot 0 gets the standing animation for the current weapon state
+0E:DCDD Act0B_Death            ; health<0: blink, then lives-- ; no lives left -> gameAction 9 (continue)
