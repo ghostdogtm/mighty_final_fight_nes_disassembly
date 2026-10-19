@@ -123,3 +123,8 @@
 009A nmiSkipFlag                ; non-zero while an overlay routine runs; NMI skips its normal updates
 00A3 timerA3                    ; counted down every frame in Act00_Walk
 00A4 timerA4                    ; set to $1E by ArmTimerA4, cleared by ClearTimerA4
+
+; ---- sound driver (bank 06)
+00C0 soundBusy                  ; INC/DEC around SoundPlay; non-zero while a request is processed
+00CE soundPriority              ; priority of the current effect/song (request is ignored if lower)
+00D0 soundPtr 2                 ; read pointer into the current song stream

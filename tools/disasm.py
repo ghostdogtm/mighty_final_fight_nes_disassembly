@@ -36,7 +36,7 @@ HW_REGS = {0x2000: 'PPUCTRL', 0x2001: 'PPUMASK', 0x2002: 'PPUSTATUS', 0x2003: 'O
            0x4010: 'DMC_FREQ', 0x4011: 'DMC_RAW', 0x4012: 'DMC_START', 0x4013: 'DMC_LEN',
            0x4014: 'OAMDMA', 0x4015: 'SNDCHN', 0x4016: 'JOY1', 0x4017: 'JOY2'}
 BANK_REG_LO, BANK_REG_HI = 0xF4, 0xF5      # RAM shadows of MMC3 R6 ($8000 window) and R7 ($A000 window)
-PAIR_OF = {0: 1, 1: 0, 4: 5, 5: 4, 8: 9, 9: 8, 12: 13, 13: 12}   # banks always mapped together (F5 = F4+1)
+PAIR_OF = {0: 1, 1: 0, 4: 5, 5: 4, 6: 7, 7: 6, 8: 9, 9: 8, 12: 13, 13: 12}   # banks always mapped together (F5 = F4+1)
 RESERVED = {o[0].lower() for o in OPS.values()} | {'a', 'x', 'y', 's', 'z'}
 
 
@@ -86,7 +86,13 @@ def load_rom_labels(path):
         if not parts:
             continue
         try:
-            if parts[0] == 'text':               # text BB:LO-HI  -> strings, split at $FE/$FF, decoded in the comment
+            if parts[0] == 'bewords':            # bewords BB:LO-HI -> big-endian address pairs (hi, lo)
+                bs, rng = parts[1].split(':')
+                lo, _, hi = rng.partition('-')
+                b = int(bs, 16)
+                notes[(b, parse_addr(lo) - base_of(b), 'w')] = (parse_addr(hi) - base_of(b),)
+                force.append(('data', b, parse_addr(lo) - base_of(b), parse_addr(hi) - base_of(b)))
+            elif parts[0] == 'text':               # text BB:LO-HI  -> strings, split at $FE/$FF, decoded in the comment
                 bs, rng = parts[1].split(':')
                 lo, _, hi = rng.partition('-')
                 b = int(bs, 16)
@@ -144,6 +150,7 @@ class Disasm:
         self.ram_user = load_ram_labels(ram_path)
         self.rom_user, self.force, self.user_notes = load_rom_labels(rom_lbl_path)
         self.refs = defaultdict(set)
+        self.locked = set()         # bytes in forced 'data' ranges: never turned into word tables
         self.cur_site = None
         self.immref = {}            # (bank, idx) of an immediate -> ('<'|'>', target bank, target idx)
         self.split = {}             # (bank, idx) -> ('lo'|'hi', target bank, target idx, adj) for split address tables
@@ -269,6 +276,8 @@ class Disasm:
             else:
                 for j in range(lo, hi + 1):
                     k[j] = 3 if kind == 'data' else 4
+                    if kind == 'data':
+                        self.locked.add((b, j))
         for j in range(0x1FFA, 0x2000):       # interrupt vectors
             self.kind[15][j] = 4
 
@@ -380,7 +389,7 @@ class Disasm:
             k, r = self.kind[b], self.rom[b]
             for adj, mn in ((0, min_abs), (1, min_rts)):
                 def val(p, strict):
-                    if p < 0 or p + 1 >= BANK_SIZE or k[p] not in (0, 3) or k[p + 1] not in (0, 3) or (b, p) in self.split or (b, p + 1) in self.split:
+                    if p < 0 or p + 1 >= BANK_SIZE or k[p] not in (0, 3) or k[p + 1] not in (0, 3) or (b, p) in self.split or (b, p + 1) in self.split or (b, p) in self.locked or (b, p + 1) in self.locked:
                         return False
                     v = ((r[p] | (r[p + 1] << 8)) + adj) & 0xFFFF
                     ts = self._target_kinds(b, v)
@@ -535,6 +544,11 @@ class Disasm:
                     i += 2
                 else:
                     i += 1
+        for key, v in self.user_notes.items():
+            if len(key) == 3 and key[2] == 'w':
+                for q in range(key[1], v[0], 2):
+                    self.cur_site = None
+                    self.addref(key[0], (self.rom[key[0]][q] << 8 | self.rom[key[0]][q + 1]), 'ptr')
         for (tb, ti) in {(v[1], v[2]) for v in self.immref.values()}:
             self.refs[(tb, ti)].add('loc')
         for (sb, si), (wh, tb, ti, adj) in self.split.items():
@@ -661,8 +675,11 @@ class Disasm:
             self.user_bank = {}
             self.tables = []
             self.texts = []
+            self.bewords = []
             for key, text in self.user_notes.items():
-                if len(key) == 3 and key[2] == 's':
+                if len(key) == 3 and key[2] == 'w':
+                    self.bewords.append((key[0], key[1], text[0]))
+                elif len(key) == 3 and key[2] == 's':
                     self.texts.append((key[0], key[1], text[0]))
                 elif len(key) == 3 and key[2] == 't':
                     self.tables.append((key[0], key[1], text[1], text[0], text[2]))
@@ -753,6 +770,34 @@ class Disasm:
                     i = j
                     continue
             j = i + 1 if kd == 4 else i                      # lone half of a word: emit as a single byte
+            bw = next(((blo, bhi) for (bb, blo, bhi) in self.bewords if bb == b and blo <= i < bhi and (i - blo) % 2 == 0), None)
+            bo = next(((blo, bhi) for (bb, blo, bhi) in self.bewords if bb == b and blo < i <= bhi and (i - 1 - blo) % 2 == 0), None)
+            if bo and kd in (0, 3) and (b, i) in self.labels:     # label inside a pair: second byte alone
+                self.cur_site = None
+                e = self.label_expr(b, rom[i - 1] << 8 | rom[i])[0]
+                o.append('	%-32s;%s 0x%06X %02X:%04X:' % ('.byte ' + ('<' + e if e else '$%02X' % rom[i]),
+                                                            self.cdl_flags(cdl[i]), off0 + i, b, base + i))
+                i += 1
+                continue
+            if bw and kd in (0, 3) and (b, i + 1) in self.labels:     # label in the middle of this pair: split it
+                self.cur_site = None
+                e = self.label_expr(b, rom[i] << 8 | rom[i + 1])[0]
+                o.append('	%-32s;%s 0x%06X %02X:%04X:' % ('.byte ' + ('>' + e if e else '$%02X' % rom[i]),
+                                                            self.cdl_flags(cdl[i]), off0 + i, b, base + i))
+                i += 1
+                continue
+            if bw and kd in (0, 3):
+                items, j = [], i
+                while j + 1 <= bw[1] and len(items) < 4 and (j == i or (b, j) not in self.labels):
+                    v = rom[j] << 8 | rom[j + 1]
+                    self.cur_site = None
+                    e = self.label_expr(b, v)[0]
+                    items.append('>%s,<%s' % (e, e) if e else '$%02X,$%02X' % (rom[j], rom[j + 1]))
+                    j += 2
+                o.append('	%-32s;%s 0x%06X %02X:%04X: big-endian address pairs' % (
+                    '.byte ' + ', '.join(items), self.cdl_flags(cdl[i]), off0 + i, b, base + i))
+                i = j
+                continue
             if any(tb == b and tlo <= i <= thi for (tb, tlo, thi) in self.texts) and kd in (0, 3):
                 j = i
                 while j < BANK_SIZE and j - i < 24 and (j == i or ((b, j) not in self.labels and (b, j) not in self.notes))                         and not any(tb == b and thi < j for (tb, tlo, thi) in self.texts if tlo <= i <= thi):

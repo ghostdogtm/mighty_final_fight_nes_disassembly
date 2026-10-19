@@ -7,7 +7,7 @@ bank  code(cdl) code(traced) data  unknown
 03         2937           86   4632      537
 04         2781          103   3279     2029
 05         1578           86   3995     2533
-06         2044          195   5746      207
+06         2044          195   5749      204
 07            0            0   5663     2529
 08         2693          140   1839     3520
 09          745          156   3569     3722
@@ -17,9 +17,9 @@ bank  code(cdl) code(traced) data  unknown
 0D         2990           48   3027     2127
 0E         7731          247    198       16
 0F         6124          402   1074      592
-all       48068         2726  56891    23387
+all       48068         2726  56894    23384
 
-Unknown bytes: 9430 fill (one repeated byte), 158 code-like, 13799 other (probably data)
+Unknown bytes: 9430 fill (one repeated byte), 158 code-like, 13796 other (probably data)
 
 CDL anomalies (code flag but not a valid instruction): 0
 
@@ -470,8 +470,8 @@ Traced code (instruction starts, verify by hand):
   06:80BF  DEY
   06:80C0  BNE loc_06_80BC
   06:80C2  CLC
-  06:80C3  ADC ram_00C0
-  06:80C5  STA ram_00C0
+  06:80C3  ADC soundBusy
+  06:80C5  STA soundBusy
   06:80C7  LDA ptr_C1
   06:80C9  ADC ram_00CD
   06:80CB  BCC loc_06_80D5
@@ -481,7 +481,7 @@ Traced code (instruction starts, verify by hand):
   06:80D3  LDA #$FF
   06:80D5  STA ram_00CD
   06:8112  SEC
-  06:8113  SBC dat_06_8A40
+  06:8113  SBC songCount
   06:8116  BCS loc_06_810D
   06:813F  LDA ram_00C4
   06:8141  BMI loc_06_8145
@@ -494,9 +494,9 @@ Traced code (instruction starts, verify by hand):
   06:822F  BEQ loc_06_8234
   06:8231  SEC
   06:8232  ROR ram_00C3
-  06:8234  LDA ram_00C0
+  06:8234  LDA soundBusy
   06:8236  AND #$0F
-  06:8238  STA ram_00C0
+  06:8238  STA soundBusy
   06:823A  LDY ram_00C3
   06:823C  STY ram_00CC
   06:823E  BEQ loc_06_8247
@@ -513,7 +513,7 @@ Traced code (instruction starts, verify by hand):
   06:8251  RTS
   06:826A  JSR sub_06_8118
   06:826D  JMP loc_06_825B
-  06:82A4  INC ram_00D1
+  06:82A4  INC soundPtr+1
   06:82B3  JSR sub_06_8386
   06:82B6  STA ram_00D2
   06:8365  JSR sub_06_85AE
@@ -1898,7 +1898,6 @@ Unknown runs, longest first (len bank:addr):
       3  07:B028
       3  07:AE95
       3  07:AE65
-      3  06:8A63
       3  06:8949
       3  06:891A
       3  05:AE65

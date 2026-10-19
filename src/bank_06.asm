@@ -71,11 +71,11 @@ loc_06_8047:
 	PLA                             ;c - - - - - 0x00C07A 06:806A: 68
 	RTS                             ;c - - - - - 0x00C07B 06:806B: 60
 loc_06_806C:
-	LDA ram_00C0                    ;C - - - - - 0x00C07C 06:806C: A5 C0
+	LDA soundBusy                   ;C - - - - - 0x00C07C 06:806C: A5 C0
 	LSR A                           ;C - - - - - 0x00C07E 06:806E: 4A
 	BCS loc_06_80D7                 ;C - - - - - 0x00C07F 06:806F: B0 66
-	LDA ram_00D0                    ;C - - - - - 0x00C081 06:8071: A5 D0
-	ORA ram_00D1                    ;C - - - - - 0x00C083 06:8073: 05 D1
+	LDA soundPtr                    ;C - - - - - 0x00C081 06:8071: A5 D0
+	ORA soundPtr+1                  ;C - - - - - 0x00C083 06:8073: 05 D1
 	BEQ loc_06_807A                 ;C - - - - - 0x00C085 06:8075: F0 03
 	JSR sub_06_8252                 ;C - - - - - 0x00C087 06:8077: 20 52 82
 loc_06_807A:
@@ -98,7 +98,7 @@ loc_06_808C:
 	STA ram_00CF                    ;C - - - - - 0x00C0A4 06:8094: 85 CF
 	JSR sub_06_82DE                 ;C - - - - - 0x00C0A6 06:8096: 20 DE 82
 loc_06_8099:
-	LDA ram_00C0                    ;C - - - - - 0x00C0A9 06:8099: A5 C0
+	LDA soundBusy                   ;C - - - - - 0x00C0A9 06:8099: A5 C0
 	AND #$02                        ;C - - - - - 0x00C0AB 06:809B: 29 02
 	BNE loc_06_80A6                 ;C - - - - - 0x00C0AD 06:809D: D0 07
 	TXA                             ;C - - - - - 0x00C0AF 06:809F: 8A
@@ -113,8 +113,8 @@ loc_06_80A6:
 	PLA                             ;C - - - - - 0x00C0B9 06:80A9: 68
 ofs_06_80AA:
 	STA ram_00CF                    ;C - - - - - 0x00C0BA 06:80AA: 85 CF
-	LSR ram_00C0                    ;C - - - - - 0x00C0BC 06:80AC: 46 C0
-	ASL ram_00C0                    ;C - - - - - 0x00C0BE 06:80AE: 06 C0
+	LSR soundBusy                   ;C - - - - - 0x00C0BC 06:80AC: 46 C0
+	ASL soundBusy                   ;C - - - - - 0x00C0BE 06:80AE: 06 C0
 ofs_06_80B0:
 	LDA ram_00CC                    ;C - - - - - 0x00C0C0 06:80B0: A5 CC
 ofs_06_80B2:
@@ -129,8 +129,8 @@ loc_06_80BC:
 	DEY                             ;c - - - - - 0x00C0CF 06:80BF: 88
 	BNE loc_06_80BC                 ;c - - - - - 0x00C0D0 06:80C0: D0 FA
 	CLC                             ;c - - - - - 0x00C0D2 06:80C2: 18
-	ADC ram_00C0                    ;c - - - - - 0x00C0D3 06:80C3: 65 C0
-	STA ram_00C0                    ;c - - - - - 0x00C0D5 06:80C5: 85 C0
+	ADC soundBusy                   ;c - - - - - 0x00C0D3 06:80C3: 65 C0
+	STA soundBusy                   ;c - - - - - 0x00C0D5 06:80C5: 85 C0
 	LDA ptr_C1                      ;c - - - - - 0x00C0D7 06:80C7: A5 C1
 	ADC ram_00CD                    ;c - - - - - 0x00C0D9 06:80C9: 65 CD
 	BCC loc_06_80D5                 ;c - - - - - 0x00C0DB 06:80CB: 90 08
@@ -170,19 +170,19 @@ sub_06_80EC:
 	STA SQ1_VOL,Y                   ;C - - - - - 0x00C10A 06:80FA: 99 00 40
 	RTS                             ;C - - - - - 0x00C10D 06:80FD: 60
 loc_06_80FE:
-	INC ram_00C0                    ;C - - - - - 0x00C10E 06:80FE: E6 C0
+	INC soundBusy                   ;C - - - - - 0x00C10E 06:80FE: E6 C0
 	JSR sub_06_8106                 ;C - - - - - 0x00C110 06:8100: 20 06 81
-	DEC ram_00C0                    ;C - - - - - 0x00C113 06:8103: C6 C0
+	DEC soundBusy                   ;C - - - - - 0x00C113 06:8103: C6 C0
 	RTS                             ;C - - - - - 0x00C115 06:8105: 60
 sub_06_8106:
 	CMP #$F0                        ;C - - - - - 0x00C116 06:8106: C9 F0
 	BCC loc_06_810D                 ;C - - - - - 0x00C118 06:8108: 90 03
 	JMP loc_06_81AE                 ;C - - - - - 0x00C11A 06:810A: 4C AE 81
 loc_06_810D:
-	CMP dat_06_8A40                 ;C - - - - - 0x00C11D 06:810D: CD 40 8A
+	CMP songCount                   ;C - - - - - 0x00C11D 06:810D: CD 40 8A
 	BCC sub_06_8118                 ;C - - - - - 0x00C120 06:8110: 90 06
 	SEC                             ;c - - - - - 0x00C122 06:8112: 38
-	SBC dat_06_8A40                 ;c - - - - - 0x00C123 06:8113: ED 40 8A
+	SBC songCount                   ;c - - - - - 0x00C123 06:8113: ED 40 8A
 	BCS loc_06_810D                 ;c - - - - - 0x00C126 06:8116: B0 F5
 sub_06_8118:
 	ASL A                           ;C - - - - - 0x00C128 06:8118: 0A
@@ -199,9 +199,9 @@ sub_06_8118:
 	INX                             ;C - - - - - 0x00C13E 06:812E: E8
 	STA ram_00C4                    ;C - - - - - 0x00C13F 06:812F: 85 C4
 	AND #$7F                        ;C - - - - - 0x00C141 06:8131: 29 7F
-	CMP ram_00CE                    ;C - - - - - 0x00C143 06:8133: C5 CE
+	CMP soundPriority               ;C - - - - - 0x00C143 06:8133: C5 CE
 	BCC loc_06_816E                 ;C - - - - - 0x00C145 06:8135: 90 37
-	STA ram_00CE                    ;C - - - - - 0x00C147 06:8137: 85 CE
+	STA soundPriority               ;C - - - - - 0x00C147 06:8137: 85 CE
 	BNE loc_06_8145                 ;C - - - - - 0x00C149 06:8139: D0 0A
 	LDA ram_00D6                    ;C - - - - - 0x00C14B 06:813B: A5 D6
 	BPL loc_06_8145                 ;C - - - - - 0x00C14D 06:813D: 10 06
@@ -217,12 +217,12 @@ loc_06_8145:
 loc_06_814F:
 	INC ptr_C1                      ;C - - - - - 0x00C15F 06:814F: E6 C1
 	LDA ptr_C1                      ;C - - - - - 0x00C161 06:8151: A5 C1
-	STA ram_00D0                    ;C - - - - - 0x00C163 06:8153: 85 D0
+	STA soundPtr                    ;C - - - - - 0x00C163 06:8153: 85 D0
 	BNE loc_06_8159                 ;C - - - - - 0x00C165 06:8155: D0 02
 	INC ptr_C1+1                    ;c - - - - - 0x00C167 06:8157: E6 C2
 loc_06_8159:
 	LDA ptr_C1+1                    ;C - - - - - 0x00C169 06:8159: A5 C2
-	STA ram_00D1                    ;C - - - - - 0x00C16B 06:815B: 85 D1
+	STA soundPtr+1                  ;C - - - - - 0x00C16B 06:815B: 85 D1
 	TYA                             ;C - - - - - 0x00C16D 06:815D: 98
 	STA ram_00D2                    ;C - - - - - 0x00C16E 06:815E: 85 D2
 	STA ram_00D3                    ;C - - - - - 0x00C170 06:8160: 85 D3
@@ -279,9 +279,9 @@ ofs_06_81C5:
 	JSR sub_06_81E4                 ;C - - J - - 0x00C1D5 06:81C5: 20 E4 81
 loc_06_81C8:
 	LDA #$00                        ;C - - - - - 0x00C1D8 06:81C8: A9 00
-	STA ram_00CE                    ;C - - - - - 0x00C1DA 06:81CA: 85 CE
-	STA ram_00D0                    ;C - - - - - 0x00C1DC 06:81CC: 85 D0
-	STA ram_00D1                    ;C - - - - - 0x00C1DE 06:81CE: 85 D1
+	STA soundPriority               ;C - - - - - 0x00C1DA 06:81CA: 85 CE
+	STA soundPtr                    ;C - - - - - 0x00C1DC 06:81CC: 85 D0
+	STA soundPtr+1                  ;C - - - - - 0x00C1DE 06:81CE: 85 D1
 	STA ram_00D7                    ;C - - - - - 0x00C1E0 06:81D0: 85 D7
 	STA ram_00D8                    ;C - - - - - 0x00C1E2 06:81D2: 85 D8
 sub_06_81D4:
@@ -327,23 +327,23 @@ loc_06_820A:
 	STA SNDCHN                      ;C - - - - - 0x00C22A 06:821A: 8D 15 40
 	RTS                             ;C - - - - - 0x00C22D 06:821D: 60
 ofs_06_821E:
-	LDA ram_00C0                    ;C - - J - - 0x00C22E 06:821E: A5 C0
+	LDA soundBusy                   ;C - - J - - 0x00C22E 06:821E: A5 C0
 	ORA #$02                        ;C - - - - - 0x00C230 06:8220: 09 02
-	STA ram_00C0                    ;C - - - - - 0x00C232 06:8222: 85 C0
+	STA soundBusy                   ;C - - - - - 0x00C232 06:8222: 85 C0
 	BNE sub_06_81F1                 ;C - - - - - 0x00C234 06:8224: D0 CB
 ofs_06_8226:
-	LDA ram_00C0                    ;C - - J - - 0x00C236 06:8226: A5 C0
+	LDA soundBusy                   ;C - - J - - 0x00C236 06:8226: A5 C0
 	AND #$FD                        ;C - - - - - 0x00C238 06:8228: 29 FD
-	STA ram_00C0                    ;C - - - - - 0x00C23A 06:822A: 85 C0
+	STA soundBusy                   ;C - - - - - 0x00C23A 06:822A: 85 C0
 	RTS                             ;C - - - - - 0x00C23C 06:822C: 60
 	ASL ram_00C3                    ;c - - - - - 0x00C23D 06:822D: 06 C3
 	BEQ loc_06_8234                 ;c - - - - - 0x00C23F 06:822F: F0 03
 	SEC                             ;c - - - - - 0x00C241 06:8231: 38
 	ROR ram_00C3                    ;c - - - - - 0x00C242 06:8232: 66 C3
 loc_06_8234:
-	LDA ram_00C0                    ;c - - - - - 0x00C244 06:8234: A5 C0
+	LDA soundBusy                   ;c - - - - - 0x00C244 06:8234: A5 C0
 	AND #$0F                        ;c - - - - - 0x00C246 06:8236: 29 0F
-	STA ram_00C0                    ;c - - - - - 0x00C248 06:8238: 85 C0
+	STA soundBusy                   ;c - - - - - 0x00C248 06:8238: 85 C0
 	LDY ram_00C3                    ;c - - - - - 0x00C24A 06:823A: A4 C3
 	STY ram_00CC                    ;c - - - - - 0x00C24C 06:823C: 84 CC
 	BEQ loc_06_8247                 ;c - - - - - 0x00C24E 06:823E: F0 07
@@ -371,7 +371,7 @@ loc_06_825B:
 	STA ram_00C4                    ;C - - - - - 0x00C26E 06:825E: 85 C4
 	ASL A                           ;C - - - - - 0x00C270 06:8260: 0A
 	BCC loc_06_8273                 ;C - - - - - 0x00C271 06:8261: 90 10
-	STY ram_00CE                    ;C - - - - - 0x00C273 06:8263: 84 CE
+	STY soundPriority               ;C - - - - - 0x00C273 06:8263: 84 CE
 	LDA ram_00D7                    ;C - - - - - 0x00C275 06:8265: A5 D7
 	LSR A                           ;C - - - - - 0x00C277 06:8267: 4A
 	BCC loc_06_8270                 ;C - - - - - 0x00C278 06:8268: 90 06
@@ -396,8 +396,8 @@ loc_06_8289:
 	JSR sub_06_8386                 ;C - - - - - 0x00C299 06:8289: 20 86 83
 	TAX                             ;C - - - - - 0x00C29C 06:828C: AA
 	JSR sub_06_8386                 ;C - - - - - 0x00C29D 06:828D: 20 86 83
-	STA ram_00D0                    ;C - - - - - 0x00C2A0 06:8290: 85 D0
-	STX ram_00D1                    ;C - - - - - 0x00C2A2 06:8292: 86 D1
+	STA soundPtr                    ;C - - - - - 0x00C2A0 06:8290: 85 D0
+	STX soundPtr+1                  ;C - - - - - 0x00C2A2 06:8292: 86 D1
 	BNE loc_06_825B                 ;C - - - - - 0x00C2A4 06:8294: D0 C5
 loc_06_8296:
 	TYA                             ;C - - - - - 0x00C2A6 06:8296: 98
@@ -406,10 +406,10 @@ loc_06_8296:
 	STA ram_00D6                    ;C - - - - - 0x00C2A9 06:8299: 85 D6
 	CLC                             ;C - - - - - 0x00C2AB 06:829B: 18
 	LDA #$02                        ;C - - - - - 0x00C2AC 06:829C: A9 02
-	ADC ram_00D0                    ;C - - - - - 0x00C2AE 06:829E: 65 D0
-	STA ram_00D0                    ;C - - - - - 0x00C2B0 06:82A0: 85 D0
+	ADC soundPtr                    ;C - - - - - 0x00C2AE 06:829E: 65 D0
+	STA soundPtr                    ;C - - - - - 0x00C2B0 06:82A0: 85 D0
 	BCC loc_06_82A6                 ;C - - - - - 0x00C2B2 06:82A2: 90 02
-	INC ram_00D1                    ;c - - - - - 0x00C2B4 06:82A4: E6 D1
+	INC soundPtr+1                  ;c - - - - - 0x00C2B4 06:82A4: E6 D1
 loc_06_82A6:
 	LSR ram_00C4                    ;C - - - - - 0x00C2B6 06:82A6: 46 C4
 	BCC loc_06_82AF                 ;C - - - - - 0x00C2B8 06:82A8: 90 05
@@ -430,7 +430,7 @@ loc_06_82B8:
 	LDY ptr_C1                      ;C - - - - - 0x00C2D6 06:82C6: A4 C1
 	INY                             ;C - - - - - 0x00C2D8 06:82C8: C8
 	STY ram_00D5                    ;C - - - - - 0x00C2D9 06:82C9: 84 D5
-	INC ram_00C0                    ;C - - - - - 0x00C2DB 06:82CB: E6 C0
+	INC soundBusy                   ;C - - - - - 0x00C2DB 06:82CB: E6 C0
 	JSR sub_06_8386                 ;C - - - - - 0x00C2DD 06:82CD: 20 86 83
 	PHA                             ;C - - - - - 0x00C2E0 06:82D0: 48
 	EOR ram_00CF                    ;C - - - - - 0x00C2E1 06:82D1: 45 CF
@@ -446,7 +446,7 @@ sub_06_82DE:
 	BEQ loc_06_82E6                 ;C - - - - - 0x00C2F1 06:82E1: F0 03
 	JSR sub_06_8684                 ;C - - - - - 0x00C2F3 06:82E3: 20 84 86
 loc_06_82E6:
-	LDA ram_00C0                    ;C - - - - - 0x00C2F6 06:82E6: A5 C0
+	LDA soundBusy                   ;C - - - - - 0x00C2F6 06:82E6: A5 C0
 	LSR A                           ;C - - - - - 0x00C2F8 06:82E8: 4A
 	BCS loc_06_830A                 ;C - - - - - 0x00C2F9 06:82E9: B0 1F
 	JSR sub_06_86BA                 ;C - - - - - 0x00C2FB 06:82EB: 20 BA 86
@@ -531,11 +531,11 @@ loc_06_837F:
 	ADC ram_00D2                    ;C - - - - - 0x00C391 06:8381: 65 D2
 	JMP sub_06_85DE                 ;C - - - - - 0x00C393 06:8383: 4C DE 85
 sub_06_8386:
-	LDY ram_00D0                    ;C - - - - - 0x00C396 06:8386: A4 D0
-	LDA ram_00D1                    ;C - - - - - 0x00C398 06:8388: A5 D1
-	INC ram_00D0                    ;C - - - - - 0x00C39A 06:838A: E6 D0
+	LDY soundPtr                    ;C - - - - - 0x00C396 06:8386: A4 D0
+	LDA soundPtr+1                  ;C - - - - - 0x00C398 06:8388: A5 D1
+	INC soundPtr                    ;C - - - - - 0x00C39A 06:838A: E6 D0
 	BNE loc_06_8390                 ;C - - - - - 0x00C39C 06:838C: D0 02
-	INC ram_00D1                    ;C - - - - - 0x00C39E 06:838E: E6 D1
+	INC soundPtr+1                  ;C - - - - - 0x00C39E 06:838E: E6 D1
 loc_06_8390:
 	JMP sub_06_803A                 ;C - - - - - 0x00C3A0 06:8390: 4C 3A 80
 sub_06_8393:
@@ -1373,28 +1373,33 @@ tbl_06_895A:
 	.byte $5C,$06,$9C,$05,$E7,$04,$3C,$04,$9B,$03,$02,$03,$72,$02,$EA,$01;- - - - - - 0x00CA13 06:8A03:
 	.byte $6A,$01,$F1,$00,$80,$00,$14,$00,$00,$00,$00,$00,$00,$00,$00,$00;- - - - - - 0x00CA23 06:8A13:
 	.res 29, $00                    ;- - - - - - 0x00CA33 06:8A23: fill 29 bytes
-dat_06_8A40:
+songCount:
 	.byte $36                       ;- D 0 - - - 0x00CA50 06:8A40:
 dat_06_8A41:
 	.byte $8A                       ;- D 0 - - - 0x00CA51 06:8A41:
 dat_06_8A42:
 	.byte $AF                       ;- D 0 - - - 0x00CA52 06:8A42:
 tbl_06_8A43:
-	.byte $8B                       ;- D 0 - - - 0x00CA53 06:8A43:
+	.byte >tbl_06_8B57              ;- D 0 - - - 0x00CA53 06:8A43:
 tbl_06_8A44:
-	.byte $57,$8E,$1B,$90,$F7,$93,$AD,$97,$07,$9A,$1F,$9C,$89,$9F,$AE,$A2;- D 0 - - - 0x00CA54 06:8A44:
-	.byte $38,$A4,$82,$A5,$E2,$A6,$BF,$A7,$36,$A8,$75,$A9,$77,$AA,$01;- D 0 - - - 0x00CA64 06:8A54:
-	.byte $00,$00,$00               ;- - - - - - 0x00CA73 06:8A63:
-	.word $AA00, $AA82, $AA9A, $AAB2, $AAE2, $ABFE, $AB1F, $AB30;W 0x00CA76 06:8A66:
-	.word $AB47, $AB64, $AB79, $AB8F, $ABA6, $ABBF, $ABCF;W 0x00CA86 06:8A76:
-	.byte $E4                       ;W 0x00CA94 06:8A84:
+	.byte <tbl_06_8B57              ;- D 0 - - - 0x00CA54 06:8A44:
+	.byte >tbl_06_8E1B,<tbl_06_8E1B, >tbl_06_90F7,<tbl_06_90F7, >tbl_06_93AD,<tbl_06_93AD, >tbl_06_9707,<tbl_06_9707;- D 0 - - - 0x00CA55 06:8A45: big-endian address pairs
+	.byte >tbl_06_9A1F,<tbl_06_9A1F, >tbl_06_9C89,<tbl_06_9C89, >tbl_06_9FAE,<tbl_06_9FAE, $A2,$38;- D 0 - - - 0x00CA5D 06:8A4D: big-endian address pairs
+	.byte $A4,$82, $A5,$E2, $A6,$BF, $A7,$36;- D 0 - - - 0x00CA65 06:8A55: big-endian address pairs
+	.byte $A8,$75, $A9,$77, $AA,$01, $00,$00;- D 0 - - - 0x00CA6D 06:8A5D: big-endian address pairs
+	.byte $00,$00, $AA,$82, $AA,$9A, $AA,$B2;- - - - - - 0x00CA75 06:8A65: big-endian address pairs
+	.byte $AA,$E2, $AA,$FE, $AB,$1F, $AB,$30;- D 0 - - - 0x00CA7D 06:8A6D: big-endian address pairs
+	.byte $AB,$47, $AB,$64, $AB,$79, $AB,$8F;- D 0 - - - 0x00CA85 06:8A75: big-endian address pairs
+	.byte $AB,$A6, $AB,$BF, $AB,$CF, $AB,$E4;- D 0 - - - 0x00CA8D 06:8A7D: big-endian address pairs
 tbl_06_8A85:
-	.word $F9AB, $1AAC, $55AC, $6CAC, $B3AC, $CBAC, $E2AC, $F7AC;W 0x00CA95 06:8A85:
-	.word $0BAD, $32AD, $47AD, $56AD, $6BAD, $A9AD, $BAAD, $C9AD;W 0x00CAA5 06:8A95:
-	.word $E8AD, $FAAD, $20AE, $34AE;W 0x00CAB5 06:8AA5:
-	.byte $AE                       ;- D 0 - - - 0x00CABD 06:8AAD:
-	.byte $4A,$1F,$15,$60,$10,$00,$00,$00,$00,$1F,$13,$C0,$10,$76,$02,$0A;- D 0 - - - 0x00CABE 06:8AAE:
-	.byte $00,$1C,$12,$C0,$12,$00,$00,$00,$00,$1F,$0E,$90;- D 0 - I - 0x00CACE 06:8ABE:
+	.byte $AB,$F9, $AC,$1A, $AC,$55, $AC,$6C;- D 0 - - - 0x00CA95 06:8A85: big-endian address pairs
+	.byte $AC,$B3, $AC,$CB, $AC,$E2, $AC,$F7;- D 0 - - - 0x00CA9D 06:8A8D: big-endian address pairs
+	.byte $AD,$0B, $AD,$32, $AD,$47, $AD,$56;- D 0 - - - 0x00CAA5 06:8A95: big-endian address pairs
+	.byte $AD,$6B, $AD,$A9, $AD,$BA, $AD,$C9;- D 0 - - - 0x00CAAD 06:8A9D: big-endian address pairs
+	.byte $AD,$E8, $AD,$FA, $AE,$20, $AE,$34;- D 0 - - - 0x00CAB5 06:8AA5: big-endian address pairs
+	.byte $AE,$4A                   ;- D 0 - - - 0x00CABD 06:8AAD: big-endian address pairs
+	.byte $1F,$15,$60,$10,$00,$00,$00,$00,$1F,$13,$C0,$10,$76,$02,$0A,$00;- D 0 - I - 0x00CABF 06:8AAF:
+	.byte $1C,$12,$C0,$12,$00,$00,$00,$00,$1F,$0E,$90;- D 0 - I - 0x00CACF 06:8ABF:
 	.byte $10                       ;- - - - - - 0x00CADA 06:8ACA:
 	.byte $00,$00,$00,$00,$1F,$13,$C0,$0C,$76,$02,$0A,$00,$1F,$1C,$C0,$15;- D 0 - I - 0x00CADB 06:8ACB:
 	.byte $C0,$7D,$76,$00,$1F,$1E,$90,$1A,$00,$00,$00,$00,$1C,$12,$C0,$12;- D 0 - I - 0x00CAEB 06:8ADB:
@@ -1420,6 +1425,7 @@ tbl_06_8A85:
 	.byte $1F,$F0                   ;- - - - - - 0x00CB60 06:8B50:
 	.byte $19,$E4,$03,$00           ;- D 0 - I - 0x00CB62 06:8B52:
 	.byte $00                       ;- - - - - - 0x00CB66 06:8B56:
+tbl_06_8B57:
 	.byte $00,$8B,$60,$8C,$60,$8C,$E7,$8D,$98,$05,$02,$2E,$0A,$FD,$06,$F0;- D 0 - I - 0x00CB67 06:8B57:
 	.byte $07,$0B,$09,$02,$18,$C0,$C0,$04,$00,$04,$00,$04,$00,$08,$02,$D6;- D 0 - I - 0x00CB77 06:8B67:
 	.byte $0D,$7F,$01,$03,$CA,$08,$07,$8A,$01,$CA,$08,$02,$0D,$00,$12,$08;- D 0 - I - 0x00CB87 06:8B77:
@@ -1476,6 +1482,7 @@ tbl_06_8CAC:
 	.byte $6F,$6F,$10,$0B,$8E,$05,$AC,$AC,$AC,$88,$85,$0F,$01,$8D,$A6,$16;- D 0 - I - 0x00CE18 06:8E08:
 	.byte $8D,$A4                   ;- D 0 - I - 0x00CE28 06:8E18:
 	.byte $17                       ;- - - - - - 0x00CE2A 06:8E1A:
+tbl_06_8E1B:
 	.byte $00,$8E,$24,$8E,$FC,$8F,$C6,$90,$8B,$05,$02,$49,$06,$E6,$09,$01;- D 0 - I - 0x00CE2B 06:8E1B:
 	.byte $18,$C0,$04,$08,$04,$08,$07,$09,$08,$02,$AC,$8B,$8C,$80,$AE,$87;- D 0 - I - 0x00CE3B 06:8E2B:
 	.byte $01,$B0,$08,$07,$01,$D0,$08,$02,$AE,$8C,$8E,$90,$8E,$80,$AB,$87;- D 0 - I - 0x00CE4B 06:8E3B:
@@ -1530,6 +1537,7 @@ tbl_06_8CAC:
 	.byte $65,$65,$85,$8A,$A5,$85,$8A,$85,$0E,$06,$90,$D9,$02,$8B,$02,$8B;- D 0 - I - 0x00D0EB 06:90DB:
 	.byte $8B,$04,$00,$6A,$0E,$07,$90,$EC,$16,$90,$91;- D 0 - I - 0x00D0FB 06:90EB:
 	.byte $17                       ;- - - - - - 0x00D106 06:90F6:
+tbl_06_90F7:
 	.byte $00,$91,$00,$91,$F6,$92,$AE,$93,$36,$05,$02,$49,$0A,$01,$06,$F0;- D 0 - I - 0x00D107 06:90F7:
 	.byte $07,$08,$08,$02,$09,$02,$18,$40,$90,$92,$90,$04,$00,$04,$00,$04;- D 0 - I - 0x00D117 06:9107:
 	.byte $00,$02,$92,$60,$01,$74,$0D,$7F,$75,$01,$95,$94,$B5,$01,$97,$08;- D 0 - I - 0x00D127 06:9117:
@@ -1579,6 +1587,7 @@ tbl_06_8CAC:
 	.byte $4F,$40,$0E,$1B,$93,$90,$08,$00,$6B,$65,$88,$6D,$6D,$8A,$66,$66;- D 0 - I - 0x00D3A6 06:9396:
 	.byte $85,$85,$8E,$16,$93,$3F   ;- D 0 - I - 0x00D3B6 06:93A6:
 	.byte $17                       ;- - - - - - 0x00D3BC 06:93AC:
+tbl_06_93AD:
 	.byte $00                       ;- D 0 - I - 0x00D3BD 06:93AD:
 	.word ofs_03_B691+2, IrqSplit2  ;W 0x00D3BE 06:93AE:
 	.byte $95,$7A,$96,$5E,$05,$01,$EB,$06,$F0,$07,$09,$08,$02,$09,$01,$18;- D 0 - I - 0x00D3C2 06:93B2:
@@ -1644,6 +1653,7 @@ tbl_06_8CAC:
 	.byte $AA,$0E,$06,$96,$E4,$85,$06,$E6,$8C,$65,$02,$8C,$02,$8C,$06,$78;- D 0 - I - 0x00D6FE 06:96EE:
 	.byte $65,$6A,$6A,$6A,$6A,$16,$96,$7C;- D 0 - I - 0x00D70E 06:96FE:
 	.byte $17                       ;- - - - - - 0x00D716 06:9706:
+tbl_06_9707:
 	.byte $00,$97,$10,$97,$DC,$98,$9D,$99,$82,$05,$02,$86,$06,$E6,$07,$08;- D 0 - I - 0x00D717 06:9707:
 	.byte $08,$0F,$09,$01,$18,$40,$01,$03,$CA,$01,$8A,$85,$8A,$01,$89,$02;- D 0 - I - 0x00D727 06:9717:
 	.byte $01,$C9,$A5,$01,$C8,$01,$88,$AA,$01,$87,$01,$C7,$A5,$A3,$01,$CA;- D 0 - I - 0x00D737 06:9727:
@@ -1703,6 +1713,7 @@ tbl_06_8CAC:
 	.byte $8A,$A5,$85,$8A,$85,$0E,$05,$99,$F4,$6A,$6A,$07,$0D,$00,$AE,$AE;- D 0 - I - 0x00DA12 06:9A02:
 	.byte $AE,$00,$AE,$07,$09,$66,$66,$66,$66,$16,$99,$B6;- D 0 - I - 0x00DA22 06:9A12:
 	.byte $17                       ;- - - - - - 0x00DA2E 06:9A1E:
+tbl_06_9A1F:
 	.byte $00,$9A,$28,$9A,$D5,$9B,$73,$9C,$0D,$05,$02,$AA,$06,$E4,$07,$09;- D 0 - I - 0x00DA2F 06:9A1F:
 	.byte $08,$02,$09,$01,$0D,$19,$18,$C0,$80,$DC,$DD,$DC,$DD,$01,$FE,$08;- D 0 - I - 0x00DA3F 06:9A2F:
 	.byte $07,$01,$DE,$08,$02,$00,$BF,$BE,$BD,$00,$01,$FC,$01,$FC,$0D,$00;- D 0 - I - 0x00DA4F 06:9A3F:
@@ -1750,6 +1761,7 @@ tbl_06_8CAC:
 	.byte $85,$8A,$A5,$85,$8A,$85,$0E,$06,$9C,$70,$06,$B4,$AB,$AB,$AB,$AB;- D 0 - I - 0x00DC83 06:9C73:
 	.byte $06,$78,$16,$9C,$23       ;- D 0 - I - 0x00DC93 06:9C83:
 	.byte $17                       ;- - - - - - 0x00DC98 06:9C88:
+tbl_06_9C89:
 	.byte $00,$9C,$92,$9D,$9B,$9E,$63,$9F,$28,$05,$02,$00,$0A,$FE,$06,$DC;- D 0 - I - 0x00DC99 06:9C89:
 	.byte $07,$0A,$08,$02,$09,$01,$18,$C0,$96,$99,$9D,$03,$88,$8D,$81,$83;- D 0 - I - 0x00DCA9 06:9C99:
 	.byte $04,$08,$68,$69,$02,$01,$AA,$08,$07,$01,$CA,$08,$02,$6A,$6D,$01;- D 0 - I - 0x00DCB9 06:9CA9:
@@ -1807,6 +1819,7 @@ tbl_06_8CAC:
 	.byte $02,$85,$65,$68,$8F,$65,$68,$6D,$6C,$68,$6A,$6D,$6C,$6A,$0F,$01;- D 0 - I - 0x00DFA8 06:9F98:
 	.byte $9F,$8B,$16,$9F,$3A       ;- D 0 - I - 0x00DFB8 06:9FA8:
 	.byte $17                       ;- - - - - - 0x00DFBD 06:9FAD:
+tbl_06_9FAE:
 	.byte $00,$9F,$B7,$A0,$65,$A1,$25,$A1,$C4,$05,$02,$16,$0A,$01,$06,$E6;- D 0 - I - 0x00DFBE 06:9FAE:
 	.byte $18,$40,$07,$0B,$08,$02,$09,$01,$C0,$02,$03,$96,$02,$91,$8D,$04;- D 0 - I - 0x00DFCE 06:9FBE:
 	.byte $48,$CA,$08,$07,$01,$CA,$08,$02,$01,$CC,$08,$07,$01,$CC,$08,$02;- D 0 - I - 0x00DFDE 06:9FCE:
