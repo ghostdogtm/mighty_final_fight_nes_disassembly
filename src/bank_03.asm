@@ -705,9 +705,9 @@ loc_03_B523:
 	STA ptr_00+1                    ;C - - - - - 0x007541 03:B531: 85 01
 	JMP (ptr_00)                    ;C - - - - - 0x007543 03:B533: 6C 00 00
 tbl_03_B536:
-	.byte $46,$7B,$66,$F5,$C9,$79,$1C,$88;- D 1 - - - 0x007546 03:B536:
+	.lobytes ofs_03_B546, ofs_03_B57B, ofs_03_B666, ofs_03_B6F5, ofs_03_B7C9, ofs_03_B879, ofs_03_BA1C, ofs_03_BA88;- D 1 - - - 0x007546 03:B536:
 tbl_03_B53E:
-	.byte $B5,$B5,$B6,$B6,$B7,$B8,$BA,$BA;- D 1 - - - 0x00754E 03:B53E:
+	.hibytes ofs_03_B546, ofs_03_B57B, ofs_03_B666, ofs_03_B6F5, ofs_03_B7C9, ofs_03_B879, ofs_03_BA1C, ofs_03_BA88;- D 1 - - - 0x00754E 03:B53E:
 ofs_03_B546:
 	LDA #$00                        ;C - - J - - 0x007556 03:B546: A9 00
 	STA ram_05D0,X                  ;C - - - - - 0x007558 03:B548: 9D D0 05

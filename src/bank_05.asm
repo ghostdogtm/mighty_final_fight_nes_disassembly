@@ -238,14 +238,20 @@ loc_05_A786:
 loc_05_A789:
 	RTS                             ;C - - - - - 0x00A799 05:A789: 60
 tbl_05_A78A:
-	.byte $90,$96,$9C               ;- D 1 - - - 0x00A79A 05:A78A:
+	.lobytes ofs_05_A790, tbl_05_A796, ofs_05_A79C;- D 1 - - - 0x00A79A 05:A78A:
 tbl_05_A78D:
-	.byte $A7,$A7,$A7               ;- D 1 - - - 0x00A79D 05:A78D:
-	.byte $40,$48,$50,$58           ;- - - - - - 0x00A7A0 05:A790:
+	.hibytes ofs_05_A790, tbl_05_A796, ofs_05_A79C;- D 1 - - - 0x00A79D 05:A78D:
+ofs_05_A790:
+	RTI                             ;c - - - - - 0x00A7A0 05:A790: 40
+	.byte $48,$50,$58               ;- - - - - - 0x00A7A1 05:A791:
 	.byte $60                       ;- D 1 - I - 0x00A7A4 05:A794:
-	.byte $68,$30,$38,$40,$48,$50   ;- - - - - - 0x00A7A5 05:A795:
+	.byte $68                       ;- - - - - - 0x00A7A5 05:A795:
+tbl_05_A796:
+	.byte $30,$38,$40,$48,$50       ;- - - - - - 0x00A7A6 05:A796:
 	.byte $58                       ;- D 1 - I - 0x00A7AB 05:A79B:
-	.byte $50,$58,$60               ;- - - - - - 0x00A7AC 05:A79C:
+ofs_05_A79C:
+	BVC loc_05_A7F6                 ;c - - - - - 0x00A7AC 05:A79C: 50 58
+	RTS                             ;c - - - - - 0x00A7AE 05:A79E: 60
 	.byte $68                       ;- D 1 - I - 0x00A7AF 05:A79F:
 	.byte $68,$68                   ;- - - - - - 0x00A7B0 05:A7A0:
 tbl_05_A7A2:
@@ -291,6 +297,7 @@ loc_05_A7D9:
 	BNE loc_05_A850                 ;C - - - - - 0x00A7FF 05:A7EF: D0 5F
 	LDA #$2E                        ;C - - - - - 0x00A801 05:A7F1: A9 2E
 	JSR sub_0F_F34C                 ;C - - - - - 0x00A803 05:A7F3: 20 4C F3
+loc_05_A7F6:
 	LDY playerId                    ;C - - - - - 0x00A806 05:A7F6: A4 34
 	LDA tbl_0F_E210,Y               ;C - - - - - 0x00A808 05:A7F8: B9 10 E2
 	JSR sub_0F_F294                 ;C - - - - - 0x00A80B 05:A7FB: 20 94 F2

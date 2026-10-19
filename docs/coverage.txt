@@ -1,25 +1,25 @@
 Coverage report (bytes). cdl = from CDL, traced = found by static tracing
 
 bank  code(cdl) code(traced) data  unknown
-00         5920          355   1440      477
-01         3060          157   2884     2091
+00         5920          390   1452      430
+01         3060          272   2886     1974
 02            0            0   7606      586
 03         2937           86   4632      537
-04         2781          103   3237     2071
-05         1483           82   3855     2772
+04         2781          103   3249     2059
+05         1483           86   3855     2768
 06         2044          195   5746      207
 07            0            0   5663     2529
-08         2693          104   1754     3641
-09          745            0   3567     3880
+08         2693          140   1832     3527
+09          745          156   3569     3722
 0A           32            0   6615     1545
-0B         2923          112   4645      512
-0C         6477          337    631      747
+0B         2923          112   4647      510
+0C         6477          338    635      742
 0D         2990           48   3027     2127
-0E         7711          247    194       40
+0E         7711          247    202       32
 0F         6106          386   1039      661
-all       47902         2212  56535    24423
+all       47902         2559  56655    23956
 
-Unknown bytes: 5415 fill (one repeated byte), 2273 code-like, 16735 other (probably data)
+Unknown bytes: 5325 fill (one repeated byte), 1944 code-like, 16687 other (probably data)
 
 CDL anomalies (code flag but not a valid instruction): 0
 
@@ -173,6 +173,22 @@ Traced code (instruction starts, verify by hand):
   00:95E9  CMP #$C8
   00:95EB  BCS loc_00_960F
   00:95ED  JMP loc_00_95FA
+  00:9610  LDA #$0E
+  00:9612  STA gameAction
+  00:9614  RTS
+  00:961F  LDA ram_0300
+  00:9622  AND #$0F
+  00:9624  CMP #$02
+  00:9626  BNE loc_00_9630
+  00:9628  LDA #$B4
+  00:962A  STA ram_0500
+  00:962D  INC ram_0300
+  00:9630  DEC ram_0500
+  00:9633  LDA ram_0500
+  00:9636  BNE loc_00_963C
+  00:9638  LDA #$0E
+  00:963A  STA gameAction
+  00:963C  RTS
   00:96D4  CMP #$03
   00:96D6  BEQ loc_00_96DC
   00:96D8  JSR sub_0E_CEAA
@@ -211,6 +227,54 @@ Traced code (instruction starts, verify by hand):
   01:A644  BNE loc_01_A648
   01:A646  LDA #$84
   01:A648  STA ram_0300,X
+  01:A651  JSR sub_01_A882
+  01:A654  LDA ram_0380,X
+  01:A657  CMP #$01
+  01:A659  BNE loc_01_A684
+  01:A65B  LDA ram_05B0,X
+  01:A65E  CMP #$07
+  01:A660  BNE loc_01_A668
+  01:A662  LDA #$20
+  01:A664  LDY #$0A
+  01:A666  BNE loc_01_A66C
+  01:A668  LDA #$24
+  01:A66A  LDY #$09
+  01:A66C  JSR sub_0F_FB3E
+  01:A66F  BCC loc_01_A684
+  01:A671  LDA ram_05B0,X
+  01:A674  SBC #$07
+  01:A676  STA ram_0510,X
+  01:A679  LDA #$82
+  01:A67B  STA ram_0300,X
+  01:A67E  LDA #$00
+  01:A680  STA ram_0500,X
+  01:A683  RTS
+  01:A684  LDY #$04
+  01:A686  JSR sub_01_A7E1
+  01:A689  LDA ram_0460,X
+  01:A68C  CMP #$01
+  01:A68E  BNE loc_01_A6A1
+  01:A690  LDA ram_0380,X
+  01:A693  CMP #$01
+  01:A695  BNE loc_01_A69E
+  01:A697  LDA objX,X
+  01:A69A  CMP #$18
+  01:A69C  BCS loc_01_A6B2
+  01:A69E  JMP sub_0F_F183
+  01:A6A1  LDA ram_0380,X
+  01:A6A4  CMP #$01
+  01:A6A6  BNE loc_01_A6AF
+  01:A6A8  LDA objX,X
+  01:A6AB  CMP #$F2
+  01:A6AD  BCC loc_01_A6B2
+  01:A6AF  JMP sub_0F_F1A1
+  01:A6B2  LDA #$81
+  01:A6B4  STA ram_0300,X
+  01:A6B7  LDA #$00
+  01:A6B9  STA ram_0500,X
+  01:A6BC  LDA #$07
+  01:A6BE  STA ram_0550,X
+  01:A6C1  JMP sub_0F_F343
   01:A70B  LDA #$00
   01:A70D  STA ram_03F0,X
   01:A710  LDA playerId
@@ -343,6 +407,9 @@ Traced code (instruction starts, verify by hand):
   05:A5A7  EOR (ptr_20+1),Y
   05:A5A9  ORA (ptr_42,X)
   05:A5AB  RTI
+  05:A790  RTI
+  05:A79C  BVC loc_05_A7F6
+  05:A79E  RTS
   05:A81D  LDA ram_0500,X
   05:A820  STA ram_00AD
   05:A822  JMP loc_05_A82A
@@ -515,6 +582,7 @@ Traced code (instruction starts, verify by hand):
   08:80F6  BMI loc_08_80E3
   08:8104  RTS
   08:81E7  RTS
+  08:8A43  RTS
   08:8DC0  JSR sub_08_89D2
   08:900A  RTS
   08:9148  CMP #$FF
@@ -528,6 +596,83 @@ Traced code (instruction starts, verify by hand):
   08:9172  STA ptr_00+1
   08:92E4  LDA #$07
   08:92E6  STA ptr_00+1
+  08:97F3  LDA tbl_08_99CC,Y
+  08:97F6  JSR sub_09_A000
+  08:97F9  RTS
+  08:986E  LDA tbl_08_99D7,Y
+  08:9871  JSR sub_09_A000
+  08:9874  RTS
+  08:996C  LDA tbl_08_99EC,Y
+  08:996F  JSR sub_09_A000
+  08:9972  RTS
+  08:9998  LDA tbl_08_99F0,Y
+  08:999B  JSR sub_09_A000
+  08:999E  RTS
+  08:99BB  LDA tbl_08_99F4,Y
+  08:99BE  JSR sub_09_A000
+  08:99C1  RTS
+  09:AB34  LDA ram_0300
+  09:AB37  AND #$0F
+  09:AB39  BNE loc_09_AB7D
+  09:AB3B  LDA #$73
+  09:AB3D  CMP ram_0580
+  09:AB40  BEQ loc_09_AB4A
+  09:AB42  JSR sub_0F_F294
+  09:AB45  LDA #$3F
+  09:AB47  JSR sub_0F_F440
+  09:AB4A  LDA ram_0570
+  09:AB4D  BNE loc_09_AB59
+  09:AB4F  LDA ram_0590
+  09:AB52  BNE loc_09_AB59
+  09:AB54  LDA #$16
+  09:AB56  JSR sub_0F_F34C
+  09:AB59  LDA ram_0570
+  09:AB5C  CMP #$06
+  09:AB5E  BNE loc_09_AB77
+  09:AB60  LDA #$13
+  09:AB62  JSR sub_0F_F294
+  09:AB65  LDA #$03
+  09:AB67  JSR sub_0F_F440
+  09:AB6A  LDA #$38
+  09:AB6C  STA ram_0420
+  09:AB6F  LDA #$04
+  09:AB71  STA ram_0430
+  09:AB74  INC ram_0300
+  09:AB77  JSR sub_0F_F406
+  09:AB7A  JMP loc_09_AB34
+  09:AB7D  LDA ram_0300
+  09:AB80  AND #$02
+  09:AB82  BNE loc_09_AB95
+  09:AB84  LDA ram_0570
+  09:AB87  CMP #$05
+  09:AB89  BNE loc_09_AB9A
+  09:AB8B  LDA #$05
+  09:AB8D  STA ram_0570
+  09:AB90  LDA #$00
+  09:AB92  STA ram_0590
+  09:AB95  LDX #$00
+  09:AB97  JSR sub_0F_F1FD
+  09:AB9A  JSR sub_0F_F183
+  09:AB9D  LDA ram_0430
+  09:ABA0  BPL loc_09_ABB4
+  09:ABA2  LDA #$3E
+  09:ABA4  CMP ram_0580
+  09:ABA7  BEQ loc_09_ABB4
+  09:ABA9  JSR sub_0F_F294
+  09:ABAC  LDA #$01
+  09:ABAE  JSR sub_0F_F440
+  09:ABB1  INC ram_0300
+  09:ABB4  LDA objY
+  09:ABB7  CMP #$A9
+  09:ABB9  BCC loc_09_ABCD
+  09:ABBB  LDA #$A8
+  09:ABBD  STA objY
+  09:ABC0  LDA #$01
+  09:ABC2  JSR sub_0F_F294
+  09:ABC5  LDA #$00
+  09:ABC7  JSR sub_0F_F440
+  09:ABCA  JMP sub_0F_F406
+  09:ABCD  JMP loc_09_AB77
   0B:B3E9  LDA #$00
   0B:B3EB  STA ram_0306
   0B:B3EE  LDA #$80
@@ -596,6 +741,7 @@ Traced code (instruction starts, verify by hand):
   0C:8724  JSR sub_0E_CEAA
   0C:8727  LDA objY
   0C:872A  STA objY,X
+  0C:8BB0  RTI
   0C:8BE5  LDA #$09
   0C:8BE7  STA lives
   0C:8BF8  LDA #$09
@@ -1101,13 +1247,10 @@ Raw ROM-address operands (do not relocate with the code): 44
 
 Code-like unknown runs (decode cleanly to the end, no BRK; review by hand):
    1361  05:B1AF
-    156  09:AB34
     134  0C:9D9E
-    115  01:A651
      65  05:A851
      33  01:A00C
      30  05:A832
-     30  00:961F
      26  02:81E7
      23  09:AFE9
      22  0C:8BC0
@@ -1128,10 +1271,6 @@ Code-like unknown runs (decode cleanly to the end, no BRK; review by hand):
       8  08:85CA
       8  08:85BE
       7  0B:B32A
-      7  08:9998
-      7  08:996C
-      7  08:986E
-      7  08:97F3
       6  0D:AE72
       6  0C:89DD
       6  0C:89D4
@@ -1168,13 +1307,11 @@ Unknown runs, longest first (len bank:addr):
     171  09:AA55
     168  04:8C58
     165  09:A99C
-    156  09:AB34
     152  0D:B9F0
     141  05:ADD3
     134  0C:9D9E
     118  0A:8BC1
     116  0D:BA8C
-    115  01:A651
     111  05:A1CD
     110  0B:A77A
     110  04:8892
@@ -1220,7 +1357,6 @@ Unknown runs, longest first (len bank:addr):
      33  01:A00C
      31  04:8B21
      30  05:A832
-     30  00:961F
      28  07:B96C
      28  01:BAA4
      26  02:81E7
@@ -1397,7 +1533,6 @@ Unknown runs, longest first (len bank:addr):
       8  0A:8133
       8  09:A1D5
       8  08:99E3
-      8  08:99BB
       8  08:85CA
       8  08:85BE
       8  08:84B6
@@ -1425,10 +1560,6 @@ Unknown runs, longest first (len bank:addr):
       7  09:AEC9
       7  09:AE99
       7  09:AE69
-      7  08:9998
-      7  08:996C
-      7  08:986E
-      7  08:97F3
       7  08:93CB
       7  07:B359
       7  07:B351
@@ -1552,7 +1683,6 @@ Unknown runs, longest first (len bank:addr):
       5  03:BB08
       5  03:BAF8
       5  01:AEC3
-      5  00:9610
       4  0F:FD0A
       4  0F:FCC2
       4  0F:FBD5
@@ -1605,11 +1735,8 @@ Unknown runs, longest first (len bank:addr):
       4  07:B7B4
       4  06:89ED
       4  06:8928
-      4  05:A790
       4  05:A57B
       4  05:A52C
-      4  04:9BC8
-      4  04:9BB9
       4  03:BE95
       4  03:BE78
       4  03:BB81
@@ -1685,7 +1812,6 @@ Unknown runs, longest first (len bank:addr):
       3  09:A0BA
       3  08:99DE
       3  08:9927
-      3  08:9912
       3  08:96AB
       3  08:9624
       3  08:95B5
@@ -1731,7 +1857,7 @@ Unknown runs, longest first (len bank:addr):
       3  06:891A
       3  05:AE65
       3  05:AA7F
-      3  05:A79C
+      3  05:A791
       3  05:A71E
       3  04:9D6E
       3  04:9D6A
@@ -1797,8 +1923,6 @@ Unknown runs, longest first (len bank:addr):
       2  0F:E223
       2  0F:E216
       2  0E:DE5C
-      2  0E:C9FD
-      2  0E:C9D2
       2  0D:BFFC
       2  0D:BFDE
       2  0D:BFD7
@@ -1922,21 +2046,10 @@ Unknown runs, longest first (len bank:addr):
       2  08:99DA
       2  08:99CF
       2  08:99C5
-      2  08:99B0
-      2  08:9985
-      2  08:9959
-      2  08:9916
-      2  08:98CD
-      2  08:9887
-      2  08:985B
-      2  08:980D
-      2  08:97E0
-      2  08:979A
       2  08:96B1
       2  08:93C7
       2  08:93B7
       2  08:939E
-      2  08:9399
       2  08:8DCB
       2  08:84EC
       2  08:84E2
@@ -2055,10 +2168,6 @@ Unknown runs, longest first (len bank:addr):
       2  01:AA30
       2  01:A98A
       2  00:821B
-      2  00:8048
-      2  00:8043
-      2  00:801E
-      2  00:8019
       1  0F:FFF9
       1  0F:FD87
       1  0F:FD85
@@ -2140,10 +2249,6 @@ Unknown runs, longest first (len bank:addr):
       1  0E:DE54
       1  0E:DE51
       1  0E:DE4D
-      1  0E:CA1F
-      1  0E:CA02
-      1  0E:C9F4
-      1  0E:C9D7
       1  0D:BFE5
       1  0D:BFDB
       1  0D:BFC7
@@ -2249,10 +2354,7 @@ Unknown runs, longest first (len bank:addr):
       1  0C:9CAC
       1  0C:9CA9
       1  0C:9CA5
-      1  0C:8FC4
-      1  0C:8FBD
       1  0C:8BBC
-      1  0C:8BB0
       1  0C:8B5D
       1  0C:89CE
       1  0C:89CA
@@ -2277,8 +2379,6 @@ Unknown runs, longest first (len bank:addr):
       1  0C:8824
       1  0C:8801
       1  0C:87DE
-      1  0C:87C1
-      1  0C:87BB
       1  0C:8601
       1  0C:84D1
       1  0C:84CB
@@ -2310,8 +2410,6 @@ Unknown runs, longest first (len bank:addr):
       1  0C:83E5
       1  0C:83DE
       1  0C:83C0
-      1  0B:BCF9
-      1  0B:BCE8
       1  0B:B2FF
       1  0B:B2D2
       1  0B:B2CF
@@ -2524,8 +2622,6 @@ Unknown runs, longest first (len bank:addr):
       1  09:BB68
       1  09:BB27
       1  09:B068
-      1  09:AB31
-      1  09:AB2E
       1  09:A781
       1  09:A450
       1  09:A44E
@@ -2552,25 +2648,7 @@ Unknown runs, longest first (len bank:addr):
       1  09:A0B8
       1  09:A0B6
       1  08:99EC
-      1  08:99B3
-      1  08:99AE
-      1  08:9989
-      1  08:9982
-      1  08:995D
-      1  08:9956
-      1  08:9910
-      1  08:98D1
-      1  08:98CA
-      1  08:988B
-      1  08:9884
-      1  08:985F
-      1  08:9858
-      1  08:9812
-      1  08:9809
-      1  08:97E4
-      1  08:97DD
-      1  08:979E
-      1  08:9797
+      1  08:99C2
       1  08:977A
       1  08:9778
       1  08:9775
@@ -2614,15 +2692,7 @@ Unknown runs, longest first (len bank:addr):
       1  08:93B3
       1  08:93AB
       1  08:93A8
-      1  08:9395
-      1  08:9393
-      1  08:9390
-      1  08:938D
-      1  08:938A
-      1  08:9386
-      1  08:9384
-      1  08:9381
-      1  08:937E
+      1  08:939A
       1  08:937B
       1  08:9377
       1  08:9375
@@ -2640,33 +2710,6 @@ Unknown runs, longest first (len bank:addr):
       1  08:8DCE
       1  08:8DC8
       1  08:8DC4
-      1  08:8D95
-      1  08:8D92
-      1  08:8D4D
-      1  08:8D49
-      1  08:8D08
-      1  08:8D04
-      1  08:8CCF
-      1  08:8CCC
-      1  08:8C6A
-      1  08:8C66
-      1  08:8BFB
-      1  08:8BF7
-      1  08:8BB2
-      1  08:8BAE
-      1  08:8B8D
-      1  08:8B8B
-      1  08:8B30
-      1  08:8B2B
-      1  08:8AE6
-      1  08:8AE2
-      1  08:8ABD
-      1  08:8ABB
-      1  08:8A89
-      1  08:8A85
-      1  08:8A43
-      1  08:8A3F
-      1  08:8A3B
       1  08:877D
       1  08:8779
       1  08:875D
@@ -3064,10 +3107,6 @@ Unknown runs, longest first (len bank:addr):
       1  04:9E0B
       1  04:9DF2
       1  04:9DC4
-      1  04:9BC5
-      1  04:9BC3
-      1  04:9BB6
-      1  04:9BB4
       1  04:9661
       1  03:BE9A
       1  03:BD3D
@@ -3284,15 +3323,9 @@ Unknown runs, longest first (len bank:addr):
       1  01:A829
       1  01:A819
       1  01:A809
-      1  01:A6D5
-      1  01:A6CC
       1  01:A030
       1  00:93EE
       1  00:93EC
-      1  00:93AE
-      1  00:93A9
-      1  00:939F
-      1  00:939A
       1  00:9390
       1  00:938B
       1  00:88A5

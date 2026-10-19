@@ -42,9 +42,9 @@ loc_0D_A03A:
 loc_0D_A045:
 	RTS                             ;C - - - - - 0x01A055 0D:A045: 60
 tbl_0D_A046:
-	.byte $80,$70,$90               ;- D 1 - - - 0x01A056 0D:A046:
+	.lobytes tbl_0D_B081-1, ofs_0D_A071-1, tbl_0D_B091-1;- D 1 - - - 0x01A056 0D:A046:
 tbl_0D_A049:
-	.byte $B0,$A0,$B0               ;- D 1 - - - 0x01A059 0D:A049:
+	.hibytes tbl_0D_B081-1, ofs_0D_A071-1, tbl_0D_B091-1;- D 1 - - - 0x01A059 0D:A049:
 ofs_0D_A04C:
 	LDA #$00                        ;C - - J - - 0x01A05C 0D:A04C: A9 00
 	STA ram_05D0,X                  ;C - - - - - 0x01A05E 0D:A04E: 9D D0 05
@@ -61,6 +61,7 @@ ofs_0D_A060:
 	LDY #$18                        ;C - - - - - 0x01A07A 0D:A06A: A0 18
 	JSR sub_0F_FB3E                 ;C - - - - - 0x01A07C 0D:A06C: 20 3E FB
 	BCS loc_0D_A07A                 ;C - - - - - 0x01A07F 0D:A06F: B0 09
+ofs_0D_A071:
 	LDA #$18                        ;C - - - - - 0x01A081 0D:A071: A9 18
 	LDY #$28                        ;C - - - - - 0x01A083 0D:A073: A0 28
 	JSR sub_0F_FB3E                 ;C - - - - - 0x01A085 0D:A075: 20 3E FB
@@ -1043,9 +1044,9 @@ loc_0D_A86C:
 loc_0D_A877:
 	RTS                             ;C - - - - - 0x01A887 0D:A877: 60
 tbl_0D_A878:
-	.byte $80,$AD,$2C               ;- D 1 - - - 0x01A888 0D:A878:
+	.lobytes ofs_0D_A780, ofs_0D_A7AD, ofs_0D_A82C;- D 1 - - - 0x01A888 0D:A878:
 tbl_0D_A87B:
-	.byte $A7,$A7,$A8               ;- D 1 - - - 0x01A88B 0D:A87B:
+	.hibytes ofs_0D_A780, ofs_0D_A7AD, ofs_0D_A82C;- D 1 - - - 0x01A88B 0D:A87B:
 tbl_0D_A87E:
 	.byte $09,$09,$09,$09           ;- - - - - - 0x01A88E 0D:A87E:
 	.byte $01,$05,$05,$05           ;- D 1 - - - 0x01A892 0D:A882:
@@ -1717,10 +1718,12 @@ tbl_0D_AE3E:
 	.res 8, $1E                     ;- D 1 - I - 0x01B070 0D:B060: fill 8 bytes
 	.res 8, $1F                     ;- D 1 - I - 0x01B078 0D:B068: fill 8 bytes
 	.res 16, $20                    ;- - - - - - 0x01B080 0D:B070: fill 16 bytes
-	.byte $6B,$53,$6C,$00,$33,$01,$00,$00,$6D,$6E,$6F,$70,$71,$72,$73,$74;- D 1 - I - 0x01B090 0D:B080:
-	.byte $75,$76,$77,$60,$78,$79,$7A,$7B,$7C,$7D,$69,$7E,$7F,$80,$7E,$1B;- D 1 - I - 0x01B0A0 0D:B090:
-	.res 8, $1E                     ;- D 1 - I - 0x01B0B0 0D:B0A0: fill 8 bytes
-	.res 8, $1F                     ;- D 1 - I - 0x01B0B8 0D:B0A8: fill 8 bytes
+	.byte $6B                       ;- D 1 - I - 0x01B090 0D:B080:
+tbl_0D_B081:
+	.byte $53,$6C,$00,$33,$01,$00,$00,$6D,$6E,$6F,$70,$71,$72,$73,$74,$75;- D 1 - I - 0x01B091 0D:B081:
+tbl_0D_B091:
+	.byte $76,$77,$60,$78,$79,$7A,$7B,$7C,$7D,$69,$7E,$7F,$80,$7E,$1B,$1E;- D 1 - I - 0x01B0A1 0D:B091:
+	.byte $1E,$1E,$1E,$1E,$1E,$1E,$1E,$1F,$1F,$1F,$1F,$1F,$1F,$1F,$1F;- D 1 - I - 0x01B0B1 0D:B0A1:
 	.res 16, $20                    ;- - - - - - 0x01B0C0 0D:B0B0: fill 16 bytes
 	.byte $00,$6B,$6C,$04,$21,$05,$05,$05,$81,$82,$83,$84,$26,$0D,$0D,$0D;- D 1 - I - 0x01B0D0 0D:B0C0:
 	.byte $85,$75,$77,$86,$87,$29,$40,$28,$88,$89,$8A,$8B,$4D,$4C,$42,$4C;- D 1 - I - 0x01B0E0 0D:B0D0:

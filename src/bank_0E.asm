@@ -1268,21 +1268,19 @@ sub_0E_C9B9:
 	STA ptr_00+1                    ;C - - - - - 0x01C9D5 0E:C9C5: 85 01
 	JMP (ptr_00)                    ;C - - - - - 0x01C9D7 0E:C9C7: 6C 00 00
 tbl_0E_C9CA:
-	.byte $20,$88,$B7,$0F,$A3,$FA,$3F,$5E;- D 2 - - - 0x01C9DA 0E:C9CA:
-	.byte $B4,$6C                   ;- - - - - - 0x01C9E2 0E:C9D2:
-	.byte $5A,$DD,$6A               ;- D 2 - - - 0x01C9E4 0E:C9D4:
-	.byte $B4                       ;- - - - - - 0x01C9E7 0E:C9D7:
-	.byte $5E,$B4,$B4,$B4,$B4,$B4,$B4,$B4,$B4,$B4,$B4,$B4,$B4,$B4,$B4,$B4;- D 2 - - - 0x01C9E8 0E:C9D8:
-	.res 12, $B4                    ;- D 2 - - - 0x01C9F8 0E:C9E8: fill 12 bytes
-	.byte $B4                       ;- - - - - - 0x01CA04 0E:C9F4:
+	.lobytes ofs_0E_CA20, loc_0E_CF88, ofs_0E_D2B7, loc_0E_D30F, ofs_0E_D7A3, ofs_0E_D9FA, ofs_0E_DA3F, ofs_0E_DE5E;- D 2 - - - 0x01C9DA 0E:C9CA:
+	.lobytes ofs_0E_CCB4, loc_0E_DC6C, ofs_0E_D45A, ofs_0E_DCDD, loc_0E_DD6A, ofs_0E_CCB4, ofs_0E_DE5E, ofs_0E_CCB4;- - - - - - 0x01C9E2 0E:C9D2:
+	.lobytes ofs_0E_CCB4, ofs_0E_CCB4, ofs_0E_CCB4, ofs_0E_CCB4, ofs_0E_CCB4, ofs_0E_CCB4, ofs_0E_CCB4, ofs_0E_CCB4;- D 2 - - - 0x01C9EA 0E:C9DA:
+	.lobytes ofs_0E_CCB4, ofs_0E_CCB4, ofs_0E_CCB4, ofs_0E_CCB4, ofs_0E_CCB4, ofs_0E_CCB4, ofs_0E_CCB4, ofs_0E_CCB4;- D 2 - - - 0x01C9F2 0E:C9E2:
+	.lobytes ofs_0E_CCB4, ofs_0E_CCB4, ofs_0E_CCB4, ofs_0E_CCB4, ofs_0E_CCB4, ofs_0E_CCB4, ofs_0E_CCB4, ofs_0E_CCB4;- D 2 - - - 0x01C9FA 0E:C9EA:
+	.lobytes ofs_0E_CCB4, ofs_0E_CCB4, ofs_0E_CCB4;- D 2 - - - 0x01CA02 0E:C9F2:
 tbl_0E_C9F5:
-	.byte $CA,$CF,$D2,$D3,$D7,$D9,$DA,$DE;- D 2 - - - 0x01CA05 0E:C9F5:
-	.byte $CC,$DC                   ;- - - - - - 0x01CA0D 0E:C9FD:
-	.byte $D4,$DC,$DD               ;- D 2 - - - 0x01CA0F 0E:C9FF:
-	.byte $CC                       ;- - - - - - 0x01CA12 0E:CA02:
-	.byte $DE,$CC,$CC,$CC,$CC,$CC,$CC,$CC,$CC,$CC,$CC,$CC,$CC,$CC,$CC,$CC;- D 2 - - - 0x01CA13 0E:CA03:
-	.res 12, $CC                    ;- D 2 - - - 0x01CA23 0E:CA13: fill 12 bytes
-	.byte $CC                       ;- - - - - - 0x01CA2F 0E:CA1F:
+	.hibytes ofs_0E_CA20, loc_0E_CF88, ofs_0E_D2B7, loc_0E_D30F, ofs_0E_D7A3, ofs_0E_D9FA, ofs_0E_DA3F, ofs_0E_DE5E;- D 2 - - - 0x01CA05 0E:C9F5:
+	.hibytes ofs_0E_CCB4, loc_0E_DC6C, ofs_0E_D45A, ofs_0E_DCDD, loc_0E_DD6A, ofs_0E_CCB4, ofs_0E_DE5E, ofs_0E_CCB4;- - - - - - 0x01CA0D 0E:C9FD:
+	.hibytes ofs_0E_CCB4, ofs_0E_CCB4, ofs_0E_CCB4, ofs_0E_CCB4, ofs_0E_CCB4, ofs_0E_CCB4, ofs_0E_CCB4, ofs_0E_CCB4;- D 2 - - - 0x01CA15 0E:CA05:
+	.hibytes ofs_0E_CCB4, ofs_0E_CCB4, ofs_0E_CCB4, ofs_0E_CCB4, ofs_0E_CCB4, ofs_0E_CCB4, ofs_0E_CCB4, ofs_0E_CCB4;- D 2 - - - 0x01CA1D 0E:CA0D:
+	.hibytes ofs_0E_CCB4, ofs_0E_CCB4, ofs_0E_CCB4, ofs_0E_CCB4, ofs_0E_CCB4, ofs_0E_CCB4, ofs_0E_CCB4, ofs_0E_CCB4;- D 2 - - - 0x01CA25 0E:CA15:
+	.hibytes ofs_0E_CCB4, ofs_0E_CCB4, ofs_0E_CCB4;- D 2 - - - 0x01CA2D 0E:CA1D:
 ofs_0E_CA20:
 	LDA playerInvincible            ;C - - J - - 0x01CA30 0E:CA20: A5 3B
 	BEQ loc_0E_CA26                 ;C - - - - - 0x01CA32 0E:CA22: F0 02
@@ -2520,9 +2518,9 @@ loc_0E_D39E:
 	STA ptr_00+1                    ;C - - - - - 0x01D3B8 0E:D3A8: 85 01
 	JMP (ptr_00)                    ;C - - - - - 0x01D3BA 0E:D3AA: 6C 00 00
 tbl_0E_D3AD:
-	.byte $B3,$7D,$41               ;- D 2 - - - 0x01D3BD 0E:D3AD:
+	.lobytes ofs_0E_D3B3, ofs_0E_D47D, ofs_0E_D641;- D 2 - - - 0x01D3BD 0E:D3AD:
 tbl_0E_D3B0:
-	.byte $D3,$D4,$D6               ;- D 2 - - - 0x01D3C0 0E:D3B0:
+	.hibytes ofs_0E_D3B3, ofs_0E_D47D, ofs_0E_D641;- D 2 - - - 0x01D3C0 0E:D3B0:
 ofs_0E_D3B3:
 	LDA ram_0580                    ;C - - J - - 0x01D3C3 0E:D3B3: AD 80 05
 	CMP #$0D                        ;C - - - - - 0x01D3C6 0E:D3B6: C9 0D
@@ -3051,11 +3049,11 @@ ofs_0E_D7A3:
 	STA ptr_00+1                    ;C - - - - - 0x01D7BD 0E:D7AD: 85 01
 	JMP (ptr_00)                    ;C - - - - - 0x01D7BF 0E:D7AF: 6C 00 00
 tbl_0E_D7B2:
-	.byte $B8                       ;- D 2 - - - 0x01D7C2 0E:D7B2:
+	.lobytes ofs_0E_D7B8            ;- D 2 - - - 0x01D7C2 0E:D7B2:
 tbl_0E_D7B3:
-	.byte $86,$9A                   ;- D 2 - - - 0x01D7C3 0E:D7B3:
+	.lobytes ofs_0E_D886, ofs_0E_D89A;- D 2 - - - 0x01D7C3 0E:D7B3:
 tbl_0E_D7B5:
-	.byte $D7,$D8,$D8               ;- D 2 - - - 0x01D7C5 0E:D7B5:
+	.hibytes ofs_0E_D7B8, ofs_0E_D886, ofs_0E_D89A;- D 2 - - - 0x01D7C5 0E:D7B5:
 ofs_0E_D7B8:
 	LDA ram_0014                    ;C - - J - - 0x01D7C8 0E:D7B8: A5 14
 	CMP #$40                        ;C - - - - - 0x01D7CA 0E:D7BA: C9 40
@@ -3907,16 +3905,20 @@ sub_0E_DE33:
 	STA playerHealth                ;C - - - - - 0x01DE53 0E:DE43: 85 3A
 	RTS                             ;C - - - - - 0x01DE55 0E:DE45: 60
 tbl_0E_DE46:
-	.byte $4C,$52,$58               ;- D 2 - - - 0x01DE56 0E:DE46:
+	.lobytes tbl_0E_DE4C, tbl_0E_DE52, tbl_0E_DE58;- D 2 - - - 0x01DE56 0E:DE46:
 tbl_0E_DE49:
-	.byte $DE,$DE,$DE,$40           ;- D 2 - - - 0x01DE59 0E:DE49:
+	.hibytes tbl_0E_DE4C, tbl_0E_DE52, tbl_0E_DE58;- D 2 - - - 0x01DE59 0E:DE49:
+tbl_0E_DE4C:
+	.byte $40                       ;- D 2 - I - 0x01DE5C 0E:DE4C:
 	.byte $48                       ;- - - - - - 0x01DE5D 0E:DE4D:
 	.byte $50,$58,$60               ;- D 2 - I - 0x01DE5E 0E:DE4E:
 	.byte $68                       ;- - - - - - 0x01DE61 0E:DE51:
+tbl_0E_DE52:
 	.byte $30,$38                   ;- D 2 - I - 0x01DE62 0E:DE52:
 	.byte $40                       ;- - - - - - 0x01DE64 0E:DE54:
 	.byte $48,$50                   ;- D 2 - I - 0x01DE65 0E:DE55:
 	.byte $58                       ;- - - - - - 0x01DE67 0E:DE57:
+tbl_0E_DE58:
 	.byte $50,$58,$60,$68           ;- D 2 - I - 0x01DE68 0E:DE58:
 	.byte $68,$68                   ;- - - - - - 0x01DE6C 0E:DE5C:
 ofs_0E_DE5E:

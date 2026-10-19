@@ -801,6 +801,7 @@ ofs_0C_8647:
 ofs_0C_864C:
 	LDA tbl_0C_8862,Y               ;C - - J - - 0x01865C 0C:864C: B9 62 88
 	BNE loc_0C_8686                 ;C - - - - - 0x01865F 0C:864F: D0 35
+ofs_0C_8651:
 	LDA tbl_0C_8885,Y               ;c - - - - - 0x018661 0C:8651: B9 85 88
 	BNE loc_0C_8686                 ;c - - - - - 0x018664 0C:8654: D0 30
 ofs_0C_8656:
@@ -987,15 +988,13 @@ tbl_0C_87A8:
 tbl_0C_87AB:
 	.byte $02,$04,$04,$08,$08       ;- D 0 - - - 0x0187BB 0C:87AB:
 tbl_0C_87B0:
-	.byte $C8,$F0,$18               ;- D 0 - - - 0x0187C0 0C:87B0:
+	.lobytes ofs_0C_85C8, ofs_0C_85F0, ofs_0C_8618;- D 0 - - - 0x0187C0 0C:87B0:
 tbl_0C_87B3:
-	.byte $85,$85,$86               ;- D 0 - - - 0x0187C3 0C:87B3:
+	.hibytes ofs_0C_85C8, ofs_0C_85F0, ofs_0C_8618;- D 0 - - - 0x0187C3 0C:87B3:
 tbl_0C_87B6:
-	.byte $38,$3D,$42,$47,$4C       ;- D 0 - - - 0x0187C6 0C:87B6:
-	.byte $51                       ;- - - - - - 0x0187CB 0C:87BB:
+	.lobytes ofs_0C_8638, ofs_0C_863D, ofs_0C_8642, ofs_0C_8647, ofs_0C_864C, ofs_0C_8651;- D 0 - - - 0x0187C6 0C:87B6:
 tbl_0C_87BC:
-	.byte $86,$86,$86,$86,$86       ;- D 0 - - - 0x0187CC 0C:87BC:
-	.byte $86                       ;- - - - - - 0x0187D1 0C:87C1:
+	.hibytes ofs_0C_8638, ofs_0C_863D, ofs_0C_8642, ofs_0C_8647, ofs_0C_864C, ofs_0C_8651;- D 0 - - - 0x0187CC 0C:87BC:
 tbl_0C_87C2:
 	.byte $56,$5B,$60,$65,$6A       ;- D 0 - - - 0x0187D2 0C:87C2:
 	.byte $6F                       ;W 0x0187D7 0C:87C7:
@@ -1318,9 +1317,9 @@ loc_0C_8AC2:
 	STA playerExp+1                 ;C - - - - - 0x018ADB 0C:8ACB: 85 6D
 	RTS                             ;C - - - - - 0x018ADD 0C:8ACD: 60
 tbl_0C_8ACE:
-	.byte $F2,$08,$1E               ;- D 0 - - - 0x018ADE 0C:8ACE:
+	.lobytes ofs_0C_89F2, ofs_0C_8A08, ofs_0C_8A1E;- D 0 - - - 0x018ADE 0C:8ACE:
 tbl_0C_8AD1:
-	.byte $89,$8A,$8A               ;- D 0 - - - 0x018AE1 0C:8AD1:
+	.hibytes ofs_0C_89F2, ofs_0C_8A08, ofs_0C_8A1E;- D 0 - - - 0x018AE1 0C:8AD1:
 tbl_0C_8AD4:
 	.byte $33,$54,$90,$47,$50       ;- D 0 - - - 0x018AE4 0C:8AD4:
 tbl_0C_8AD9:
@@ -1434,13 +1433,17 @@ loc_0C_8BA6:
 	JSR sub_0C_8C00                 ;C - - - - - 0x018BB6 0C:8BA6: 20 00 8C
 	RTS                             ;C - - - - - 0x018BB9 0C:8BA9: 60
 tbl_0C_8BAA:
-	.byte $B0,$B6,$BC               ;- D 0 - - - 0x018BBA 0C:8BAA:
+	.lobytes ofs_0C_8BB0, tbl_0C_8BB6, tbl_0C_8BBC;- D 0 - - - 0x018BBA 0C:8BAA:
 tbl_0C_8BAD:
-	.byte $8B,$8B,$8B               ;- D 0 - - - 0x018BBD 0C:8BAD:
-	.byte $40                       ;- - - - - - 0x018BC0 0C:8BB0:
+	.hibytes ofs_0C_8BB0, tbl_0C_8BB6, tbl_0C_8BBC;- D 0 - - - 0x018BBD 0C:8BAD:
+ofs_0C_8BB0:
+	RTI                             ;c - - - - - 0x018BC0 0C:8BB0: 40
 	.byte $48,$50,$58,$60           ;- D 0 - I - 0x018BC1 0C:8BB1:
-	.byte $68,$30                   ;- - - - - - 0x018BC5 0C:8BB5:
+	.byte $68                       ;- - - - - - 0x018BC5 0C:8BB5:
+tbl_0C_8BB6:
+	.byte $30                       ;- - - - - - 0x018BC6 0C:8BB6:
 	.byte $38,$40,$48,$50,$58       ;- D 0 - I - 0x018BC7 0C:8BB7:
+tbl_0C_8BBC:
 	.byte $50                       ;- - - - - - 0x018BCC 0C:8BBC:
 	.byte $58,$60,$68               ;- D 0 - I - 0x018BCD 0C:8BBD:
 	.byte $68,$68,$A9,$2E,$20,$4C,$F3,$A5,$AF,$C9,$09,$F0,$05,$18,$69,$01;- - - - - - 0x018BD0 0C:8BC0:
@@ -1495,9 +1498,9 @@ ofs_0C_8C1C:
 	STA ptr_00+1                    ;C - - - - - 0x018C3A 0C:8C2A: 85 01
 	JMP (ptr_00)                    ;C - - - - - 0x018C3C 0C:8C2C: 6C 00 00
 tbl_0C_8C2F:
-	.byte $3F,$98,$00,$88,$43,$5A,$E5,$8D;- D 0 - - - 0x018C3F 0C:8C2F:
+	.lobytes ofs_0C_8C3F, ofs_0C_8C98, ofs_0C_8D00, ofs_0C_8D88, ofs_0C_8E43, ofs_0C_8E5A, ofs_0C_8EE5, ofs_0C_8F8D;- D 0 - - - 0x018C3F 0C:8C2F:
 tbl_0C_8C37:
-	.byte $8C,$8C,$8D,$8D,$8E,$8E,$8E,$8F;- D 0 - - - 0x018C47 0C:8C37:
+	.hibytes ofs_0C_8C3F, ofs_0C_8C98, ofs_0C_8D00, ofs_0C_8D88, ofs_0C_8E43, ofs_0C_8E5A, ofs_0C_8EE5, ofs_0C_8F8D;- D 0 - - - 0x018C47 0C:8C37:
 ofs_0C_8C3F:
 	LDA #$10                        ;C - - J - - 0x018C4F 0C:8C3F: A9 10
 	STA ram_0510,X                  ;C - - - - - 0x018C51 0C:8C41: 9D 10 05
@@ -1588,6 +1591,7 @@ loc_0C_8CD9:
 	SEC                             ;C - - - - - 0x018D0A 0C:8CFA: 38
 	SBC #$08                        ;C - - - - - 0x018D0B 0C:8CFB: E9 08
 	STA objY,X                      ;C - - - - - 0x018D0D 0C:8CFD: 9D C0 03
+ofs_0C_8D00:
 	LDA gameAction                  ;C - - - - - 0x018D10 0C:8D00: A5 30
 	CMP #$06                        ;C - - - - - 0x018D12 0C:8D02: C9 06
 	BEQ loc_0C_8D15                 ;C - - - - - 0x018D14 0C:8D04: F0 0F
@@ -1653,6 +1657,7 @@ loc_0C_8D61:
 	SEC                             ;C - - - - - 0x018D92 0C:8D82: 38
 	SBC #$06                        ;C - - - - - 0x018D93 0C:8D83: E9 06
 	STA objY,X                      ;C - - - - - 0x018D95 0C:8D85: 9D C0 03
+ofs_0C_8D88:
 	LDA gameAction                  ;C - - - - - 0x018D98 0C:8D88: A5 30
 	CMP #$06                        ;C - - - - - 0x018D9A 0C:8D8A: C9 06
 	BEQ loc_0C_8D9D                 ;C - - - - - 0x018D9C 0C:8D8C: F0 0F
@@ -1747,6 +1752,7 @@ loc_0C_8E1C:
 	SBC #$06                        ;C - - - - - 0x018E4B 0C:8E3B: E9 06
 	STA objY,X                      ;C - - - - - 0x018E4D 0C:8E3D: 9D C0 03
 	INC ram_0300,X                  ;C - - - - - 0x018E50 0C:8E40: FE 00 03
+ofs_0C_8E43:
 	LDA #$00                        ;C - - - - - 0x018E53 0C:8E43: A9 00
 	STA ram_0400,X                  ;C - - - - - 0x018E55 0C:8E45: 9D 00 04
 	LDA #$02                        ;C - - - - - 0x018E58 0C:8E48: A9 02
@@ -1756,6 +1762,7 @@ loc_0C_8E1C:
 	LDA #$01                        ;C - - - - - 0x018E62 0C:8E52: A9 01
 	STA ram_0430,X                  ;C - - - - - 0x018E64 0C:8E54: 9D 30 04
 	INC ram_0300,X                  ;C - - - - - 0x018E67 0C:8E57: FE 00 03
+ofs_0C_8E5A:
 	LDA ram_0590,X                  ;C - - - - - 0x018E6A 0C:8E5A: BD 90 05
 	CMP #$0C                        ;C - - - - - 0x018E6D 0C:8E5D: C9 0C
 	BNE loc_0C_8E64                 ;C - - - - - 0x018E6F 0C:8E5F: D0 03
@@ -1822,6 +1829,7 @@ loc_0C_8EC5:
 	LDA #$00                        ;C - - - - - 0x018EED 0C:8EDD: A9 00
 	STA ram_0410,X                  ;C - - - - - 0x018EEF 0C:8EDF: 9D 10 04
 	INC ram_0300,X                  ;C - - - - - 0x018EF2 0C:8EE2: FE 00 03
+ofs_0C_8EE5:
 	LDA ram_04C0,X                  ;C - - - - - 0x018EF5 0C:8EE5: BD C0 04
 	CMP #$FE                        ;C - - - - - 0x018EF8 0C:8EE8: C9 FE
 	BEQ loc_0C_8EF2                 ;C - - - - - 0x018EFA 0C:8EEA: F0 06
@@ -1926,13 +1934,9 @@ ofs_0C_8FA5:
 	STA ptr_00+1                    ;C - - - - - 0x018FC3 0C:8FB3: 85 01
 	JMP (ptr_00)                    ;C - - - - - 0x018FC5 0C:8FB5: 6C 00 00
 tbl_0C_8FB8:
-	.byte $C6,$36,$78,$BA,$28       ;- D 0 - - - 0x018FC8 0C:8FB8:
-	.byte $8D                       ;- - - - - - 0x018FCD 0C:8FBD:
-	.byte $7E                       ;- D 0 - - - 0x018FCE 0C:8FBE:
+	.lobytes ofs_0C_8FC6, ofs_0C_9036, ofs_0C_9078, ofs_0C_90BA, ofs_0C_9128, ofs_0C_8F8D, ofs_0C_917E;- D 0 - - - 0x018FC8 0C:8FB8:
 tbl_0C_8FBF:
-	.byte $8F,$90,$90,$90,$91       ;- D 0 - - - 0x018FCF 0C:8FBF:
-	.byte $8F                       ;- - - - - - 0x018FD4 0C:8FC4:
-	.byte $91                       ;- D 0 - - - 0x018FD5 0C:8FC5:
+	.hibytes ofs_0C_8FC6, ofs_0C_9036, ofs_0C_9078, ofs_0C_90BA, ofs_0C_9128, ofs_0C_8F8D, ofs_0C_917E;- D 0 - - - 0x018FCF 0C:8FBF:
 ofs_0C_8FC6:
 	LDA #$33                        ;C - - J - - 0x018FD6 0C:8FC6: A9 33
 	JSR sub_0F_F34C                 ;C - - - - - 0x018FD8 0C:8FC8: 20 4C F3
@@ -2141,6 +2145,7 @@ loc_0C_9173:
 	STA ram_00A7                    ;C - - - - - 0x019186 0C:9176: 85 A7
 	INC ram_0300,X                  ;C - - - - - 0x019188 0C:9178: FE 00 03
 	INC ram_0300,X                  ;C - - - - - 0x01918B 0C:917B: FE 00 03
+ofs_0C_917E:
 	LDA ram_04C0,X                  ;C - - - - - 0x01918E 0C:917E: BD C0 04
 	CMP #$FE                        ;C - - - - - 0x019191 0C:9181: C9 FE
 	BEQ loc_0C_91B3                 ;C - - - - - 0x019193 0C:9183: F0 2E
@@ -2354,9 +2359,11 @@ ofs_0C_9332:
 	STA ptr_00+1                    ;C - - - - - 0x019350 0C:9340: 85 01
 	JMP (ptr_00)                    ;C - - - - - 0x019352 0C:9342: 6C 00 00
 tbl_0C_9345:
-	.byte $57,$D1,$57,$D4,$51,$CE,$02,$8D,$8D;- D 0 - - - 0x019355 0C:9345:
+	.lobytes ofs_0C_9357, ofs_0C_93D1, ofs_0C_9457, ofs_0C_94D4, ofs_0C_9551, ofs_0C_95CE, ofs_0C_9602, ofs_0C_968D;- D 0 - - - 0x019355 0C:9345:
+	.lobytes ofs_0C_8F8D            ;- D 0 - - - 0x01935D 0C:934D:
 tbl_0C_934E:
-	.byte $93,$93,$94,$94,$95,$95,$96,$96,$8F;- D 0 - - - 0x01935E 0C:934E:
+	.hibytes ofs_0C_9357, ofs_0C_93D1, ofs_0C_9457, ofs_0C_94D4, ofs_0C_9551, ofs_0C_95CE, ofs_0C_9602, ofs_0C_968D;- D 0 - - - 0x01935E 0C:934E:
+	.hibytes ofs_0C_8F8D            ;- D 0 - - - 0x019366 0C:9356:
 ofs_0C_9357:
 	LDA #$33                        ;C - - J - - 0x019367 0C:9357: A9 33
 	JSR sub_0F_F34C                 ;C - - - - - 0x019369 0C:9359: 20 4C F3
@@ -2768,6 +2775,7 @@ loc_0C_966D:
 	LDA #$00                        ;C - - - - - 0x019695 0C:9685: A9 00
 	STA ram_0410,X                  ;C - - - - - 0x019697 0C:9687: 9D 10 04
 	INC ram_0300,X                  ;C - - - - - 0x01969A 0C:968A: FE 00 03
+ofs_0C_968D:
 	LDA ram_04C0,X                  ;C - - - - - 0x01969D 0C:968D: BD C0 04
 	CMP #$FE                        ;C - - - - - 0x0196A0 0C:9690: C9 FE
 	BEQ loc_0C_96C5                 ;C - - - - - 0x0196A2 0C:9692: F0 31

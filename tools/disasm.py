@@ -120,6 +120,7 @@ class Disasm:
         self.rom_user, self.force, self.user_notes = load_rom_labels(rom_lbl_path)
         self.refs = defaultdict(set)
         self.cur_site = None
+        self.split = {}             # (bank, idx) -> ('lo'|'hi', target bank, target idx, adj) for split address tables
         self.hints = {}             # (site bank, idx) -> target bank for raw $8000-$BFFF operands
         self.hint_why = {}
         self.labels = {}
@@ -384,6 +385,59 @@ class Disasm:
                     p += 1
         return found
 
+    def detect_split_tables(self):
+        """Separate low-byte / high-byte address tables: two LDA tbl,X (or ,Y) a few instructions apart whose
+        operands differ by the table length n, and whose n combined values are all valid ROM addresses."""
+        found = 0
+        for b in range(NBANKS):
+            k = self.kind[b]
+            L = [(i,) + self.decode(b, i) for i in range(BANK_SIZE) if k[i] == 1]
+            for n, (i, mn, mode, ln) in enumerate(L):
+                if mode not in ('abx', 'aby') or mn != 'LDA':
+                    continue
+                a = self.operand(b, i, ln)
+                if a < 0x8000:
+                    continue
+                for y in L[n + 1:n + 8]:
+                    if y[2] != mode or y[1] != 'LDA':
+                        continue
+                    a2 = self.operand(b, y[0], y[3])
+                    dd = a2 - a
+                    if a2 >= 0x8000 and 2 <= abs(dd) <= 64:
+                        lo, hi, cnt = (a, a2, dd) if dd > 0 else (a2, a, -dd)
+                        found += self.try_split(b, lo, hi, cnt)
+                    break
+        return found
+
+    def try_split(self, sb, lo, hi, cnt):
+        rl, rh = self.resolve(sb, lo), self.resolve(sb, hi)
+        if not rl or not rh or rl[0] != rh[0] or (rl[0], rl[1]) in self.split:
+            return 0
+        tb, il, ih = rl[0], rl[1], rh[1]
+        k = self.kind[tb]
+        if il + cnt > BANK_SIZE or ih + cnt > BANK_SIZE:
+            return 0
+        if any(k[il + q] not in (0, 3) or k[ih + q] not in (0, 3) or (tb, il + q) in self.split
+               or (tb, ih + q) in self.split for q in range(cnt)):
+            return 0
+        for adj in (0, 1):
+            tg = []
+            for q in range(cnt):
+                v = ((self.rom[tb][il + q] | (self.rom[tb][ih + q] << 8)) + adj) & 0xFFFF
+                r = self.resolve(tb, v) if 0x8000 <= v else None
+                if not r or self.kind[r[0]][r[1]] == 2 or self.cdl[r[0]][r[1]] & 0 :
+                    break
+                tg.append(r)
+            if len(tg) == cnt:
+                for q, r in enumerate(tg):
+                    self.split[(tb, il + q)] = ('lo', r[0], r[1], adj)
+                    self.split[(tb, ih + q)] = ('hi', r[0], r[1], adj)
+                    k[il + q] = k[ih + q] = 3
+                    if self.kind[r[0]][r[1]] == 0:
+                        self.table_targets.add((r[0], r[1]))
+                return 1
+        return 0
+
     # ------------------------------------------------------------------ targets / labels
     def start_of(self, b, idx):
         while idx > 0 and self.kind[b][idx] == 2:
@@ -431,6 +485,9 @@ class Disasm:
                     i += 2
                 else:
                     i += 1
+        for (sb, si), (wh, tb, ti, adj) in self.split.items():
+            if wh == 'lo':
+                self.refs[(tb, self.start_of(tb, ti))].add('ptr')
         for key in self.rom_user:
             b, i = key
             self.refs[(b, self.start_of(b, i))].add('user')
@@ -608,9 +665,23 @@ class Disasm:
                 o.append('\t%-32s;W 0x%06X %02X:%04X:' % ('.word ' + ', '.join(items), off0 + i, b, base + i))
                 i = j
                 continue
+            if (b, i) in self.split:
+                wh = self.split[(b, i)][0]
+                items, j = [], i
+                while j < BANK_SIZE and j - i < 8 and (b, j) in self.split and self.split[(b, j)][0] == wh                         and (j == i or ((b, j) not in self.labels and (b, j) not in self.notes
+                                        and (b, j) not in self.user_notes_at)):
+                    _, tb, ti, adj = self.split[(b, j)]
+                    ts = self.start_of(tb, ti)
+                    e = self.labels[(tb, ts)] + ('+%d' % (ti - ts) if ti != ts else '')
+                    items.append(e + ('-1' if adj else ''))
+                    j += 1
+                o.append('	%-32s;%s 0x%06X %02X:%04X:' % ('.%sbytes %s' % (wh, ', '.join(items)),
+                                                            self.cdl_flags(cdl[i]), off0 + i, b, base + i))
+                i = j
+                continue
             if kd in (0, 3):                                 # run of identical bytes -> .res
                 j = i + 1
-                while j < BANK_SIZE and rom[j] == rom[i] and k[j] == kd and cdl[j] == cdl[i]                         and (b, j) not in self.labels and (b, j) not in self.notes                         and (b, j) not in self.user_notes_at:
+                while j < BANK_SIZE and rom[j] == rom[i] and k[j] == kd and cdl[j] == cdl[i]                         and (b, j) not in self.labels and (b, j) not in self.notes                         and (b, j) not in self.user_notes_at and (b, j) not in self.split:
                     j += 1
                 if j - i >= FILL_MIN:
                     o.append('	%-32s;%s 0x%06X %02X:%04X: fill %d bytes' % (
@@ -620,6 +691,7 @@ class Disasm:
             j = i + 1 if kd == 4 else i                      # lone half of a word: emit as a single byte
             while kd != 4 and j < BANK_SIZE and j - i < 16 and k[j] in (0, 3) and \
                     (j == i or ((b, j) not in self.labels and (b, j) not in self.notes)) \
+                    and (b, j) not in self.split \
                     and (k[j] == 3) == (k[i] == 3):
                 j += 1
             o.append('\t%-32s;%s 0x%06X %02X:%04X:%s' % ('.byte ' + ','.join('$%02X' % x for x in rom[i:j]),
@@ -864,7 +936,7 @@ def main():
     if not a.no_trace:
         for rnd in range(8):
             D.trace()
-            if not D.detect_tables():
+            if not (D.detect_tables() + D.detect_split_tables()):
                 break
         print('trace: %d instructions found, %d pointer-table targets' % (len(D.traced), len(D.table_targets)))
     D.infer_banks()

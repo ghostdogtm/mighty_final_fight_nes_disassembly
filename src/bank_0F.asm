@@ -203,14 +203,32 @@ ofs_0F_E184:
 	STA objX                        ;C - - - - - 0x01E19B 0F:E18B: 8D 60 03
 	RTS                             ;C - - - - - 0x01E19E 0F:E18E: 60
 tbl_0F_E18F:
-	.byte $A3,$A6,$A9,$AC,$AF       ;- D 3 - - - 0x01E19F 0F:E18F:
+	.lobytes tbl_0F_E1A3, tbl_0F_E1A6, tbl_0F_E1A9, tbl_0F_E1AC, tbl_0F_E1AF;- D 3 - - - 0x01E19F 0F:E18F:
 tbl_0F_E194:
-	.byte $E1,$E1,$E1,$E1,$E1       ;- D 3 - - - 0x01E1A4 0F:E194:
+	.hibytes tbl_0F_E1A3, tbl_0F_E1A6, tbl_0F_E1A9, tbl_0F_E1AC, tbl_0F_E1AF;- D 3 - - - 0x01E1A4 0F:E194:
 tbl_0F_E199:
-	.byte $B2,$B5,$B8,$BB,$BE       ;- D 3 - - - 0x01E1A9 0F:E199:
+	.lobytes tbl_0F_E1B2, tbl_0F_E1B5, tbl_0F_E1B8, tbl_0F_E1BB, tbl_0F_E1BE;- D 3 - - - 0x01E1A9 0F:E199:
 tbl_0F_E19E:
-	.byte $E1,$E1,$E1,$E1,$E1,$90,$81,$00,$98,$98,$A0,$98,$98,$88,$98,$78;- D 3 - - - 0x01E1AE 0F:E19E:
-	.byte $A0,$98,$98,$98,$30,$0C,$40,$30,$30,$00,$30,$30,$18,$30,$40,$30;- D 3 - I - 0x01E1BE 0F:E1AE:
+	.hibytes tbl_0F_E1B2, tbl_0F_E1B5, tbl_0F_E1B8, tbl_0F_E1BB, tbl_0F_E1BE;- D 3 - - - 0x01E1AE 0F:E19E:
+tbl_0F_E1A3:
+	.byte $90,$81,$00               ;- D 3 - I - 0x01E1B3 0F:E1A3:
+tbl_0F_E1A6:
+	.byte $98,$98,$A0               ;- D 3 - I - 0x01E1B6 0F:E1A6:
+tbl_0F_E1A9:
+	.byte $98,$98,$88               ;- D 3 - I - 0x01E1B9 0F:E1A9:
+tbl_0F_E1AC:
+	.byte $98,$78,$A0               ;- D 3 - I - 0x01E1BC 0F:E1AC:
+tbl_0F_E1AF:
+	.byte $98,$98,$98               ;- D 3 - I - 0x01E1BF 0F:E1AF:
+tbl_0F_E1B2:
+	.byte $30,$0C,$40               ;- D 3 - I - 0x01E1C2 0F:E1B2:
+tbl_0F_E1B5:
+	.byte $30,$30,$00               ;- D 3 - I - 0x01E1C5 0F:E1B5:
+tbl_0F_E1B8:
+	.byte $30,$30,$18               ;- D 3 - I - 0x01E1C8 0F:E1B8:
+tbl_0F_E1BB:
+	.byte $30,$40,$30               ;- D 3 - I - 0x01E1CB 0F:E1BB:
+tbl_0F_E1BE:
 	.byte $30,$30,$30               ;- D 3 - I - 0x01E1CE 0F:E1BE:
 tbl_0F_E1C1:
 	.byte $4C,$80,$19               ;- D 3 - - - 0x01E1D1 0F:E1C1:
@@ -1349,11 +1367,21 @@ loc_0F_E97E:
 	STX ram_0065                    ;C - - - - - 0x01E999 0F:E989: 86 65
 	RTS                             ;C - - - - - 0x01E99B 0F:E98B: 60
 tbl_0F_E98C:
-	.byte $98,$9E,$A4,$AA,$B0,$B6   ;- D 3 - - - 0x01E99C 0F:E98C:
+	.lobytes tbl_0F_E998, tbl_0F_E99E, tbl_0F_E9A4, tbl_0F_E9AA, tbl_0F_E9B0, tbl_0F_E9B6;- D 3 - - - 0x01E99C 0F:E98C:
 tbl_0F_E992:
-	.byte $E9,$E9,$E9,$E9,$E9,$E9,$73,$74,$74,$74,$74,$74,$73,$73,$74,$74;- D 3 - - - 0x01E9A2 0F:E992:
-	.byte $74,$74,$73,$73,$73,$74,$74,$74,$73,$73,$73,$73,$74,$74,$73,$73;- D 3 - I - 0x01E9B2 0F:E9A2:
-	.byte $73,$73,$73,$74,$73,$73,$73,$73,$73,$73;- D 3 - I - 0x01E9C2 0F:E9B2:
+	.hibytes tbl_0F_E998, tbl_0F_E99E, tbl_0F_E9A4, tbl_0F_E9AA, tbl_0F_E9B0, tbl_0F_E9B6;- D 3 - - - 0x01E9A2 0F:E992:
+tbl_0F_E998:
+	.byte $73,$74,$74,$74,$74,$74   ;- D 3 - I - 0x01E9A8 0F:E998:
+tbl_0F_E99E:
+	.byte $73,$73,$74,$74,$74,$74   ;- D 3 - I - 0x01E9AE 0F:E99E:
+tbl_0F_E9A4:
+	.byte $73,$73,$73,$74,$74,$74   ;- D 3 - I - 0x01E9B4 0F:E9A4:
+tbl_0F_E9AA:
+	.byte $73,$73,$73,$73,$74,$74   ;- D 3 - I - 0x01E9BA 0F:E9AA:
+tbl_0F_E9B0:
+	.byte $73,$73,$73,$73,$73,$74   ;- D 3 - I - 0x01E9C0 0F:E9B0:
+tbl_0F_E9B6:
+	.byte $73,$73,$73,$73,$73,$73   ;- D 3 - I - 0x01E9C6 0F:E9B6:
 sub_0F_E9BC:
 	LDX #$0F                        ;C - - - - - 0x01E9CC 0F:E9BC: A2 0F
 	LDA ram_0300,X                  ;C - - - - - 0x01E9CE 0F:E9BE: BD 00 03

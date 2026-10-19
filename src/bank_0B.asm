@@ -963,9 +963,9 @@ loc_0B_B63F:
 loc_0B_B64D:
 	RTS                             ;C - - - - - 0x01765D 0B:B64D: 60
 tbl_0B_B64E:
-	.byte $49,$66,$03,$11           ;- D 1 - - - 0x01765E 0B:B64E:
+	.lobytes ofs_0B_B349, ofs_0B_B366, ofs_0B_B403, ofs_0B_B411;- D 1 - - - 0x01765E 0B:B64E:
 tbl_0B_B652:
-	.byte $B3,$B3,$B4,$B4           ;- D 1 - - - 0x017662 0B:B652:
+	.hibytes ofs_0B_B349, ofs_0B_B366, ofs_0B_B403, ofs_0B_B411;- D 1 - - - 0x017662 0B:B652:
 tbl_0B_B656:
 	.byte $00,$00,$00,$FF,$FF,$FF,$FF,$FF;- D 1 - - - 0x017666 0B:B656:
 tbl_0B_B65E:
@@ -1753,17 +1753,15 @@ sub_0B_BCD9:
 loc_0B_BCE5:
 	RTS                             ;C - - - - - 0x017CF5 0B:BCE5: 60
 tbl_0B_BCE6:
-	.byte $0B,$8C                   ;- D 1 - - - 0x017CF6 0B:BCE6:
-	.byte $AC                       ;- - - - - - 0x017CF8 0B:BCE8:
-	.byte $25,$6F,$D3               ;- D 1 - - - 0x017CF9 0B:BCE9:
+	.lobytes ofs_0B_B80B, ofs_0B_BB8C, ofs_0B_BBAC, ofs_0B_B825, ofs_0B_B86F, ofs_0B_B8D3;- D 1 - - - 0x017CF6 0B:BCE6:
 tbl_0B_BCEC:
-	.byte $29,$8C,$AC,$58,$7B,$68,$9A,$D0,$E8,$05,$53;- D 1 - - - 0x017CFC 0B:BCEC:
+	.lobytes ofs_0B_B929, ofs_0B_BB8C, ofs_0B_BBAC, ofs_0B_B958, ofs_0B_B97B, ofs_0B_BA68, ofs_0B_BA9A, ofs_0B_BAD0;- D 1 - - - 0x017CFC 0B:BCEC:
+	.lobytes ofs_0B_BAE8, ofs_0B_BB05, ofs_0B_BB53;- D 1 - - - 0x017D04 0B:BCF4:
 tbl_0B_BCF7:
-	.byte $B8,$BB                   ;- D 1 - - - 0x017D07 0B:BCF7:
-	.byte $BB                       ;- - - - - - 0x017D09 0B:BCF9:
-	.byte $B8,$B8,$B8               ;- D 1 - - - 0x017D0A 0B:BCFA:
+	.hibytes ofs_0B_B80B, ofs_0B_BB8C, ofs_0B_BBAC, ofs_0B_B825, ofs_0B_B86F, ofs_0B_B8D3;- D 1 - - - 0x017D07 0B:BCF7:
 tbl_0B_BCFD:
-	.byte $B9,$BB,$BB,$B9,$B9,$BA,$BA,$BA,$BA,$BB,$BB;- D 1 - - - 0x017D0D 0B:BCFD:
+	.hibytes ofs_0B_B929, ofs_0B_BB8C, ofs_0B_BBAC, ofs_0B_B958, ofs_0B_B97B, ofs_0B_BA68, ofs_0B_BA9A, ofs_0B_BAD0;- D 1 - - - 0x017D0D 0B:BCFD:
+	.hibytes ofs_0B_BAE8, ofs_0B_BB05, ofs_0B_BB53;- D 1 - - - 0x017D15 0B:BD05:
 tbl_0B_BD08:
 	.byte $1A                       ;- D 1 - - - 0x017D18 0B:BD08:
 tbl_0B_BD09:
@@ -2053,9 +2051,9 @@ ofs_0B_BF90:
 loc_0B_BF9E:
 	RTS                             ;C - - - - - 0x017FAE 0B:BF9E: 60
 tbl_0B_BF9F:
-	.byte $9B,$BF,$E6,$23,$2B,$5B,$75,$90;- D 1 - - - 0x017FAF 0B:BF9F:
+	.lobytes ofs_0B_BD9B, ofs_0B_BDBF, ofs_0B_BDE6, ofs_0B_BE23, ofs_0B_BF2B, ofs_0B_BF5B, ofs_0B_BF75, ofs_0B_BF90;- D 1 - - - 0x017FAF 0B:BF9F:
 tbl_0B_BFA7:
-	.byte $BD,$BD,$BD,$BE,$BF,$BF,$BF,$BF;- D 1 - - - 0x017FB7 0B:BFA7:
+	.hibytes ofs_0B_BD9B, ofs_0B_BDBF, ofs_0B_BDE6, ofs_0B_BE23, ofs_0B_BF2B, ofs_0B_BF5B, ofs_0B_BF75, ofs_0B_BF90;- D 1 - - - 0x017FB7 0B:BFA7:
 loc_0B_BFAF:
 	JSR sub_0F_F71A                 ;C - - - - - 0x017FBF 0B:BFAF: 20 1A F7
 	BCS loc_0B_BFED                 ;C - - - - - 0x017FC2 0B:BFB2: B0 39

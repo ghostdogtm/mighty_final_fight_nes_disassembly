@@ -802,20 +802,68 @@ loc_01_A64B:
 	LDA #$00                        ;C - - - - - 0x00265B 01:A64B: A9 00
 	STA ram_0500,X                  ;C - - - - - 0x00265D 01:A64D: 9D 00 05
 	RTS                             ;C - - - - - 0x002660 01:A650: 60
-	.byte $20,$82,$A8,$BD,$80,$03,$C9,$01,$D0,$29,$BD,$B0,$05,$C9,$07,$D0;- - - - - - 0x002661 01:A651:
-	.byte $06,$A9,$20,$A0,$0A,$D0,$04,$A9,$24,$A0,$09,$20,$3E,$FB,$90,$13;- - - - - - 0x002671 01:A661:
-	.byte $BD,$B0,$05,$E9,$07,$9D,$10,$05,$A9,$82,$9D,$00,$03,$A9,$00,$9D;- - - - - - 0x002681 01:A671:
-	.byte $00,$05,$60,$A0,$04,$20,$E1,$A7,$BD,$60,$04,$C9,$01,$D0,$11,$BD;- - - - - - 0x002691 01:A681:
-	.byte $80,$03,$C9,$01,$D0,$07,$BD,$60,$03,$C9,$18,$B0,$14,$4C,$83,$F1;- - - - - - 0x0026A1 01:A691:
-	.byte $BD,$80,$03,$C9,$01,$D0,$07,$BD,$60,$03,$C9,$F2,$90,$03,$4C,$A1;- - - - - - 0x0026B1 01:A6A1:
-	.byte $F1,$A9,$81,$9D,$00,$03,$A9,$00,$9D,$00,$05,$A9,$07,$9D,$50,$05;- - - - - - 0x0026C1 01:A6B1:
-	.byte $4C,$43,$F3               ;- - - - - - 0x0026D1 01:A6C1:
+ofs_01_A651:
+	JSR sub_01_A882                 ;c - - - - - 0x002661 01:A651: 20 82 A8
+	LDA ram_0380,X                  ;c - - - - - 0x002664 01:A654: BD 80 03
+	CMP #$01                        ;c - - - - - 0x002667 01:A657: C9 01
+	BNE loc_01_A684                 ;c - - - - - 0x002669 01:A659: D0 29
+	LDA ram_05B0,X                  ;c - - - - - 0x00266B 01:A65B: BD B0 05
+	CMP #$07                        ;c - - - - - 0x00266E 01:A65E: C9 07
+	BNE loc_01_A668                 ;c - - - - - 0x002670 01:A660: D0 06
+	LDA #$20                        ;c - - - - - 0x002672 01:A662: A9 20
+	LDY #$0A                        ;c - - - - - 0x002674 01:A664: A0 0A
+	BNE loc_01_A66C                 ;c - - - - - 0x002676 01:A666: D0 04
+loc_01_A668:
+	LDA #$24                        ;c - - - - - 0x002678 01:A668: A9 24
+	LDY #$09                        ;c - - - - - 0x00267A 01:A66A: A0 09
+loc_01_A66C:
+	JSR sub_0F_FB3E                 ;c - - - - - 0x00267C 01:A66C: 20 3E FB
+	BCC loc_01_A684                 ;c - - - - - 0x00267F 01:A66F: 90 13
+	LDA ram_05B0,X                  ;c - - - - - 0x002681 01:A671: BD B0 05
+	SBC #$07                        ;c - - - - - 0x002684 01:A674: E9 07
+	STA ram_0510,X                  ;c - - - - - 0x002686 01:A676: 9D 10 05
+	LDA #$82                        ;c - - - - - 0x002689 01:A679: A9 82
+	STA ram_0300,X                  ;c - - - - - 0x00268B 01:A67B: 9D 00 03
+	LDA #$00                        ;c - - - - - 0x00268E 01:A67E: A9 00
+	STA ram_0500,X                  ;c - - - - - 0x002690 01:A680: 9D 00 05
+	RTS                             ;c - - - - - 0x002693 01:A683: 60
+loc_01_A684:
+	LDY #$04                        ;c - - - - - 0x002694 01:A684: A0 04
+	JSR sub_01_A7E1                 ;c - - - - - 0x002696 01:A686: 20 E1 A7
+	LDA ram_0460,X                  ;c - - - - - 0x002699 01:A689: BD 60 04
+	CMP #$01                        ;c - - - - - 0x00269C 01:A68C: C9 01
+	BNE loc_01_A6A1                 ;c - - - - - 0x00269E 01:A68E: D0 11
+	LDA ram_0380,X                  ;c - - - - - 0x0026A0 01:A690: BD 80 03
+	CMP #$01                        ;c - - - - - 0x0026A3 01:A693: C9 01
+	BNE loc_01_A69E                 ;c - - - - - 0x0026A5 01:A695: D0 07
+	LDA objX,X                      ;c - - - - - 0x0026A7 01:A697: BD 60 03
+	CMP #$18                        ;c - - - - - 0x0026AA 01:A69A: C9 18
+	BCS loc_01_A6B2                 ;c - - - - - 0x0026AC 01:A69C: B0 14
+loc_01_A69E:
+	JMP sub_0F_F183                 ;c - - - - - 0x0026AE 01:A69E: 4C 83 F1
+loc_01_A6A1:
+	LDA ram_0380,X                  ;c - - - - - 0x0026B1 01:A6A1: BD 80 03
+	CMP #$01                        ;c - - - - - 0x0026B4 01:A6A4: C9 01
+	BNE loc_01_A6AF                 ;c - - - - - 0x0026B6 01:A6A6: D0 07
+	LDA objX,X                      ;c - - - - - 0x0026B8 01:A6A8: BD 60 03
+	CMP #$F2                        ;c - - - - - 0x0026BB 01:A6AB: C9 F2
+	BCC loc_01_A6B2                 ;c - - - - - 0x0026BD 01:A6AD: 90 03
+loc_01_A6AF:
+	JMP sub_0F_F1A1                 ;c - - - - - 0x0026BF 01:A6AF: 4C A1 F1
+loc_01_A6B2:
+	LDA #$81                        ;c - - - - - 0x0026C2 01:A6B2: A9 81
+	STA ram_0300,X                  ;c - - - - - 0x0026C4 01:A6B4: 9D 00 03
+	LDA #$00                        ;c - - - - - 0x0026C7 01:A6B7: A9 00
+	STA ram_0500,X                  ;c - - - - - 0x0026C9 01:A6B9: 9D 00 05
+	LDA #$07                        ;c - - - - - 0x0026CC 01:A6BC: A9 07
+	STA ram_0550,X                  ;c - - - - - 0x0026CE 01:A6BE: 9D 50 05
+	JMP sub_0F_F343                 ;c - - - - - 0x0026D1 01:A6C1: 4C 43 F3
 tbl_01_A6C4:
-	.byte $3C,$69,$ED,$17,$73,$57,$CF,$33;- D 1 - - - 0x0026D4 01:A6C4:
-	.byte $51                       ;- - - - - - 0x0026DC 01:A6CC:
+	.lobytes ofs_01_A13C, ofs_01_A169, ofs_01_A2ED, ofs_01_A417, ofs_01_A473, sub_01_A557, ofs_01_A5CF, ofs_01_A633;- D 1 - - - 0x0026D4 01:A6C4:
+	.lobytes ofs_01_A651            ;- - - - - - 0x0026DC 01:A6CC:
 tbl_01_A6CD:
-	.byte $A1,$A1,$A2,$A4,$A4,$A5,$A5,$A6;- D 1 - - - 0x0026DD 01:A6CD:
-	.byte $A6                       ;- - - - - - 0x0026E5 01:A6D5:
+	.hibytes ofs_01_A13C, ofs_01_A169, ofs_01_A2ED, ofs_01_A417, ofs_01_A473, sub_01_A557, ofs_01_A5CF, ofs_01_A633;- D 1 - - - 0x0026DD 01:A6CD:
+	.hibytes ofs_01_A651            ;- - - - - - 0x0026E5 01:A6D5:
 sub_01_A6D6:
 	LDA ram_03F0,X                  ;C - - - - - 0x0026E6 01:A6D6: BD F0 03
 	BEQ loc_01_A71C                 ;C - - - - - 0x0026E9 01:A6D9: F0 41
@@ -1325,9 +1373,11 @@ loc_01_AAB3:
 	STA ptr_00+1                    ;C - - - - - 0x002AD1 01:AAC1: 85 01
 	JMP (ptr_00)                    ;C - - - - - 0x002AD3 01:AAC3: 6C 00 00
 tbl_01_AAC6:
-	.byte $D8,$0A,$ED,$4E,$73,$B6,$BA,$8C,$19;- D 1 - - - 0x002AD6 01:AAC6:
+	.lobytes ofs_01_AAD8, ofs_01_AB0A, ofs_01_A2ED, ofs_01_AC4E, ofs_01_A473, ofs_01_ABB6, ofs_01_ADBA, ofs_01_AD8C;- D 1 - - - 0x002AD6 01:AAC6:
+	.lobytes ofs_01_AE19            ;- D 1 - - - 0x002ADE 01:AACE:
 tbl_01_AACF:
-	.byte $AA,$AB,$A2,$AC,$A4,$AB,$AD,$AD,$AE;- D 1 - - - 0x002ADF 01:AACF:
+	.hibytes ofs_01_AAD8, ofs_01_AB0A, ofs_01_A2ED, ofs_01_AC4E, ofs_01_A473, ofs_01_ABB6, ofs_01_ADBA, ofs_01_AD8C;- D 1 - - - 0x002ADF 01:AACF:
+	.hibytes ofs_01_AE19            ;- D 1 - - - 0x002AE7 01:AAD7:
 ofs_01_AAD8:
 	LDA ram_05C0,X                  ;C - - J - - 0x002AE8 01:AAD8: BD C0 05
 	CMP #$03                        ;C - - - - - 0x002AEB 01:AADB: C9 03
