@@ -78,12 +78,14 @@ stagePalIdx1_s2        = $AED1
 stageChr0_s2           = $AED8
 stageChr1_s2           = $AED9
 stagePalettes_s2       = $AEDC
+stageScreenBase        = $AF00
 spriteOffsetLo         = $B100
 spriteOffsetHi         = $B200
-stageTableBB00         = $BB00
-stageTableBC00         = $BC00
-stageTableBD00         = $BD00
-stageTableBE00         = $BE00
-stageTableBF00         = $BF00
+stageMetaBase          = $B700
+stageBlockTL           = $BB00
+stageBlockTR           = $BC00
+stageBlockBL           = $BD00
+stageBlockBR           = $BE00
+stageBlockAttr         = $BF00
 
 .include "ram.inc"

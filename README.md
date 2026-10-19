@@ -58,6 +58,7 @@ python tools/disasm.py --build      # згенерувати src/, зібрат�
 | `docs/coverage.txt` | покриття: код/дані/невідоме по банках, трасований код, найбільші невідомі ділянки |
 | `tools/disasm.py`, `opcodes.py` | генератор asm з ROM + CDL |
 | `docs/sound_format.md` | формат даних звукового драйвера (частково) |
+| `docs/stage_maps.md` | формат карт стадій |
 | `tools/reloc_test.py` | тест переміщуваності: збірка зі зсувом усіх змінних банків на $100 має змінити лише байти адрес |
 | `tools/chr_tool.py` | CHR ↔ `.chr` по 1 КБ ↔ PNG |
 | `tools/labels/ram.txt` | імена RAM: `ADDR NAME [SIZE] ; коментар` |

@@ -155,11 +155,11 @@ rawsym 8100 frameListLo
 rawsym 8200 frameListHi
 rawsym B100 spriteOffsetLo
 rawsym B200 spriteOffsetHi
-rawsym BF00 stageTableBF00
-rawsym BB00 stageTableBB00
-rawsym BC00 stageTableBC00
-rawsym BD00 stageTableBD00
-rawsym BE00 stageTableBE00
+rawsym BF00 stageBlockAttr
+rawsym BB00 stageBlockTL
+rawsym BC00 stageBlockTR
+rawsym BD00 stageBlockBL
+rawsym BE00 stageBlockBR
 0E:C3DD LoadSectionGfx          ; stage setup: CHR banks, sprite palette of the character (tbl_0E_C53E/C546/C54E) and 16-colour palette from the stage bank
 0E:C53E spritePalCody
 0E:C546 spritePalGuy
@@ -208,3 +208,10 @@ comment 0E:DEBC call into the switchable $8000 bank (bank depends on stage)
 06:851B SndCmd0E_Loop0         ; loop slot 0..3 (also $12-$15): count param, then big-endian address
 06:8580 SndCmd17_EndChannel
 06:86AD SndCmd18_NoiseVolume
+rawsym AF00 stageScreenBase
+rawsym B700 stageMetaBase
+0F:E60F StageLoadMetaTiles     ; 4 blocks of the current 32x32 metatile -> ram_06C0.. tile buffer, attributes -> spriteFlipMask
+0F:E653 StageMetaPtr           ; ptr_00 = $B700 + 4 * map[ram_0028] (the four 16x16 block ids of the metatile)
+0F:E66E StageScreenPtr         ; Y = screen index; ptr_20 = $AF00 + 64 * stageFieldNN[Y] of the current section
+comment 0F:E669 metatile table at $B700, 4 block ids per entry
+comment 0F:E6A5 map screens at $AF00, 64 bytes each

@@ -774,11 +774,11 @@ loc_0F_E547:
 	LSR A                           ;C - - - - - 0x01E564 0F:E554: 4A
 	STA ram_0028                    ;C - - - - - 0x01E565 0F:E555: 85 28
 	LDY ram_0029                    ;C - - - - - 0x01E567 0F:E557: A4 29
-	JSR sub_0F_E66E                 ;C - - - - - 0x01E569 0F:E559: 20 6E E6
+	JSR StageScreenPtr              ;C - - - - - 0x01E569 0F:E559: 20 6E E6
 	LDA #$00                        ;C - - - - - 0x01E56C 0F:E55C: A9 00
 	STA ptr_02+1                    ;C - - - - - 0x01E56E 0F:E55E: 85 03
 loc_0F_E560:
-	JSR sub_0F_E60F                 ;C - - - - - 0x01E570 0F:E560: 20 0F E6
+	JSR StageLoadMetaTiles          ;C - - - - - 0x01E570 0F:E560: 20 0F E6
 	LDY ram_0028                    ;C - - - - - 0x01E573 0F:E563: A4 28
 	LDA ram_0640,Y                  ;C - - - - - 0x01E575 0F:E565: B9 40 06
 	STA spritePriorityBit           ;C - - - - - 0x01E578 0F:E568: 85 11
@@ -871,8 +871,9 @@ tbl_0F_E60B:
 	.byte $00,$FF                   ;- - - - - - 0x01E61B 0F:E60B:
 tbl_0F_E60D:
 	.byte $01,$1F                   ;- - - - - - 0x01E61D 0F:E60D:
-sub_0F_E60F:
-	JSR sub_0F_E653                 ;C - - - - - 0x01E61F 0F:E60F: 20 53 E6
+; 4 blocks of the current 32x32 metatile -> ram_06C0.. tile buffer, attributes -> spriteFlipMask
+StageLoadMetaTiles:
+	JSR StageMetaPtr                ;C - - - - - 0x01E61F 0F:E60F: 20 53 E6
 	LDY #$03                        ;C - - - - - 0x01E622 0F:E612: A0 03
 	STY ptr_02                      ;C - - - - - 0x01E624 0F:E614: 84 02
 	LDA #$00                        ;C - - - - - 0x01E626 0F:E616: A9 00
@@ -882,15 +883,15 @@ loc_0F_E61A:
 	LDX tbl_0F_E64F,Y               ;C - - - - - 0x01E62C 0F:E61C: BE 4F E6
 	LDA (ptr_00),Y                  ;C - - - - - 0x01E62F 0F:E61F: B1 00
 	TAY                             ;C - - - - - 0x01E631 0F:E621: A8
-	LDA stageTableBB00,Y            ;C - - - - - 0x01E632 0F:E622: B9 00 BB
+	LDA stageBlockTL,Y              ;C - - - - - 0x01E632 0F:E622: B9 00 BB
 	STA ram_06C0,X                  ;C - - - - - 0x01E635 0F:E625: 9D C0 06
-	LDA stageTableBC00,Y            ;C - - - - - 0x01E638 0F:E628: B9 00 BC
+	LDA stageBlockTR,Y              ;C - - - - - 0x01E638 0F:E628: B9 00 BC
 	STA ram_06C1,X                  ;C - - - - - 0x01E63B 0F:E62B: 9D C1 06
-	LDA stageTableBD00,Y            ;C - - - - - 0x01E63E 0F:E62E: B9 00 BD
+	LDA stageBlockBL,Y              ;C - - - - - 0x01E63E 0F:E62E: B9 00 BD
 	STA ram_06C4,X                  ;C - - - - - 0x01E641 0F:E631: 9D C4 06
-	LDA stageTableBE00,Y            ;C - - - - - 0x01E644 0F:E634: B9 00 BE
+	LDA stageBlockBR,Y              ;C - - - - - 0x01E644 0F:E634: B9 00 BE
 	STA ram_06C5,X                  ;C - - - - - 0x01E647 0F:E637: 9D C5 06
-	LDA stageTableBF00,Y            ;C - - - - - 0x01E64A 0F:E63A: B9 00 BF
+	LDA stageBlockAttr,Y            ;C - - - - - 0x01E64A 0F:E63A: B9 00 BF
 	AND #$03                        ;C - - - - - 0x01E64D 0F:E63D: 29 03
 	ORA spriteFlipMask              ;C - - - - - 0x01E64F 0F:E63F: 05 10
 	STA spriteFlipMask              ;C - - - - - 0x01E651 0F:E641: 85 10
@@ -903,7 +904,8 @@ loc_0F_E64E:
 	RTS                             ;C - - - - - 0x01E65E 0F:E64E: 60
 tbl_0F_E64F:
 	.byte $00,$02,$08,$0A           ;- D 3 - - - 0x01E65F 0F:E64F:
-sub_0F_E653:
+; ptr_00 = $B700 + 4 * map[ram_0028] (the four 16x16 block ids of the metatile)
+StageMetaPtr:
 	JSR RefreshStageBank            ;C - - - - - 0x01E663 0F:E653: 20 DF C1
 	LDA #$00                        ;C - - - - - 0x01E666 0F:E656: A9 00
 	STA ptr_00+1                    ;C - - - - - 0x01E668 0F:E658: 85 01
@@ -916,10 +918,11 @@ sub_0F_E653:
 	STA ptr_00                      ;C - - - - - 0x01E674 0F:E664: 85 00
 	LDA ptr_00+1                    ;C - - - - - 0x01E676 0F:E666: A5 01
 	CLC                             ;C - - - - - 0x01E678 0F:E668: 18
-	ADC #$B7                        ;C - - - - - 0x01E679 0F:E669: 69 B7
+	ADC #$B7                        ;C - - - - - 0x01E679 0F:E669: 69 B7  ; metatile table at $B700, 4 block ids per entry
 	STA ptr_00+1                    ;C - - - - - 0x01E67B 0F:E66B: 85 01
 	RTS                             ;C - - - - - 0x01E67D 0F:E66D: 60
-sub_0F_E66E:
+; Y = screen index; ptr_20 = $AF00 + 64 * stageFieldNN[Y] of the current section
+StageScreenPtr:
 	LDA stageSection                ;C - - - - - 0x01E67E 0F:E66E: A5 60
 	BEQ loc_0F_E67A                 ;C - - - - - 0x01E680 0F:E670: F0 08
 	CMP #$01                        ;C - - - - - 0x01E682 0F:E672: C9 01
@@ -953,7 +956,7 @@ loc_0F_E689:
 	ROL ptr_00                      ;C - - - - - 0x01E6AF 0F:E69F: 26 00
 	STA ptr_20                      ;C - - - - - 0x01E6B1 0F:E6A1: 85 20
 	LDA ptr_00                      ;C - - - - - 0x01E6B3 0F:E6A3: A5 00
-	CLC                             ;C - - - - - 0x01E6B5 0F:E6A5: 18
+	CLC                             ;C - - - - - 0x01E6B5 0F:E6A5: 18  ; map screens at $AF00, 64 bytes each
 ofs_0F_E6A6:
 	ADC #$AF                        ;C - - - - - 0x01E6B6 0F:E6A6: 69 AF
 	STA ptr_20+1                    ;C - - - - - 0x01E6B8 0F:E6A8: 85 21
@@ -1849,14 +1852,14 @@ loc_0F_ED49:
 	JSR SetPrgBanks                 ;C - - - - - 0x01ED62 0F:ED52: 20 4D FF
 	LDX ptr_04                      ;C - - - - - 0x01ED65 0F:ED55: A6 04
 	LDY spriteBaseX                 ;C - - - - - 0x01ED67 0F:ED57: A4 13
-	JSR sub_0F_E66E                 ;C - - - - - 0x01ED69 0F:ED59: 20 6E E6
+	JSR StageScreenPtr              ;C - - - - - 0x01ED69 0F:ED59: 20 6E E6
 loc_0F_ED5C:
-	JSR sub_0F_E653                 ;C - - - - - 0x01ED6C 0F:ED5C: 20 53 E6
+	JSR StageMetaPtr                ;C - - - - - 0x01ED6C 0F:ED5C: 20 53 E6
 loc_0F_ED5F:
 	LDY ptr_02+1                    ;C - - - - - 0x01ED6F 0F:ED5F: A4 03
 	LDA (ptr_00),Y                  ;C - - - - - 0x01ED71 0F:ED61: B1 00
 	TAY                             ;C - - - - - 0x01ED73 0F:ED63: A8
-	LDA stageTableBF00,Y            ;C - - - - - 0x01ED74 0F:ED64: B9 00 BF
+	LDA stageBlockAttr,Y            ;C - - - - - 0x01ED74 0F:ED64: B9 00 BF
 	AND #$F0                        ;C - - - - - 0x01ED77 0F:ED67: 29 F0
 	LDY ptr_02                      ;C - - - - - 0x01ED79 0F:ED69: A4 02
 	STA a:ptr_42,Y                  ;C - - - - - 0x01ED7B 0F:ED6B: 99 42 00
@@ -1998,14 +2001,14 @@ loc_0F_EE43:
 	JSR SetPrgBanks                 ;C - - - - - 0x01EE6F 0F:EE5F: 20 4D FF
 	LDX ptr_04                      ;C - - - - - 0x01EE72 0F:EE62: A6 04
 	LDY spriteBaseX                 ;C - - - - - 0x01EE74 0F:EE64: A4 13
-	JSR sub_0F_E66E                 ;C - - - - - 0x01EE76 0F:EE66: 20 6E E6
+	JSR StageScreenPtr              ;C - - - - - 0x01EE76 0F:EE66: 20 6E E6
 loc_0F_EE69:
-	JSR sub_0F_E653                 ;C - - - - - 0x01EE79 0F:EE69: 20 53 E6
+	JSR StageMetaPtr                ;C - - - - - 0x01EE79 0F:EE69: 20 53 E6
 loc_0F_EE6C:
 	LDY ptr_02+1                    ;C - - - - - 0x01EE7C 0F:EE6C: A4 03
 	LDA (ptr_00),Y                  ;C - - - - - 0x01EE7E 0F:EE6E: B1 00
 	TAY                             ;C - - - - - 0x01EE80 0F:EE70: A8
-	LDA stageTableBF00,Y            ;C - - - - - 0x01EE81 0F:EE71: B9 00 BF
+	LDA stageBlockAttr,Y            ;C - - - - - 0x01EE81 0F:EE71: B9 00 BF
 	AND #$F0                        ;C - - - - - 0x01EE84 0F:EE74: 29 F0
 	LDY ptr_02                      ;C - - - - - 0x01EE86 0F:EE76: A4 02
 	STA a:ptr_42,Y                  ;C - - - - - 0x01EE88 0F:EE78: 99 42 00
