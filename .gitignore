@@ -1,0 +1,21 @@
+# ROM and emulator logger data (copyrighted / local only)
+*.nes
+*.cdl
+
+# graphics extracted from the ROM (regenerate: python tools/chr_tool.py split)
+src/chr/
+gfx/
+
+# build output
+*.o
+mff.map
+mff_labels.txt
+
+# third-party / local reference material
+*.mhtml
+mesen/
+Mighty final fight enemy values.txt
+
+# python
+__pycache__/
+*.pyc

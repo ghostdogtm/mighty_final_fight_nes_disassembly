@@ -1,0 +1,3210 @@
+Coverage report (bytes). cdl = from CDL, traced = found by static tracing
+
+bank  code(cdl) code(traced) data  unknown
+00         5920          355   1440      477
+01         3060          157   2884     2091
+02            0            0   7606      586
+03         2937           86   4632      537
+04         2781          103   3237     2071
+05         1483           82   3855     2772
+06         2044          195   5746      207
+07            0            0   5663     2529
+08         2693          104   1754     3641
+09          745            0   3567     3880
+0A           32            0   6615     1545
+0B         2923          112   4645      512
+0C         6477          337    631      747
+0D         2990           48   3027     2127
+0E         7711          247    194       40
+0F         6106          386   1039      661
+all       47902         2212  56535    24423
+
+CDL anomalies (code flag but not a valid instruction): 0
+
+Traced code (instruction starts, verify by hand):
+  00:81A6  DEY
+  00:81A7  CPY #$00
+  00:81A9  BNE loc_00_81A1
+  00:81AB  RTS
+  00:8230  DEY
+  00:8231  CPY #$00
+  00:8233  BNE loc_00_822B
+  00:8235  RTS
+  00:82F1  LDA #$03
+  00:82F3  BNE loc_00_82F7
+  00:8311  JSR sub_0F_F26E
+  00:8342  LDA #$1C
+  00:8344  JSR sub_0F_F34C
+  00:8347  LDA #$02
+  00:8349  STA gameAction
+  00:834B  LDA #$03
+  00:834D  STA ram_0037
+  00:834F  JSR sub_0F_F436
+  00:8352  JSR sub_0E_CEAA
+  00:8355  LDY ram_0039
+  00:8357  LDA ram_0330,Y
+  00:835A  STA ram_0320,Y
+  00:835D  LDA #$FF
+  00:835F  STA ram_03F0,Y
+  00:8362  LDA ram_0310,Y
+  00:8365  STA ram_0300,Y
+  00:8368  LDA #$00
+  00:836A  STA ram_0470,Y
+  00:836D  LDA objY
+  00:8370  STA objY,Y
+  00:8373  RTS
+  00:8A4C  LDA ram_0016
+  00:8A4E  CMP #$48
+  00:8A50  BNE loc_00_8A6D
+  00:8A52  INC ram_0300
+  00:8A55  LDA #$14
+  00:8A57  JSR sub_0F_F294
+  00:8A5A  LDA #$07
+  00:8A5C  JSR sub_0F_F440
+  00:8A5F  LDA #$33
+  00:8A61  STA ram_0420
+  00:8A64  LDA #$01
+  00:8A66  STA ram_0430
+  00:8A69  LDA #$FF
+  00:8A6B  STA ram_006E
+  00:8A71  LDA ram_0300
+  00:8A74  AND #$02
+  00:8A76  BNE loc_00_8AB3
+  00:8A78  LDA ram_0570
+  00:8A7B  CMP #$04
+  00:8A7D  BNE loc_00_8A8E
+  00:8A7F  LDA ram_0590
+  00:8A82  BNE loc_00_8A8E
+  00:8A84  JSR sub_0F_F43B
+  00:8A87  LDA #$01
+  00:8A89  STA ram_00A7
+  00:8A8B  JSR sub_0F_F430
+  00:8A8E  LDA ram_0570
+  00:8A91  CMP #$06
+  00:8A93  BNE loc_00_8A6D
+  00:8A95  JSR sub_0F_F436
+  00:8A98  LDA #$5B
+  00:8A9A  JSR sub_0F_F294
+  00:8A9D  LDA #$05
+  00:8A9F  JSR sub_0F_F440
+  00:8AA2  LDA objY
+  00:8AA5  STA ram_0036
+  00:8AA7  LDA objY
+  00:8AAA  SEC
+  00:8AAB  SBC #$20
+  00:8AAD  STA objY
+  00:8AB0  INC ram_0300
+  00:8AB3  LDY #$00
+  00:8AB5  JSR sub_0F_F119
+  00:8AB8  LDA ram_0430
+  00:8ABB  BPL loc_00_8AFF
+  00:8ABD  LDA objY
+  00:8AC0  CLC
+  00:8AC1  ADC #$02
+  00:8AC3  CMP ram_0036
+  00:8AC5  BCC loc_00_8AFF
+  00:8AC7  BEQ loc_00_8AD0
+  00:8AC9  SBC #$01
+  00:8ACB  STA objY
+  00:8ACE  BNE loc_00_8AD3
+  00:8AD0  STA objY
+  00:8D1E  DEY
+  00:8D1F  CPY #$00
+  00:8D21  BNE loc_00_8D19
+  00:8D23  RTS
+  00:8DAB  LDA #$01
+  00:8DC8  JSR sub_0F_F183
+  00:8DCB  JMP loc_00_8DD1
+  00:8DDA  LDA playerId
+  00:8DDC  CMP #$02
+  00:8DDE  BNE loc_00_8DE0
+  00:8E2E  LDA #$00
+  00:8E30  STA ram_0062
+  00:8E32  LDA #$09
+  00:8E34  STA gameAction
+  00:8E36  JMP loc_0E_DC6C
+  00:8E98  LDA #$98
+  00:8E9A  BNE loc_00_8E9E
+  00:8EE7  INC ram_0062
+  00:8F5D  LDA #$81
+  00:8F5F  STA ram_0300
+  00:8F62  STA ram_006E
+  00:8F64  LDA ram_0031
+  00:8F66  AND #$01
+  00:8F68  BEQ loc_00_8F6F
+  00:8F6A  JSR sub_0F_F048
+  00:8F6D  BNE loc_00_8F72
+  00:8F6F  JSR sub_0F_F03F
+  00:8F72  LDA ram_0031
+  00:8F74  EOR #$03
+  00:8F76  STA ram_0031
+  00:8F78  JSR sub_0F_F436
+  00:8F7B  LDA #$22
+  00:8F7D  STA gameAction
+  00:8F7F  JMP loc_00_8A55
+  00:8FDF  LDA #$02
+  00:8FE1  BNE loc_00_8FE5
+  00:9035  LDA ram_0580
+  00:9038  CMP tbl_0F_E29A,Y
+  00:903B  BEQ loc_00_9049
+  00:903D  LDA tbl_0F_E204,Y
+  00:9040  JSR sub_0F_F294
+  00:9050  JSR sub_0F_F1BF
+  00:9053  RTS
+  00:917F  JSR sub_0F_F1BF
+  00:9182  RTS
+  00:920F  JSR sub_0F_F1DF
+  00:9212  RTS
+  00:92F6  LDA #$0F
+  00:940D  JSR sub_0F_F048
+  00:941A  JSR sub_0F_F1BF
+  00:941D  RTS
+  00:9430  JSR sub_0F_F1A1
+  00:9433  JSR sub_0F_F048
+  00:9436  JMP loc_00_943F
+  00:95B1  JSR sub_0F_F048
+  00:95B4  JMP loc_00_95BA
+  00:95CF  JSR sub_0F_F1DF
+  00:95D2  RTS
+  00:95E3  JSR sub_0F_F1A1
+  00:95E6  LDA objX
+  00:95E9  CMP #$C8
+  00:95EB  BCS loc_00_960F
+  00:95ED  JMP loc_00_95FA
+  00:96D4  CMP #$03
+  00:96D6  BEQ loc_00_96DC
+  00:96D8  JSR sub_0E_CEAA
+  00:9776  STY palUpdateFlag
+  00:9778  RTS
+  01:A146  LDA #$01
+  01:A148  STA ram_0460,X
+  01:A14B  LDA ram_0380,X
+  01:A14E  BEQ loc_01_A155
+  01:A150  LDA #$02
+  01:A152  STA ram_0460,X
+  01:A155  LDA #$88
+  01:A157  STA ram_0300,X
+  01:A15A  RTS
+  01:A1C3  CMP #$02
+  01:A1C5  BEQ loc_01_A1CB
+  01:A1C7  LDA #$01
+  01:A1C9  BNE loc_01_A1CD
+  01:A1CB  LDA #$FE
+  01:A1CD  STA objX,X
+  01:A1D0  LDA #$01
+  01:A1D2  STA ram_0380,X
+  01:A463  LDA #$81
+  01:A465  STA ram_0300,X
+  01:A468  LDA #$00
+  01:A46A  STA ram_0500,X
+  01:A46D  LDA #$07
+  01:A46F  STA ram_0550,X
+  01:A472  RTS
+  01:A4AE  JMP loc_01_A54C
+  01:A4BF  JMP loc_01_A54C
+  01:A63B  LDA ram_05B0,X
+  01:A63E  AND #$08
+  01:A640  BNE loc_01_A646
+  01:A642  LDA #$80
+  01:A644  BNE loc_01_A648
+  01:A646  LDA #$84
+  01:A648  STA ram_0300,X
+  01:A70B  LDA #$00
+  01:A70D  STA ram_03F0,X
+  01:A710  LDA playerId
+  01:A712  CMP #$02
+  01:A714  BNE loc_01_A71C
+  01:A716  LDA objY
+  01:A719  STA objY,X
+  01:A75A  JSR sub_01_A83A
+  01:A75D  SEC
+  01:A75E  RTS
+  01:A7AC  LDA ram_0520,X
+  01:A7AF  STA ram_0530,X
+  01:A7B2  JMP loc_01_A7BB
+  01:ABC8  LDA #$82
+  01:ABCA  STA ram_0300,X
+  01:ABCD  LDA #$00
+  01:ABCF  STA ram_0500,X
+  01:ABD2  LDA #$01
+  01:ABD4  STA ram_0510,X
+  01:ABD7  RTS
+  01:ABFC  LDA #$05
+  01:ABFE  STA ram_0460,X
+  01:ADA3  CMP #$02
+  01:ADA5  BCS loc_01_ADAF
+  01:ADA7  LDA #$84
+  01:ADA9  BNE loc_01_ADB1
+  01:ADDA  LDA #$00
+  01:ADDC  BEQ loc_01_AE00
+  01:ADDE  CMP #$3C
+  01:ADE0  BCS loc_01_ADE6
+  01:ADE2  LDA #$0A
+  01:ADE4  BNE loc_01_AE00
+  01:ADE6  CMP #$50
+  01:ADE8  BCS loc_01_ADEE
+  01:ADEA  LDA #$0B
+  01:ADEC  BNE loc_01_AE00
+  03:B371  LDA ram_0010
+  03:B373  AND #$10
+  03:B375  BEQ loc_03_B38F
+  03:B377  STA ptr_0E+1
+  03:B379  BNE loc_03_B38F
+  03:B389  LDA ram_0010
+  03:B38B  AND #$10
+  03:B38D  STA ptr_0E+1
+  03:B45B  LDA #$00
+  03:B45D  STA ram_03F0,X
+  03:B460  LDA playerId
+  03:B462  CMP #$02
+  03:B464  BNE loc_03_B46C
+  03:B466  LDA objY
+  03:B469  STA objY,X
+  03:B72F  JSR sub_0F_F343
+  03:B732  LDA #$00
+  03:B734  STA ram_0500,X
+  03:B737  LDA #$87
+  03:B739  STA ram_0300,X
+  03:B73C  RTS
+  03:B774  LDA #$0F
+  03:BB31  TYA
+  03:BB32  BNE loc_03_BB38
+  03:BB34  INY
+  03:BB35  INY
+  03:BB36  BNE loc_03_BB3A
+  03:BB38  DEY
+  03:BB39  DEY
+  03:BB3A  JSR sub_0F_F374
+  03:BB3D  BCS loc_03_BB4D
+  03:BB3F  TYA
+  03:BB40  EOR #$FF
+  03:BB42  ADC #$01
+  03:BB44  AND #$0F
+  03:BB46  TAY
+  03:BB47  BNE loc_03_BB4D
+  03:BBF4  LDA #$3C
+  03:BBF6  STA ram_0500,X
+  03:BBF9  RTS
+  03:BC76  CMP #$04
+  03:BC78  BEQ loc_03_BCB4
+  03:BCF3  LDA #$00
+  03:BCF5  RTS
+  04:91E1  LDA #$02
+  04:91E3  STA playerId
+  04:93E4  LDA #$00
+  04:93E6  STA ram_0500
+  04:93E9  LDA #$54
+  04:93EB  STA objY
+  04:93EE  BNE loc_04_9398
+  04:93FA  LDA #$FF
+  04:93FC  STA ram_0500
+  04:93FF  LDA #$64
+  04:9401  STA objY
+  04:9404  BNE loc_04_9410
+  04:98A7  LDY #$06
+  04:98A9  JSR sub_04_9AA0
+  04:98AC  JMP loc_04_98BD
+  04:98E3  JSR sub_04_9A9E
+  04:98E6  INC ram_0066
+  04:98E8  RTS
+  04:9911  LDY playerId
+  04:9913  LDA tbl_04_9D5C,Y
+  04:9916  STA ram_0062
+  04:994F  JMP loc_04_9BA4
+  04:9956  JMP loc_04_9B7E
+  04:9B7E  INC lives
+  04:9B80  LDX ram_0065
+  04:9B82  LDA #$01
+  04:9B84  STA ram_0780,X
+  04:9B87  INX
+  04:9B88  LDA #$20
+  04:9B8A  STA ram_0780,X
+  04:9B8D  INX
+  04:9B8E  LDA #$7C
+  04:9B90  STA ram_0780,X
+  04:9B93  INX
+  04:9B94  LDA #$02
+  04:9B96  STA ram_0780,X
+  04:9B99  INX
+  04:9B9A  STX ram_0065
+  04:9B9C  LDA #$FF
+  04:9B9E  STA ram_0064
+  04:9BA0  LDA #$2D
+  04:9BA2  BNE loc_04_9BA8
+  04:9BA4  INC credits
+  04:9BA6  LDA #$30
+  04:9BA8  JSR sub_0F_F34C
+  04:9BAB  INC ram_00AA
+  04:9BAD  RTS
+  05:A5A4  ASL ram_0041
+  05:A5A6  CLD
+  05:A5A7  EOR (ptr_20+1),Y
+  05:A5A9  ORA (ptr_42,X)
+  05:A5AB  RTI
+  05:A81D  LDA ram_0500,X
+  05:A820  STA ram_00AD
+  05:A822  JMP loc_05_A82A
+  05:A94E  JSR sub_0F_F183
+  05:A951  JMP loc_05_A957
+  05:A985  LDA stage
+  05:A987  CMP #$01
+  05:A989  BEQ loc_05_A991
+  05:A98B  CMP #$03
+  05:A98D  BEQ loc_05_A99A
+  05:A98F  BNE loc_05_A9AB
+  05:A991  LDA objY,X
+  05:A994  CMP #$A0
+  05:A996  BCC loc_05_A9BC
+  05:A998  BCS loc_05_A9AB
+  05:A99A  LDA ram_0060
+  05:A99C  CMP #$01
+  05:A99E  BNE loc_05_A9AB
+  05:A9A0  LDA objX,X
+  05:A9A3  CMP #$18
+  05:A9A5  BCC loc_05_A9BC
+  05:A9A7  CMP #$E8
+  05:A9A9  BCS loc_05_A9BC
+  05:A9AB  LDA #$69
+  05:A9AD  STA ram_0320,X
+  05:A9B0  STA ram_0330,X
+  05:A9B3  LDA #$80
+  05:A9B5  STA ram_0300,X
+  05:A9B8  STA ram_0310,X
+  05:AA22  CMP tbl_05_AA7F,Y
+  05:AA25  BEQ loc_05_AA28
+  05:AA27  RTS
+  06:8047  SEC
+  06:8048  SBC #$20
+  06:804A  STA ptr_C1+1
+  06:804C  LDA #$07
+  06:804E  STA MMC3_BANK_SELECT
+  06:8051  LDA #$18
+  06:8053  STA MMC3_BANK_DATA
+  06:8056  LDA (ptr_C1),Y
+  06:8058  PHA
+  06:8059  LDA #$07
+  06:805B  STA MMC3_BANK_SELECT
+  06:805E  LDA #$17
+  06:8060  STA MMC3_BANK_DATA
+  06:8063  LDA #$20
+  06:8065  CLC
+  06:8066  ADC ptr_C1+1
+  06:8068  STA ptr_C1+1
+  06:806A  PLA
+  06:806B  RTS
+  06:80B6  LDY #$00
+  06:80B8  STY ptr_C1
+  06:80BA  LDY #$04
+  06:80BC  ASL A
+  06:80BD  ROL ptr_C1
+  06:80BF  DEY
+  06:80C0  BNE loc_06_80BC
+  06:80C2  CLC
+  06:80C3  ADC ram_00C0
+  06:80C5  STA ram_00C0
+  06:80C7  LDA ptr_C1
+  06:80C9  ADC ram_00CD
+  06:80CB  BCC loc_06_80D5
+  06:80CD  LDA ram_00CC
+  06:80CF  AND #$80
+  06:80D1  STA ram_00CC
+  06:80D3  LDA #$FF
+  06:80D5  STA ram_00CD
+  06:8112  SEC
+  06:8113  SBC dat_06_8A40
+  06:8116  BCS loc_06_810D
+  06:813F  LDA ram_00C4
+  06:8141  BMI loc_06_8145
+  06:8143  STY ram_00D7
+  06:814D  STX ram_00D7
+  06:8157  INC ptr_C1+1
+  06:818D  INC ptr_C1+1
+  06:819D  INC ptr_C1+1
+  06:822D  ASL ram_00C3
+  06:822F  BEQ loc_06_8234
+  06:8231  SEC
+  06:8232  ROR ram_00C3
+  06:8234  LDA ram_00C0
+  06:8236  AND #$0F
+  06:8238  STA ram_00C0
+  06:823A  LDY ram_00C3
+  06:823C  STY ram_00CC
+  06:823E  BEQ loc_06_8247
+  06:8240  LDY #$FF
+  06:8242  CPY ram_00CD
+  06:8244  BNE loc_06_8249
+  06:8246  INY
+  06:8247  STY ram_00CD
+  06:8249  RTS
+  06:824A  LDA #$00
+  06:824C  SEC
+  06:824D  SBC ram_00C3
+  06:824F  STA ram_00D8
+  06:8251  RTS
+  06:826A  JSR sub_06_8118
+  06:826D  JMP loc_06_825B
+  06:82A4  INC ram_00D1
+  06:82B3  JSR sub_06_8386
+  06:82B6  STA ram_00D2
+  06:8365  JSR sub_06_85AE
+  06:8428  LDA #$01
+  06:85E2  LDA #$5F
+  06:8740  CPX #$29
+  06:8742  BNE loc_06_875B
+  06:8744  STA ram_00C4
+  06:8746  LDA ram_0740,X
+  06:8749  STA ptr_C1
+  06:874B  JSR sub_06_8006
+  06:874E  LDA ptr_C1
+  06:8750  BEQ loc_06_87AA
+  06:875B  CMP ram_0710,X
+  06:875E  BCC loc_06_8763
+  06:881C  LDA ram_00D8
+  06:881E  BEQ loc_06_8835
+  06:8820  STA ram_00C4
+  06:8822  STY ptr_C1
+  06:8824  LDA ptr_C1+1
+  06:8826  PHA
+  06:8827  JSR sub_06_8006
+  06:882A  PLA
+  06:882B  CLC
+  06:882C  ADC ptr_C1+1
+  06:882E  STA ptr_C1+1
+  06:8830  LDA #$00
+  06:8832  ADC ptr_C1
+  06:8834  TAY
+  08:804B  INY
+  08:804C  BNE loc_08_803A
+  08:804E  BEQ loc_08_8073
+  08:8050  LDA ram_00FC
+  08:8052  CLC
+  08:8053  ADC #$FF
+  08:8055  STA ptr_00
+  08:8057  LDA ram_002D
+  08:8059  ADC #$00
+  08:805B  STA ptr_00+1
+  08:805D  LDY #$00
+  08:805F  LDA (ptr_78),Y
+  08:8061  CMP ram_00FB
+  08:8063  BNE loc_08_8070
+  08:8065  LDA (ptr_72),Y
+  08:8067  SEC
+  08:8068  SBC ptr_00
+  08:806A  LDA (ptr_74),Y
+  08:806C  SBC ptr_00+1
+  08:806E  BCC loc_08_8073
+  08:8070  INY
+  08:8071  BNE loc_08_805F
+  08:808A  CMP #$02
+  08:808C  BEQ loc_08_808E
+  08:808E  LDY ram_009F
+  08:8090  JSR sub_08_80C2
+  08:8093  BNE loc_08_809C
+  08:8095  JSR sub_08_80E4
+  08:8098  DEC ram_009F
+  08:809A  BNE loc_08_808E
+  08:809C  LDY ram_009F
+  08:809E  INY
+  08:809F  JSR sub_08_80C2
+  08:80A2  BEQ loc_08_809E
+  08:80A4  STY totalEnemies
+  08:80A6  RTS
+  08:80F3  LDA ram_0300,X
+  08:80F6  BMI loc_08_80E3
+  08:8104  RTS
+  08:81E7  RTS
+  08:8DC0  JSR sub_08_89D2
+  08:900A  RTS
+  08:9148  CMP #$FF
+  08:914A  BEQ loc_08_9170
+  08:914C  LDA #$00
+  08:914E  STA ram_05A0
+  08:9151  STA ram_05A1
+  08:9154  STA ram_05A2
+  08:9157  RTS
+  08:9170  LDA #$07
+  08:9172  STA ptr_00+1
+  08:92E4  LDA #$07
+  08:92E6  STA ptr_00+1
+  0B:B3E9  LDA #$00
+  0B:B3EB  STA ram_0306
+  0B:B3EE  LDA #$80
+  0B:B3F0  STA ram_0300
+  0B:B3F3  LDA #$29
+  0B:B3F5  STA gameAction
+  0B:B3F7  LDA #$0C
+  0B:B3F9  STA ram_0037
+  0B:B3FB  JSR sub_0F_F2BE
+  0B:B3FE  LDA #$FB
+  0B:B400  STA ram_0062
+  0B:B402  RTS
+  0B:B41C  CMP #$03
+  0B:B41E  BEQ loc_0B_B421
+  0B:B420  RTS
+  0B:B6F2  LDA gameAction
+  0B:B6F4  CMP #$21
+  0B:B6F6  BNE loc_0B_B707
+  0B:B6F8  LDA #$C3
+  0B:B6FA  LDY #$3A
+  0B:B6FC  JSR sub_0F_F449
+  0B:B6FF  LDA #$80
+  0B:B701  STA ram_0300,X
+  0B:B704  JMP sub_0F_F343
+  0B:B707  LDA #$00
+  0B:B709  STA ram_00A3
+  0B:B70B  JSR sub_0F_F343
+  0B:B70E  LDA #$80
+  0B:B710  STA ram_0300,X
+  0B:B713  LDA ram_0038
+  0B:B715  BMI loc_0B_B743
+  0B:B717  CMP #$0C
+  0B:B719  BCC loc_0B_B743
+  0B:B71B  LDA #$0C
+  0B:B71D  STA ram_0038
+  0B:B71F  BNE loc_0B_B743
+  0B:B7C6  LDA #$82
+  0B:B7C8  STA objY,X
+  0B:B889  LDA tbl_0B_BD5C,Y
+  0B:B8A3  LDA #$00
+  0B:B8A5  STA ram_05D0,X
+  0B:B8A8  DEC ram_0300,X
+  0B:B8AB  RTS
+  0B:BBB9  LDA ram_0380,X
+  0B:BBBC  CMP #$02
+  0B:BBBE  BNE loc_0B_BBC7
+  0B:BBC0  LDA objX,X
+  0B:BBC3  CMP #$17
+  0B:BBC5  BCS loc_0B_BBDB
+  0B:BBC7  JMP sub_0F_F183
+  0C:8037  SEC
+  0C:8038  SBC #$06
+  0C:803A  TAY
+  0C:8651  LDA tbl_0C_8885,Y
+  0C:8654  BNE loc_0C_8686
+  0C:870D  LDA #$00
+  0C:870F  STA ram_0038
+  0C:8711  STA gameAction
+  0C:8713  STA ram_00BA
+  0C:8715  JSR sub_0F_F436
+  0C:8718  LDA #$80
+  0C:871A  STA ram_0300
+  0C:871D  LDY playerId
+  0C:871F  LDA tbl_0F_E288,Y
+  0C:8722  STA ram_006F
+  0C:8724  JSR sub_0E_CEAA
+  0C:8727  LDA objY
+  0C:872A  STA objY,X
+  0C:8BE5  LDA #$09
+  0C:8BE7  STA lives
+  0C:8BF8  LDA #$09
+  0C:8BFA  STA lives
+  0C:8BFC  BNE sub_0C_8C00
+  0C:8DBC  LDA ram_00FC
+  0C:8DBE  CLC
+  0C:8DBF  ADC #$10
+  0C:8DC1  STA objX,X
+  0C:8DC4  LDA ram_002D
+  0C:8DC6  ADC #$00
+  0C:8DC8  STA ram_0380,X
+  0C:8DCB  JMP loc_0C_8DEE
+  0C:8DDF  LDA ram_00FC
+  0C:8DE1  CLC
+  0C:8DE2  ADC #$F0
+  0C:8DE4  STA objX,X
+  0C:8DE7  LDA ram_002D
+  0C:8DE9  ADC #$00
+  0C:8DEB  STA ram_0380,X
+  0C:8DEE  RTS
+  0C:912D  LDA #$FE
+  0C:912F  STA ram_0430,X
+  0C:9132  LDA #$00
+  0C:9134  STA ram_0420,X
+  0C:9137  RTS
+  0C:9204  CMP #$24
+  0C:9206  BEQ loc_0C_9209
+  0C:9208  RTS
+  0C:923C  CMP #$04
+  0C:923E  BNE loc_0C_92A3
+  0C:9240  LDA #$10
+  0C:9242  STA ram_0510,X
+  0C:9245  LDA #$08
+  0C:9247  STA ram_0540,X
+  0C:9312  JSR sub_0C_9C55
+  0C:93B5  LDA ram_0460,X
+  0C:93B8  AND #$02
+  0C:93BA  TAY
+  0C:93BB  LDA objX,X
+  0C:93BE  CLC
+  0C:93BF  ADC tbl_0F_FD0A,Y
+  0C:93C2  PHA
+  0C:93C3  LDA ram_0380,X
+  0C:93C6  ADC tbl_0F_FD0B,Y
+  0C:93C9  STA ram_0380,X
+  0C:93CC  PLA
+  0C:93CD  STA objX,X
+  0C:93D0  RTS
+  0C:93FC  LDA ram_00FC
+  0C:93FE  CLC
+  0C:93FF  ADC #$10
+  0C:9401  STA objX,X
+  0C:9404  LDA ram_002D
+  0C:9406  ADC #$00
+  0C:9408  STA ram_0380,X
+  0C:940B  JMP loc_0C_942E
+  0C:941F  LDA ram_00FC
+  0C:9421  CLC
+  0C:9422  ADC #$F0
+  0C:9424  STA objX,X
+  0C:9427  LDA ram_002D
+  0C:9429  ADC #$00
+  0C:942B  STA ram_0380,X
+  0C:942E  RTS
+  0C:9482  LDA ram_00FC
+  0C:9484  CLC
+  0C:9485  ADC #$10
+  0C:9487  STA objX,X
+  0C:948A  LDA ram_002D
+  0C:948C  ADC #$00
+  0C:948E  STA ram_0380,X
+  0C:9491  JMP loc_0C_94B4
+  0C:94A5  LDA ram_00FC
+  0C:94A7  CLC
+  0C:94A8  ADC #$F0
+  0C:94AA  STA objX,X
+  0C:94AD  LDA ram_002D
+  0C:94AF  ADC #$00
+  0C:94B1  STA ram_0380,X
+  0C:94B4  RTS
+  0C:94FF  LDA ram_00FC
+  0C:9501  CLC
+  0C:9502  ADC #$10
+  0C:9504  STA objX,X
+  0C:9507  LDA ram_002D
+  0C:9509  ADC #$00
+  0C:950B  STA ram_0380,X
+  0C:950E  JMP loc_0C_9531
+  0C:9522  LDA ram_00FC
+  0C:9524  CLC
+  0C:9525  ADC #$F0
+  0C:9527  STA objX,X
+  0C:952A  LDA ram_002D
+  0C:952C  ADC #$00
+  0C:952E  STA ram_0380,X
+  0C:9531  RTS
+  0C:959F  LDA ram_00FC
+  0C:95A1  CLC
+  0C:95A2  ADC #$F0
+  0C:95A4  STA objX,X
+  0C:95A7  LDA ram_002D
+  0C:95A9  ADC #$00
+  0C:95AB  STA ram_0380,X
+  0C:9647  LDA ram_00FC
+  0C:9649  CLC
+  0C:964A  ADC #$F0
+  0C:964C  STA objX,X
+  0C:964F  LDA ram_002D
+  0C:9651  ADC #$00
+  0C:9653  STA ram_0380,X
+  0C:9656  JMP loc_0C_965C
+  0C:96D6  LDA ram_00FC
+  0C:96D8  CLC
+  0C:96D9  ADC #$F0
+  0C:96DB  STA objX,X
+  0C:96DE  LDA ram_002D
+  0C:96E0  ADC #$00
+  0C:96E2  STA ram_0380,X
+  0C:96E5  JMP loc_0C_96EB
+  0C:9A9D  LDA ram_00FC
+  0C:9A9F  CLC
+  0C:9AA0  ADC #$F0
+  0C:9AA2  STA objX,X
+  0C:9AA5  LDA ram_002D
+  0C:9AA7  ADC #$00
+  0C:9AA9  STA ram_0380,X
+  0C:9AAC  JMP loc_0C_9AD8
+  0C:9E2E  LDA #$01
+  0C:9E30  BNE loc_0C_9E38
+  0C:9E3C  LDA #$01
+  0C:9E3E  BNE loc_0C_9E46
+  0C:9E40  LDA #$02
+  0C:9E42  BNE loc_0C_9E46
+  0C:9EC9  LDA #$02
+  0C:9ECB  BNE loc_0C_9ECF
+  0C:9F01  LDA #$00
+  0C:9F03  BEQ loc_0C_9F07
+  0D:A042  STA objY,X
+  0D:A1CE  LDA #$00
+  0D:A1D0  STA ram_03D0,X
+  0D:A1D3  RTS
+  0D:A4DC  LDA ram_05B0,X
+  0D:A4DF  STA ram_03D0,X
+  0D:A4E2  RTS
+  0D:A525  STA objX,X
+  0D:A52F  STA objX,X
+  0D:AB6B  LDA ptr_0E+1
+  0D:AB6D  STA objY,X
+  0D:AB70  LDA #$00
+  0D:AB72  STA ram_0420,X
+  0D:AB75  STA ram_0430,X
+  0D:AB78  SEC
+  0D:AB79  RTS
+  0D:ABB7  SEC
+  0D:ABB8  RTS
+  0D:AC04  LDA ram_0520,X
+  0D:AC07  STA ram_0530,X
+  0D:AC0A  JMP loc_0D_AC13
+  0E:C2C7  LDA ram_0014,X
+  0E:C2C9  AND #$F0
+  0E:C2CB  STA ram_0014,X
+  0E:C2F1  LDX ptr_02
+  0E:C5CA  LDA #$00
+  0E:C5CC  BEQ loc_0E_C5CA
+  0E:C8F3  JMP loc_0E_C93B
+  0E:CAF2  JMP loc_0E_CCDA
+  0E:CAF5  JMP loc_0E_CA3C
+  0E:CC3F  LDA ram_0460,Y
+  0E:CC42  AND #$03
+  0E:CC44  CMP ram_0031
+  0E:CC46  BEQ loc_0E_CC4F
+  0E:CC48  LDA ram_0031
+  0E:CC4A  STA ram_0460,Y
+  0E:CC4D  BNE loc_0E_CC52
+  0E:CC4F  JSR sub_0E_CC85
+  0E:CC62  JMP loc_0E_D7F2
+  0E:CC65  LDA ram_0460,Y
+  0E:CC68  AND #$03
+  0E:CC6A  CMP ram_0031
+  0E:CC6C  BEQ loc_0E_CC70
+  0E:CC6E  BNE loc_0E_CC73
+  0E:CC70  JSR sub_0E_CC85
+  0E:CC73  JMP loc_0E_D88C
+  0E:CC7F  JMP loc_0E_CB22
+  0E:CC85  LDA ram_0031
+  0E:CC87  AND #$02
+  0E:CC89  TAY
+  0E:CC8A  LDA objX
+  0E:CC8D  CLC
+  0E:CC8E  ADC tbl_0F_E1D3,Y
+  0E:CC91  PHA
+  0E:CC92  LDA ram_0380
+  0E:CC95  ADC tbl_0F_E1D4,Y
+  0E:CC98  LDY ram_0039
+  0E:CC9A  STA ram_0380,Y
+  0E:CC9D  PLA
+  0E:CC9E  STA objX,Y
+  0E:CCA1  RTS
+  0E:CEF9  RTS
+  0E:CF74  EOR #$FF
+  0E:CF76  ADC #$01
+  0E:CF78  CLC
+  0E:CFCD  JSR sub_0E_CFD1
+  0E:CFD0  RTS
+  0E:CFD1  LDA gameAction
+  0E:CFD3  STA ram_00BE
+  0E:CFD5  LDA #$24
+  0E:CFD7  STA gameAction
+  0E:CFD9  LDA #$80
+  0E:CFDB  STA ram_0300
+  0E:CFDE  RTS
+  0E:CFF4  JSR sub_0E_CFD1
+  0E:CFF7  RTS
+  0E:D016  JSR sub_0E_CFD1
+  0E:D019  RTS
+  0E:D0DE  JMP loc_0E_D18E
+  0E:D183  LDA #$04
+  0E:D1E3  LDA ram_00FC
+  0E:D1E5  CLC
+  0E:D1E6  ADC #$F0
+  0E:D1E8  STA objX
+  0E:D1EB  LDA ram_002D
+  0E:D1ED  ADC #$00
+  0E:D1EF  STA ram_0380
+  0E:D1F2  RTS
+  0E:D251  LDA ram_0590
+  0E:D254  CMP #$04
+  0E:D256  BNE loc_0E_D264
+  0E:D258  LDA tbl_0F_E1EC,Y
+  0E:D25B  JSR sub_0F_F294
+  0E:D25E  LDA tbl_0F_E22E,Y
+  0E:D261  JSR sub_0F_F440
+  0E:D2A1  LDA ram_00FC
+  0E:D2A3  CLC
+  0E:D2A4  ADC #$F0
+  0E:D2A6  STA objX
+  0E:D2A9  LDA ram_002D
+  0E:D2AB  ADC #$00
+  0E:D2AD  STA ram_0380
+  0E:D2B0  RTS
+  0E:D4A4  CMP #$35
+  0E:D4A6  BEQ loc_0E_D4C4
+  0E:D4A8  RTS
+  0E:D4C4  LDY ram_0039
+  0E:D4C6  LDA objY
+  0E:D4C9  STA objY,Y
+  0E:D4CC  JMP loc_0E_D88C
+  0E:D55A  JSR sub_0F_F436
+  0E:D610  STA objY
+  0E:D62E  RTS
+  0E:D65C  CMP #$47
+  0E:D65E  BEQ loc_0E_D667
+  0E:D660  RTS
+  0E:D667  JMP sub_0E_D79A
+  0E:D735  LDA objY
+  0E:D738  STA ram_0036
+  0E:D786  BNE sub_0E_D79A
+  0E:D951  LDA ram_0380,Y
+  0E:D954  ADC #$00
+  0E:D956  STA ram_0380,Y
+  0E:D9CF  ADC #$0F
+  0E:D9D1  STA objY,Y
+  0E:DBBC  LDA ram_00FC
+  0E:DBBE  CLC
+  0E:DBBF  ADC #$19
+  0E:DBC1  STA objX
+  0E:DBC4  LDA ram_002D
+  0E:DBC6  ADC #$00
+  0E:DBC8  STA ram_0380
+  0E:DCDC  RTS
+  0F:E2CD  JMP loc_0F_E473
+  0F:E3F8  JSR sub_0E_CEAA
+  0F:E3FB  LDA #$00
+  0F:E3FD  STA gameAction
+  0F:E3FF  STA ram_00BB
+  0F:E401  STA ram_0035
+  0F:E403  LDA #$80
+  0F:E405  STA ram_0300
+  0F:E408  RTS
+  0F:E412  INC ram_002D
+  0F:E414  RTS
+  0F:E42A  LDA #$01
+  0F:E42C  STA ptr_00+1
+  0F:E434  STA ptr_00+1
+  0F:E460  STA objX
+  0F:E4BC  LDA gameAction
+  0F:E4BE  CMP #$19
+  0F:E4C0  BEQ loc_0F_E4DE
+  0F:E4C2  LDA #$E8
+  0F:E4C4  STA objX
+  0F:E4C7  RTS
+  0F:E4E6  EOR #$FF
+  0F:E4E8  CLC
+  0F:E4E9  ADC #$01
+  0F:E4F5  LDA ram_0010
+  0F:E4F7  STA ram_0023
+  0F:E4F9  AND #$01
+  0F:E4FB  TAX
+  0F:E4FC  LDA tbl_0F_E60B,X
+  0F:E4FF  STA ram_0025
+  0F:E501  LDA tbl_0F_E60D,X
+  0F:E504  STA ram_0024
+  0F:E511  LDA ram_0025
+  0F:E513  EOR #$FF
+  0F:E52E  JMP loc_0F_E53F
+  0F:EA19  CPX #$00
+  0F:EA1B  BEQ loc_0F_EA4D
+  0F:EA1D  LDA ram_03E0,X
+  0F:EA20  BMI loc_0F_EA30
+  0F:EA22  BPL loc_0F_EA30
+  0F:EA4B  BEQ loc_0F_EA30
+  0F:EAD6  LDA ram_0092
+  0F:EAD8  AND #$04
+  0F:EADA  BNE loc_0F_EAEF
+  0F:EB48  BCS loc_0F_EB8B
+  0F:EC39  LDA ram_0060
+  0F:EC3B  CMP #$01
+  0F:EC3D  BNE loc_0F_EC41
+  0F:EC3F  BEQ loc_0F_EC81
+  0F:EC52  RTS
+  0F:EC53  LDA ram_00F9
+  0F:EC55  SEC
+  0F:EC56  SBC ram_0380,X
+  0F:EC59  BMI loc_0F_EC6E
+  0F:EC5B  LDA objX,X
+  0F:EC5E  CLC
+  0F:EC5F  ADC #$10
+  0F:EC61  STA objX,X
+  0F:EC64  LDA ram_0380,X
+  0F:EC67  ADC #$00
+  0F:EC69  STA ram_0380,X
+  0F:EC6C  SEC
+  0F:EC6D  RTS
+  0F:EC6E  LDA objX,X
+  0F:EC71  SEC
+  0F:EC72  SBC #$10
+  0F:EC74  STA objX,X
+  0F:EC77  LDA ram_0380,X
+  0F:EC7A  SBC #$00
+  0F:EC7C  STA ram_0380,X
+  0F:EC7F  SEC
+  0F:EC80  RTS
+  0F:ECFB  LDA #$00
+  0F:ECFD  LDY ptr_02
+  0F:ECFF  STA a:ptr_42,Y
+  0F:ED02  DEY
+  0F:ED03  BPL loc_0F_ECFF
+  0F:ED05  JMP loc_0F_EEDF
+  0F:EE08  BCS loc_0F_EE12
+  0F:EE10  BCS loc_0F_EE08
+  0F:EE12  LDA #$EF
+  0F:EE14  STA ram_0011
+  0F:EE16  BNE loc_0F_EE43
+  0F:EE18  LDA #$00
+  0F:EE1A  STA ram_0011
+  0F:EE1C  BEQ loc_0F_EE43
+  0F:EE1E  LDA ram_0011
+  0F:EE20  CLC
+  0F:EE21  ADC tbl_0F_EF2F,Y
+  0F:EE24  STA ram_0011
+  0F:EE26  CMP #$F0
+  0F:EE28  BCC loc_0F_EE32
+  0F:EE2A  ADC #$10
+  0F:EE2C  STA ram_0011
+  0F:EE2E  INC ptr_04
+  0F:EE30  BEQ loc_0F_EE43
+  0F:EE32  INY
+  0F:EE33  STY ram_0040
+  0F:EE35  LDY ptr_02
+  0F:EE37  LDA #$00
+  0F:EE39  STA a:ptr_42,Y
+  0F:EE3C  DEC ptr_02
+  0F:EE3E  BPL loc_0F_EE1E
+  0F:EE40  JMP loc_0F_EEDF
+  0F:EEB8  STA ram_0028
+  0F:EEBA  JMP loc_0F_EE6C
+  0F:EF94  ADC #$0F
+  0F:EF96  STA objY,X
+  0F:EF99  INC ram_03E0,X
+  0F:EFAF  SBC #$0F
+  0F:EFB1  STA objY,X
+  0F:EFB4  DEC ram_03E0,X
+  0F:F029  LDA ram_0010
+  0F:F02B  CMP #$40
+  0F:F02D  BEQ loc_0F_F035
+  0F:F02F  CMP #$50
+  0F:F031  BEQ loc_0F_F035
+  0F:F033  CLC
+  0F:F034  RTS
+  0F:F035  LDA ram_0430
+  0F:F038  BMI loc_0F_F024
+  0F:F03A  JSR sub_0F_F0DC
+  0F:F03D  CLC
+  0F:F03E  RTS
+  0F:F07A  LDA ram_0010
+  0F:F07C  CMP #$40
+  0F:F07E  BEQ loc_0F_F086
+  0F:F080  CMP #$50
+  0F:F082  BEQ loc_0F_F086
+  0F:F084  CLC
+  0F:F085  RTS
+  0F:F086  LDA ram_0430
+  0F:F089  BMI loc_0F_F075
+  0F:F08B  JSR sub_0F_F0DC
+  0F:F08E  CLC
+  0F:F08F  RTS
+  0F:F0CC  LDA gameAction
+  0F:F0CE  CMP #$0D
+  0F:F0D0  BEQ loc_0F_F0BD
+  0F:F0D2  CLC
+  0F:F0D3  RTS
+  0F:F0D8  JSR sub_0F_F0DC
+  0F:F0DB  RTS
+  0F:F0DC  LDA gameAction
+  0F:F0DE  STA ram_00BE
+  0F:F0E0  LDA #$24
+  0F:F0E2  STA gameAction
+  0F:F0E4  LDA #$80
+  0F:F0E6  STA ram_0300
+  0F:F0E9  LDA ram_00BE
+  0F:F0EB  CMP #$04
+  0F:F0ED  BNE loc_0F_F0F6
+  0F:F0EF  LDA #$FF
+  0F:F0F1  LDY ram_0039
+  0F:F0F3  STA ram_03F0,Y
+  0F:F0F6  RTS
+  0F:F168  JSR sub_0F_EF83
+  0F:F16B  JSR sub_0F_F26E
+  0F:F1D6  ADC #$0F
+  0F:F1D8  STA objY,X
+  0F:F1DB  INC ram_03E0,X
+  0F:F1F4  SBC #$0F
+  0F:F1F6  STA objY,X
+  0F:F1F9  DEC ram_03E0,X
+  0F:F225  ADC #$0F
+  0F:F227  STA objY,X
+  0F:F22A  INC ram_03E0,X
+  0F:F243  SBC #$0F
+  0F:F245  STA objY,X
+  0F:F248  DEC ram_03E0,X
+  0F:F726  SEC
+  0F:F727  RTS
+  0F:F8D9  RTS
+  0F:F8DF  LDA ram_0581
+  0F:F8E2  CMP #$74
+  0F:F8E4  BNE loc_0F_F8ED
+  0F:F8E6  LDA #$00
+  0F:F8E8  STA ram_0301
+  0F:F8EB  BEQ loc_0F_F8FE
+  0F:F985  JSR sub_0F_F436
+  0F:F988  LDA #$00
+  0F:F98A  STA ram_00A3
+  0F:F98C  LDA #$FF
+  0F:F98E  STA weaponHeld
+  0F:F990  RTS
+
+Unknown runs, longest first (len bank:addr):
+   1424  01:B170
+   1361  05:B1AF
+   1360  0D:B1B0
+   1036  08:9BF4
+    991  09:B321
+    943  0A:9C51
+    902  07:B361
+    529  07:B12F
+    520  08:8DF8
+    504  08:99F6
+    480  09:B120
+    466  09:A52E
+    413  04:9663
+    375  08:8789
+    343  05:A5AC
+    329  09:AD17
+    324  07:B9BC
+    307  00:9ECD
+    290  05:B9E0
+    268  09:B9F4
+    267  09:A1F5
+    222  04:9222
+    184  04:8F48
+    179  04:944D
+    171  09:AA55
+    168  04:8C58
+    165  09:A99C
+    156  09:AB34
+    152  0D:B9F0
+    141  05:ADD3
+    134  0C:9D9E
+    118  0A:8BC1
+    116  0D:BA8C
+    115  01:A651
+    111  05:A1CD
+    110  0B:A77A
+    110  04:8892
+    109  02:9177
+    106  0F:FD96
+    104  04:8B98
+     99  04:9056
+     92  04:89D9
+     92  02:9FA4
+     91  04:95A5
+     89  0A:9BA7
+     89  00:99A7
+     87  04:8A69
+     86  02:989E
+     82  03:ACAE
+     69  0F:EFBB
+     68  09:A071
+     65  05:A851
+     65  04:90BF
+     61  06:8A03
+     51  03:B2CD
+     51  03:B1CD
+     44  07:B98C
+     43  0F:FFB5
+     43  04:9CC3
+     42  0A:9728
+     41  08:871D
+     40  0B:A5A4
+     40  0B:A3AE
+     40  0A:8A8B
+     40  08:857A
+     40  01:BAD4
+     37  08:86ED
+     36  08:854A
+     36  04:9D32
+     36  02:9546
+     36  02:904C
+     36  02:8464
+     35  0C:8885
+     34  0A:8B65
+     34  03:AA60
+     34  03:A788
+     33  01:A00C
+     31  04:8B21
+     30  05:A832
+     30  00:961F
+     28  07:B96C
+     28  01:BAA4
+     26  02:81E7
+     25  0C:8803
+     25  08:8611
+     25  08:85F5
+     25  02:82E7
+     24  0F:EF35
+     24  0D:B168
+     24  0D:B128
+     24  09:B028
+     24  09:AF28
+     24  07:B950
+     24  07:B6E8
+     24  05:B168
+     24  01:B128
+     24  01:B0E8
+     24  01:B0A8
+     24  01:B068
+     23  09:AFE9
+     23  07:AC55
+     23  02:9156
+     23  01:B028
+     22  0F:EBDF
+     22  0C:8BC0
+     22  0A:90AF
+     21  0A:84E0
+     21  09:A0F0
+     21  08:9932
+     21  08:98A6
+     21  08:9834
+     21  08:97B9
+     21  07:AFAA
+     21  01:AE4B
+     20  0A:9680
+     20  0A:9632
+     20  09:B0FE
+     20  07:B938
+     18  0F:FF12
+     18  0D:AE4E
+     18  0B:BFEE
+     18  0B:B30F
+     18  0A:81EF
+     18  09:A3D9
+     18  06:896F
+     18  06:895B
+     18  05:AFEE
+     18  04:89AE
+     18  03:B0EE
+     17  0D:B0EF
+     17  0A:82EF
+     17  09:B0AF
+     17  08:8749
+     17  06:892E
+     17  01:AFEF
+     16  0F:FC00
+     16  0F:F70A
+     16  0D:B0B0
+     16  0D:B070
+     16  0D:B030
+     16  0D:AFF0
+     16  0D:AFB0
+     16  0D:AF70
+     16  0D:AF30
+     16  0D:AEF0
+     16  0B:BD5C
+     16  0B:B681
+     16  0B:B66C
+     16  0B:B0F0
+     16  0B:AC44
+     16  09:B070
+     16  09:AFB0
+     16  09:AF70
+     16  09:AEF0
+     16  09:A16D
+     16  08:85A6
+     16  08:846E
+     16  07:B0F0
+     16  07:B0B0
+     16  07:B070
+     16  07:B030
+     16  07:AFF0
+     16  07:AF70
+     16  07:AF30
+     16  07:AEF0
+     16  05:B130
+     16  05:B0F0
+     16  05:B0B0
+     16  05:B070
+     16  05:B030
+     16  05:AFB0
+     16  05:AF70
+     16  05:AF30
+     16  05:AEF0
+     16  04:98C8
+     16  02:9096
+     16  01:AFB0
+     16  01:AF70
+     16  01:AF30
+     16  01:AEF0
+     16  00:97E9
+     15  09:A370
+     15  08:9558
+     15  08:94D1
+     15  08:944A
+     15  03:BE7D
+     15  03:B312
+     14  0C:88D5
+     14  08:8452
+     13  0E:C251
+     13  0A:9B96
+     13  08:86DD
+     13  03:B2A4
+     13  03:B1A4
+     12  08:95DF
+     12  08:9579
+     12  08:94F2
+     12  08:946B
+     12  08:93E4
+     12  08:853A
+     12  07:A949
+     12  05:A89C
+     12  04:9D18
+     12  04:8934
+     11  0F:EC17
+     11  0C:84D3
+     11  0C:8433
+     11  0A:847C
+     11  09:B0F0
+     11  09:A458
+     10  0F:EBC9
+     10  0E:D450
+     10  0C:9FE2
+     10  0C:9FA7
+     10  0C:9F91
+     10  0C:893E
+     10  0C:88F8
+     10  0C:886C
+     10  0C:8849
+     10  0C:8826
+     10  0C:87E0
+     10  0C:849B
+     10  0C:83FB
+     10  06:89F7
+     10  02:84A4
+      9  0F:F8CC
+      9  0F:F6DF
+      9  0C:8997
+      9  0C:8974
+      9  0C:8951
+      9  0C:891C
+      9  0C:88B3
+      9  0B:B27B
+      9  0B:B17B
+      9  08:98EC
+      9  08:959D
+      9  08:9516
+      9  08:948F
+      9  08:9408
+      9  08:876D
+      9  08:8761
+      9  08:86D1
+      9  08:86A5
+      9  08:8659
+      9  05:A59B
+      9  03:B20F
+      9  03:B10F
+      8  0F:FFF0
+      8  0F:EBAA
+      8  0C:89BB
+      8  0C:8466
+      8  0C:83C6
+      8  0A:8233
+      8  0A:8133
+      8  09:A1D5
+      8  08:99E3
+      8  08:99BB
+      8  08:85CA
+      8  08:85BE
+      8  08:84B6
+      8  08:81F6
+      8  08:8078
+      8  07:A8D9
+      8  06:8AF7
+      8  06:89DF
+      8  04:9646
+      8  01:BAC4
+      7  0F:FCB9
+      7  0D:B028
+      7  0D:AF28
+      7  0D:AEC9
+      7  0D:AE99
+      7  0D:AE69
+      7  0C:896B
+      7  0B:BD75
+      7  0B:BD6D
+      7  0B:B32A
+      7  09:B319
+      7  09:B311
+      7  09:B309
+      7  09:B301
+      7  09:AEC9
+      7  09:AE99
+      7  09:AE69
+      7  08:9998
+      7  08:996C
+      7  08:986E
+      7  08:97F3
+      7  08:93CB
+      7  07:B359
+      7  07:B351
+      7  07:B349
+      7  07:B341
+      7  07:AEC9
+      7  07:AE99
+      7  07:AE69
+      7  07:AE59
+      7  05:AEC9
+      7  05:AE99
+      7  05:AE69
+      7  04:9D5C
+      7  04:8A39
+      7  03:BE8D
+      7  02:857B
+      7  01:AEC9
+      7  01:AE99
+      7  01:AE69
+      6  0F:F8AB
+      6  0F:F887
+      6  0F:F6CA
+      6  0F:EF25
+      6  0F:ECC9
+      6  0F:EC08
+      6  0F:E261
+      6  0F:E231
+      6  0F:E1F5
+      6  0D:AED2
+      6  0D:AEA2
+      6  0D:AE72
+      6  0D:A3D3
+      6  0C:89DD
+      6  0C:89D4
+      6  0C:89B1
+      6  0C:898E
+      6  0C:88E8
+      6  0C:8877
+      6  0C:84C4
+      6  0C:8424
+      6  0B:A286
+      6  0A:8568
+      6  0A:855F
+      6  09:AED2
+      6  09:AEA2
+      6  09:AE92
+      6  09:AE72
+      6  09:A436
+      6  09:A3F1
+      6  08:98FB
+      6  08:95D3
+      6  08:95C7
+      6  08:95BB
+      6  08:9570
+      6  08:954C
+      6  08:9540
+      6  08:9534
+      6  08:94E9
+      6  08:94C5
+      6  08:94B9
+      6  08:94AD
+      6  08:9462
+      6  08:943E
+      6  08:9432
+      6  08:9426
+      6  08:93DB
+      6  08:93BB
+      6  07:AED2
+      6  07:AEC2
+      6  07:AEA2
+      6  07:AE72
+      6  05:AF28
+      6  05:AED2
+      6  05:AEA2
+      6  05:AE72
+      6  05:A795
+      6  03:B306
+      6  02:85BD
+      6  01:B78A
+      6  01:AF28
+      6  01:AED2
+      6  01:AEA2
+      6  01:AE72
+      6  01:A95E
+      6  01:A94E
+      6  01:A93E
+      5  0F:F703
+      5  0F:F6C3
+      5  0F:EC29
+      5  0D:A3CD
+      5  0C:8988
+      5  0C:892F
+      5  0C:890C
+      5  0C:8904
+      5  0C:88C6
+      5  0C:883A
+      5  0C:87F4
+      5  0C:84E5
+      5  0C:8445
+      5  0A:853F
+      5  0A:8241
+      5  0A:8141
+      5  09:A4CF
+      5  09:A0CE
+      5  08:8DE7
+      5  08:8781
+      5  08:8695
+      5  08:868D
+      5  08:8685
+      5  08:8675
+      5  08:8669
+      5  08:864D
+      5  08:862D
+      5  08:8461
+      5  07:AF69
+      5  07:AF28
+      5  05:AEC3
+      5  04:9D64
+      5  04:921C
+      5  03:BB18
+      5  03:BB08
+      5  03:BAF8
+      5  01:AEC3
+      5  00:9610
+      4  0F:FD0A
+      4  0F:FCC2
+      4  0F:FBD5
+      4  0F:FB3A
+      4  0F:FB35
+      4  0F:EB9D
+      4  0F:E60B
+      4  0F:E161
+      4  0D:AEC4
+      4  0D:AD92
+      4  0D:A87E
+      4  0D:A3EB
+      4  0D:A3BF
+      4  0C:9D67
+      4  0C:8880
+      4  0C:885D
+      4  0C:8856
+      4  0C:8459
+      4  0C:83B9
+      4  0A:9ACC
+      4  0A:8489
+      4  0A:8248
+      4  0A:8148
+      4  09:AEC4
+      4  09:A4C6
+      4  09:A04F
+      4  08:99D4
+      4  08:99C9
+      4  08:991F
+      4  08:98E0
+      4  08:989A
+      4  08:9828
+      4  08:97AD
+      4  08:958D
+      4  08:9506
+      4  08:947F
+      4  08:93F8
+      4  08:93A1
+      4  08:9034
+      4  08:85DE
+      4  08:8532
+      4  08:84D2
+      4  08:84C6
+      4  08:8482
+      4  07:BFF2
+      4  07:BEF2
+      4  07:BDF2
+      4  07:BCF2
+      4  07:BBF2
+      4  07:B7B4
+      4  06:89ED
+      4  06:8928
+      4  05:A790
+      4  05:A57B
+      4  05:A52C
+      4  04:9BC8
+      4  04:9BB9
+      4  03:BE95
+      4  03:BE78
+      4  03:BB81
+      4  03:BAE9
+      4  03:B248
+      4  03:B148
+      4  03:A806
+      4  02:845E
+      4  02:8285
+      4  02:8185
+      4  01:A968
+      4  01:A958
+      4  01:A948
+      4  01:A938
+      4  00:8917
+      3  0F:FD92
+      3  0F:FD6E
+      3  0F:FD52
+      3  0F:FD2E
+      3  0F:FCD3
+      3  0F:FC65
+      3  0F:FC58
+      3  0F:FC4B
+      3  0F:F8B9
+      3  0F:F6DB
+      3  0F:EC25
+      3  0F:E294
+      3  0F:E240
+      3  0E:C262
+      3  0D:BFF5
+      3  0D:BEF5
+      3  0D:BDF5
+      3  0D:BCF5
+      3  0D:BBF5
+      3  0D:AE95
+      3  0D:AE65
+      3  0D:AE2C
+      3  0C:89C6
+      3  0C:89A3
+      3  0C:8980
+      3  0C:895D
+      3  0C:8949
+      3  0C:8834
+      3  0C:87EE
+      3  0C:87D7
+      3  0B:B324
+      3  0B:B309
+      3  0B:B303
+      3  0B:B275
+      3  0B:B175
+      3  0A:8590
+      3  0A:8216
+      3  0A:8116
+      3  09:BFD8
+      3  09:BF92
+      3  09:BF01
+      3  09:BED8
+      3  09:BE92
+      3  09:BE01
+      3  09:BDD8
+      3  09:BD92
+      3  09:BD01
+      3  09:BCD8
+      3  09:BC92
+      3  09:BC01
+      3  09:BBD8
+      3  09:BB92
+      3  09:BB01
+      3  09:AE65
+      3  09:A42D
+      3  09:A385
+      3  09:A0E8
+      3  09:A0BA
+      3  08:99DE
+      3  08:9927
+      3  08:9912
+      3  08:96AB
+      3  08:9624
+      3  08:95B5
+      3  08:95AF
+      3  08:9597
+      3  08:952E
+      3  08:9528
+      3  08:9510
+      3  08:94A7
+      3  08:94A1
+      3  08:9489
+      3  08:9420
+      3  08:941A
+      3  08:9402
+      3  08:93C2
+      3  08:93AD
+      3  08:852E
+      3  08:84F3
+      3  08:848A
+      3  08:8467
+      3  08:8035
+      3  07:BF7E
+      3  07:BF38
+      3  07:BF18
+      3  07:BE7E
+      3  07:BE38
+      3  07:BE18
+      3  07:BD7E
+      3  07:BD38
+      3  07:BD18
+      3  07:BC7E
+      3  07:BC38
+      3  07:BC18
+      3  07:BB7E
+      3  07:BB38
+      3  07:BB18
+      3  07:B02C
+      3  07:B028
+      3  07:AE95
+      3  07:AE65
+      3  06:8A63
+      3  06:8949
+      3  06:891A
+      3  05:AE65
+      3  05:AA7F
+      3  05:A79C
+      3  05:A71E
+      3  04:9D6E
+      3  04:9D6A
+      3  03:BB88
+      3  03:BB20
+      3  03:BB10
+      3  03:BB00
+      3  03:BAF0
+      3  03:B26F
+      3  03:B16F
+      3  02:849E
+      3  02:827B
+      3  02:8264
+      3  02:817B
+      3  02:8164
+      3  01:AE95
+      3  01:AE65
+      3  01:AA2B
+      3  01:A9C1
+      3  01:A9B9
+      3  01:A9B1
+      3  01:A9A9
+      3  01:A9A1
+      3  01:A999
+      3  01:A991
+      3  01:A96E
+      3  01:A931
+      3  01:A006
+      3  00:94EF
+      3  00:8CBB
+      2  0F:FD8C
+      2  0F:FD82
+      2  0F:FD7F
+      2  0F:FD72
+      2  0F:FD69
+      2  0F:FD62
+      2  0F:FD5E
+      2  0F:FD4C
+      2  0F:FD42
+      2  0F:FD3F
+      2  0F:FD32
+      2  0F:FD29
+      2  0F:FD22
+      2  0F:FD1E
+      2  0F:FCCC
+      2  0F:FC7B
+      2  0F:FC6E
+      2  0F:FC61
+      2  0F:FC54
+      2  0F:FC47
+      2  0F:FC30
+      2  0F:FB06
+      2  0F:F896
+      2  0F:F872
+      2  0F:F6D7
+      2  0F:F6BF
+      2  0F:EC11
+      2  0F:EBBF
+      2  0F:EBA7
+      2  0F:E26B
+      2  0F:E25E
+      2  0F:E23D
+      2  0F:E223
+      2  0F:E216
+      2  0E:DE5C
+      2  0E:C9FD
+      2  0E:C9D2
+      2  0D:BFFC
+      2  0D:BFDE
+      2  0D:BFD7
+      2  0D:BFBD
+      2  0D:BFAF
+      2  0D:BF9E
+      2  0D:BF97
+      2  0D:BF7F
+      2  0D:BEFC
+      2  0D:BEDE
+      2  0D:BED7
+      2  0D:BEBD
+      2  0D:BEAF
+      2  0D:BE9E
+      2  0D:BE97
+      2  0D:BE7F
+      2  0D:BDFC
+      2  0D:BDDE
+      2  0D:BDD7
+      2  0D:BDBD
+      2  0D:BDAF
+      2  0D:BD9E
+      2  0D:BD97
+      2  0D:BD7F
+      2  0D:BCFC
+      2  0D:BCDE
+      2  0D:BCD7
+      2  0D:BCBD
+      2  0D:BCAF
+      2  0D:BC9E
+      2  0D:BC97
+      2  0D:BBFC
+      2  0D:BBDE
+      2  0D:BBD7
+      2  0D:BBBD
+      2  0D:BBAF
+      2  0D:BB9E
+      2  0D:BB97
+      2  0D:AEDA
+      2  0D:AEAA
+      2  0D:AE7A
+      2  0D:AD99
+      2  0D:AD8F
+      2  0D:AD89
+      2  0D:A8E0
+      2  0D:A88C
+      2  0D:A886
+      2  0D:A3DD
+      2  0D:A3DA
+      2  0D:A3C9
+      2  0D:A133
+      2  0C:9FF0
+      2  0C:9FED
+      2  0C:9FCF
+      2  0C:9FB5
+      2  0C:9FB2
+      2  0C:9EC0
+      2  0C:9EBA
+      2  0C:9EB4
+      2  0C:8BB5
+      2  0C:894D
+      2  0C:893B
+      2  0C:892A
+      2  0C:8918
+      2  0C:88F5
+      2  0C:88E4
+      2  0C:88D2
+      2  0C:88C1
+      2  0C:88BE
+      2  0C:88AF
+      2  0C:8863
+      2  0C:8840
+      2  0C:881D
+      2  0C:87FA
+      2  0C:85FE
+      2  0C:84E1
+      2  0C:84CD
+      2  0C:84AE
+      2  0C:84A9
+      2  0C:84A6
+      2  0C:8488
+      2  0C:847B
+      2  0C:8463
+      2  0C:8441
+      2  0C:842D
+      2  0C:840E
+      2  0C:8409
+      2  0C:8406
+      2  0C:83E8
+      2  0C:83DB
+      2  0C:83C3
+      2  0B:BD7D
+      2  0B:B693
+      2  0B:B67E
+      2  0B:B248
+      2  0B:B148
+      2  0A:8391
+      2  0A:8360
+      2  0A:8338
+      2  0A:82B1
+      2  0A:82AA
+      2  0A:81B1
+      2  0A:81AA
+      2  0A:80E5
+      2  0A:80E2
+      2  0A:8065
+      2  0A:8062
+      2  09:BFFE
+      2  09:BEFE
+      2  09:BDFE
+      2  09:BCFE
+      2  09:BBFE
+      2  09:AEDA
+      2  09:AEAA
+      2  09:AE7A
+      2  09:A445
+      2  09:A069
+      2  09:A03B
+      2  08:99F3
+      2  08:99EF
+      2  08:99DA
+      2  08:99CF
+      2  08:99C5
+      2  08:99B0
+      2  08:9985
+      2  08:9959
+      2  08:9916
+      2  08:98CD
+      2  08:9887
+      2  08:985B
+      2  08:980D
+      2  08:97E0
+      2  08:979A
+      2  08:96B1
+      2  08:93C7
+      2  08:93B7
+      2  08:939E
+      2  08:9399
+      2  08:8DCB
+      2  08:84EC
+      2  08:84E2
+      2  08:84AC
+      2  08:847F
+      2  07:BFDD
+      2  07:BFDA
+      2  07:BFC3
+      2  07:BFBD
+      2  07:BF68
+      2  07:BF5A
+      2  07:BF54
+      2  07:BF51
+      2  07:BF03
+      2  07:BEDD
+      2  07:BEDA
+      2  07:BEC3
+      2  07:BEBD
+      2  07:BE68
+      2  07:BE5A
+      2  07:BE54
+      2  07:BE51
+      2  07:BE03
+      2  07:BDDD
+      2  07:BDDA
+      2  07:BDC3
+      2  07:BDBD
+      2  07:BD68
+      2  07:BD5A
+      2  07:BD54
+      2  07:BD51
+      2  07:BD03
+      2  07:BCDD
+      2  07:BCDA
+      2  07:BCC3
+      2  07:BCBD
+      2  07:BC68
+      2  07:BC5A
+      2  07:BC54
+      2  07:BC51
+      2  07:BC03
+      2  07:BBDD
+      2  07:BBDA
+      2  07:BBC3
+      2  07:BBBD
+      2  07:BB68
+      2  07:BB5A
+      2  07:BB54
+      2  07:BB51
+      2  07:BB03
+      2  07:B77A
+      2  07:AEDA
+      2  07:AEAA
+      2  07:AE7A
+      2  07:A8CF
+      2  06:8B50
+      2  06:89F3
+      2  06:89E9
+      2  06:8983
+      2  05:BFD1
+      2  05:BF00
+      2  05:BED1
+      2  05:BE00
+      2  05:BDD1
+      2  05:BD00
+      2  05:BCD1
+      2  05:BC00
+      2  05:BBD1
+      2  05:B782
+      2  05:B028
+      2  05:AEDA
+      2  05:AEAA
+      2  05:AE96
+      2  05:AE7A
+      2  05:A7A0
+      2  05:A3BF
+      2  05:A3A1
+      2  05:A380
+      2  05:A362
+      2  05:A341
+      2  05:A303
+      2  05:A2E9
+      2  05:A2CB
+      2  05:A2AA
+      2  05:A057
+      2  05:A037
+      2  05:A01C
+      2  04:9F97
+      2  04:9F89
+      2  04:9F69
+      2  04:9EE0
+      2  04:9EBE
+      2  04:9E3A
+      2  04:98DA
+      2  04:965E
+      2  04:9573
+      2  03:BFFE
+      2  03:BD31
+      2  03:BD19
+      2  03:BD01
+      2  03:B2C7
+      2  03:B27A
+      2  03:B25B
+      2  03:B234
+      2  03:B1C7
+      2  03:B17A
+      2  03:B15B
+      2  03:B134
+      2  02:82B6
+      2  02:81B6
+      2  02:80ED
+      2  02:806D
+      2  01:AEDA
+      2  01:AEAA
+      2  01:AE7A
+      2  01:AA30
+      2  01:A98A
+      2  00:821B
+      2  00:8048
+      2  00:8043
+      2  00:801E
+      2  00:8019
+      1  0F:FFF9
+      1  0F:FD87
+      1  0F:FD85
+      1  0F:FD79
+      1  0F:FD59
+      1  0F:FD47
+      1  0F:FD45
+      1  0F:FD39
+      1  0F:FD19
+      1  0F:FCC7
+      1  0F:FCB5
+      1  0F:FCAA
+      1  0F:FCA7
+      1  0F:FCA3
+      1  0F:FC99
+      1  0F:FC8E
+      1  0F:FC8C
+      1  0F:FC88
+      1  0F:FC81
+      1  0F:FC7F
+      1  0F:FC74
+      1  0F:FC72
+      1  0F:FC3D
+      1  0F:FC39
+      1  0F:FC29
+      1  0F:FC19
+      1  0F:FC12
+      1  0F:FBD2
+      1  0F:FB30
+      1  0F:FB19
+      1  0F:F8CA
+      1  0F:F8C4
+      1  0F:F8B3
+      1  0F:F8A6
+      1  0F:F8A0
+      1  0F:F892
+      1  0F:F88F
+      1  0F:F882
+      1  0F:F87C
+      1  0F:F86E
+      1  0F:F86B
+      1  0F:F6FF
+      1  0F:F6FD
+      1  0F:F6BD
+      1  0F:F6B8
+      1  0F:F405
+      1  0F:F401
+      1  0F:F3FD
+      1  0F:F3F9
+      1  0F:F3F5
+      1  0F:F3F1
+      1  0F:F3ED
+      1  0F:F3E9
+      1  0F:EC2F
+      1  0F:EC15
+      1  0F:EC0F
+      1  0F:EC06
+      1  0F:EC04
+      1  0F:EBFD
+      1  0F:EBF7
+      1  0F:EBDB
+      1  0F:EBD9
+      1  0F:EBD7
+      1  0F:EBD4
+      1  0F:EBC2
+      1  0F:EBA4
+      1  0F:E879
+      1  0F:E86E
+      1  0F:E609
+      1  0F:E607
+      1  0F:E605
+      1  0F:E603
+      1  0F:E601
+      1  0F:E472
+      1  0F:E24E
+      1  0F:E24C
+      1  0F:E15C
+      1  0E:DE57
+      1  0E:DE54
+      1  0E:DE51
+      1  0E:DE4D
+      1  0E:CA1F
+      1  0E:CA02
+      1  0E:C9F4
+      1  0E:C9D7
+      1  0D:BFE5
+      1  0D:BFDB
+      1  0D:BFC7
+      1  0D:BFA2
+      1  0D:BF91
+      1  0D:BF88
+      1  0D:BF7C
+      1  0D:BF6A
+      1  0D:BF54
+      1  0D:BF44
+      1  0D:BF33
+      1  0D:BF28
+      1  0D:BF02
+      1  0D:BEFF
+      1  0D:BEE5
+      1  0D:BEDB
+      1  0D:BEC7
+      1  0D:BEA2
+      1  0D:BE91
+      1  0D:BE88
+      1  0D:BE7C
+      1  0D:BE6A
+      1  0D:BE54
+      1  0D:BE44
+      1  0D:BE33
+      1  0D:BE28
+      1  0D:BE02
+      1  0D:BDFF
+      1  0D:BDE5
+      1  0D:BDDB
+      1  0D:BDC7
+      1  0D:BDA2
+      1  0D:BD91
+      1  0D:BD88
+      1  0D:BD7C
+      1  0D:BD6A
+      1  0D:BD54
+      1  0D:BD33
+      1  0D:BD28
+      1  0D:BD02
+      1  0D:BCFF
+      1  0D:BCE5
+      1  0D:BCDB
+      1  0D:BCC7
+      1  0D:BCA2
+      1  0D:BC88
+      1  0D:BC6A
+      1  0D:BC54
+      1  0D:BC44
+      1  0D:BC33
+      1  0D:BC28
+      1  0D:BC02
+      1  0D:BBFF
+      1  0D:BBE5
+      1  0D:BBDB
+      1  0D:BBC7
+      1  0D:BBA2
+      1  0D:BB91
+      1  0D:BB88
+      1  0D:BB80
+      1  0D:BB6A
+      1  0D:BB54
+      1  0D:BB44
+      1  0D:BB33
+      1  0D:BB28
+      1  0D:BB02
+      1  0D:B77F
+      1  0D:ADA9
+      1  0D:AD97
+      1  0D:AD8D
+      1  0D:AD87
+      1  0D:A89A
+      1  0D:A897
+      1  0D:A708
+      1  0D:A6F9
+      1  0D:A3C6
+      1  0D:A3BC
+      1  0D:A3B6
+      1  0C:9FF5
+      1  0C:9FF3
+      1  0C:9FDE
+      1  0C:9FDC
+      1  0C:9FDA
+      1  0C:9FD7
+      1  0C:9FD5
+      1  0C:9FD2
+      1  0C:9FCC
+      1  0C:9FBA
+      1  0C:9FB8
+      1  0C:9FA3
+      1  0C:9FA1
+      1  0C:9F9F
+      1  0C:9F9C
+      1  0C:9EC4
+      1  0C:9EBE
+      1  0C:9EB8
+      1  0C:9CEC
+      1  0C:9CEA
+      1  0C:9CE6
+      1  0C:9CDF
+      1  0C:9CDD
+      1  0C:9CD9
+      1  0C:9CAC
+      1  0C:9CA9
+      1  0C:9CA5
+      1  0C:8FC4
+      1  0C:8FBD
+      1  0C:8BBC
+      1  0C:8BB0
+      1  0C:8B5D
+      1  0C:89CE
+      1  0C:89CA
+      1  0C:89C4
+      1  0C:89A7
+      1  0C:89A1
+      1  0C:8984
+      1  0C:897E
+      1  0C:8965
+      1  0C:8961
+      1  0C:895B
+      1  0C:8936
+      1  0C:8928
+      1  0C:8926
+      1  0C:8913
+      1  0C:88F0
+      1  0C:88CD
+      1  0C:88AA
+      1  0C:886A
+      1  0C:8854
+      1  0C:8832
+      1  0C:8824
+      1  0C:8801
+      1  0C:87DE
+      1  0C:87C1
+      1  0C:87BB
+      1  0C:8601
+      1  0C:84D1
+      1  0C:84CB
+      1  0C:84C2
+      1  0C:84C0
+      1  0C:84B9
+      1  0C:84AC
+      1  0C:8497
+      1  0C:8495
+      1  0C:8493
+      1  0C:8490
+      1  0C:848E
+      1  0C:848B
+      1  0C:8485
+      1  0C:847E
+      1  0C:8460
+      1  0C:8431
+      1  0C:842B
+      1  0C:8422
+      1  0C:8420
+      1  0C:8419
+      1  0C:840C
+      1  0C:83F7
+      1  0C:83F5
+      1  0C:83F3
+      1  0C:83F0
+      1  0C:83EE
+      1  0C:83EB
+      1  0C:83E5
+      1  0C:83DE
+      1  0C:83C0
+      1  0B:BCF9
+      1  0B:BCE8
+      1  0B:B2FF
+      1  0B:B2D2
+      1  0B:B2CF
+      1  0B:B2CD
+      1  0B:B2C7
+      1  0B:B2C5
+      1  0B:B2C3
+      1  0B:B2C1
+      1  0B:B2BF
+      1  0B:B2BD
+      1  0B:B2BB
+      1  0B:B2B9
+      1  0B:B2B7
+      1  0B:B2B5
+      1  0B:B2B3
+      1  0B:B2B1
+      1  0B:B2AF
+      1  0B:B2AD
+      1  0B:B2AB
+      1  0B:B2A9
+      1  0B:B2A7
+      1  0B:B2A5
+      1  0B:B2A3
+      1  0B:B2A1
+      1  0B:B29F
+      1  0B:B29D
+      1  0B:B29B
+      1  0B:B299
+      1  0B:B297
+      1  0B:B295
+      1  0B:B293
+      1  0B:B291
+      1  0B:B28F
+      1  0B:B28D
+      1  0B:B28B
+      1  0B:B289
+      1  0B:B287
+      1  0B:B279
+      1  0B:B273
+      1  0B:B271
+      1  0B:B26F
+      1  0B:B26D
+      1  0B:B26B
+      1  0B:B269
+      1  0B:B267
+      1  0B:B265
+      1  0B:B263
+      1  0B:B261
+      1  0B:B25F
+      1  0B:B25D
+      1  0B:B25B
+      1  0B:B259
+      1  0B:B257
+      1  0B:B255
+      1  0B:B253
+      1  0B:B251
+      1  0B:B24F
+      1  0B:B24D
+      1  0B:B24B
+      1  0B:B245
+      1  0B:B243
+      1  0B:B241
+      1  0B:B23D
+      1  0B:B23B
+      1  0B:B239
+      1  0B:B237
+      1  0B:B235
+      1  0B:B233
+      1  0B:B22C
+      1  0B:B1FF
+      1  0B:B1D2
+      1  0B:B1CF
+      1  0B:B1CD
+      1  0B:B1C7
+      1  0B:B1C5
+      1  0B:B1C3
+      1  0B:B1C1
+      1  0B:B1BF
+      1  0B:B1BD
+      1  0B:B1BB
+      1  0B:B1B9
+      1  0B:B1B7
+      1  0B:B1B5
+      1  0B:B1AB
+      1  0B:B1A9
+      1  0B:B1A7
+      1  0B:B1A5
+      1  0B:B1A3
+      1  0B:B1A1
+      1  0B:B19F
+      1  0B:B19D
+      1  0B:B19B
+      1  0B:B199
+      1  0B:B197
+      1  0B:B195
+      1  0B:B193
+      1  0B:B191
+      1  0B:B18F
+      1  0B:B18D
+      1  0B:B18B
+      1  0B:B189
+      1  0B:B187
+      1  0B:B179
+      1  0B:B173
+      1  0B:B171
+      1  0B:B16F
+      1  0B:B16D
+      1  0B:B16B
+      1  0B:B169
+      1  0B:B167
+      1  0B:B165
+      1  0B:B163
+      1  0B:B161
+      1  0B:B15F
+      1  0B:B15D
+      1  0B:B15B
+      1  0B:B159
+      1  0B:B157
+      1  0B:B155
+      1  0B:B153
+      1  0B:B151
+      1  0B:B14F
+      1  0B:B14D
+      1  0B:B14B
+      1  0B:B145
+      1  0B:B143
+      1  0B:B141
+      1  0B:B13D
+      1  0B:B13B
+      1  0B:B139
+      1  0B:B137
+      1  0B:B135
+      1  0B:B133
+      1  0B:B12C
+      1  0A:85ED
+      1  0A:85DB
+      1  0A:85D7
+      1  0A:85D1
+      1  0A:85CE
+      1  0A:85CB
+      1  0A:85C8
+      1  0A:8522
+      1  0A:851B
+      1  0A:84D7
+      1  0A:84AF
+      1  0A:846A
+      1  0A:8463
+      1  0A:845C
+      1  0A:844A
+      1  0A:843A
+      1  0A:8432
+      1  0A:83CA
+      1  0A:83C7
+      1  0A:83C4
+      1  0A:83B5
+      1  0A:83A2
+      1  0A:839B
+      1  0A:8331
+      1  0A:832A
+      1  0A:82E3
+      1  0A:82B8
+      1  0A:8276
+      1  0A:8228
+      1  0A:821F
+      1  0A:81E3
+      1  0A:81B8
+      1  0A:8176
+      1  0A:8128
+      1  0A:811F
+      1  0A:8100
+      1  0A:80EF
+      1  0A:80DA
+      1  0A:80CF
+      1  0A:80C3
+      1  0A:80C1
+      1  0A:8080
+      1  0A:806F
+      1  0A:805A
+      1  0A:804F
+      1  0A:8043
+      1  0A:8041
+      1  09:BFF7
+      1  09:BFEF
+      1  09:BFEB
+      1  09:BF84
+      1  09:BF68
+      1  09:BF27
+      1  09:BEF7
+      1  09:BEEF
+      1  09:BEEB
+      1  09:BE84
+      1  09:BE68
+      1  09:BE27
+      1  09:BDF7
+      1  09:BDEF
+      1  09:BDEB
+      1  09:BD84
+      1  09:BD68
+      1  09:BD27
+      1  09:BCF7
+      1  09:BCEF
+      1  09:BCEB
+      1  09:BC84
+      1  09:BC68
+      1  09:BC27
+      1  09:BBF7
+      1  09:BBEF
+      1  09:BBEB
+      1  09:BB84
+      1  09:BB68
+      1  09:BB27
+      1  09:B068
+      1  09:AB31
+      1  09:AB2E
+      1  09:A781
+      1  09:A450
+      1  09:A44E
+      1  09:A0EE
+      1  09:A0EC
+      1  09:A0E6
+      1  09:A0E4
+      1  09:A0E2
+      1  09:A0E0
+      1  09:A0DE
+      1  09:A0DC
+      1  09:A0DA
+      1  09:A0D8
+      1  09:A0D6
+      1  09:A0D4
+      1  09:A0CC
+      1  09:A0CA
+      1  09:A0C8
+      1  09:A0C6
+      1  09:A0C4
+      1  09:A0C2
+      1  09:A0C0
+      1  09:A0BE
+      1  09:A0B8
+      1  09:A0B6
+      1  08:99EC
+      1  08:99B3
+      1  08:99AE
+      1  08:9989
+      1  08:9982
+      1  08:995D
+      1  08:9956
+      1  08:9910
+      1  08:98D1
+      1  08:98CA
+      1  08:988B
+      1  08:9884
+      1  08:985F
+      1  08:9858
+      1  08:9812
+      1  08:9809
+      1  08:97E4
+      1  08:97DD
+      1  08:979E
+      1  08:9797
+      1  08:977A
+      1  08:9778
+      1  08:9775
+      1  08:976B
+      1  08:9769
+      1  08:9766
+      1  08:9763
+      1  08:975C
+      1  08:975A
+      1  08:9757
+      1  08:9754
+      1  08:96AF
+      1  08:964A
+      1  08:9648
+      1  08:9646
+      1  08:9644
+      1  08:963F
+      1  08:963B
+      1  08:9628
+      1  08:960F
+      1  08:95FE
+      1  08:95F5
+      1  08:95F2
+      1  08:95C5
+      1  08:9577
+      1  08:956D
+      1  08:956B
+      1  08:953E
+      1  08:94F0
+      1  08:94E6
+      1  08:94E4
+      1  08:94B7
+      1  08:9469
+      1  08:945F
+      1  08:945D
+      1  08:9430
+      1  08:93E2
+      1  08:93D8
+      1  08:93D6
+      1  08:93B5
+      1  08:93B3
+      1  08:93AB
+      1  08:93A8
+      1  08:9395
+      1  08:9393
+      1  08:9390
+      1  08:938D
+      1  08:938A
+      1  08:9386
+      1  08:9384
+      1  08:9381
+      1  08:937E
+      1  08:937B
+      1  08:9377
+      1  08:9375
+      1  08:9372
+      1  08:936F
+      1  08:8DF6
+      1  08:8DF2
+      1  08:8DEE
+      1  08:8DE5
+      1  08:8DE2
+      1  08:8DDD
+      1  08:8DD9
+      1  08:8DD7
+      1  08:8DD2
+      1  08:8DCE
+      1  08:8DC8
+      1  08:8DC4
+      1  08:8D95
+      1  08:8D92
+      1  08:8D4D
+      1  08:8D49
+      1  08:8D08
+      1  08:8D04
+      1  08:8CCF
+      1  08:8CCC
+      1  08:8C6A
+      1  08:8C66
+      1  08:8BFB
+      1  08:8BF7
+      1  08:8BB2
+      1  08:8BAE
+      1  08:8B8D
+      1  08:8B8B
+      1  08:8B30
+      1  08:8B2B
+      1  08:8AE6
+      1  08:8AE2
+      1  08:8ABD
+      1  08:8ABB
+      1  08:8A89
+      1  08:8A85
+      1  08:8A43
+      1  08:8A3F
+      1  08:8A3B
+      1  08:877D
+      1  08:8779
+      1  08:875D
+      1  08:8719
+      1  08:8715
+      1  08:86CD
+      1  08:86C9
+      1  08:86C5
+      1  08:86C1
+      1  08:86BD
+      1  08:86B9
+      1  08:86B5
+      1  08:86B1
+      1  08:86A1
+      1  08:869D
+      1  08:8681
+      1  08:867D
+      1  08:8671
+      1  08:8665
+      1  08:8655
+      1  08:8649
+      1  08:8645
+      1  08:8641
+      1  08:863D
+      1  08:8639
+      1  08:8635
+      1  08:85F1
+      1  08:85ED
+      1  08:85E9
+      1  08:84EA
+      1  08:84E5
+      1  08:84AA
+      1  08:8441
+      1  08:8439
+      1  08:842D
+      1  08:8424
+      1  08:841B
+      1  08:8400
+      1  08:83F9
+      1  08:83F2
+      1  08:83DD
+      1  08:83D7
+      1  08:83D1
+      1  08:83BF
+      1  08:83BA
+      1  08:83B5
+      1  08:83A6
+      1  08:83A1
+      1  08:839C
+      1  08:838D
+      1  08:838A
+      1  08:8387
+      1  08:837E
+      1  08:8378
+      1  08:8372
+      1  08:8360
+      1  08:8359
+      1  08:8352
+      1  08:833D
+      1  08:833A
+      1  08:8337
+      1  08:832E
+      1  08:8326
+      1  08:831E
+      1  08:8306
+      1  08:82FF
+      1  08:82F8
+      1  08:82E3
+      1  08:82DF
+      1  08:82DB
+      1  08:82CF
+      1  08:82CA
+      1  08:82C5
+      1  08:82B6
+      1  08:82AF
+      1  08:82A8
+      1  07:BFF9
+      1  07:BFEA
+      1  07:BFE6
+      1  07:BFD4
+      1  07:BFD2
+      1  07:BFD0
+      1  07:BFCE
+      1  07:BFCC
+      1  07:BFAF
+      1  07:BFA6
+      1  07:BF9F
+      1  07:BF9D
+      1  07:BF96
+      1  07:BF8C
+      1  07:BF88
+      1  07:BF77
+      1  07:BF6E
+      1  07:BF66
+      1  07:BF61
+      1  07:BF5D
+      1  07:BF58
+      1  07:BF4D
+      1  07:BF32
+      1  07:BF2F
+      1  07:BF2D
+      1  07:BF2A
+      1  07:BF28
+      1  07:BF22
+      1  07:BF14
+      1  07:BF10
+      1  07:BF06
+      1  07:BEFF
+      1  07:BEF9
+      1  07:BEEA
+      1  07:BEE6
+      1  07:BED4
+      1  07:BED2
+      1  07:BED0
+      1  07:BECE
+      1  07:BECC
+      1  07:BEAF
+      1  07:BEA6
+      1  07:BE9F
+      1  07:BE9D
+      1  07:BE96
+      1  07:BE8C
+      1  07:BE88
+      1  07:BE77
+      1  07:BE6E
+      1  07:BE66
+      1  07:BE61
+      1  07:BE5D
+      1  07:BE58
+      1  07:BE4D
+      1  07:BE32
+      1  07:BE2F
+      1  07:BE2D
+      1  07:BE2A
+      1  07:BE28
+      1  07:BE22
+      1  07:BE14
+      1  07:BE10
+      1  07:BE06
+      1  07:BDFF
+      1  07:BDF9
+      1  07:BDEA
+      1  07:BDE6
+      1  07:BDD4
+      1  07:BDD2
+      1  07:BDD0
+      1  07:BDCE
+      1  07:BDCC
+      1  07:BDAF
+      1  07:BDA6
+      1  07:BD9F
+      1  07:BD9D
+      1  07:BD96
+      1  07:BD8C
+      1  07:BD88
+      1  07:BD77
+      1  07:BD6E
+      1  07:BD66
+      1  07:BD61
+      1  07:BD5D
+      1  07:BD58
+      1  07:BD4D
+      1  07:BD32
+      1  07:BD2F
+      1  07:BD2D
+      1  07:BD2A
+      1  07:BD28
+      1  07:BD22
+      1  07:BD14
+      1  07:BD10
+      1  07:BD06
+      1  07:BCFF
+      1  07:BCF9
+      1  07:BCEA
+      1  07:BCE6
+      1  07:BCD4
+      1  07:BCD2
+      1  07:BCD0
+      1  07:BCCE
+      1  07:BCCC
+      1  07:BCAF
+      1  07:BCA6
+      1  07:BC9F
+      1  07:BC9D
+      1  07:BC96
+      1  07:BC8C
+      1  07:BC88
+      1  07:BC77
+      1  07:BC6E
+      1  07:BC66
+      1  07:BC61
+      1  07:BC5D
+      1  07:BC58
+      1  07:BC4D
+      1  07:BC32
+      1  07:BC2F
+      1  07:BC2D
+      1  07:BC2A
+      1  07:BC28
+      1  07:BC22
+      1  07:BC14
+      1  07:BC10
+      1  07:BC06
+      1  07:BBFF
+      1  07:BBF9
+      1  07:BBEA
+      1  07:BBE6
+      1  07:BBD4
+      1  07:BBD2
+      1  07:BBD0
+      1  07:BBCE
+      1  07:BBCC
+      1  07:BBAF
+      1  07:BBA6
+      1  07:BB9F
+      1  07:BB9D
+      1  07:BB96
+      1  07:BB8C
+      1  07:BB88
+      1  07:BB77
+      1  07:BB6E
+      1  07:BB66
+      1  07:BB61
+      1  07:BB5D
+      1  07:BB58
+      1  07:BB4D
+      1  07:BB32
+      1  07:BB2F
+      1  07:BB2D
+      1  07:BB2A
+      1  07:BB28
+      1  07:BB22
+      1  07:BB14
+      1  07:BB10
+      1  07:BB06
+      1  07:B0EE
+      1  07:A976
+      1  07:A913
+      1  07:A700
+      1  07:A6BE
+      1  07:A694
+      1  07:A652
+      1  07:A64A
+      1  07:A5E1
+      1  07:A5A7
+      1  07:A53E
+      1  07:A4E6
+      1  06:9FAD
+      1  06:9F27
+      1  06:9E62
+      1  06:9D9A
+      1  06:9C88
+      1  06:9C0C
+      1  06:9B72
+      1  06:9AD4
+      1  06:9A1E
+      1  06:9981
+      1  06:989C
+      1  06:97DB
+      1  06:9706
+      1  06:965D
+      1  06:9579
+      1  06:94C0
+      1  06:93AC
+      1  06:9335
+      1  06:92AD
+      1  06:91F5
+      1  06:90F6
+      1  06:908A
+      1  06:8FC5
+      1  06:8EFB
+      1  06:8E1A
+      1  06:8D97
+      1  06:8CE6
+      1  06:8C5F
+      1  06:8B56
+      1  06:8B36
+      1  06:8B32
+      1  06:8B2E
+      1  06:8B12
+      1  06:8B0A
+      1  06:8B06
+      1  06:8AEE
+      1  06:8ACA
+      1  06:8947
+      1  06:8944
+      1  06:8940
+      1  06:8923
+      1  06:8915
+      1  05:BFE2
+      1  05:BFCF
+      1  05:BFCB
+      1  05:BFC6
+      1  05:BFB8
+      1  05:BFB2
+      1  05:BF7C
+      1  05:BF73
+      1  05:BF5E
+      1  05:BF5B
+      1  05:BF53
+      1  05:BF29
+      1  05:BF25
+      1  05:BEE2
+      1  05:BECF
+      1  05:BECB
+      1  05:BEC6
+      1  05:BEB8
+      1  05:BEB2
+      1  05:BE7C
+      1  05:BE73
+      1  05:BE5E
+      1  05:BE5B
+      1  05:BE53
+      1  05:BE40
+      1  05:BE29
+      1  05:BE25
+      1  05:BDE2
+      1  05:BDCF
+      1  05:BDCB
+      1  05:BDC6
+      1  05:BDB8
+      1  05:BDB2
+      1  05:BD7C
+      1  05:BD73
+      1  05:BD5E
+      1  05:BD5B
+      1  05:BD53
+      1  05:BD40
+      1  05:BD29
+      1  05:BD25
+      1  05:BCE2
+      1  05:BCCF
+      1  05:BCCB
+      1  05:BCC6
+      1  05:BCB8
+      1  05:BCB2
+      1  05:BC7C
+      1  05:BC73
+      1  05:BC5E
+      1  05:BC5B
+      1  05:BC53
+      1  05:BC40
+      1  05:BC29
+      1  05:BC25
+      1  05:BBE2
+      1  05:BBCF
+      1  05:BBCB
+      1  05:BBC6
+      1  05:BBB8
+      1  05:BBB2
+      1  05:BB7C
+      1  05:BB5E
+      1  05:BB5B
+      1  05:BB53
+      1  05:BB40
+      1  05:BB29
+      1  05:BB25
+      1  05:B1A8
+      1  05:AF6E
+      1  05:A9E1
+      1  05:A89A
+      1  05:A730
+      1  05:A571
+      1  05:A568
+      1  05:A550
+      1  05:A54C
+      1  05:A522
+      1  05:A519
+      1  05:A501
+      1  05:A4FD
+      1  05:A4EB
+      1  05:A4E9
+      1  05:A36C
+      1  05:A36A
+      1  05:A295
+      1  05:A27B
+      1  05:A261
+      1  04:9FFF
+      1  04:9FE7
+      1  04:9FE5
+      1  04:9FCC
+      1  04:9FCA
+      1  04:9FAE
+      1  04:9FAC
+      1  04:9F28
+      1  04:9F09
+      1  04:9EEB
+      1  04:9EA3
+      1  04:9E93
+      1  04:9E73
+      1  04:9E5F
+      1  04:9E3D
+      1  04:9E1A
+      1  04:9E17
+      1  04:9E0B
+      1  04:9DF2
+      1  04:9DC4
+      1  04:9BC5
+      1  04:9BC3
+      1  04:9BB6
+      1  04:9BB4
+      1  04:9661
+      1  03:BE9A
+      1  03:BD3D
+      1  03:BD2F
+      1  03:BD2A
+      1  03:BD27
+      1  03:BD25
+      1  03:BD17
+      1  03:BD12
+      1  03:BD0F
+      1  03:BD0D
+      1  03:BCFF
+      1  03:BCFA
+      1  03:BCF7
+      1  03:BB90
+      1  03:BB8E
+      1  03:BB8C
+      1  03:BB28
+      1  03:BB26
+      1  03:BB24
+      1  03:BB16
+      1  03:BB14
+      1  03:BB06
+      1  03:BB04
+      1  03:BAF6
+      1  03:BAF4
+      1  03:B3F3
+      1  03:B3EC
+      1  03:B3E3
+      1  03:B3DC
+      1  03:B3D3
+      1  03:B3CC
+      1  03:B3C3
+      1  03:B3BC
+      1  03:B330
+      1  03:B295
+      1  03:B293
+      1  03:B291
+      1  03:B28F
+      1  03:B28D
+      1  03:B28B
+      1  03:B289
+      1  03:B287
+      1  03:B283
+      1  03:B27F
+      1  03:B27D
+      1  03:B278
+      1  03:B275
+      1  03:B273
+      1  03:B26D
+      1  03:B264
+      1  03:B259
+      1  03:B257
+      1  03:B255
+      1  03:B253
+      1  03:B251
+      1  03:B24F
+      1  03:B24D
+      1  03:B237
+      1  03:B225
+      1  03:B223
+      1  03:B221
+      1  03:B21F
+      1  03:B219
+      1  03:B195
+      1  03:B193
+      1  03:B191
+      1  03:B18F
+      1  03:B18D
+      1  03:B18B
+      1  03:B189
+      1  03:B187
+      1  03:B183
+      1  03:B17F
+      1  03:B17D
+      1  03:B178
+      1  03:B175
+      1  03:B173
+      1  03:B16D
+      1  03:B164
+      1  03:B159
+      1  03:B157
+      1  03:B155
+      1  03:B153
+      1  03:B151
+      1  03:B14F
+      1  03:B14D
+      1  03:B137
+      1  03:B125
+      1  03:B123
+      1  03:B121
+      1  03:B11F
+      1  03:B119
+      1  02:8655
+      1  02:8645
+      1  02:8642
+      1  02:85C9
+      1  02:85A5
+      1  02:8591
+      1  02:855D
+      1  02:8510
+      1  02:84FA
+      1  02:8443
+      1  02:843C
+      1  02:8433
+      1  02:8421
+      1  02:840E
+      1  02:8408
+      1  02:8405
+      1  02:8402
+      1  02:83FF
+      1  02:83FC
+      1  02:83F9
+      1  02:83F6
+      1  02:83F3
+      1  02:83F0
+      1  02:83ED
+      1  02:83B4
+      1  02:8397
+      1  02:82A1
+      1  02:8280
+      1  02:8279
+      1  02:8269
+      1  02:81A1
+      1  02:8180
+      1  02:8179
+      1  02:8169
+      1  02:8100
+      1  02:80D0
+      1  02:80CE
+      1  02:80CB
+      1  02:80C9
+      1  02:8050
+      1  02:804E
+      1  02:804B
+      1  02:8049
+      1  01:BFED
+      1  01:BFD6
+      1  01:BFCE
+      1  01:BFC5
+      1  01:BFBD
+      1  01:BFA6
+      1  01:BF92
+      1  01:BF5E
+      1  01:BF53
+      1  01:BF40
+      1  01:BF3A
+      1  01:BF35
+      1  01:BEED
+      1  01:BED6
+      1  01:BECE
+      1  01:BEC5
+      1  01:BEBD
+      1  01:BEA6
+      1  01:BE92
+      1  01:BE5E
+      1  01:BE53
+      1  01:BE40
+      1  01:BE3A
+      1  01:BE35
+      1  01:BE2B
+      1  01:BDED
+      1  01:BDD6
+      1  01:BDCE
+      1  01:BDC5
+      1  01:BDBD
+      1  01:BDA6
+      1  01:BD92
+      1  01:BD5E
+      1  01:BD53
+      1  01:BD40
+      1  01:BD3A
+      1  01:BD35
+      1  01:BD2B
+      1  01:BCED
+      1  01:BCD6
+      1  01:BCCE
+      1  01:BCC5
+      1  01:BCBD
+      1  01:BCA6
+      1  01:BC92
+      1  01:BC5E
+      1  01:BC53
+      1  01:BC40
+      1  01:BC3A
+      1  01:BC35
+      1  01:BC2B
+      1  01:BBED
+      1  01:BBD6
+      1  01:BBCE
+      1  01:BBC5
+      1  01:BBBD
+      1  01:BBA6
+      1  01:BB92
+      1  01:BB5E
+      1  01:BB53
+      1  01:BB40
+      1  01:BB3A
+      1  01:BB35
+      1  01:BB2B
+      1  01:AA25
+      1  01:AA23
+      1  01:A9C9
+      1  01:A9C7
+      1  01:A9BF
+      1  01:A9B7
+      1  01:A9AF
+      1  01:A9A7
+      1  01:A99F
+      1  01:A997
+      1  01:A98F
+      1  01:A916
+      1  01:A839
+      1  01:A829
+      1  01:A819
+      1  01:A809
+      1  01:A6D5
+      1  01:A6CC
+      1  01:A030
+      1  00:93EE
+      1  00:93EC
+      1  00:93AE
+      1  00:93A9
+      1  00:939F
+      1  00:939A
+      1  00:9390
+      1  00:938B
+      1  00:88A5
+      1  00:817A

@@ -1,0 +1,37 @@
+; ADDR  NAME  [SIZE]  ; comment            (hex addresses; SIZE>1 makes ADDR+n print as NAME+n)
+; Sources: Data Crystal RAM map, GameHacking.org codes, 'enemy values' notes, NMI/GG code analysis.
+; Entries marked (?) are guesses from code - verify.
+
+; ---- zero page
+0018 palUpdateFlag              ; (?) nonzero -> NMI copies palBuffer ($0600) to PPU $3F00
+0019 vramUpdateFlag0            ; (?) NMI: calls sub_0E_C1FD when nonzero
+001A vramUpdateFlag1            ; (?) NMI: calls sub_0E_C201 (vertical increment mode) when nonzero
+0022 stageData                  ; Data Crystal: stage related data ("real stage modifier" cheat)
+0030 gameAction                 ; game mode / player action (see list in docs: 01 jump, 03 punch, 04 grab, 05 hit, 06 fall, 07 select screen, 09 continue, 0E skip stage ...)
+0034 playerId                   ; 00 Cody, 01 Guy, 02 Haggar
+003A playerHealth               ; max $68 (104), depends on level
+003B playerInvincible           ; cheat 003B:25 = invincible
+003E lives
+0061 stage                      ; current stage / round
+0063 enemySpawnTimer            ; timer to load the next enemy
+006B playerLevel                ; 0..2 (cheat sets 5)
+006C playerExp 2                ; low / high byte
+009E totalEnemies               ; number of enemies in the stage
+00A9 weaponHeld                 ; 00 dropped, FF picked up
+00AF credits                    ; GG "infinite credits" decrements it (DEC $AF at 04:941B)
+00FF bufPPUCTRL                 ; (?) PPUCTRL shadow, NMI writes it with bit 7 cleared
+
+; ---- object tables (index X = object slot; slot 0 = player, enemies start at slot $0C)
+031C objState                   ; enemy state: 00 killed, 80 alive
+033C objId                      ; object / enemy id (Poison 20/26/30, Two P 21/27/31, Bred 22/28/32, Axl 23/29/33,
+                                ; El Gado 24/2A/34, Andore 25/2B/35, Thrasher 80, Sodom 81/83, Abigail 90, Belger 74,
+                                ; drums 72, go sign 6F, enemy killed 16, cyborg killed 9B)
+0360 objX                       ; X position (player at +0, enemies at +$0C ...)
+03C0 objY                       ; Y position
+0490 objLife                    ; enemy life; "one hit kills" cheat patches the SBC that subtracts from it
+04FC objSpriteAir               ; (?) sprite id while in the air
+05BC objSpriteDown              ; (?) sprite id while lying down
+
+; ---- misc
+0200 oamBuffer 256              ; OAM DMA source ($4014 <- $02)
+0600 palBuffer 32               ; palette buffer copied to $3F00 by NMI when palUpdateFlag is set
