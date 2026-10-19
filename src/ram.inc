@@ -9,7 +9,7 @@ ram_0008               = $0008 ; 9
 ram_0009               = $0009 ; 5
 ptr_0A                 = $000A ; 10 (size 2) ; auto: indirect pointer
 ptr_0C                 = $000C ; 28 (size 2) ; auto: indirect pointer
-ptr_0E                 = $000E ; 93 (size 2) ; auto: indirect pointer
+ptr_0E                 = $000E ; 95 (size 2) ; auto: indirect pointer
 ram_0010               = $0010 ; 69
 ram_0011               = $0011 ; 35
 ram_0012               = $0012 ; 14
@@ -38,7 +38,7 @@ gameAction             = $0030 ; 216 ; game mode / player action (see list in do
 ram_0031               = $0031 ; 76
 ram_0032               = $0032 ; 11
 ram_0033               = $0033 ; 1
-playerId               = $0034 ; 188 ; 00 Cody, 01 Guy, 02 Haggar
+playerId               = $0034 ; 190 ; 00 Cody, 01 Guy, 02 Haggar
 ram_0035               = $0035 ; 23
 ram_0036               = $0036 ; 55
 ram_0037               = $0037 ; 44
@@ -106,7 +106,7 @@ weaponHeld             = $00A9 ; 19 ; 00 dropped, FF picked up
 ram_00AA               = $00AA ; 9
 ram_00AB               = $00AB ; 10
 ram_00AC               = $00AC ; 3
-ram_00AD               = $00AD ; 8
+ram_00AD               = $00AD ; 10
 credits                = $00AF ; 7 ; GG "infinite credits" decrements it (DEC $AF at 04:941B)
 ram_00B0               = $00B0 ; 7
 ram_00B1               = $00B1 ; 9
@@ -165,7 +165,7 @@ prgBankA000            = $00F5 ; 46 ; wanted PRG bank in the $A000 window (stage
 bankSwitchBusy         = $00F6 ; 3 ; INC at entry / DEC at exit of SetPrgBanks
 ram_00F7               = $00F7 ; 3
 ram_00F8               = $00F8 ; 1
-ram_00F9               = $00F9 ; 43
+ram_00F9               = $00F9 ; 44
 scrollY                = $00FA ; 18 ; second PPUSCROLL write in NMI
 ram_00FB               = $00FB ; 8
 scrollX                = $00FC ; 111 ; copied to irqScrollX each NMI
@@ -188,21 +188,21 @@ ram_010F               = $010F ; 2
 ram_0150               = $0150 ; 3
 ram_0151               = $0151 ; 6
 oamBuffer              = $0200 ; 9 (size 256) ; OAM DMA source ($4014 <- $02)
-objArr_0300            = $0300 ; 427 (size 16)
-objState               = $0310 ; 11 (size 16) ; enemy state: 00 killed, 80 alive (array of 16 object slots; slot 0 = player; Data Crystal addresses are slot $0C)
-objArr_0320            = $0320 ; 121 (size 16)
-objId                  = $0330 ; 31 (size 16) ; object / enemy id (Poison 20/26/30, Two P 21/27/31, Bred 22/28/32, Axl 23/29/33, (array of 16 object slots; slot 0 = player; Data Crystal addresses are slot $0C)
+objArr_0300            = $0300 ; 428 (size 16)
+objState               = $0310 ; 12 (size 16) ; enemy state: 00 killed, 80 alive (array of 16 object slots; slot 0 = player; Data Crystal addresses are slot $0C)
+objArr_0320            = $0320 ; 123 (size 16)
+objId                  = $0330 ; 32 (size 16) ; object / enemy id (Poison 20/26/30, Two P 21/27/31, Bred 22/28/32, Axl 23/29/33, (array of 16 object slots; slot 0 = player; Data Crystal addresses are slot $0C)
 objArr_0340            = $0340 ; 12 (size 16)
 objArr_0350            = $0350 ; 0 (size 16)
-objX                   = $0360 ; 338 (size 16) ; X position (player at +0, enemies at +$0C ...) (array of 16 object slots; slot 0 = player; Data Crystal addresses are slot $0C)
+objX                   = $0360 ; 340 (size 16) ; X position (player at +0, enemies at +$0C ...) (array of 16 object slots; slot 0 = player; Data Crystal addresses are slot $0C)
 objArr_0370            = $0370 ; 0 (size 16)
-objArr_0380            = $0380 ; 225 (size 16)
+objArr_0380            = $0380 ; 226 (size 16)
 objArr_0390            = $0390 ; 0 (size 16)
 objArr_03A0            = $03A0 ; 10 (size 16)
 objArr_03B0            = $03B0 ; 0 (size 16)
-objY                   = $03C0 ; 375 (size 16) ; Y position (array of 16 object slots; slot 0 = player; Data Crystal addresses are slot $0C)
+objY                   = $03C0 ; 377 (size 16) ; Y position (array of 16 object slots; slot 0 = player; Data Crystal addresses are slot $0C)
 objArr_03D0            = $03D0 ; 12 (size 16)
-objArr_03E0            = $03E0 ; 71 (size 16)
+objArr_03E0            = $03E0 ; 73 (size 16)
 objArr_03F0            = $03F0 ; 28 (size 16)
 objArr_0400            = $0400 ; 112 (size 16)
 objArr_0410            = $0410 ; 107 (size 16)
@@ -210,7 +210,7 @@ objArr_0420            = $0420 ; 114 (size 16)
 objArr_0430            = $0430 ; 150 (size 16)
 objArr_0440            = $0440 ; 65 (size 16)
 objArr_0450            = $0450 ; 36 (size 16)
-objArr_0460            = $0460 ; 215 (size 16)
+objArr_0460            = $0460 ; 217 (size 16)
 objArr_0470            = $0470 ; 24 (size 16)
 objArr_0480            = $0480 ; 6 (size 16)
 objLife                = $0490 ; 39 (size 16) ; enemy life; "one hit kills" cheat patches the SBC that subtracts from it (array of 16 object slots; slot 0 = player; Data Crystal addresses are slot $0C)
@@ -220,7 +220,7 @@ objArr_04C0            = $04C0 ; 70 (size 16)
 objArr_04D0            = $04D0 ; 26 (size 16)
 objArr_04E0            = $04E0 ; 36 (size 16)
 objSpriteAir           = $04F0 ; 20 (size 16) ; (?) sprite id while in the air (array of 16 object slots; slot 0 = player; Data Crystal addresses are slot $0C)
-objArr_0500            = $0500 ; 241 (size 16)
+objArr_0500            = $0500 ; 242 (size 16)
 objArr_0510            = $0510 ; 90 (size 16)
 objArr_0520            = $0520 ; 65 (size 16)
 objArr_0530            = $0530 ; 71 (size 16)

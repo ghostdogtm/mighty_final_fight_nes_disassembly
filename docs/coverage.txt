@@ -2,11 +2,11 @@ Coverage report (bytes). cdl = from CDL, traced = found by static tracing
 
 bank  code(cdl) code(traced) data  unknown
 00         5920          390   1452      430
-01         3060          272   2886     1974
-02            0            0   7606      586
+01         3093          273   2886     1940
+02            0            0   7632      560
 03         2937           86   4632      537
 04         2781          103   3249     2059
-05         1483           86   3855     2768
+05         1578           86   3855     2673
 06         2044          195   5746      207
 07            0            0   5663     2529
 08         2693          140   1832     3527
@@ -17,9 +17,9 @@ bank  code(cdl) code(traced) data  unknown
 0D         2990           48   3027     2127
 0E         7731          247    198       16
 0F         6124          402   1039      627
-all       47940         2727  56651    23754
+all       48068         2728  56677    23599
 
-Unknown bytes: 9455 fill (one repeated byte), 286 code-like, 14013 other (probably data)
+Unknown bytes: 9430 fill (one repeated byte), 158 code-like, 14011 other (probably data)
 
 CDL anomalies (code flag but not a valid instruction): 0
 
@@ -194,6 +194,7 @@ Traced code (instruction starts, verify by hand):
   00:96D8  JSR sub_0E_CEAA
   00:9776  STY palUpdateFlag
   00:9778  RTS
+  01:A030  RTS
   01:A146  LDA #$01
   01:A148  STA objArr_0460,X
   01:A14B  LDA objArr_0380,X
@@ -1322,9 +1323,6 @@ Raw ROM-address operands (do not relocate with the code): 42
   0F:EE71  LDA $BF00,Y
 
 Code-like unknown runs (decode cleanly to the end, no BRK; review by hand):
-     65  05:A851
-     33  01:A00C
-     30  05:A832
      18  0B:B30F
      15  0C:8899
      15  03:B312
@@ -1393,7 +1391,6 @@ Unknown runs, longest first (len bank:addr):
      82  03:ACAE
      69  0F:EFBB
      68  09:A071
-     65  05:A851
      65  04:90BF
      61  06:8A03
      51  03:B2CD
@@ -1418,12 +1415,9 @@ Unknown runs, longest first (len bank:addr):
      34  0A:8B65
      34  03:AA60
      34  03:A788
-     33  01:A00C
      31  04:8B21
-     30  05:A832
      28  07:B96C
      28  01:BAA4
-     26  02:81E7
      25  0C:8803
      25  08:8611
      25  08:85F5
@@ -3383,7 +3377,6 @@ Unknown runs, longest first (len bank:addr):
       1  01:A829
       1  01:A819
       1  01:A809
-      1  01:A030
       1  00:93EE
       1  00:93EC
       1  00:9390

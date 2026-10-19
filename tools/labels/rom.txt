@@ -79,3 +79,7 @@ bank 0F:FFA8 06
 0F:FF8E SoundStep               ; drains soundQueue into the driver (06:8003), then runs one driver frame (06:8000)
 06:8000 SoundFrame              ; per-frame update of the sound driver
 06:8003 SoundPlay               ; A = sound/music id
+; ---- manual review of code-like unknown runs
+code 01:A00C-A02E            ; 11 unused JMP $A030 stubs
+code 05:A832-A891            ; unreached object-spawn helpers (end of run checked by hand)
+data 02:81E7-8200            ; repeated $A4 pairs, not code
