@@ -498,7 +498,7 @@ loc_06_8320:
 	BNE loc_06_8311                 ;C - - - - - 0x00C334 06:8324: D0 EB
 sub_06_8326:
 	JSR SoundJumpInline             ;C - - - - - 0x00C336 06:8326: 20 23 80
-	.word ofs_06_866F, ofs_06_86AD, ofs_06_865A, ofs_06_86A7, ofs_06_86A1;W 0x00C339 06:8329:
+	.word SndCmd08_Instrument, SndCmd18_NoiseVolume, SndCmd07_Volume, SndCmd0D_Param718, SndCmd0C_Param714;W 0x00C339 06:8329:
 loc_06_8333:
 	JSR SoundStreamByte             ;C - - - - - 0x00C343 06:8333: 20 86 83
 	TAY                             ;C - - - - - 0x00C346 06:8336: A8
@@ -709,28 +709,29 @@ SoundCommand:
 	LDA ram_00C4                    ;C - - - - - 0x00C4B2 06:84A2: A5 C4
 loc_06_84A4:
 	JSR SoundJumpInline             ;C - - - - - 0x00C4B4 06:84A4: 20 23 80
-	.word ofs_06_84D9, ofs_06_84DD, ofs_06_84E1, ofs_06_84E8, sub_06_8575, ofs_06_84F1, ofs_06_84FF, ofs_06_865A;W 0x00C4B7 06:84A7:
-	.word ofs_06_866F, ofs_06_8505, ofs_06_8510, ofs_06_8515, ofs_06_86A1, ofs_06_86A7, ofs_06_851B, ofs_06_851F;W 0x00C4C7 06:84B7:
-	.word ofs_06_8523, ofs_06_8527, ofs_06_851B, ofs_06_851F, ofs_06_8523, ofs_06_8527, $855A, ofs_06_8580;W 0x00C4D7 06:84C7:
-	.word ofs_06_86AD               ;W 0x00C4E7 06:84D7:
-ofs_06_84D9:
+	.word SndCmd00_ToggleFlag20, SndCmd01_ToggleFlag40, SndCmd02_SetFlag10, SndCmd03_ToggleFlag08, SndCmd04_SetModeBits, SndCmd05_Tempo, SndCmd06_NoteScale, SndCmd07_Volume;W 0x00C4B7 06:84A7:
+	.word SndCmd08_Instrument, SndCmd09_LenMode, SndCmd0A_Transpose, SndCmd0B_ChanTranspose, SndCmd0C_Param714, SndCmd0D_Param718, SndCmd0E_Loop0, ofs_06_851F;W 0x00C4C7 06:84B7:
+	.word ofs_06_8523, ofs_06_8527, SndCmd0E_Loop0, ofs_06_851F, ofs_06_8523, ofs_06_8527, $855A, SndCmd17_EndChannel;W 0x00C4D7 06:84C7:
+	.word SndCmd18_NoiseVolume      ;W 0x00C4E7 06:84D7:
+SndCmd00_ToggleFlag20:
 	LDA #$20                        ;C - - J - - 0x00C4E9 06:84D9: A9 20
 	BNE loc_06_84EA                 ;C - - - - - 0x00C4EB 06:84DB: D0 0D
-ofs_06_84DD:
+SndCmd01_ToggleFlag40:
 	LDA #$40                        ;C - - J - - 0x00C4ED 06:84DD: A9 40
 	BNE loc_06_84EA                 ;C - - - - - 0x00C4EF 06:84DF: D0 09
-ofs_06_84E1:
+SndCmd02_SetFlag10:
 	LDA #$10                        ;C - - J - - 0x00C4F1 06:84E1: A9 10
 	ORA ram_0730,X                  ;C - - - - - 0x00C4F3 06:84E3: 1D 30 07
 	BNE loc_06_84ED                 ;C - - - - - 0x00C4F6 06:84E6: D0 05
-ofs_06_84E8:
+SndCmd03_ToggleFlag08:
 	LDA #$08                        ;C - - J - - 0x00C4F8 06:84E8: A9 08
 loc_06_84EA:
 	EOR ram_0730,X                  ;C - - - - - 0x00C4FA 06:84EA: 5D 30 07
 loc_06_84ED:
 	STA ram_0730,X                  ;C - - - - - 0x00C4FD 06:84ED: 9D 30 07
 	RTS                             ;C - - - - - 0x00C500 06:84F0: 60
-ofs_06_84F1:
+; params: hi, lo of the 16-bit tempo (ticks/frame, 8.8)
+SndCmd05_Tempo:
 	LDA #$00                        ;C - - J - - 0x00C501 06:84F1: A9 00
 	STA ram_00C8                    ;C - - - - - 0x00C503 06:84F3: 85 C8
 	JSR sub_06_8592                 ;C - - - - - 0x00C505 06:84F5: 20 92 85
@@ -738,25 +739,29 @@ ofs_06_84F1:
 	STA ram_00CA                    ;C - - - - - 0x00C50A 06:84FA: 85 CA
 	STY ram_00C9                    ;C - - - - - 0x00C50C 06:84FC: 84 C9
 	RTS                             ;C - - - - - 0x00C50E 06:84FE: 60
-ofs_06_84FF:
+; ram_073C,X := param
+SndCmd06_NoteScale:
 	LDA ram_00C3                    ;C - - J - - 0x00C50F 06:84FF: A5 C3
 	STA ram_073C,X                  ;C - - - - - 0x00C511 06:8501: 9D 3C 07
 	RTS                             ;C - - - - - 0x00C514 06:8504: 60
-ofs_06_8505:
+; low 3 bits of flags := param
+SndCmd09_LenMode:
 	LDA ram_0730,X                  ;C - - J - - 0x00C515 06:8505: BD 30 07
 	AND #$F8                        ;C - - - - - 0x00C518 06:8508: 29 F8
 	ORA ram_00C3                    ;C - - - - - 0x00C51A 06:850A: 05 C3
 	STA ram_0730,X                  ;C - - - - - 0x00C51C 06:850C: 9D 30 07
 	RTS                             ;C - - - - - 0x00C51F 06:850F: 60
-ofs_06_8510:
+; global transpose
+SndCmd0A_Transpose:
 	LDA ram_00C3                    ;C - - J - - 0x00C520 06:8510: A5 C3
 	STA ram_00CB                    ;C - - - - - 0x00C522 06:8512: 85 CB
 	RTS                             ;C - - - - - 0x00C524 06:8514: 60
-ofs_06_8515:
+SndCmd0B_ChanTranspose:
 	LDA ram_00C3                    ;C - - J - - 0x00C525 06:8515: A5 C3
 	STA ram_0734,X                  ;C - - - - - 0x00C527 06:8517: 9D 34 07
 	RTS                             ;C - - - - - 0x00C52A 06:851A: 60
-ofs_06_851B:
+; loop slot 0..3 (also $12-$15): count param, then big-endian address
+SndCmd0E_Loop0:
 	LDA #$00                        ;C - - J - - 0x00C52B 06:851B: A9 00
 	BEQ loc_06_8529                 ;C - - - - - 0x00C52D 06:851D: F0 0A
 ofs_06_851F:
@@ -791,7 +796,7 @@ loc_06_8547:
 	SBC #$01                        ;C - - - - - 0x00C55B 06:854B: E9 01
 	BNE loc_06_8566                 ;C - - - - - 0x00C55D 06:854D: D0 17
 	STA ram_0744,Y                  ;C - - - - - 0x00C55F 06:854F: 99 44 07
-	JSR sub_06_8575                 ;C - - - - - 0x00C562 06:8552: 20 75 85
+	JSR SndCmd04_SetModeBits        ;C - - - - - 0x00C562 06:8552: 20 75 85
 loc_06_8555:
 	JSR sub_06_8592                 ;C - - - - - 0x00C565 06:8555: 20 92 85
 	STA ram_00C3                    ;C - - - - - 0x00C568 06:8558: 85 C3
@@ -809,13 +814,14 @@ loc_06_8566:
 	INC ram_072C,X                  ;C - - - - - 0x00C581 06:8571: FE 2C 07
 loc_06_8574:
 	RTS                             ;C - - - - - 0x00C584 06:8574: 60
-sub_06_8575:
+; flags := (flags & $97) | param
+SndCmd04_SetModeBits:
 	LDA ram_0730,X                  ;C - - J - - 0x00C585 06:8575: BD 30 07
 	AND #$97                        ;C - - - - - 0x00C588 06:8578: 29 97
 	ORA ram_00C3                    ;C - - - - - 0x00C58A 06:857A: 05 C3
 	STA ram_0730,X                  ;C - - - - - 0x00C58C 06:857C: 9D 30 07
 	RTS                             ;C - - - - - 0x00C58F 06:857F: 60
-ofs_06_8580:
+SndCmd17_EndChannel:
 	PLA                             ;C - - J - - 0x00C590 06:8580: 68
 	PLA                             ;C - - - - - 0x00C591 06:8581: 68
 	LDA #$00                        ;C - - - - - 0x00C592 06:8582: A9 00
@@ -934,7 +940,8 @@ loc_06_864C:
 	AND #$37                        ;C - - - - - 0x00C664 06:8654: 29 37
 	STA ram_0704,X                  ;C - - - - - 0x00C666 06:8656: 9D 04 07
 	RTS                             ;C - - - - - 0x00C669 06:8659: 60
-ofs_06_865A:
+; volume/duty register value
+SndCmd07_Volume:
 	CPX #$01                        ;C - - J - - 0x00C66A 06:865A: E0 01
 	BNE loc_06_8662                 ;C - - - - - 0x00C66C 06:865C: D0 04
 	LDA ram_00C3                    ;C - - - - - 0x00C66E 06:865E: A5 C3
@@ -947,7 +954,8 @@ loc_06_8662:
 loc_06_866B:
 	STA ram_070C,X                  ;C - - - - - 0x00C67B 06:866B: 9D 0C 07
 	RTS                             ;C - - - - - 0x00C67E 06:866E: 60
-ofs_06_866F:
+; param+1 = instrument number (8-byte entries, base at 06:8A41)
+SndCmd08_Instrument:
 	INC ram_00C3                    ;C - - J - - 0x00C67F 06:866F: E6 C3
 	LDA ram_00C3                    ;C - - - - - 0x00C681 06:8671: A5 C3
 	CMP ram_0700,X                  ;C - - - - - 0x00C683 06:8673: DD 00 07
@@ -978,15 +986,15 @@ ofs_06_8685:
 	STA ptr_C5+1                    ;C - - - - - 0x00C6AE 06:869E: 85 C6
 loc_06_86A0:
 	RTS                             ;C - - - - - 0x00C6B0 06:86A0: 60
-ofs_06_86A1:
+SndCmd0C_Param714:
 	LDA ram_00C3                    ;C - - J - - 0x00C6B1 06:86A1: A5 C3
 	STA ram_0714,X                  ;C - - - - - 0x00C6B3 06:86A3: 9D 14 07
 	RTS                             ;C - - - - - 0x00C6B6 06:86A6: 60
-ofs_06_86A7:
+SndCmd0D_Param718:
 	LDA ram_00C3                    ;C - - J - - 0x00C6B7 06:86A7: A5 C3
 	STA ram_0718,X                  ;C - - - - - 0x00C6B9 06:86A9: 9D 18 07
 	RTS                             ;C - - - - - 0x00C6BC 06:86AC: 60
-ofs_06_86AD:
+SndCmd18_NoiseVolume:
 	LDA ram_070C,X                  ;C - - J - - 0x00C6BD 06:86AD: BD 0C 07
 	AND #$0F                        ;C - - - - - 0x00C6C0 06:86B0: 29 0F
 	ORA ram_00C3                    ;C - - - - - 0x00C6C2 06:86B2: 05 C3
@@ -1679,7 +1687,7 @@ tbl_06_9707:
 	.byte $02,$AC,$8A,$89,$80,$01,$85,$C5,$01,$E5,$A0,$CB,$AA,$C8,$88,$02;- D 0 - I - 0x00D767 06:9757:
 	.byte $AA,$88,$86,$80,$C1,$80,$81,$61,$60,$61,$60,$61,$60,$80,$02,$A3;- D 0 - I - 0x00D777 06:9767:
 	.byte $A0,$CD,$AC,$CA,$8A,$02,$AD,$8F,$8C,$80,$01,$88;- D 0 - I - 0x00D787 06:9777:
-	.word $E801, ofs_06_8580, $8886 ;W 0x00D793 06:9783:
+	.word $E801, SndCmd17_EndChannel, $8886;W 0x00D793 06:9783:
 	.byte $8D,$8A,$80,$01,$86,$01,$E6,$80,$86,$88,$8A,$8C,$89,$80,$01,$85;- D 0 - I - 0x00D799 06:9789:
 	.byte $01,$C5,$80,$AF,$04,$08,$8F,$8F,$8E,$8C,$8F,$8F,$AE,$AA,$02,$01;- D 0 - I - 0x00D7A9 06:9799:
 	.byte $A5,$01,$C5,$00,$A2,$A3,$A5,$02,$00,$C6,$12,$08,$97,$BE,$AA,$02;- D 0 - I - 0x00D7B9 06:97A9:
@@ -1702,7 +1710,7 @@ tbl_06_9707:
 	.byte $17                       ;- - - - - - 0x00D8AC 06:989C:
 	.byte $06,$C8,$08,$00,$09,$03,$04,$00,$04,$00,$8A,$8A,$80,$8A,$80,$8A;- D 0 - I - 0x00D8AD 06:989D:
 	.byte $80,$85,$85,$85           ;- D 0 - I - 0x00D8BD 06:98AD:
-	.word ofs_06_8580, ofs_06_8580, ofs_06_8580;W 0x00D8C1 06:98B1:
+	.word SndCmd17_EndChannel, SndCmd17_EndChannel, SndCmd17_EndChannel;W 0x00D8C1 06:98B1:
 	.byte $0B,$FE,$0E,$01,$98,$A5,$0B,$00,$0F,$01,$98,$A3,$0B,$00,$85,$87;- D 0 - I - 0x00D8C7 06:98B7:
 	.byte $89,$A5,$85,$A9,$91,$8F,$8D,$AC,$A5,$85,$04,$00,$8A,$04,$00,$8A;- D 0 - I - 0x00D8D7 06:98C7:
 	.byte $80,$0E,$04,$98,$D4,$8A,$85,$8A,$88,$86,$85,$04,$00,$85,$80,$0E;- D 0 - I - 0x00D8E7 06:98D7:
@@ -1712,11 +1720,11 @@ tbl_06_9707:
 	.byte $85,$86,$8A,$88,$04,$00,$88,$80,$0E,$04,$99,$1B,$88,$88,$85,$86;- D 0 - I - 0x00D927 06:9917:
 	.byte $88,$86,$04,$00,$86,$80,$0E,$04,$99,$29,$86,$86,$81,$83,$86,$85;- D 0 - I - 0x00D937 06:9927:
 	.byte $85                       ;- D 0 - I - 0x00D947 06:9937:
-	.word ofs_06_8580, ofs_06_8580, ofs_06_8580, $A585;W 0x00D948 06:9938:
+	.word SndCmd17_EndChannel, SndCmd17_EndChannel, SndCmd17_EndChannel, $A585;W 0x00D948 06:9938:
 	.byte $85,$85,$87,$89,$8C,$04,$00,$04,$00,$04,$00,$AA,$80,$8A,$80,$8A;- D 0 - I - 0x00D950 06:9940:
 	.byte $80,$8A,$0E,$01,$99,$49,$0B,$F9,$0F,$01,$99,$47,$0B,$00,$10,$01;- D 0 - I - 0x00D960 06:9950:
 	.byte $99,$45,$A8,$80,$88,$80,$88,$80,$88,$A8,$80;- D 0 - I - 0x00D970 06:9960:
-	.word ofs_06_8888, $8388, $A586, ofs_06_8580, ofs_06_8580, ofs_06_8580;W 0x00D97B 06:996B:
+	.word ofs_06_8888, $8388, $A586, SndCmd17_EndChannel, SndCmd17_EndChannel, SndCmd17_EndChannel;W 0x00D97B 06:996B:
 	.byte $00,$A5,$A5,$A5,$00,$A5,$A0,$16,$98,$D1;- D 0 - I - 0x00D987 06:9977:
 	.byte $17                       ;- - - - - - 0x00D991 06:9981:
 	.byte $06,$DC,$07,$09,$08,$00,$04,$00,$04,$00,$A5,$8A,$A5,$85,$8A,$12;- D 0 - I - 0x00D992 06:9982:
@@ -1769,9 +1777,9 @@ tbl_06_9A1F:
 	.byte $17                       ;- - - - - - 0x00DC1C 06:9C0C:
 	.byte $06,$78,$07,$09,$08,$06,$80,$E0,$E0,$E0,$E0,$AA,$AA,$AA,$AA,$AA;- D 0 - I - 0x00DC1D 06:9C0D:
 	.byte $AA,$AA,$6A,$6A,$6A,$6A,$04,$00,$04,$00,$04,$00,$85;- D 0 - I - 0x00DC2D 06:9C1D:
-	.word $AA85, ofs_06_8580, ofs_06_858A;W 0x00DC3A 06:9C2A:
+	.word $AA85, SndCmd17_EndChannel, ofs_06_858A;W 0x00DC3A 06:9C2A:
 	.byte $85,$85,$8A,$A5,$85       ;- D 0 - I - 0x00DC40 06:9C30:
-	.word $85AA, $AA85, ofs_06_8580, ofs_06_858A, $B406, $AB02, $AB02;W 0x00DC45 06:9C35:
+	.word $85AA, $AA85, SndCmd17_EndChannel, ofs_06_858A, $B406, $AB02, $AB02;W 0x00DC45 06:9C35:
 	.byte $AB,$06,$78,$0E,$01,$9C,$27,$13,$00,$9C,$70,$85,$85,$8A,$A5,$85;- D 0 - I - 0x00DC53 06:9C43:
 	.byte $AA,$85,$85,$8A,$A5,$85,$6A,$6A,$8A,$06,$B4,$AA,$AA,$AA,$AA,$06;- D 0 - I - 0x00DC63 06:9C53:
 	.byte $78,$80,$8A,$8A,$8A,$8A,$8A,$8A,$8A,$0F,$01,$9C,$25,$04,$00,$85;- D 0 - I - 0x00DC73 06:9C63:

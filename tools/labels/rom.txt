@@ -191,3 +191,20 @@ comment 0E:DEBC call into the switchable $8000 bank (bank depends on stage)
 06:8393 SoundChannelStep       ; per-channel step of a music stream (X = channel)
 06:83CD SoundNextNote          ; reads an event: <$20 command, >=$20 note (bits 7-5 duration, bits 4-0 pitch)
 06:8497 SoundCommand           ; stream command < $20 (jump table follows); see docs/sound_format.md
+06:84D9 SndCmd00_ToggleFlag20
+06:84DD SndCmd01_ToggleFlag40
+06:84E1 SndCmd02_SetFlag10
+06:84E8 SndCmd03_ToggleFlag08
+06:8575 SndCmd04_SetModeBits   ; flags := (flags & $97) | param
+06:84F1 SndCmd05_Tempo         ; params: hi, lo of the 16-bit tempo (ticks/frame, 8.8)
+06:84FF SndCmd06_NoteScale     ; ram_073C,X := param
+06:865A SndCmd07_Volume        ; volume/duty register value
+06:866F SndCmd08_Instrument    ; param+1 = instrument number (8-byte entries, base at 06:8A41)
+06:8505 SndCmd09_LenMode       ; low 3 bits of flags := param
+06:8510 SndCmd0A_Transpose     ; global transpose
+06:8515 SndCmd0B_ChanTranspose
+06:86A1 SndCmd0C_Param714
+06:86A7 SndCmd0D_Param718
+06:851B SndCmd0E_Loop0         ; loop slot 0..3 (also $12-$15): count param, then big-endian address
+06:8580 SndCmd17_EndChannel
+06:86AD SndCmd18_NoiseVolume
