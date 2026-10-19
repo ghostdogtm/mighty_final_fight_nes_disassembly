@@ -13,13 +13,13 @@ bank  code(cdl) code(traced) data  unknown
 09          745          156   3569     3722
 0A           32            0   6615     1545
 0B         2923          112   4647      510
-0C         6477          338    635      742
+0C         6477          490    635      590
 0D         2990           48   3027     2127
 0E         7731          247    198       16
-0F         6124          386   1039      643
-all       47940         2559  56651    23922
+0F         6124          402   1039      627
+all       47940         2727  56651    23754
 
-Unknown bytes: 5325 fill (one repeated byte), 1926 code-like, 16671 other (probably data)
+Unknown bytes: 9455 fill (one repeated byte), 286 code-like, 14013 other (probably data)
 
 CDL anomalies (code flag but not a valid instruction): 0
 
@@ -742,6 +742,18 @@ Traced code (instruction starts, verify by hand):
   0C:8727  LDA objY
   0C:872A  STA objY,X
   0C:8BB0  RTI
+  0C:8BC0  PLA
+  0C:8BC1  PLA
+  0C:8BC2  LDA #$2E
+  0C:8BC4  JSR QueueSound
+  0C:8BC7  LDA credits
+  0C:8BC9  CMP #$09
+  0C:8BCB  BEQ loc_0C_8BD2
+  0C:8BCD  CLC
+  0C:8BCE  ADC #$01
+  0C:8BD0  STA credits
+  0C:8BD2  JSR sub_0C_8C00
+  0C:8BD5  RTS
   0C:8BE5  LDA #$09
   0C:8BE7  STA lives
   0C:8BF8  LDA #$09
@@ -870,6 +882,62 @@ Traced code (instruction starts, verify by hand):
   0C:9AA7  ADC #$00
   0C:9AA9  STA objArr_0380,X
   0C:9AAC  JMP loc_0C_9AD8
+  0C:9D9E  LDY #$25
+  0C:9DA0  LDA #$01
+  0C:9DA2  BNE loc_0C_9DAE
+  0C:9DA4  LDY #$2B
+  0C:9DA6  LDA #$02
+  0C:9DA8  BNE loc_0C_9DAE
+  0C:9DAA  LDY #$35
+  0C:9DAC  LDA #$04
+  0C:9DAE  STA objArr_05C0,X
+  0C:9DB1  TYA
+  0C:9DB2  STA objArr_0510,X
+  0C:9DB5  LDA #$05
+  0C:9DB7  STA objSpriteDown,X
+  0C:9DBA  JSR sub_0F_F374
+  0C:9DBD  CMP #$80
+  0C:9DBF  BCC loc_0C_9DC2
+  0C:9DC1  RTS
+  0C:9DC2  JSR sub_0F_FB5B
+  0C:9DC5  TAY
+  0C:9DC6  LDA tbl_0D_A87E,Y
+  0C:9DC9  STA objArr_0460,X
+  0C:9DCC  AND #$0C
+  0C:9DCE  BNE loc_0C_9DE4
+  0C:9DD0  LDA #$4C
+  0C:9DD2  STA objArr_0400,X
+  0C:9DD5  LDA #$02
+  0C:9DD7  STA objArr_0410,X
+  0C:9DDA  LDA #$00
+  0C:9DDC  STA objArr_0420,X
+  0C:9DDF  STA objArr_0430,X
+  0C:9DE2  BEQ loc_0C_9DF8
+  0C:9DE4  LDA #$1F
+  0C:9DE6  STA objArr_0400,X
+  0C:9DE9  LDA #$02
+  0C:9DEB  STA objArr_0410,X
+  0C:9DEE  LDA #$E1
+  0C:9DF0  STA objArr_0420,X
+  0C:9DF3  LDA #$00
+  0C:9DF5  STA objArr_0430,X
+  0C:9DF8  LDA #$D2
+  0C:9DFA  LDY #$24
+  0C:9DFC  JSR sub_0F_F443
+  0C:9DFF  LDA objArr_05C0,X
+  0C:9E02  TAY
+  0C:9E03  LDA tbl_0D_A897,Y
+  0C:9E06  CLC
+  0C:9E07  ADC #$33
+  0C:9E09  STA objArr_0450,X
+  0C:9E0C  LDA #$8E
+  0C:9E0E  STA objArr_0300,X
+  0C:9E11  LDA #$03
+  0C:9E13  STA objArr_0500,X
+  0C:9E16  LDA objArr_0510,X
+  0C:9E19  STA objArr_0320,X
+  0C:9E1C  STA objId,X
+  0C:9E1F  RTS
   0C:9E2E  LDA #$01
   0C:9E30  BNE loc_0C_9E38
   0C:9E3C  LDA #$01
@@ -1183,6 +1251,16 @@ Traced code (instruction starts, verify by hand):
   0F:F243  SBC #$0F
   0F:F245  STA objY,X
   0F:F248  DEC objArr_03E0,X
+  0F:F70A  LDX #$0D
+  0F:F70C  LDA objArr_0300,X
+  0F:F70F  BPL loc_0F_F718
+  0F:F711  DEX
+  0F:F712  CPX #$02
+  0F:F714  BNE loc_0F_F70C
+  0F:F716  SEC
+  0F:F717  RTS
+  0F:F718  CLC
+  0F:F719  RTS
   0F:F726  SEC
   0F:F727  RTS
   0F:F8D9  RTS
@@ -1244,25 +1322,14 @@ Raw ROM-address operands (do not relocate with the code): 42
   0F:EE71  LDA $BF00,Y
 
 Code-like unknown runs (decode cleanly to the end, no BRK; review by hand):
-   1361  05:B1AF
-    134  0C:9D9E
      65  05:A851
      33  01:A00C
      30  05:A832
-     26  02:81E7
-     23  09:AFE9
-     22  0C:8BC0
      18  0B:B30F
-     18  0A:81EF
-     17  09:B0AF
-     16  0F:F70A
+     15  0C:8899
      15  03:B312
-     14  0C:88D5
      12  08:853A
      10  0E:D450
-     10  0C:893E
-     10  0C:88F8
-     10  0C:886C
       9  0C:8997
       8  0C:89BB
       8  08:85CA
@@ -1274,6 +1341,7 @@ Code-like unknown runs (decode cleanly to the end, no BRK; review by hand):
       6  0C:89B1
       6  0C:898E
       6  09:A436
+      6  05:AF28
       6  03:B306
 
 Unknown runs, longest first (len bank:addr):
@@ -1306,7 +1374,6 @@ Unknown runs, longest first (len bank:addr):
     165  09:A99C
     152  0D:B9F0
     141  05:ADD3
-    134  0C:9D9E
     118  0A:8BC1
     116  0D:BA8C
     111  05:A1CD
@@ -1378,7 +1445,6 @@ Unknown runs, longest first (len bank:addr):
      23  02:9156
      23  01:B028
      22  0F:EBDF
-     22  0C:8BC0
      22  0A:90AF
      21  0A:84E0
      21  09:A0F0
@@ -1409,7 +1475,6 @@ Unknown runs, longest first (len bank:addr):
      17  06:892E
      17  01:AFEF
      16  0F:FC00
-     16  0F:F70A
      16  0D:B0B0
      16  0D:B070
      16  0D:B030
@@ -1691,6 +1756,7 @@ Unknown runs, longest first (len bank:addr):
       4  0D:A87E
       4  0D:A3EB
       4  0D:A3BF
+      4  0C:9E20
       4  0C:9D67
       4  0C:8880
       4  0C:885D

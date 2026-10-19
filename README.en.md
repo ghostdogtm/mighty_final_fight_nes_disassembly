@@ -82,7 +82,8 @@ A lowercase `c` means the code was found by tracing (the emulator never saw it; 
    stored to `prgBank8000/prgBankA000` ($F4/$F5) in the fixed banks. These operands carry `bank=NN` in the comment.
 5. Split address tables (low and high bytes separately, `LDA lo,Y` / `LDA hi,Y`) are emitted as `.lobytes`/`.hibytes`;
    `LDA #lo / STA zp / LDA #hi / STA zp+1` pairs become `#<label` / `#>label`.
-6. Runs of identical bytes (8+) are collapsed into `.res N, $xx`.
+6. Unknown runs of 16+ bytes that decode cleanly and end in `RTS/RTI/JMP` are adopted as unreached code (`c`).
+7. Runs of identical bytes (8+) are collapsed into `.res N, $xx`.
 
 ## Known limitations
 - About 24 KB of PRG (≈19 %) was never seen by the CDL and tracing did not turn it into code — it is mostly data the

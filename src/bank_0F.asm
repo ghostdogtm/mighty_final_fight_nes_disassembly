@@ -3106,7 +3106,18 @@ tbl_0F_F6EA:
 	.byte $10,$24,$26               ;- D 3 - - - 0x01F710 0F:F700:
 	.byte $00,$00,$00,$00,$00       ;- - - - - - 0x01F713 0F:F703:
 	.byte $0A,$0D                   ;- D 3 - - - 0x01F718 0F:F708:
-	.byte $A2,$0D,$BD,$00,$03,$10,$07,$CA,$E0,$02,$D0,$F6,$38,$60,$18,$60;- - - - - - 0x01F71A 0F:F70A:
+	LDX #$0D                        ;c - - - - - 0x01F71A 0F:F70A: A2 0D
+loc_0F_F70C:
+	LDA objArr_0300,X               ;c - - - - - 0x01F71C 0F:F70C: BD 00 03
+	BPL loc_0F_F718                 ;c - - - - - 0x01F71F 0F:F70F: 10 07
+	DEX                             ;c - - - - - 0x01F721 0F:F711: CA
+	CPX #$02                        ;c - - - - - 0x01F722 0F:F712: E0 02
+	BNE loc_0F_F70C                 ;c - - - - - 0x01F724 0F:F714: D0 F6
+	SEC                             ;c - - - - - 0x01F726 0F:F716: 38
+	RTS                             ;c - - - - - 0x01F727 0F:F717: 60
+loc_0F_F718:
+	CLC                             ;c - - - - - 0x01F728 0F:F718: 18
+	RTS                             ;c - - - - - 0x01F729 0F:F719: 60
 sub_0F_F71A:
 	LDY #$0D                        ;C - - - - - 0x01F72A 0F:F71A: A0 0D
 loc_0F_F71C:

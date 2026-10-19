@@ -1446,8 +1446,19 @@ tbl_0C_8BB6:
 tbl_0C_8BBC:
 	.byte $50                       ;- - - - - - 0x018BCC 0C:8BBC:
 	.byte $58,$60,$68               ;- D 0 - I - 0x018BCD 0C:8BBD:
-	.byte $68,$68,$A9,$2E,$20,$4C,$F3,$A5,$AF,$C9,$09,$F0,$05,$18,$69,$01;- - - - - - 0x018BD0 0C:8BC0:
-	.byte $85,$AF,$20,$00,$8C,$60   ;- - - - - - 0x018BE0 0C:8BD0:
+	PLA                             ;c - - - - - 0x018BD0 0C:8BC0: 68
+	PLA                             ;c - - - - - 0x018BD1 0C:8BC1: 68
+	LDA #$2E                        ;c - - - - - 0x018BD2 0C:8BC2: A9 2E
+	JSR QueueSound                  ;c - - - - - 0x018BD4 0C:8BC4: 20 4C F3
+	LDA credits                     ;c - - - - - 0x018BD7 0C:8BC7: A5 AF
+	CMP #$09                        ;c - - - - - 0x018BD9 0C:8BC9: C9 09
+	BEQ loc_0C_8BD2                 ;c - - - - - 0x018BDB 0C:8BCB: F0 05
+	CLC                             ;c - - - - - 0x018BDD 0C:8BCD: 18
+	ADC #$01                        ;c - - - - - 0x018BDE 0C:8BCE: 69 01
+	STA credits                     ;c - - - - - 0x018BE0 0C:8BD0: 85 AF
+loc_0C_8BD2:
+	JSR sub_0C_8C00                 ;c - - - - - 0x018BE2 0C:8BD2: 20 00 8C
+	RTS                             ;c - - - - - 0x018BE5 0C:8BD5: 60
 ofs_0C_8BD6:
 	LDA #$2D                        ;C - - J - - 0x018BE6 0C:8BD6: A9 2D
 	JSR QueueSound                  ;C - - - - - 0x018BE8 0C:8BD8: 20 4C F3
@@ -3628,15 +3639,67 @@ loc_0C_9D8B:
 loc_0C_9D98:
 	JSR sub_0F_F099                 ;C - - - - - 0x019DA8 0C:9D98: 20 99 F0
 	JMP sub_0F_F1A1                 ;C - - - - - 0x019DAB 0C:9D9B: 4C A1 F1
-	.byte $A0,$25,$A9,$01,$D0,$0A,$A0,$2B,$A9,$02,$D0,$04,$A0,$35,$A9,$04;- - - - - - 0x019DAE 0C:9D9E:
-	.byte $9D,$C0,$05,$98,$9D,$10,$05,$A9,$05,$9D,$B0,$05,$20,$74,$F3,$C9;- - - - - - 0x019DBE 0C:9DAE:
-	.byte $80,$90,$01,$60,$20,$5B,$FB,$A8,$B9,$7E,$A8,$9D,$60,$04,$29,$0C;- - - - - - 0x019DCE 0C:9DBE:
-	.byte $D0,$14,$A9,$4C,$9D,$00,$04,$A9,$02,$9D,$10,$04,$A9,$00,$9D,$20;- - - - - - 0x019DDE 0C:9DCE:
-	.byte $04,$9D,$30,$04,$F0,$14,$A9,$1F,$9D,$00,$04,$A9,$02,$9D,$10,$04;- - - - - - 0x019DEE 0C:9DDE:
-	.byte $A9,$E1,$9D,$20,$04,$A9,$00,$9D,$30,$04,$A9,$D2,$A0,$24,$20,$43;- - - - - - 0x019DFE 0C:9DEE:
-	.byte $F4,$BD,$C0,$05,$A8,$B9,$97,$A8,$18,$69,$33,$9D,$50,$04,$A9,$8E;- - - - - - 0x019E0E 0C:9DFE:
-	.byte $9D,$00,$03,$A9,$03,$9D,$00,$05,$BD,$10,$05,$9D,$20,$03,$9D,$30;- - - - - - 0x019E1E 0C:9E0E:
-	.byte $03,$60,$A9,$01,$D0,$06   ;- - - - - - 0x019E2E 0C:9E1E:
+	LDY #$25                        ;c - - - - - 0x019DAE 0C:9D9E: A0 25
+	LDA #$01                        ;c - - - - - 0x019DB0 0C:9DA0: A9 01
+	BNE loc_0C_9DAE                 ;c - - - - - 0x019DB2 0C:9DA2: D0 0A
+	LDY #$2B                        ;c - - - - - 0x019DB4 0C:9DA4: A0 2B
+	LDA #$02                        ;c - - - - - 0x019DB6 0C:9DA6: A9 02
+	BNE loc_0C_9DAE                 ;c - - - - - 0x019DB8 0C:9DA8: D0 04
+	LDY #$35                        ;c - - - - - 0x019DBA 0C:9DAA: A0 35
+	LDA #$04                        ;c - - - - - 0x019DBC 0C:9DAC: A9 04
+loc_0C_9DAE:
+	STA objArr_05C0,X               ;c - - - - - 0x019DBE 0C:9DAE: 9D C0 05
+	TYA                             ;c - - - - - 0x019DC1 0C:9DB1: 98
+	STA objArr_0510,X               ;c - - - - - 0x019DC2 0C:9DB2: 9D 10 05
+	LDA #$05                        ;c - - - - - 0x019DC5 0C:9DB5: A9 05
+	STA objSpriteDown,X             ;c - - - - - 0x019DC7 0C:9DB7: 9D B0 05
+	JSR sub_0F_F374                 ;c - - - - - 0x019DCA 0C:9DBA: 20 74 F3
+	CMP #$80                        ;c - - - - - 0x019DCD 0C:9DBD: C9 80
+	BCC loc_0C_9DC2                 ;c - - - - - 0x019DCF 0C:9DBF: 90 01
+	RTS                             ;c - - - - - 0x019DD1 0C:9DC1: 60
+loc_0C_9DC2:
+	JSR sub_0F_FB5B                 ;c - - - - - 0x019DD2 0C:9DC2: 20 5B FB
+	TAY                             ;c - - - - - 0x019DD5 0C:9DC5: A8
+	LDA tbl_0D_A87E,Y               ;c - - - - - bank=0D 0x019DD6 0C:9DC6: B9 7E A8
+	STA objArr_0460,X               ;c - - - - - 0x019DD9 0C:9DC9: 9D 60 04
+	AND #$0C                        ;c - - - - - 0x019DDC 0C:9DCC: 29 0C
+	BNE loc_0C_9DE4                 ;c - - - - - 0x019DDE 0C:9DCE: D0 14
+	LDA #$4C                        ;c - - - - - 0x019DE0 0C:9DD0: A9 4C
+	STA objArr_0400,X               ;c - - - - - 0x019DE2 0C:9DD2: 9D 00 04
+	LDA #$02                        ;c - - - - - 0x019DE5 0C:9DD5: A9 02
+	STA objArr_0410,X               ;c - - - - - 0x019DE7 0C:9DD7: 9D 10 04
+	LDA #$00                        ;c - - - - - 0x019DEA 0C:9DDA: A9 00
+	STA objArr_0420,X               ;c - - - - - 0x019DEC 0C:9DDC: 9D 20 04
+	STA objArr_0430,X               ;c - - - - - 0x019DEF 0C:9DDF: 9D 30 04
+	BEQ loc_0C_9DF8                 ;c - - - - - 0x019DF2 0C:9DE2: F0 14
+loc_0C_9DE4:
+	LDA #$1F                        ;c - - - - - 0x019DF4 0C:9DE4: A9 1F
+	STA objArr_0400,X               ;c - - - - - 0x019DF6 0C:9DE6: 9D 00 04
+	LDA #$02                        ;c - - - - - 0x019DF9 0C:9DE9: A9 02
+	STA objArr_0410,X               ;c - - - - - 0x019DFB 0C:9DEB: 9D 10 04
+	LDA #$E1                        ;c - - - - - 0x019DFE 0C:9DEE: A9 E1
+	STA objArr_0420,X               ;c - - - - - 0x019E00 0C:9DF0: 9D 20 04
+	LDA #$00                        ;c - - - - - 0x019E03 0C:9DF3: A9 00
+	STA objArr_0430,X               ;c - - - - - 0x019E05 0C:9DF5: 9D 30 04
+loc_0C_9DF8:
+	LDA #$D2                        ;c - - - - - 0x019E08 0C:9DF8: A9 D2
+	LDY #$24                        ;c - - - - - 0x019E0A 0C:9DFA: A0 24
+	JSR sub_0F_F443                 ;c - - - - - 0x019E0C 0C:9DFC: 20 43 F4
+	LDA objArr_05C0,X               ;c - - - - - 0x019E0F 0C:9DFF: BD C0 05
+	TAY                             ;c - - - - - 0x019E12 0C:9E02: A8
+	LDA tbl_0D_A897,Y               ;c - - - - - bank=0D 0x019E13 0C:9E03: B9 97 A8
+	CLC                             ;c - - - - - 0x019E16 0C:9E06: 18
+	ADC #$33                        ;c - - - - - 0x019E17 0C:9E07: 69 33
+	STA objArr_0450,X               ;c - - - - - 0x019E19 0C:9E09: 9D 50 04
+	LDA #$8E                        ;c - - - - - 0x019E1C 0C:9E0C: A9 8E
+	STA objArr_0300,X               ;c - - - - - 0x019E1E 0C:9E0E: 9D 00 03
+	LDA #$03                        ;c - - - - - 0x019E21 0C:9E11: A9 03
+	STA objArr_0500,X               ;c - - - - - 0x019E23 0C:9E13: 9D 00 05
+	LDA objArr_0510,X               ;c - - - - - 0x019E26 0C:9E16: BD 10 05
+	STA objArr_0320,X               ;c - - - - - 0x019E29 0C:9E19: 9D 20 03
+	STA objId,X                     ;c - - - - - 0x019E2C 0C:9E1C: 9D 30 03
+	RTS                             ;c - - - - - 0x019E2F 0C:9E1F: 60
+	.byte $A9,$01,$D0,$06           ;- - - - - - 0x019E30 0C:9E20:
 ofs_0C_9E24:
 	LDA #$02                        ;C - - J - - 0x019E34 0C:9E24: A9 02
 	BNE loc_0C_9E2A                 ;C - - - - - 0x019E36 0C:9E26: D0 02

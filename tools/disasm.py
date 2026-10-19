@@ -883,6 +883,35 @@ class Disasm:
                 self.hint_why[(key[0], key[1])] = 'user'
         return n_pair, n_track
 
+    def adopt_code_like(self, min_len=16):
+        """Unknown runs that decode cleanly and end in RTS/RTI/JMP are almost certainly unreached code."""
+        n = 0
+        for b in range(NBANKS):
+            k = self.kind[b]
+            i = 0
+            while i < BANK_SIZE:
+                if k[i] != 0:
+                    i += 1
+                    continue
+                j = i
+                while j < BANK_SIZE and k[j] == 0:
+                    j += 1
+                if j - i >= min_len and len(set(self.rom[b][i:j])) > 3:
+                    for st in range(i, min(j, i + 8)):
+                        found = self.speculate(b, st)
+                        if found and sum(found.values()) >= min_len:
+                            last = max(found)
+                            if self.decode(b, last[1])[0] in ('RTS', 'RTI', 'JMP'):
+                                for (fb, fi), ln in found.items():
+                                    self.kind[fb][fi] = 1
+                                    for q in range(1, ln):
+                                        self.kind[fb][fi + q] = 2
+                                    self.traced.add((fb, fi))
+                                n += 1
+                                break
+                i = j
+        return n
+
     def looks_like_code(self, b, i, ln):
         end = i + ln
         if ln < 6:
@@ -921,14 +950,32 @@ class Disasm:
         fill = codelike = other = 0
         cl_runs = []
         for ln, b, i in runs:
-            seg = self.rom[b][i:i + ln]
-            if len(set(seg)) == 1:
-                fill += ln
-            elif self.looks_like_code(b, i, ln):
-                codelike += ln
-                cl_runs.append((ln, b, i))
-            else:
-                other += ln
+            # split into fills (8+ identical bytes) and the remaining pieces, classify each piece
+            seg, p, pieces = self.rom[b], i, []
+            while p < i + ln:
+                q = p
+                while q < i + ln and seg[q] == seg[p]:
+                    q += 1
+                if q - p >= FILL_MIN:
+                    fill += q - p
+                    p = q
+                    continue
+                r = p
+                while r < i + ln:
+                    q = r
+                    while q < i + ln and seg[q] == seg[r]:
+                        q += 1
+                    if q - r >= FILL_MIN:
+                        break
+                    r = q
+                pieces.append((p, r - p))
+                p = r
+            for pp, pl in pieces:
+                if self.looks_like_code(b, pp, pl):
+                    codelike += pl
+                    cl_runs.append((pl, b, pp))
+                else:
+                    other += pl
         o += ['', 'Unknown bytes: %d fill (one repeated byte), %d code-like, %d other (probably data)'
               % (fill, codelike, other)]
         o += ['', 'CDL anomalies (code flag but not a valid instruction): %d' % len(self.anomalies)]
@@ -978,6 +1025,10 @@ def main():
             D.trace()
             if not (D.detect_tables() + D.detect_split_tables()):
                 break
+        n_adopt = D.adopt_code_like()
+        if n_adopt:
+            D.trace()
+        print('adopted %d code-like runs' % n_adopt)
         print('trace: %d instructions found, %d pointer-table targets' % (len(D.traced), len(D.table_targets)))
     D.detect_imm_pairs()
     D.infer_banks()
