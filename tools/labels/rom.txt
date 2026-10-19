@@ -174,3 +174,17 @@ rawsym 9A00 bankedEntry9A00
 comment 0E:C0DC write to $E000+X (MMC3 IRQ disable/enable, X = ram_009B)
 comment 0E:C5D5 call into the switchable $8000 bank (bank depends on stage)
 comment 0E:DEBC call into the switchable $8000 bank (bank depends on stage)
+06:8006 SoundMul8              ; ptr_C1 = ptr_C1 * ram_00C4 (8x8 shift-add multiply)
+06:8023 SoundJumpInline        ; A = index; word table follows the JSR (pops return address, jumps to entry)
+06:803A SoundReadByte          ; A:Y = address; A>=$C0 -> byte read through banks $17/$18 (R7) at $A000+
+06:806C SoundFrameBody         ; one driver frame: runs the stream reader, then each of the 4 channels
+06:80D8 SoundSilenceChannel    ; X = channel; volume register := $30 (triangle: $00)
+06:80EC SoundWriteReg          ; A -> APU register $4000 + channel*4 + Y
+06:80FE SoundPlayBody          ; SoundPlay body (soundBusy is held while it runs)
+06:8106 SoundRequest           ; A < $F0 = song/effect id, A >= $F0 = control command
+06:8118 SoundStart             ; A = id; looks up song table, applies priority, resets channel state
+06:81AE SoundControl           ; $F0-$F7 control commands (jump table follows)
+06:81C8 SoundStop              ; clear priority and stream pointer, silence channels
+06:81F1 SoundSilenceAll        ; silence channels not in the mask, enable channels via SNDCHN
+06:8252 SoundStreamTick        ; read command bytes of the current stream when its delay expires
+06:8386 SoundStreamByte        ; next byte from the stream at soundPtr

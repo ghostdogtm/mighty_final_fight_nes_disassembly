@@ -3,11 +3,12 @@
 
 ; per-frame update of the sound driver
 SoundFrame:
-	JMP loc_06_806C                 ;C D 0 - - - 0x00C010 06:8000: 4C 6C 80
+	JMP SoundFrameBody              ;C D 0 - - - 0x00C010 06:8000: 4C 6C 80
 ; A = sound/music id
 SoundPlay:
-	JMP loc_06_80FE                 ;C - - - - - 0x00C013 06:8003: 4C FE 80
-sub_06_8006:
+	JMP SoundPlayBody               ;C - - - - - 0x00C013 06:8003: 4C FE 80
+; ptr_C1 = ptr_C1 * ram_00C4 (8x8 shift-add multiply)
+SoundMul8:
 	LDA #$00                        ;C - - - - - 0x00C016 06:8006: A9 00
 	STA ptr_C1+1                    ;C - - - - - 0x00C018 06:8008: 85 C2
 	LDY #$08                        ;C - - - - - 0x00C01A 06:800A: A0 08
@@ -26,7 +27,8 @@ loc_06_801F:
 	DEY                             ;C - - - - - 0x00C02F 06:801F: 88
 	BNE loc_06_800C                 ;C - - - - - 0x00C030 06:8020: D0 EA
 	RTS                             ;C - - - - - 0x00C032 06:8022: 60
-sub_06_8023:
+; A = index; word table follows the JSR (pops return address, jumps to entry)
+SoundJumpInline:
 	ASL A                           ;C - - - - - 0x00C033 06:8023: 0A
 	TAY                             ;C - - - - - 0x00C034 06:8024: A8
 	INY                             ;C - - - - - 0x00C035 06:8025: C8
@@ -42,7 +44,8 @@ sub_06_8023:
 	PLA                             ;C - - - - - 0x00C044 06:8034: 68
 	STA ptr_C1                      ;C - - - - - 0x00C045 06:8035: 85 C1
 	JMP (ptr_C1)                    ;C - - - - - 0x00C047 06:8037: 6C C1 00
-sub_06_803A:
+; A:Y = address; A>=$C0 -> byte read through banks $17/$18 (R7) at $A000+
+SoundReadByte:
 	STY ptr_C1                      ;C - - - - - 0x00C04A 06:803A: 84 C1
 	LDY #$00                        ;C - - - - - 0x00C04C 06:803C: A0 00
 	CMP #$C0                        ;C - - - - - 0x00C04E 06:803E: C9 C0
@@ -70,14 +73,15 @@ loc_06_8047:
 	STA ptr_C1+1                    ;c - - - - - 0x00C078 06:8068: 85 C2
 	PLA                             ;c - - - - - 0x00C07A 06:806A: 68
 	RTS                             ;c - - - - - 0x00C07B 06:806B: 60
-loc_06_806C:
+; one driver frame: runs the stream reader, then each of the 4 channels
+SoundFrameBody:
 	LDA soundBusy                   ;C - - - - - 0x00C07C 06:806C: A5 C0
 	LSR A                           ;C - - - - - 0x00C07E 06:806E: 4A
 	BCS loc_06_80D7                 ;C - - - - - 0x00C07F 06:806F: B0 66
 	LDA soundPtr                    ;C - - - - - 0x00C081 06:8071: A5 D0
 	ORA soundPtr+1                  ;C - - - - - 0x00C083 06:8073: 05 D1
 	BEQ loc_06_807A                 ;C - - - - - 0x00C085 06:8075: F0 03
-	JSR sub_06_8252                 ;C - - - - - 0x00C087 06:8077: 20 52 82
+	JSR SoundStreamTick             ;C - - - - - 0x00C087 06:8077: 20 52 82
 loc_06_807A:
 	CLC                             ;C - - - - - 0x00C08A 06:807A: 18
 	LDA ram_00CA                    ;C - - - - - 0x00C08B 06:807B: A5 CA
@@ -142,7 +146,8 @@ loc_06_80D5:
 	STA ram_00CD                    ;c - - - - - 0x00C0E5 06:80D5: 85 CD
 loc_06_80D7:
 	RTS                             ;C - - - - - 0x00C0E7 06:80D7: 60
-sub_06_80D8:
+; X = channel; volume register := $30 (triangle: $00)
+SoundSilenceChannel:
 	TXA                             ;C - - - - - 0x00C0E8 06:80D8: 8A
 	AND #$03                        ;C - - - - - 0x00C0E9 06:80D9: 29 03
 	EOR #$03                        ;C - - - - - 0x00C0EB 06:80DB: 49 03
@@ -156,7 +161,8 @@ sub_06_80D8:
 loc_06_80E8:
 	STA SQ1_VOL,Y                   ;C - - - - - 0x00C0F8 06:80E8: 99 00 40
 	RTS                             ;C - - - - - 0x00C0FB 06:80EB: 60
-sub_06_80EC:
+; A -> APU register $4000 + channel*4 + Y
+SoundWriteReg:
 	PHA                             ;C - - - - - 0x00C0FC 06:80EC: 48
 	TXA                             ;C - - - - - 0x00C0FD 06:80ED: 8A
 	AND #$03                        ;C - - - - - 0x00C0FE 06:80EE: 29 03
@@ -169,22 +175,25 @@ sub_06_80EC:
 	PLA                             ;C - - - - - 0x00C109 06:80F9: 68
 	STA SQ1_VOL,Y                   ;C - - - - - 0x00C10A 06:80FA: 99 00 40
 	RTS                             ;C - - - - - 0x00C10D 06:80FD: 60
-loc_06_80FE:
+; SoundPlay body (soundBusy is held while it runs)
+SoundPlayBody:
 	INC soundBusy                   ;C - - - - - 0x00C10E 06:80FE: E6 C0
-	JSR sub_06_8106                 ;C - - - - - 0x00C110 06:8100: 20 06 81
+	JSR SoundRequest                ;C - - - - - 0x00C110 06:8100: 20 06 81
 	DEC soundBusy                   ;C - - - - - 0x00C113 06:8103: C6 C0
 	RTS                             ;C - - - - - 0x00C115 06:8105: 60
-sub_06_8106:
+; A < $F0 = song/effect id, A >= $F0 = control command
+SoundRequest:
 	CMP #$F0                        ;C - - - - - 0x00C116 06:8106: C9 F0
 	BCC loc_06_810D                 ;C - - - - - 0x00C118 06:8108: 90 03
-	JMP loc_06_81AE                 ;C - - - - - 0x00C11A 06:810A: 4C AE 81
+	JMP SoundControl                ;C - - - - - 0x00C11A 06:810A: 4C AE 81
 loc_06_810D:
 	CMP songCount                   ;C - - - - - 0x00C11D 06:810D: CD 40 8A
-	BCC sub_06_8118                 ;C - - - - - 0x00C120 06:8110: 90 06
+	BCC SoundStart                  ;C - - - - - 0x00C120 06:8110: 90 06
 	SEC                             ;c - - - - - 0x00C122 06:8112: 38
 	SBC songCount                   ;c - - - - - 0x00C123 06:8113: ED 40 8A
 	BCS loc_06_810D                 ;c - - - - - 0x00C126 06:8116: B0 F5
-sub_06_8118:
+; A = id; looks up song table, applies priority, resets channel state
+SoundStart:
 	ASL A                           ;C - - - - - 0x00C128 06:8118: 0A
 	TAX                             ;C - - - - - 0x00C129 06:8119: AA
 	LDY tbl_06_8A44,X               ;C - - - - - 0x00C12A 06:811A: BC 44 8A
@@ -192,7 +201,7 @@ sub_06_8118:
 	ORA tbl_06_8A43,X               ;C - - - - - 0x00C12E 06:811E: 1D 43 8A
 	BEQ loc_06_816E                 ;C - - - - - 0x00C131 06:8121: F0 4B
 	LDA tbl_06_8A43,X               ;C - - - - - 0x00C133 06:8123: BD 43 8A
-	JSR sub_06_803A                 ;C - - - - - 0x00C136 06:8126: 20 3A 80
+	JSR SoundReadByte               ;C - - - - - 0x00C136 06:8126: 20 3A 80
 	TAY                             ;C - - - - - 0x00C139 06:8129: A8
 	BEQ loc_06_816F                 ;C - - - - - 0x00C13A 06:812A: F0 43
 	LDY #$00                        ;C - - - - - 0x00C13C 06:812C: A0 00
@@ -257,7 +266,7 @@ loc_06_8189:
 loc_06_818F:
 	LDY ptr_C1                      ;C - - - - - 0x00C19F 06:818F: A4 C1
 	LDA ptr_C1+1                    ;C - - - - - 0x00C1A1 06:8191: A5 C2
-	JSR sub_06_803A                 ;C - - - - - 0x00C1A3 06:8193: 20 3A 80
+	JSR SoundReadByte               ;C - - - - - 0x00C1A3 06:8193: 20 3A 80
 	STA ram_0754,X                  ;C - - - - - 0x00C1A6 06:8196: 9D 54 07
 	INC ptr_C1                      ;C - - - - - 0x00C1A9 06:8199: E6 C1
 	BNE loc_06_819F                 ;C - - - - - 0x00C1AB 06:819B: D0 02
@@ -265,19 +274,21 @@ loc_06_818F:
 loc_06_819F:
 	LDY ptr_C1                      ;C - - - - - 0x00C1AF 06:819F: A4 C1
 	LDA ptr_C1+1                    ;C - - - - - 0x00C1B1 06:81A1: A5 C2
-	JSR sub_06_803A                 ;C - - - - - 0x00C1B3 06:81A3: 20 3A 80
+	JSR SoundReadByte               ;C - - - - - 0x00C1B3 06:81A3: 20 3A 80
 	STA ram_0750,X                  ;C - - - - - 0x00C1B6 06:81A6: 9D 50 07
 	DEX                             ;C - - - - - 0x00C1B9 06:81A9: CA
 	BPL loc_06_8189                 ;C - - - - - 0x00C1BA 06:81AA: 10 DD
-	BMI sub_06_81F1                 ;C - - - - - 0x00C1BC 06:81AC: 30 43
-loc_06_81AE:
+	BMI SoundSilenceAll             ;C - - - - - 0x00C1BC 06:81AC: 30 43
+; $F0-$F7 control commands (jump table follows)
+SoundControl:
 	STY ram_00C3                    ;C - - - - - 0x00C1BE 06:81AE: 84 C3
 	AND #$07                        ;C - - - - - 0x00C1C0 06:81B0: 29 07
-	JSR sub_06_8023                 ;C - - - - - 0x00C1C2 06:81B2: 20 23 80
-	.word ofs_06_81C5, loc_06_81C8, sub_06_81E4, ofs_06_821E, ofs_06_8226, $822D, loc_06_8234, $824A;W 0x00C1C5 06:81B5:
+	JSR SoundJumpInline             ;C - - - - - 0x00C1C2 06:81B2: 20 23 80
+	.word ofs_06_81C5, SoundStop, sub_06_81E4, ofs_06_821E, ofs_06_8226, $822D, loc_06_8234, $824A;W 0x00C1C5 06:81B5:
 ofs_06_81C5:
 	JSR sub_06_81E4                 ;C - - J - - 0x00C1D5 06:81C5: 20 E4 81
-loc_06_81C8:
+; clear priority and stream pointer, silence channels
+SoundStop:
 	LDA #$00                        ;C - - - - - 0x00C1D8 06:81C8: A9 00
 	STA soundPriority               ;C - - - - - 0x00C1DA 06:81CA: 85 CE
 	STA soundPtr                    ;C - - - - - 0x00C1DC 06:81CC: 85 D0
@@ -289,7 +300,7 @@ sub_06_81D4:
 	BEQ loc_06_81E3                 ;C - - - - - 0x00C1E6 06:81D6: F0 0B
 	EOR #$0F                        ;C - - - - - 0x00C1E8 06:81D8: 49 0F
 	STA ram_00CF                    ;C - - - - - 0x00C1EA 06:81DA: 85 CF
-	JSR sub_06_81F1                 ;C - - - - - 0x00C1EC 06:81DC: 20 F1 81
+	JSR SoundSilenceAll             ;C - - - - - 0x00C1EC 06:81DC: 20 F1 81
 	LDA #$00                        ;C - - - - - 0x00C1EF 06:81DF: A9 00
 	STA ram_00CF                    ;C - - - - - 0x00C1F1 06:81E1: 85 CF
 loc_06_81E3:
@@ -302,14 +313,15 @@ loc_06_81E8:
 	STA ram_0750,X                  ;C - - - - - 0x00C1FB 06:81EB: 9D 50 07
 	DEX                             ;C - - - - - 0x00C1FE 06:81EE: CA
 	BPL loc_06_81E8                 ;C - - - - - 0x00C1FF 06:81EF: 10 F7
-sub_06_81F1:
+; silence channels not in the mask, enable channels via SNDCHN
+SoundSilenceAll:
 	LDA ram_00CF                    ;C - - - - - 0x00C201 06:81F1: A5 CF
 	PHA                             ;C - - - - - 0x00C203 06:81F3: 48
 	LDX #$03                        ;C - - - - - 0x00C204 06:81F4: A2 03
 loc_06_81F6:
 	LSR ram_00CF                    ;C - - - - - 0x00C206 06:81F6: 46 CF
 	BCS loc_06_820A                 ;C - - - - - 0x00C208 06:81F8: B0 10
-	JSR sub_06_80D8                 ;C - - - - - 0x00C20A 06:81FA: 20 D8 80
+	JSR SoundSilenceChannel         ;C - - - - - 0x00C20A 06:81FA: 20 D8 80
 	LDA ram_0754,X                  ;C - - - - - 0x00C20D 06:81FD: BD 54 07
 	ORA ram_0750,X                  ;C - - - - - 0x00C210 06:8200: 1D 50 07
 	BEQ loc_06_820A                 ;C - - - - - 0x00C213 06:8203: F0 05
@@ -330,7 +342,7 @@ ofs_06_821E:
 	LDA soundBusy                   ;C - - J - - 0x00C22E 06:821E: A5 C0
 	ORA #$02                        ;C - - - - - 0x00C230 06:8220: 09 02
 	STA soundBusy                   ;C - - - - - 0x00C232 06:8222: 85 C0
-	BNE sub_06_81F1                 ;C - - - - - 0x00C234 06:8224: D0 CB
+	BNE SoundSilenceAll             ;C - - - - - 0x00C234 06:8224: D0 CB
 ofs_06_8226:
 	LDA soundBusy                   ;C - - J - - 0x00C236 06:8226: A5 C0
 	AND #$FD                        ;C - - - - - 0x00C238 06:8228: 29 FD
@@ -360,14 +372,15 @@ loc_06_8249:
 	SBC ram_00C3                    ;c - - - - - 0x00C25D 06:824D: E5 C3
 	STA ram_00D8                    ;c - - - - - 0x00C25F 06:824F: 85 D8
 	RTS                             ;c - - - - - 0x00C261 06:8251: 60
-sub_06_8252:
+; read command bytes of the current stream when its delay expires
+SoundStreamTick:
 	LDA ram_00D3                    ;C - - - - - 0x00C262 06:8252: A5 D3
 	BEQ loc_06_825B                 ;C - - - - - 0x00C264 06:8254: F0 05
 	DEC ram_00D3                    ;C - - - - - 0x00C266 06:8256: C6 D3
 	DEC ram_00D5                    ;C - - - - - 0x00C268 06:8258: C6 D5
 	RTS                             ;C - - - - - 0x00C26A 06:825A: 60
 loc_06_825B:
-	JSR sub_06_8386                 ;C - - - - - 0x00C26B 06:825B: 20 86 83
+	JSR SoundStreamByte             ;C - - - - - 0x00C26B 06:825B: 20 86 83
 	STA ram_00C4                    ;C - - - - - 0x00C26E 06:825E: 85 C4
 	ASL A                           ;C - - - - - 0x00C270 06:8260: 0A
 	BCC loc_06_8273                 ;C - - - - - 0x00C271 06:8261: 90 10
@@ -375,14 +388,14 @@ loc_06_825B:
 	LDA ram_00D7                    ;C - - - - - 0x00C275 06:8265: A5 D7
 	LSR A                           ;C - - - - - 0x00C277 06:8267: 4A
 	BCC loc_06_8270                 ;C - - - - - 0x00C278 06:8268: 90 06
-	JSR sub_06_8118                 ;c - - - - - 0x00C27A 06:826A: 20 18 81
+	JSR SoundStart                  ;c - - - - - 0x00C27A 06:826A: 20 18 81
 	JMP loc_06_825B                 ;c - - - - - 0x00C27D 06:826D: 4C 5B 82
 loc_06_8270:
-	JMP loc_06_81C8                 ;C - - - - - 0x00C280 06:8270: 4C C8 81
+	JMP SoundStop                   ;C - - - - - 0x00C280 06:8270: 4C C8 81
 loc_06_8273:
 	LSR ram_00C4                    ;C - - - - - 0x00C283 06:8273: 46 C4
 	BCC loc_06_82A6                 ;C - - - - - 0x00C285 06:8275: 90 2F
-	JSR sub_06_8386                 ;C - - - - - 0x00C287 06:8277: 20 86 83
+	JSR SoundStreamByte             ;C - - - - - 0x00C287 06:8277: 20 86 83
 	ASL A                           ;C - - - - - 0x00C28A 06:827A: 0A
 	BEQ loc_06_8289                 ;C - - - - - 0x00C28B 06:827B: F0 0C
 	ASL ram_00D6                    ;C - - - - - 0x00C28D 06:827D: 06 D6
@@ -393,9 +406,9 @@ loc_06_8273:
 	ROR ram_00D6                    ;C - - - - - 0x00C295 06:8285: 66 D6
 	INC ram_00D6                    ;C - - - - - 0x00C297 06:8287: E6 D6
 loc_06_8289:
-	JSR sub_06_8386                 ;C - - - - - 0x00C299 06:8289: 20 86 83
+	JSR SoundStreamByte             ;C - - - - - 0x00C299 06:8289: 20 86 83
 	TAX                             ;C - - - - - 0x00C29C 06:828C: AA
-	JSR sub_06_8386                 ;C - - - - - 0x00C29D 06:828D: 20 86 83
+	JSR SoundStreamByte             ;C - - - - - 0x00C29D 06:828D: 20 86 83
 	STA soundPtr                    ;C - - - - - 0x00C2A0 06:8290: 85 D0
 	STX soundPtr+1                  ;C - - - - - 0x00C2A2 06:8292: 86 D1
 	BNE loc_06_825B                 ;C - - - - - 0x00C2A4 06:8294: D0 C5
@@ -413,25 +426,25 @@ loc_06_8296:
 loc_06_82A6:
 	LSR ram_00C4                    ;C - - - - - 0x00C2B6 06:82A6: 46 C4
 	BCC loc_06_82AF                 ;C - - - - - 0x00C2B8 06:82A8: 90 05
-	JSR sub_06_8386                 ;C - - - - - 0x00C2BA 06:82AA: 20 86 83
+	JSR SoundStreamByte             ;C - - - - - 0x00C2BA 06:82AA: 20 86 83
 	STA ram_00D4                    ;C - - - - - 0x00C2BD 06:82AD: 85 D4
 loc_06_82AF:
 	LSR ram_00C4                    ;C - - - - - 0x00C2BF 06:82AF: 46 C4
 	BCC loc_06_82B8                 ;C - - - - - 0x00C2C1 06:82B1: 90 05
-	JSR sub_06_8386                 ;c - - - - - 0x00C2C3 06:82B3: 20 86 83
+	JSR SoundStreamByte             ;c - - - - - 0x00C2C3 06:82B3: 20 86 83
 	STA ram_00D2                    ;c - - - - - 0x00C2C6 06:82B6: 85 D2
 loc_06_82B8:
-	JSR sub_06_8386                 ;C - - - - - 0x00C2C8 06:82B8: 20 86 83
+	JSR SoundStreamByte             ;C - - - - - 0x00C2C8 06:82B8: 20 86 83
 	STA ram_00D3                    ;C - - - - - 0x00C2CB 06:82BB: 85 D3
 	STA ptr_C1                      ;C - - - - - 0x00C2CD 06:82BD: 85 C1
 	LDA ram_00D4                    ;C - - - - - 0x00C2CF 06:82BF: A5 D4
 	STA ram_00C4                    ;C - - - - - 0x00C2D1 06:82C1: 85 C4
-	JSR sub_06_8006                 ;C - - - - - 0x00C2D3 06:82C3: 20 06 80
+	JSR SoundMul8                   ;C - - - - - 0x00C2D3 06:82C3: 20 06 80
 	LDY ptr_C1                      ;C - - - - - 0x00C2D6 06:82C6: A4 C1
 	INY                             ;C - - - - - 0x00C2D8 06:82C8: C8
 	STY ram_00D5                    ;C - - - - - 0x00C2D9 06:82C9: 84 D5
 	INC soundBusy                   ;C - - - - - 0x00C2DB 06:82CB: E6 C0
-	JSR sub_06_8386                 ;C - - - - - 0x00C2DD 06:82CD: 20 86 83
+	JSR SoundStreamByte             ;C - - - - - 0x00C2DD 06:82CD: 20 86 83
 	PHA                             ;C - - - - - 0x00C2E0 06:82D0: 48
 	EOR ram_00CF                    ;C - - - - - 0x00C2E1 06:82D1: 45 CF
 	BEQ loc_06_82DA                 ;C - - - - - 0x00C2E3 06:82D3: F0 05
@@ -469,12 +482,12 @@ loc_06_8300:
 loc_06_830A:
 	LDA #$00                        ;C - - - - - 0x00C31A 06:830A: A9 00
 	STA ram_00C4                    ;C - - - - - 0x00C31C 06:830C: 85 C4
-	JSR sub_06_8386                 ;C - - - - - 0x00C31E 06:830E: 20 86 83
+	JSR SoundStreamByte             ;C - - - - - 0x00C31E 06:830E: 20 86 83
 loc_06_8311:
 	LSR A                           ;C - - - - - 0x00C321 06:8311: 4A
 	BCC loc_06_8320                 ;C - - - - - 0x00C322 06:8312: 90 0C
 	PHA                             ;C - - - - - 0x00C324 06:8314: 48
-	JSR sub_06_8386                 ;C - - - - - 0x00C325 06:8315: 20 86 83
+	JSR SoundStreamByte             ;C - - - - - 0x00C325 06:8315: 20 86 83
 	STA ram_00C3                    ;C - - - - - 0x00C328 06:8318: 85 C3
 	LDA ram_00C4                    ;C - - - - - 0x00C32A 06:831A: A5 C4
 	JSR sub_06_8326                 ;C - - - - - 0x00C32C 06:831C: 20 26 83
@@ -484,10 +497,10 @@ loc_06_8320:
 	INC ram_00C4                    ;C - - - - - 0x00C332 06:8322: E6 C4
 	BNE loc_06_8311                 ;C - - - - - 0x00C334 06:8324: D0 EB
 sub_06_8326:
-	JSR sub_06_8023                 ;C - - - - - 0x00C336 06:8326: 20 23 80
+	JSR SoundJumpInline             ;C - - - - - 0x00C336 06:8326: 20 23 80
 	.word ofs_06_866F, ofs_06_86AD, ofs_06_865A, ofs_06_86A7, ofs_06_86A1;W 0x00C339 06:8329:
 loc_06_8333:
-	JSR sub_06_8386                 ;C - - - - - 0x00C343 06:8333: 20 86 83
+	JSR SoundStreamByte             ;C - - - - - 0x00C343 06:8333: 20 86 83
 	TAY                             ;C - - - - - 0x00C346 06:8336: A8
 	BNE loc_06_8349                 ;C - - - - - 0x00C347 06:8337: D0 10
 	STA ram_0710,X                  ;C - - - - - 0x00C349 06:8339: 9D 10 07
@@ -495,7 +508,7 @@ loc_06_8333:
 	AND #$F8                        ;C - - - - - 0x00C34F 06:833F: 29 F8
 	ORA #$04                        ;C - - - - - 0x00C351 06:8341: 09 04
 	STA ram_0704,X                  ;C - - - - - 0x00C353 06:8343: 9D 04 07
-	JMP sub_06_80D8                 ;C - - - - - 0x00C356 06:8346: 4C D8 80
+	JMP SoundSilenceChannel         ;C - - - - - 0x00C356 06:8346: 4C D8 80
 loc_06_8349:
 	LDA ram_0704,X                  ;C - - - - - 0x00C359 06:8349: BD 04 07
 	ORA #$20                        ;C - - - - - 0x00C35C 06:834C: 09 20
@@ -530,14 +543,15 @@ loc_06_837F:
 	CLC                             ;C - - - - - 0x00C390 06:8380: 18
 	ADC ram_00D2                    ;C - - - - - 0x00C391 06:8381: 65 D2
 	JMP sub_06_85DE                 ;C - - - - - 0x00C393 06:8383: 4C DE 85
-sub_06_8386:
+; next byte from the stream at soundPtr
+SoundStreamByte:
 	LDY soundPtr                    ;C - - - - - 0x00C396 06:8386: A4 D0
 	LDA soundPtr+1                  ;C - - - - - 0x00C398 06:8388: A5 D1
 	INC soundPtr                    ;C - - - - - 0x00C39A 06:838A: E6 D0
 	BNE loc_06_8390                 ;C - - - - - 0x00C39C 06:838C: D0 02
 	INC soundPtr+1                  ;C - - - - - 0x00C39E 06:838E: E6 D1
 loc_06_8390:
-	JMP sub_06_803A                 ;C - - - - - 0x00C3A0 06:8390: 4C 3A 80
+	JMP SoundReadByte               ;C - - - - - 0x00C3A0 06:8390: 4C 3A 80
 sub_06_8393:
 	TXA                             ;C - - - - - 0x00C3A3 06:8393: 8A
 	ORA #$28                        ;C - - - - - 0x00C3A4 06:8394: 09 28
@@ -618,7 +632,7 @@ loc_06_8419:
 	STY ram_00C4                    ;C - - - - - 0x00C42A 06:841A: 84 C4
 	LDA ram_073C,X                  ;C - - - - - 0x00C42C 06:841C: BD 3C 07
 	STA ptr_C1                      ;C - - - - - 0x00C42F 06:841F: 85 C1
-	JSR sub_06_8006                 ;C - - - - - 0x00C431 06:8421: 20 06 80
+	JSR SoundMul8                   ;C - - - - - 0x00C431 06:8421: 20 06 80
 	LDA ptr_C1                      ;C - - - - - 0x00C434 06:8424: A5 C1
 	BNE loc_06_842A                 ;C - - - - - 0x00C436 06:8426: D0 02
 	LDA #$01                        ;c - - - - - 0x00C438 06:8428: A9 01
@@ -691,7 +705,7 @@ sub_06_8497:
 	STA ram_00C3                    ;C - - - - - 0x00C4B0 06:84A0: 85 C3
 	LDA ram_00C4                    ;C - - - - - 0x00C4B2 06:84A2: A5 C4
 loc_06_84A4:
-	JSR sub_06_8023                 ;C - - - - - 0x00C4B4 06:84A4: 20 23 80
+	JSR SoundJumpInline             ;C - - - - - 0x00C4B4 06:84A4: 20 23 80
 	.word ofs_06_84D9, ofs_06_84DD, ofs_06_84E1, ofs_06_84E8, sub_06_8575, ofs_06_84F1, ofs_06_84FF, ofs_06_865A;W 0x00C4B7 06:84A7:
 	.word ofs_06_866F, ofs_06_8505, ofs_06_8510, ofs_06_8515, ofs_06_86A1, ofs_06_86A7, ofs_06_851B, ofs_06_851F;W 0x00C4C7 06:84B7:
 	.word ofs_06_8523, ofs_06_8527, ofs_06_851B, ofs_06_851F, ofs_06_8523, ofs_06_8527, $855A, ofs_06_8580;W 0x00C4D7 06:84C7:
@@ -808,7 +822,7 @@ ofs_06_8584:
 ofs_06_858A:
 	LDA ram_00CF                    ;C - - - - - 0x00C59A 06:858A: A5 CF
 	BMI loc_06_8591                 ;C - - - - - 0x00C59C 06:858C: 30 03
-	JMP sub_06_80D8                 ;C - - - - - 0x00C59E 06:858E: 4C D8 80
+	JMP SoundSilenceChannel         ;C - - - - - 0x00C59E 06:858E: 4C D8 80
 loc_06_8591:
 	RTS                             ;C - - - - - 0x00C5A1 06:8591: 60
 sub_06_8592:
@@ -818,7 +832,7 @@ sub_06_8592:
 	BNE loc_06_85A0                 ;C - - - - - 0x00C5AB 06:859B: D0 03
 	INC ram_072C,X                  ;C - - - - - 0x00C5AD 06:859D: FE 2C 07
 loc_06_85A0:
-	JMP sub_06_803A                 ;C - - - - - 0x00C5B0 06:85A0: 4C 3A 80
+	JMP SoundReadByte               ;C - - - - - 0x00C5B0 06:85A0: 4C 3A 80
 sub_06_85A3:
 	LDA ram_0704,X                  ;C - - - - - 0x00C5B3 06:85A3: BD 04 07
 	AND #$F8                        ;C - - - - - 0x00C5B6 06:85A6: 29 F8
@@ -840,7 +854,7 @@ sub_06_85AE:
 	STA ptr_C1                      ;C - - - - - 0x00C5D4 06:85C4: 85 C1
 	LDA ram_070C,X                  ;C - - - - - 0x00C5D6 06:85C6: BD 0C 07
 	STA ram_00C4                    ;C - - - - - 0x00C5D9 06:85C9: 85 C4
-	JSR sub_06_8006                 ;C - - - - - 0x00C5DB 06:85CB: 20 06 80
+	JSR SoundMul8                   ;C - - - - - 0x00C5DB 06:85CB: 20 06 80
 	LDY ptr_C1                      ;C - - - - - 0x00C5DE 06:85CE: A4 C1
 loc_06_85D0:
 	INY                             ;C - - - - - 0x00C5E0 06:85D0: C8
@@ -981,7 +995,7 @@ sub_06_86BA:
 	STA ram_00C4                    ;C - - - - - 0x00C6CD 06:86BD: 85 C4
 	LDA ram_0704,X                  ;C - - - - - 0x00C6CF 06:86BF: BD 04 07
 	AND #$07                        ;C - - - - - 0x00C6D2 06:86C2: 29 07
-	JSR sub_06_8023                 ;C - - - - - 0x00C6D4 06:86C4: 20 23 80
+	JSR SoundJumpInline             ;C - - - - - 0x00C6D4 06:86C4: 20 23 80
 	.word ofs_06_86D1, ofs_06_86E6, loc_06_8720, ofs_06_8702, loc_06_8914;W 0x00C6D7 06:86C7:
 ofs_06_86D1:
 	LDY #$00                        ;C - - J - - 0x00C6E1 06:86D1: A0 00
@@ -1057,7 +1071,7 @@ loc_06_8740:
 	STA ram_00C4                    ;c - - - - - 0x00C754 06:8744: 85 C4
 	LDA ram_0740,X                  ;c - - - - - 0x00C756 06:8746: BD 40 07
 	STA ptr_C1                      ;c - - - - - 0x00C759 06:8749: 85 C1
-	JSR sub_06_8006                 ;c - - - - - 0x00C75B 06:874B: 20 06 80
+	JSR SoundMul8                   ;c - - - - - 0x00C75B 06:874B: 20 06 80
 	LDA ptr_C1                      ;c - - - - - 0x00C75E 06:874E: A5 C1
 	BEQ loc_06_87AA                 ;c - - - - - 0x00C760 06:8750: F0 58
 loc_06_8752:
@@ -1092,7 +1106,7 @@ loc_06_8763:
 loc_06_8782:
 	BEQ loc_06_8797                 ;C - - - - - 0x00C792 06:8782: F0 13
 	STA ptr_C1                      ;C - - - - - 0x00C794 06:8784: 85 C1
-	JSR sub_06_8006                 ;C - - - - - 0x00C796 06:8786: 20 06 80
+	JSR SoundMul8                   ;C - - - - - 0x00C796 06:8786: 20 06 80
 	LDA ptr_C1                      ;C - - - - - 0x00C799 06:8789: A5 C1
 	LSR A                           ;C - - - - - 0x00C79B 06:878B: 4A
 	LSR A                           ;C - - - - - 0x00C79C 06:878C: 4A
@@ -1114,7 +1128,7 @@ loc_06_87A5:
 	AND #$F0                        ;C - - - - - 0x00C7B8 06:87A8: 29 F0
 loc_06_87AA:
 	LDY #$00                        ;C - - - - - 0x00C7BA 06:87AA: A0 00
-	JSR sub_06_80EC                 ;C - - - - - 0x00C7BC 06:87AC: 20 EC 80
+	JSR SoundWriteReg               ;C - - - - - 0x00C7BC 06:87AC: 20 EC 80
 	TXA                             ;C - - - - - 0x00C7BF 06:87AF: 8A
 	AND #$03                        ;C - - - - - 0x00C7C0 06:87B0: 29 03
 	TAY                             ;C - - - - - 0x00C7C2 06:87B2: A8
@@ -1134,7 +1148,7 @@ loc_06_87AA:
 loc_06_87CD:
 	BEQ loc_06_880C                 ;C - - - - - 0x00C7DD 06:87CD: F0 3D
 	STA ptr_C1                      ;C - - - - - 0x00C7DF 06:87CF: 85 C1
-	JSR sub_06_8006                 ;C - - - - - 0x00C7E1 06:87D1: 20 06 80
+	JSR SoundMul8                   ;C - - - - - 0x00C7E1 06:87D1: 20 06 80
 	LDA ptr_C1                      ;C - - - - - 0x00C7E4 06:87D4: A5 C1
 	LSR A                           ;C - - - - - 0x00C7E6 06:87D6: 4A
 	ROR ptr_C1+1                    ;C - - - - - 0x00C7E7 06:87D7: 66 C2
@@ -1183,7 +1197,7 @@ loc_06_8814:
 	STY ptr_C1                      ;c - - - - - 0x00C832 06:8822: 84 C1
 	LDA ptr_C1+1                    ;c - - - - - 0x00C834 06:8824: A5 C2
 	PHA                             ;c - - - - - 0x00C836 06:8826: 48
-	JSR sub_06_8006                 ;c - - - - - 0x00C837 06:8827: 20 06 80
+	JSR SoundMul8                   ;c - - - - - 0x00C837 06:8827: 20 06 80
 	PLA                             ;c - - - - - 0x00C83A 06:882A: 68
 	CLC                             ;c - - - - - 0x00C83B 06:882B: 18
 	ADC ptr_C1+1                    ;c - - - - - 0x00C83C 06:882C: 65 C2
@@ -1246,7 +1260,7 @@ loc_06_8884:
 	LDY #$02                        ;C - - - - - 0x00C894 06:8884: A0 02
 	LDA ptr_C1+1                    ;C - - - - - 0x00C896 06:8886: A5 C2
 ofs_06_8888:
-	JSR sub_06_80EC                 ;C - - - - - 0x00C898 06:8888: 20 EC 80
+	JSR SoundWriteReg               ;C - - - - - 0x00C898 06:8888: 20 EC 80
 	TXA                             ;C - - - - - 0x00C89B 06:888B: 8A
 	AND #$03                        ;C - - - - - 0x00C89C 06:888C: 29 03
 	TAY                             ;C - - - - - 0x00C89E 06:888E: A8
@@ -1256,7 +1270,7 @@ ofs_06_8888:
 	STA ram_077C,Y                  ;C - - - - - 0x00C8A6 06:8896: 99 7C 07
 	ORA #$08                        ;C - - - - - 0x00C8A9 06:8899: 09 08
 	LDY #$03                        ;C - - - - - 0x00C8AB 06:889B: A0 03
-	JSR sub_06_80EC                 ;C - - - - - 0x00C8AD 06:889D: 20 EC 80
+	JSR SoundWriteReg               ;C - - - - - 0x00C8AD 06:889D: 20 EC 80
 loc_06_88A0:
 	LDA ram_0704,X                  ;C - - - - - 0x00C8B0 06:88A0: BD 04 07
 	AND #$20                        ;C - - - - - 0x00C8B3 06:88A3: 29 20
