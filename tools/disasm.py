@@ -77,7 +77,7 @@ def load_rom_labels(path):
         try:
             if parts[0] == 'comment':
                 bs, a = parts[1].split(':')
-                notes[(int(bs, 16), parse_addr(a) - base_of(int(bs, 16)), 'c')] = comment.strip()
+                notes[(int(bs, 16), parse_addr(a) - base_of(int(bs, 16)), 'c')] = ' '.join(parts[2:]) or comment.strip()
             elif parts[0] == 'note':
                 bs, a = parts[1].split(':')
                 notes[(int(bs, 16), parse_addr(a) - base_of(int(bs, 16)))] = comment.strip()

@@ -26,3 +26,4 @@ note 0E:C7EE ; GG PEVKTYIA/IE start lives: LDA #$05 / STA lives
 note 0E:C7F2 ; GG PENGZYLA start credits: LDA #$03 / STA credits
 note 0E:C755 ; GG PASGIYAA..GASGIYAA start stage: LDA #$00 / STA stage
 
+
