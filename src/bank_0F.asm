@@ -36,7 +36,7 @@ loc_0F_E03B:
 	AND #$1F                        ;C - - - - - 0x01E051 0F:E041: 29 1F
 	STA ram_002C                    ;C - - - - - 0x01E053 0F:E043: 85 2C
 	LDA #$00                        ;C - - - - - 0x01E055 0F:E045: A9 00
-	STA ram_002B                    ;C - - - - - 0x01E057 0F:E047: 85 2B
+	STA paletteSetIdx               ;C - - - - - 0x01E057 0F:E047: 85 2B
 	STA ram_002D                    ;C - - - - - 0x01E059 0F:E049: 85 2D
 	JSR LoadSectionGfx              ;C - - - - - 0x01E05B 0F:E04B: 20 DD C3
 	LDA #$00                        ;C - - - - - 0x01E05E 0F:E04E: A9 00
@@ -80,7 +80,7 @@ loc_0F_E0A3:
 loc_0F_E0A5:
 	STA ram_005C                    ;C - - - - - 0x01E0B5 0F:E0A5: 85 5C
 	LDA #$01                        ;C - - - - - 0x01E0B7 0F:E0A7: A9 01
-	STA ram_0031                    ;C - - - - - 0x01E0B9 0F:E0A9: 85 31
+	STA playerFacing                ;C - - - - - 0x01E0B9 0F:E0A9: 85 31
 	STA ram_0032                    ;C - - - - - 0x01E0BB 0F:E0AB: 85 32
 	LDA #$00                        ;C - - - - - 0x01E0BD 0F:E0AD: A9 00
 	STA gameAction                  ;C - - - - - 0x01E0BF 0F:E0AF: 85 30
@@ -88,7 +88,7 @@ loc_0F_E0A5:
 	STA timerA3                     ;C - - - - - 0x01E0C3 0F:E0B3: 85 A3
 	STA timerA4                     ;C - - - - - 0x01E0C5 0F:E0B5: 85 A4
 	STA ram_00A5                    ;C - - - - - 0x01E0C7 0F:E0B7: 85 A5
-	STA ram_0037                    ;C - - - - - 0x01E0C9 0F:E0B9: 85 37
+	STA actionTimer                 ;C - - - - - 0x01E0C9 0F:E0B9: 85 37
 	STA ram_00B3                    ;C - - - - - 0x01E0CB 0F:E0BB: 85 B3
 	STA weaponHeld                  ;C - - - - - 0x01E0CD 0F:E0BD: 85 A9
 	STA ram_00AD                    ;C - - - - - 0x01E0CF 0F:E0BF: 85 AD
@@ -97,7 +97,7 @@ loc_0F_E0A5:
 	STA ram_0050                    ;C - - - - - 0x01E0D5 0F:E0C5: 85 50
 	STA ram_003F                    ;C - - - - - 0x01E0D7 0F:E0C7: 85 3F
 	STA ram_0054                    ;C - - - - - 0x01E0D9 0F:E0C9: 85 54
-	STA ram_0062                    ;C - - - - - 0x01E0DB 0F:E0CB: 85 62
+	STA gameOverFlag                ;C - - - - - 0x01E0DB 0F:E0CB: 85 62
 	STA ram_00B5                    ;C - - - - - 0x01E0DD 0F:E0CD: 85 B5
 	STA ram_00B6                    ;C - - - - - 0x01E0DF 0F:E0CF: 85 B6
 	STA ram_00BB                    ;C - - - - - 0x01E0E1 0F:E0D1: 85 BB
@@ -171,7 +171,7 @@ sub_0F_E143:
 	STA scrollXPage                 ;C - - - - - 0x01E15D 0F:E14D: 85 F9
 	STA renderOffCount              ;C - - - - - 0x01E15F 0F:E14F: 85 EE
 	LDA #$01                        ;C - - - - - 0x01E161 0F:E151: A9 01
-	STA ram_0031                    ;C - - - - - 0x01E163 0F:E153: 85 31
+	STA playerFacing                ;C - - - - - 0x01E163 0F:E153: 85 31
 	STA ram_0023                    ;C - - - - - 0x01E165 0F:E155: 85 23
 	STA ram_0032                    ;C - - - - - 0x01E167 0F:E157: 85 32
 	STA ram_002E                    ;C - - - - - 0x01E169 0F:E159: 85 2E
@@ -455,7 +455,7 @@ loc_0F_E30F:
 	LDA gameAction                  ;C - - - - - 0x01E331 0F:E321: A5 30
 	CMP #$04                        ;C - - - - - 0x01E333 0F:E323: C9 04
 	BNE loc_0F_E32F                 ;C - - - - - 0x01E335 0F:E325: D0 08
-	LDA ram_0031                    ;C - - - - - 0x01E337 0F:E327: A5 31
+	LDA playerFacing                ;C - - - - - 0x01E337 0F:E327: A5 31
 	CMP #$02                        ;C - - - - - 0x01E339 0F:E329: C9 02
 	BEQ loc_0F_E333                 ;C - - - - - 0x01E33B 0F:E32B: F0 06
 	BNE loc_0F_E32F                 ;C - - - - - 0x01E33D 0F:E32D: D0 00
@@ -649,7 +649,7 @@ loc_0F_E473:
 	CMP #$04                        ;C - - - - - 0x01E48F 0F:E47F: C9 04
 ofs_0F_E481:
 	BNE loc_0F_E489                 ;C - - - - - 0x01E491 0F:E481: D0 06
-	LDA ram_0031                    ;C - - - - - 0x01E493 0F:E483: A5 31
+	LDA playerFacing                ;C - - - - - 0x01E493 0F:E483: A5 31
 	CMP #$02                        ;C - - - - - 0x01E495 0F:E485: C9 02
 	BEQ loc_0F_E496                 ;C - - - - - 0x01E497 0F:E487: F0 0D
 loc_0F_E489:
@@ -674,7 +674,7 @@ loc_0F_E4A3:
 	LDA gameAction                  ;C - - - - - 0x01E4B9 0F:E4A9: A5 30
 	CMP #$04                        ;C - - - - - 0x01E4BB 0F:E4AB: C9 04
 	BNE loc_0F_E4C8                 ;C - - - - - 0x01E4BD 0F:E4AD: D0 19
-	LDA ram_0031                    ;C - - - - - 0x01E4BF 0F:E4AF: A5 31
+	LDA playerFacing                ;C - - - - - 0x01E4BF 0F:E4AF: A5 31
 	CMP #$02                        ;C - - - - - 0x01E4C1 0F:E4B1: C9 02
 	BEQ loc_0F_E4C8                 ;C - - - - - 0x01E4C3 0F:E4B3: F0 13
 	LDA objX                        ;C - - - - - 0x01E4C5 0F:E4B5: AD 60 03
@@ -962,12 +962,12 @@ sub_0F_E6AB:
 	LDA vramUpdateFlag0             ;C - - - - - 0x01E6BB 0F:E6AB: A5 19
 	ORA vramUpdateFlag1             ;C - - - - - 0x01E6BD 0F:E6AD: 05 1A
 	BNE loc_0F_E6DC                 ;C - - - - - 0x01E6BF 0F:E6AF: D0 2B
-	LDA ram_0062                    ;C - - - - - 0x01E6C1 0F:E6B1: A5 62
+	LDA gameOverFlag                ;C - - - - - 0x01E6C1 0F:E6B1: A5 62
 	BEQ loc_0F_E6BE                 ;C - - - - - 0x01E6C3 0F:E6B3: F0 09
 	CMP #$F9                        ;C - - - - - 0x01E6C5 0F:E6B5: C9 F9
 	BNE loc_0F_E6DC                 ;C - - - - - 0x01E6C7 0F:E6B7: D0 23
 	LDA #$00                        ;C - - - - - 0x01E6C9 0F:E6B9: A9 00
-	STA ram_0062                    ;C - - - - - 0x01E6CB 0F:E6BB: 85 62
+	STA gameOverFlag                ;C - - - - - 0x01E6CB 0F:E6BB: 85 62
 	RTS                             ;C - - - - - 0x01E6CD 0F:E6BD: 60
 loc_0F_E6BE:
 	LDA gameAction                  ;C - - - - - 0x01E6CE 0F:E6BE: A5 30
@@ -2824,7 +2824,7 @@ sub_0F_F455:
 	BCS loc_0F_F4B8                 ;C - - - - - 0x01F4C3 0F:F4B3: B0 03
 	JMP loc_0F_F4E1                 ;C - - - - - 0x01F4C5 0F:F4B5: 4C E1 F4
 loc_0F_F4B8:
-	LDA ram_0031                    ;C - - - - - 0x01F4C8 0F:F4B8: A5 31
+	LDA playerFacing                ;C - - - - - 0x01F4C8 0F:F4B8: A5 31
 	AND #$02                        ;C - - - - - 0x01F4CA 0F:F4BA: 29 02
 	TAY                             ;C - - - - - 0x01F4CC 0F:F4BC: A8
 	LDA objX                        ;C - - - - - 0x01F4CD 0F:F4BD: AD 60 03
@@ -2864,7 +2864,7 @@ loc_0F_F4EC:
 	STA objX,Y                      ;C - - - - - 0x01F510 0F:F500: 99 60 03
 	JMP loc_0F_F522                 ;C - - - - - 0x01F513 0F:F503: 4C 22 F5
 loc_0F_F506:
-	LDA ram_0031                    ;C - - - - - 0x01F516 0F:F506: A5 31
+	LDA playerFacing                ;C - - - - - 0x01F516 0F:F506: A5 31
 	AND #$02                        ;C - - - - - 0x01F518 0F:F508: 29 02
 	TAY                             ;C - - - - - 0x01F51A 0F:F50A: A8
 	LDA objX                        ;C - - - - - 0x01F51B 0F:F50B: AD 60 03
@@ -3300,7 +3300,7 @@ loc_0F_F811:
 	JMP loc_0F_F83D                 ;C - - - - - 0x01F838 0F:F828: 4C 3D F8
 loc_0F_F82B:
 	STA ptr_00                      ;C - - - - - 0x01F83B 0F:F82B: 85 00
-	LDA ram_0031                    ;C - - - - - 0x01F83D 0F:F82D: A5 31
+	LDA playerFacing                ;C - - - - - 0x01F83D 0F:F82D: A5 31
 	AND #$01                        ;C - - - - - 0x01F83F 0F:F82F: 29 01
 	BEQ loc_0F_F845                 ;C - - - - - 0x01F841 0F:F831: F0 12
 loc_0F_F833:
@@ -3310,7 +3310,7 @@ loc_0F_F833:
 	JMP loc_0F_F84C                 ;C - - - - - 0x01F84A 0F:F83A: 4C 4C F8
 loc_0F_F83D:
 	STA ptr_00                      ;C - - - - - 0x01F84D 0F:F83D: 85 00
-	LDA ram_0031                    ;C - - - - - 0x01F84F 0F:F83F: A5 31
+	LDA playerFacing                ;C - - - - - 0x01F84F 0F:F83F: A5 31
 	AND #$01                        ;C - - - - - 0x01F851 0F:F841: 29 01
 	BEQ loc_0F_F833                 ;C - - - - - 0x01F853 0F:F843: F0 EE
 loc_0F_F845:
@@ -3447,7 +3447,7 @@ loc_0F_F922:
 loc_0F_F960:
 	LDA #$02                        ;C - - - - - 0x01F970 0F:F960: A9 02
 loc_0F_F962:
-	STA ram_0031                    ;C - - - - - 0x01F972 0F:F962: 85 31
+	STA playerFacing                ;C - - - - - 0x01F972 0F:F962: 85 31
 	LDA gameAction                  ;C - - - - - 0x01F974 0F:F964: A5 30
 	CMP #$01                        ;C - - - - - 0x01F976 0F:F966: C9 01
 	BEQ loc_0F_F9B7                 ;C - - - - - 0x01F978 0F:F968: F0 4D
@@ -3497,7 +3497,7 @@ ofs_0F_F9A3:
 loc_0F_F9B7:
 	LDA #$02                        ;C - - - - - 0x01F9C7 0F:F9B7: A9 02
 loc_0F_F9B9:
-	STA ram_0031                    ;C - - - - - 0x01F9C9 0F:F9B9: 85 31
+	STA playerFacing                ;C - - - - - 0x01F9C9 0F:F9B9: 85 31
 	LDY playerId                    ;C - - - - - 0x01F9CB 0F:F9BB: A4 34
 	LDA tbl_0F_E20A,Y               ;C - - - - - 0x01F9CD 0F:F9BD: B9 0A E2
 	JSR SetPlayerAnim               ;C - - - - - 0x01F9D0 0F:F9C0: 20 94 F2
@@ -3657,7 +3657,7 @@ sub_0F_FAC4:
 	LDA #$00                        ;C - - - - - 0x01FAFE 0F:FAEE: A9 00
 	STA objAnimFlags+1              ;C - - - - - 0x01FB00 0F:FAF0: 8D 91 05
 	STA objAnimFrame+1              ;C - - - - - 0x01FB03 0F:FAF3: 8D 71 05
-	LDA ram_0031                    ;C - - - - - 0x01FB06 0F:FAF6: A5 31
+	LDA playerFacing                ;C - - - - - 0x01FB06 0F:FAF6: A5 31
 	STA objFacing+1                 ;C - - - - - 0x01FB08 0F:FAF8: 8D 61 04
 	LDA #$66                        ;C - - - - - 0x01FB0B 0F:FAFB: A9 66
 	STA objKind+1                   ;C - - - - - 0x01FB0D 0F:FAFD: 8D 21 03

@@ -13,13 +13,13 @@ bank  code(cdl) code(traced) data  unknown
 09          745          156   3569     3722
 0A           32            0   6615     1545
 0B         2923          112   4647      510
-0C         6477          488    636      591
+0C         6477          492    786      437
 0D         2990           48   3027     2127
 0E         7731          247    198       16
 0F         6124          402   1074      592
-all       48068         2726  56894    23384
+all       48068         2730  57044    23230
 
-Unknown bytes: 9430 fill (one repeated byte), 158 code-like, 13796 other (probably data)
+Unknown bytes: 9403 fill (one repeated byte), 158 code-like, 13669 other (probably data)
 
 CDL anomalies (code flag but not a valid instruction): 0
 
@@ -40,7 +40,7 @@ Traced code (instruction starts, verify by hand):
   00:8347  LDA #$02
   00:8349  STA gameAction
   00:834B  LDA #$03
-  00:834D  STA ram_0037
+  00:834D  STA actionTimer
   00:834F  JSR ClearTimerA4
   00:8352  JSR ResetPlayerStand
   00:8355  LDY ram_0039
@@ -121,25 +121,25 @@ Traced code (instruction starts, verify by hand):
   00:8DDC  CMP #$02
   00:8DDE  BNE loc_00_8DE0
   00:8E2E  LDA #$00
-  00:8E30  STA ram_0062
+  00:8E30  STA gameOverFlag
   00:8E32  LDA #$09
   00:8E34  STA gameAction
   00:8E36  JMP Act09_Continue
   00:8E98  LDA #$98
   00:8E9A  BNE loc_00_8E9E
-  00:8EE7  INC ram_0062
+  00:8EE7  INC gameOverFlag
   00:8F5D  LDA #$81
   00:8F5F  STA objActive
   00:8F62  STA ram_006E
-  00:8F64  LDA ram_0031
+  00:8F64  LDA playerFacing
   00:8F66  AND #$01
   00:8F68  BEQ loc_00_8F6F
   00:8F6A  JSR ClearPlayerFlag40
   00:8F6D  BNE loc_00_8F72
   00:8F6F  JSR SetPlayerFlag40
-  00:8F72  LDA ram_0031
+  00:8F72  LDA playerFacing
   00:8F74  EOR #$03
-  00:8F76  STA ram_0031
+  00:8F76  STA playerFacing
   00:8F78  JSR ClearTimerA4
   00:8F7B  LDA #$22
   00:8F7D  STA gameAction
@@ -376,7 +376,7 @@ Traced code (instruction starts, verify by hand):
   04:98E8  RTS
   04:9911  LDY playerId
   04:9913  LDA tbl_04_9D5C,Y
-  04:9916  STA ram_0062
+  04:9916  STA gameOverFlag
   04:994F  JMP loc_04_9BA4
   04:9956  JMP loc_04_9B7E
   04:9B7E  INC lives
@@ -681,10 +681,10 @@ Traced code (instruction starts, verify by hand):
   0B:B3F3  LDA #$29
   0B:B3F5  STA gameAction
   0B:B3F7  LDA #$0C
-  0B:B3F9  STA ram_0037
+  0B:B3F9  STA actionTimer
   0B:B3FB  JSR ClearObject
   0B:B3FE  LDA #$FB
-  0B:B400  STA ram_0062
+  0B:B400  STA gameOverFlag
   0B:B402  RTS
   0B:B41C  CMP #$03
   0B:B41E  BEQ loc_0B_B421
@@ -937,6 +937,8 @@ Traced code (instruction starts, verify by hand):
   0C:9E19  STA objKind,X
   0C:9E1C  STA objId,X
   0C:9E1F  RTS
+  0C:9E20  LDA #$01
+  0C:9E22  BNE loc_0C_9E2A
   0C:9E2E  LDA #$01
   0C:9E30  BNE loc_0C_9E38
   0C:9E3C  LDA #$01
@@ -979,22 +981,22 @@ Traced code (instruction starts, verify by hand):
   0E:CAF5  JMP loc_0E_CA3C
   0E:CC3F  LDA objFacing,Y
   0E:CC42  AND #$03
-  0E:CC44  CMP ram_0031
+  0E:CC44  CMP playerFacing
   0E:CC46  BEQ loc_0E_CC4F
-  0E:CC48  LDA ram_0031
+  0E:CC48  LDA playerFacing
   0E:CC4A  STA objFacing,Y
   0E:CC4D  BNE loc_0E_CC52
   0E:CC4F  JSR sub_0E_CC85
   0E:CC62  JMP loc_0E_D7F2
   0E:CC65  LDA objFacing,Y
   0E:CC68  AND #$03
-  0E:CC6A  CMP ram_0031
+  0E:CC6A  CMP playerFacing
   0E:CC6C  BEQ loc_0E_CC70
   0E:CC6E  BNE loc_0E_CC73
   0E:CC70  JSR sub_0E_CC85
   0E:CC73  JMP loc_0E_D88C
   0E:CC7F  JMP loc_0E_CB22
-  0E:CC85  LDA ram_0031
+  0E:CC85  LDA playerFacing
   0E:CC87  AND #$02
   0E:CC89  TAY
   0E:CC8A  LDA objX
@@ -1494,8 +1496,6 @@ Unknown runs, longest first (len bank:addr):
      12  04:9D18
      12  04:8934
      11  0F:EC17
-     11  0C:84D3
-     11  0C:8433
      11  0A:847C
      11  09:B0F0
      11  09:A458
@@ -1510,8 +1510,6 @@ Unknown runs, longest first (len bank:addr):
      10  0C:8849
      10  0C:8826
      10  0C:87E0
-     10  0C:849B
-     10  0C:83FB
      10  06:89F7
      10  02:84A4
       9  0F:F8CC
@@ -1539,8 +1537,6 @@ Unknown runs, longest first (len bank:addr):
       8  0F:FFF0
       8  0F:EBAA
       8  0C:89BB
-      8  0C:8466
-      8  0C:83C6
       8  0A:8233
       8  0A:8133
       8  09:A1D5
@@ -1607,8 +1603,6 @@ Unknown runs, longest first (len bank:addr):
       6  0C:898E
       6  0C:88E8
       6  0C:8877
-      6  0C:84C4
-      6  0C:8424
       6  0B:A286
       6  0A:8568
       6  0A:855F
@@ -1666,8 +1660,6 @@ Unknown runs, longest first (len bank:addr):
       5  0C:88C6
       5  0C:883A
       5  0C:87F4
-      5  0C:84E5
-      5  0C:8445
       5  0A:853F
       5  0A:8241
       5  0A:8141
@@ -1705,13 +1697,10 @@ Unknown runs, longest first (len bank:addr):
       4  0D:A87E
       4  0D:A3EB
       4  0D:A3BF
-      4  0C:9E20
       4  0C:9D67
       4  0C:8880
       4  0C:885D
       4  0C:8856
-      4  0C:8459
-      4  0C:83B9
       4  0A:9ACC
       4  0A:8489
       4  0A:8248
@@ -2001,22 +1990,6 @@ Unknown runs, longest first (len bank:addr):
       2  0C:881D
       2  0C:87FA
       2  0C:85FE
-      2  0C:84E1
-      2  0C:84CD
-      2  0C:84AE
-      2  0C:84A9
-      2  0C:84A6
-      2  0C:8488
-      2  0C:847B
-      2  0C:8463
-      2  0C:8441
-      2  0C:842D
-      2  0C:840E
-      2  0C:8409
-      2  0C:8406
-      2  0C:83E8
-      2  0C:83DB
-      2  0C:83C3
       2  0B:BD7D
       2  0B:B693
       2  0B:B67E
@@ -2361,36 +2334,6 @@ Unknown runs, longest first (len bank:addr):
       1  0C:8801
       1  0C:87DE
       1  0C:8601
-      1  0C:84D1
-      1  0C:84CB
-      1  0C:84C2
-      1  0C:84C0
-      1  0C:84B9
-      1  0C:84AC
-      1  0C:8497
-      1  0C:8495
-      1  0C:8493
-      1  0C:8490
-      1  0C:848E
-      1  0C:848B
-      1  0C:8485
-      1  0C:847E
-      1  0C:8460
-      1  0C:8431
-      1  0C:842B
-      1  0C:8422
-      1  0C:8420
-      1  0C:8419
-      1  0C:840C
-      1  0C:83F7
-      1  0C:83F5
-      1  0C:83F3
-      1  0C:83F0
-      1  0C:83EE
-      1  0C:83EB
-      1  0C:83E5
-      1  0C:83DE
-      1  0C:83C0
       1  0B:B2FF
       1  0B:B2D2
       1  0B:B2CF

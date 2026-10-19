@@ -164,3 +164,8 @@ rawsym BE00 stageTableBE00
 0E:C53E spritePalCody
 0E:C546 spritePalGuy
 0E:C54E spritePalHaggar
+; ---- enemy engine (bank 0C, $8000 window)
+0C:8003 UpdateEnemies           ; slots 1-15: per-object countdown (objArr_04B0), then AI handler = enemyAIPtr[objKind]; handler returns to the loop via a pushed address
+0C:83AF enemyAILo               ; 160 entries; one handler per objKind (lo bytes)
+0C:844F enemyAIHi               ; hi bytes; the last 48 entries point into other banks ($A700.., $B300.., $A000..)
+0C:84EF EnemyAI_None            ; RTS handler used by unused kinds

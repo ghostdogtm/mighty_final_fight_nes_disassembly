@@ -85,7 +85,7 @@ loc_01_A09B:
 	CMP #$10                        ;C - - - - - 0x0020B5 01:A0A5: C9 10
 	BCS loc_01_A0C6                 ;C - - - - - 0x0020B7 01:A0A7: B0 1D
 	LDA #$01                        ;C - - - - - 0x0020B9 01:A0A9: A9 01
-	STA ram_0031                    ;C - - - - - 0x0020BB 01:A0AB: 85 31
+	STA playerFacing                ;C - - - - - 0x0020BB 01:A0AB: 85 31
 	LDA #$0D                        ;C - - - - - 0x0020BD 01:A0AD: A9 0D
 	STA ram_00A7                    ;C - - - - - 0x0020BF 01:A0AF: 85 A7
 	JSR sub_0F_F455                 ;C - - - - - 0x0020C1 01:A0B1: 20 55 F4

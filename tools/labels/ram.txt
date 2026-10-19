@@ -138,3 +138,9 @@
 0096 drawSlot                   ; slot being drawn
 00F9 scrollXPage                ; high byte of scrollX (compared with objXPage)
 0060 stageSection           ; 0..2: section of the stage (selects the +$30 sets of stage tables)
+
+; ---- gameplay variables (named from usage)
+0031 playerFacing               ; 1 = right, 2 = left (same coding as objFacing); toggled with EOR #3
+0037 actionTimer                ; frame counter of the current gameAction (Act02/Act0B count it down)
+002B paletteSetIdx              ; index (x2) into the per-section palette set tables of the stage bank
+0062 gameOverFlag               ; $00 after the last life is lost (-> continue screen); tested with BPL

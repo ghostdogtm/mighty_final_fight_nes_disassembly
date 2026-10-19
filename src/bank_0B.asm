@@ -586,7 +586,7 @@ ofs_0B_B327:
 	JMP loc_0B_BD7F                 ;C - - J - - 0x017337 0B:B327: 4C 7F BD
 	.byte $4C,$30,$B3,$4C,$30,$B3,$60;- - - - - - 0x01733A 0B:B32A:
 loc_0B_B331:
-	LDA ram_0062                    ;C - - - - - 0x017341 0B:B331: A5 62
+	LDA gameOverFlag                ;C - - - - - 0x017341 0B:B331: A5 62
 	BEQ loc_0B_B336                 ;C - - - - - 0x017343 0B:B333: F0 01
 	RTS                             ;C - - - - - 0x017345 0B:B335: 60
 loc_0B_B336:
@@ -660,7 +660,7 @@ loc_0B_B387:
 	CMP #$14                        ;C - - - - - 0x0173DC 0B:B3CC: C9 14
 	BNE loc_0B_B3D4                 ;C - - - - - 0x0173DE 0B:B3CE: D0 04
 	LDA #$FC                        ;C - - - - - 0x0173E0 0B:B3D0: A9 FC
-	STA ram_0062                    ;C - - - - - 0x0173E2 0B:B3D2: 85 62
+	STA gameOverFlag                ;C - - - - - 0x0173E2 0B:B3D2: 85 62
 loc_0B_B3D4:
 	LDA tbl_0B_B681,Y               ;C - - - - - 0x0173E4 0B:B3D4: B9 81 B6
 	STA objKind+6                   ;C - - - - - 0x0173E7 0B:B3D7: 8D 26 03
@@ -678,10 +678,10 @@ loc_0B_B3E9:
 	LDA #$29                        ;c - - - - - 0x017403 0B:B3F3: A9 29
 	STA gameAction                  ;c - - - - - 0x017405 0B:B3F5: 85 30
 	LDA #$0C                        ;c - - - - - 0x017407 0B:B3F7: A9 0C
-	STA ram_0037                    ;c - - - - - 0x017409 0B:B3F9: 85 37
+	STA actionTimer                 ;c - - - - - 0x017409 0B:B3F9: 85 37
 	JSR ClearObject                 ;c - - - - - 0x01740B 0B:B3FB: 20 BE F2
 	LDA #$FB                        ;c - - - - - 0x01740E 0B:B3FE: A9 FB
-	STA ram_0062                    ;c - - - - - 0x017410 0B:B400: 85 62
+	STA gameOverFlag                ;c - - - - - 0x017410 0B:B400: 85 62
 	RTS                             ;c - - - - - 0x017412 0B:B402: 60
 ofs_0B_B403:
 	DEC objArr_0530,X               ;C - - J - - 0x017413 0B:B403: DE 30 05
@@ -723,7 +723,7 @@ loc_0B_B421:
 	STA gameAction                  ;C - - - - - 0x017465 0B:B455: 85 30
 	JSR ClearObject                 ;C - - - - - 0x017467 0B:B457: 20 BE F2
 	LDA #$FE                        ;C - - - - - 0x01746A 0B:B45A: A9 FE
-	STA ram_0062                    ;C - - - - - 0x01746C 0B:B45C: 85 62
+	STA gameOverFlag                ;C - - - - - 0x01746C 0B:B45C: 85 62
 	RTS                             ;C - - - - - 0x01746E 0B:B45E: 60
 loc_0B_B45F:
 	LDA objFlags+6                  ;C - - - - - 0x01746F 0B:B45F: AD 66 05
@@ -1114,7 +1114,7 @@ loc_0B_B78C:
 	RTS                             ;C - - - - - 0x0177B4 0B:B7A4: 60
 loc_0B_B7A5:
 	LDA #$3C                        ;C - - - - - 0x0177B5 0B:B7A5: A9 3C
-	STA ram_0062                    ;C - - - - - 0x0177B7 0B:B7A7: 85 62
+	STA gameOverFlag                ;C - - - - - 0x0177B7 0B:B7A7: 85 62
 	LDA #$80                        ;C - - - - - 0x0177B9 0B:B7A9: A9 80
 	STA objActive,X                 ;C - - - - - 0x0177BB 0B:B7AB: 9D 00 03
 	STA objState,X                  ;C - - - - - 0x0177BE 0B:B7AE: 9D 10 03
@@ -1788,7 +1788,7 @@ tbl_0B_BD7C:
 	.byte $04,$08                   ;- - - - - - 0x017D8D 0B:BD7D:
 loc_0B_BD7F:
 	LDA #$F9                        ;C - - - - - 0x017D8F 0B:BD7F: A9 F9
-	STA ram_0062                    ;C - - - - - 0x017D91 0B:BD81: 85 62
+	STA gameOverFlag                ;C - - - - - 0x017D91 0B:BD81: 85 62
 	LDA #$01                        ;C - - - - - 0x017D93 0B:BD83: A9 01
 	STA objArr_04C0,X               ;C - - - - - 0x017D95 0B:BD85: 9D C0 04
 	LDA objActive,X                 ;C - - - - - 0x017D98 0B:BD88: BD 00 03
@@ -1816,7 +1816,7 @@ ofs_0B_BD9B:
 	INC objActive,X                 ;C - - - - - 0x017DC9 0B:BDB9: FE 00 03
 	JMP loc_0B_BFAF                 ;C - - - - - 0x017DCC 0B:BDBC: 4C AF BF
 ofs_0B_BDBF:
-	LDA ram_0031                    ;C - - J - - 0x017DCF 0B:BDBF: A5 31
+	LDA playerFacing                ;C - - J - - 0x017DCF 0B:BDBF: A5 31
 	EOR #$FF                        ;C - - - - - 0x017DD1 0B:BDC1: 49 FF
 	AND #$03                        ;C - - - - - 0x017DD3 0B:BDC3: 29 03
 	STA ram_0032                    ;C - - - - - 0x017DD5 0B:BDC5: 85 32
@@ -1840,7 +1840,7 @@ ofs_0B_BDE6:
 	LDA objActive,Y                 ;C - - - - - 0x017DF9 0B:BDE9: B9 00 03
 	BMI loc_0B_BE22                 ;C - - - - - 0x017DFC 0B:BDEC: 30 34
 	LDA #$FF                        ;C - - - - - 0x017DFE 0B:BDEE: A9 FF
-	STA ram_0062                    ;C - - - - - 0x017E00 0B:BDF0: 85 62
+	STA gameOverFlag                ;C - - - - - 0x017E00 0B:BDF0: 85 62
 	LDA #$0F                        ;C - - - - - 0x017E02 0B:BDF2: A9 0F
 	JSR QueueSoundSaved             ;C - - - - - 0x017E04 0B:BDF4: 20 4A F3
 	LDA #$50                        ;C - - - - - 0x017E07 0B:BDF7: A9 50
@@ -2031,7 +2031,7 @@ ofs_0B_BF75:
 	CMP playerId                    ;C - - - - - 0x017F88 0B:BF78: C5 34
 	BNE loc_0B_BF80                 ;C - - - - - 0x017F8A 0B:BF7A: D0 04
 	LDA #$00                        ;C - - - - - 0x017F8C 0B:BF7C: A9 00
-	STA ram_0062                    ;C - - - - - 0x017F8E 0B:BF7E: 85 62
+	STA gameOverFlag                ;C - - - - - 0x017F8E 0B:BF7E: 85 62
 loc_0B_BF80:
 	LDA #$28                        ;C - - - - - 0x017F90 0B:BF80: A9 28
 	STA gameAction                  ;C - - - - - 0x017F92 0B:BF82: 85 30

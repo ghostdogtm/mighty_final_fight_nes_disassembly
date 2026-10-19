@@ -1188,7 +1188,7 @@ loc_03_B8E1:
 loc_03_B8FE:
 	LDA #$02                        ;C - - - - - 0x00790E 03:B8FE: A9 02
 loc_03_B900:
-	STA ram_0031                    ;C - - - - - 0x007910 03:B900: 85 31
+	STA playerFacing                ;C - - - - - 0x007910 03:B900: 85 31
 	LDA objFlags,X                  ;C - - - - - 0x007912 03:B902: BD 60 05
 	AND #$40                        ;C - - - - - 0x007915 03:B905: 29 40
 	BEQ loc_03_B90F                 ;C - - - - - 0x007917 03:B907: F0 06
@@ -1769,7 +1769,7 @@ loc_03_BD74:
 	BNE loc_03_BD7C                 ;C - - - - - 0x007D87 03:BD77: D0 03
 	JSR sub_03_BDCE                 ;C - - - - - 0x007D89 03:BD79: 20 CE BD
 loc_03_BD7C:
-	LDA ram_0031                    ;C - - - - - 0x007D8C 03:BD7C: A5 31
+	LDA playerFacing                ;C - - - - - 0x007D8C 03:BD7C: A5 31
 	CMP objFacing,X                 ;C - - - - - 0x007D8E 03:BD7E: DD 60 04
 	BEQ loc_03_BD88                 ;C - - - - - 0x007D91 03:BD81: F0 05
 	LDA objFacing,X                 ;C - - - - - 0x007D93 03:BD83: BD 60 04
@@ -1951,7 +1951,7 @@ loc_03_BEEB:
 	STA objVelXHi,X                 ;C - - - - - 0x007F04 03:BEF4: 9D 10 04
 	LDA #$99                        ;C - - - - - 0x007F07 03:BEF7: A9 99
 	STA objVelXLo,X                 ;C - - - - - 0x007F09 03:BEF9: 9D 00 04
-	LDA ram_0031                    ;C - - - - - 0x007F0C 03:BEFC: A5 31
+	LDA playerFacing                ;C - - - - - 0x007F0C 03:BEFC: A5 31
 	STA objFacing,X                 ;C - - - - - 0x007F0E 03:BEFE: 9D 60 04
 	LDA objArr_0520,X               ;C - - - - - 0x007F11 03:BF01: BD 20 05
 	STA objArr_0530,X               ;C - - - - - 0x007F14 03:BF04: 9D 30 05

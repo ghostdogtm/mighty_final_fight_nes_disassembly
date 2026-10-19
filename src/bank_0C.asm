@@ -2,8 +2,9 @@
 ; 0x018010-0x01A00F  CPU $8000-$9FFF
 
 sub_0C_8000:
-	JMP loc_0C_8003                 ;C D 0 - - - 0x018010 0C:8000: 4C 03 80
-loc_0C_8003:
+	JMP UpdateEnemies               ;C D 0 - - - 0x018010 0C:8000: 4C 03 80
+; slots 1-15: per-object countdown (objArr_04B0), then AI handler = enemyAIPtr[objKind]; handler returns to the loop via a pushed address
+UpdateEnemies:
 	LDA #$38                        ;C - - - - - 0x018013 0C:8003: A9 38
 	STA ram_0099                    ;C - - - - - 0x018015 0C:8005: 85 99
 	LDX #$01                        ;C - - - - - 0x018017 0C:8007: A2 01
@@ -47,9 +48,9 @@ loc_0C_803B:
 	TAX                             ;C - - - - - 0x018057 0C:8047: AA
 loc_0C_8048:
 	LDY objKind,X                   ;C - - - - - 0x018058 0C:8048: BC 20 03
-	LDA tbl_0C_83AF,Y               ;C - - - - - 0x01805B 0C:804B: B9 AF 83
+	LDA enemyAILo,Y                 ;C - - - - - 0x01805B 0C:804B: B9 AF 83
 	STA ptr_00                      ;C - - - - - 0x01805E 0C:804E: 85 00
-	LDA tbl_0C_844F,Y               ;C - - - - - 0x018060 0C:8050: B9 4F 84
+	LDA enemyAIHi,Y                 ;C - - - - - 0x018060 0C:8050: B9 4F 84
 	STA ptr_00+1                    ;C - - - - - 0x018063 0C:8053: 85 01
 	LDA #$80                        ;C - - - - - 0x018065 0C:8055: A9 80
 	PHA                             ;C - - - - - 0x018067 0C:8057: 48
@@ -490,127 +491,52 @@ loc_0C_83A8:
 	JMP loc_0C_8256                 ;C - - - - - 0x0183BB 0C:83AB: 4C 56 82
 loc_0C_83AE:
 	RTS                             ;C - - - - - 0x0183BE 0C:83AE: 60
-tbl_0C_83AF:
-	.byte $EF,$F8,$33,$3B,$1C,$3B,$62,$3F,$A5,$F8;- D 0 - - - 0x0183BF 0C:83AF:
-	.byte $EF,$EF,$EF,$EF           ;- - - - - - 0x0183C9 0C:83B9:
-	.byte $B7,$32,$EE               ;- D 0 - - - 0x0183CD 0C:83BD:
-	.byte $EE                       ;- - - - - - 0x0183D0 0C:83C0:
-	.byte $EE,$EE                   ;- D 0 - - - 0x0183D1 0C:83C1:
-	.byte $EF,$EF                   ;- - - - - - 0x0183D3 0C:83C3:
-	.byte $3F                       ;- D 0 - - - 0x0183D5 0C:83C5:
-	.res 8, $EF                     ;- - - - - - 0x0183D6 0C:83C6: fill 8 bytes
-	.byte $74,$ED,$ED,$ED,$ED,$ED,$ED,$F1,$F1,$F1,$F1,$F1,$F1;- D 0 - - - 0x0183DE 0C:83CE:
-	.byte $9E,$A4                   ;- - - - - - 0x0183EB 0C:83DB:
-	.byte $71                       ;- D 0 - - - 0x0183ED 0C:83DD:
-	.byte $AA                       ;- - - - - - 0x0183EE 0C:83DE:
-	.byte $F5,$F5,$F5,$F5,$F5,$F5   ;- D 0 - - - 0x0183EF 0C:83DF:
-	.byte $20                       ;- - - - - - 0x0183F5 0C:83E5:
-	.byte $24,$28                   ;- D 0 - - - 0x0183F6 0C:83E6:
-	.byte $3C,$40                   ;- - - - - - 0x0183F8 0C:83E8:
-	.byte $44                       ;- D 0 - - - 0x0183FA 0C:83EA:
-	.byte $2E                       ;- - - - - - 0x0183FB 0C:83EB:
-	.byte $32,$36                   ;- D 0 - - - 0x0183FC 0C:83EC:
-	.byte $C5                       ;- - - - - - 0x0183FE 0C:83EE:
-	.byte $F4                       ;- D 0 - - - 0x0183FF 0C:83EF:
-	.byte $01                       ;- - - - - - 0x018400 0C:83F0:
-	.byte $0E,$F4                   ;- D 0 - - - 0x018401 0C:83F1:
-	.byte $01                       ;- - - - - - 0x018403 0C:83F3:
-	.byte $0E                       ;- D 0 - - - 0x018404 0C:83F4:
-	.byte $F8                       ;- - - - - - 0x018405 0C:83F5:
-	.byte $05                       ;- D 0 - - - 0x018406 0C:83F6:
-	.byte $12                       ;- - - - - - 0x018407 0C:83F7:
-	.byte $F8,$05,$12               ;- D 0 - - - 0x018408 0C:83F8:
-	.byte $EF,$EF,$EF,$C9,$C5,$C9,$CD,$C5,$C9,$CD;- - - - - - 0x01840B 0C:83FB:
-	.byte $C5                       ;- D 0 - - - 0x018415 0C:8405:
-	.byte $C5,$C9                   ;- - - - - - 0x018416 0C:8406:
-	.byte $C5                       ;- D 0 - - - 0x018418 0C:8408:
-	.byte $C9,$CD                   ;- - - - - - 0x018419 0C:8409:
-	.byte $C5                       ;- D 0 - - - 0x01841B 0C:840B:
-	.byte $C9                       ;- - - - - - 0x01841C 0C:840C:
-	.byte $CD                       ;- D 0 - - - 0x01841D 0C:840D:
-	.byte $CD,$00                   ;- - - - - - 0x01841E 0C:840E:
-	.byte $03,$06,$09,$0C,$0F,$12,$15,$18,$1B;- D 0 - - - 0x018420 0C:8410:
-	.byte $1E                       ;- - - - - - 0x018429 0C:8419:
-	.byte $21,$24,$27,$2A,$2D,$00   ;- D 0 - - - 0x01842A 0C:841A:
-	.byte $03                       ;- - - - - - 0x018430 0C:8420:
-	.byte $06                       ;- D 0 - - - 0x018431 0C:8421:
-	.byte $09                       ;- - - - - - 0x018432 0C:8422:
-	.byte $0C                       ;- D 0 - - - 0x018433 0C:8423:
-	.byte $0F,$12,$15,$18,$1B,$1E   ;- - - - - - 0x018434 0C:8424:
-	.byte $21                       ;- D 0 - - - 0x01843A 0C:842A:
-	.byte $24                       ;- - - - - - 0x01843B 0C:842B:
-	.byte $27                       ;- D 0 - - - 0x01843C 0C:842C:
-	.byte $2A,$2D                   ;- - - - - - 0x01843D 0C:842D:
-	.byte $00,$03                   ;- D 0 - - - 0x01843F 0C:842F:
-	.byte $06                       ;- - - - - - 0x018441 0C:8431:
-	.byte $09                       ;- D 0 - - - 0x018442 0C:8432:
-	.byte $0C,$0F,$12,$15,$18,$1B,$1E,$21,$24,$27,$2A;- - - - - - 0x018443 0C:8433:
-	.byte $2D,$00,$03               ;- D 0 - - - 0x01844E 0C:843E:
-	.byte $06,$09                   ;- - - - - - 0x018451 0C:8441:
-	.byte $0C,$0F                   ;- D 0 - - - 0x018453 0C:8443:
-	.byte $12,$15,$18,$1B,$1E       ;- - - - - - 0x018455 0C:8445:
-	.byte $21,$24,$27,$2A,$2D       ;- D 0 - - - 0x01845A 0C:844A:
-tbl_0C_844F:
-	.byte $84,$89,$97,$98,$8C,$98,$99,$9A,$8F,$89;- D 0 - - - 0x01845F 0C:844F:
-	.byte $84,$84,$84,$84           ;- - - - - - 0x018469 0C:8459:
-	.byte $91,$93,$8A               ;- D 0 - - - 0x01846D 0C:845D:
-	.byte $8A                       ;- - - - - - 0x018470 0C:8460:
-	.byte $8A,$8A                   ;- D 0 - - - 0x018471 0C:8461:
-	.byte $84,$84                   ;- - - - - - 0x018473 0C:8463:
-	.byte $9A                       ;- D 0 - - - 0x018475 0C:8465:
-	.res 8, $84                     ;- - - - - - 0x018476 0C:8466: fill 8 bytes
-	.byte $9B,$9C,$9C,$9C,$9C,$9C,$9C,$9C,$9C,$9C,$9C,$9C,$9C;- D 0 - - - 0x01847E 0C:846E:
-	.byte $9D,$9D                   ;- - - - - - 0x01848B 0C:847B:
-	.byte $9D                       ;- D 0 - - - 0x01848D 0C:847D:
-	.byte $9D                       ;- - - - - - 0x01848E 0C:847E:
-	.byte $9C,$9C,$9C,$9C,$9C,$9C   ;- D 0 - - - 0x01848F 0C:847F:
-	.byte $9E                       ;- - - - - - 0x018495 0C:8485:
-	.byte $9E,$9E                   ;- D 0 - - - 0x018496 0C:8486:
-	.byte $9E,$9E                   ;- - - - - - 0x018498 0C:8488:
-	.byte $9E                       ;- D 0 - - - 0x01849A 0C:848A:
-	.byte $9E                       ;- - - - - - 0x01849B 0C:848B:
-	.byte $9E,$9E                   ;- D 0 - - - 0x01849C 0C:848C:
-	.byte $9E                       ;- - - - - - 0x01849E 0C:848E:
-	.byte $9E                       ;- D 0 - - - 0x01849F 0C:848F:
-	.byte $9F                       ;- - - - - - 0x0184A0 0C:8490:
-	.byte $9F,$9E                   ;- D 0 - - - 0x0184A1 0C:8491:
-	.byte $9F                       ;- - - - - - 0x0184A3 0C:8493:
-	.byte $9F                       ;- D 0 - - - 0x0184A4 0C:8494:
-	.byte $9E                       ;- - - - - - 0x0184A5 0C:8495:
-	.byte $9F                       ;- D 0 - - - 0x0184A6 0C:8496:
-	.byte $9F                       ;- - - - - - 0x0184A7 0C:8497:
-	.byte $9E,$9F,$9F               ;- D 0 - - - 0x0184A8 0C:8498:
-	.byte $84,$84,$84,$9E,$9E,$9E,$9E,$9E,$9E,$9E;- - - - - - 0x0184AB 0C:849B:
-	.byte $9E                       ;- D 0 - - - 0x0184B5 0C:84A5:
-	.byte $9E,$9E                   ;- - - - - - 0x0184B6 0C:84A6:
-	.byte $9E                       ;- D 0 - - - 0x0184B8 0C:84A8:
-	.byte $9E,$9E                   ;- - - - - - 0x0184B9 0C:84A9:
-	.byte $9E                       ;- D 0 - - - 0x0184BB 0C:84AB:
-	.byte $9E                       ;- - - - - - 0x0184BC 0C:84AC:
-	.byte $9E                       ;- D 0 - - - 0x0184BD 0C:84AD:
-	.byte $9E,$A7                   ;- - - - - - 0x0184BE 0C:84AE:
-	.res 9, $A7                     ;- D 0 - - - 0x0184C0 0C:84B0: fill 9 bytes
-	.byte $A7                       ;- - - - - - 0x0184C9 0C:84B9:
-	.byte $A7,$A7,$A7,$A7,$A7,$B3   ;- D 0 - - - 0x0184CA 0C:84BA:
-	.byte $B3                       ;- - - - - - 0x0184D0 0C:84C0:
-	.byte $B3                       ;- D 0 - - - 0x0184D1 0C:84C1:
-	.byte $B3                       ;- - - - - - 0x0184D2 0C:84C2:
-	.byte $B3                       ;- D 0 - - - 0x0184D3 0C:84C3:
-	.byte $B3,$B3,$B3,$B3,$B3,$B3   ;- - - - - - 0x0184D4 0C:84C4:
-	.byte $B3                       ;- D 0 - - - 0x0184DA 0C:84CA:
-	.byte $B3                       ;- - - - - - 0x0184DB 0C:84CB:
-	.byte $B3                       ;- D 0 - - - 0x0184DC 0C:84CC:
-	.byte $B3,$B3                   ;- - - - - - 0x0184DD 0C:84CD:
-	.byte $A0,$A0                   ;- D 0 - - - 0x0184DF 0C:84CF:
-	.byte $A0                       ;- - - - - - 0x0184E1 0C:84D1:
-	.byte $A0                       ;- D 0 - - - 0x0184E2 0C:84D2:
-	.res 11, $A0                    ;- - - - - - 0x0184E3 0C:84D3: fill 11 bytes
-	.byte $A0,$B3,$B3               ;- D 0 - - - 0x0184EE 0C:84DE:
-	.byte $B3,$B3                   ;- - - - - - 0x0184F1 0C:84E1:
-	.byte $B3,$B3                   ;- D 0 - - - 0x0184F3 0C:84E3:
-	.byte $B3,$B3,$B3,$B3,$B3       ;- - - - - - 0x0184F5 0C:84E5:
-	.byte $B3,$B3,$B3,$B3,$B3       ;- D 0 - - - 0x0184FA 0C:84EA:
-ofs_0C_84EF:
+; 160 entries; one handler per objKind (lo bytes)
+enemyAILo:
+	.lobytes EnemyAI_None, ofs_0C_89F8, ofs_0C_9733, ofs_0C_983B, ofs_0C_8C1C, ofs_0C_983B, ofs_0C_9962, ofs_0C_9A3F;- D 0 - - - 0x0183BF 0C:83AF:
+	.lobytes ofs_0C_8FA5, ofs_0C_89F8, EnemyAI_None, EnemyAI_None, EnemyAI_None, EnemyAI_None, ofs_0C_91B7, ofs_0C_9332;- D 0 - - - 0x0183C7 0C:83B7:
+	.lobytes ofs_0C_8AEE, ofs_0C_8AEE, ofs_0C_8AEE, ofs_0C_8AEE, EnemyAI_None, EnemyAI_None, ofs_0C_9A3F, EnemyAI_None;- D 0 - - - 0x0183CF 0C:83BF:
+	.lobytes EnemyAI_None, EnemyAI_None, EnemyAI_None, EnemyAI_None, EnemyAI_None, EnemyAI_None, EnemyAI_None, ofs_0C_9B74;- - - - - - 0x0183D7 0C:83C7:
+	.lobytes ofs_0C_9CED, ofs_0C_9CED, ofs_0C_9CED, ofs_0C_9CED, ofs_0C_9CED, ofs_0C_9CED, ofs_0C_9CF1, ofs_0C_9CF1;- D 0 - - - 0x0183DF 0C:83CF:
+	.lobytes ofs_0C_9CF1, ofs_0C_9CF1, ofs_0C_9CF1, ofs_0C_9CF1, ofs_0C_9D9E, ofs_0C_9DA4, ofs_0C_9D71, ofs_0C_9DAA;- D 0 - - - 0x0183E7 0C:83D7:
+	.lobytes ofs_0C_9CF5, ofs_0C_9CF5, ofs_0C_9CF5, ofs_0C_9CF5, ofs_0C_9CF5, ofs_0C_9CF5, ofs_0C_9E20, ofs_0C_9E24;- D 0 - - - 0x0183EF 0C:83DF:
+	.lobytes ofs_0C_9E28, ofs_0C_9E3C, ofs_0C_9E40, ofs_0C_9E44, ofs_0C_9E2E, ofs_0C_9E32, ofs_0C_9E36, ofs_0C_9EC5;- D 0 - - - 0x0183F7 0C:83E7:
+	.lobytes ofs_0C_9EF4, ofs_0C_9F01, ofs_0C_9F0E, ofs_0C_9EF4, ofs_0C_9F01, ofs_0C_9F0E, ofs_0C_9EF8, ofs_0C_9F05;- D 0 - - - 0x0183FF 0C:83EF:
+	.lobytes ofs_0C_9F12, ofs_0C_9EF8, ofs_0C_9F05, ofs_0C_9F12, EnemyAI_None, EnemyAI_None, EnemyAI_None, ofs_0C_9EC9;- - - - - - 0x018407 0C:83F7:
+	.lobytes ofs_0C_9EC5, ofs_0C_9EC9, ofs_0C_9ECD, ofs_0C_9EC5, ofs_0C_9EC9, ofs_0C_9ECD, ofs_0C_9EC5, ofs_0C_9EC5;- - - - - - 0x01840F 0C:83FF:
+	.lobytes ofs_0C_9EC9, ofs_0C_9EC5, ofs_0C_9EC9, ofs_0C_9ECD, ofs_0C_9EC5, ofs_0C_9EC9, ofs_0C_9ECD, ofs_0C_9ECD;- - - - - - 0x018417 0C:8407:
+	.lobytes $A700, $A703, $A706, $A709, $A70C, $A70F, $A712, $A715;- - - - - - 0x01841F 0C:840F:
+	.lobytes $A718, $A71B, $A71E, $A721, $A724, $A727, $A72A, $A72D;- D 0 - - - 0x018427 0C:8417:
+	.lobytes $B300, ofs_03_B303, ofs_0B_B306, $B309, $B30C, ofs_03_B30F, $B312, $B315;- D 0 - - - 0x01842F 0C:841F:
+	.lobytes tbl_09_B318, $B31B, $B31E, $B321, ofs_03_B324, $B327, ofs_03_B32A, ofs_03_B32D;- - - - - - 0x018437 0C:8427:
+	.lobytes $A000, $A003, $A006, $A009, $A00C, $A00F, $A012, $A015;- D 0 - - - 0x01843F 0C:842F:
+	.lobytes $A018, $A01B, $A01E, $A021, $A024, $A027, $A02A, $A02D;- - - - - - 0x018447 0C:8437:
+	.lobytes $B300, ofs_03_B303, ofs_0B_B306, $B309, $B30C, ofs_03_B30F, $B312, $B315;- D 0 - - - 0x01844F 0C:843F:
+	.lobytes tbl_09_B318, $B31B, $B31E, $B321, ofs_03_B324, $B327, ofs_03_B32A, ofs_03_B32D;- - - - - - 0x018457 0C:8447:
+; hi bytes; the last 48 entries point into other banks ($A700.., $B300.., $A000..)
+enemyAIHi:
+	.hibytes EnemyAI_None, ofs_0C_89F8, ofs_0C_9733, ofs_0C_983B, ofs_0C_8C1C, ofs_0C_983B, ofs_0C_9962, ofs_0C_9A3F;- D 0 - - - 0x01845F 0C:844F:
+	.hibytes ofs_0C_8FA5, ofs_0C_89F8, EnemyAI_None, EnemyAI_None, EnemyAI_None, EnemyAI_None, ofs_0C_91B7, ofs_0C_9332;- D 0 - - - 0x018467 0C:8457:
+	.hibytes ofs_0C_8AEE, ofs_0C_8AEE, ofs_0C_8AEE, ofs_0C_8AEE, EnemyAI_None, EnemyAI_None, ofs_0C_9A3F, EnemyAI_None;- D 0 - - - 0x01846F 0C:845F:
+	.hibytes EnemyAI_None, EnemyAI_None, EnemyAI_None, EnemyAI_None, EnemyAI_None, EnemyAI_None, EnemyAI_None, ofs_0C_9B74;- - - - - - 0x018477 0C:8467:
+	.hibytes ofs_0C_9CED, ofs_0C_9CED, ofs_0C_9CED, ofs_0C_9CED, ofs_0C_9CED, ofs_0C_9CED, ofs_0C_9CF1, ofs_0C_9CF1;- D 0 - - - 0x01847F 0C:846F:
+	.hibytes ofs_0C_9CF1, ofs_0C_9CF1, ofs_0C_9CF1, ofs_0C_9CF1, ofs_0C_9D9E, ofs_0C_9DA4, ofs_0C_9D71, ofs_0C_9DAA;- D 0 - - - 0x018487 0C:8477:
+	.hibytes ofs_0C_9CF5, ofs_0C_9CF5, ofs_0C_9CF5, ofs_0C_9CF5, ofs_0C_9CF5, ofs_0C_9CF5, ofs_0C_9E20, ofs_0C_9E24;- D 0 - - - 0x01848F 0C:847F:
+	.hibytes ofs_0C_9E28, ofs_0C_9E3C, ofs_0C_9E40, ofs_0C_9E44, ofs_0C_9E2E, ofs_0C_9E32, ofs_0C_9E36, ofs_0C_9EC5;- D 0 - - - 0x018497 0C:8487:
+	.hibytes ofs_0C_9EF4, ofs_0C_9F01, ofs_0C_9F0E, ofs_0C_9EF4, ofs_0C_9F01, ofs_0C_9F0E, ofs_0C_9EF8, ofs_0C_9F05;- D 0 - - - 0x01849F 0C:848F:
+	.hibytes ofs_0C_9F12, ofs_0C_9EF8, ofs_0C_9F05, ofs_0C_9F12, EnemyAI_None, EnemyAI_None, EnemyAI_None, ofs_0C_9EC9;- - - - - - 0x0184A7 0C:8497:
+	.hibytes ofs_0C_9EC5, ofs_0C_9EC9, ofs_0C_9ECD, ofs_0C_9EC5, ofs_0C_9EC9, ofs_0C_9ECD, ofs_0C_9EC5, ofs_0C_9EC5;- - - - - - 0x0184AF 0C:849F:
+	.hibytes ofs_0C_9EC9, ofs_0C_9EC5, ofs_0C_9EC9, ofs_0C_9ECD, ofs_0C_9EC5, ofs_0C_9EC9, ofs_0C_9ECD, ofs_0C_9ECD;- - - - - - 0x0184B7 0C:84A7:
+	.hibytes $A700, $A703, $A706, $A709, $A70C, $A70F, $A712, $A715;- - - - - - 0x0184BF 0C:84AF:
+	.hibytes $A718, $A71B, $A71E, $A721, $A724, $A727, $A72A, $A72D;- D 0 - - - 0x0184C7 0C:84B7:
+	.hibytes $B300, ofs_03_B303, ofs_0B_B306, $B309, $B30C, ofs_03_B30F, $B312, $B315;- D 0 - - - 0x0184CF 0C:84BF:
+	.hibytes tbl_09_B318, $B31B, $B31E, $B321, ofs_03_B324, $B327, ofs_03_B32A, ofs_03_B32D;- - - - - - 0x0184D7 0C:84C7:
+	.hibytes $A000, $A003, $A006, $A009, $A00C, $A00F, $A012, $A015;- D 0 - - - 0x0184DF 0C:84CF:
+	.hibytes $A018, $A01B, $A01E, $A021, $A024, $A027, $A02A, $A02D;- - - - - - 0x0184E7 0C:84D7:
+	.hibytes $B300, ofs_03_B303, ofs_0B_B306, $B309, $B30C, ofs_03_B30F, $B312, $B315;- D 0 - - - 0x0184EF 0C:84DF:
+	.hibytes tbl_09_B318, $B31B, $B31E, $B321, ofs_03_B324, $B327, ofs_03_B32A, ofs_03_B32D;- - - - - - 0x0184F7 0C:84E7:
+; RTS handler used by unused kinds
+EnemyAI_None:
 	RTS                             ;C - - J - - 0x0184FF 0C:84EF: 60
 sub_0C_84F0:
 	LDA objSpriteDown,X             ;C - - - - - 0x018500 0C:84F0: BD B0 05
@@ -1478,7 +1404,7 @@ sub_0C_8C00:
 	STA gameAction                  ;C - - - - - 0x018C16 0C:8C06: 85 30
 loc_0C_8C08:
 	LDA #$0C                        ;C - - - - - 0x018C18 0C:8C08: A9 0C
-	STA ram_0037                    ;C - - - - - 0x018C1A 0C:8C0A: 85 37
+	STA actionTimer                 ;C - - - - - 0x018C1A 0C:8C0A: 85 37
 	JSR ClearObject                 ;C - - - - - 0x018C1C 0C:8C0C: 20 BE F2
 	RTS                             ;C - - - - - 0x018C1F 0C:8C0F: 60
 loc_0C_8C10:
@@ -2885,7 +2811,7 @@ loc_0C_976A:
 	LDA #$10                        ;C - - - - - 0x019783 0C:9773: A9 10
 	STA objArr_0510,X               ;C - - - - - 0x019785 0C:9775: 9D 10 05
 	JSR FaceToPlayer                ;C - - - - - 0x019788 0C:9778: 20 14 F3
-	LDA ram_0031                    ;C - - - - - 0x01978B 0C:977B: A5 31
+	LDA playerFacing                ;C - - - - - 0x01978B 0C:977B: A5 31
 	CMP objFacing,X                 ;C - - - - - 0x01978D 0C:977D: DD 60 04
 	BEQ loc_0C_9787                 ;C - - - - - 0x019790 0C:9780: F0 05
 	LDA objFacing,X                 ;C - - - - - 0x019792 0C:9782: BD 60 04
@@ -2963,7 +2889,7 @@ loc_0C_9818:
 	JMP sub_0C_9BFC                 ;C - - - - - 0x019828 0C:9818: 4C FC 9B
 sub_0C_981B:
 	JSR FaceToPlayer                ;C - - - - - 0x01982B 0C:981B: 20 14 F3
-	LDA ram_0031                    ;C - - - - - 0x01982E 0C:981E: A5 31
+	LDA playerFacing                ;C - - - - - 0x01982E 0C:981E: A5 31
 	CMP objFacing,X                 ;C - - - - - 0x019830 0C:9820: DD 60 04
 	BEQ loc_0C_982E                 ;C - - - - - 0x019833 0C:9823: F0 09
 	LDA objFacing,X                 ;C - - - - - 0x019835 0C:9825: BD 60 04
@@ -2993,7 +2919,7 @@ ofs_0C_983B:
 	JMP loc_0C_986E                 ;C - - - - - 0x019869 0C:9859: 4C 6E 98
 loc_0C_985C:
 	JSR FaceToPlayer                ;C - - - - - 0x01986C 0C:985C: 20 14 F3
-	LDA ram_0031                    ;C - - - - - 0x01986F 0C:985F: A5 31
+	LDA playerFacing                ;C - - - - - 0x01986F 0C:985F: A5 31
 	CMP objFacing,X                 ;C - - - - - 0x019871 0C:9861: DD 60 04
 	BNE loc_0C_986B                 ;C - - - - - 0x019874 0C:9864: D0 05
 	LDA objFacing,X                 ;C - - - - - 0x019876 0C:9866: BD 60 04
@@ -3627,12 +3553,15 @@ loc_0C_9D8B:
 loc_0C_9D98:
 	JSR sub_0F_F099                 ;C - - - - - 0x019DA8 0C:9D98: 20 99 F0
 	JMP ApplyVelXSub                ;C - - - - - 0x019DAB 0C:9D9B: 4C A1 F1
+ofs_0C_9D9E:
 	LDY #$25                        ;c - - - - - 0x019DAE 0C:9D9E: A0 25
 	LDA #$01                        ;c - - - - - 0x019DB0 0C:9DA0: A9 01
 	BNE loc_0C_9DAE                 ;c - - - - - 0x019DB2 0C:9DA2: D0 0A
+ofs_0C_9DA4:
 	LDY #$2B                        ;c - - - - - 0x019DB4 0C:9DA4: A0 2B
 	LDA #$02                        ;c - - - - - 0x019DB6 0C:9DA6: A9 02
 	BNE loc_0C_9DAE                 ;c - - - - - 0x019DB8 0C:9DA8: D0 04
+ofs_0C_9DAA:
 	LDY #$35                        ;c - - - - - 0x019DBA 0C:9DAA: A0 35
 	LDA #$04                        ;c - - - - - 0x019DBC 0C:9DAC: A9 04
 loc_0C_9DAE:
@@ -3687,7 +3616,9 @@ loc_0C_9DF8:
 	STA objKind,X                   ;c - - - - - 0x019E29 0C:9E19: 9D 20 03
 	STA objId,X                     ;c - - - - - 0x019E2C 0C:9E1C: 9D 30 03
 	RTS                             ;c - - - - - 0x019E2F 0C:9E1F: 60
-	.byte $A9,$01,$D0,$06           ;- - - - - - 0x019E30 0C:9E20:
+ofs_0C_9E20:
+	LDA #$01                        ;c - - - - - 0x019E30 0C:9E20: A9 01
+	BNE loc_0C_9E2A                 ;c - - - - - 0x019E32 0C:9E22: D0 06
 ofs_0C_9E24:
 	LDA #$02                        ;C - - J - - 0x019E34 0C:9E24: A9 02
 	BNE loc_0C_9E2A                 ;C - - - - - 0x019E36 0C:9E26: D0 02
@@ -3696,6 +3627,7 @@ ofs_0C_9E28:
 loc_0C_9E2A:
 	LDY #$00                        ;C - - - - - 0x019E3A 0C:9E2A: A0 00
 	BEQ loc_0C_9E48                 ;C - - - - - 0x019E3C 0C:9E2C: F0 1A
+ofs_0C_9E2E:
 	LDA #$01                        ;c - - - - - 0x019E3E 0C:9E2E: A9 01
 	BNE loc_0C_9E38                 ;c - - - - - 0x019E40 0C:9E30: D0 06
 ofs_0C_9E32:
@@ -3706,8 +3638,10 @@ ofs_0C_9E36:
 loc_0C_9E38:
 	LDY #$04                        ;C - - - - - 0x019E48 0C:9E38: A0 04
 	BNE loc_0C_9E48                 ;C - - - - - 0x019E4A 0C:9E3A: D0 0C
+ofs_0C_9E3C:
 	LDA #$01                        ;c - - - - - 0x019E4C 0C:9E3C: A9 01
 	BNE loc_0C_9E46                 ;c - - - - - 0x019E4E 0C:9E3E: D0 06
+ofs_0C_9E40:
 	LDA #$02                        ;c - - - - - 0x019E50 0C:9E40: A9 02
 	BNE loc_0C_9E46                 ;c - - - - - 0x019E52 0C:9E42: D0 02
 ofs_0C_9E44:
@@ -3782,6 +3716,7 @@ tbl_0C_9EBF:
 ofs_0C_9EC5:
 	LDA #$01                        ;C - - J - - 0x019ED5 0C:9EC5: A9 01
 	BNE loc_0C_9ECF                 ;C - - - - - 0x019ED7 0C:9EC7: D0 06
+ofs_0C_9EC9:
 	LDA #$02                        ;c - - - - - 0x019ED9 0C:9EC9: A9 02
 	BNE loc_0C_9ECF                 ;c - - - - - 0x019EDB 0C:9ECB: D0 02
 ofs_0C_9ECD:
@@ -3811,6 +3746,7 @@ loc_0C_9EFA:
 	STA objArr_0540,X               ;C - - - - - 0x019F0A 0C:9EFA: 9D 40 05
 	LDA #$01                        ;C - - - - - 0x019F0D 0C:9EFD: A9 01
 	BNE loc_0C_9F19                 ;C - - - - - 0x019F0F 0C:9EFF: D0 18
+ofs_0C_9F01:
 	LDA #$00                        ;c - - - - - 0x019F11 0C:9F01: A9 00
 	BEQ loc_0C_9F07                 ;c - - - - - 0x019F13 0C:9F03: F0 02
 ofs_0C_9F05:

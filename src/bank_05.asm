@@ -184,7 +184,7 @@ loc_05_A731:
 	CMP #$11                        ;C - - - - - 0x00A754 05:A744: C9 11
 	BCC loc_05_A789                 ;C - - - - - 0x00A756 05:A746: 90 41
 	LDA objFacing,X                 ;C - - - - - 0x00A758 05:A748: BD 60 04
-	CMP ram_0031                    ;C - - - - - 0x00A75B 05:A74B: C5 31
+	CMP playerFacing                ;C - - - - - 0x00A75B 05:A74B: C5 31
 	BEQ loc_05_A789                 ;C - - - - - 0x00A75D 05:A74D: F0 3A
 	LDY playerId                    ;C - - - - - 0x00A75F 05:A74F: A4 34
 	LDA objAnim                     ;C - - - - - 0x00A761 05:A751: AD 80 05
@@ -284,7 +284,7 @@ loc_05_A7F6:
 	LDA #$02                        ;C - - - - - 0x00A814 05:A804: A9 02
 	STA gameAction                  ;C - - - - - 0x00A816 05:A806: 85 30
 	LDA #$0C                        ;C - - - - - 0x00A818 05:A808: A9 0C
-	STA ram_0037                    ;C - - - - - 0x00A81A 05:A80A: 85 37
+	STA actionTimer                 ;C - - - - - 0x00A81A 05:A80A: 85 37
 	LDA weaponHeld                  ;C - - - - - 0x00A81C 05:A80C: A5 A9
 	BNE loc_05_A832                 ;C - - - - - 0x00A81E 05:A80E: D0 22
 	LDA playerId                    ;C - - - - - 0x00A820 05:A810: A5 34
@@ -570,10 +570,10 @@ loc_05_AA3F:
 	ADC playerId                    ;C - - - - - 0x00AA50 05:AA40: 65 34
 	TAY                             ;C - - - - - 0x00AA52 05:AA42: A8
 	LDA tbl_05_AA67,Y               ;C - - - - - 0x00AA53 05:AA43: B9 67 AA
-	STA ram_0062                    ;C - - - - - 0x00AA56 05:AA46: 85 62
+	STA gameOverFlag                ;C - - - - - 0x00AA56 05:AA46: 85 62
 	INC objActive,X                 ;C - - - - - 0x00AA58 05:AA48: FE 00 03
 loc_05_AA4B:
-	LDA ram_0062                    ;C - - - - - 0x00AA5B 05:AA4B: A5 62
+	LDA gameOverFlag                ;C - - - - - 0x00AA5B 05:AA4B: A5 62
 	BNE loc_05_AA17                 ;C - - - - - 0x00AA5D 05:AA4D: D0 C8
 	LDA #$FF                        ;C - - - - - 0x00AA5F 05:AA4F: A9 FF
 	STA ram_0050                    ;C - - - - - 0x00AA61 05:AA51: 85 50
@@ -737,7 +737,7 @@ loc_05_AB93:
 	JSR SetAnimXChr3                ;C - - - - - 0x00ABB9 05:ABA9: 20 43 F4
 loc_05_ABAC:
 	LDA #$01                        ;C - - - - - 0x00ABBC 05:ABAC: A9 01
-	STA ram_0031                    ;C - - - - - 0x00ABBE 05:ABAE: 85 31
+	STA playerFacing                ;C - - - - - 0x00ABBE 05:ABAE: 85 31
 	LDA #$D0                        ;C - - - - - 0x00ABC0 05:ABB0: A9 D0
 	STA objFlags                    ;C - - - - - 0x00ABC2 05:ABB2: 8D 60 05
 	LDY playerId                    ;C - - - - - 0x00ABC5 05:ABB5: A4 34

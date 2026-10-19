@@ -1281,27 +1281,27 @@ sub_04_9800:
 	STA ptr_0C+1                    ;C - - - - - 0x00981A 04:980A: 85 0D
 	JMP (ptr_0C)                    ;C - - - - - 0x00981C 04:980C: 6C 0C 00
 ofs_04_980F:
-	LDA ram_0062                    ;C - - J - - 0x00981F 04:980F: A5 62
+	LDA gameOverFlag                ;C - - J - - 0x00981F 04:980F: A5 62
 	CMP #$F0                        ;C - - - - - 0x009821 04:9811: C9 F0
 	BNE loc_04_9818                 ;C - - - - - 0x009823 04:9813: D0 03
 	JMP loc_04_98AF                 ;C - - - - - 0x009825 04:9815: 4C AF 98
 loc_04_9818:
-	LDA ram_0062                    ;C - - - - - 0x009828 04:9818: A5 62
+	LDA gameOverFlag                ;C - - - - - 0x009828 04:9818: A5 62
 	CMP #$FE                        ;C - - - - - 0x00982A 04:981A: C9 FE
 	BEQ loc_04_9889                 ;C - - - - - 0x00982C 04:981C: F0 6B
-	LDA ram_0062                    ;C - - - - - 0x00982E 04:981E: A5 62
+	LDA gameOverFlag                ;C - - - - - 0x00982E 04:981E: A5 62
 	CMP #$FF                        ;C - - - - - 0x009830 04:9820: C9 FF
 	BEQ loc_04_984C                 ;C - - - - - 0x009832 04:9822: F0 28
-	LDA ram_0062                    ;C - - - - - 0x009834 04:9824: A5 62
+	LDA gameOverFlag                ;C - - - - - 0x009834 04:9824: A5 62
 	CMP #$FD                        ;C - - - - - 0x009836 04:9826: C9 FD
 	BEQ loc_04_9879                 ;C - - - - - 0x009838 04:9828: F0 4F
-	LDA ram_0062                    ;C - - - - - 0x00983A 04:982A: A5 62
+	LDA gameOverFlag                ;C - - - - - 0x00983A 04:982A: A5 62
 	CMP #$FC                        ;C - - - - - 0x00983C 04:982C: C9 FC
 	BEQ loc_04_989F                 ;C - - - - - 0x00983E 04:982E: F0 6F
-	LDA ram_0062                    ;C - - - - - 0x009840 04:9830: A5 62
+	LDA gameOverFlag                ;C - - - - - 0x009840 04:9830: A5 62
 	CMP #$FB                        ;C - - - - - 0x009842 04:9832: C9 FB
 	BEQ loc_04_98A7                 ;C - - - - - 0x009844 04:9834: F0 71
-	LDA ram_0062                    ;C - - - - - 0x009846 04:9836: A5 62
+	LDA gameOverFlag                ;C - - - - - 0x009846 04:9836: A5 62
 	CMP #$FA                        ;C - - - - - 0x009848 04:9838: C9 FA
 	BEQ loc_04_9881                 ;C - - - - - 0x00984A 04:983A: F0 45
 	JSR sub_04_9A9E                 ;C - - - - - 0x00984C 04:983C: 20 9E 9A
@@ -1337,7 +1337,7 @@ loc_04_984C:
 loc_04_9879:
 	JSR sub_04_9B18                 ;C - - - - - 0x009889 04:9879: 20 18 9B
 	LDA #$FA                        ;C - - - - - 0x00988C 04:987C: A9 FA
-	STA ram_0062                    ;C - - - - - 0x00988E 04:987E: 85 62
+	STA gameOverFlag                ;C - - - - - 0x00988E 04:987E: 85 62
 	RTS                             ;C - - - - - 0x009890 04:9880: 60
 loc_04_9881:
 	LDY #$04                        ;C - - - - - 0x009891 04:9881: A0 04
@@ -1375,7 +1375,7 @@ loc_04_98BD:
 	LDA #$F0                        ;C - - - - - 0x0098CD 04:98BD: A9 F0
 	STA ram_00AB                    ;C - - - - - 0x0098CF 04:98BF: 85 AB
 	LDA #$F0                        ;C - - - - - 0x0098D1 04:98C1: A9 F0
-	STA ram_0062                    ;C - - - - - 0x0098D3 04:98C3: 85 62
+	STA gameOverFlag                ;C - - - - - 0x0098D3 04:98C3: 85 62
 	STA vramQueueFlag               ;C - - - - - 0x0098D5 04:98C5: 85 64
 	RTS                             ;C - - - - - 0x0098D7 04:98C7: 60
 tbl_04_98C8:
@@ -1397,7 +1397,7 @@ loc_04_98E9:
 	BMI loc_04_98F0                 ;C - - - - - 0x0098FD 04:98ED: 30 01
 	RTS                             ;C - - - - - 0x0098FF 04:98EF: 60
 loc_04_98F0:
-	LDA ram_0062                    ;C - - - - - 0x009900 04:98F0: A5 62
+	LDA gameOverFlag                ;C - - - - - 0x009900 04:98F0: A5 62
 	CMP #$33                        ;C - - - - - 0x009902 04:98F2: C9 33
 	BNE loc_04_9918                 ;C - - - - - 0x009904 04:98F4: D0 22
 	LDY playerLevel                 ;C - - - - - 0x009906 04:98F6: A4 6B
@@ -1417,9 +1417,9 @@ loc_04_990D:
 	BNE loc_04_9918                 ;C - - - - - 0x00991F 04:990F: D0 07
 	LDY playerId                    ;c - - - - - 0x009921 04:9911: A4 34
 	LDA tbl_04_9D5C,Y               ;c - - - - - 0x009923 04:9913: B9 5C 9D
-	STA ram_0062                    ;c - - - - - 0x009926 04:9916: 85 62
+	STA gameOverFlag                ;c - - - - - 0x009926 04:9916: 85 62
 loc_04_9918:
-	LDY ram_0062                    ;C - - - - - 0x009928 04:9918: A4 62
+	LDY gameOverFlag                ;C - - - - - 0x009928 04:9918: A4 62
 	LDX vramQueueEnd                ;C - - - - - 0x00992A 04:991A: A6 65
 	LDA tbl_05_A54C,Y               ;C - - - - - bank=05 0x00992C 04:991C: B9 4C A5
 	STA ptr_0C                      ;C - - - - - 0x00992F 04:991F: 85 0C
@@ -1494,7 +1494,7 @@ loc_04_9994:
 	STA vramQueueFlag               ;C - - - - - 0x0099A8 04:9998: 85 64
 	RTS                             ;C - - - - - 0x0099AA 04:999A: 60
 loc_04_999B:
-	LDY ram_0062                    ;C - - - - - 0x0099AB 04:999B: A4 62
+	LDY gameOverFlag                ;C - - - - - 0x0099AB 04:999B: A4 62
 	LDA tbl_05_A54C,Y               ;C - - - - - bank=05 0x0099AD 04:999D: B9 4C A5
 	STA ptr_0C                      ;C - - - - - 0x0099B0 04:99A0: 85 0C
 	LDA tbl_05_A4FD,Y               ;C - - - - - bank=05 0x0099B2 04:99A2: B9 FD A4
@@ -1531,7 +1531,7 @@ loc_04_99D6:
 loc_04_99DD:
 	LDA (ptr_0C),Y                  ;C - - - - - 0x0099ED 04:99DD: B1 0C
 	BEQ loc_04_99EA                 ;C - - - - - 0x0099EF 04:99DF: F0 09
-	STA ram_0062                    ;C - - - - - 0x0099F1 04:99E1: 85 62
+	STA gameOverFlag                ;C - - - - - 0x0099F1 04:99E1: 85 62
 	LDA #$00                        ;C - - - - - 0x0099F3 04:99E3: A9 00
 	STA ram_00AA                    ;C - - - - - 0x0099F5 04:99E5: 85 AA
 	STA ram_00AB                    ;C - - - - - 0x0099F7 04:99E7: 85 AB
@@ -1629,7 +1629,7 @@ loc_04_9A8E:
 ofs_04_9A8F:
 	LDY #$00                        ;C - - J - - 0x009A9F 04:9A8F: A0 00
 	STY ram_0066                    ;C - - - - - 0x009AA1 04:9A91: 84 66
-	STY ram_0062                    ;C - - - - - 0x009AA3 04:9A93: 84 62
+	STY gameOverFlag                ;C - - - - - 0x009AA3 04:9A93: 84 62
 	LDY #$01                        ;C - - - - - 0x009AA5 04:9A95: A0 01
 	JSR sub_04_9AA0                 ;C - - - - - 0x009AA7 04:9A97: 20 A0 9A
 	JSR sub_0F_E954                 ;C - - - - - 0x009AAA 04:9A9A: 20 54 E9

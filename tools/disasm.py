@@ -443,7 +443,7 @@ class Disasm:
                         continue
                     a2 = self.operand(b, y[0], y[3])
                     dd = a2 - a
-                    if a2 >= 0x8000 and 2 <= abs(dd) <= 64:
+                    if a2 >= 0x8000 and 2 <= abs(dd) <= 256:
                         lo, hi, cnt = (a, a2, dd) if dd > 0 else (a2, a, -dd)
                         found += self.try_split(b, lo, hi, cnt)
                     break
@@ -485,19 +485,23 @@ class Disasm:
                or (tb, ih + q) in self.split for q in range(cnt)):
             return 0
         for adj in (0, 1):
-            tg = []
+            tg, loose = [], 0
             for q in range(cnt):
                 v = ((self.rom[tb][il + q] | (self.rom[tb][ih + q] << 8)) + adj) & 0xFFFF
                 r = self.resolve(tb, v) if 0x8000 <= v else None
-                if not r or self.kind[r[0]][r[1]] == 2 or self.cdl[r[0]][r[1]] & 0 :
+                if r and self.kind[r[0]][r[1]] != 2:
+                    tg.append(r)
+                elif v >= 0x8000 and v < 0xC000 and not r:     # bank not known: keep the literal address
+                    tg.append((None, v, False))
+                    loose += 1
+                else:
                     break
-                tg.append(r)
-            if len(tg) == cnt:
+            if len(tg) == cnt and loose * 3 <= cnt:
                 for q, r in enumerate(tg):
                     self.split[(tb, il + q)] = ('lo', r[0], r[1], adj)
                     self.split[(tb, ih + q)] = ('hi', r[0], r[1], adj)
                     k[il + q] = k[ih + q] = 3
-                    if self.kind[r[0]][r[1]] == 0:
+                    if r[0] is not None and self.kind[r[0]][r[1]] == 0:
                         self.table_targets.add((r[0], r[1]))
                 return 1
         return 0
@@ -557,7 +561,7 @@ class Disasm:
         for (tb, ti) in {(v[1], v[2]) for v in self.immref.values()}:
             self.refs[(tb, ti)].add('loc')
         for (sb, si), (wh, tb, ti, adj) in self.split.items():
-            if wh == 'lo':
+            if wh == 'lo' and tb is not None:
                 self.refs[(tb, self.start_of(tb, ti))].add('ptr')
         for key in self.rom_user:
             b, i = key
@@ -759,8 +763,11 @@ class Disasm:
                 while j < BANK_SIZE and j - i < 8 and (b, j) in self.split and self.split[(b, j)][0] == wh                         and (j == i or ((b, j) not in self.labels and (b, j) not in self.notes
                                         and (b, j) not in self.user_notes_at)):
                     _, tb, ti, adj = self.split[(b, j)]
-                    ts = self.start_of(tb, ti)
-                    e = self.labels[(tb, ts)] + ('+%d' % (ti - ts) if ti != ts else '')
+                    if tb is None:
+                        e = '$%04X' % ti
+                    else:
+                        ts = self.start_of(tb, ti)
+                        e = self.labels[(tb, ts)] + ('+%d' % (ti - ts) if ti != ts else '')
                     items.append(e + ('-1' if adj else ''))
                     j += 1
                 o.append('	%-32s;%s 0x%06X %02X:%04X:' % ('.%sbytes %s' % (wh, ', '.join(items)),
