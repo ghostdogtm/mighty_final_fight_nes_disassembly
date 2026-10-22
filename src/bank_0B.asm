@@ -610,7 +610,7 @@ ofsSetHi_0B:
 ofs_0B_B300:
 	JMP loc_0B_B331                 ;C - - J - - 0x017310 0B:B300: 4C 31 B3
 	.byte $4C,$31,$B3               ;- - - - - - 0x017313 0B:B303:
-ofs_0B_B306:
+enemyAI_72:
 	JMP loc_0B_B5D7                 ;C - - J - - 0x017316 0B:B306: 4C D7 B5
 	.byte $4C,$30,$B3               ;- - - - - - 0x017319 0B:B309:
 ofs_0B_B30C:
@@ -631,9 +631,9 @@ loc_0B_B336:
 	LDA objActive,X                 ;C - - - - - 0x017346 0B:B336: BD 00 03
 	AND #$0F                        ;C - - - - - 0x017349 0B:B339: 29 0F
 	TAY                             ;C - - - - - 0x01734B 0B:B33B: A8
-	LDA tbl_0B_B64E,Y               ;C - - - - - 0x01734C 0B:B33C: B9 4E B6
+	LDA ofsSetHi_0BTbl_B64E,Y       ;C - - - - - 0x01734C 0B:B33C: B9 4E B6
 	STA ptr_00                      ;C - - - - - 0x01734F 0B:B33F: 85 00
-	LDA tbl_0B_B652,Y               ;C - - - - - 0x017351 0B:B341: B9 52 B6
+	LDA ofsSetHi_0BTbl_B652,Y       ;C - - - - - 0x017351 0B:B341: B9 52 B6
 	STA ptr_00+1                    ;C - - - - - 0x017354 0B:B344: 85 01
 	JMP (ptr_00)                    ;C - - - - - 0x017356 0B:B346: 6C 00 00
 ofs_0B_B349:
@@ -692,7 +692,7 @@ loc_0B_B387:
 	LDA #$1F                        ;C - - - - - 0x0173CD 0B:B3BD: A9 1F
 	STA objAtkBox+6                 ;C - - - - - 0x0173CF 0B:B3BF: 8D 46 04
 	LDY ram_00B9                    ;C - - - - - 0x0173D2 0B:B3C2: A4 B9
-	LDA tbl_0B_B66C,Y               ;C - - - - - 0x0173D4 0B:B3C4: B9 6C B6
+	LDA ofsSetHi_0BTbl_B66C,Y       ;C - - - - - 0x0173D4 0B:B3C4: B9 6C B6
 	STA objAnim+6                   ;C - - - - - 0x0173D7 0B:B3C7: 8D 86 05
 	LDA ram_00B9                    ;C - - - - - 0x0173DA 0B:B3CA: A5 B9
 	CMP #$14                        ;C - - - - - 0x0173DC 0B:B3CC: C9 14
@@ -700,7 +700,7 @@ loc_0B_B387:
 	LDA #$FC                        ;C - - - - - 0x0173E0 0B:B3D0: A9 FC
 	STA gameOverFlag                ;C - - - - - 0x0173E2 0B:B3D2: 85 62
 loc_0B_B3D4:
-	LDA tbl_0B_B681,Y               ;C - - - - - 0x0173E4 0B:B3D4: B9 81 B6
+	LDA ofsSetHi_0BTbl_B681,Y       ;C - - - - - 0x0173E4 0B:B3D4: B9 81 B6
 	STA objKind+6                   ;C - - - - - 0x0173E7 0B:B3D7: 8D 26 03
 	LDA objFlags+6                  ;C - - - - - 0x0173EA 0B:B3DA: AD 66 05
 	ORA #$04                        ;C - - - - - 0x0173ED 0B:B3DD: 09 04
@@ -810,7 +810,7 @@ loc_0B_B475:
 	ROR A                           ;C - - - - - 0x0174D5 0B:B4C5: 6A
 	AND #$07                        ;C - - - - - 0x0174D6 0B:B4C6: 29 07
 	TAY                             ;C - - - - - 0x0174D8 0B:B4C8: A8
-	LDA tbl_0B_B656,Y               ;C - - - - - 0x0174D9 0B:B4C9: B9 56 B6
+	LDA SpawnThrownObj72Tbl_B656,Y  ;C - - - - - 0x0174D9 0B:B4C9: B9 56 B6
 	BEQ loc_0B_B4D5                 ;C - - - - - 0x0174DC 0B:B4CC: F0 07
 	LDY ptr_02                      ;C - - - - - 0x0174DE 0B:B4CE: A4 02
 	LDA #$40                        ;C - - - - - 0x0174E0 0B:B4D0: A9 40
@@ -839,7 +839,7 @@ loc_0B_B4F5:
 	EOR objY                        ;C - - - - - 0x017507 0B:B4F7: 4D C0 03
 	AND #$03                        ;C - - - - - 0x01750A 0B:B4FA: 29 03
 	TAY                             ;C - - - - - 0x01750C 0B:B4FC: A8
-	LDA tbl_0B_B666,Y               ;C - - - - - 0x01750D 0B:B4FD: B9 66 B6
+	LDA SpawnThrownObj72Tbl_B666,Y  ;C - - - - - 0x01750D 0B:B4FD: B9 66 B6
 	STA ptr_02+1                    ;C - - - - - 0x017510 0B:B500: 85 03
 	JMP loc_0B_B512                 ;C - - - - - 0x017512 0B:B502: 4C 12 B5
 loc_0B_B505:
@@ -847,7 +847,7 @@ loc_0B_B505:
 	EOR objY                        ;C - - - - - 0x017517 0B:B507: 4D C0 03
 	AND #$01                        ;C - - - - - 0x01751A 0B:B50A: 29 01
 	TAY                             ;C - - - - - 0x01751C 0B:B50C: A8
-	LDA tbl_0B_B66A,Y               ;C - - - - - 0x01751D 0B:B50D: B9 6A B6
+	LDA SpawnThrownObj72Tbl_B66A,Y  ;C - - - - - 0x01751D 0B:B50D: B9 6A B6
 	STA ptr_02+1                    ;C - - - - - 0x017520 0B:B510: 85 03
 loc_0B_B512:
 	LDY ptr_02                      ;C - - - - - 0x017522 0B:B512: A4 02
@@ -931,7 +931,7 @@ EnemyRandomJump:
 	ADC enemySpawnTimer             ;C - - - - - 0x0175C1 0B:B5B1: 65 63
 	AND #$07                        ;C - - - - - 0x0175C3 0B:B5B3: 29 07
 	TAY                             ;C - - - - - 0x0175C5 0B:B5B5: A8
-	LDA tbl_0B_B65E,Y               ;C - - - - - 0x0175C6 0B:B5B6: B9 5E B6
+	LDA EnemyRandomJumpTbl_B65E,Y   ;C - - - - - 0x0175C6 0B:B5B6: B9 5E B6
 	BEQ loc_0B_B5D6                 ;C - - - - - 0x0175C9 0B:B5B9: F0 1B
 	LDY ptr_02                      ;C - - - - - 0x0175CB 0B:B5BB: A4 02
 	LDA #$01                        ;C - - - - - 0x0175CD 0B:B5BD: A9 01
@@ -1000,25 +1000,25 @@ loc_0B_B63F:
 	JMP ClearObject                 ;C - - - - - 0x01765A 0B:B64A: 4C BE F2
 loc_0B_B64D:
 	RTS                             ;C - - - - - 0x01765D 0B:B64D: 60
-tbl_0B_B64E:
+ofsSetHi_0BTbl_B64E:
 	.lobytes ofs_0B_B349, ofs_0B_B366, ofs_0B_B403, ofs_0B_B411;- D 1 - - - 0x01765E 0B:B64E:
-tbl_0B_B652:
+ofsSetHi_0BTbl_B652:
 	.hibytes ofs_0B_B349, ofs_0B_B366, ofs_0B_B403, ofs_0B_B411;- D 1 - - - 0x017662 0B:B652:
-tbl_0B_B656:
+SpawnThrownObj72Tbl_B656:
 	.byte $00,$00,$00,$FF,$FF,$FF,$FF,$FF;- D 1 - - - 0x017666 0B:B656:
-tbl_0B_B65E:
+EnemyRandomJumpTbl_B65E:
 	.byte $FF,$FF,$00,$00,$00,$00,$00,$00;- D 1 - - - 0x01766E 0B:B65E:
-tbl_0B_B666:
+SpawnThrownObj72Tbl_B666:
 	.byte $00,$02,$04,$05           ;- D 1 - - - 0x017676 0B:B666:
-tbl_0B_B66A:
+SpawnThrownObj72Tbl_B66A:
 	.byte $01,$03                   ;- D 1 - - - 0x01767A 0B:B66A:
-tbl_0B_B66C:
+ofsSetHi_0BTbl_B66C:
 	.res 8, $00                     ;- - - - - - 0x01767C 0B:B66C: fill 8 bytes
 	.byte $63,$63,$62,$62,$60,$60,$61,$61;- - - - - - 0x017684 0B:B674:
 	.byte $64,$64                   ;- D 1 - - - 0x01768C 0B:B67C:
 	.byte $65,$65                   ;- - - - - - 0x01768E 0B:B67E:
 	.byte $67                       ;- D 1 - - - 0x017690 0B:B680:
-tbl_0B_B681:
+ofsSetHi_0BTbl_B681:
 	.res 8, $00                     ;- - - - - - 0x017691 0B:B681: fill 8 bytes
 	.res 8, $10                     ;- - - - - - 0x017699 0B:B689: fill 8 bytes
 	.byte $13,$13                   ;- D 1 - - - 0x0176A1 0B:B691:
@@ -1098,7 +1098,7 @@ loc_0B_B721:
 	STA ram_0038                    ;C - - - - - 0x01773B 0B:B72B: 85 38
 	DEC ram_0038                    ;C - - - - - 0x01773D 0B:B72D: C6 38
 	LDY playerId                    ;C - - - - - 0x01773F 0B:B72F: A4 34
-	LDA tbl_0B_BD7C,Y               ;C - - - - - 0x017741 0B:B731: B9 7C BD
+	LDA EnemyRandomJumpTbl_BD7C,Y   ;C - - - - - 0x017741 0B:B731: B9 7C BD
 	JSR SetChrBank2                 ;C - - - - - 0x017744 0B:B734: 20 40 F4
 	LDA #$20                        ;C - - - - - 0x017747 0B:B737: A9 20
 	STA objTimer,X                  ;C - - - - - 0x017749 0B:B739: 9D D0 05
@@ -1180,9 +1180,9 @@ loc_0B_B7D7:
 	LDA objActive,X                 ;C - - - - - 0x0177EC 0B:B7DC: BD 00 03
 	AND #$0F                        ;C - - - - - 0x0177EF 0B:B7DF: 29 0F
 	TAY                             ;C - - - - - 0x0177F1 0B:B7E1: A8
-	LDA tbl_0B_BCE6,Y               ;C - - - - - 0x0177F2 0B:B7E2: B9 E6 BC
+	LDA EnemyRandomJumpTbl_BCE6,Y   ;C - - - - - 0x0177F2 0B:B7E2: B9 E6 BC
 	STA ptr_00                      ;C - - - - - 0x0177F5 0B:B7E5: 85 00
-	LDA tbl_0B_BCF7,Y               ;C - - - - - 0x0177F7 0B:B7E7: B9 F7 BC
+	LDA EnemyRandomJumpTbl_BCF7,Y   ;C - - - - - 0x0177F7 0B:B7E7: B9 F7 BC
 	STA ptr_00+1                    ;C - - - - - 0x0177FA 0B:B7EA: 85 01
 	JMP (ptr_00)                    ;C - - - - - 0x0177FC 0B:B7EC: 6C 00 00
 loc_0B_B7EF:
@@ -1194,9 +1194,9 @@ loc_0B_B7F8:
 	LDA objActive,X                 ;C - - - - - 0x017808 0B:B7F8: BD 00 03
 	AND #$0F                        ;C - - - - - 0x01780B 0B:B7FB: 29 0F
 	TAY                             ;C - - - - - 0x01780D 0B:B7FD: A8
-	LDA tbl_0B_BCEC,Y               ;C - - - - - 0x01780E 0B:B7FE: B9 EC BC
+	LDA EnemyRandomJumpTbl_BCEC,Y   ;C - - - - - 0x01780E 0B:B7FE: B9 EC BC
 	STA ptr_00                      ;C - - - - - 0x017811 0B:B801: 85 00
-	LDA tbl_0B_BCFD,Y               ;C - - - - - 0x017813 0B:B803: B9 FD BC
+	LDA EnemyRandomJumpTbl_BCFD,Y   ;C - - - - - 0x017813 0B:B803: B9 FD BC
 	STA ptr_00+1                    ;C - - - - - 0x017816 0B:B806: 85 01
 	JMP (ptr_00)                    ;C - - - - - 0x017818 0B:B808: 6C 00 00
 ofs_0B_B80B:
@@ -1231,13 +1231,13 @@ loc_0B_B83A:
 loc_0B_B84B:
 	LDA tbl_0F_FBF0,Y               ;C - - - - - 0x01785B 0B:B84B: B9 F0 FB
 	STA objFacing,X                 ;C - - - - - 0x01785E 0B:B84E: 9D 60 04
-	LDA tbl_0B_BD1C,Y               ;C - - - - - 0x017861 0B:B851: B9 1C BD
+	LDA EnemyRandomJumpTbl_BD1C,Y   ;C - - - - - 0x017861 0B:B851: B9 1C BD
 	STA objVelXLo,X                 ;C - - - - - 0x017864 0B:B854: 9D 00 04
-	LDA tbl_0B_BD0C,Y               ;C - - - - - 0x017867 0B:B857: B9 0C BD
+	LDA EnemyRandomJumpTbl_BD0C,Y   ;C - - - - - 0x017867 0B:B857: B9 0C BD
 	STA objVelXHi,X                 ;C - - - - - 0x01786A 0B:B85A: 9D 10 04
-	LDA tbl_0B_BD3C,Y               ;C - - - - - 0x01786D 0B:B85D: B9 3C BD
+	LDA EnemyRandomJumpTbl_BD3C,Y   ;C - - - - - 0x01786D 0B:B85D: B9 3C BD
 	STA objVelYLo,X                 ;C - - - - - 0x017870 0B:B860: 9D 20 04
-	LDA tbl_0B_BD2C,Y               ;C - - - - - 0x017873 0B:B863: B9 2C BD
+	LDA EnemyRandomJumpTbl_BD2C,Y   ;C - - - - - 0x017873 0B:B863: B9 2C BD
 	STA objVelYHi,X                 ;C - - - - - 0x017876 0B:B866: 9D 30 04
 loc_0B_B869:
 	JSR EnemyBounceMoveVert         ;C - - - - - 0x017879 0B:B869: 20 6B BC
@@ -1251,10 +1251,10 @@ ofs_0B_B86F:
 	TAY                             ;C - - - - - 0x01788D 0B:B87D: A8
 	LDA objToggle,X                 ;C - - - - - 0x01788E 0B:B87E: BD F0 05
 	BNE loc_0B_B889                 ;C - - - - - 0x017891 0B:B881: D0 06
-	LDA tbl_0B_BD4C,Y               ;C - - - - - 0x017893 0B:B883: B9 4C BD
+	LDA EnemyRandomJumpTbl_BD4C,Y   ;C - - - - - 0x017893 0B:B883: B9 4C BD
 	JMP loc_0B_B88C                 ;C - - - - - 0x017896 0B:B886: 4C 8C B8
 loc_0B_B889:
-	LDA tbl_0B_BD5C,Y               ;c - - - - - 0x017899 0B:B889: B9 5C BD
+	LDA EnemyRandomJumpTbl_BD5C,Y   ;c - - - - - 0x017899 0B:B889: B9 5C BD
 loc_0B_B88C:
 	STA objStep,X                   ;C - - - - - 0x01789C 0B:B88C: 9D 00 05
 	BPL loc_0B_B8B8                 ;C - - - - - 0x01789F 0B:B88F: 10 27
@@ -1274,7 +1274,7 @@ loc_0B_B8AC:
 	LDA objStep,X                   ;C - - - - - 0x0178BC 0B:B8AC: BD 00 05
 	AND #$0F                        ;C - - - - - 0x0178BF 0B:B8AF: 29 0F
 	TAY                             ;C - - - - - 0x0178C1 0B:B8B1: A8
-	LDA tbl_0B_BD6C,Y               ;C - - - - - 0x0178C2 0B:B8B2: B9 6C BD
+	LDA EnemyRandomJumpTbl_BD6C,Y   ;C - - - - - 0x0178C2 0B:B8B2: B9 6C BD
 	STA objTimer,X                  ;C - - - - - 0x0178C5 0B:B8B5: 9D D0 05
 loc_0B_B8B8:
 	JSR SetAnimBD                   ;C - - - - - 0x0178C8 0B:B8B8: 20 D9 BC
@@ -1695,10 +1695,10 @@ loc_0B_BC0F:
 	TAY                             ;C - - - - - 0x017C24 0B:BC14: A8
 	LDA objX,X                      ;C - - - - - 0x017C25 0B:BC15: BD 60 03
 	CLC                             ;C - - - - - 0x017C28 0B:BC18: 18
-	ADC tbl_0B_BD08,Y               ;C - - - - - 0x017C29 0B:BC19: 79 08 BD
+	ADC SpawnProjectileC7Tbl_BD08,Y ;C - - - - - 0x017C29 0B:BC19: 79 08 BD
 	PHA                             ;C - - - - - 0x017C2C 0B:BC1C: 48
 	LDA objXPage,X                  ;C - - - - - 0x017C2D 0B:BC1D: BD 80 03
-	ADC tbl_0B_BD09,Y               ;C - - - - - 0x017C30 0B:BC20: 79 09 BD
+	ADC SpawnProjectileC7Tbl_BD09,Y ;C - - - - - 0x017C30 0B:BC20: 79 09 BD
 	LDY ptr_00                      ;C - - - - - 0x017C33 0B:BC23: A4 00
 	STA objXPage,Y                  ;C - - - - - 0x017C35 0B:BC25: 99 80 03
 	PLA                             ;C - - - - - 0x017C38 0B:BC28: 68
@@ -1790,38 +1790,38 @@ SetAnimBD:
 	JSR SetAnimXChr4                ;C - - - - - 0x017CF2 0B:BCE2: 20 49 F4
 loc_0B_BCE5:
 	RTS                             ;C - - - - - 0x017CF5 0B:BCE5: 60
-tbl_0B_BCE6:
+EnemyRandomJumpTbl_BCE6:
 	.lobytes ofs_0B_B80B, ofs_0B_BB8C, ofs_0B_BBAC, ofs_0B_B825, ofs_0B_B86F, ofs_0B_B8D3;- D 1 - - - 0x017CF6 0B:BCE6:
-tbl_0B_BCEC:
+EnemyRandomJumpTbl_BCEC:
 	.lobytes ofs_0B_B929, ofs_0B_BB8C, ofs_0B_BBAC, ofs_0B_B958, ofs_0B_B97B, ofs_0B_BA68, ofs_0B_BA9A, ofs_0B_BAD0;- D 1 - - - 0x017CFC 0B:BCEC:
 	.lobytes ofs_0B_BAE8, ofs_0B_BB05, ofs_0B_BB53;- D 1 - - - 0x017D04 0B:BCF4:
-tbl_0B_BCF7:
+EnemyRandomJumpTbl_BCF7:
 	.hibytes ofs_0B_B80B, ofs_0B_BB8C, ofs_0B_BBAC, ofs_0B_B825, ofs_0B_B86F, ofs_0B_B8D3;- D 1 - - - 0x017D07 0B:BCF7:
-tbl_0B_BCFD:
+EnemyRandomJumpTbl_BCFD:
 	.hibytes ofs_0B_B929, ofs_0B_BB8C, ofs_0B_BBAC, ofs_0B_B958, ofs_0B_B97B, ofs_0B_BA68, ofs_0B_BA9A, ofs_0B_BAD0;- D 1 - - - 0x017D0D 0B:BCFD:
 	.hibytes ofs_0B_BAE8, ofs_0B_BB05, ofs_0B_BB53;- D 1 - - - 0x017D15 0B:BD05:
-tbl_0B_BD08:
+SpawnProjectileC7Tbl_BD08:
 	.byte $1A                       ;- D 1 - - - 0x017D18 0B:BD08:
-tbl_0B_BD09:
+SpawnProjectileC7Tbl_BD09:
 	.byte $00,$E6,$FF               ;- D 1 - - - 0x017D19 0B:BD09:
-tbl_0B_BD0C:
+EnemyRandomJumpTbl_BD0C:
 	.byte $00,$00,$01,$02,$02,$02,$01,$00,$00,$00,$01,$02,$02,$02,$01,$00;- D 1 - - - 0x017D1C 0B:BD0C:
-tbl_0B_BD1C:
+EnemyRandomJumpTbl_BD1C:
 	.byte $00,$F4,$C4,$4F,$80,$4F,$C4,$F4,$00,$F4,$C4,$4F,$80,$4F,$C4,$F4;- D 1 - - - 0x017D2C 0B:BD1C:
-tbl_0B_BD2C:
+EnemyRandomJumpTbl_BD2C:
 	.byte $02,$02,$01,$00,$00,$00,$01,$02,$02,$02,$01,$00,$00,$00,$01,$02;- D 1 - - - 0x017D3C 0B:BD2C:
-tbl_0B_BD3C:
+EnemyRandomJumpTbl_BD3C:
 	.byte $80,$4F,$C4,$F4,$00,$F4,$C4,$4F,$80,$4F,$C4,$F4,$00,$F4,$C4,$4F;- D 1 - - - 0x017D4C 0B:BD3C:
-tbl_0B_BD4C:
+EnemyRandomJumpTbl_BD4C:
 	.byte $04,$05,$06,$07,$88,$09,$0A,$0B,$0C,$0D,$0E,$0F,$80,$01,$02,$03;- D 1 - - - 0x017D5C 0B:BD4C:
-tbl_0B_BD5C:
+EnemyRandomJumpTbl_BD5C:
 	.byte $0C,$0D,$0E,$0F,$80,$01,$02,$03,$04,$05,$06,$07,$88,$09,$0A,$0B;- - - - - - 0x017D6C 0B:BD5C:
-tbl_0B_BD6C:
+EnemyRandomJumpTbl_BD6C:
 	.byte $03                       ;- D 1 - - - 0x017D7C 0B:BD6C:
 	.byte $0A,$08,$0A,$03,$0A,$08,$0A;- - - - - - 0x017D7D 0B:BD6D:
 	.byte $03                       ;- D 1 - - - 0x017D84 0B:BD74:
 	.byte $0A,$08,$0A,$03,$0A,$08,$0A;- - - - - - 0x017D85 0B:BD75:
-tbl_0B_BD7C:
+EnemyRandomJumpTbl_BD7C:
 	.byte $00                       ;- D 1 - - - 0x017D8C 0B:BD7C:
 	.byte $04,$08                   ;- - - - - - 0x017D8D 0B:BD7D:
 loc_0B_BD7F:
@@ -1832,9 +1832,9 @@ loc_0B_BD7F:
 	LDA objActive,X                 ;C - - - - - 0x017D98 0B:BD88: BD 00 03
 	AND #$0F                        ;C - - - - - 0x017D9B 0B:BD8B: 29 0F
 	TAY                             ;C - - - - - 0x017D9D 0B:BD8D: A8
-	LDA tbl_0B_BF9F,Y               ;C - - - - - 0x017D9E 0B:BD8E: B9 9F BF
+	LDA SetAnimBDTbl_BF9F,Y         ;C - - - - - 0x017D9E 0B:BD8E: B9 9F BF
 	STA ptr_00                      ;C - - - - - 0x017DA1 0B:BD91: 85 00
-	LDA tbl_0B_BFA7,Y               ;C - - - - - 0x017DA3 0B:BD93: B9 A7 BF
+	LDA SetAnimBDTbl_BFA7,Y         ;C - - - - - 0x017DA3 0B:BD93: B9 A7 BF
 	STA ptr_00+1                    ;C - - - - - 0x017DA6 0B:BD96: 85 01
 	JMP (ptr_00)                    ;C - - - - - 0x017DA8 0B:BD98: 6C 00 00
 ofs_0B_BD9B:
@@ -2088,9 +2088,9 @@ ofs_0B_BF90:
 	STA playerId                    ;C - - - - - 0x017FAC 0B:BF9C: 85 34
 loc_0B_BF9E:
 	RTS                             ;C - - - - - 0x017FAE 0B:BF9E: 60
-tbl_0B_BF9F:
+SetAnimBDTbl_BF9F:
 	.lobytes ofs_0B_BD9B, ofs_0B_BDBF, ofs_0B_BDE6, ofs_0B_BE23, ofs_0B_BF2B, ofs_0B_BF5B, ofs_0B_BF75, ofs_0B_BF90;- D 1 - - - 0x017FAF 0B:BF9F:
-tbl_0B_BFA7:
+SetAnimBDTbl_BFA7:
 	.hibytes ofs_0B_BD9B, ofs_0B_BDBF, ofs_0B_BDE6, ofs_0B_BE23, ofs_0B_BF2B, ofs_0B_BF5B, ofs_0B_BF75, ofs_0B_BF90;- D 1 - - - 0x017FB7 0B:BFA7:
 loc_0B_BFAF:
 	JSR FindFreeEnemySlot           ;C - - - - - 0x017FBF 0B:BFAF: 20 1A F7

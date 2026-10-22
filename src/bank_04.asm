@@ -7,9 +7,9 @@ QueueVramScript:
 	STA ptr_04+1                    ;C - - - - - 0x008012 04:8002: 85 05
 	LDA #$01                        ;C - - - - - 0x008014 04:8004: A9 01
 	STA renderOffCount              ;C - - - - - 0x008016 04:8006: 85 EE
-	LDA tbl_04_8100,X               ;C - - - - - 0x008018 04:8008: BD 00 81
+	LDA QueueVramScriptTbl_8100,X   ;C - - - - - 0x008018 04:8008: BD 00 81
 	STA ptr_0E                      ;C - - - - - 0x00801B 04:800B: 85 0E
-	LDA tbl_04_810E,X               ;C - - - - - 0x00801D 04:800D: BD 0E 81
+	LDA QueueVramScriptTbl_810E,X   ;C - - - - - 0x00801D 04:800D: BD 0E 81
 	STA ptr_0E+1                    ;C - - - - - 0x008020 04:8010: 85 0F
 	LDX vramQueueEnd                ;C - - - - - 0x008022 04:8012: A6 65
 	LDY #$00                        ;C - - - - - 0x008024 04:8014: A0 00
@@ -148,10 +148,10 @@ dat_04_80FE:
 	.byte $40                       ;- D 0 - - - 0x00810E 04:80FE:
 dat_04_80FF:
 	.byte $80                       ;- D 0 - - - 0x00810F 04:80FF:
-tbl_04_8100:
+QueueVramScriptTbl_8100:
 	.lobytes tbl_04_811C, tbl_04_8131, tbl_04_81DE, tbl_04_83CE, tbl_04_8431, tbl_04_8449, tbl_04_847A, tbl_04_850C;- D 0 - - - 0x008110 04:8100:
 	.lobytes tbl_04_8554, tbl_04_85D9, tbl_04_865E, tbl_04_86E3, tbl_04_8768, tbl_04_87ED;- D 0 - - - 0x008118 04:8108:
-tbl_04_810E:
+QueueVramScriptTbl_810E:
 	.hibytes tbl_04_811C, tbl_04_8131, tbl_04_81DE, tbl_04_83CE, tbl_04_8431, tbl_04_8449, tbl_04_847A, tbl_04_850C;- D 0 - - - 0x00811E 04:810E:
 	.hibytes tbl_04_8554, tbl_04_85D9, tbl_04_865E, tbl_04_86E3, tbl_04_8768, tbl_04_87ED;- D 0 - - - 0x008126 04:8116:
 tbl_04_811C:
@@ -306,7 +306,7 @@ tbl_04_87ED:
 ScreenInit8900:
 	LDY #$0F                        ;C - - - - - 0x008910 04:8900: A0 0F
 loc_04_8902:
-	LDA tbl_04_8924,Y               ;C - - - - - 0x008912 04:8902: B9 24 89
+	LDA ScreenInit8900Tbl_8924,Y    ;C - - - - - 0x008912 04:8902: B9 24 89
 	STA palBuffer,Y                 ;C - - - - - 0x008915 04:8905: 99 00 06
 	STA palBase,Y                   ;C - - - - - 0x008918 04:8908: 99 20 06
 	STA palBuffer+16,Y              ;C - - - - - 0x00891B 04:890B: 99 10 06
@@ -321,16 +321,16 @@ loc_04_8902:
 	STA chrBankShadow+1             ;C - - - - - 0x00892E 04:891E: 85 E9
 	JSR FadeOutPaletteFast          ;C - - - - - 0x008930 04:8920: 20 62 C3
 	RTS                             ;C - - - - - 0x008933 04:8923: 60
-tbl_04_8924:
+ScreenInit8900Tbl_8924:
 	.byte $0F,$20,$32,$22,$0F,$27,$38,$02,$0F,$17,$27,$02,$0F,$0F,$0F,$0F;- D 0 - - - 0x008934 04:8924:
 	.byte $6F,$DF,$C8,$D7,$A4,$BE,$8C,$CE,$BB,$DF,$AB,$CB;- - - - - - 0x008944 04:8934:
 ScreenInit8940:
 	LDY #$0F                        ;C - - - - - 0x008950 04:8940: A0 0F
 loc_04_8942:
-	LDA tbl_04_898E,Y               ;C - - - - - 0x008952 04:8942: B9 8E 89
+	LDA ScreenInit8940Tbl_898E,Y    ;C - - - - - 0x008952 04:8942: B9 8E 89
 	STA palBuffer,Y                 ;C - - - - - 0x008955 04:8945: 99 00 06
 	STA palBase,Y                   ;C - - - - - 0x008958 04:8948: 99 20 06
-	LDA tbl_04_899E,Y               ;C - - - - - 0x00895B 04:894B: B9 9E 89
+	LDA ScreenInit8940Tbl_899E,Y    ;C - - - - - 0x00895B 04:894B: B9 9E 89
 	STA palBuffer+16,Y              ;C - - - - - 0x00895E 04:894E: 99 10 06
 	STA palBase+16,Y                ;C - - - - - 0x008961 04:8951: 99 30 06
 	DEY                             ;C - - - - - 0x008964 04:8954: 88
@@ -358,9 +358,9 @@ loc_04_8942:
 	LDA #$37                        ;C - - - - - 0x008998 04:8988: A9 37
 	STA objY+13                     ;C - - - - - 0x00899A 04:898A: 8D CD 03
 	RTS                             ;C - - - - - 0x00899D 04:898D: 60
-tbl_04_898E:
+ScreenInit8940Tbl_898E:
 	.byte $0F,$20,$28,$0F,$0F,$16,$28,$0F,$0F,$28,$02,$2A,$0F,$2A,$02,$0F;- D 0 - - - 0x00899E 04:898E:
-tbl_04_899E:
+ScreenInit8940Tbl_899E:
 	.res 9, $0F                     ;- D 0 - - - 0x0089AE 04:899E: fill 9 bytes
 	.byte $28,$02,$2A,$0F,$2A,$02,$0F;- D 0 - - - 0x0089B7 04:89A7:
 	.byte $A2,$F4,$00,$CD,$EA,$5D,$8A,$FE,$AB,$C3,$8E,$7F,$20,$8A,$AA,$70;- - - - - - 0x0089BE 04:89AE:
@@ -368,7 +368,7 @@ tbl_04_899E:
 ScreenInit89C0:
 	LDY #$0F                        ;C - - - - - 0x0089D0 04:89C0: A0 0F
 loc_04_89C2:
-	LDA tbl_04_898E,Y               ;C - - - - - 0x0089D2 04:89C2: B9 8E 89
+	LDA ScreenInit8940Tbl_898E,Y    ;C - - - - - 0x0089D2 04:89C2: B9 8E 89
 	STA palBuffer,Y                 ;C - - - - - 0x0089D5 04:89C5: 99 00 06
 	STA palBase,Y                   ;C - - - - - 0x0089D8 04:89C8: 99 20 06
 	DEY                             ;C - - - - - 0x0089DB 04:89CB: 88
@@ -390,7 +390,7 @@ loc_04_89C2:
 ScreenInit8A40:
 	LDY #$0F                        ;C - - - - - 0x008A50 04:8A40: A0 0F
 loc_04_8A42:
-	LDA tbl_04_8A59,Y               ;C - - - - - 0x008A52 04:8A42: B9 59 8A
+	LDA ScreenInit8A40Tbl_8A59,Y    ;C - - - - - 0x008A52 04:8A42: B9 59 8A
 	STA palBuffer,Y                 ;C - - - - - 0x008A55 04:8A45: 99 00 06
 	STA palBase,Y                   ;C - - - - - 0x008A58 04:8A48: 99 20 06
 	DEY                             ;C - - - - - 0x008A5B 04:8A4B: 88
@@ -401,7 +401,7 @@ loc_04_8A42:
 	LDA #$62                        ;C - - - - - 0x008A64 04:8A54: A9 62
 	STA chrBankShadow+1             ;C - - - - - 0x008A66 04:8A56: 85 E9
 	RTS                             ;C - - - - - 0x008A68 04:8A58: 60
-tbl_04_8A59:
+ScreenInit8A40Tbl_8A59:
 	.byte $0F,$20,$10,$00,$0F,$21,$20,$11,$0F,$23,$13,$28,$0F,$21,$20,$16;- D 0 - - - 0x008A69 04:8A59:
 	.byte $5F,$AA,$F9,$28,$7F,$E1,$9D,$A8,$A7,$89,$8D,$A2,$29,$3A,$7F,$2E;- - - - - - 0x008A79 04:8A69:
 	.byte $CA,$27,$CB,$0A,$3C,$2C,$32,$28,$B3,$E0,$BF,$EC,$F6,$58,$EB,$2A;- - - - - - 0x008A89 04:8A79:
@@ -412,10 +412,10 @@ tbl_04_8A59:
 ScreenInit8AC0:
 	LDY #$0F                        ;C - - - - - 0x008AD0 04:8AC0: A0 0F
 loc_04_8AC2:
-	LDA tbl_04_8B01,Y               ;C - - - - - 0x008AD2 04:8AC2: B9 01 8B
+	LDA ScreenInit8AC0Tbl_8B01,Y    ;C - - - - - 0x008AD2 04:8AC2: B9 01 8B
 	STA palBuffer,Y                 ;C - - - - - 0x008AD5 04:8AC5: 99 00 06
 	STA palBase,Y                   ;C - - - - - 0x008AD8 04:8AC8: 99 20 06
-	LDA tbl_04_8B11,Y               ;C - - - - - 0x008ADB 04:8ACB: B9 11 8B
+	LDA ScreenInit8AC0Tbl_8B11,Y    ;C - - - - - 0x008ADB 04:8ACB: B9 11 8B
 	STA palBuffer+16,Y              ;C - - - - - 0x008ADE 04:8ACE: 99 10 06
 	STA palBase+16,Y                ;C - - - - - 0x008AE1 04:8AD1: 99 30 06
 	DEY                             ;C - - - - - 0x008AE4 04:8AD4: 88
@@ -439,19 +439,19 @@ loc_04_8AC2:
 	LDA #$7A                        ;C - - - - - 0x008B0B 04:8AFB: A9 7A
 	JSR SetPlayerAnim               ;C - - - - - 0x008B0D 04:8AFD: 20 94 F2
 	RTS                             ;C - - - - - 0x008B10 04:8B00: 60
-tbl_04_8B01:
+ScreenInit8AC0Tbl_8B01:
 	.byte $0F,$20,$37,$27,$0F,$15,$37,$27,$0F,$13,$37,$27,$0F,$20,$37,$21;- D 0 - - - 0x008B11 04:8B01:
-tbl_04_8B11:
+ScreenInit8AC0Tbl_8B11:
 	.byte $0F,$30,$37,$27,$0F,$0F,$0F,$0F,$0F,$0F,$0F,$0F,$0F,$0F,$0F,$0F;- D 0 - - - 0x008B21 04:8B11:
 	.byte $FE,$A3,$A6,$D8,$99,$68,$31,$AB,$DD,$A8,$BE,$A2,$EF,$A8,$CA,$02;- - - - - - 0x008B31 04:8B21:
 	.byte $C4,$E1,$FB,$2A,$4E,$2B,$ED,$EA,$F3,$0A,$E3,$A0,$FE,$9A,$DE;- - - - - - 0x008B41 04:8B31:
 ScreenInit8B40:
 	LDY #$0F                        ;C - - - - - 0x008B50 04:8B40: A0 0F
 loc_04_8B42:
-	LDA tbl_04_8A59,Y               ;C - - - - - 0x008B52 04:8B42: B9 59 8A
+	LDA ScreenInit8A40Tbl_8A59,Y    ;C - - - - - 0x008B52 04:8B42: B9 59 8A
 	STA palBuffer,Y                 ;C - - - - - 0x008B55 04:8B45: 99 00 06
 	STA palBase,Y                   ;C - - - - - 0x008B58 04:8B48: 99 20 06
-	LDA tbl_04_8B88,Y               ;C - - - - - 0x008B5B 04:8B4B: B9 88 8B
+	LDA ScreenInit8B40Tbl_8B88,Y    ;C - - - - - 0x008B5B 04:8B4B: B9 88 8B
 	STA palBuffer+16,Y              ;C - - - - - 0x008B5E 04:8B4E: 99 10 06
 	STA palBase+16,Y                ;C - - - - - 0x008B61 04:8B51: 99 30 06
 	DEY                             ;C - - - - - 0x008B64 04:8B54: 88
@@ -477,7 +477,7 @@ loc_04_8B42:
 	STA objYPage                    ;C - - - - - 0x008B91 04:8B81: 8D E0 03
 	STA objKind                     ;C - - - - - 0x008B94 04:8B84: 8D 20 03
 	RTS                             ;C - - - - - 0x008B97 04:8B87: 60
-tbl_04_8B88:
+ScreenInit8B40Tbl_8B88:
 	.byte $0F,$0F,$30,$29,$0F,$0F,$30,$29,$0F,$0F,$30,$15,$0F,$0F,$30,$21;- D 0 - - - 0x008B98 04:8B88:
 	.byte $88,$EF,$22,$7A,$A2,$FE,$3E,$CF,$20,$FC,$2A,$E5,$2A,$EC,$4E,$4F;- - - - - - 0x008BA8 04:8B98:
 	.byte $A3,$FD,$A2,$4E,$8A,$47,$C8,$D7,$08,$F1,$42,$A7,$26,$B7,$9A,$DD;- - - - - - 0x008BB8 04:8BA8:
@@ -489,10 +489,10 @@ tbl_04_8B88:
 ScreenInit8C00:
 	LDY #$0F                        ;C - - - - - 0x008C10 04:8C00: A0 0F
 loc_04_8C02:
-	LDA tbl_04_9046,Y               ;C - - - - - 0x008C12 04:8C02: B9 46 90
+	LDA ScreenInit8C00Tbl_9046,Y    ;C - - - - - 0x008C12 04:8C02: B9 46 90
 	STA palBuffer,Y                 ;C - - - - - 0x008C15 04:8C05: 99 00 06
 	STA palBase,Y                   ;C - - - - - 0x008C18 04:8C08: 99 20 06
-	LDA tbl_04_8C48,Y               ;C - - - - - 0x008C1B 04:8C0B: B9 48 8C
+	LDA ScreenInit8C00Tbl_8C48,Y    ;C - - - - - 0x008C1B 04:8C0B: B9 48 8C
 	STA palBuffer+16,Y              ;C - - - - - 0x008C1E 04:8C0E: 99 10 06
 	STA palBase+16,Y                ;C - - - - - 0x008C21 04:8C11: 99 30 06
 	DEY                             ;C - - - - - 0x008C24 04:8C14: 88
@@ -518,7 +518,7 @@ loc_04_8C02:
 	STA objYPage                    ;C - - - - - 0x008C51 04:8C41: 8D E0 03
 	STA objKind                     ;C - - - - - 0x008C54 04:8C44: 8D 20 03
 	RTS                             ;C - - - - - 0x008C57 04:8C47: 60
-tbl_04_8C48:
+ScreenInit8C00Tbl_8C48:
 	.byte $0F,$0F,$36,$26,$0F,$0F,$30,$22,$0F,$0F,$30,$15,$0F,$0F,$0F,$0F;- D 0 - - - 0x008C58 04:8C48:
 	.byte $6A,$01,$85,$52,$AE,$35,$80,$11,$CE,$14,$5E,$05,$FE,$75,$6B,$16;- - - - - - 0x008C68 04:8C58:
 	.byte $5B,$50,$F8,$15,$42,$51,$D6,$70,$EF,$00,$10,$01,$6E,$00,$0D,$95;- - - - - - 0x008C78 04:8C68:
@@ -543,7 +543,7 @@ ScreenInit8D00:
 	CMP #$02                        ;C - - - - - 0x008D1F 04:8D0F: C9 02
 	BEQ loc_04_8D33                 ;C - - - - - 0x008D21 04:8D11: F0 20
 loc_04_8D13:
-	LDA tbl_04_8F18,Y               ;C - - - - - 0x008D23 04:8D13: B9 18 8F
+	LDA ScreenInit8D00Tbl_8F18,Y    ;C - - - - - 0x008D23 04:8D13: B9 18 8F
 	STA palBuffer,Y                 ;C - - - - - 0x008D26 04:8D16: 99 00 06
 	STA palBase,Y                   ;C - - - - - 0x008D29 04:8D19: 99 20 06
 	DEY                             ;C - - - - - 0x008D2C 04:8D1C: 88
@@ -551,7 +551,7 @@ loc_04_8D13:
 	STY palUpdateFlag               ;C - - - - - 0x008D2F 04:8D1F: 84 18
 	BNE loc_04_8D41                 ;C - - - - - 0x008D31 04:8D21: D0 1E
 loc_04_8D23:
-	LDA tbl_04_8F28,Y               ;C - - - - - 0x008D33 04:8D23: B9 28 8F
+	LDA ScreenInit8D00Tbl_8F28,Y    ;C - - - - - 0x008D33 04:8D23: B9 28 8F
 	STA palBuffer,Y                 ;C - - - - - 0x008D36 04:8D26: 99 00 06
 	STA palBase,Y                   ;C - - - - - 0x008D39 04:8D29: 99 20 06
 	DEY                             ;C - - - - - 0x008D3C 04:8D2C: 88
@@ -559,7 +559,7 @@ loc_04_8D23:
 	STY palUpdateFlag               ;C - - - - - 0x008D3F 04:8D2F: 84 18
 	BNE loc_04_8D41                 ;C - - - - - 0x008D41 04:8D31: D0 0E
 loc_04_8D33:
-	LDA tbl_04_8F38,Y               ;C - - - - - 0x008D43 04:8D33: B9 38 8F
+	LDA ScreenInit8D00Tbl_8F38,Y    ;C - - - - - 0x008D43 04:8D33: B9 38 8F
 	STA palBuffer,Y                 ;C - - - - - 0x008D46 04:8D36: 99 00 06
 	STA palBase,Y                   ;C - - - - - 0x008D49 04:8D39: 99 20 06
 	DEY                             ;C - - - - - 0x008D4C 04:8D3C: 88
@@ -609,26 +609,26 @@ loc_04_8D55:
 	LDA #$32                        ;C - - - - - 0x008DAF 04:8D9F: A9 32
 	STA objY                        ;C - - - - - 0x008DB1 04:8DA1: 8D C0 03
 	LDY stage                       ;C - - - - - 0x008DB4 04:8DA4: A4 61
-	LDA tbl_04_8DCE,Y               ;C - - - - - 0x008DB6 04:8DA6: B9 CE 8D
+	LDA ScreenInit8D00Tbl_8DCE,Y    ;C - - - - - 0x008DB6 04:8DA6: B9 CE 8D
 	STA objX+2                      ;C - - - - - 0x008DB9 04:8DA9: 8D 62 03
-	LDA tbl_04_8DD3,Y               ;C - - - - - 0x008DBC 04:8DAC: B9 D3 8D
+	LDA ScreenInit8D00Tbl_8DD3,Y    ;C - - - - - 0x008DBC 04:8DAC: B9 D3 8D
 	STA objY+2                      ;C - - - - - 0x008DBF 04:8DAF: 8D C2 03
 	LDX #$02                        ;C - - - - - 0x008DC2 04:8DB2: A2 02
 	LDA #$7C                        ;C - - - - - 0x008DC4 04:8DB4: A9 7C
 	JSR SetAnimX                    ;C - - - - - 0x008DC6 04:8DB6: 20 88 F2
 	LDY playerId                    ;C - - - - - 0x008DC9 04:8DB9: A4 34
-	LDA tbl_04_8DC8,Y               ;C - - - - - 0x008DCB 04:8DBB: B9 C8 8D
+	LDA ScreenInit8D00Tbl_8DC8,Y    ;C - - - - - 0x008DCB 04:8DBB: B9 C8 8D
 	STA ptr_00                      ;C - - - - - 0x008DCE 04:8DBE: 85 00
-	LDA tbl_04_8DCB,Y               ;C - - - - - 0x008DD0 04:8DC0: B9 CB 8D
+	LDA ScreenInit8D00Tbl_8DCB,Y    ;C - - - - - 0x008DD0 04:8DC0: B9 CB 8D
 	STA ptr_00+1                    ;C - - - - - 0x008DD3 04:8DC3: 85 01
 	JMP (ptr_00)                    ;C - - - - - 0x008DD5 04:8DC5: 6C 00 00
-tbl_04_8DC8:
+ScreenInit8D00Tbl_8DC8:
 	.lobytes ofs_04_8DD8, ofs_04_8E56, ofs_04_8ED4;- D 0 - - - 0x008DD8 04:8DC8:
-tbl_04_8DCB:
+ScreenInit8D00Tbl_8DCB:
 	.hibytes ofs_04_8DD8, ofs_04_8E56, ofs_04_8ED4;- D 0 - - - 0x008DDB 04:8DCB:
-tbl_04_8DCE:
+ScreenInit8D00Tbl_8DCE:
 	.byte $4A,$62,$92,$AA,$B2       ;- D 0 - - - 0x008DDE 04:8DCE:
-tbl_04_8DD3:
+ScreenInit8D00Tbl_8DD3:
 	.byte $93,$9B,$7B,$93,$B3       ;- D 0 - - - 0x008DE3 04:8DD3:
 ofs_04_8DD8:
 	LDA #$73                        ;C - - J - - 0x008DE8 04:8DD8: A9 73
@@ -776,11 +776,11 @@ ResetSlot2Anim:
 loc_04_8F12:
 	JSR RedrawAndWaitFrame          ;C - - - - - 0x008F22 04:8F12: 20 06 F4
 	JMP loc_04_8EED                 ;C - - - - - 0x008F25 04:8F15: 4C ED 8E
-tbl_04_8F18:
+ScreenInit8D00Tbl_8F18:
 	.byte $0F,$20,$0F,$0F,$0F,$28,$1A,$18,$0F,$20,$16,$1A,$0F,$20,$2C,$11;- D 0 - - - 0x008F28 04:8F18:
-tbl_04_8F28:
+ScreenInit8D00Tbl_8F28:
 	.byte $0F,$20,$0F,$0F,$0F,$28,$1A,$18,$0F,$20,$16,$1A,$0F,$36,$26,$16;- D 0 - - - 0x008F38 04:8F28:
-tbl_04_8F38:
+ScreenInit8D00Tbl_8F38:
 	.byte $0F,$20,$0F,$0F,$0F,$28,$1A,$18,$0F,$20,$16,$1A,$0F,$20,$2A,$19;- D 0 - - - 0x008F48 04:8F38:
 	.byte $0F,$0F,$0F,$0F,$0F,$0F,$30,$25,$0F,$0F,$0F,$0F,$0F,$0F,$0F,$0F;- - - - - - 0x008F58 04:8F48:
 	.byte $72,$44,$E7,$00,$34,$07,$81,$11,$F3,$55,$6B,$57,$F8,$44,$D7,$74;- - - - - - 0x008F68 04:8F58:
@@ -797,10 +797,10 @@ tbl_04_8F38:
 ScreenInit9000:
 	LDY #$0F                        ;C - - - - - 0x009010 04:9000: A0 0F
 loc_04_9002:
-	LDA tbl_04_9046,Y               ;C - - - - - 0x009012 04:9002: B9 46 90
+	LDA ScreenInit8C00Tbl_9046,Y    ;C - - - - - 0x009012 04:9002: B9 46 90
 	STA palBuffer,Y                 ;C - - - - - 0x009015 04:9005: 99 00 06
 	STA palBase,Y                   ;C - - - - - 0x009018 04:9008: 99 20 06
-	LDA tbl_04_8B88,Y               ;C - - - - - 0x00901B 04:900B: B9 88 8B
+	LDA ScreenInit8B40Tbl_8B88,Y    ;C - - - - - 0x00901B 04:900B: B9 88 8B
 	STA palBuffer+16,Y              ;C - - - - - 0x00901E 04:900E: 99 10 06
 	STA palBase+16,Y                ;C - - - - - 0x009021 04:9011: 99 30 06
 	DEY                             ;C - - - - - 0x009024 04:9014: 88
@@ -825,7 +825,7 @@ loc_04_9002:
 	STA objYPage                    ;C - - - - - 0x00904F 04:903F: 8D E0 03
 	STA objKind                     ;C - - - - - 0x009052 04:9042: 8D 20 03
 	RTS                             ;C - - - - - 0x009055 04:9045: 60
-tbl_04_9046:
+ScreenInit8C00Tbl_9046:
 	.byte $0F,$20,$10,$00,$0F,$16,$27,$05,$0F,$26,$16,$28,$0F,$16,$27,$16;- D 0 - - - 0x009056 04:9046:
 	.byte $A0,$44,$90,$E3,$28,$9D,$28,$C8,$9B,$B1,$AA,$76,$A2,$66,$01,$B3;- - - - - - 0x009066 04:9056:
 	.byte $80,$D6,$20,$60,$8B,$D3,$20,$90,$A0,$A3,$AA,$DF,$EA,$D2,$A8,$B3;- - - - - - 0x009076 04:9066:
@@ -853,10 +853,10 @@ loc_04_910C:
 loc_04_9110:
 	LDY #$0F                        ;C - - - - - 0x009120 04:9110: A0 0F
 loc_04_9112:
-	LDA tbl_04_91FB,Y               ;C - - - - - 0x009122 04:9112: B9 FB 91
+	LDA ScreenInit9100Tbl_91FB,Y    ;C - - - - - 0x009122 04:9112: B9 FB 91
 	STA palBuffer,Y                 ;C - - - - - 0x009125 04:9115: 99 00 06
 	STA palBase,Y                   ;C - - - - - 0x009128 04:9118: 99 20 06
-	LDA tbl_04_920B,Y               ;C - - - - - 0x00912B 04:911B: B9 0B 92
+	LDA ScreenInit9100Tbl_920B,Y    ;C - - - - - 0x00912B 04:911B: B9 0B 92
 	STA palBuffer+16,Y              ;C - - - - - 0x00912E 04:911E: 99 10 06
 	STA palBase+16,Y                ;C - - - - - 0x009131 04:9121: 99 30 06
 	DEY                             ;C - - - - - 0x009134 04:9124: 88
@@ -891,7 +891,7 @@ loc_04_9112:
 	LDA #$16                        ;C - - - - - 0x00917A 04:916A: A9 16
 	STA objX                        ;C - - - - - 0x00917C 04:916C: 8D 60 03
 	LDY playerId                    ;C - - - - - 0x00917F 04:916F: A4 34
-	LDA tbl_04_91F8,Y               ;C - - - - - 0x009181 04:9171: B9 F8 91
+	LDA ScreenInit9100Tbl_91F8,Y    ;C - - - - - 0x009181 04:9171: B9 F8 91
 	STA objY                        ;C - - - - - 0x009184 04:9174: 8D C0 03
 	LDA #$6E                        ;C - - - - - 0x009187 04:9177: A9 6E
 	JSR SetAnimX                    ;C - - - - - 0x009189 04:9179: 20 88 F2
@@ -924,10 +924,10 @@ loc_04_91AC:
 	LDA playerId                    ;C - - - - - 0x0091C0 04:91B0: A5 34
 	CMP #$02                        ;C - - - - - 0x0091C2 04:91B2: C9 02
 	BNE loc_04_91A7                 ;C - - - - - 0x0091C4 04:91B4: D0 F1
-	LDA tbl_04_921B,Y               ;C - - - - - 0x0091C6 04:91B6: B9 1B 92
+	LDA ScreenInit9100Tbl_921B,Y    ;C - - - - - 0x0091C6 04:91B6: B9 1B 92
 	JMP loc_04_91BF                 ;C - - - - - 0x0091C9 04:91B9: 4C BF 91
 loc_04_91BC:
-	LDA tbl_04_9221,Y               ;C - - - - - 0x0091CC 04:91BC: B9 21 92
+	LDA ScreenInit9100Tbl_9221,Y    ;C - - - - - 0x0091CC 04:91BC: B9 21 92
 loc_04_91BF:
 	STA playerLevel                 ;C - - - - - 0x0091CF 04:91BF: 85 6B
 	STA ram_0051                    ;C - - - - - 0x0091D1 04:91C1: 85 51
@@ -954,21 +954,21 @@ loc_04_91E5:
 	LDA #$2F                        ;C - - - - - 0x0091F5 04:91E5: A9 2F
 	JSR QueueSound                  ;C - - - - - 0x0091F7 04:91E7: 20 4C F3
 	LDY playerId                    ;C - - - - - 0x0091FA 04:91EA: A4 34
-	LDA tbl_04_91F8,Y               ;C - - - - - 0x0091FC 04:91EC: B9 F8 91
+	LDA ScreenInit9100Tbl_91F8,Y    ;C - - - - - 0x0091FC 04:91EC: B9 F8 91
 	STA objY                        ;C - - - - - 0x0091FF 04:91EF: 8D C0 03
 loc_04_91F2:
 	JSR RedrawAndWaitFrame          ;C - - - - - 0x009202 04:91F2: 20 06 F4
 	JMP loc_04_9181                 ;C - - - - - 0x009205 04:91F5: 4C 81 91
-tbl_04_91F8:
+ScreenInit9100Tbl_91F8:
 	.byte $34,$6C,$A4               ;- D 0 - - - 0x009208 04:91F8:
-tbl_04_91FB:
+ScreenInit9100Tbl_91FB:
 	.byte $0F,$20,$38,$27,$0F,$19,$38,$27,$0F,$20,$2C,$27,$0F,$2C,$11,$39;- D 0 - - - 0x00920B 04:91FB:
-tbl_04_920B:
+ScreenInit9100Tbl_920B:
 	.byte $0F,$20,$2C,$27,$0F,$15,$38,$27,$0F,$0F,$30,$21,$0F,$0F,$0F,$0F;- D 0 - - - 0x00921B 04:920B:
-tbl_04_921B:
+ScreenInit9100Tbl_921B:
 	.byte $00                       ;- D 0 - - - 0x00922B 04:921B:
 	.byte $00,$00,$01,$02,$03       ;- - - - - - 0x00922C 04:921C:
-tbl_04_9221:
+ScreenInit9100Tbl_9221:
 	.byte $02                       ;- D 0 - - - 0x009231 04:9221:
 	.byte $03,$04,$05,$B0,$02,$42,$82,$A7,$A8,$30,$00,$F8,$08,$14,$08,$D3;- - - - - - 0x009232 04:9222:
 	.byte $2A,$0D,$A2,$A1,$30,$F7,$AE,$5F,$48,$EB,$18,$58,$0A,$CF,$00,$02;- - - - - - 0x009242 04:9232:
@@ -988,10 +988,10 @@ ScreenInit9300:
 	INC ram_0150                    ;C - - - - - 0x009310 04:9300: EE 50 01
 	LDY #$0F                        ;C - - - - - 0x009313 04:9303: A0 0F
 loc_04_9305:
-	LDA tbl_04_9575,Y               ;C - - - - - 0x009315 04:9305: B9 75 95
+	LDA ScreenInit9300Tbl_9575,Y    ;C - - - - - 0x009315 04:9305: B9 75 95
 	STA palBuffer,Y                 ;C - - - - - 0x009318 04:9308: 99 00 06
 	STA palBase,Y                   ;C - - - - - 0x00931B 04:930B: 99 20 06
-	LDA tbl_04_9585,Y               ;C - - - - - 0x00931E 04:930E: B9 85 95
+	LDA ScreenInit9300Tbl_9585,Y    ;C - - - - - 0x00931E 04:930E: B9 85 95
 	STA palBuffer+16,Y              ;C - - - - - 0x009321 04:9311: 99 10 06
 	STA palBase+16,Y                ;C - - - - - 0x009324 04:9314: 99 30 06
 	DEY                             ;C - - - - - 0x009327 04:9317: 88
@@ -1129,13 +1129,13 @@ QueueCreditsDigit:
 	LDA #$00                        ;C - - - - - 0x009444 04:9434: A9 00
 	STA vramQueue+2                 ;C - - - - - 0x009446 04:9436: 8D 82 07
 	LDY credits                     ;C - - - - - 0x009449 04:9439: A4 AF
-	LDA tbl_04_9449,Y               ;C - - - - - 0x00944B 04:943B: B9 49 94
+	LDA QueueCreditsDigitTbl_9449,Y ;C - - - - - 0x00944B 04:943B: B9 49 94
 	STA vramQueue+3                 ;C - - - - - 0x00944E 04:943E: 8D 83 07
 	LDA #$FF                        ;C - - - - - 0x009451 04:9441: A9 FF
 	STA vramQueue+4                 ;C - - - - - 0x009453 04:9443: 8D 84 07
 	STA vramUpdateFlag0             ;C - - - - - 0x009456 04:9446: 85 19
 	RTS                             ;C - - - - - 0x009458 04:9448: 60
-tbl_04_9449:
+QueueCreditsDigitTbl_9449:
 	.byte $01,$02,$03,$04           ;- D 0 - - - 0x009459 04:9449:
 	.byte $05,$06,$07,$08,$09,$0A,$09,$61,$04,$18,$45,$EA,$00,$03,$04,$29;- - - - - - 0x00945D 04:944D:
 	.byte $D8,$68,$02,$E1,$10,$0A,$08,$70,$45,$1C,$04,$A2,$10,$04,$40,$B9;- - - - - - 0x00946D 04:945D:
@@ -1152,7 +1152,7 @@ tbl_04_9449:
 ScreenInit9500:
 	LDY #$0F                        ;C - - - - - 0x009510 04:9500: A0 0F
 loc_04_9502:
-	LDA tbl_04_9595,Y               ;C - - - - - 0x009512 04:9502: B9 95 95
+	LDA ScreenInit9500Tbl_9595,Y    ;C - - - - - 0x009512 04:9502: B9 95 95
 	STA palBuffer,Y                 ;C - - - - - 0x009515 04:9505: 99 00 06
 	STA palBase,Y                   ;C - - - - - 0x009518 04:9508: 99 20 06
 	DEY                             ;C - - - - - 0x00951B 04:950B: 88
@@ -1202,11 +1202,11 @@ loc_04_955A:
 	JSR FadeOutPalette              ;C - - - - - 0x00957D 04:956D: 20 6E C3
 	JMP RESET                       ;C - - - - - 0x009580 04:9570: 4C 00 FE
 	.byte $6C,$7C                   ;- - - - - - 0x009583 04:9573:
-tbl_04_9575:
+ScreenInit9300Tbl_9575:
 	.byte $0F,$20,$16,$35,$0F,$20,$2C,$11,$0F,$26,$16,$06,$0F,$14,$16,$06;- D 0 - - - 0x009585 04:9575:
-tbl_04_9585:
+ScreenInit9300Tbl_9585:
 	.byte $0F,$0F,$36,$26,$0F,$0F,$20,$22,$0F,$0F,$30,$21,$0F,$0F,$30,$25;- D 0 - - - 0x009595 04:9585:
-tbl_04_9595:
+ScreenInit9500Tbl_9595:
 	.byte $0F,$20,$10,$00,$0F,$3C,$2C,$1C,$0F,$1B,$1A,$0A,$0F,$20,$2C,$11;- D 0 - - - 0x0095A5 04:9595:
 	.byte $15,$6F,$D0,$48,$40,$B1,$50,$03,$1C,$80,$58,$00,$06,$AA,$00,$89;- - - - - - 0x0095B5 04:95A5:
 	.byte $04,$50,$95,$12,$00,$90,$00,$C0,$40,$E0,$00,$04,$15,$5D,$14,$89;- - - - - - 0x0095C5 04:95B5:
@@ -1217,7 +1217,7 @@ tbl_04_9595:
 ScreenInit9600:
 	LDY #$0F                        ;C - - - - - 0x009610 04:9600: A0 0F
 loc_04_9602:
-	LDA tbl_04_9636,Y               ;C - - - - - 0x009612 04:9602: B9 36 96
+	LDA ScreenInit9600Tbl_9636,Y    ;C - - - - - 0x009612 04:9602: B9 36 96
 	STA palBuffer,Y                 ;C - - - - - 0x009615 04:9605: 99 00 06
 	STA palBase,Y                   ;C - - - - - 0x009618 04:9608: 99 20 06
 	DEY                             ;C - - - - - 0x00961B 04:960B: 88
@@ -1227,7 +1227,7 @@ loc_04_9602:
 	TAX                             ;C - - - - - 0x009623 04:9613: AA
 	LDY #$07                        ;C - - - - - 0x009624 04:9614: A0 07
 loc_04_9616:
-	LDA tbl_04_9646,X               ;C - - - - - 0x009626 04:9616: BD 46 96
+	LDA ScreenInit9600Tbl_9646,X    ;C - - - - - 0x009626 04:9616: BD 46 96
 	STA palBuffer+16,Y              ;C - - - - - 0x009629 04:9619: 99 10 06
 	STA palBase+16,Y                ;C - - - - - 0x00962C 04:961C: 99 30 06
 	DEX                             ;C - - - - - 0x00962F 04:961F: CA
@@ -1239,15 +1239,15 @@ loc_04_9616:
 	LDA #$7A                        ;C - - - - - 0x009639 04:9629: A9 7A
 	STA chrBankShadow+1             ;C - - - - - 0x00963B 04:962B: 85 E9
 	LDY lives                       ;C - - - - - 0x00963D 04:962D: A4 3E
-	LDA tbl_04_965E,Y               ;C - - - - - 0x00963F 04:962F: B9 5E 96
+	LDA ScreenInit9600Tbl_965E,Y    ;C - - - - - 0x00963F 04:962F: B9 5E 96
 	JSR QueueSoundSaved             ;C - - - - - 0x009642 04:9632: 20 4A F3
 	RTS                             ;C - - - - - 0x009645 04:9635: 60
-tbl_04_9636:
+ScreenInit9600Tbl_9636:
 	.byte $0F,$20,$0F,$0F,$0F,$0F,$0F,$0F,$0F,$0F,$0F,$0F,$0F,$0F,$0F,$0F;- D 0 - - - 0x009646 04:9636:
-tbl_04_9646:
+ScreenInit9600Tbl_9646:
 	.byte $01,$0F,$36,$26,$0F,$0F,$30,$21;- - - - - - 0x009656 04:9646:
 	.byte $01,$0F,$36,$26,$0F,$0F,$36,$15,$01,$0F,$36,$26,$0F,$0F,$30,$19;- D 0 - - - 0x00965E 04:964E:
-tbl_04_965E:
+ScreenInit9600Tbl_965E:
 	.byte $00,$01                   ;- - - - - - 0x00966E 04:965E:
 	.byte $02                       ;- D 0 - - - 0x009670 04:9660:
 	.byte $03                       ;- - - - - - 0x009671 04:9661:
@@ -1281,9 +1281,9 @@ tbl_04_965E:
 ; jump table by ram_0066
 ScreenDispatch9800:
 	LDY screenStep                  ;C - - - - - 0x009810 04:9800: A4 66
-	LDA tbl_04_9D56,Y               ;C - - - - - 0x009812 04:9802: B9 56 9D
+	LDA ScreenDispatch9800Tbl_9D56,Y;C - - - - - 0x009812 04:9802: B9 56 9D
 	STA ptr_0C                      ;C - - - - - 0x009815 04:9805: 85 0C
-	LDA tbl_04_9D59,Y               ;C - - - - - 0x009817 04:9807: B9 59 9D
+	LDA ScreenDispatch9800Tbl_9D59,Y;C - - - - - 0x009817 04:9807: B9 59 9D
 	STA ptr_0C+1                    ;C - - - - - 0x00981A 04:980A: 85 0D
 	JMP (ptr_0C)                    ;C - - - - - 0x00981C 04:980C: 6C 0C 00
 ofs_04_980F:
@@ -1354,7 +1354,7 @@ loc_04_9889:
 	JSR QueueTextScript             ;C - - - - - 0x00989B 04:988B: 20 A0 9A
 	LDA ram_00B9                    ;C - - - - - 0x00989E 04:988E: A5 B9
 	TAY                             ;C - - - - - 0x0098A0 04:9890: A8
-	LDA tbl_04_98C8,Y               ;C - - - - - 0x0098A1 04:9891: B9 C8 98
+	LDA ScreenDispatch9800Tbl_98C8,Y;C - - - - - 0x0098A1 04:9891: B9 C8 98
 	TAY                             ;C - - - - - 0x0098A4 04:9894: A8
 	JSR QueueTextScript             ;C - - - - - 0x0098A5 04:9895: 20 A0 9A
 	LDA #$00                        ;C - - - - - 0x0098A8 04:9898: A9 00
@@ -1384,7 +1384,7 @@ loc_04_98BD:
 	STA gameOverFlag                ;C - - - - - 0x0098D3 04:98C3: 85 62
 	STA vramQueueFlag               ;C - - - - - 0x0098D5 04:98C5: 85 64
 	RTS                             ;C - - - - - 0x0098D7 04:98C7: 60
-tbl_04_98C8:
+ScreenDispatch9800Tbl_98C8:
 	.res 8, $00                     ;- - - - - - 0x0098D8 04:98C8: fill 8 bytes
 	.byte $0E,$0E,$0D,$0D,$0C,$0C,$0B,$0B;- - - - - - 0x0098E0 04:98D0:
 	.byte $0A,$0A                   ;- D 0 - - - 0x0098E8 04:98D8:
@@ -1411,25 +1411,25 @@ loc_04_98F0:
 	BEQ loc_04_9905                 ;C - - - - - 0x00990A 04:98FA: F0 09
 	CMP #$01                        ;C - - - - - 0x00990C 04:98FC: C9 01
 	BEQ loc_04_990A                 ;C - - - - - 0x00990E 04:98FE: F0 0A
-	LDA tbl_04_9D6B,Y               ;C - - - - - 0x009910 04:9900: B9 6B 9D
+	LDA ScreenDispatch9800Tbl_9D6B,Y;C - - - - - 0x009910 04:9900: B9 6B 9D
 	BNE loc_04_990D                 ;C - - - - - 0x009913 04:9903: D0 08
 loc_04_9905:
-	LDA tbl_04_9D5F,Y               ;C - - - - - 0x009915 04:9905: B9 5F 9D
+	LDA ScreenDispatch9800Tbl_9D5F,Y;C - - - - - 0x009915 04:9905: B9 5F 9D
 	BNE loc_04_990D                 ;C - - - - - 0x009918 04:9908: D0 03
 loc_04_990A:
-	LDA tbl_04_9D65,Y               ;C - - - - - 0x00991A 04:990A: B9 65 9D
+	LDA ScreenDispatch9800Tbl_9D65,Y;C - - - - - 0x00991A 04:990A: B9 65 9D
 loc_04_990D:
 	CMP playerHealth                ;C - - - - - 0x00991D 04:990D: C5 3A
 	BNE loc_04_9918                 ;C - - - - - 0x00991F 04:990F: D0 07
 	LDY playerId                    ;c - - - - - 0x009921 04:9911: A4 34
-	LDA tbl_04_9D5C,Y               ;c - - - - - 0x009923 04:9913: B9 5C 9D
+	LDA ScreenDispatch9800Tbl_9D5C,Y;c - - - - - 0x009923 04:9913: B9 5C 9D
 	STA gameOverFlag                ;c - - - - - 0x009926 04:9916: 85 62
 loc_04_9918:
 	LDY gameOverFlag                ;C - - - - - 0x009928 04:9918: A4 62
 	LDX vramQueueEnd                ;C - - - - - 0x00992A 04:991A: A6 65
-	LDA tbl_05_A54C,Y               ;C - - - - - bank=05 0x00992C 04:991C: B9 4C A5
+	LDA ScreenDispatch9800Tbl_A54C,Y;C - - - - - bank=05 0x00992C 04:991C: B9 4C A5
 	STA ptr_0C                      ;C - - - - - 0x00992F 04:991F: 85 0C
-	LDA tbl_05_A4FD,Y               ;C - - - - - bank=05 0x009931 04:9921: B9 FD A4
+	LDA ScreenDispatch9800Tbl_A4FD,Y;C - - - - - bank=05 0x009931 04:9921: B9 FD A4
 	STA ptr_0C+1                    ;C - - - - - 0x009934 04:9924: 85 0D
 	LDY ram_00AA                    ;C - - - - - 0x009936 04:9926: A4 AA
 	INY                             ;C - - - - - 0x009938 04:9928: C8
@@ -1501,9 +1501,9 @@ loc_04_9994:
 	RTS                             ;C - - - - - 0x0099AA 04:999A: 60
 loc_04_999B:
 	LDY gameOverFlag                ;C - - - - - 0x0099AB 04:999B: A4 62
-	LDA tbl_05_A54C,Y               ;C - - - - - bank=05 0x0099AD 04:999D: B9 4C A5
+	LDA ScreenDispatch9800Tbl_A54C,Y;C - - - - - bank=05 0x0099AD 04:999D: B9 4C A5
 	STA ptr_0C                      ;C - - - - - 0x0099B0 04:99A0: 85 0C
-	LDA tbl_05_A4FD,Y               ;C - - - - - bank=05 0x0099B2 04:99A2: B9 FD A4
+	LDA ScreenDispatch9800Tbl_A4FD,Y;C - - - - - bank=05 0x0099B2 04:99A2: B9 FD A4
 	STA ptr_0C+1                    ;C - - - - - 0x0099B5 04:99A5: 85 0D
 	LDY #$01                        ;C - - - - - 0x0099B7 04:99A7: A0 01
 	LDA (ptr_0C),Y                  ;C - - - - - 0x0099B9 04:99A9: B1 0C
@@ -1644,9 +1644,9 @@ QueueTextScript0:
 	LDY #$00                        ;C - - - - - 0x009AAE 04:9A9E: A0 00
 ; Y = script index
 QueueTextScript:
-	LDA tbl_04_9BAE,Y               ;C - - - - - 0x009AB0 04:9AA0: B9 AE 9B
+	LDA QueueTextScriptTbl_9BAE,Y   ;C - - - - - 0x009AB0 04:9AA0: B9 AE 9B
 	STA ptr_0A                      ;C - - - - - 0x009AB3 04:9AA3: 85 0A
-	LDA tbl_04_9BBD,Y               ;C - - - - - 0x009AB5 04:9AA5: B9 BD 9B
+	LDA QueueTextScriptTbl_9BBD,Y   ;C - - - - - 0x009AB5 04:9AA5: B9 BD 9B
 	STA ptr_0A+1                    ;C - - - - - 0x009AB8 04:9AA8: 85 0B
 	LDX vramQueueEnd                ;C - - - - - 0x009ABA 04:9AAA: A6 65
 	LDY #$00                        ;C - - - - - 0x009ABC 04:9AAC: A0 00
@@ -1800,10 +1800,10 @@ loc_04_9BA8:
 	JSR QueueSound                  ;c - - - - - 0x009BB8 04:9BA8: 20 4C F3
 	INC ram_00AA                    ;c - - - - - 0x009BBB 04:9BAB: E6 AA
 	RTS                             ;c - - - - - 0x009BBD 04:9BAD: 60
-tbl_04_9BAE:
+QueueTextScriptTbl_9BAE:
 	.lobytes tbl_04_9BCC, tbl_04_9C1C, tbl_04_9C2F, tbl_04_9C3B, tbl_04_9C6B, tbl_04_9C99, tbl_04_9CC3, tbl_04_9CEE;- D 0 - - - 0x009BBE 04:9BAE:
 	.lobytes tbl_04_9D18, tbl_04_9D24, tbl_04_9D2B, tbl_04_9D32, tbl_04_9D3B, tbl_04_9D44, tbl_04_9D4D;- - - - - - 0x009BC6 04:9BB6:
-tbl_04_9BBD:
+QueueTextScriptTbl_9BBD:
 	.hibytes tbl_04_9BCC, tbl_04_9C1C, tbl_04_9C2F, tbl_04_9C3B, tbl_04_9C6B, tbl_04_9C99, tbl_04_9CC3, tbl_04_9CEE;- D 0 - - - 0x009BCD 04:9BBD:
 	.hibytes tbl_04_9D18, tbl_04_9D24, tbl_04_9D2B, tbl_04_9D32, tbl_04_9D3B, tbl_04_9D44, tbl_04_9D4D;- - - - - - 0x009BD5 04:9BC5:
 tbl_04_9BCC:
@@ -1853,21 +1853,21 @@ tbl_04_9D44:
 	.byte $05,$23,$51,$02,$07,$64,$71,$6B,$FF;- - - - - - 0x009D54 04:9D44:
 tbl_04_9D4D:
 	.byte $05,$23,$51,$00,$09,$64,$71,$6B,$FF;- - - - - - 0x009D5D 04:9D4D:
-tbl_04_9D56:
+ScreenDispatch9800Tbl_9D56:
 	.lobytes ofs_04_980F, ofs_04_98DD, ofs_04_9A8F;- D 0 - - - 0x009D66 04:9D56:
-tbl_04_9D59:
+ScreenDispatch9800Tbl_9D59:
 	.hibytes ofs_04_980F, ofs_04_98DD, ofs_04_9A8F;- D 0 - - - 0x009D69 04:9D59:
-tbl_04_9D5C:
+ScreenDispatch9800Tbl_9D5C:
 	.byte $2F,$2F,$2F               ;- - - - - - 0x009D6C 04:9D5C:
-tbl_04_9D5F:
+ScreenDispatch9800Tbl_9D5F:
 	.byte $40,$48,$50,$58           ;- - - - - - 0x009D6F 04:9D5F:
 	.byte $60                       ;- D 0 - - - 0x009D73 04:9D63:
 	.byte $68                       ;- - - - - - 0x009D74 04:9D64:
-tbl_04_9D65:
+ScreenDispatch9800Tbl_9D65:
 	.byte $30,$38,$40,$48           ;- - - - - - 0x009D75 04:9D65:
 	.byte $50                       ;- D 0 - - - 0x009D79 04:9D69:
 	.byte $58                       ;- - - - - - 0x009D7A 04:9D6A:
-tbl_04_9D6B:
+ScreenDispatch9800Tbl_9D6B:
 	.byte $50,$58                   ;- - - - - - 0x009D7B 04:9D6B:
 	.byte $60                       ;- D 0 - - - 0x009D7D 04:9D6D:
 	.byte $68,$68,$68               ;- - - - - - 0x009D7E 04:9D6E:

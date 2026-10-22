@@ -272,233 +272,233 @@ loc_08_81F2:
 	.byte $01,$02,$04,$08,$10,$20,$40,$80;- - - - - - 0x010206 08:81F6:
 ; lo/hi pointer tables (15 levels) to the arrays of X page
 spawnXPageLo:
-	.lobytes tbl_08_8294, tbl_08_82B7, tbl_08_82D0, tbl_08_82E4, tbl_08_8307, tbl_08_832F, tbl_08_833E, tbl_08_8361;- D 0 - - - 0x01020E 08:81FE:
-	.lobytes tbl_08_837F, tbl_08_838E, tbl_08_83A7, tbl_08_83C0, tbl_08_83DE, tbl_08_8401, tbl_08_842E;- D 0 - - - 0x010216 08:8206:
+	.lobytes spawnXPage_00, spawnXPage_01, spawnXPage_02, spawnXPage_03, spawnXPage_04, spawnXPage_05, spawnXPage_06, spawnXPage_07;- D 0 - - - 0x01020E 08:81FE:
+	.lobytes spawnXPage_08, spawnXPage_09, spawnXPage_0A, spawnXPage_0B, spawnXPage_0C, spawnXPage_0D, spawnXPage_0E;- D 0 - - - 0x010216 08:8206:
 spawnXPageHi:
-	.hibytes tbl_08_8294, tbl_08_82B7, tbl_08_82D0, tbl_08_82E4, tbl_08_8307, tbl_08_832F, tbl_08_833E, tbl_08_8361;- D 0 - - - 0x01021D 08:820D:
-	.hibytes tbl_08_837F, tbl_08_838E, tbl_08_83A7, tbl_08_83C0, tbl_08_83DE, tbl_08_8401, tbl_08_842E;- D 0 - - - 0x010225 08:8215:
+	.hibytes spawnXPage_00, spawnXPage_01, spawnXPage_02, spawnXPage_03, spawnXPage_04, spawnXPage_05, spawnXPage_06, spawnXPage_07;- D 0 - - - 0x01021D 08:820D:
+	.hibytes spawnXPage_08, spawnXPage_09, spawnXPage_0A, spawnXPage_0B, spawnXPage_0C, spawnXPage_0D, spawnXPage_0E;- D 0 - - - 0x010225 08:8215:
 ; arrays of X low bytes
 spawnXLoLo:
-	.lobytes tbl_08_829B, tbl_08_82BC, tbl_08_82D4, tbl_08_82EB, tbl_08_830F, tbl_08_8332, tbl_08_8345, tbl_08_8367;- D 0 - - - 0x01022C 08:821C:
-	.lobytes tbl_08_8382, tbl_08_8393, tbl_08_83AC, tbl_08_83C6, tbl_08_83E5, tbl_08_840A, tbl_08_8432;- D 0 - - - 0x010234 08:8224:
+	.lobytes spawnXLo_00, spawnXLo_01, spawnXLo_02, spawnXLo_03, spawnXLo_04, spawnXLo_05, spawnXLo_06, spawnXLo_07;- D 0 - - - 0x01022C 08:821C:
+	.lobytes spawnXLo_08, spawnXLo_09, spawnXLo_0A, spawnXLo_0B, spawnXLo_0C, spawnXLo_0D, spawnXLo_0E;- D 0 - - - 0x010234 08:8224:
 spawnXLoHi:
-	.hibytes tbl_08_829B, tbl_08_82BC, tbl_08_82D4, tbl_08_82EB, tbl_08_830F, tbl_08_8332, tbl_08_8345, tbl_08_8367;- D 0 - - - 0x01023B 08:822B:
-	.hibytes tbl_08_8382, tbl_08_8393, tbl_08_83AC, tbl_08_83C6, tbl_08_83E5, tbl_08_840A, tbl_08_8432;- D 0 - - - 0x010243 08:8233:
+	.hibytes spawnXLo_00, spawnXLo_01, spawnXLo_02, spawnXLo_03, spawnXLo_04, spawnXLo_05, spawnXLo_06, spawnXLo_07;- D 0 - - - 0x01023B 08:822B:
+	.hibytes spawnXLo_08, spawnXLo_09, spawnXLo_0A, spawnXLo_0B, spawnXLo_0C, spawnXLo_0D, spawnXLo_0E;- D 0 - - - 0x010243 08:8233:
 ; arrays of Y page
 spawnYPageLo:
-	.lobytes tbl_08_82A2, tbl_08_82C1, tbl_08_82D8, tbl_08_82F2, tbl_08_8317, tbl_08_8335, tbl_08_834C, tbl_08_836D;- D 0 - - - 0x01024A 08:823A:
-	.lobytes tbl_08_8385, tbl_08_8398, tbl_08_83B1, tbl_08_83CC, tbl_08_83EC, tbl_08_8413, tbl_08_8436;- D 0 - - - 0x010252 08:8242:
+	.lobytes spawnYPage_00, spawnYPage_01, spawnYPage_02, spawnYPage_03, spawnYPage_04, spawnYPage_05, spawnYPage_06, spawnYPage_07;- D 0 - - - 0x01024A 08:823A:
+	.lobytes spawnYPage_08, spawnYPage_09, spawnYPage_0A, spawnYPage_0B, spawnYPage_0C, spawnYPage_0D, spawnYPage_0E;- D 0 - - - 0x010252 08:8242:
 spawnYPageHi:
-	.hibytes tbl_08_82A2, tbl_08_82C1, tbl_08_82D8, tbl_08_82F2, tbl_08_8317, tbl_08_8335, tbl_08_834C, tbl_08_836D;- D 0 - - - 0x010259 08:8249:
-	.hibytes tbl_08_8385, tbl_08_8398, tbl_08_83B1, tbl_08_83CC, tbl_08_83EC, tbl_08_8413, tbl_08_8436;- D 0 - - - 0x010261 08:8251:
+	.hibytes spawnYPage_00, spawnYPage_01, spawnYPage_02, spawnYPage_03, spawnYPage_04, spawnYPage_05, spawnYPage_06, spawnYPage_07;- D 0 - - - 0x010259 08:8249:
+	.hibytes spawnYPage_08, spawnYPage_09, spawnYPage_0A, spawnYPage_0B, spawnYPage_0C, spawnYPage_0D, spawnYPage_0E;- D 0 - - - 0x010261 08:8251:
 ; arrays of Y low bytes
 spawnYLoLo:
-	.lobytes tbl_08_82A9, tbl_08_82C6, tbl_08_82DC, tbl_08_82F9, tbl_08_831F, tbl_08_8338, tbl_08_8353, tbl_08_8373;- D 0 - - - 0x010268 08:8258:
-	.lobytes tbl_08_8388, tbl_08_839D, tbl_08_83B6, tbl_08_83D2, tbl_08_83F3, tbl_08_841C, tbl_08_843A;- D 0 - - - 0x010270 08:8260:
+	.lobytes spawnYLo_00, spawnYLo_01, spawnYLo_02, spawnYLo_03, spawnYLo_04, spawnYLo_05, spawnYLo_06, spawnYLo_07;- D 0 - - - 0x010268 08:8258:
+	.lobytes spawnYLo_08, spawnYLo_09, spawnYLo_0A, spawnYLo_0B, spawnYLo_0C, spawnYLo_0D, spawnYLo_0E;- D 0 - - - 0x010270 08:8260:
 spawnYLoHi:
-	.hibytes tbl_08_82A9, tbl_08_82C6, tbl_08_82DC, tbl_08_82F9, tbl_08_831F, tbl_08_8338, tbl_08_8353, tbl_08_8373;- D 0 - - - 0x010277 08:8267:
-	.hibytes tbl_08_8388, tbl_08_839D, tbl_08_83B6, tbl_08_83D2, tbl_08_83F3, tbl_08_841C, tbl_08_843A;- D 0 - - - 0x01027F 08:826F:
+	.hibytes spawnYLo_00, spawnYLo_01, spawnYLo_02, spawnYLo_03, spawnYLo_04, spawnYLo_05, spawnYLo_06, spawnYLo_07;- D 0 - - - 0x010277 08:8267:
+	.hibytes spawnYLo_08, spawnYLo_09, spawnYLo_0A, spawnYLo_0B, spawnYLo_0C, spawnYLo_0D, spawnYLo_0E;- D 0 - - - 0x01027F 08:826F:
 ; arrays of enemy type numbers (index into enemyTypeTable)
 spawnTypeLo:
-	.lobytes tbl_08_82B0, tbl_08_82CB, tbl_08_82E0, tbl_08_8300, tbl_08_8327, tbl_08_833B, tbl_08_835A, tbl_08_8379;- D 0 - - - 0x010286 08:8276:
-	.lobytes tbl_08_838B, tbl_08_83A2, tbl_08_83BB, tbl_08_83D8, tbl_08_83FA, tbl_08_8425, tbl_08_843E;- D 0 - - - 0x01028E 08:827E:
+	.lobytes spawnType_00, spawnType_01, spawnType_02, spawnType_03, spawnType_04, spawnType_05, spawnType_06, spawnType_07;- D 0 - - - 0x010286 08:8276:
+	.lobytes spawnType_08, spawnType_09, spawnType_0A, spawnType_0B, spawnType_0C, spawnType_0D, spawnType_0E;- D 0 - - - 0x01028E 08:827E:
 spawnTypeHi:
-	.hibytes tbl_08_82B0, tbl_08_82CB, tbl_08_82E0, tbl_08_8300, tbl_08_8327, tbl_08_833B, tbl_08_835A, tbl_08_8379;- D 0 - - - 0x010295 08:8285:
-	.hibytes tbl_08_838B, tbl_08_83A2, tbl_08_83BB, tbl_08_83D8, tbl_08_83FA, tbl_08_8425, tbl_08_843E;- D 0 - - - 0x01029D 08:828D:
-tbl_08_8294:
+	.hibytes spawnType_00, spawnType_01, spawnType_02, spawnType_03, spawnType_04, spawnType_05, spawnType_06, spawnType_07;- D 0 - - - 0x010295 08:8285:
+	.hibytes spawnType_08, spawnType_09, spawnType_0A, spawnType_0B, spawnType_0C, spawnType_0D, spawnType_0E;- D 0 - - - 0x01029D 08:828D:
+spawnXPage_00:
 	.byte $01,$01,$02,$02,$03,$03,$FF;- D 0 - I - 0x0102A4 08:8294:
-tbl_08_829B:
+spawnXLo_00:
 	.byte $48,$78,$48,$98,$48,$D0,$FF;- D 0 - I - 0x0102AB 08:829B:
-tbl_08_82A2:
+spawnYPage_00:
 	.byte $00,$00,$00,$00,$00,$00   ;- D 0 - I - 0x0102B2 08:82A2:
 	.byte $FF                       ;- - - - - - 0x0102B8 08:82A8:
-tbl_08_82A9:
+spawnYLo_00:
 	.byte $88,$A0,$98,$AE,$82,$90   ;- D 0 - I - 0x0102B9 08:82A9:
 	.byte $FF                       ;- - - - - - 0x0102BF 08:82AF:
-tbl_08_82B0:
+spawnType_00:
 	.byte $3D,$01,$4B,$20,$64,$5D   ;- D 0 - I - 0x0102C0 08:82B0:
 	.byte $FF                       ;- - - - - - 0x0102C6 08:82B6:
-tbl_08_82B7:
+spawnXPage_01:
 	.byte $01,$02,$02,$03,$FF       ;- D 0 - I - 0x0102C7 08:82B7:
-tbl_08_82BC:
+spawnXLo_01:
 	.byte $88,$78,$A8,$9A,$FF       ;- D 0 - I - 0x0102CC 08:82BC:
-tbl_08_82C1:
+spawnYPage_01:
 	.byte $00,$00,$00,$00           ;- D 0 - I - 0x0102D1 08:82C1:
 	.byte $FF                       ;- - - - - - 0x0102D5 08:82C5:
-tbl_08_82C6:
+spawnYLo_01:
 	.byte $00,$88,$78,$68           ;- D 0 - I - 0x0102D6 08:82C6:
 	.byte $FF                       ;- - - - - - 0x0102DA 08:82CA:
-tbl_08_82CB:
+spawnType_01:
 	.byte $11,$4D,$37,$19           ;- D 0 - I - 0x0102DB 08:82CB:
 	.byte $FF                       ;- - - - - - 0x0102DF 08:82CF:
-tbl_08_82D0:
+spawnXPage_02:
 	.byte $01,$01,$01,$FF           ;- D 0 - I - 0x0102E0 08:82D0:
-tbl_08_82D4:
+spawnXLo_02:
 	.byte $88,$D0,$E0,$FF           ;- D 0 - I - 0x0102E4 08:82D4:
-tbl_08_82D8:
+spawnYPage_02:
 	.byte $00,$00,$00               ;- D 0 - I - 0x0102E8 08:82D8:
 	.byte $FF                       ;- - - - - - 0x0102EB 08:82DB:
-tbl_08_82DC:
+spawnYLo_02:
 	.byte $01,$88,$01               ;- D 0 - I - 0x0102EC 08:82DC:
 	.byte $FF                       ;- - - - - - 0x0102EF 08:82DF:
-tbl_08_82E0:
+spawnType_02:
 	.byte $18,$13,$1B               ;- D 0 - I - 0x0102F0 08:82E0:
 	.byte $FF                       ;- - - - - - 0x0102F3 08:82E3:
-tbl_08_82E4:
+spawnXPage_03:
 	.byte $01,$01,$02,$02,$03,$03,$FF;- D 0 - I - 0x0102F4 08:82E4:
-tbl_08_82EB:
+spawnXLo_03:
 	.byte $78,$A8,$38,$A8,$78,$A8,$FF;- D 0 - I - 0x0102FB 08:82EB:
-tbl_08_82F2:
+spawnYPage_03:
 	.byte $00,$00,$00,$00,$00,$00   ;- D 0 - I - 0x010302 08:82F2:
 	.byte $FF                       ;- - - - - - 0x010308 08:82F8:
-tbl_08_82F9:
+spawnYLo_03:
 	.byte $80,$A8,$80,$A8,$80,$A8   ;- D 0 - I - 0x010309 08:82F9:
 	.byte $FF                       ;- - - - - - 0x01030F 08:82FF:
-tbl_08_8300:
+spawnType_03:
 	.byte $38,$4C,$65,$4B,$39,$41   ;- D 0 - I - 0x010310 08:8300:
 	.byte $FF                       ;- - - - - - 0x010316 08:8306:
-tbl_08_8307:
+spawnXPage_04:
 	.byte $01,$01,$02,$02,$03,$04,$04,$FF;- D 0 - I - 0x010317 08:8307:
-tbl_08_830F:
+spawnXLo_04:
 	.byte $78,$B8,$60,$B0,$88,$60,$B0,$FF;- D 0 - I - 0x01031F 08:830F:
-tbl_08_8317:
+spawnYPage_04:
 	.byte $00,$00,$00,$00,$00,$00,$00;- D 0 - I - 0x010327 08:8317:
 	.byte $FF                       ;- - - - - - 0x01032E 08:831E:
-tbl_08_831F:
+spawnYLo_04:
 	.byte $90,$98                   ;- D 0 - I - 0x01032F 08:831F:
 	.word $98A0, $A000              ;W 0x010331 08:8321:
 	.byte $98                       ;- D 0 - I - 0x010335 08:8325:
 	.byte $FF                       ;- - - - - - 0x010336 08:8326:
-tbl_08_8327:
+spawnType_04:
 	.byte $66,$00,$23,$36,$11,$22,$00;- D 0 - I - 0x010337 08:8327:
 	.byte $FF                       ;- - - - - - 0x01033E 08:832E:
-tbl_08_832F:
+spawnXPage_05:
 	.byte $01,$01,$FF               ;- D 0 - I - 0x01033F 08:832F:
-tbl_08_8332:
+spawnXLo_05:
 	.byte $88,$D0,$FF               ;- D 0 - I - 0x010342 08:8332:
-tbl_08_8335:
+spawnYPage_05:
 	.byte $00,$00                   ;- D 0 - I - 0x010345 08:8335:
 	.byte $FF                       ;- - - - - - 0x010347 08:8337:
-tbl_08_8338:
+spawnYLo_05:
 	.byte $01,$88                   ;- D 0 - I - 0x010348 08:8338:
 	.byte $FF                       ;- - - - - - 0x01034A 08:833A:
-tbl_08_833B:
+spawnType_05:
 	.byte $18,$14                   ;- D 0 - I - 0x01034B 08:833B:
 	.byte $FF                       ;- - - - - - 0x01034D 08:833D:
-tbl_08_833E:
+spawnXPage_06:
 	.byte $01,$01,$02,$02,$03,$03,$FF;- D 0 - I - 0x01034E 08:833E:
-tbl_08_8345:
+spawnXLo_06:
 	.byte $70,$C8,$88,$E8,$70,$80,$FF;- D 0 - I - 0x010355 08:8345:
-tbl_08_834C:
+spawnYPage_06:
 	.byte $00,$00,$00,$00,$00,$00   ;- D 0 - I - 0x01035C 08:834C:
 	.byte $FF                       ;- - - - - - 0x010362 08:8352:
-tbl_08_8353:
+spawnYLo_06:
 	.byte $88,$A8,$88,$A8,$A8,$A8   ;- D 0 - I - 0x010363 08:8353:
 	.byte $FF                       ;- - - - - - 0x010369 08:8359:
-tbl_08_835A:
+spawnType_06:
 	.byte $27,$25,$29,$58,$2E,$2D   ;- D 0 - I - 0x01036A 08:835A:
 	.byte $FF                       ;- - - - - - 0x010370 08:8360:
-tbl_08_8361:
+spawnXPage_07:
 	.byte $01,$01,$02,$03,$03,$FF   ;- D 0 - I - 0x010371 08:8361:
-tbl_08_8367:
+spawnXLo_07:
 	.byte $60,$88,$88,$60,$88,$FF   ;- D 0 - I - 0x010377 08:8367:
-tbl_08_836D:
+spawnYPage_07:
 	.byte $00,$00,$00,$00,$00       ;- D 0 - I - 0x01037D 08:836D:
 	.byte $FF                       ;- - - - - - 0x010382 08:8372:
-tbl_08_8373:
+spawnYLo_07:
 	.byte $30,$AE,$00,$30,$30       ;- D 0 - I - 0x010383 08:8373:
 	.byte $FF                       ;- - - - - - 0x010388 08:8378:
-tbl_08_8379:
+spawnType_07:
 	.byte $34,$26,$11,$32,$33       ;- D 0 - I - 0x010389 08:8379:
 	.byte $FF                       ;- - - - - - 0x01038E 08:837E:
-tbl_08_837F:
+spawnXPage_08:
 	.byte $00,$00,$FF               ;- D 0 - I - 0x01038F 08:837F:
-tbl_08_8382:
+spawnXLo_08:
 	.byte $88,$D8,$FF               ;- D 0 - I - 0x010392 08:8382:
-tbl_08_8385:
+spawnYPage_08:
 	.byte $00,$00                   ;- D 0 - I - 0x010395 08:8385:
 	.byte $FF                       ;- - - - - - 0x010397 08:8387:
-tbl_08_8388:
+spawnYLo_08:
 	.byte $01,$A8                   ;- D 0 - I - 0x010398 08:8388:
 	.byte $FF                       ;- - - - - - 0x01039A 08:838A:
-tbl_08_838B:
+spawnType_08:
 	.byte $18,$15                   ;- D 0 - I - 0x01039B 08:838B:
 	.byte $FF                       ;- - - - - - 0x01039D 08:838D:
-tbl_08_838E:
+spawnXPage_09:
 	.byte $01,$01,$02,$02,$FF       ;- D 0 - I - 0x01039E 08:838E:
-tbl_08_8393:
+spawnXLo_09:
 	.byte $68,$A8,$68,$A8,$FF       ;- D 0 - I - 0x0103A3 08:8393:
-tbl_08_8398:
+spawnYPage_09:
 	.byte $00,$00,$00,$00           ;- D 0 - I - 0x0103A8 08:8398:
 	.byte $FF                       ;- - - - - - 0x0103AC 08:839C:
-tbl_08_839D:
+spawnYLo_09:
 	.byte $88,$A8,$98,$A8           ;- D 0 - I - 0x0103AD 08:839D:
 	.byte $FF                       ;- - - - - - 0x0103B1 08:83A1:
-tbl_08_83A2:
+spawnType_09:
 	.byte $68,$27,$61,$27           ;- D 0 - I - 0x0103B2 08:83A2:
 	.byte $FF                       ;- - - - - - 0x0103B6 08:83A6:
-tbl_08_83A7:
+spawnXPage_0A:
 	.byte $00,$00,$00,$00,$FF       ;- D 0 - I - 0x0103B7 08:83A7:
-tbl_08_83AC:
+spawnXLo_0A:
 	.byte $10,$68,$AC,$C8,$FF       ;- D 0 - I - 0x0103BC 08:83AC:
-tbl_08_83B1:
+spawnYPage_0A:
 	.byte $00,$00,$00,$00           ;- D 0 - I - 0x0103C1 08:83B1:
 	.byte $FF                       ;- - - - - - 0x0103C5 08:83B5:
-tbl_08_83B6:
+spawnYLo_0A:
 	.byte $10,$98,$8C,$8C           ;- D 0 - I - 0x0103C6 08:83B6:
 	.byte $FF                       ;- - - - - - 0x0103CA 08:83BA:
-tbl_08_83BB:
+spawnType_0A:
 	.byte $1F,$0A,$39,$3A           ;- D 0 - I - 0x0103CB 08:83BB:
 	.byte $FF                       ;- - - - - - 0x0103CF 08:83BF:
-tbl_08_83C0:
+spawnXPage_0B:
 	.byte $00,$01,$01,$02,$02,$FF   ;- D 0 - I - 0x0103D0 08:83C0:
-tbl_08_83C6:
+spawnXLo_0B:
 	.byte $48,$38,$E8,$88,$D0,$FF   ;- D 0 - I - 0x0103D6 08:83C6:
-tbl_08_83CC:
+spawnYPage_0B:
 	.byte $00,$00,$00,$00,$00       ;- D 0 - I - 0x0103DC 08:83CC:
 	.byte $FF                       ;- - - - - - 0x0103E1 08:83D1:
-tbl_08_83D2:
+spawnYLo_0B:
 	.byte $A8,$30,$80,$01,$A8       ;- D 0 - I - 0x0103E2 08:83D2:
 	.byte $FF                       ;- - - - - - 0x0103E7 08:83D7:
-tbl_08_83D8:
+spawnType_0B:
 	.byte $03,$35,$68,$18,$16       ;- D 0 - I - 0x0103E8 08:83D8:
 	.byte $FF                       ;- - - - - - 0x0103ED 08:83DD:
-tbl_08_83DE:
+spawnXPage_0C:
 	.byte $01,$01,$02,$02,$03,$03,$FF;- D 0 - I - 0x0103EE 08:83DE:
-tbl_08_83E5:
+spawnXLo_0C:
 	.byte $30,$70,$38,$70,$88,$D8,$FF;- D 0 - I - 0x0103F5 08:83E5:
-tbl_08_83EC:
+spawnYPage_0C:
 	.byte $00,$00,$00,$00,$00,$00   ;- D 0 - I - 0x0103FC 08:83EC:
 	.byte $FF                       ;- - - - - - 0x010402 08:83F2:
-tbl_08_83F3:
+spawnYLo_0C:
 	.byte $30,$AE,$90,$AE,$00,$90   ;- D 0 - I - 0x010403 08:83F3:
 	.byte $FF                       ;- - - - - - 0x010409 08:83F9:
-tbl_08_83FA:
+spawnType_0C:
 	.byte $34,$2B,$2F,$2E,$18,$15   ;- D 0 - I - 0x01040A 08:83FA:
 	.byte $FF                       ;- - - - - - 0x010410 08:8400:
-tbl_08_8401:
+spawnXPage_0D:
 	.byte $00,$01,$01,$01,$02,$02,$03,$03,$FF;- D 0 - I - 0x010411 08:8401:
-tbl_08_840A:
+spawnXLo_0D:
 	.byte $40,$70,$E8,$E8,$70,$E0,$88,$E8,$FF;- D 0 - I - 0x01041A 08:840A:
-tbl_08_8413:
+spawnYPage_0D:
 	.res 8, $00                     ;- D 0 - I - 0x010423 08:8413: fill 8 bytes
 	.byte $FF                       ;- - - - - - 0x01042B 08:841B:
-tbl_08_841C:
+spawnYLo_0D:
 	.byte $A4,$30,$8E,$7E,$88,$AE,$08,$AE;- D 0 - I - 0x01042C 08:841C:
 	.byte $FF                       ;- - - - - - 0x010434 08:8424:
-tbl_08_8425:
+spawnType_0D:
 	.byte $02,$2F,$37,$1C,$5E,$2E,$18,$16;- D 0 - I - 0x010435 08:8425:
 	.byte $FF                       ;- - - - - - 0x01043D 08:842D:
-tbl_08_842E:
+spawnXPage_0E:
 	.byte $01,$02,$02,$FF           ;- D 0 - I - 0x01043E 08:842E:
-tbl_08_8432:
+spawnXLo_0E:
 	.byte $88,$88,$F0,$FF           ;- D 0 - I - 0x010442 08:8432:
-tbl_08_8436:
+spawnYPage_0E:
 	.byte $00,$00,$00               ;- D 0 - I - 0x010446 08:8436:
 	.byte $FF                       ;- - - - - - 0x010449 08:8439:
-tbl_08_843A:
+spawnYLo_0E:
 	.byte $A8,$00,$A0,$FF           ;- D 0 - I - 0x01044A 08:843A:
-tbl_08_843E:
+spawnType_0E:
 	.byte $03,$18,$17               ;- D 0 - I - 0x01044E 08:843E:
 	.byte $FF                       ;- - - - - - 0x010451 08:8441:
 ; 105 types x 4 bytes: objFlags, objKind, objAnim, objArr_0440 start value
@@ -865,21 +865,21 @@ SetEventFlag3F:
 	RTS                             ;C - - - - - 0x0109E6 08:89D6: 60
 StageEventDispatch:
 	LDY stage                       ;C - - - - - 0x0109E7 08:89D7: A4 61
-	LDA tbl_08_89F5,Y               ;C - - - - - 0x0109E9 08:89D9: B9 F5 89
+	LDA StageEventDispatchTbl_89F5,Y;C - - - - - 0x0109E9 08:89D9: B9 F5 89
 	STA ptr_02                      ;C - - - - - 0x0109EC 08:89DC: 85 02
-	LDA tbl_08_89FA,Y               ;C - - - - - 0x0109EE 08:89DE: B9 FA 89
+	LDA StageEventDispatchTbl_89FA,Y;C - - - - - 0x0109EE 08:89DE: B9 FA 89
 	STA ptr_02+1                    ;C - - - - - 0x0109F1 08:89E1: 85 03
 	LDY stageSection                ;C - - - - - 0x0109F3 08:89E3: A4 60
 	LDA (ptr_02),Y                  ;C - - - - - 0x0109F5 08:89E5: B1 02
 	TAY                             ;C - - - - - 0x0109F7 08:89E7: A8
-	LDA tbl_08_8A0E,Y               ;C - - - - - 0x0109F8 08:89E8: B9 0E 8A
+	LDA StageEventDispatchTbl_8A0E,Y;C - - - - - 0x0109F8 08:89E8: B9 0E 8A
 	STA ptr_04                      ;C - - - - - 0x0109FB 08:89EB: 85 04
-	LDA tbl_08_8A1D,Y               ;C - - - - - 0x0109FD 08:89ED: B9 1D 8A
+	LDA StageEventDispatchTbl_8A1D,Y;C - - - - - 0x0109FD 08:89ED: B9 1D 8A
 	STA ptr_04+1                    ;C - - - - - 0x010A00 08:89F0: 85 05
 	JMP (ptr_04)                    ;C - - - - - 0x010A02 08:89F2: 6C 04 00
-tbl_08_89F5:
+StageEventDispatchTbl_89F5:
 	.lobytes tbl_08_89FF, tbl_08_8A02, tbl_08_8A05, tbl_08_8A08, tbl_08_8A0B;- D 0 - - - 0x010A05 08:89F5:
-tbl_08_89FA:
+StageEventDispatchTbl_89FA:
 	.hibytes tbl_08_89FF, tbl_08_8A02, tbl_08_8A05, tbl_08_8A08, tbl_08_8A0B;- D 0 - - - 0x010A0A 08:89FA:
 tbl_08_89FF:
 	.byte $00,$01,$02               ;- D 0 - I - 0x010A0F 08:89FF:
@@ -891,28 +891,28 @@ tbl_08_8A08:
 	.byte $09,$0A,$0B               ;- D 0 - I - 0x010A18 08:8A08:
 tbl_08_8A0B:
 	.byte $0C,$0D,$0E               ;- D 0 - I - 0x010A1B 08:8A0B:
-tbl_08_8A0E:
+StageEventDispatchTbl_8A0E:
 	.lobytes ofs_08_8A2C, ofs_08_8A76, ofs_08_8AAC, ofs_08_8AD3, ofs_08_8B1C, ofs_08_8B7C, ofs_08_8B9F, ofs_08_8BE8;- D 0 - - - 0x010A1E 08:8A0E:
 	.lobytes ofs_08_8C32, ofs_08_8C57, ofs_08_8C8C, ofs_08_8CBD, ofs_08_8CF5, ofs_08_8D3A, ofs_08_8D83;- D 0 - - - 0x010A26 08:8A16:
-tbl_08_8A1D:
+StageEventDispatchTbl_8A1D:
 	.hibytes ofs_08_8A2C, ofs_08_8A76, ofs_08_8AAC, ofs_08_8AD3, ofs_08_8B1C, ofs_08_8B7C, ofs_08_8B9F, ofs_08_8BE8;- D 0 - - - 0x010A2D 08:8A1D:
 	.hibytes ofs_08_8C32, ofs_08_8C57, ofs_08_8C8C, ofs_08_8CBD, ofs_08_8CF5, ofs_08_8D3A, ofs_08_8D83;- D 0 - - - 0x010A35 08:8A25:
 ofs_08_8A2C:
 	LDY scrollXPage                 ;C - - J - - 0x010A3C 08:8A2C: A4 F9
-	LDA tbl_08_8A3B,Y               ;C - - - - - 0x010A3E 08:8A2E: B9 3B 8A
+	LDA StageEventDispatchTbl_8A3B,Y;C - - - - - 0x010A3E 08:8A2E: B9 3B 8A
 	STA ptr_06                      ;C - - - - - 0x010A41 08:8A31: 85 06
-	LDA tbl_08_8A3F,Y               ;C - - - - - 0x010A43 08:8A33: B9 3F 8A
+	LDA StageEventDispatchTbl_8A3F,Y;C - - - - - 0x010A43 08:8A33: B9 3F 8A
 	STA ptr_06+1                    ;C - - - - - 0x010A46 08:8A36: 85 07
 	JMP (ptr_06)                    ;C - - - - - 0x010A48 08:8A38: 6C 06 00
-tbl_08_8A3B:
+StageEventDispatchTbl_8A3B:
 	.lobytes ofs_08_8A43, ofs_08_8A44, ofs_08_8A53, ofs_08_8A62;- - - - - - 0x010A4B 08:8A3B:
-tbl_08_8A3F:
+StageEventDispatchTbl_8A3F:
 	.hibytes ofs_08_8A43, ofs_08_8A44, ofs_08_8A53, ofs_08_8A62;- - - - - - 0x010A4F 08:8A3F:
 ofs_08_8A43:
 	RTS                             ;c - - - - - 0x010A53 08:8A43: 60
 ofs_08_8A44:
 	LDA enemiesDefeated             ;C - - J - - 0x010A54 08:8A44: A5 54
-	CMP tbl_08_8DC4,Y               ;C - - - - - 0x010A56 08:8A46: D9 C4 8D
+	CMP StageEventDispatchTbl_8DC4,Y;C - - - - - 0x010A56 08:8A46: D9 C4 8D
 	BCC loc_08_8A4F                 ;C - - - - - 0x010A59 08:8A49: 90 04
 	JSR SetEventFlag3F              ;C - - - - - 0x010A5B 08:8A4B: 20 D2 89
 	RTS                             ;C - - - - - 0x010A5E 08:8A4E: 60
@@ -921,7 +921,7 @@ loc_08_8A4F:
 	RTS                             ;C - - - - - 0x010A62 08:8A52: 60
 ofs_08_8A53:
 	LDA enemiesDefeated             ;C - - J - - 0x010A63 08:8A53: A5 54
-	CMP tbl_08_8DC4,Y               ;C - - - - - 0x010A65 08:8A55: D9 C4 8D
+	CMP StageEventDispatchTbl_8DC4,Y;C - - - - - 0x010A65 08:8A55: D9 C4 8D
 	BCC loc_08_8A5E                 ;C - - - - - 0x010A68 08:8A58: 90 04
 	JSR SetEventFlag3F              ;C - - - - - 0x010A6A 08:8A5A: 20 D2 89
 	RTS                             ;C - - - - - 0x010A6D 08:8A5D: 60
@@ -930,7 +930,7 @@ loc_08_8A5E:
 	RTS                             ;C - - - - - 0x010A71 08:8A61: 60
 ofs_08_8A62:
 	LDA enemiesDefeated             ;C - - J - - 0x010A72 08:8A62: A5 54
-	CMP tbl_08_8DC4,Y               ;C - - - - - 0x010A74 08:8A64: D9 C4 8D
+	CMP StageEventDispatchTbl_8DC4,Y;C - - - - - 0x010A74 08:8A64: D9 C4 8D
 	BCC loc_08_8A72                 ;C - - - - - 0x010A77 08:8A67: 90 09
 	JSR CountBossLikeObjs           ;C - - - - - 0x010A79 08:8A69: 20 FC 96
 	BNE loc_08_8A75                 ;C - - - - - 0x010A7C 08:8A6C: D0 07
@@ -942,18 +942,18 @@ loc_08_8A75:
 	RTS                             ;C - - - - - 0x010A85 08:8A75: 60
 ofs_08_8A76:
 	LDY scrollXPage                 ;C - - J - - 0x010A86 08:8A76: A4 F9
-	LDA tbl_08_8A85,Y               ;C - - - - - 0x010A88 08:8A78: B9 85 8A
+	LDA StageEventDispatchTbl_8A85,Y;C - - - - - 0x010A88 08:8A78: B9 85 8A
 	STA ptr_06                      ;C - - - - - 0x010A8B 08:8A7B: 85 06
-	LDA tbl_08_8A89,Y               ;C - - - - - 0x010A8D 08:8A7D: B9 89 8A
+	LDA StageEventDispatchTbl_8A89,Y;C - - - - - 0x010A8D 08:8A7D: B9 89 8A
 	STA ptr_06+1                    ;C - - - - - 0x010A90 08:8A80: 85 07
 	JMP (ptr_06)                    ;C - - - - - 0x010A92 08:8A82: 6C 06 00
-tbl_08_8A85:
+StageEventDispatchTbl_8A85:
 	.lobytes ofs_08_8A43, ofs_08_8A8D, ofs_08_8A9D, ofs_08_8AAB;- - - - - - 0x010A95 08:8A85:
-tbl_08_8A89:
+StageEventDispatchTbl_8A89:
 	.hibytes ofs_08_8A43, ofs_08_8A8D, ofs_08_8A9D, ofs_08_8AAB;- - - - - - 0x010A99 08:8A89:
 ofs_08_8A8D:
 	LDA enemiesDefeated             ;C - - J - - 0x010A9D 08:8A8D: A5 54
-	CMP tbl_08_8DC8,Y               ;C - - - - - 0x010A9F 08:8A8F: D9 C8 8D
+	CMP StageEventDispatchTbl_8DC8,Y;C - - - - - 0x010A9F 08:8A8F: D9 C8 8D
 	BCC loc_08_8A9C                 ;C - - - - - 0x010AA2 08:8A92: 90 08
 	JSR CountBossLikeObjs           ;C - - - - - 0x010AA4 08:8A94: 20 FC 96
 	BNE loc_08_8A9C                 ;C - - - - - 0x010AA7 08:8A97: D0 03
@@ -962,7 +962,7 @@ loc_08_8A9C:
 	RTS                             ;C - - - - - 0x010AAC 08:8A9C: 60
 ofs_08_8A9D:
 	LDA enemiesDefeated             ;C - - J - - 0x010AAD 08:8A9D: A5 54
-	CMP tbl_08_8DC8,Y               ;C - - - - - 0x010AAF 08:8A9F: D9 C8 8D
+	CMP StageEventDispatchTbl_8DC8,Y;C - - - - - 0x010AAF 08:8A9F: D9 C8 8D
 	BCC loc_08_8AA8                 ;C - - - - - 0x010AB2 08:8AA2: 90 04
 	JSR SetEventFlag3F              ;C - - - - - 0x010AB4 08:8AA4: 20 D2 89
 	RTS                             ;C - - - - - 0x010AB7 08:8AA7: 60
@@ -972,20 +972,20 @@ ofs_08_8AAB:
 	RTS                             ;C - - - - - 0x010ABB 08:8AAB: 60
 ofs_08_8AAC:
 	LDY scrollXPage                 ;C - - J - - 0x010ABC 08:8AAC: A4 F9
-	LDA tbl_08_8ABB,Y               ;C - - - - - 0x010ABE 08:8AAE: B9 BB 8A
+	LDA StageEventDispatchTbl_8ABB,Y;C - - - - - 0x010ABE 08:8AAE: B9 BB 8A
 	STA ptr_06                      ;C - - - - - 0x010AC1 08:8AB1: 85 06
-	LDA tbl_08_8ABD,Y               ;C - - - - - 0x010AC3 08:8AB3: B9 BD 8A
+	LDA StageEventDispatchTbl_8ABD,Y;C - - - - - 0x010AC3 08:8AB3: B9 BD 8A
 	STA ptr_06+1                    ;C - - - - - 0x010AC6 08:8AB6: 85 07
 	JMP (ptr_06)                    ;C - - - - - 0x010AC8 08:8AB8: 6C 06 00
-tbl_08_8ABB:
+StageEventDispatchTbl_8ABB:
 	.lobytes ofs_08_8A43, ofs_08_8ABF;- - - - - - 0x010ACB 08:8ABB:
-tbl_08_8ABD:
+StageEventDispatchTbl_8ABD:
 	.hibytes ofs_08_8A43, ofs_08_8ABF;- - - - - - 0x010ACD 08:8ABD:
 ofs_08_8ABF:
 	LDA #$FF                        ;C - - J - - 0x010ACF 08:8ABF: A9 FF
 	STA ram_00BC                    ;C - - - - - 0x010AD1 08:8AC1: 85 BC
 	LDA enemiesDefeated             ;C - - - - - 0x010AD3 08:8AC3: A5 54
-	CMP tbl_08_8DCC,Y               ;C - - - - - 0x010AD5 08:8AC5: D9 CC 8D
+	CMP StageEventDispatchTbl_8DCC,Y;C - - - - - 0x010AD5 08:8AC5: D9 CC 8D
 	BCC loc_08_8AD2                 ;C - - - - - 0x010AD8 08:8AC8: 90 08
 	JSR CountBossLikeObjs           ;C - - - - - 0x010ADA 08:8ACA: 20 FC 96
 	BNE loc_08_8AD2                 ;C - - - - - 0x010ADD 08:8ACD: D0 03
@@ -994,18 +994,18 @@ loc_08_8AD2:
 	RTS                             ;C - - - - - 0x010AE2 08:8AD2: 60
 ofs_08_8AD3:
 	LDY scrollXPage                 ;C - - J - - 0x010AE3 08:8AD3: A4 F9
-	LDA tbl_08_8AE2,Y               ;C - - - - - 0x010AE5 08:8AD5: B9 E2 8A
+	LDA StageEventDispatchTbl_8AE2,Y;C - - - - - 0x010AE5 08:8AD5: B9 E2 8A
 	STA ptr_06                      ;C - - - - - 0x010AE8 08:8AD8: 85 06
-	LDA tbl_08_8AE6,Y               ;C - - - - - 0x010AEA 08:8ADA: B9 E6 8A
+	LDA StageEventDispatchTbl_8AE6,Y;C - - - - - 0x010AEA 08:8ADA: B9 E6 8A
 	STA ptr_06+1                    ;C - - - - - 0x010AED 08:8ADD: 85 07
 	JMP (ptr_06)                    ;C - - - - - 0x010AEF 08:8ADF: 6C 06 00
-tbl_08_8AE2:
+StageEventDispatchTbl_8AE2:
 	.lobytes ofs_08_8A43, ofs_08_8AEA, ofs_08_8AF9, ofs_08_8B08;- - - - - - 0x010AF2 08:8AE2:
-tbl_08_8AE6:
+StageEventDispatchTbl_8AE6:
 	.hibytes ofs_08_8A43, ofs_08_8AEA, ofs_08_8AF9, ofs_08_8B08;- - - - - - 0x010AF6 08:8AE6:
 ofs_08_8AEA:
 	LDA enemiesDefeated             ;C - - J - - 0x010AFA 08:8AEA: A5 54
-	CMP tbl_08_8DCE,Y               ;C - - - - - 0x010AFC 08:8AEC: D9 CE 8D
+	CMP StageEventDispatchTbl_8DCE,Y;C - - - - - 0x010AFC 08:8AEC: D9 CE 8D
 	BCC loc_08_8AF5                 ;C - - - - - 0x010AFF 08:8AEF: 90 04
 	JSR SetEventFlag3F              ;C - - - - - 0x010B01 08:8AF1: 20 D2 89
 	RTS                             ;C - - - - - 0x010B04 08:8AF4: 60
@@ -1014,7 +1014,7 @@ loc_08_8AF5:
 	RTS                             ;C - - - - - 0x010B08 08:8AF8: 60
 ofs_08_8AF9:
 	LDA enemiesDefeated             ;C - - J - - 0x010B09 08:8AF9: A5 54
-	CMP tbl_08_8DCE,Y               ;C - - - - - 0x010B0B 08:8AFB: D9 CE 8D
+	CMP StageEventDispatchTbl_8DCE,Y;C - - - - - 0x010B0B 08:8AFB: D9 CE 8D
 	BCC loc_08_8B04                 ;C - - - - - 0x010B0E 08:8AFE: 90 04
 	JSR SetEventFlag3F              ;C - - - - - 0x010B10 08:8B00: 20 D2 89
 	RTS                             ;C - - - - - 0x010B13 08:8B03: 60
@@ -1023,7 +1023,7 @@ loc_08_8B04:
 	RTS                             ;C - - - - - 0x010B17 08:8B07: 60
 ofs_08_8B08:
 	LDA enemiesDefeated             ;C - - J - - 0x010B18 08:8B08: A5 54
-	CMP tbl_08_8DCE,Y               ;C - - - - - 0x010B1A 08:8B0A: D9 CE 8D
+	CMP StageEventDispatchTbl_8DCE,Y;C - - - - - 0x010B1A 08:8B0A: D9 CE 8D
 	BCC loc_08_8B18                 ;C - - - - - 0x010B1D 08:8B0D: 90 09
 	JSR CountBossLikeObjs           ;C - - - - - 0x010B1F 08:8B0F: 20 FC 96
 	BNE loc_08_8B1B                 ;C - - - - - 0x010B22 08:8B12: D0 07
@@ -1035,18 +1035,18 @@ loc_08_8B1B:
 	RTS                             ;C - - - - - 0x010B2B 08:8B1B: 60
 ofs_08_8B1C:
 	LDY scrollXPage                 ;C - - J - - 0x010B2C 08:8B1C: A4 F9
-	LDA tbl_08_8B2B,Y               ;C - - - - - 0x010B2E 08:8B1E: B9 2B 8B
+	LDA StageEventDispatchTbl_8B2B,Y;C - - - - - 0x010B2E 08:8B1E: B9 2B 8B
 	STA ptr_06                      ;C - - - - - 0x010B31 08:8B21: 85 06
-	LDA tbl_08_8B30,Y               ;C - - - - - 0x010B33 08:8B23: B9 30 8B
+	LDA StageEventDispatchTbl_8B30,Y;C - - - - - 0x010B33 08:8B23: B9 30 8B
 	STA ptr_06+1                    ;C - - - - - 0x010B36 08:8B26: 85 07
 	JMP (ptr_06)                    ;C - - - - - 0x010B38 08:8B28: 6C 06 00
-tbl_08_8B2B:
+StageEventDispatchTbl_8B2B:
 	.lobytes ofs_08_8A43, ofs_08_8B35, ofs_08_8B44, ofs_08_8B58, ofs_08_8B68;- - - - - - 0x010B3B 08:8B2B:
-tbl_08_8B30:
+StageEventDispatchTbl_8B30:
 	.hibytes ofs_08_8A43, ofs_08_8B35, ofs_08_8B44, ofs_08_8B58, ofs_08_8B68;- - - - - - 0x010B40 08:8B30:
 ofs_08_8B35:
 	LDA enemiesDefeated             ;C - - J - - 0x010B45 08:8B35: A5 54
-	CMP tbl_08_8DD2,Y               ;C - - - - - 0x010B47 08:8B37: D9 D2 8D
+	CMP StageEventDispatchTbl_8DD2,Y;C - - - - - 0x010B47 08:8B37: D9 D2 8D
 	BCC loc_08_8B40                 ;C - - - - - 0x010B4A 08:8B3A: 90 04
 	JSR SetEventFlag3F              ;C - - - - - 0x010B4C 08:8B3C: 20 D2 89
 	RTS                             ;C - - - - - 0x010B4F 08:8B3F: 60
@@ -1055,7 +1055,7 @@ loc_08_8B40:
 	RTS                             ;C - - - - - 0x010B53 08:8B43: 60
 ofs_08_8B44:
 	LDA enemiesDefeated             ;C - - J - - 0x010B54 08:8B44: A5 54
-	CMP tbl_08_8DD2,Y               ;C - - - - - 0x010B56 08:8B46: D9 D2 8D
+	CMP StageEventDispatchTbl_8DD2,Y;C - - - - - 0x010B56 08:8B46: D9 D2 8D
 	BCC loc_08_8B54                 ;C - - - - - 0x010B59 08:8B49: 90 09
 	JSR CountBossLikeObjs           ;C - - - - - 0x010B5B 08:8B4B: 20 FC 96
 	BNE loc_08_8B57                 ;C - - - - - 0x010B5E 08:8B4E: D0 07
@@ -1067,7 +1067,7 @@ loc_08_8B57:
 	RTS                             ;C - - - - - 0x010B67 08:8B57: 60
 ofs_08_8B58:
 	LDA enemiesDefeated             ;C - - J - - 0x010B68 08:8B58: A5 54
-	CMP tbl_08_8DD2,Y               ;C - - - - - 0x010B6A 08:8B5A: D9 D2 8D
+	CMP StageEventDispatchTbl_8DD2,Y;C - - - - - 0x010B6A 08:8B5A: D9 D2 8D
 	BCC loc_08_8B67                 ;C - - - - - 0x010B6D 08:8B5D: 90 08
 	JSR CountBossLikeObjs           ;C - - - - - 0x010B6F 08:8B5F: 20 FC 96
 	BNE loc_08_8B67                 ;C - - - - - 0x010B72 08:8B62: D0 03
@@ -1076,7 +1076,7 @@ loc_08_8B67:
 	RTS                             ;C - - - - - 0x010B77 08:8B67: 60
 ofs_08_8B68:
 	LDA enemiesDefeated             ;C - - J - - 0x010B78 08:8B68: A5 54
-	CMP tbl_08_8DD2,Y               ;C - - - - - 0x010B7A 08:8B6A: D9 D2 8D
+	CMP StageEventDispatchTbl_8DD2,Y;C - - - - - 0x010B7A 08:8B6A: D9 D2 8D
 	BCC loc_08_8B78                 ;C - - - - - 0x010B7D 08:8B6D: 90 09
 	JSR CountBossLikeObjs           ;C - - - - - 0x010B7F 08:8B6F: 20 FC 96
 	BNE loc_08_8B7B                 ;C - - - - - 0x010B82 08:8B72: D0 07
@@ -1088,18 +1088,18 @@ loc_08_8B7B:
 	RTS                             ;C - - - - - 0x010B8B 08:8B7B: 60
 ofs_08_8B7C:
 	LDY scrollXPage                 ;C - - J - - 0x010B8C 08:8B7C: A4 F9
-	LDA tbl_08_8B8B,Y               ;C - - - - - 0x010B8E 08:8B7E: B9 8B 8B
+	LDA StageEventDispatchTbl_8B8B,Y;C - - - - - 0x010B8E 08:8B7E: B9 8B 8B
 	STA ptr_06                      ;C - - - - - 0x010B91 08:8B81: 85 06
-	LDA tbl_08_8B8D,Y               ;C - - - - - 0x010B93 08:8B83: B9 8D 8B
+	LDA StageEventDispatchTbl_8B8D,Y;C - - - - - 0x010B93 08:8B83: B9 8D 8B
 	STA ptr_06+1                    ;C - - - - - 0x010B96 08:8B86: 85 07
 	JMP (ptr_06)                    ;C - - - - - 0x010B98 08:8B88: 6C 06 00
-tbl_08_8B8B:
+StageEventDispatchTbl_8B8B:
 	.lobytes ofs_08_8A43, ofs_08_8B8F;- - - - - - 0x010B9B 08:8B8B:
-tbl_08_8B8D:
+StageEventDispatchTbl_8B8D:
 	.hibytes ofs_08_8A43, ofs_08_8B8F;- - - - - - 0x010B9D 08:8B8D:
 ofs_08_8B8F:
 	LDA enemiesDefeated             ;C - - J - - 0x010B9F 08:8B8F: A5 54
-	CMP tbl_08_8DD7,Y               ;C - - - - - 0x010BA1 08:8B91: D9 D7 8D
+	CMP StageEventDispatchTbl_8DD7,Y;C - - - - - 0x010BA1 08:8B91: D9 D7 8D
 	BCC loc_08_8B9E                 ;C - - - - - 0x010BA4 08:8B94: 90 08
 	JSR CountBossLikeObjs           ;C - - - - - 0x010BA6 08:8B96: 20 FC 96
 	BNE loc_08_8B9E                 ;C - - - - - 0x010BA9 08:8B99: D0 03
@@ -1108,18 +1108,18 @@ loc_08_8B9E:
 	RTS                             ;C - - - - - 0x010BAE 08:8B9E: 60
 ofs_08_8B9F:
 	LDY scrollXPage                 ;C - - J - - 0x010BAF 08:8B9F: A4 F9
-	LDA tbl_08_8BAE,Y               ;C - - - - - 0x010BB1 08:8BA1: B9 AE 8B
+	LDA StageEventDispatchTbl_8BAE,Y;C - - - - - 0x010BB1 08:8BA1: B9 AE 8B
 	STA ptr_06                      ;C - - - - - 0x010BB4 08:8BA4: 85 06
-	LDA tbl_08_8BB2,Y               ;C - - - - - 0x010BB6 08:8BA6: B9 B2 8B
+	LDA StageEventDispatchTbl_8BB2,Y;C - - - - - 0x010BB6 08:8BA6: B9 B2 8B
 	STA ptr_06+1                    ;C - - - - - 0x010BB9 08:8BA9: 85 07
 	JMP (ptr_06)                    ;C - - - - - 0x010BBB 08:8BAB: 6C 06 00
-tbl_08_8BAE:
+StageEventDispatchTbl_8BAE:
 	.lobytes ofs_08_8A43, ofs_08_8BB6, ofs_08_8BC5, ofs_08_8BD4;- - - - - - 0x010BBE 08:8BAE:
-tbl_08_8BB2:
+StageEventDispatchTbl_8BB2:
 	.hibytes ofs_08_8A43, ofs_08_8BB6, ofs_08_8BC5, ofs_08_8BD4;- - - - - - 0x010BC2 08:8BB2:
 ofs_08_8BB6:
 	LDA enemiesDefeated             ;C - - J - - 0x010BC6 08:8BB6: A5 54
-	CMP tbl_08_8DD9,Y               ;C - - - - - 0x010BC8 08:8BB8: D9 D9 8D
+	CMP StageEventDispatchTbl_8DD9,Y;C - - - - - 0x010BC8 08:8BB8: D9 D9 8D
 	BCC loc_08_8BC1                 ;C - - - - - 0x010BCB 08:8BBB: 90 04
 	JSR SetEventFlag3F              ;C - - - - - 0x010BCD 08:8BBD: 20 D2 89
 	RTS                             ;C - - - - - 0x010BD0 08:8BC0: 60
@@ -1128,7 +1128,7 @@ loc_08_8BC1:
 	RTS                             ;C - - - - - 0x010BD4 08:8BC4: 60
 ofs_08_8BC5:
 	LDA enemiesDefeated             ;C - - J - - 0x010BD5 08:8BC5: A5 54
-	CMP tbl_08_8DD9,Y               ;C - - - - - 0x010BD7 08:8BC7: D9 D9 8D
+	CMP StageEventDispatchTbl_8DD9,Y;C - - - - - 0x010BD7 08:8BC7: D9 D9 8D
 	BCC loc_08_8BD0                 ;C - - - - - 0x010BDA 08:8BCA: 90 04
 	JSR SetEventFlag3F              ;C - - - - - 0x010BDC 08:8BCC: 20 D2 89
 	RTS                             ;C - - - - - 0x010BDF 08:8BCF: 60
@@ -1137,7 +1137,7 @@ loc_08_8BD0:
 	RTS                             ;C - - - - - 0x010BE3 08:8BD3: 60
 ofs_08_8BD4:
 	LDA enemiesDefeated             ;C - - J - - 0x010BE4 08:8BD4: A5 54
-	CMP tbl_08_8DD9,Y               ;C - - - - - 0x010BE6 08:8BD6: D9 D9 8D
+	CMP StageEventDispatchTbl_8DD9,Y;C - - - - - 0x010BE6 08:8BD6: D9 D9 8D
 	BCC loc_08_8BE4                 ;C - - - - - 0x010BE9 08:8BD9: 90 09
 	JSR CountBossLikeObjs           ;C - - - - - 0x010BEB 08:8BDB: 20 FC 96
 	BNE loc_08_8BE7                 ;C - - - - - 0x010BEE 08:8BDE: D0 07
@@ -1149,18 +1149,18 @@ loc_08_8BE7:
 	RTS                             ;C - - - - - 0x010BF7 08:8BE7: 60
 ofs_08_8BE8:
 	LDY scrollXPage                 ;C - - J - - 0x010BF8 08:8BE8: A4 F9
-	LDA tbl_08_8BF7,Y               ;C - - - - - 0x010BFA 08:8BEA: B9 F7 8B
+	LDA StageEventDispatchTbl_8BF7,Y;C - - - - - 0x010BFA 08:8BEA: B9 F7 8B
 	STA ptr_06                      ;C - - - - - 0x010BFD 08:8BED: 85 06
-	LDA tbl_08_8BFB,Y               ;C - - - - - 0x010BFF 08:8BEF: B9 FB 8B
+	LDA StageEventDispatchTbl_8BFB,Y;C - - - - - 0x010BFF 08:8BEF: B9 FB 8B
 	STA ptr_06+1                    ;C - - - - - 0x010C02 08:8BF2: 85 07
 	JMP (ptr_06)                    ;C - - - - - 0x010C04 08:8BF4: 6C 06 00
-tbl_08_8BF7:
+StageEventDispatchTbl_8BF7:
 	.lobytes ofs_08_8A43, ofs_08_8BFF, ofs_08_8C0E, ofs_08_8C1E;- - - - - - 0x010C07 08:8BF7:
-tbl_08_8BFB:
+StageEventDispatchTbl_8BFB:
 	.hibytes ofs_08_8A43, ofs_08_8BFF, ofs_08_8C0E, ofs_08_8C1E;- - - - - - 0x010C0B 08:8BFB:
 ofs_08_8BFF:
 	LDA enemiesDefeated             ;C - - J - - 0x010C0F 08:8BFF: A5 54
-	CMP tbl_08_8DDD,Y               ;C - - - - - 0x010C11 08:8C01: D9 DD 8D
+	CMP StageEventDispatchTbl_8DDD,Y;C - - - - - 0x010C11 08:8C01: D9 DD 8D
 	BCC loc_08_8C0A                 ;C - - - - - 0x010C14 08:8C04: 90 04
 	JSR SetEventFlag3F              ;C - - - - - 0x010C16 08:8C06: 20 D2 89
 	RTS                             ;C - - - - - 0x010C19 08:8C09: 60
@@ -1169,7 +1169,7 @@ loc_08_8C0A:
 	RTS                             ;C - - - - - 0x010C1D 08:8C0D: 60
 ofs_08_8C0E:
 	LDA enemiesDefeated             ;C - - J - - 0x010C1E 08:8C0E: A5 54
-	CMP tbl_08_8DDD,Y               ;C - - - - - 0x010C20 08:8C10: D9 DD 8D
+	CMP StageEventDispatchTbl_8DDD,Y;C - - - - - 0x010C20 08:8C10: D9 DD 8D
 	BCC loc_08_8C1D                 ;C - - - - - 0x010C23 08:8C13: 90 08
 	JSR CountBossLikeObjs           ;C - - - - - 0x010C25 08:8C15: 20 FC 96
 	BNE loc_08_8C1D                 ;C - - - - - 0x010C28 08:8C18: D0 03
@@ -1178,7 +1178,7 @@ loc_08_8C1D:
 	RTS                             ;C - - - - - 0x010C2D 08:8C1D: 60
 ofs_08_8C1E:
 	LDA enemiesDefeated             ;C - - J - - 0x010C2E 08:8C1E: A5 54
-	CMP tbl_08_8DDD,Y               ;C - - - - - 0x010C30 08:8C20: D9 DD 8D
+	CMP StageEventDispatchTbl_8DDD,Y;C - - - - - 0x010C30 08:8C20: D9 DD 8D
 	BCC loc_08_8C2E                 ;C - - - - - 0x010C33 08:8C23: 90 09
 	JSR CountBossLikeObjs           ;C - - - - - 0x010C35 08:8C25: 20 FC 96
 	BNE loc_08_8C31                 ;C - - - - - 0x010C38 08:8C28: D0 07
@@ -1190,20 +1190,20 @@ loc_08_8C31:
 	RTS                             ;C - - - - - 0x010C41 08:8C31: 60
 ofs_08_8C32:
 	LDY scrollXPage                 ;C - - J - - 0x010C42 08:8C32: A4 F9
-	LDA tbl_08_8C41,Y               ;C - - - - - 0x010C44 08:8C34: B9 41 8C
+	LDA StageEventDispatchTbl_8C41,Y;C - - - - - 0x010C44 08:8C34: B9 41 8C
 	STA ptr_06                      ;C - - - - - 0x010C47 08:8C37: 85 06
-	LDA tbl_08_8C42,Y               ;C - - - - - 0x010C49 08:8C39: B9 42 8C
+	LDA StageEventDispatchTbl_8C42,Y;C - - - - - 0x010C49 08:8C39: B9 42 8C
 	STA ptr_06+1                    ;C - - - - - 0x010C4C 08:8C3C: 85 07
 	JMP (ptr_06)                    ;C - - - - - 0x010C4E 08:8C3E: 6C 06 00
-tbl_08_8C41:
+StageEventDispatchTbl_8C41:
 	.byte $43                       ;- D 0 - - - 0x010C51 08:8C41:
-tbl_08_8C42:
+StageEventDispatchTbl_8C42:
 	.byte $8C                       ;- D 0 - - - 0x010C52 08:8C42:
 ofs_08_8C43:
 	LDA #$FF                        ;C - - J - - 0x010C53 08:8C43: A9 FF
 	STA ram_00BC                    ;C - - - - - 0x010C55 08:8C45: 85 BC
 	LDA enemiesDefeated             ;C - - - - - 0x010C57 08:8C47: A5 54
-	CMP tbl_08_8DE1,Y               ;C - - - - - 0x010C59 08:8C49: D9 E1 8D
+	CMP StageEventDispatchTbl_8DE1,Y;C - - - - - 0x010C59 08:8C49: D9 E1 8D
 	BCC loc_08_8C56                 ;C - - - - - 0x010C5C 08:8C4C: 90 08
 	JSR CountBossLikeObjs           ;C - - - - - 0x010C5E 08:8C4E: 20 FC 96
 	BNE loc_08_8C56                 ;C - - - - - 0x010C61 08:8C51: D0 03
@@ -1212,18 +1212,18 @@ loc_08_8C56:
 	RTS                             ;C - - - - - 0x010C66 08:8C56: 60
 ofs_08_8C57:
 	LDY scrollXPage                 ;C - - J - - 0x010C67 08:8C57: A4 F9
-	LDA tbl_08_8C66,Y               ;C - - - - - 0x010C69 08:8C59: B9 66 8C
+	LDA StageEventDispatchTbl_8C66,Y;C - - - - - 0x010C69 08:8C59: B9 66 8C
 	STA ptr_06                      ;C - - - - - 0x010C6C 08:8C5C: 85 06
-	LDA tbl_08_8C6A,Y               ;C - - - - - 0x010C6E 08:8C5E: B9 6A 8C
+	LDA StageEventDispatchTbl_8C6A,Y;C - - - - - 0x010C6E 08:8C5E: B9 6A 8C
 	STA ptr_06+1                    ;C - - - - - 0x010C71 08:8C61: 85 07
 	JMP (ptr_06)                    ;C - - - - - 0x010C73 08:8C63: 6C 06 00
-tbl_08_8C66:
+StageEventDispatchTbl_8C66:
 	.lobytes ofs_08_8A43, ofs_08_8C6E, ofs_08_8C7D, ofs_08_8C8B;- - - - - - 0x010C76 08:8C66:
-tbl_08_8C6A:
+StageEventDispatchTbl_8C6A:
 	.hibytes ofs_08_8A43, ofs_08_8C6E, ofs_08_8C7D, ofs_08_8C8B;- - - - - - 0x010C7A 08:8C6A:
 ofs_08_8C6E:
 	LDA enemiesDefeated             ;C - - J - - 0x010C7E 08:8C6E: A5 54
-	CMP tbl_08_8DE2,Y               ;C - - - - - 0x010C80 08:8C70: D9 E2 8D
+	CMP StageEventDispatchTbl_8DE2,Y;C - - - - - 0x010C80 08:8C70: D9 E2 8D
 	BCC loc_08_8C79                 ;C - - - - - 0x010C83 08:8C73: 90 04
 	JSR SetEventFlag3F              ;C - - - - - 0x010C85 08:8C75: 20 D2 89
 	RTS                             ;C - - - - - 0x010C88 08:8C78: 60
@@ -1232,7 +1232,7 @@ loc_08_8C79:
 	RTS                             ;C - - - - - 0x010C8C 08:8C7C: 60
 ofs_08_8C7D:
 	LDA enemiesDefeated             ;C - - J - - 0x010C8D 08:8C7D: A5 54
-	CMP tbl_08_8DE2,Y               ;C - - - - - 0x010C8F 08:8C7F: D9 E2 8D
+	CMP StageEventDispatchTbl_8DE2,Y;C - - - - - 0x010C8F 08:8C7F: D9 E2 8D
 	BCC loc_08_8C88                 ;C - - - - - 0x010C92 08:8C82: 90 04
 	JSR SetEventFlag3F              ;C - - - - - 0x010C94 08:8C84: 20 D2 89
 	RTS                             ;C - - - - - 0x010C97 08:8C87: 60
@@ -1242,20 +1242,20 @@ ofs_08_8C8B:
 	RTS                             ;C - - - - - 0x010C9B 08:8C8B: 60
 ofs_08_8C8C:
 	LDY scrollXPage                 ;C - - J - - 0x010C9C 08:8C8C: A4 F9
-	LDA tbl_08_8C9B,Y               ;C - - - - - 0x010C9E 08:8C8E: B9 9B 8C
+	LDA StageEventDispatchTbl_8C9B,Y;C - - - - - 0x010C9E 08:8C8E: B9 9B 8C
 	STA ptr_06                      ;C - - - - - 0x010CA1 08:8C91: 85 06
-	LDA tbl_08_8CA0,Y               ;C - - - - - 0x010CA3 08:8C93: B9 A0 8C
+	LDA StageEventDispatchTbl_8CA0,Y;C - - - - - 0x010CA3 08:8C93: B9 A0 8C
 	STA ptr_06+1                    ;C - - - - - 0x010CA6 08:8C96: 85 07
 	JMP (ptr_06)                    ;C - - - - - 0x010CA8 08:8C98: 6C 06 00
-tbl_08_8C9B:
+StageEventDispatchTbl_8C9B:
 	.lobytes ofs_08_8CA5, ofs_08_8CA5, ofs_08_8CA5, ofs_08_8CA5, ofs_08_8CA5;- D 0 - - - 0x010CAB 08:8C9B:
-tbl_08_8CA0:
+StageEventDispatchTbl_8CA0:
 	.hibytes ofs_08_8CA5, ofs_08_8CA5, ofs_08_8CA5, ofs_08_8CA5, ofs_08_8CA5;- D 0 - - - 0x010CB0 08:8CA0:
 ofs_08_8CA5:
 	LDA #$FF                        ;C - - J - - 0x010CB5 08:8CA5: A9 FF
 	STA ram_00BC                    ;C - - - - - 0x010CB7 08:8CA7: 85 BC
 	LDA enemiesDefeated             ;C - - - - - 0x010CB9 08:8CA9: A5 54
-	CMP tbl_08_8DE6,Y               ;C - - - - - 0x010CBB 08:8CAB: D9 E6 8D
+	CMP StageEventDispatchTbl_8DE6,Y;C - - - - - 0x010CBB 08:8CAB: D9 E6 8D
 	BCC loc_08_8CB9                 ;C - - - - - 0x010CBE 08:8CAE: 90 09
 	JSR CountBossLikeObjs           ;C - - - - - 0x010CC0 08:8CB0: 20 FC 96
 	BNE loc_08_8CBC                 ;C - - - - - 0x010CC3 08:8CB3: D0 07
@@ -1267,18 +1267,18 @@ loc_08_8CBC:
 	RTS                             ;C - - - - - 0x010CCC 08:8CBC: 60
 ofs_08_8CBD:
 	LDY scrollXPage                 ;C - - J - - 0x010CCD 08:8CBD: A4 F9
-	LDA tbl_08_8CCC,Y               ;C - - - - - 0x010CCF 08:8CBF: B9 CC 8C
+	LDA StageEventDispatchTbl_8CCC,Y;C - - - - - 0x010CCF 08:8CBF: B9 CC 8C
 	STA ptr_06                      ;C - - - - - 0x010CD2 08:8CC2: 85 06
-	LDA tbl_08_8CCF,Y               ;C - - - - - 0x010CD4 08:8CC4: B9 CF 8C
+	LDA StageEventDispatchTbl_8CCF,Y;C - - - - - 0x010CD4 08:8CC4: B9 CF 8C
 	STA ptr_06+1                    ;C - - - - - 0x010CD7 08:8CC7: 85 07
 	JMP (ptr_06)                    ;C - - - - - 0x010CD9 08:8CC9: 6C 06 00
-tbl_08_8CCC:
+StageEventDispatchTbl_8CCC:
 	.lobytes ofs_08_8A43, ofs_08_8CD2, ofs_08_8CE1;- - - - - - 0x010CDC 08:8CCC:
-tbl_08_8CCF:
+StageEventDispatchTbl_8CCF:
 	.hibytes ofs_08_8A43, ofs_08_8CD2, ofs_08_8CE1;- - - - - - 0x010CDF 08:8CCF:
 ofs_08_8CD2:
 	LDA enemiesDefeated             ;C - - J - - 0x010CE2 08:8CD2: A5 54
-	CMP tbl_08_8DEB,Y               ;C - - - - - 0x010CE4 08:8CD4: D9 EB 8D
+	CMP StageEventDispatchTbl_8DEB,Y;C - - - - - 0x010CE4 08:8CD4: D9 EB 8D
 	BCC loc_08_8CDD                 ;C - - - - - 0x010CE7 08:8CD7: 90 04
 	JSR SetEventFlag3F              ;C - - - - - 0x010CE9 08:8CD9: 20 D2 89
 	RTS                             ;C - - - - - 0x010CEC 08:8CDC: 60
@@ -1289,7 +1289,7 @@ ofs_08_8CE1:
 	LDA #$FF                        ;C - - J - - 0x010CF1 08:8CE1: A9 FF
 	STA ram_00BC                    ;C - - - - - 0x010CF3 08:8CE3: 85 BC
 	LDA enemiesDefeated             ;C - - - - - 0x010CF5 08:8CE5: A5 54
-	CMP tbl_08_8DEB,Y               ;C - - - - - 0x010CF7 08:8CE7: D9 EB 8D
+	CMP StageEventDispatchTbl_8DEB,Y;C - - - - - 0x010CF7 08:8CE7: D9 EB 8D
 	BCC loc_08_8CF4                 ;C - - - - - 0x010CFA 08:8CEA: 90 08
 	JSR CountBossLikeObjs           ;C - - - - - 0x010CFC 08:8CEC: 20 FC 96
 	BNE loc_08_8CF4                 ;C - - - - - 0x010CFF 08:8CEF: D0 03
@@ -1298,18 +1298,18 @@ loc_08_8CF4:
 	RTS                             ;C - - - - - 0x010D04 08:8CF4: 60
 ofs_08_8CF5:
 	LDY scrollXPage                 ;C - - J - - 0x010D05 08:8CF5: A4 F9
-	LDA tbl_08_8D04,Y               ;C - - - - - 0x010D07 08:8CF7: B9 04 8D
+	LDA StageEventDispatchTbl_8D04,Y;C - - - - - 0x010D07 08:8CF7: B9 04 8D
 	STA ptr_06                      ;C - - - - - 0x010D0A 08:8CFA: 85 06
-	LDA tbl_08_8D08,Y               ;C - - - - - 0x010D0C 08:8CFC: B9 08 8D
+	LDA StageEventDispatchTbl_8D08,Y;C - - - - - 0x010D0C 08:8CFC: B9 08 8D
 	STA ptr_06+1                    ;C - - - - - 0x010D0F 08:8CFF: 85 07
 	JMP (ptr_06)                    ;C - - - - - 0x010D11 08:8D01: 6C 06 00
-tbl_08_8D04:
+StageEventDispatchTbl_8D04:
 	.lobytes ofs_08_8A43, ofs_08_8D0C, ofs_08_8D1B, ofs_08_8D2A;- - - - - - 0x010D14 08:8D04:
-tbl_08_8D08:
+StageEventDispatchTbl_8D08:
 	.hibytes ofs_08_8A43, ofs_08_8D0C, ofs_08_8D1B, ofs_08_8D2A;- - - - - - 0x010D18 08:8D08:
 ofs_08_8D0C:
 	LDA enemiesDefeated             ;C - - J - - 0x010D1C 08:8D0C: A5 54
-	CMP tbl_08_8DEE,Y               ;C - - - - - 0x010D1E 08:8D0E: D9 EE 8D
+	CMP StageEventDispatchTbl_8DEE,Y;C - - - - - 0x010D1E 08:8D0E: D9 EE 8D
 	BCC loc_08_8D17                 ;C - - - - - 0x010D21 08:8D11: 90 04
 	JSR SetEventFlag3F              ;C - - - - - 0x010D23 08:8D13: 20 D2 89
 	RTS                             ;C - - - - - 0x010D26 08:8D16: 60
@@ -1318,7 +1318,7 @@ loc_08_8D17:
 	RTS                             ;C - - - - - 0x010D2A 08:8D1A: 60
 ofs_08_8D1B:
 	LDA enemiesDefeated             ;C - - J - - 0x010D2B 08:8D1B: A5 54
-	CMP tbl_08_8DEE,Y               ;C - - - - - 0x010D2D 08:8D1D: D9 EE 8D
+	CMP StageEventDispatchTbl_8DEE,Y;C - - - - - 0x010D2D 08:8D1D: D9 EE 8D
 	BCC loc_08_8D26                 ;C - - - - - 0x010D30 08:8D20: 90 04
 	JSR SetEventFlag3F              ;C - - - - - 0x010D32 08:8D22: 20 D2 89
 	RTS                             ;C - - - - - 0x010D35 08:8D25: 60
@@ -1327,7 +1327,7 @@ loc_08_8D26:
 	RTS                             ;C - - - - - 0x010D39 08:8D29: 60
 ofs_08_8D2A:
 	LDA enemiesDefeated             ;C - - J - - 0x010D3A 08:8D2A: A5 54
-	CMP tbl_08_8DEE,Y               ;C - - - - - 0x010D3C 08:8D2C: D9 EE 8D
+	CMP StageEventDispatchTbl_8DEE,Y;C - - - - - 0x010D3C 08:8D2C: D9 EE 8D
 	BCC loc_08_8D39                 ;C - - - - - 0x010D3F 08:8D2F: 90 08
 	JSR CountBossLikeObjs           ;C - - - - - 0x010D41 08:8D31: 20 FC 96
 	BNE loc_08_8D39                 ;C - - - - - 0x010D44 08:8D34: D0 03
@@ -1336,18 +1336,18 @@ loc_08_8D39:
 	RTS                             ;C - - - - - 0x010D49 08:8D39: 60
 ofs_08_8D3A:
 	LDY scrollXPage                 ;C - - J - - 0x010D4A 08:8D3A: A4 F9
-	LDA tbl_08_8D49,Y               ;C - - - - - 0x010D4C 08:8D3C: B9 49 8D
+	LDA StageEventDispatchTbl_8D49,Y;C - - - - - 0x010D4C 08:8D3C: B9 49 8D
 	STA ptr_06                      ;C - - - - - 0x010D4F 08:8D3F: 85 06
-	LDA tbl_08_8D4D,Y               ;C - - - - - 0x010D51 08:8D41: B9 4D 8D
+	LDA StageEventDispatchTbl_8D4D,Y;C - - - - - 0x010D51 08:8D41: B9 4D 8D
 	STA ptr_06+1                    ;C - - - - - 0x010D54 08:8D44: 85 07
 	JMP (ptr_06)                    ;C - - - - - 0x010D56 08:8D46: 6C 06 00
-tbl_08_8D49:
+StageEventDispatchTbl_8D49:
 	.lobytes ofs_08_8A43, ofs_08_8D51, ofs_08_8D60, ofs_08_8D6F;- - - - - - 0x010D59 08:8D49:
-tbl_08_8D4D:
+StageEventDispatchTbl_8D4D:
 	.hibytes ofs_08_8A43, ofs_08_8D51, ofs_08_8D60, ofs_08_8D6F;- - - - - - 0x010D5D 08:8D4D:
 ofs_08_8D51:
 	LDA enemiesDefeated             ;C - - J - - 0x010D61 08:8D51: A5 54
-	CMP tbl_08_8DF2,Y               ;C - - - - - 0x010D63 08:8D53: D9 F2 8D
+	CMP StageEventDispatchTbl_8DF2,Y;C - - - - - 0x010D63 08:8D53: D9 F2 8D
 	BCC loc_08_8D5C                 ;C - - - - - 0x010D66 08:8D56: 90 04
 	JSR SetEventFlag3F              ;C - - - - - 0x010D68 08:8D58: 20 D2 89
 	RTS                             ;C - - - - - 0x010D6B 08:8D5B: 60
@@ -1356,7 +1356,7 @@ loc_08_8D5C:
 	RTS                             ;C - - - - - 0x010D6F 08:8D5F: 60
 ofs_08_8D60:
 	LDA enemiesDefeated             ;C - - J - - 0x010D70 08:8D60: A5 54
-	CMP tbl_08_8DF2,Y               ;C - - - - - 0x010D72 08:8D62: D9 F2 8D
+	CMP StageEventDispatchTbl_8DF2,Y;C - - - - - 0x010D72 08:8D62: D9 F2 8D
 	BCC loc_08_8D6B                 ;C - - - - - 0x010D75 08:8D65: 90 04
 	JSR SetEventFlag3F              ;C - - - - - 0x010D77 08:8D67: 20 D2 89
 	RTS                             ;C - - - - - 0x010D7A 08:8D6A: 60
@@ -1367,7 +1367,7 @@ ofs_08_8D6F:
 	LDA #$FF                        ;C - - J - - 0x010D7F 08:8D6F: A9 FF
 	STA ram_00BC                    ;C - - - - - 0x010D81 08:8D71: 85 BC
 	LDA enemiesDefeated             ;C - - - - - 0x010D83 08:8D73: A5 54
-	CMP tbl_08_8DF2,Y               ;C - - - - - 0x010D85 08:8D75: D9 F2 8D
+	CMP StageEventDispatchTbl_8DF2,Y;C - - - - - 0x010D85 08:8D75: D9 F2 8D
 	BCC loc_08_8D82                 ;C - - - - - 0x010D88 08:8D78: 90 08
 	JSR CountBossLikeObjs           ;C - - - - - 0x010D8A 08:8D7A: 20 FC 96
 	BNE loc_08_8D82                 ;C - - - - - 0x010D8D 08:8D7D: D0 03
@@ -1376,18 +1376,18 @@ loc_08_8D82:
 	RTS                             ;C - - - - - 0x010D92 08:8D82: 60
 ofs_08_8D83:
 	LDY scrollXPage                 ;C - - J - - 0x010D93 08:8D83: A4 F9
-	LDA tbl_08_8D92,Y               ;C - - - - - 0x010D95 08:8D85: B9 92 8D
+	LDA StageEventDispatchTbl_8D92,Y;C - - - - - 0x010D95 08:8D85: B9 92 8D
 	STA ptr_06                      ;C - - - - - 0x010D98 08:8D88: 85 06
-	LDA tbl_08_8D95,Y               ;C - - - - - 0x010D9A 08:8D8A: B9 95 8D
+	LDA StageEventDispatchTbl_8D95,Y;C - - - - - 0x010D9A 08:8D8A: B9 95 8D
 	STA ptr_06+1                    ;C - - - - - 0x010D9D 08:8D8D: 85 07
 	JMP (ptr_06)                    ;C - - - - - 0x010D9F 08:8D8F: 6C 06 00
-tbl_08_8D92:
+StageEventDispatchTbl_8D92:
 	.lobytes ofs_08_8A43, ofs_08_8D98, ofs_08_8DA8;- - - - - - 0x010DA2 08:8D92:
-tbl_08_8D95:
+StageEventDispatchTbl_8D95:
 	.hibytes ofs_08_8A43, ofs_08_8D98, ofs_08_8DA8;- - - - - - 0x010DA5 08:8D95:
 ofs_08_8D98:
 	LDA enemiesDefeated             ;C - - J - - 0x010DA8 08:8D98: A5 54
-	CMP tbl_08_8DF6,Y               ;C - - - - - 0x010DAA 08:8D9A: D9 F6 8D
+	CMP StageEventDispatchTbl_8DF6,Y;C - - - - - 0x010DAA 08:8D9A: D9 F6 8D
 	BCC loc_08_8DA7                 ;C - - - - - 0x010DAD 08:8D9D: 90 08
 	JSR CountBossLikeObjs           ;C - - - - - 0x010DAF 08:8D9F: 20 FC 96
 	BNE loc_08_8DA7                 ;C - - - - - 0x010DB2 08:8DA2: D0 03
@@ -1412,50 +1412,50 @@ loc_08_8DBB:
 	JSR SetEventFlag3F              ;c - - - - - 0x010DD0 08:8DC0: 20 D2 89
 loc_08_8DC3:
 	RTS                             ;C - - - - - 0x010DD3 08:8DC3: 60
-tbl_08_8DC4:
+StageEventDispatchTbl_8DC4:
 	.byte $00                       ;- - - - - - 0x010DD4 08:8DC4:
 	.byte $03,$03,$04               ;- D 0 - - - 0x010DD5 08:8DC5:
-tbl_08_8DC8:
+StageEventDispatchTbl_8DC8:
 	.byte $00                       ;- - - - - - 0x010DD8 08:8DC8:
 	.byte $04,$03                   ;- D 0 - - - 0x010DD9 08:8DC9:
 	.byte $01                       ;- - - - - - 0x010DDB 08:8DCB:
-tbl_08_8DCC:
+StageEventDispatchTbl_8DCC:
 	.byte $00                       ;- - - - - - 0x010DDC 08:8DCC:
 	.byte $01                       ;- D 0 - - - 0x010DDD 08:8DCD:
-tbl_08_8DCE:
+StageEventDispatchTbl_8DCE:
 	.byte $00                       ;- - - - - - 0x010DDE 08:8DCE:
 	.byte $03,$04,$04               ;- D 0 - - - 0x010DDF 08:8DCF:
-tbl_08_8DD2:
+StageEventDispatchTbl_8DD2:
 	.byte $00                       ;- - - - - - 0x010DE2 08:8DD2:
 	.byte $06,$04,$04,$06           ;- D 0 - - - 0x010DE3 08:8DD3:
-tbl_08_8DD7:
+StageEventDispatchTbl_8DD7:
 	.byte $00                       ;- - - - - - 0x010DE7 08:8DD7:
 	.byte $01                       ;- D 0 - - - 0x010DE8 08:8DD8:
-tbl_08_8DD9:
+StageEventDispatchTbl_8DD9:
 	.byte $00                       ;- - - - - - 0x010DE9 08:8DD9:
 	.byte $04,$04,$05               ;- D 0 - - - 0x010DEA 08:8DDA:
-tbl_08_8DDD:
+StageEventDispatchTbl_8DDD:
 	.byte $00                       ;- - - - - - 0x010DED 08:8DDD:
 	.byte $05,$04,$04               ;- D 0 - - - 0x010DEE 08:8DDE:
-tbl_08_8DE1:
+StageEventDispatchTbl_8DE1:
 	.byte $01                       ;- D 0 - - - 0x010DF1 08:8DE1:
-tbl_08_8DE2:
+StageEventDispatchTbl_8DE2:
 	.byte $00                       ;- - - - - - 0x010DF2 08:8DE2:
 	.byte $05,$03                   ;- D 0 - - - 0x010DF3 08:8DE3:
 	.byte $02                       ;- - - - - - 0x010DF5 08:8DE5:
-tbl_08_8DE6:
+StageEventDispatchTbl_8DE6:
 	.byte $16                       ;- D 0 - - - 0x010DF6 08:8DE6:
 	.byte $16,$02,$02,$02           ;- - - - - - 0x010DF7 08:8DE7:
-tbl_08_8DEB:
+StageEventDispatchTbl_8DEB:
 	.byte $00                       ;- - - - - - 0x010DFB 08:8DEB:
 	.byte $05,$01                   ;- D 0 - - - 0x010DFC 08:8DEC:
-tbl_08_8DEE:
+StageEventDispatchTbl_8DEE:
 	.byte $00                       ;- - - - - - 0x010DFE 08:8DEE:
 	.byte $08,$05,$01               ;- D 0 - - - 0x010DFF 08:8DEF:
-tbl_08_8DF2:
+StageEventDispatchTbl_8DF2:
 	.byte $00                       ;- - - - - - 0x010E02 08:8DF2:
 	.byte $07,$05,$01               ;- D 0 - - - 0x010E03 08:8DF3:
-tbl_08_8DF6:
+StageEventDispatchTbl_8DF6:
 	.byte $00                       ;- - - - - - 0x010E06 08:8DF6:
 	.byte $00                       ;- D 0 - - - 0x010E07 08:8DF7:
 	.byte $01,$00,$00,$00,$00,$00,$00,$00,$40,$40,$81,$51,$41,$51,$80,$00;- - - - - - 0x010E08 08:8DF8:
@@ -1514,7 +1514,7 @@ loc_08_9012:
 	CMP #$01                        ;C - - - - - 0x01102F 08:901F: C9 01
 	BCC loc_08_9038                 ;C - - - - - 0x011031 08:9021: 90 15
 	RTS                             ;C - - - - - 0x011033 08:9023: 60
-tbl_08_9024:
+UpdateSpawnTimerTbl_9024:
 	.byte $1E,$3C,$5A,$78,$96,$3C,$1E,$3C,$B4,$78,$3C,$1E,$69,$78,$96,$1E;- D 0 - - - 0x011034 08:9024:
 	.byte $3C,$5A,$78,$3C           ;- - - - - - 0x011044 08:9034:
 loc_08_9038:
@@ -1524,7 +1524,7 @@ loc_08_9038:
 	STA rngState0                   ;C - - - - - 0x01104D 08:903D: 85 E4
 	AND #$0F                        ;C - - - - - 0x01104F 08:903F: 29 0F
 	TAY                             ;C - - - - - 0x011051 08:9041: A8
-	LDA tbl_08_9024,Y               ;C - - - - - 0x011052 08:9042: B9 24 90
+	LDA UpdateSpawnTimerTbl_9024,Y  ;C - - - - - 0x011052 08:9042: B9 24 90
 	STA enemySpawnTimer             ;C - - - - - 0x011055 08:9045: 85 63
 	LDA stage                       ;C - - - - - 0x011057 08:9047: A5 61
 	CMP #$03                        ;C - - - - - 0x011059 08:9049: C9 03
@@ -1572,13 +1572,13 @@ loc_08_9056:
 	STA rngState1                   ;C - - - - - 0x0110C3 08:90B3: 85 E5
 	AND #$1F                        ;C - - - - - 0x0110C5 08:90B5: 29 1F
 	TAX                             ;C - - - - - 0x0110C7 08:90B7: AA
-	LDA tbl_08_964B,X               ;C - - - - - 0x0110C8 08:90B8: BD 4B 96
+	LDA UpdateSpawnTimerTbl_964B,X  ;C - - - - - 0x0110C8 08:90B8: BD 4B 96
 	STA objX,Y                      ;C - - - - - 0x0110CB 08:90BB: 99 60 03
 	LDA scrollXPage                 ;C - - - - - 0x0110CE 08:90BE: A5 F9
 	CLC                             ;C - - - - - 0x0110D0 08:90C0: 18
-	ADC tbl_08_966B,X               ;C - - - - - 0x0110D1 08:90C1: 7D 6B 96
+	ADC UpdateSpawnTimerTbl_966B,X  ;C - - - - - 0x0110D1 08:90C1: 7D 6B 96
 	STA objXPage,Y                  ;C - - - - - 0x0110D4 08:90C4: 99 80 03
-	LDA tbl_08_968B,X               ;C - - - - - 0x0110D7 08:90C7: BD 8B 96
+	LDA UpdateSpawnTimerTbl_968B,X  ;C - - - - - 0x0110D7 08:90C7: BD 8B 96
 	STA objY,Y                      ;C - - - - - 0x0110DA 08:90CA: 99 C0 03
 	LDA stage                       ;C - - - - - 0x0110DD 08:90CD: A5 61
 	BNE loc_08_90EF                 ;C - - - - - 0x0110DF 08:90CF: D0 1E
@@ -1593,7 +1593,7 @@ loc_08_9056:
 	STA rngState2                   ;C - - - - - 0x0110F2 08:90E2: 85 E6
 	AND #$07                        ;C - - - - - 0x0110F4 08:90E4: 29 07
 	TAX                             ;C - - - - - 0x0110F6 08:90E6: AA
-	LDA tbl_08_96AB,X               ;C - - - - - 0x0110F7 08:90E7: BD AB 96
+	LDA UpdateSpawnTimerTbl_96AB,X  ;C - - - - - 0x0110F7 08:90E7: BD AB 96
 	STA objY,Y                      ;C - - - - - 0x0110FA 08:90EA: 99 C0 03
 	BNE loc_08_910A                 ;C - - - - - 0x0110FD 08:90ED: D0 1B
 loc_08_90EF:
@@ -1608,7 +1608,7 @@ loc_08_90EF:
 	STA rngState2                   ;C - - - - - 0x01110F 08:90FF: 85 E6
 	AND #$07                        ;C - - - - - 0x011111 08:9101: 29 07
 	TAX                             ;C - - - - - 0x011113 08:9103: AA
-	LDA tbl_08_96B3,X               ;C - - - - - 0x011114 08:9104: BD B3 96
+	LDA UpdateSpawnTimerTbl_96B3,X  ;C - - - - - 0x011114 08:9104: BD B3 96
 	STA objY,Y                      ;C - - - - - 0x011117 08:9107: 99 C0 03
 loc_08_910A:
 	LDX #$0D                        ;C - - - - - 0x01111A 08:910A: A2 0D
@@ -1679,16 +1679,16 @@ loc_08_9174:
 	SBC ptr_00+1                    ;C - - - - - 0x01118E 08:917E: E5 01
 	STA ptr_00+1                    ;C - - - - - 0x011190 08:9180: 85 01
 	LDY stage                       ;C - - - - - 0x011192 08:9182: A4 61
-	LDA tbl_08_9363,Y               ;C - - - - - 0x011194 08:9184: B9 63 93
+	LDA UpdateSpawnTimerTbl_9363,Y  ;C - - - - - 0x011194 08:9184: B9 63 93
 	STA ptr_02                      ;C - - - - - 0x011197 08:9187: 85 02
-	LDA tbl_08_9368,Y               ;C - - - - - 0x011199 08:9189: B9 68 93
+	LDA UpdateSpawnTimerTbl_9368,Y  ;C - - - - - 0x011199 08:9189: B9 68 93
 	STA ptr_02+1                    ;C - - - - - 0x01119C 08:918C: 85 03
 	LDY stageSection                ;C - - - - - 0x01119E 08:918E: A4 60
 	LDA (ptr_02),Y                  ;C - - - - - 0x0111A0 08:9190: B1 02
 	TAY                             ;C - - - - - 0x0111A2 08:9192: A8
-	LDA tbl_08_937C,Y               ;C - - - - - 0x0111A3 08:9193: B9 7C 93
+	LDA UpdateSpawnTimerTbl_937C,Y  ;C - - - - - 0x0111A3 08:9193: B9 7C 93
 	STA ptr_04                      ;C - - - - - 0x0111A6 08:9196: 85 04
-	LDA tbl_08_938B,Y               ;C - - - - - 0x0111A8 08:9198: B9 8B 93
+	LDA UpdateSpawnTimerTbl_938B,Y  ;C - - - - - 0x0111A8 08:9198: B9 8B 93
 	STA ptr_04+1                    ;C - - - - - 0x0111AB 08:919B: 85 05
 	LDY scrollXPage                 ;C - - - - - 0x0111AD 08:919D: A4 F9
 	LDA (ptr_04),Y                  ;C - - - - - 0x0111AF 08:919F: B1 04
@@ -1696,14 +1696,14 @@ loc_08_9174:
 	ADC ptr_00+1                    ;C - - - - - 0x0111B2 08:91A2: 65 01
 	TAX                             ;C - - - - - 0x0111B4 08:91A4: AA
 	LDY ram_003C                    ;C - - - - - 0x0111B5 08:91A5: A4 3C
-	LDA tbl_08_94DD,X               ;C - - - - - 0x0111B7 08:91A7: BD DD 94
+	LDA UpdateSpawnTimerTbl_94DD,X  ;C - - - - - 0x0111B7 08:91A7: BD DD 94
 	JSR SetAnimY                    ;C - - - - - 0x0111BA 08:91AA: 20 A0 F2
-	LDA tbl_08_9456,X               ;C - - - - - 0x0111BD 08:91AD: BD 56 94
+	LDA UpdateSpawnTimerTbl_9456,X  ;C - - - - - 0x0111BD 08:91AD: BD 56 94
 	STA objKind,Y                   ;C - - - - - 0x0111C0 08:91B0: 99 20 03
 	STA objId,Y                     ;C - - - - - 0x0111C3 08:91B3: 99 30 03
-	LDA tbl_08_9564,X               ;C - - - - - 0x0111C6 08:91B6: BD 64 95
+	LDA UpdateSpawnTimerTbl_9564,X  ;C - - - - - 0x0111C6 08:91B6: BD 64 95
 	STA objSpriteDown,Y             ;C - - - - - 0x0111C9 08:91B9: 99 B0 05
-	LDA tbl_08_93CF,X               ;C - - - - - 0x0111CC 08:91BC: BD CF 93
+	LDA UpdateSpawnTimerTbl_93CF,X  ;C - - - - - 0x0111CC 08:91BC: BD CF 93
 	STA objSpriteAir,Y              ;C - - - - - 0x0111CF 08:91BF: 99 F0 04
 	STX ptr_02                      ;C - - - - - 0x0111D2 08:91C2: 86 02
 	LDA rngState0                   ;C - - - - - 0x0111D4 08:91C4: A5 E4
@@ -1727,19 +1727,19 @@ loc_08_9174:
 	CMP #$04                        ;C - - - - - 0x0111F7 08:91E7: C9 04
 	BEQ loc_08_91FF                 ;C - - - - - 0x0111F9 08:91E9: F0 14
 loc_08_91EB:
-	LDA tbl_08_95EB,X               ;C - - - - - 0x0111FB 08:91EB: BD EB 95
+	LDA UpdateSpawnTimerTbl_95EB,X  ;C - - - - - 0x0111FB 08:91EB: BD EB 95
 	BNE loc_08_9202                 ;C - - - - - 0x0111FE 08:91EE: D0 12
 loc_08_91F0:
-	LDA tbl_08_95FB,X               ;C - - - - - 0x011200 08:91F0: BD FB 95
+	LDA UpdateSpawnTimerTbl_95FB,X  ;C - - - - - 0x011200 08:91F0: BD FB 95
 	BNE loc_08_9202                 ;C - - - - - 0x011203 08:91F3: D0 0D
 loc_08_91F5:
-	LDA tbl_08_960B,X               ;C - - - - - 0x011205 08:91F5: BD 0B 96
+	LDA UpdateSpawnTimerTbl_960B,X  ;C - - - - - 0x011205 08:91F5: BD 0B 96
 	BNE loc_08_9202                 ;C - - - - - 0x011208 08:91F8: D0 08
 loc_08_91FA:
-	LDA tbl_08_961B,X               ;C - - - - - 0x01120A 08:91FA: BD 1B 96
+	LDA UpdateSpawnTimerTbl_961B,X  ;C - - - - - 0x01120A 08:91FA: BD 1B 96
 	BNE loc_08_9202                 ;C - - - - - 0x01120D 08:91FD: D0 03
 loc_08_91FF:
-	LDA tbl_08_962B,X               ;C - - - - - 0x01120F 08:91FF: BD 2B 96
+	LDA UpdateSpawnTimerTbl_962B,X  ;C - - - - - 0x01120F 08:91FF: BD 2B 96
 loc_08_9202:
 	STA objLife,Y                   ;C - - - - - 0x011212 08:9202: 99 90 04
 	STA objHudLife,Y                ;C - - - - - 0x011215 08:9205: 99 A0 04
@@ -1750,7 +1750,7 @@ loc_08_9209:
 	STA rngState2                   ;C - - - - - 0x01121D 08:920D: 85 E6
 	AND #$0F                        ;C - - - - - 0x01121F 08:920F: 29 0F
 	TAX                             ;C - - - - - 0x011221 08:9211: AA
-	LDA tbl_08_963B,X               ;C - - - - - 0x011222 08:9212: BD 3B 96
+	LDA UpdateSpawnTimerTbl_963B,X  ;C - - - - - 0x011222 08:9212: BD 3B 96
 	STA objLife,Y                   ;C - - - - - 0x011225 08:9215: 99 90 04
 	STA objHudLife,Y                ;C - - - - - 0x011228 08:9218: 99 A0 04
 loc_08_921B:
@@ -1792,7 +1792,7 @@ loc_08_921C:
 	STA rngState0                   ;C - - - - - 0x011286 08:9276: 85 E4
 	AND #$07                        ;C - - - - - 0x011288 08:9278: 29 07
 	TAX                             ;C - - - - - 0x01128A 08:927A: AA
-	LDA tbl_08_96BB,X               ;C - - - - - 0x01128B 08:927B: BD BB 96
+	LDA UpdateSpawnTimerTbl_96BB,X  ;C - - - - - 0x01128B 08:927B: BD BB 96
 	STA objX,Y                      ;C - - - - - 0x01128E 08:927E: 99 60 03
 	LDA #$30                        ;C - - - - - 0x011291 08:9281: A9 30
 	STA objY,Y                      ;C - - - - - 0x011293 08:9283: 99 C0 03
@@ -1869,7 +1869,7 @@ loc_08_92FE:
 	STA rngState0                   ;C - - - - - 0x011313 08:9303: 85 E4
 	AND #$01                        ;C - - - - - 0x011315 08:9305: 29 01
 	TAX                             ;C - - - - - 0x011317 08:9307: AA
-	LDA tbl_08_934D,X               ;C - - - - - 0x011318 08:9308: BD 4D 93
+	LDA UpdateSpawnTimerTbl_934D,X  ;C - - - - - 0x011318 08:9308: BD 4D 93
 	TAX                             ;C - - - - - 0x01131B 08:930B: AA
 	JMP loc_08_931D                 ;C - - - - - 0x01131C 08:930C: 4C 1D 93
 loc_08_930F:
@@ -1879,43 +1879,43 @@ loc_08_930F:
 	STA rngState1                   ;C - - - - - 0x011324 08:9314: 85 E5
 	AND #$01                        ;C - - - - - 0x011326 08:9316: 29 01
 	TAX                             ;C - - - - - 0x011328 08:9318: AA
-	LDA tbl_08_934B,X               ;C - - - - - 0x011329 08:9319: BD 4B 93
+	LDA UpdateSpawnTimerTbl_934B,X  ;C - - - - - 0x011329 08:9319: BD 4B 93
 	TAX                             ;C - - - - - 0x01132C 08:931C: AA
 loc_08_931D:
 	LDY ptr_00                      ;C - - - - - 0x01132D 08:931D: A4 00
-	LDA tbl_08_934F,X               ;C - - - - - 0x01132F 08:931F: BD 4F 93
+	LDA UpdateSpawnTimerTbl_934F,X  ;C - - - - - 0x01132F 08:931F: BD 4F 93
 	JSR SetAnimY                    ;C - - - - - 0x011332 08:9322: 20 A0 F2
 	LDA #$D4                        ;C - - - - - 0x011335 08:9325: A9 D4
 	STA objFlags,Y                  ;C - - - - - 0x011337 08:9327: 99 60 05
-	LDA tbl_08_9353,X               ;C - - - - - 0x01133A 08:932A: BD 53 93
+	LDA UpdateSpawnTimerTbl_9353,X  ;C - - - - - 0x01133A 08:932A: BD 53 93
 	STA objKind,Y                   ;C - - - - - 0x01133D 08:932D: 99 20 03
 	STA objId,Y                     ;C - - - - - 0x011340 08:9330: 99 30 03
-	LDA tbl_08_9357,X               ;C - - - - - 0x011343 08:9333: BD 57 93
+	LDA UpdateSpawnTimerTbl_9357,X  ;C - - - - - 0x011343 08:9333: BD 57 93
 	STA objSpriteDown,Y             ;C - - - - - 0x011346 08:9336: 99 B0 05
-	LDA tbl_08_935B,X               ;C - - - - - 0x011349 08:9339: BD 5B 93
+	LDA UpdateSpawnTimerTbl_935B,X  ;C - - - - - 0x011349 08:9339: BD 5B 93
 	STA objSpriteAir,Y              ;C - - - - - 0x01134C 08:933C: 99 F0 04
 	STX ptr_02                      ;C - - - - - 0x01134F 08:933F: 86 02
-	LDA tbl_08_935F,X               ;C - - - - - 0x011351 08:9341: BD 5F 93
+	LDA UpdateSpawnTimerTbl_935F,X  ;C - - - - - 0x011351 08:9341: BD 5F 93
 	STA objLife,Y                   ;C - - - - - 0x011354 08:9344: 99 90 04
 	STA objHudLife,Y                ;C - - - - - 0x011357 08:9347: 99 A0 04
 	RTS                             ;C - - - - - 0x01135A 08:934A: 60
-tbl_08_934B:
+UpdateSpawnTimerTbl_934B:
 	.byte $00,$01                   ;- D 0 - - - 0x01135B 08:934B:
-tbl_08_934D:
+UpdateSpawnTimerTbl_934D:
 	.byte $02,$03                   ;- D 0 - - - 0x01135D 08:934D:
-tbl_08_934F:
+UpdateSpawnTimerTbl_934F:
 	.byte $80,$99,$A1,$A1           ;- D 0 - - - 0x01135F 08:934F:
-tbl_08_9353:
+UpdateSpawnTimerTbl_9353:
 	.byte $38,$3B,$3E,$3E           ;- D 0 - - - 0x011363 08:9353:
-tbl_08_9357:
+UpdateSpawnTimerTbl_9357:
 	.byte $00,$03,$04,$04           ;- D 0 - - - 0x011367 08:9357:
-tbl_08_935B:
+UpdateSpawnTimerTbl_935B:
 	.byte $04,$04,$05,$05           ;- D 0 - - - 0x01136B 08:935B:
-tbl_08_935F:
+UpdateSpawnTimerTbl_935F:
 	.byte $30,$30,$38,$38           ;- D 0 - - - 0x01136F 08:935F:
-tbl_08_9363:
+UpdateSpawnTimerTbl_9363:
 	.lobytes tbl_08_936D, tbl_08_9370, tbl_08_9373, tbl_08_9376, tbl_08_9379;- D 0 - - - 0x011373 08:9363:
-tbl_08_9368:
+UpdateSpawnTimerTbl_9368:
 	.hibytes tbl_08_936D, tbl_08_9370, tbl_08_9373, tbl_08_9376, tbl_08_9379;- D 0 - - - 0x011378 08:9368:
 tbl_08_936D:
 	.byte $00,$01                   ;- D 0 - I - 0x01137D 08:936D:
@@ -1933,10 +1933,10 @@ tbl_08_9376:
 tbl_08_9379:
 	.byte $0C,$0D                   ;- D 0 - I - 0x011389 08:9379:
 	.byte $0E                       ;- - - - - - 0x01138B 08:937B:
-tbl_08_937C:
+UpdateSpawnTimerTbl_937C:
 	.lobytes tbl_08_939A, tbl_08_939E, tbl_08_93A2, tbl_08_93A4, tbl_08_93A8, tbl_08_93AD, tbl_08_93AF, tbl_08_93B3;- D 0 - - - 0x01138C 08:937C:
 	.lobytes tbl_08_93B7, tbl_08_93B8, tbl_08_93BC, tbl_08_93C0, tbl_08_93C4, tbl_08_93C8, tbl_08_93CC;- - - - - - 0x011394 08:9384:
-tbl_08_938B:
+UpdateSpawnTimerTbl_938B:
 	.hibytes tbl_08_939A, tbl_08_939E, tbl_08_93A2, tbl_08_93A4, tbl_08_93A8, tbl_08_93AD, tbl_08_93AF, tbl_08_93B3;- D 0 - - - 0x01139B 08:938B:
 	.hibytes tbl_08_93B7, tbl_08_93B8, tbl_08_93BC, tbl_08_93C0, tbl_08_93C4, tbl_08_93C8, tbl_08_93CC;- - - - - - 0x0113A3 08:9393:
 tbl_08_939A:
@@ -1988,7 +1988,7 @@ tbl_08_93C8:
 	.byte $7B                       ;- - - - - - 0x0113DB 08:93CB:
 tbl_08_93CC:
 	.byte $7E,$81,$84               ;- - - - - - 0x0113DC 08:93CC:
-tbl_08_93CF:
+UpdateSpawnTimerTbl_93CF:
 	.byte $05,$04,$03               ;- - - - - - 0x0113DF 08:93CF:
 	.byte $05,$04,$03,$05           ;- D 0 - - - 0x0113E2 08:93D2:
 	.byte $04                       ;- - - - - - 0x0113E6 08:93D6:
@@ -2020,7 +2020,7 @@ tbl_08_93CF:
 	.byte $05,$04,$03,$05,$04,$03   ;- - - - - - 0x01144E 08:943E:
 	.byte $05,$04,$03,$05,$04,$03   ;- D 0 - - - 0x011454 08:9444:
 	.byte $05,$04,$03,$05,$04,$03,$05,$04,$03,$05,$04,$03;- - - - - - 0x01145A 08:944A:
-tbl_08_9456:
+UpdateSpawnTimerTbl_9456:
 	.byte $21,$23,$22               ;- - - - - - 0x011466 08:9456:
 	.byte $21,$23,$22,$21           ;- D 0 - - - 0x011469 08:9459:
 	.byte $23                       ;- - - - - - 0x01146D 08:945D:
@@ -2054,7 +2054,7 @@ tbl_08_9490:
 	.byte $34,$33,$32,$31,$30,$32   ;- - - - - - 0x0114D5 08:94C5:
 	.byte $31,$30,$32,$34,$30,$32   ;- D 0 - - - 0x0114DB 08:94CB:
 	.byte $34,$30,$32,$31,$33,$35,$31,$33,$35,$31,$33,$35;- - - - - - 0x0114E1 08:94D1:
-tbl_08_94DD:
+UpdateSpawnTimerTbl_94DD:
 	.byte $88,$99,$8F               ;- - - - - - 0x0114ED 08:94DD:
 	.byte $88,$99,$8F,$88           ;- D 0 - - - 0x0114F0 08:94E0:
 	.byte $99                       ;- - - - - - 0x0114F4 08:94E4:
@@ -2086,7 +2086,7 @@ tbl_08_94DD:
 	.byte $A1,$80,$8F,$88,$80,$B7   ;- - - - - - 0x01155C 08:954C:
 	.byte $88,$80,$B7,$A1,$99,$8F   ;- D 0 - - - 0x011562 08:9552:
 	.byte $A1,$99,$8F,$88,$99,$B7,$88,$99,$B7,$88,$99,$B7;- - - - - - 0x011568 08:9558:
-tbl_08_9564:
+UpdateSpawnTimerTbl_9564:
 	.byte $01,$03,$02               ;- - - - - - 0x011574 08:9564:
 	.byte $01,$03,$02,$01           ;- D 0 - - - 0x011577 08:9567:
 	.byte $03                       ;- - - - - - 0x01157B 08:956B:
@@ -2118,29 +2118,29 @@ tbl_08_9564:
 	.byte $04,$03,$02,$01,$00,$05   ;- - - - - - 0x0115E3 08:95D3:
 	.byte $01,$00,$05,$04,$00,$02   ;- D 0 - - - 0x0115E9 08:95D9:
 	.byte $04,$00,$02,$01,$03,$05,$01,$03,$05,$01,$03,$05;- - - - - - 0x0115EF 08:95DF:
-tbl_08_95EB:
+UpdateSpawnTimerTbl_95EB:
 	.byte $08,$08,$08,$08,$10,$10,$10;- D 0 - - - 0x0115FB 08:95EB:
 	.byte $10                       ;- - - - - - 0x011602 08:95F2:
 	.byte $10,$10                   ;- D 0 - - - 0x011603 08:95F3:
 	.byte $18                       ;- - - - - - 0x011605 08:95F5:
 	.byte $18,$18,$18,$28,$28       ;- D 0 - - - 0x011606 08:95F6:
-tbl_08_95FB:
+UpdateSpawnTimerTbl_95FB:
 	.byte $10,$10,$10               ;- D 0 - - - 0x01160B 08:95FB:
 	.byte $10                       ;- - - - - - 0x01160E 08:95FE:
 	.byte $18,$18,$18,$18,$28,$28,$28,$28,$30,$30,$30,$48;- D 0 - - - 0x01160F 08:95FF:
-tbl_08_960B:
+UpdateSpawnTimerTbl_960B:
 	.byte $28,$28,$28,$28           ;- D 0 - - - 0x01161B 08:960B:
 	.byte $38                       ;- - - - - - 0x01161F 08:960F:
 	.byte $38,$38,$38,$40,$40,$40,$40,$48,$48,$48,$58;- D 0 - - - 0x011620 08:9610:
-tbl_08_961B:
+UpdateSpawnTimerTbl_961B:
 	.byte $30,$30,$30,$30,$40,$40,$40,$40,$48;- D 0 - - - 0x01162B 08:961B:
 	.byte $48,$48,$48               ;- - - - - - 0x011634 08:9624:
 	.byte $50                       ;- D 0 - - - 0x011637 08:9627:
 	.byte $50                       ;- - - - - - 0x011638 08:9628:
 	.byte $50,$60                   ;- D 0 - - - 0x011639 08:9629:
-tbl_08_962B:
+UpdateSpawnTimerTbl_962B:
 	.byte $38,$38,$38,$38,$48,$48,$48,$48,$58,$58,$58,$58,$60,$60,$60,$60;- D 0 - - - 0x01163B 08:962B:
-tbl_08_963B:
+UpdateSpawnTimerTbl_963B:
 	.byte $68                       ;- - - - - - 0x01164B 08:963B:
 	.byte $40,$60,$68               ;- D 0 - - - 0x01164C 08:963C:
 	.byte $48                       ;- - - - - - 0x01164F 08:963F:
@@ -2152,25 +2152,25 @@ tbl_08_963B:
 	.byte $58                       ;- - - - - - 0x011658 08:9648:
 	.byte $48                       ;- D 0 - - - 0x011659 08:9649:
 	.byte $48                       ;- - - - - - 0x01165A 08:964A:
-tbl_08_964B:
+UpdateSpawnTimerTbl_964B:
 	.byte $10,$F0,$14,$F0,$14,$FC,$14,$F0,$10,$F0,$14,$F0,$14,$FC,$14,$F0;- D 0 - - - 0x01165B 08:964B:
 	.byte $10,$F0,$14,$F0,$14,$FC,$14,$F0,$10,$F0,$14,$F0,$14,$FC,$14,$F0;- D 0 - - - 0x01166B 08:965B:
-tbl_08_966B:
+UpdateSpawnTimerTbl_966B:
 	.byte $01,$FF,$01,$FF,$01,$FF,$01,$FF,$01,$FF,$01,$FF,$01,$FF,$01,$FF;- D 0 - - - 0x01167B 08:966B:
 	.byte $01,$FF,$01,$FF,$01,$FF,$01,$FF,$01,$FF,$01,$FF,$01,$FF,$01,$FF;- D 0 - - - 0x01168B 08:967B:
-tbl_08_968B:
+UpdateSpawnTimerTbl_968B:
 	.byte $90,$90,$98,$90,$8C,$90,$98,$90,$9C,$98,$90;- D 0 - - - 0x01169B 08:968B:
 	.word ofs_08_8C8C, tbl_08_9490, tbl_08_9C8C;W 0x0116A6 08:9696:
 	.byte $98,$98,$8C,$94,$94,$98,$90,$90,$90,$98,$9C,$94,$98,$90,$98;- D 0 - - - 0x0116AC 08:969C:
-tbl_08_96AB:
+UpdateSpawnTimerTbl_96AB:
 	.byte $80,$94,$78               ;- - - - - - 0x0116BB 08:96AB:
 	.byte $94                       ;- D 0 - - - 0x0116BE 08:96AE:
 	.byte $88                       ;- - - - - - 0x0116BF 08:96AF:
 	.byte $78                       ;- D 0 - - - 0x0116C0 08:96B0:
 	.byte $90,$98                   ;- - - - - - 0x0116C1 08:96B1:
-tbl_08_96B3:
+UpdateSpawnTimerTbl_96B3:
 	.byte $98,$A0,$9C,$A4,$98,$A4,$98,$A0;- D 0 - - - 0x0116C3 08:96B3:
-tbl_08_96BB:
+UpdateSpawnTimerTbl_96BB:
 	.byte $58,$58,$68,$78,$88,$98,$A8,$A8;- D 0 - - - 0x0116CB 08:96BB:
 ; $FF if two or more
 CountActiveFoes:
@@ -2236,21 +2236,21 @@ loc_08_9727:
 	RTS                             ;C - - - - - 0x011739 08:9729: 60
 StageEventDispatch2:
 	LDY stage                       ;C - - - - - 0x01173A 08:972A: A4 61
-	LDA tbl_08_9748,Y               ;C - - - - - 0x01173C 08:972C: B9 48 97
+	LDA StageEventDispatch2Tbl_9748,Y;C - - - - - 0x01173C 08:972C: B9 48 97
 	STA ptr_02                      ;C - - - - - 0x01173F 08:972F: 85 02
-	LDA tbl_08_974D,Y               ;C - - - - - 0x011741 08:9731: B9 4D 97
+	LDA StageEventDispatch2Tbl_974D,Y;C - - - - - 0x011741 08:9731: B9 4D 97
 	STA ptr_02+1                    ;C - - - - - 0x011744 08:9734: 85 03
 	LDY stageSection                ;C - - - - - 0x011746 08:9736: A4 60
 	LDA (ptr_02),Y                  ;C - - - - - 0x011748 08:9738: B1 02
 	TAY                             ;C - - - - - 0x01174A 08:973A: A8
-	LDA tbl_08_9761,Y               ;C - - - - - 0x01174B 08:973B: B9 61 97
+	LDA StageEventDispatch2Tbl_9761,Y;C - - - - - 0x01174B 08:973B: B9 61 97
 	STA ptr_04                      ;C - - - - - 0x01174E 08:973E: 85 04
-	LDA tbl_08_9770,Y               ;C - - - - - 0x011750 08:9740: B9 70 97
+	LDA StageEventDispatch2Tbl_9770,Y;C - - - - - 0x011750 08:9740: B9 70 97
 	STA ptr_04+1                    ;C - - - - - 0x011753 08:9743: 85 05
 	JMP (ptr_04)                    ;C - - - - - 0x011755 08:9745: 6C 04 00
-tbl_08_9748:
+StageEventDispatch2Tbl_9748:
 	.lobytes tbl_08_9752, tbl_08_9755, tbl_08_9758, tbl_08_975B, tbl_08_975E;- D 0 - - - 0x011758 08:9748:
-tbl_08_974D:
+StageEventDispatch2Tbl_974D:
 	.hibytes tbl_08_9752, tbl_08_9755, tbl_08_9758, tbl_08_975B, tbl_08_975E;- D 0 - - - 0x01175D 08:974D:
 tbl_08_9752:
 	.byte $00,$01                   ;- D 0 - I - 0x011762 08:9752:
@@ -2267,35 +2267,35 @@ tbl_08_975B:
 	.byte $0B                       ;- D 0 - I - 0x01176D 08:975D:
 tbl_08_975E:
 	.byte $0C,$0D,$0E               ;- D 0 - I - 0x01176E 08:975E:
-tbl_08_9761:
+StageEventDispatch2Tbl_9761:
 	.lobytes ofs_08_977F, ofs_08_9788, tbl_08_97B4, ofs_08_97CE, ofs_08_97FA, tbl_08_982F, ofs_08_9849, ofs_08_9875;- D 0 - - - 0x011771 08:9761:
 	.lobytes tbl_08_98A1, ofs_08_98BB, tbl_08_98E7, ofs_08_9901, ofs_08_9947, ofs_08_9973, ofs_08_999F;- - - - - - 0x011779 08:9769:
-tbl_08_9770:
+StageEventDispatch2Tbl_9770:
 	.hibytes ofs_08_977F, ofs_08_9788, tbl_08_97B4, ofs_08_97CE, ofs_08_97FA, tbl_08_982F, ofs_08_9849, ofs_08_9875;- D 0 - - - 0x011780 08:9770:
 	.hibytes tbl_08_98A1, ofs_08_98BB, tbl_08_98E7, ofs_08_9901, ofs_08_9947, ofs_08_9973, ofs_08_999F;- - - - - - 0x011788 08:9778:
 ofs_08_977F:
 	LDY scrollXPage                 ;C - - J - - 0x01178F 08:977F: A4 F9
-	LDA tbl_08_99C2,Y               ;C - - - - - 0x011791 08:9781: B9 C2 99
+	LDA StageEventDispatch2Tbl_99C2,Y;C - - - - - 0x011791 08:9781: B9 C2 99
 	JSR SetSectionChr               ;C - - - - - bank=09 0x011794 08:9784: 20 00 A0
 ofs_08_9787:
 	RTS                             ;C - - - - - 0x011797 08:9787: 60
 ofs_08_9788:
 	LDY scrollXPage                 ;C - - J - - 0x011798 08:9788: A4 F9
-	LDA tbl_08_9797,Y               ;C - - - - - 0x01179A 08:978A: B9 97 97
+	LDA StageEventDispatch2Tbl_9797,Y;C - - - - - 0x01179A 08:978A: B9 97 97
 	STA ptr_06                      ;C - - - - - 0x01179D 08:978D: 85 06
-	LDA tbl_08_979B,Y               ;C - - - - - 0x01179F 08:978F: B9 9B 97
+	LDA StageEventDispatch2Tbl_979B,Y;C - - - - - 0x01179F 08:978F: B9 9B 97
 	STA ptr_06+1                    ;C - - - - - 0x0117A2 08:9792: 85 07
 	JMP (ptr_06)                    ;C - - - - - 0x0117A4 08:9794: 6C 06 00
-tbl_08_9797:
+StageEventDispatch2Tbl_9797:
 	.lobytes ofs_08_9787, ofs_08_979F, ofs_08_97A6, tbl_08_97AD;- - - - - - 0x0117A7 08:9797:
-tbl_08_979B:
+StageEventDispatch2Tbl_979B:
 	.hibytes ofs_08_9787, ofs_08_979F, ofs_08_97A6, tbl_08_97AD;- - - - - - 0x0117AB 08:979B:
 ofs_08_979F:
-	LDA tbl_08_99C6,Y               ;C - - J - - 0x0117AF 08:979F: B9 C6 99
+	LDA StageEventDispatch2Tbl_99C6,Y;C - - J - - 0x0117AF 08:979F: B9 C6 99
 	JSR SetSectionChr               ;C - - - - - bank=09 0x0117B2 08:97A2: 20 00 A0
 	RTS                             ;C - - - - - 0x0117B5 08:97A5: 60
 ofs_08_97A6:
-	LDA tbl_08_99C6,Y               ;C - - J - - 0x0117B6 08:97A6: B9 C6 99
+	LDA StageEventDispatch2Tbl_99C6,Y;C - - J - - 0x0117B6 08:97A6: B9 C6 99
 	JSR SetSectionChr               ;C - - - - - bank=09 0x0117B9 08:97A9: 20 00 A0
 	RTS                             ;C - - - - - 0x0117BC 08:97AC: 60
 tbl_08_97AD:
@@ -2309,48 +2309,48 @@ tbl_08_97B4:
 	.byte $99,$20,$00,$A0,$60       ;- - - - - - 0x0117D9 08:97C9:
 ofs_08_97CE:
 	LDY scrollXPage                 ;C - - J - - 0x0117DE 08:97CE: A4 F9
-	LDA tbl_08_97DD,Y               ;C - - - - - 0x0117E0 08:97D0: B9 DD 97
+	LDA StageEventDispatch2Tbl_97DD,Y;C - - - - - 0x0117E0 08:97D0: B9 DD 97
 	STA ptr_06                      ;C - - - - - 0x0117E3 08:97D3: 85 06
-	LDA tbl_08_97E1,Y               ;C - - - - - 0x0117E5 08:97D5: B9 E1 97
+	LDA StageEventDispatch2Tbl_97E1,Y;C - - - - - 0x0117E5 08:97D5: B9 E1 97
 	STA ptr_06+1                    ;C - - - - - 0x0117E8 08:97D8: 85 07
 	JMP (ptr_06)                    ;C - - - - - 0x0117EA 08:97DA: 6C 06 00
-tbl_08_97DD:
+StageEventDispatch2Tbl_97DD:
 	.lobytes ofs_08_9787, ofs_08_97E5, ofs_08_97EC, ofs_08_97F3;- - - - - - 0x0117ED 08:97DD:
-tbl_08_97E1:
+StageEventDispatch2Tbl_97E1:
 	.hibytes ofs_08_9787, ofs_08_97E5, ofs_08_97EC, ofs_08_97F3;- - - - - - 0x0117F1 08:97E1:
 ofs_08_97E5:
-	LDA tbl_08_99CC,Y               ;C - - J - - 0x0117F5 08:97E5: B9 CC 99
+	LDA StageEventDispatch2Tbl_99CC,Y;C - - J - - 0x0117F5 08:97E5: B9 CC 99
 	JSR SetSectionChr               ;C - - - - - bank=09 0x0117F8 08:97E8: 20 00 A0
 	RTS                             ;C - - - - - 0x0117FB 08:97EB: 60
 ofs_08_97EC:
-	LDA tbl_08_99CC,Y               ;C - - J - - 0x0117FC 08:97EC: B9 CC 99
+	LDA StageEventDispatch2Tbl_99CC,Y;C - - J - - 0x0117FC 08:97EC: B9 CC 99
 	JSR SetSectionChr               ;C - - - - - bank=09 0x0117FF 08:97EF: 20 00 A0
 	RTS                             ;C - - - - - 0x011802 08:97F2: 60
 ofs_08_97F3:
-	LDA tbl_08_99CC,Y               ;c - - - - - 0x011803 08:97F3: B9 CC 99
+	LDA StageEventDispatch2Tbl_99CC,Y;c - - - - - 0x011803 08:97F3: B9 CC 99
 	JSR SetSectionChr               ;c - - - - - bank=09 0x011806 08:97F6: 20 00 A0
 	RTS                             ;c - - - - - 0x011809 08:97F9: 60
 ofs_08_97FA:
 	LDY scrollXPage                 ;C - - J - - 0x01180A 08:97FA: A4 F9
-	LDA tbl_08_9809,Y               ;C - - - - - 0x01180C 08:97FC: B9 09 98
+	LDA StageEventDispatch2Tbl_9809,Y;C - - - - - 0x01180C 08:97FC: B9 09 98
 	STA ptr_06                      ;C - - - - - 0x01180F 08:97FF: 85 06
-	LDA tbl_08_980E,Y               ;C - - - - - 0x011811 08:9801: B9 0E 98
+	LDA StageEventDispatch2Tbl_980E,Y;C - - - - - 0x011811 08:9801: B9 0E 98
 	STA ptr_06+1                    ;C - - - - - 0x011814 08:9804: 85 07
 	JMP (ptr_06)                    ;C - - - - - 0x011816 08:9806: 6C 06 00
-tbl_08_9809:
+StageEventDispatch2Tbl_9809:
 	.lobytes ofs_08_9787, ofs_08_9813, ofs_08_981A, ofs_08_9821, tbl_08_9828;- - - - - - 0x011819 08:9809:
-tbl_08_980E:
+StageEventDispatch2Tbl_980E:
 	.hibytes ofs_08_9787, ofs_08_9813, ofs_08_981A, ofs_08_9821, tbl_08_9828;- - - - - - 0x01181E 08:980E:
 ofs_08_9813:
-	LDA tbl_08_99D0,Y               ;C - - J - - 0x011823 08:9813: B9 D0 99
+	LDA StageEventDispatch2Tbl_99D0,Y;C - - J - - 0x011823 08:9813: B9 D0 99
 	JSR SetSectionChr               ;C - - - - - bank=09 0x011826 08:9816: 20 00 A0
 	RTS                             ;C - - - - - 0x011829 08:9819: 60
 ofs_08_981A:
-	LDA tbl_08_99D0,Y               ;C - - J - - 0x01182A 08:981A: B9 D0 99
+	LDA StageEventDispatch2Tbl_99D0,Y;C - - J - - 0x01182A 08:981A: B9 D0 99
 	JSR SetSectionChr               ;C - - - - - bank=09 0x01182D 08:981D: 20 00 A0
 	RTS                             ;C - - - - - 0x011830 08:9820: 60
 ofs_08_9821:
-	LDA tbl_08_99D0,Y               ;C - - J - - 0x011831 08:9821: B9 D0 99
+	LDA StageEventDispatch2Tbl_99D0,Y;C - - J - - 0x011831 08:9821: B9 D0 99
 	JSR SetSectionChr               ;C - - - - - bank=09 0x011834 08:9824: 20 00 A0
 	RTS                             ;C - - - - - 0x011837 08:9827: 60
 tbl_08_9828:
@@ -2365,44 +2365,44 @@ tbl_08_983E:
 	.byte $87,$42,$97,$98,$B9,$D5,$99,$20,$00,$A0,$60;- - - - - - 0x01184E 08:983E:
 ofs_08_9849:
 	LDY scrollXPage                 ;C - - J - - 0x011859 08:9849: A4 F9
-	LDA tbl_08_9858,Y               ;C - - - - - 0x01185B 08:984B: B9 58 98
+	LDA StageEventDispatch2Tbl_9858,Y;C - - - - - 0x01185B 08:984B: B9 58 98
 	STA ptr_06                      ;C - - - - - 0x01185E 08:984E: 85 06
-	LDA tbl_08_985C,Y               ;C - - - - - 0x011860 08:9850: B9 5C 98
+	LDA StageEventDispatch2Tbl_985C,Y;C - - - - - 0x011860 08:9850: B9 5C 98
 	STA ptr_06+1                    ;C - - - - - 0x011863 08:9853: 85 07
 	JMP (ptr_06)                    ;C - - - - - 0x011865 08:9855: 6C 06 00
-tbl_08_9858:
+StageEventDispatch2Tbl_9858:
 	.lobytes ofs_08_9787, ofs_08_9860, ofs_08_9867, ofs_08_986E;- - - - - - 0x011868 08:9858:
-tbl_08_985C:
+StageEventDispatch2Tbl_985C:
 	.hibytes ofs_08_9787, ofs_08_9860, ofs_08_9867, ofs_08_986E;- - - - - - 0x01186C 08:985C:
 ofs_08_9860:
-	LDA tbl_08_99D7,Y               ;C - - J - - 0x011870 08:9860: B9 D7 99
+	LDA StageEventDispatch2Tbl_99D7,Y;C - - J - - 0x011870 08:9860: B9 D7 99
 	JSR SetSectionChr               ;C - - - - - bank=09 0x011873 08:9863: 20 00 A0
 	RTS                             ;C - - - - - 0x011876 08:9866: 60
 ofs_08_9867:
-	LDA tbl_08_99D7,Y               ;C - - J - - 0x011877 08:9867: B9 D7 99
+	LDA StageEventDispatch2Tbl_99D7,Y;C - - J - - 0x011877 08:9867: B9 D7 99
 	JSR SetSectionChr               ;C - - - - - bank=09 0x01187A 08:986A: 20 00 A0
 	RTS                             ;C - - - - - 0x01187D 08:986D: 60
 ofs_08_986E:
-	LDA tbl_08_99D7,Y               ;c - - - - - 0x01187E 08:986E: B9 D7 99
+	LDA StageEventDispatch2Tbl_99D7,Y;c - - - - - 0x01187E 08:986E: B9 D7 99
 	JSR SetSectionChr               ;c - - - - - bank=09 0x011881 08:9871: 20 00 A0
 	RTS                             ;c - - - - - 0x011884 08:9874: 60
 ofs_08_9875:
 	LDY scrollXPage                 ;C - - J - - 0x011885 08:9875: A4 F9
-	LDA tbl_08_9884,Y               ;C - - - - - 0x011887 08:9877: B9 84 98
+	LDA StageEventDispatch2Tbl_9884,Y;C - - - - - 0x011887 08:9877: B9 84 98
 	STA ptr_06                      ;C - - - - - 0x01188A 08:987A: 85 06
-	LDA tbl_08_9888,Y               ;C - - - - - 0x01188C 08:987C: B9 88 98
+	LDA StageEventDispatch2Tbl_9888,Y;C - - - - - 0x01188C 08:987C: B9 88 98
 	STA ptr_06+1                    ;C - - - - - 0x01188F 08:987F: 85 07
 	JMP (ptr_06)                    ;C - - - - - 0x011891 08:9881: 6C 06 00
-tbl_08_9884:
+StageEventDispatch2Tbl_9884:
 	.lobytes ofs_08_9787, ofs_08_988C, ofs_08_9893, tbl_08_989A;- - - - - - 0x011894 08:9884:
-tbl_08_9888:
+StageEventDispatch2Tbl_9888:
 	.hibytes ofs_08_9787, ofs_08_988C, ofs_08_9893, tbl_08_989A;- - - - - - 0x011898 08:9888:
 ofs_08_988C:
-	LDA tbl_08_99DB,Y               ;C - - J - - 0x01189C 08:988C: B9 DB 99
+	LDA StageEventDispatch2Tbl_99DB,Y;C - - J - - 0x01189C 08:988C: B9 DB 99
 	JSR SetSectionChr               ;C - - - - - bank=09 0x01189F 08:988F: 20 00 A0
 	RTS                             ;C - - - - - 0x0118A2 08:9892: 60
 ofs_08_9893:
-	LDA tbl_08_99DB,Y               ;C - - J - - 0x0118A3 08:9893: B9 DB 99
+	LDA StageEventDispatch2Tbl_99DB,Y;C - - J - - 0x0118A3 08:9893: B9 DB 99
 ofs_08_9896:
 	JSR SetSectionChr               ;C - - - - - bank=09 0x0118A6 08:9896: 20 00 A0
 	RTS                             ;C - - - - - 0x0118A9 08:9899: 60
@@ -2418,21 +2418,21 @@ tbl_08_98B0:
 	.byte $87,$B4,$97,$98,$B9,$E4,$99,$20,$00,$A0,$60;- - - - - - 0x0118C0 08:98B0:
 ofs_08_98BB:
 	LDY scrollXPage                 ;C - - J - - 0x0118CB 08:98BB: A4 F9
-	LDA tbl_08_98CA,Y               ;C - - - - - 0x0118CD 08:98BD: B9 CA 98
+	LDA StageEventDispatch2Tbl_98CA,Y;C - - - - - 0x0118CD 08:98BD: B9 CA 98
 	STA ptr_06                      ;C - - - - - 0x0118D0 08:98C0: 85 06
-	LDA tbl_08_98CE,Y               ;C - - - - - 0x0118D2 08:98C2: B9 CE 98
+	LDA StageEventDispatch2Tbl_98CE,Y;C - - - - - 0x0118D2 08:98C2: B9 CE 98
 	STA ptr_06+1                    ;C - - - - - 0x0118D5 08:98C5: 85 07
 	JMP (ptr_06)                    ;C - - - - - 0x0118D7 08:98C7: 6C 06 00
-tbl_08_98CA:
+StageEventDispatch2Tbl_98CA:
 	.lobytes ofs_08_9787, ofs_08_98D2, ofs_08_98D9, tbl_08_98E0;- - - - - - 0x0118DA 08:98CA:
-tbl_08_98CE:
+StageEventDispatch2Tbl_98CE:
 	.hibytes ofs_08_9787, ofs_08_98D2, ofs_08_98D9, tbl_08_98E0;- - - - - - 0x0118DE 08:98CE:
 ofs_08_98D2:
-	LDA tbl_08_99E0,Y               ;C - - J - - 0x0118E2 08:98D2: B9 E0 99
+	LDA StageEventDispatch2Tbl_99E0,Y;C - - J - - 0x0118E2 08:98D2: B9 E0 99
 	JSR SetSectionChr               ;C - - - - - bank=09 0x0118E5 08:98D5: 20 00 A0
 	RTS                             ;C - - - - - 0x0118E8 08:98D8: 60
 ofs_08_98D9:
-	LDA tbl_08_99E0,Y               ;C - - J - - 0x0118E9 08:98D9: B9 E0 99
+	LDA StageEventDispatch2Tbl_99E0,Y;C - - J - - 0x0118E9 08:98D9: B9 E0 99
 	JSR SetSectionChr               ;C - - - - - bank=09 0x0118EC 08:98DC: 20 00 A0
 	RTS                             ;C - - - - - 0x0118EF 08:98DF: 60
 tbl_08_98E0:
@@ -2449,17 +2449,17 @@ tbl_08_98F6:
 	.byte $ED,$99,$20,$00,$A0,$60   ;- - - - - - 0x01190B 08:98FB:
 ofs_08_9901:
 	LDY scrollXPage                 ;C - - J - - 0x011911 08:9901: A4 F9
-	LDA tbl_08_9910,Y               ;C - - - - - 0x011913 08:9903: B9 10 99
+	LDA StageEventDispatch2Tbl_9910,Y;C - - - - - 0x011913 08:9903: B9 10 99
 	STA ptr_06                      ;C - - - - - 0x011916 08:9906: 85 06
-	LDA tbl_08_9914,Y               ;C - - - - - 0x011918 08:9908: B9 14 99
+	LDA StageEventDispatch2Tbl_9914,Y;C - - - - - 0x011918 08:9908: B9 14 99
 	STA ptr_06+1                    ;C - - - - - 0x01191B 08:990B: 85 07
 	JMP (ptr_06)                    ;C - - - - - 0x01191D 08:990D: 6C 06 00
-tbl_08_9910:
+StageEventDispatch2Tbl_9910:
 	.lobytes ofs_08_9787, ofs_08_9918, tbl_08_991F, tbl_08_9926;- - - - - - 0x011920 08:9910:
-tbl_08_9914:
+StageEventDispatch2Tbl_9914:
 	.hibytes ofs_08_9787, ofs_08_9918, tbl_08_991F, tbl_08_9926;- - - - - - 0x011924 08:9914:
 ofs_08_9918:
-	LDA tbl_08_99EA,Y               ;C - - J - - 0x011928 08:9918: B9 EA 99
+	LDA StageEventDispatch2Tbl_99EA,Y;C - - J - - 0x011928 08:9918: B9 EA 99
 	JSR SetSectionChr               ;C - - - - - bank=09 0x01192B 08:991B: 20 00 A0
 	RTS                             ;C - - - - - 0x01192E 08:991E: 60
 tbl_08_991F:
@@ -2475,109 +2475,109 @@ tbl_08_993C:
 	.byte $87,$40,$97,$99,$B9,$F5,$99,$20,$00,$A0,$60;- - - - - - 0x01194C 08:993C:
 ofs_08_9947:
 	LDY scrollXPage                 ;C - - J - - 0x011957 08:9947: A4 F9
-	LDA tbl_08_9956,Y               ;C - - - - - 0x011959 08:9949: B9 56 99
+	LDA StageEventDispatch2Tbl_9956,Y;C - - - - - 0x011959 08:9949: B9 56 99
 	STA ptr_06                      ;C - - - - - 0x01195C 08:994C: 85 06
-	LDA tbl_08_995A,Y               ;C - - - - - 0x01195E 08:994E: B9 5A 99
+	LDA StageEventDispatch2Tbl_995A,Y;C - - - - - 0x01195E 08:994E: B9 5A 99
 	STA ptr_06+1                    ;C - - - - - 0x011961 08:9951: 85 07
 	JMP (ptr_06)                    ;C - - - - - 0x011963 08:9953: 6C 06 00
-tbl_08_9956:
+StageEventDispatch2Tbl_9956:
 	.lobytes ofs_08_9787, ofs_08_995E, ofs_08_9965, ofs_08_996C;- - - - - - 0x011966 08:9956:
-tbl_08_995A:
+StageEventDispatch2Tbl_995A:
 	.hibytes ofs_08_9787, ofs_08_995E, ofs_08_9965, ofs_08_996C;- - - - - - 0x01196A 08:995A:
 ofs_08_995E:
-	LDA tbl_08_99EC,Y               ;C - - J - - 0x01196E 08:995E: B9 EC 99
+	LDA StageEventDispatch2Tbl_99EC,Y;C - - J - - 0x01196E 08:995E: B9 EC 99
 	JSR SetSectionChr               ;C - - - - - bank=09 0x011971 08:9961: 20 00 A0
 	RTS                             ;C - - - - - 0x011974 08:9964: 60
 ofs_08_9965:
-	LDA tbl_08_99EC,Y               ;C - - J - - 0x011975 08:9965: B9 EC 99
+	LDA StageEventDispatch2Tbl_99EC,Y;C - - J - - 0x011975 08:9965: B9 EC 99
 	JSR SetSectionChr               ;C - - - - - bank=09 0x011978 08:9968: 20 00 A0
 	RTS                             ;C - - - - - 0x01197B 08:996B: 60
 ofs_08_996C:
-	LDA tbl_08_99EC,Y               ;c - - - - - 0x01197C 08:996C: B9 EC 99
+	LDA StageEventDispatch2Tbl_99EC,Y;c - - - - - 0x01197C 08:996C: B9 EC 99
 	JSR SetSectionChr               ;c - - - - - bank=09 0x01197F 08:996F: 20 00 A0
 	RTS                             ;c - - - - - 0x011982 08:9972: 60
 ofs_08_9973:
 	LDY scrollXPage                 ;C - - J - - 0x011983 08:9973: A4 F9
-	LDA tbl_08_9982,Y               ;C - - - - - 0x011985 08:9975: B9 82 99
+	LDA StageEventDispatch2Tbl_9982,Y;C - - - - - 0x011985 08:9975: B9 82 99
 	STA ptr_06                      ;C - - - - - 0x011988 08:9978: 85 06
-	LDA tbl_08_9986,Y               ;C - - - - - 0x01198A 08:997A: B9 86 99
+	LDA StageEventDispatch2Tbl_9986,Y;C - - - - - 0x01198A 08:997A: B9 86 99
 	STA ptr_06+1                    ;C - - - - - 0x01198D 08:997D: 85 07
 	JMP (ptr_06)                    ;C - - - - - 0x01198F 08:997F: 6C 06 00
-tbl_08_9982:
+StageEventDispatch2Tbl_9982:
 	.lobytes ofs_08_9787, ofs_08_998A, ofs_08_9991, ofs_08_9998;- - - - - - 0x011992 08:9982:
-tbl_08_9986:
+StageEventDispatch2Tbl_9986:
 	.hibytes ofs_08_9787, ofs_08_998A, ofs_08_9991, ofs_08_9998;- - - - - - 0x011996 08:9986:
 ofs_08_998A:
-	LDA tbl_08_99F0,Y               ;C - - J - - 0x01199A 08:998A: B9 F0 99
+	LDA StageEventDispatch2Tbl_99F0,Y;C - - J - - 0x01199A 08:998A: B9 F0 99
 	JSR SetSectionChr               ;C - - - - - bank=09 0x01199D 08:998D: 20 00 A0
 	RTS                             ;C - - - - - 0x0119A0 08:9990: 60
 ofs_08_9991:
-	LDA tbl_08_99F0,Y               ;C - - J - - 0x0119A1 08:9991: B9 F0 99
+	LDA StageEventDispatch2Tbl_99F0,Y;C - - J - - 0x0119A1 08:9991: B9 F0 99
 	JSR SetSectionChr               ;C - - - - - bank=09 0x0119A4 08:9994: 20 00 A0
 	RTS                             ;C - - - - - 0x0119A7 08:9997: 60
 ofs_08_9998:
-	LDA tbl_08_99F0,Y               ;c - - - - - 0x0119A8 08:9998: B9 F0 99
+	LDA StageEventDispatch2Tbl_99F0,Y;c - - - - - 0x0119A8 08:9998: B9 F0 99
 	JSR SetSectionChr               ;c - - - - - bank=09 0x0119AB 08:999B: 20 00 A0
 	RTS                             ;c - - - - - 0x0119AE 08:999E: 60
 ofs_08_999F:
 	LDY scrollXPage                 ;C - - J - - 0x0119AF 08:999F: A4 F9
-	LDA tbl_08_99AE,Y               ;C - - - - - 0x0119B1 08:99A1: B9 AE 99
+	LDA StageEventDispatch2Tbl_99AE,Y;C - - - - - 0x0119B1 08:99A1: B9 AE 99
 	STA ptr_06                      ;C - - - - - 0x0119B4 08:99A4: 85 06
-	LDA tbl_08_99B1,Y               ;C - - - - - 0x0119B6 08:99A6: B9 B1 99
+	LDA StageEventDispatch2Tbl_99B1,Y;C - - - - - 0x0119B6 08:99A6: B9 B1 99
 	STA ptr_06+1                    ;C - - - - - 0x0119B9 08:99A9: 85 07
 	JMP (ptr_06)                    ;C - - - - - 0x0119BB 08:99AB: 6C 06 00
-tbl_08_99AE:
+StageEventDispatch2Tbl_99AE:
 	.lobytes ofs_08_9787, ofs_08_99B4, ofs_08_99BB;- - - - - - 0x0119BE 08:99AE:
-tbl_08_99B1:
+StageEventDispatch2Tbl_99B1:
 	.hibytes ofs_08_9787, ofs_08_99B4, ofs_08_99BB;- - - - - - 0x0119C1 08:99B1:
 ofs_08_99B4:
-	LDA tbl_08_99F4,Y               ;C - - J - - 0x0119C4 08:99B4: B9 F4 99
+	LDA StageEventDispatch2Tbl_99F4,Y;C - - J - - 0x0119C4 08:99B4: B9 F4 99
 	JSR SetSectionChr               ;C - - - - - bank=09 0x0119C7 08:99B7: 20 00 A0
 	RTS                             ;C - - - - - 0x0119CA 08:99BA: 60
 ofs_08_99BB:
-	LDA tbl_08_99F4,Y               ;c - - - - - 0x0119CB 08:99BB: B9 F4 99
+	LDA StageEventDispatch2Tbl_99F4,Y;c - - - - - 0x0119CB 08:99BB: B9 F4 99
 	JSR SetSectionChr               ;c - - - - - bank=09 0x0119CE 08:99BE: 20 00 A0
 	RTS                             ;c - - - - - 0x0119D1 08:99C1: 60
-tbl_08_99C2:
+StageEventDispatch2Tbl_99C2:
 	.byte $00                       ;- - - - - - 0x0119D2 08:99C2:
 	.byte $01,$02                   ;- D 0 - - - 0x0119D3 08:99C3:
 	.byte $02                       ;- - - - - - 0x0119D5 08:99C5:
-tbl_08_99C6:
+StageEventDispatch2Tbl_99C6:
 	.byte $10                       ;- - - - - - 0x0119D6 08:99C6:
 	.byte $08,$05                   ;- D 0 - - - 0x0119D7 08:99C7:
 	.byte $05,$05,$05               ;- - - - - - 0x0119D9 08:99C9:
-tbl_08_99CC:
+StageEventDispatch2Tbl_99CC:
 	.byte $11                       ;- - - - - - 0x0119DC 08:99CC:
 	.byte $1D,$09                   ;- D 0 - - - 0x0119DD 08:99CD:
 	.byte $09                       ;- - - - - - 0x0119DF 08:99CF:
-tbl_08_99D0:
+StageEventDispatch2Tbl_99D0:
 	.byte $11                       ;- - - - - - 0x0119E0 08:99D0:
 	.byte $11,$10,$12               ;- D 0 - - - 0x0119E1 08:99D1:
 	.byte $12,$07,$07               ;- - - - - - 0x0119E4 08:99D4:
-tbl_08_99D7:
+StageEventDispatch2Tbl_99D7:
 	.byte $13                       ;- - - - - - 0x0119E7 08:99D7:
 	.byte $14,$15                   ;- D 0 - - - 0x0119E8 08:99D8:
 	.byte $15                       ;- - - - - - 0x0119EA 08:99DA:
-tbl_08_99DB:
+StageEventDispatch2Tbl_99DB:
 	.byte $16                       ;- - - - - - 0x0119EB 08:99DB:
 	.byte $10,$17                   ;- D 0 - - - 0x0119EC 08:99DC:
 	.byte $17,$06                   ;- - - - - - 0x0119EE 08:99DE:
-tbl_08_99E0:
+StageEventDispatch2Tbl_99E0:
 	.byte $0F                       ;- - - - - - 0x0119F0 08:99E0:
 	.byte $02,$11                   ;- D 0 - - - 0x0119F1 08:99E1:
 	.byte $11,$0F,$03,$03,$03,$03,$0A;- - - - - - 0x0119F3 08:99E3:
-tbl_08_99EA:
+StageEventDispatch2Tbl_99EA:
 	.byte $1E                       ;- - - - - - 0x0119FA 08:99EA:
 	.byte $0A                       ;- D 0 - - - 0x0119FB 08:99EB:
-tbl_08_99EC:
+StageEventDispatch2Tbl_99EC:
 	.byte $18                       ;- - - - - - 0x0119FC 08:99EC:
 	.byte $19,$0B                   ;- D 0 - - - 0x0119FD 08:99ED:
 	.byte $0B                       ;- - - - - - 0x0119FF 08:99EF:
-tbl_08_99F0:
+StageEventDispatch2Tbl_99F0:
 	.byte $1A                       ;- - - - - - 0x011A00 08:99F0:
 	.byte $1B,$0C                   ;- D 0 - - - 0x011A01 08:99F1:
 	.byte $0C                       ;- - - - - - 0x011A03 08:99F3:
-tbl_08_99F4:
+StageEventDispatch2Tbl_99F4:
 	.byte $1C                       ;- - - - - - 0x011A04 08:99F4:
 	.byte $04                       ;- D 0 - - - 0x011A05 08:99F5:
 	.byte $04,$FA,$AA,$DF,$AA,$49,$92,$F5,$02,$A0,$88,$FA,$A0,$9C,$AB,$CB;- - - - - - 0x011A06 08:99F6:

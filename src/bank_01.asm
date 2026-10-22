@@ -37,9 +37,9 @@ loc_01_A03A:
 	BEQ loc_01_A05D                 ;C - - - - - 0x002054 01:A044: F0 17
 	JSR ApplyVelYUpAlt              ;C - - - - - 0x002056 01:A046: 20 DF F1
 	LDA objY,X                      ;C - - - - - 0x002059 01:A049: BD C0 03
-	CMP tbl_01_A08E,Y               ;C - - - - - 0x00205C 01:A04C: D9 8E A0
+	CMP EnemyVertBounceTbl_A08E,Y   ;C - - - - - 0x00205C 01:A04C: D9 8E A0
 	BCS loc_01_A077                 ;C - - - - - 0x00205F 01:A04F: B0 26
-	LDA tbl_01_A08E,Y               ;C - - - - - 0x002061 01:A051: B9 8E A0
+	LDA EnemyVertBounceTbl_A08E,Y   ;C - - - - - 0x002061 01:A051: B9 8E A0
 	STA objY,X                      ;C - - - - - 0x002064 01:A054: 9D C0 03
 	LDA #$08                        ;C - - - - - 0x002067 01:A057: A9 08
 	STA ptr_0E+1                    ;C - - - - - 0x002069 01:A059: 85 0F
@@ -69,7 +69,7 @@ loc_01_A083:
 	JMP ApplyVelXSub                ;C - - - - - 0x00209A 01:A08A: 4C A1 F1
 loc_01_A08D:
 	RTS                             ;C - - - - - 0x00209D 01:A08D: 60
-tbl_01_A08E:
+EnemyVertBounceTbl_A08E:
 	.byte $85,$82                   ;- D 1 - - - 0x00209E 01:A08E:
 SetFlag40ToPlayer_01:
 	JSR DistanceXToPlayer           ;C - - - - - 0x0020A0 01:A090: 20 74 F3
@@ -152,9 +152,9 @@ loc_01_A129:
 	LDA objActive,X                 ;C - - - - - 0x002139 01:A129: BD 00 03
 	AND #$0F                        ;C - - - - - 0x00213C 01:A12C: 29 0F
 	TAY                             ;C - - - - - 0x00213E 01:A12E: A8
-	LDA tbl_01_A6C4,Y               ;C - - - - - 0x00213F 01:A12F: B9 C4 A6
+	LDA SetFlag40ToPlayer_01Tbl_A6C4,Y;C - - - - - 0x00213F 01:A12F: B9 C4 A6
 	STA ptr_00                      ;C - - - - - 0x002142 01:A132: 85 00
-	LDA tbl_01_A6CD,Y               ;C - - - - - 0x002144 01:A134: B9 CD A6
+	LDA SetFlag40ToPlayer_01Tbl_A6CD,Y;C - - - - - 0x002144 01:A134: B9 CD A6
 	STA ptr_00+1                    ;C - - - - - 0x002147 01:A137: 85 01
 	JMP (ptr_00)                    ;C - - - - - 0x002149 01:A139: 6C 00 00
 ofs_01_A13C:
@@ -449,12 +449,12 @@ loc_01_A35F:
 	BCS loc_01_A3C5                 ;C - - - - - 0x00237C 01:A36C: B0 57
 loc_01_A36E:
 	LDY objParamA,X                 ;C - - - - - 0x00237E 01:A36E: BC 10 05
-	LDA tbl_01_A413,Y               ;C - - - - - 0x002381 01:A371: B9 13 A4
+	LDA SetFlag40ToPlayer_01Tbl_A413,Y;C - - - - - 0x002381 01:A371: B9 13 A4
 	STA objAtkBox,X                 ;C - - - - - 0x002384 01:A374: 9D 40 04
 	BNE loc_01_A382                 ;C - - - - - 0x002387 01:A377: D0 09
 loc_01_A379:
 	LDY objParamA,X                 ;C - - - - - 0x002389 01:A379: BC 10 05
-	LDA tbl_01_A411,Y               ;C - - - - - 0x00238C 01:A37C: B9 11 A4
+	LDA SetFlag40ToPlayer_01Tbl_A411,Y;C - - - - - 0x00238C 01:A37C: B9 11 A4
 	STA objAtkBox,X                 ;C - - - - - 0x00238F 01:A37F: 9D 40 04
 loc_01_A382:
 	LDA objParamA,X                 ;C - - - - - 0x002392 01:A382: BD 10 05
@@ -479,7 +479,7 @@ loc_01_A399:
 	BNE loc_01_A3AF                 ;C - - - - - 0x0023B7 01:A3A7: D0 06
 loc_01_A3A9:
 	LDY objParamA,X                 ;C - - - - - 0x0023B9 01:A3A9: BC 10 05
-	LDA tbl_01_A415,Y               ;C - - - - - 0x0023BC 01:A3AC: B9 15 A4
+	LDA SetFlag40ToPlayer_01Tbl_A415,Y;C - - - - - 0x0023BC 01:A3AC: B9 15 A4
 loc_01_A3AF:
 	STA objAtkDamage,X              ;C - - - - - 0x0023BF 01:A3AF: 9D 50 04
 	LDA objAtkHeavy,X               ;C - - - - - 0x0023C2 01:A3B2: BD D0 04
@@ -531,11 +531,11 @@ loc_01_A401:
 	LDA #$07                        ;C - - - - - 0x00241B 01:A40B: A9 07
 	STA objSubStep,X                ;C - - - - - 0x00241D 01:A40D: 9D 50 05
 	RTS                             ;C - - - - - 0x002420 01:A410: 60
-tbl_01_A411:
+SetFlag40ToPlayer_01Tbl_A411:
 	.byte $91,$92                   ;- D 1 - - - 0x002421 01:A411:
-tbl_01_A413:
+SetFlag40ToPlayer_01Tbl_A413:
 	.byte $8D,$8E                   ;- D 1 - - - 0x002423 01:A413:
-tbl_01_A415:
+SetFlag40ToPlayer_01Tbl_A415:
 	.byte $1F,$27                   ;- D 1 - - - 0x002425 01:A415:
 ofs_01_A417:
 	LDA objStep,X                   ;C - - J - - 0x002427 01:A417: BD 00 05
@@ -867,10 +867,10 @@ loc_01_A6B2:
 	LDA #$07                        ;c - - - - - 0x0026CC 01:A6BC: A9 07
 	STA objSubStep,X                ;c - - - - - 0x0026CE 01:A6BE: 9D 50 05
 	JMP FaceToPlayerFlag            ;c - - - - - 0x0026D1 01:A6C1: 4C 43 F3
-tbl_01_A6C4:
+SetFlag40ToPlayer_01Tbl_A6C4:
 	.lobytes ofs_01_A13C, ofs_01_A169, ofs_01_A2ED, ofs_01_A417, ofs_01_A473, EnemyJumpUp, ofs_01_A5CF, ofs_01_A633;- D 1 - - - 0x0026D4 01:A6C4:
 	.lobytes ofs_01_A651            ;- - - - - - 0x0026DC 01:A6CC:
-tbl_01_A6CD:
+SetFlag40ToPlayer_01Tbl_A6CD:
 	.hibytes ofs_01_A13C, ofs_01_A169, ofs_01_A2ED, ofs_01_A417, ofs_01_A473, EnemyJumpUp, ofs_01_A5CF, ofs_01_A633;- D 1 - - - 0x0026DD 01:A6CD:
 	.hibytes ofs_01_A651            ;- - - - - - 0x0026E5 01:A6D5:
 EnemyGrabbedCheck_01:
@@ -1014,25 +1014,25 @@ loc_01_A7BB:
 	SEC                             ;C - - - - - 0x0027EF 01:A7DF: 38
 	RTS                             ;C - - - - - 0x0027F0 01:A7E0: 60
 SetVelFromTbl_A7E1:
-	LDA tbl_01_A80A,Y               ;C - - - - - 0x0027F1 01:A7E1: B9 0A A8
+	LDA SetVelFromTbl_A7E1Tbl_A80A,Y;C - - - - - 0x0027F1 01:A7E1: B9 0A A8
 	STA objVelXLo,X                 ;C - - - - - 0x0027F4 01:A7E4: 9D 00 04
-	LDA tbl_01_A7FA,Y               ;C - - - - - 0x0027F7 01:A7E7: B9 FA A7
+	LDA SetVelFromTbl_A7E1Tbl_A7FA,Y;C - - - - - 0x0027F7 01:A7E7: B9 FA A7
 	STA objVelXHi,X                 ;C - - - - - 0x0027FA 01:A7EA: 9D 10 04
-	LDA tbl_01_A82A,Y               ;C - - - - - 0x0027FD 01:A7ED: B9 2A A8
+	LDA SetVelFromTbl_A7E1Tbl_A82A,Y;C - - - - - 0x0027FD 01:A7ED: B9 2A A8
 	STA objVelYLo,X                 ;C - - - - - 0x002800 01:A7F0: 9D 20 04
-	LDA tbl_01_A81A,Y               ;C - - - - - 0x002803 01:A7F3: B9 1A A8
+	LDA SetVelFromTbl_A7E1Tbl_A81A,Y;C - - - - - 0x002803 01:A7F3: B9 1A A8
 	STA objVelYHi,X                 ;C - - - - - 0x002806 01:A7F6: 9D 30 04
 	RTS                             ;C - - - - - 0x002809 01:A7F9: 60
-tbl_01_A7FA:
+SetVelFromTbl_A7E1Tbl_A7FA:
 	.byte $00,$00,$00,$01,$01,$01,$00,$00,$00,$00,$00,$01,$01,$01,$00;- D 1 - - - 0x00280A 01:A7FA:
 	.byte $00                       ;- - - - - - 0x002819 01:A809:
-tbl_01_A80A:
+SetVelFromTbl_A7E1Tbl_A80A:
 	.byte $00,$75,$D9,$1B,$33,$1B,$D9,$75,$00,$75,$D9,$1B,$33,$1B,$D9;- D 1 - - - 0x00281A 01:A80A:
 	.byte $75                       ;- - - - - - 0x002829 01:A819:
-tbl_01_A81A:
+SetVelFromTbl_A7E1Tbl_A81A:
 	.byte $01,$01,$00,$00,$00,$00,$00,$01,$01,$01,$00,$00,$00,$00,$00;- D 1 - - - 0x00282A 01:A81A:
 	.byte $01                       ;- - - - - - 0x002839 01:A829:
-tbl_01_A82A:
+SetVelFromTbl_A7E1Tbl_A82A:
 	.byte $33,$1B,$D9,$75,$00,$75,$D9,$1B,$33,$1B,$D9,$75,$00,$75,$D9;- D 1 - - - 0x00283A 01:A82A:
 	.byte $1B                       ;- - - - - - 0x002849 01:A839:
 SetGrabbedAnimA_01:
@@ -1043,13 +1043,13 @@ SetGrabbedAnimA_01:
 	SEC                             ;C - - - - - 0x002854 01:A844: 38
 	SBC #$07                        ;C - - - - - 0x002855 01:A845: E9 07
 	TAY                             ;C - - - - - 0x002857 01:A847: A8
-	LDA tbl_01_A870,Y               ;C - - - - - 0x002858 01:A848: B9 70 A8
+	LDA SetGrabbedAnimA_01Tbl_A870,Y;C - - - - - 0x002858 01:A848: B9 70 A8
 	CMP objAnim,X                   ;C - - - - - 0x00285B 01:A84B: DD 80 05
 	BEQ loc_01_A86F                 ;C - - - - - 0x00285E 01:A84E: F0 1F
 	JSR SetAnimX                    ;C - - - - - 0x002860 01:A850: 20 88 F2
-	LDA tbl_01_A872,Y               ;C - - - - - 0x002863 01:A853: B9 72 A8
+	LDA SetGrabbedAnimA_01Tbl_A872,Y;C - - - - - 0x002863 01:A853: B9 72 A8
 	STA ptr_00                      ;C - - - - - 0x002866 01:A856: 85 00
-	LDA tbl_01_A874,Y               ;C - - - - - 0x002868 01:A858: B9 74 A8
+	LDA SetGrabbedAnimA_01Tbl_A874,Y;C - - - - - 0x002868 01:A858: B9 74 A8
 	STA ptr_00+1                    ;C - - - - - 0x00286B 01:A85B: 85 01
 	LDA tbl_01_A914,Y               ;C - - - - - 0x00286D 01:A85D: B9 14 A9
 	TAY                             ;C - - - - - 0x002870 01:A860: A8
@@ -1061,11 +1061,11 @@ SetGrabbedAnimA_01:
 	STA a:chrBankShadow+3,Y         ;C - - - - - 0x00287C 01:A86C: 99 EB 00
 loc_01_A86F:
 	RTS                             ;C - - - - - 0x00287F 01:A86F: 60
-tbl_01_A870:
+SetGrabbedAnimA_01Tbl_A870:
 	.byte $E4,$F0                   ;- D 1 - - - 0x002880 01:A870:
-tbl_01_A872:
+SetGrabbedAnimA_01Tbl_A872:
 	.byte $28,$2C                   ;- D 1 - - - 0x002882 01:A872:
-tbl_01_A874:
+SetGrabbedAnimA_01Tbl_A874:
 	.byte $28,$2E                   ;- D 1 - - - 0x002884 01:A874:
 loc_01_A876:
 	LDA #$EF                        ;C - - - - - 0x002886 01:A876: A9 EF
@@ -1079,13 +1079,13 @@ SetGrabbedAnimB_01:
 	SEC                             ;C - - - - - 0x002895 01:A885: 38
 	SBC #$07                        ;C - - - - - 0x002896 01:A886: E9 07
 	TAY                             ;C - - - - - 0x002898 01:A888: A8
-	LDA tbl_01_A8B1,Y               ;C - - - - - 0x002899 01:A889: B9 B1 A8
+	LDA SetGrabbedAnimB_01Tbl_A8B1,Y;C - - - - - 0x002899 01:A889: B9 B1 A8
 	CMP objAnim,X                   ;C - - - - - 0x00289C 01:A88C: DD 80 05
 	BEQ loc_01_A8B0                 ;C - - - - - 0x00289F 01:A88F: F0 1F
 	JSR SetAnimX                    ;C - - - - - 0x0028A1 01:A891: 20 88 F2
-	LDA tbl_01_A8B3,Y               ;C - - - - - 0x0028A4 01:A894: B9 B3 A8
+	LDA SetGrabbedAnimB_01Tbl_A8B3,Y;C - - - - - 0x0028A4 01:A894: B9 B3 A8
 	STA ptr_00                      ;C - - - - - 0x0028A7 01:A897: 85 00
-	LDA tbl_01_A8B5,Y               ;C - - - - - 0x0028A9 01:A899: B9 B5 A8
+	LDA SetGrabbedAnimB_01Tbl_A8B5,Y;C - - - - - 0x0028A9 01:A899: B9 B5 A8
 	STA ptr_00+1                    ;C - - - - - 0x0028AC 01:A89C: 85 01
 	LDA tbl_01_A914,Y               ;C - - - - - 0x0028AE 01:A89E: B9 14 A9
 	TAY                             ;C - - - - - 0x0028B1 01:A8A1: A8
@@ -1097,24 +1097,24 @@ SetGrabbedAnimB_01:
 	STA a:chrBankShadow+3,Y         ;C - - - - - 0x0028BD 01:A8AD: 99 EB 00
 loc_01_A8B0:
 	RTS                             ;C - - - - - 0x0028C0 01:A8B0: 60
-tbl_01_A8B1:
+SetGrabbedAnimB_01Tbl_A8B1:
 	.byte $E5,$F2                   ;- D 1 - - - 0x0028C1 01:A8B1:
-tbl_01_A8B3:
+SetGrabbedAnimB_01Tbl_A8B3:
 	.byte $28,$2C                   ;- D 1 - - - 0x0028C3 01:A8B3:
-tbl_01_A8B5:
+SetGrabbedAnimB_01Tbl_A8B5:
 	.byte $28,$2E                   ;- D 1 - - - 0x0028C5 01:A8B5:
 SetGrabbedAnimC_01:
 	LDA objSpriteDown,X             ;C - - - - - 0x0028C7 01:A8B7: BD B0 05
 	SEC                             ;C - - - - - 0x0028CA 01:A8BA: 38
 	SBC #$07                        ;C - - - - - 0x0028CB 01:A8BB: E9 07
 	TAY                             ;C - - - - - 0x0028CD 01:A8BD: A8
-	LDA tbl_01_A8E9,Y               ;C - - - - - 0x0028CE 01:A8BE: B9 E9 A8
+	LDA SetGrabbedAnimC_01Tbl_A8E9,Y;C - - - - - 0x0028CE 01:A8BE: B9 E9 A8
 	CMP objAnim,X                   ;C - - - - - 0x0028D1 01:A8C1: DD 80 05
 	BEQ loc_01_A8E8                 ;C - - - - - 0x0028D4 01:A8C4: F0 22
 	JSR SetAnimX                    ;C - - - - - 0x0028D6 01:A8C6: 20 88 F2
-	LDA tbl_01_A8EB,Y               ;C - - - - - 0x0028D9 01:A8C9: B9 EB A8
+	LDA SetGrabbedAnimC_01Tbl_A8EB,Y;C - - - - - 0x0028D9 01:A8C9: B9 EB A8
 	STA ptr_00                      ;C - - - - - 0x0028DC 01:A8CC: 85 00
-	LDA tbl_01_A8ED,Y               ;C - - - - - 0x0028DE 01:A8CE: B9 ED A8
+	LDA SetGrabbedAnimC_01Tbl_A8ED,Y;C - - - - - 0x0028DE 01:A8CE: B9 ED A8
 	STA ptr_00+1                    ;C - - - - - 0x0028E1 01:A8D1: 85 01
 	LDA tbl_01_A914,Y               ;C - - - - - 0x0028E3 01:A8D3: B9 14 A9
 	TAY                             ;C - - - - - 0x0028E6 01:A8D6: A8
@@ -1127,22 +1127,22 @@ SetGrabbedAnimC_01:
 	INC objAnimFlags,X              ;C - - - - - 0x0028F5 01:A8E5: FE 90 05
 loc_01_A8E8:
 	RTS                             ;C - - - - - 0x0028F8 01:A8E8: 60
-tbl_01_A8E9:
+SetGrabbedAnimC_01Tbl_A8E9:
 	.byte $E9,$F5                   ;- D 1 - - - 0x0028F9 01:A8E9:
-tbl_01_A8EB:
+SetGrabbedAnimC_01Tbl_A8EB:
 	.byte $29,$2C                   ;- D 1 - - - 0x0028FB 01:A8EB:
-tbl_01_A8ED:
+SetGrabbedAnimC_01Tbl_A8ED:
 	.byte $29,$2E                   ;- D 1 - - - 0x0028FD 01:A8ED:
 SetGrabbedAnimD_01:
 	LDA objSpriteDown,X             ;C - - - - - 0x0028FF 01:A8EF: BD B0 05
 	SEC                             ;C - - - - - 0x002902 01:A8F2: 38
 	SBC #$07                        ;C - - - - - 0x002903 01:A8F3: E9 07
 	TAY                             ;C - - - - - 0x002905 01:A8F5: A8
-	LDA tbl_01_A910,Y               ;C - - - - - 0x002906 01:A8F6: B9 10 A9
+	LDA SetGrabbedAnimD_01Tbl_A910,Y;C - - - - - 0x002906 01:A8F6: B9 10 A9
 	CMP objAnim,X                   ;C - - - - - 0x002909 01:A8F9: DD 80 05
 	BEQ loc_01_A90F                 ;C - - - - - 0x00290C 01:A8FC: F0 11
 	JSR SetAnimX                    ;C - - - - - 0x00290E 01:A8FE: 20 88 F2
-	LDA tbl_01_A912,Y               ;C - - - - - 0x002911 01:A901: B9 12 A9
+	LDA SetGrabbedAnimD_01Tbl_A912,Y;C - - - - - 0x002911 01:A901: B9 12 A9
 	STA ptr_00                      ;C - - - - - 0x002914 01:A904: 85 00
 	LDA tbl_01_A914,Y               ;C - - - - - 0x002916 01:A906: B9 14 A9
 	TAY                             ;C - - - - - 0x002919 01:A909: A8
@@ -1150,9 +1150,9 @@ SetGrabbedAnimD_01:
 	STA a:chrBankShadow+3,Y         ;C - - - - - 0x00291C 01:A90C: 99 EB 00
 loc_01_A90F:
 	RTS                             ;C - - - - - 0x00291F 01:A90F: 60
-tbl_01_A910:
+SetGrabbedAnimD_01Tbl_A910:
 	.byte $EA,$F7                   ;- D 1 - - - 0x002920 01:A910:
-tbl_01_A912:
+SetGrabbedAnimD_01Tbl_A912:
 	.byte $2B,$2D                   ;- D 1 - - - 0x002922 01:A912:
 tbl_01_A914:
 	.byte $01,$01                   ;- D 1 - - - 0x002924 01:A914:
@@ -1160,50 +1160,50 @@ tbl_01_A916:
 	.byte $01                       ;- - - - - - 0x002926 01:A916:
 	.byte $02                       ;- D 1 - - - 0x002927 01:A917:
 SetVelFromTbl_A918:
-	LDA tbl_01_A941,Y               ;C - - - - - 0x002928 01:A918: B9 41 A9
+	LDA SetVelFromTbl_A918Tbl_A941,Y;C - - - - - 0x002928 01:A918: B9 41 A9
 	STA objVelXLo,X                 ;C - - - - - 0x00292B 01:A91B: 9D 00 04
-	LDA tbl_01_A931,Y               ;C - - - - - 0x00292E 01:A91E: B9 31 A9
+	LDA SetVelFromTbl_A918Tbl_A931,Y;C - - - - - 0x00292E 01:A91E: B9 31 A9
 	STA objVelXHi,X                 ;C - - - - - 0x002931 01:A921: 9D 10 04
-	LDA tbl_01_A961,Y               ;C - - - - - 0x002934 01:A924: B9 61 A9
+	LDA SetVelFromTbl_A918Tbl_A961,Y;C - - - - - 0x002934 01:A924: B9 61 A9
 	STA objVelYLo,X                 ;C - - - - - 0x002937 01:A927: 9D 20 04
-	LDA tbl_01_A951,Y               ;C - - - - - 0x00293A 01:A92A: B9 51 A9
+	LDA SetVelFromTbl_A918Tbl_A951,Y;C - - - - - 0x00293A 01:A92A: B9 51 A9
 	STA objVelYHi,X                 ;C - - - - - 0x00293D 01:A92D: 9D 30 04
 	RTS                             ;C - - - - - 0x002940 01:A930: 60
-tbl_01_A931:
+SetVelFromTbl_A918Tbl_A931:
 	.byte $00,$00,$01               ;- - - - - - 0x002941 01:A931:
 	.byte $02,$02,$02,$01           ;- D 1 - - - 0x002944 01:A934:
 	.byte $00,$00,$00,$01           ;- - - - - - 0x002948 01:A938:
 	.byte $02,$02                   ;- D 1 - - - 0x00294C 01:A93C:
 	.byte $02,$01,$00               ;- - - - - - 0x00294E 01:A93E:
-tbl_01_A941:
+SetVelFromTbl_A918Tbl_A941:
 	.byte $00,$E1,$A0               ;- - - - - - 0x002951 01:A941:
 	.byte $1F,$4C,$1F,$A0           ;- D 1 - - - 0x002954 01:A944:
 	.byte $E1,$00,$E1,$A0           ;- - - - - - 0x002958 01:A948:
 	.byte $1F,$4C                   ;- D 1 - - - 0x00295C 01:A94C:
 	.byte $1F,$A0,$E1               ;- - - - - - 0x00295E 01:A94E:
-tbl_01_A951:
+SetVelFromTbl_A918Tbl_A951:
 	.byte $02,$02,$01               ;- - - - - - 0x002961 01:A951:
 	.byte $00,$00,$00,$01           ;- D 1 - - - 0x002964 01:A954:
 	.byte $02,$02,$02,$01           ;- - - - - - 0x002968 01:A958:
 	.byte $00,$00                   ;- D 1 - - - 0x00296C 01:A95C:
 	.byte $00,$01,$02               ;- - - - - - 0x00296E 01:A95E:
-tbl_01_A961:
+SetVelFromTbl_A918Tbl_A961:
 	.byte $4C,$1F,$A0               ;- - - - - - 0x002971 01:A961:
 	.byte $E1,$00,$E1,$A0           ;- D 1 - - - 0x002974 01:A964:
 	.byte $1F,$4C,$1F,$A0           ;- - - - - - 0x002978 01:A968:
 	.byte $E1,$00                   ;- D 1 - - - 0x00297C 01:A96C:
 	.byte $E1,$A0,$1F               ;- - - - - - 0x00297E 01:A96E:
 SetVelFromTbl_A971:
-	LDA tbl_01_A99A,Y               ;C - - - - - 0x002981 01:A971: B9 9A A9
+	LDA SetVelFromTbl_A971Tbl_A99A,Y;C - - - - - 0x002981 01:A971: B9 9A A9
 	STA objVelXLo,X                 ;C - - - - - 0x002984 01:A974: 9D 00 04
-	LDA tbl_01_A98A,Y               ;C - - - - - 0x002987 01:A977: B9 8A A9
+	LDA SetVelFromTbl_A971Tbl_A98A,Y;C - - - - - 0x002987 01:A977: B9 8A A9
 	STA objVelXHi,X                 ;C - - - - - 0x00298A 01:A97A: 9D 10 04
-	LDA tbl_01_A9BA,Y               ;C - - - - - 0x00298D 01:A97D: B9 BA A9
+	LDA SetVelFromTbl_A971Tbl_A9BA,Y;C - - - - - 0x00298D 01:A97D: B9 BA A9
 	STA objVelYLo,X                 ;C - - - - - 0x002990 01:A980: 9D 20 04
-	LDA tbl_01_A9AA,Y               ;C - - - - - 0x002993 01:A983: B9 AA A9
+	LDA SetVelFromTbl_A971Tbl_A9AA,Y;C - - - - - 0x002993 01:A983: B9 AA A9
 	STA objVelYHi,X                 ;C - - - - - 0x002996 01:A986: 9D 30 04
 	RTS                             ;C - - - - - 0x002999 01:A989: 60
-tbl_01_A98A:
+SetVelFromTbl_A971Tbl_A98A:
 	.byte $00,$01                   ;- - - - - - 0x00299A 01:A98A:
 	.byte $02,$02,$03               ;- D 1 - - - 0x00299C 01:A98C:
 	.byte $02                       ;- - - - - - 0x00299F 01:A98F:
@@ -1213,7 +1213,7 @@ tbl_01_A98A:
 	.byte $02                       ;- - - - - - 0x0029A7 01:A997:
 	.byte $02                       ;- D 1 - - - 0x0029A8 01:A998:
 	.byte $01                       ;- - - - - - 0x0029A9 01:A999:
-tbl_01_A99A:
+SetVelFromTbl_A971Tbl_A99A:
 	.byte $00,$25                   ;- - - - - - 0x0029AA 01:A99A:
 	.byte $1F,$C5,$00               ;- D 1 - - - 0x0029AC 01:A99C:
 	.byte $C5                       ;- - - - - - 0x0029AF 01:A99F:
@@ -1223,7 +1223,7 @@ tbl_01_A99A:
 	.byte $C5                       ;- - - - - - 0x0029B7 01:A9A7:
 	.byte $1F                       ;- D 1 - - - 0x0029B8 01:A9A8:
 	.byte $25                       ;- - - - - - 0x0029B9 01:A9A9:
-tbl_01_A9AA:
+SetVelFromTbl_A971Tbl_A9AA:
 	.byte $03,$02                   ;- - - - - - 0x0029BA 01:A9AA:
 	.byte $02,$01,$00               ;- D 1 - - - 0x0029BC 01:A9AC:
 	.byte $01                       ;- - - - - - 0x0029BF 01:A9AF:
@@ -1233,7 +1233,7 @@ tbl_01_A9AA:
 	.byte $01                       ;- - - - - - 0x0029C7 01:A9B7:
 	.byte $02                       ;- D 1 - - - 0x0029C8 01:A9B8:
 	.byte $02                       ;- - - - - - 0x0029C9 01:A9B9:
-tbl_01_A9BA:
+SetVelFromTbl_A971Tbl_A9BA:
 	.byte $00,$C5                   ;- - - - - - 0x0029CA 01:A9BA:
 	.byte $1F,$25,$00               ;- D 1 - - - 0x0029CC 01:A9BC:
 	.byte $25                       ;- - - - - - 0x0029CF 01:A9BF:
@@ -1266,7 +1266,7 @@ loc_01_A9DB:
 	TAY                             ;C - - - - - 0x0029F7 01:A9E7: A8
 	BNE loc_01_A9EE                 ;C - - - - - 0x0029F8 01:A9E8: D0 04
 loc_01_A9EA:
-	LDA tbl_01_AA23,Y               ;C - - - - - 0x0029FA 01:A9EA: B9 23 AA
+	LDA EnemyChooseDirToPlayer_01Tbl_AA23,Y;C - - - - - 0x0029FA 01:A9EA: B9 23 AA
 	TAY                             ;C - - - - - 0x0029FD 01:A9ED: A8
 loc_01_A9EE:
 	LDA tbl_0F_FBF0,Y               ;C - - - - - 0x0029FE 01:A9EE: B9 F0 FB
@@ -1298,7 +1298,7 @@ loc_01_AA18:
 	STA objParamB,X                 ;C - - - - - 0x002A2F 01:AA1F: 9D 20 05
 loc_01_AA22:
 	RTS                             ;C - - - - - 0x002A32 01:AA22: 60
-tbl_01_AA23:
+EnemyChooseDirToPlayer_01Tbl_AA23:
 	.byte $02                       ;- - - - - - 0x002A33 01:AA23:
 	.byte $02                       ;- D 1 - - - 0x002A34 01:AA24:
 	.byte $02                       ;- - - - - - 0x002A35 01:AA25:
@@ -1376,15 +1376,15 @@ loc_01_AAB3:
 	LDA objActive,X                 ;C - - - - - 0x002AC3 01:AAB3: BD 00 03
 	AND #$0F                        ;C - - - - - 0x002AC6 01:AAB6: 29 0F
 	TAY                             ;C - - - - - 0x002AC8 01:AAB8: A8
-	LDA tbl_01_AAC6,Y               ;C - - - - - 0x002AC9 01:AAB9: B9 C6 AA
+	LDA EnemySetDirAndParamsTbl_AAC6,Y;C - - - - - 0x002AC9 01:AAB9: B9 C6 AA
 	STA ptr_00                      ;C - - - - - 0x002ACC 01:AABC: 85 00
-	LDA tbl_01_AACF,Y               ;C - - - - - 0x002ACE 01:AABE: B9 CF AA
+	LDA EnemySetDirAndParamsTbl_AACF,Y;C - - - - - 0x002ACE 01:AABE: B9 CF AA
 	STA ptr_00+1                    ;C - - - - - 0x002AD1 01:AAC1: 85 01
 	JMP (ptr_00)                    ;C - - - - - 0x002AD3 01:AAC3: 6C 00 00
-tbl_01_AAC6:
+EnemySetDirAndParamsTbl_AAC6:
 	.lobytes ofs_01_AAD8, ofs_01_AB0A, ofs_01_A2ED, ofs_01_AC4E, ofs_01_A473, ofs_01_ABB6, ofs_01_ADBA, ofs_01_AD8C;- D 1 - - - 0x002AD6 01:AAC6:
 	.lobytes ofs_01_AE19            ;- D 1 - - - 0x002ADE 01:AACE:
-tbl_01_AACF:
+EnemySetDirAndParamsTbl_AACF:
 	.hibytes ofs_01_AAD8, ofs_01_AB0A, ofs_01_A2ED, ofs_01_AC4E, ofs_01_A473, ofs_01_ABB6, ofs_01_ADBA, ofs_01_AD8C;- D 1 - - - 0x002ADF 01:AACF:
 	.hibytes ofs_01_AE19            ;- D 1 - - - 0x002AE7 01:AAD7:
 ofs_01_AAD8:
@@ -1610,7 +1610,7 @@ loc_01_AC87:
 	BCC loc_01_ACAF                 ;C - - - - - 0x002CA8 01:AC98: 90 15
 	LDA objX,X                      ;C - - - - - 0x002CAA 01:AC9A: BD 60 03
 	CLC                             ;C - - - - - 0x002CAD 01:AC9D: 18
-	ADC tbl_01_AD80,Y               ;C - - - - - 0x002CAE 01:AC9E: 79 80 AD
+	ADC EnemySetDirAndParamsTbl_AD80,Y;C - - - - - 0x002CAE 01:AC9E: 79 80 AD
 	STA objX,X                      ;C - - - - - 0x002CB1 01:ACA1: 9D 60 03
 	LDA objXPage,X                  ;C - - - - - 0x002CB4 01:ACA4: BD 80 03
 	ADC #$00                        ;C - - - - - 0x002CB7 01:ACA7: 69 00
@@ -1619,7 +1619,7 @@ loc_01_AC87:
 loc_01_ACAF:
 	LDA objX,X                      ;C - - - - - 0x002CBF 01:ACAF: BD 60 03
 	SEC                             ;C - - - - - 0x002CC2 01:ACB2: 38
-	SBC tbl_01_AD80,Y               ;C - - - - - 0x002CC3 01:ACB3: F9 80 AD
+	SBC EnemySetDirAndParamsTbl_AD80,Y;C - - - - - 0x002CC3 01:ACB3: F9 80 AD
 	STA objX,X                      ;C - - - - - 0x002CC6 01:ACB6: 9D 60 03
 	LDA objXPage,X                  ;C - - - - - 0x002CC9 01:ACB9: BD 80 03
 	SBC #$00                        ;C - - - - - 0x002CCC 01:ACBC: E9 00
@@ -1632,10 +1632,10 @@ loc_01_ACC1:
 	LDA objCooldown,X               ;C - - - - - 0x002CDA 01:ACCA: BD 40 05
 	LSR A                           ;C - - - - - 0x002CDD 01:ACCD: 4A
 	BCS loc_01_ACD5                 ;C - - - - - 0x002CDE 01:ACCE: B0 05
-	LDA tbl_01_AD84,Y               ;C - - - - - 0x002CE0 01:ACD0: B9 84 AD
+	LDA EnemySetDirAndParamsTbl_AD84,Y;C - - - - - 0x002CE0 01:ACD0: B9 84 AD
 	BNE loc_01_ACD8                 ;C - - - - - 0x002CE3 01:ACD3: D0 03
 loc_01_ACD5:
-	LDA tbl_01_AD88,Y               ;C - - - - - 0x002CE5 01:ACD5: B9 88 AD
+	LDA EnemySetDirAndParamsTbl_AD88,Y;C - - - - - 0x002CE5 01:ACD5: B9 88 AD
 loc_01_ACD8:
 	STA ptr_00+1                    ;C - - - - - 0x002CE8 01:ACD8: 85 01
 	LDA objFacing,X                 ;C - - - - - 0x002CEA 01:ACDA: BD 60 04
@@ -1721,11 +1721,11 @@ loc_01_AD72:
 	STA objStep,X                   ;C - - - - - 0x002D8C 01:AD7C: 9D 00 05
 loc_01_AD7F:
 	RTS                             ;C - - - - - 0x002D8F 01:AD7F: 60
-tbl_01_AD80:
+EnemySetDirAndParamsTbl_AD80:
 	.byte $10,$08,$08,$10           ;- D 1 - - - 0x002D90 01:AD80:
-tbl_01_AD84:
+EnemySetDirAndParamsTbl_AD84:
 	.byte $10,$08,$08,$10           ;- D 1 - - - 0x002D94 01:AD84:
-tbl_01_AD88:
+EnemySetDirAndParamsTbl_AD88:
 	.byte $08,$04,$04,$08           ;- D 1 - - - 0x002D98 01:AD88:
 ofs_01_AD8C:
 	JSR FaceToPlayerFlag            ;C - - J - - 0x002D9C 01:AD8C: 20 43 F3

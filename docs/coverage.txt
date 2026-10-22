@@ -147,9 +147,9 @@ Traced code (instruction starts, verify by hand):
   00:8FDF  LDA #$02
   00:8FE1  BNE loc_00_8FE5
   00:9035  LDA objAnim
-  00:9038  CMP tbl_0F_E29A,Y
+  00:9038  CMP GameActionDispatch00Tbl_E29A,Y
   00:903B  BEQ loc_00_9049
-  00:903D  LDA tbl_0F_E204,Y
+  00:903D  LDA GameActionDispatch00Tbl_E204,Y
   00:9040  JSR SetPlayerAnim
   00:9050  JSR ApplyVelYAdd
   00:9053  RTS
@@ -375,7 +375,7 @@ Traced code (instruction starts, verify by hand):
   04:98E6  INC screenStep
   04:98E8  RTS
   04:9911  LDY playerId
-  04:9913  LDA tbl_04_9D5C,Y
+  04:9913  LDA ScreenDispatch9800Tbl_9D5C,Y
   04:9916  STA gameOverFlag
   04:994F  JMP loc_04_9BA4
   04:9956  JMP loc_04_9B7E
@@ -440,7 +440,7 @@ Traced code (instruction starts, verify by hand):
   05:A9B3  LDA #$80
   05:A9B5  STA objActive,X
   05:A9B8  STA objState,X
-  05:AA22  CMP tbl_05_AA7F,Y
+  05:AA22  CMP SpawnObj6ATbl_AA7F,Y
   05:AA25  BEQ loc_05_AA28
   05:AA27  RTS
   06:8047  SEC
@@ -491,7 +491,7 @@ Traced code (instruction starts, verify by hand):
   06:818D  INC ptr_C1+1
   06:819D  INC ptr_C1+1
   06:822D  ASL sndParam
-  06:822F  BEQ loc_06_8234
+  06:822F  BEQ SoundControl_06
   06:8231  SEC
   06:8232  ROR sndParam
   06:8234  LDA soundBusy
@@ -597,19 +597,19 @@ Traced code (instruction starts, verify by hand):
   08:9172  STA ptr_00+1
   08:92E4  LDA #$07
   08:92E6  STA ptr_00+1
-  08:97F3  LDA tbl_08_99CC,Y
+  08:97F3  LDA StageEventDispatch2Tbl_99CC,Y
   08:97F6  JSR SetSectionChr
   08:97F9  RTS
-  08:986E  LDA tbl_08_99D7,Y
+  08:986E  LDA StageEventDispatch2Tbl_99D7,Y
   08:9871  JSR SetSectionChr
   08:9874  RTS
-  08:996C  LDA tbl_08_99EC,Y
+  08:996C  LDA StageEventDispatch2Tbl_99EC,Y
   08:996F  JSR SetSectionChr
   08:9972  RTS
-  08:9998  LDA tbl_08_99F0,Y
+  08:9998  LDA StageEventDispatch2Tbl_99F0,Y
   08:999B  JSR SetSectionChr
   08:999E  RTS
-  08:99BB  LDA tbl_08_99F4,Y
+  08:99BB  LDA StageEventDispatch2Tbl_99F4,Y
   08:99BE  JSR SetSectionChr
   08:99C1  RTS
   09:AB34  LDA objActive
@@ -718,7 +718,7 @@ Traced code (instruction starts, verify by hand):
   0B:B71F  BNE loc_0B_B743
   0B:B7C6  LDA #$82
   0B:B7C8  STA objY,X
-  0B:B889  LDA tbl_0B_BD5C,Y
+  0B:B889  LDA EnemyRandomJumpTbl_BD5C,Y
   0B:B8A3  LDA #$00
   0B:B8A5  STA objTimer,X
   0B:B8A8  DEC objActive,X
@@ -733,7 +733,7 @@ Traced code (instruction starts, verify by hand):
   0C:8037  SEC
   0C:8038  SBC #$06
   0C:803A  TAY
-  0C:8651  LDA tbl_0C_8885,Y
+  0C:8651  LDA EnemyHitCheckTbl_8885,Y
   0C:8654  BNE loc_0C_8686
   0C:870D  LDA #$00
   0C:870F  STA ram_0038
@@ -800,10 +800,10 @@ Traced code (instruction starts, verify by hand):
   0C:93BA  TAY
   0C:93BB  LDA objX,X
   0C:93BE  CLC
-  0C:93BF  ADC tbl_0F_FD0A,Y
+  0C:93BF  ADC EnemyAI_Kind0FTbl_FD0A,Y
   0C:93C2  PHA
   0C:93C3  LDA objXPage,X
-  0C:93C6  ADC tbl_0F_FD0B,Y
+  0C:93C6  ADC EnemyAI_Kind0FTbl_FD0B,Y
   0C:93C9  STA objXPage,X
   0C:93CC  PLA
   0C:93CD  STA objX,X
@@ -906,7 +906,7 @@ Traced code (instruction starts, verify by hand):
   0C:9DC1  RTS
   0C:9DC2  JSR DirToPlayerGround
   0C:9DC5  TAY
-  0C:9DC6  LDA tbl_0D_A87E,Y
+  0C:9DC6  LDA EnemyAI_LeaperCommonTbl_A87E,Y
   0C:9DC9  STA objFacing,X
   0C:9DCC  AND #$0C
   0C:9DCE  BNE loc_0C_9DE4
@@ -1007,10 +1007,10 @@ Traced code (instruction starts, verify by hand):
   0E:CC89  TAY
   0E:CC8A  LDA objX
   0E:CC8D  CLC
-  0E:CC8E  ADC tbl_0F_E1D3,Y
+  0E:CC8E  ADC PlaceGrabbedEnemyTbl_E1D3,Y
   0E:CC91  PHA
   0E:CC92  LDA objXPage
-  0E:CC95  ADC tbl_0F_E1D4,Y
+  0E:CC95  ADC PlaceGrabbedEnemyTbl_E1D4,Y
   0E:CC98  LDY grabbedSlot
   0E:CC9A  STA objXPage,Y
   0E:CC9D  PLA
@@ -1046,7 +1046,7 @@ Traced code (instruction starts, verify by hand):
   0E:D251  LDA objAnimFlags
   0E:D254  CMP #$04
   0E:D256  BNE loc_0E_D264
-  0E:D258  LDA tbl_0F_E1EC,Y
+  0E:D258  LDA StartAction24Tbl_E1EC,Y
   0E:D25B  JSR SetPlayerAnim
   0E:D25E  LDA tbl_0F_E22E,Y
   0E:D261  JSR SetChrBank2
@@ -1116,9 +1116,9 @@ Traced code (instruction starts, verify by hand):
   0F:E4F7  STA scrollDir
   0F:E4F9  AND #$01
   0F:E4FB  TAX
-  0F:E4FC  LDA tbl_0F_E60B,X
+  0F:E4FC  LDA UpdateHorizScrollTbl_E60B,X
   0F:E4FF  STA ram_0025
-  0F:E501  LDA tbl_0F_E60D,X
+  0F:E501  LDA UpdateHorizScrollTbl_E60D,X
   0F:E504  STA stageColumn
   0F:E511  LDA ram_0025
   0F:E513  EOR #$FF
@@ -1176,7 +1176,7 @@ Traced code (instruction starts, verify by hand):
   0F:EE1C  BEQ loc_0F_EE43
   0F:EE1E  LDA spritePriorityBit
   0F:EE20  CLC
-  0F:EE21  ADC tbl_0F_EF2F,Y
+  0F:EE21  ADC TileCollideXTbl_EF2F,Y
   0F:EE24  STA spritePriorityBit
   0F:EE26  CMP #$F0
   0F:EE28  BCC loc_0F_EE32

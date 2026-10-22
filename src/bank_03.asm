@@ -567,23 +567,23 @@ ofsSetHi_03:
 	.hibytes ofsset_03_B0EE, ofsset_03_B0EE, ofsset_03_B0EE, ofsset_03_B0EE, ofsset_03_B0EE, ofsset_03_B0EE, ofsset_03_B0EE, ofsset_03_B0EE;- - - - - - 0x007308 03:B2F8:
 ofs_03_B300:
 	JMP loc_03_B3F4                 ;C - - J - - 0x007310 03:B300: 4C F4 B3
-ofs_03_B303:
+frame_02_8A30_02:
 	JMP loc_03_BB91                 ;C - - J - - 0x007313 03:B303: 4C 91 BB
 	.byte $4C,$30,$B3,$4C,$30,$B3   ;- - - - - - 0x007316 03:B306:
 ofs_03_B30C:
 	JMP loc_03_BBCB                 ;C - - J - - 0x00731C 03:B30C: 4C CB BB
-ofs_03_B30F:
+enemyAI_75:
 	JMP loc_03_BD46                 ;C - - J - - 0x00731F 03:B30F: 4C 46 BD
 	.byte $4C,$30,$B3,$4C,$30,$B3,$4C,$30,$B3,$4C,$30,$B3,$4C,$30,$B3;- - - - - - 0x007322 03:B312:
 ofs_03_B321:
 	JMP loc_03_BF38                 ;C - - J - - 0x007331 03:B321: 4C 38 BF
-ofs_03_B324:
+enemyAI_7C:
 	JMP loc_03_BFBE                 ;C - - J - - 0x007334 03:B324: 4C BE BF
 ofs_03_B327:
 	JMP loc_03_BF95                 ;C - - J - - 0x007337 03:B327: 4C 95 BF
-ofs_03_B32A:
+enemyAI_7E:
 	JMP loc_03_BF48                 ;C - - J - - 0x00733A 03:B32A: 4C 48 BF
-ofs_03_B32D:
+enemyAI_7F:
 	JMP loc_03_BED2                 ;C - - J - - 0x00733D 03:B32D: 4C D2 BE
 	.byte $60                       ;- - - - - - 0x007340 03:B330:
 EnemyMoveProbe4Way:
@@ -642,31 +642,31 @@ SetFlag40ToPlayer_03:
 loc_03_B398:
 	JMP SetObjFlag40                ;C - - - - - 0x0073A8 03:B398: 4C 90 F0
 SetVelFromTbl_B39B:
-	LDA tbl_03_B3C4,Y               ;C - - - - - 0x0073AB 03:B39B: B9 C4 B3
+	LDA SetVelFromTbl_B39BTbl_B3C4,Y;C - - - - - 0x0073AB 03:B39B: B9 C4 B3
 	STA objVelXLo,X                 ;C - - - - - 0x0073AE 03:B39E: 9D 00 04
-	LDA tbl_03_B3B4,Y               ;C - - - - - 0x0073B1 03:B3A1: B9 B4 B3
+	LDA SetVelFromTbl_B39BTbl_B3B4,Y;C - - - - - 0x0073B1 03:B3A1: B9 B4 B3
 	STA objVelXHi,X                 ;C - - - - - 0x0073B4 03:B3A4: 9D 10 04
-	LDA tbl_03_B3E4,Y               ;C - - - - - 0x0073B7 03:B3A7: B9 E4 B3
+	LDA SetVelFromTbl_B39BTbl_B3E4,Y;C - - - - - 0x0073B7 03:B3A7: B9 E4 B3
 	STA objVelYLo,X                 ;C - - - - - 0x0073BA 03:B3AA: 9D 20 04
-	LDA tbl_03_B3D4,Y               ;C - - - - - 0x0073BD 03:B3AD: B9 D4 B3
+	LDA SetVelFromTbl_B39BTbl_B3D4,Y;C - - - - - 0x0073BD 03:B3AD: B9 D4 B3
 	STA objVelYHi,X                 ;C - - - - - 0x0073C0 03:B3B0: 9D 30 04
 	RTS                             ;C - - - - - 0x0073C3 03:B3B3: 60
-tbl_03_B3B4:
+SetVelFromTbl_B39BTbl_B3B4:
 	.byte $00,$00,$00,$00,$01,$00,$00,$00;- D 1 - - - 0x0073C4 03:B3B4:
 	.byte $00                       ;- - - - - - 0x0073CC 03:B3BC:
 	.byte $00,$00,$00,$01,$00,$00   ;- D 1 - - - 0x0073CD 03:B3BD:
 	.byte $00                       ;- - - - - - 0x0073D3 03:B3C3:
-tbl_03_B3C4:
+SetVelFromTbl_B39BTbl_B3C4:
 	.byte $00,$61,$B5,$EC,$00,$EC,$B5,$61;- D 1 - - - 0x0073D4 03:B3C4:
 	.byte $00                       ;- - - - - - 0x0073DC 03:B3CC:
 	.byte $61,$B5,$EC,$00,$EC,$B5   ;- D 1 - - - 0x0073DD 03:B3CD:
 	.byte $61                       ;- - - - - - 0x0073E3 03:B3D3:
-tbl_03_B3D4:
+SetVelFromTbl_B39BTbl_B3D4:
 	.byte $01,$00,$00,$00,$00,$00,$00,$00;- D 1 - - - 0x0073E4 03:B3D4:
 	.byte $01                       ;- - - - - - 0x0073EC 03:B3DC:
 	.byte $00,$00,$00,$00,$00,$00   ;- D 1 - - - 0x0073ED 03:B3DD:
 	.byte $00                       ;- - - - - - 0x0073F3 03:B3E3:
-tbl_03_B3E4:
+SetVelFromTbl_B39BTbl_B3E4:
 	.byte $00,$EC,$B5,$61,$00,$61,$B5,$EC;- D 1 - - - 0x0073F4 03:B3E4:
 	.byte $00                       ;- - - - - - 0x0073FC 03:B3EC:
 	.byte $EC,$B5,$61,$00,$61,$B5   ;- D 1 - - - 0x0073FD 03:B3ED:
@@ -829,14 +829,14 @@ loc_03_B523:
 	LDA objActive,X                 ;C - - - - - 0x007533 03:B523: BD 00 03
 	AND #$0F                        ;C - - - - - 0x007536 03:B526: 29 0F
 	TAY                             ;C - - - - - 0x007538 03:B528: A8
-	LDA tbl_03_B536,Y               ;C - - - - - 0x007539 03:B529: B9 36 B5
+	LDA SetVelFromTbl_B39BTbl_B536,Y;C - - - - - 0x007539 03:B529: B9 36 B5
 	STA ptr_00                      ;C - - - - - 0x00753C 03:B52C: 85 00
-	LDA tbl_03_B53E,Y               ;C - - - - - 0x00753E 03:B52E: B9 3E B5
+	LDA SetVelFromTbl_B39BTbl_B53E,Y;C - - - - - 0x00753E 03:B52E: B9 3E B5
 	STA ptr_00+1                    ;C - - - - - 0x007541 03:B531: 85 01
 	JMP (ptr_00)                    ;C - - - - - 0x007543 03:B533: 6C 00 00
-tbl_03_B536:
+SetVelFromTbl_B39BTbl_B536:
 	.lobytes ofs_03_B546, ofs_03_B57B, ofs_03_B666, ofs_03_B6F5, ofs_03_B7C9, ofs_03_B879, ofs_03_BA1C, ofs_03_BA88;- D 1 - - - 0x007546 03:B536:
-tbl_03_B53E:
+SetVelFromTbl_B39BTbl_B53E:
 	.hibytes ofs_03_B546, ofs_03_B57B, ofs_03_B666, ofs_03_B6F5, ofs_03_B7C9, ofs_03_B879, ofs_03_BA1C, ofs_03_BA88;- D 1 - - - 0x00754E 03:B53E:
 ofs_03_B546:
 	LDA #$00                        ;C - - J - - 0x007556 03:B546: A9 00
@@ -1340,9 +1340,9 @@ loc_03_B925:
 	CMP #$01                        ;C - - - - - 0x007938 03:B928: C9 01
 	BEQ loc_03_B93A                 ;C - - - - - 0x00793A 03:B92A: F0 0E
 	LDY playerId                    ;C - - - - - 0x00793C 03:B92C: A4 34
-	LDA tbl_0F_E207,Y               ;C - - - - - 0x00793E 03:B92E: B9 07 E2
+	LDA SetVelFromTbl_B39BTbl_E207,Y;C - - - - - 0x00793E 03:B92E: B9 07 E2
 	JSR SetPlayerAnim               ;C - - - - - 0x007941 03:B931: 20 94 F2
-	LDA tbl_0F_E24F,Y               ;C - - - - - 0x007944 03:B934: B9 4F E2
+	LDA SetVelFromTbl_B39BTbl_E24F,Y;C - - - - - 0x007944 03:B934: B9 4F E2
 	JSR SetChrBank2                 ;C - - - - - 0x007947 03:B937: 20 40 F4
 loc_03_B93A:
 	LDA objAnimFrame,X              ;C - - - - - 0x00794A 03:B93A: BD 70 05
@@ -1420,7 +1420,7 @@ loc_03_B9CB:
 	BEQ loc_03_B9EF                 ;C - - - - - 0x0079E8 03:B9D8: F0 15
 	LDA objX,X                      ;C - - - - - 0x0079EA 03:B9DA: BD 60 03
 	CLC                             ;C - - - - - 0x0079ED 03:B9DD: 18
-	ADC tbl_03_BA16,Y               ;C - - - - - 0x0079EE 03:B9DE: 79 16 BA
+	ADC SetVelFromTbl_B39BTbl_BA16,Y;C - - - - - 0x0079EE 03:B9DE: 79 16 BA
 	STA objX                        ;C - - - - - 0x0079F1 03:B9E1: 8D 60 03
 	LDA objXPage,X                  ;C - - - - - 0x0079F4 03:B9E4: BD 80 03
 	ADC #$00                        ;C - - - - - 0x0079F7 03:B9E7: 69 00
@@ -1429,7 +1429,7 @@ loc_03_B9CB:
 loc_03_B9EF:
 	LDA objX,X                      ;C - - - - - 0x0079FF 03:B9EF: BD 60 03
 	SEC                             ;C - - - - - 0x007A02 03:B9F2: 38
-	SBC tbl_03_BA16,Y               ;C - - - - - 0x007A03 03:B9F3: F9 16 BA
+	SBC SetVelFromTbl_B39BTbl_BA16,Y;C - - - - - 0x007A03 03:B9F3: F9 16 BA
 	STA objX                        ;C - - - - - 0x007A06 03:B9F6: 8D 60 03
 	LDA objXPage,X                  ;C - - - - - 0x007A09 03:B9F9: BD 80 03
 	SBC #$00                        ;C - - - - - 0x007A0C 03:B9FC: E9 00
@@ -1437,7 +1437,7 @@ loc_03_B9EF:
 loc_03_BA01:
 	LDA objY,X                      ;C - - - - - 0x007A11 03:BA01: BD C0 03
 	SEC                             ;C - - - - - 0x007A14 03:BA04: 38
-	SBC tbl_03_BA19,Y               ;C - - - - - 0x007A15 03:BA05: F9 19 BA
+	SBC SetVelFromTbl_B39BTbl_BA19,Y;C - - - - - 0x007A15 03:BA05: F9 19 BA
 	STA objY                        ;C - - - - - 0x007A18 03:BA08: 8D C0 03
 	LDA #$00                        ;C - - - - - 0x007A1B 03:BA0B: A9 00
 	STA timerA4                     ;C - - - - - 0x007A1D 03:BA0D: 85 A4
@@ -1445,9 +1445,9 @@ loc_03_BA01:
 	LDA #$0A                        ;C - - - - - 0x007A21 03:BA11: A9 0A
 	STA gameAction                  ;C - - - - - 0x007A23 03:BA13: 85 30
 	RTS                             ;C - - - - - 0x007A25 03:BA15: 60
-tbl_03_BA16:
+SetVelFromTbl_B39BTbl_BA16:
 	.byte $12,$07,$0A               ;- D 1 - - - 0x007A26 03:BA16:
-tbl_03_BA19:
+SetVelFromTbl_B39BTbl_BA19:
 	.byte $0C,$12,$17               ;- D 1 - - - 0x007A29 03:BA19:
 ofs_03_BA1C:
 	JSR DistanceXToPlayer           ;C - - J - - 0x007A2C 03:BA1C: 20 74 F3
@@ -1545,16 +1545,16 @@ loc_03_BAC2:
 	STA objActive,X                 ;C - - - - - 0x007ADC 03:BACC: 9D 00 03
 	RTS                             ;C - - - - - 0x007ADF 03:BACF: 60
 SetVelFromTbl_BAD0:
-	LDA tbl_03_BAF9,Y               ;C - - - - - 0x007AE0 03:BAD0: B9 F9 BA
+	LDA SetVelFromTbl_BAD0Tbl_BAF9,Y;C - - - - - 0x007AE0 03:BAD0: B9 F9 BA
 	STA objVelXLo,X                 ;C - - - - - 0x007AE3 03:BAD3: 9D 00 04
-	LDA tbl_03_BAE9,Y               ;C - - - - - 0x007AE6 03:BAD6: B9 E9 BA
+	LDA SetVelFromTbl_BAD0Tbl_BAE9,Y;C - - - - - 0x007AE6 03:BAD6: B9 E9 BA
 	STA objVelXHi,X                 ;C - - - - - 0x007AE9 03:BAD9: 9D 10 04
-	LDA tbl_03_BB19,Y               ;C - - - - - 0x007AEC 03:BADC: B9 19 BB
+	LDA SetVelFromTbl_BAD0Tbl_BB19,Y;C - - - - - 0x007AEC 03:BADC: B9 19 BB
 	STA objVelYLo,X                 ;C - - - - - 0x007AEF 03:BADF: 9D 20 04
-	LDA tbl_03_BB09,Y               ;C - - - - - 0x007AF2 03:BAE2: B9 09 BB
+	LDA SetVelFromTbl_BAD0Tbl_BB09,Y;C - - - - - 0x007AF2 03:BAE2: B9 09 BB
 	STA objVelYHi,X                 ;C - - - - - 0x007AF5 03:BAE5: 9D 30 04
 	RTS                             ;C - - - - - 0x007AF8 03:BAE8: 60
-tbl_03_BAE9:
+SetVelFromTbl_BAD0Tbl_BAE9:
 	.byte $00,$00,$01,$02           ;- - - - - - 0x007AF9 03:BAE9:
 	.byte $02,$02,$01               ;- D 1 - - - 0x007AFD 03:BAED:
 	.byte $00,$00,$00               ;- - - - - - 0x007B00 03:BAF0:
@@ -1564,7 +1564,7 @@ tbl_03_BAE9:
 	.byte $02                       ;- - - - - - 0x007B06 03:BAF6:
 	.byte $01                       ;- D 1 - - - 0x007B07 03:BAF7:
 	.byte $00                       ;- - - - - - 0x007B08 03:BAF8:
-tbl_03_BAF9:
+SetVelFromTbl_BAD0Tbl_BAF9:
 	.byte $00,$E1,$A0,$1F           ;- - - - - - 0x007B09 03:BAF9:
 	.byte $4C,$1F,$A0               ;- D 1 - - - 0x007B0D 03:BAFD:
 	.byte $E1,$00,$E1               ;- - - - - - 0x007B10 03:BB00:
@@ -1574,7 +1574,7 @@ tbl_03_BAF9:
 	.byte $1F                       ;- - - - - - 0x007B16 03:BB06:
 	.byte $A0                       ;- D 1 - - - 0x007B17 03:BB07:
 	.byte $E1                       ;- - - - - - 0x007B18 03:BB08:
-tbl_03_BB09:
+SetVelFromTbl_BAD0Tbl_BB09:
 	.byte $02,$02,$01,$00           ;- - - - - - 0x007B19 03:BB09:
 	.byte $00,$00,$01               ;- D 1 - - - 0x007B1D 03:BB0D:
 	.byte $02,$02,$02               ;- - - - - - 0x007B20 03:BB10:
@@ -1584,7 +1584,7 @@ tbl_03_BB09:
 	.byte $00                       ;- - - - - - 0x007B26 03:BB16:
 	.byte $01                       ;- D 1 - - - 0x007B27 03:BB17:
 	.byte $02                       ;- - - - - - 0x007B28 03:BB18:
-tbl_03_BB19:
+SetVelFromTbl_BAD0Tbl_BB19:
 	.byte $4C,$1F,$A0,$E1           ;- - - - - - 0x007B29 03:BB19:
 	.byte $00,$E1,$A0               ;- D 1 - - - 0x007B2D 03:BB1D:
 	.byte $1F,$4C,$1F               ;- - - - - - 0x007B30 03:BB20:
@@ -1617,7 +1617,7 @@ loc_03_BB3A:
 	TAY                             ;c - - - - - 0x007B56 03:BB46: A8
 	BNE loc_03_BB4D                 ;c - - - - - 0x007B57 03:BB47: D0 04
 loc_03_BB49:
-	LDA tbl_03_BB81,Y               ;C - - - - - 0x007B59 03:BB49: B9 81 BB
+	LDA EnemyChooseDirToPlayerTbl_BB81,Y;C - - - - - 0x007B59 03:BB49: B9 81 BB
 	TAY                             ;C - - - - - 0x007B5C 03:BB4C: A8
 loc_03_BB4D:
 	LDA tbl_0F_FBF0,Y               ;C - - - - - 0x007B5D 03:BB4D: B9 F0 FB
@@ -1647,7 +1647,7 @@ loc_03_BB76:
 	STA objParamB,X                 ;C - - - - - 0x007B8D 03:BB7D: 9D 20 05
 loc_03_BB80:
 	RTS                             ;C - - - - - 0x007B90 03:BB80: 60
-tbl_03_BB81:
+EnemyChooseDirToPlayerTbl_BB81:
 	.byte $02,$02,$02,$03           ;- - - - - - 0x007B91 03:BB81:
 	.byte $04,$05,$06               ;- D 1 - - - 0x007B95 03:BB85:
 	.byte $06,$0A,$0A               ;- - - - - - 0x007B98 03:BB88:
@@ -1756,7 +1756,7 @@ loc_03_BC54:
 	AND #$07                        ;C - - - - - 0x007C6F 03:BC5F: 29 07
 	TAY                             ;C - - - - - 0x007C71 03:BC61: A8
 	STY ptr_00+1                    ;C - - - - - 0x007C72 03:BC62: 84 01
-	LDA tbl_03_BD3E,Y               ;C - - - - - 0x007C74 03:BC64: B9 3E BD
+	LDA EnemyChooseDirToPlayerTbl_BD3E,Y;C - - - - - 0x007C74 03:BC64: B9 3E BD
 	STA objStep,X                   ;C - - - - - 0x007C77 03:BC67: 9D 00 05
 	LDA stage                       ;C - - - - - 0x007C7A 03:BC6A: A5 61
 	BEQ loc_03_BC7A                 ;C - - - - - 0x007C7C 03:BC6C: F0 0C
@@ -1767,41 +1767,41 @@ loc_03_BC54:
 	CMP #$04                        ;c - - - - - 0x007C86 03:BC76: C9 04
 	BEQ loc_03_BCB4                 ;c - - - - - 0x007C88 03:BC78: F0 3A
 loc_03_BC7A:
-	LDA tbl_03_BCF6,Y               ;C - - - - - 0x007C8A 03:BC7A: B9 F6 BC
+	LDA EnemyChooseDirToPlayerTbl_BCF6,Y;C - - - - - 0x007C8A 03:BC7A: B9 F6 BC
 	LDY ptr_00                      ;C - - - - - 0x007C8D 03:BC7D: A4 00
 	STA objY,Y                      ;C - - - - - 0x007C8F 03:BC7F: 99 C0 03
 	LDY ptr_00+1                    ;C - - - - - 0x007C92 03:BC82: A4 01
-	LDA tbl_03_BD0E,Y               ;C - - - - - 0x007C94 03:BC84: B9 0E BD
+	LDA EnemyChooseDirToPlayerTbl_BD0E,Y;C - - - - - 0x007C94 03:BC84: B9 0E BD
 	LDY ptr_00                      ;C - - - - - 0x007C97 03:BC87: A4 00
 	STA objX,Y                      ;C - - - - - 0x007C99 03:BC89: 99 60 03
 	LDY ptr_00+1                    ;C - - - - - 0x007C9C 03:BC8C: A4 01
-	LDA tbl_03_BD26,Y               ;C - - - - - 0x007C9E 03:BC8E: B9 26 BD
+	LDA EnemyChooseDirToPlayerTbl_BD26,Y;C - - - - - 0x007C9E 03:BC8E: B9 26 BD
 	LDY ptr_00                      ;C - - - - - 0x007CA1 03:BC91: A4 00
 	STA objFacing,Y                 ;C - - - - - 0x007CA3 03:BC93: 99 60 04
 	RTS                             ;C - - - - - 0x007CA6 03:BC96: 60
 loc_03_BC97:
-	LDA tbl_03_BCFE,Y               ;C - - - - - 0x007CA7 03:BC97: B9 FE BC
+	LDA EnemyChooseDirToPlayerTbl_BCFE,Y;C - - - - - 0x007CA7 03:BC97: B9 FE BC
 	LDY ptr_00                      ;C - - - - - 0x007CAA 03:BC9A: A4 00
 	STA objY,Y                      ;C - - - - - 0x007CAC 03:BC9C: 99 C0 03
 	LDY ptr_00+1                    ;C - - - - - 0x007CAF 03:BC9F: A4 01
-	LDA tbl_03_BD16,Y               ;C - - - - - 0x007CB1 03:BCA1: B9 16 BD
+	LDA EnemyChooseDirToPlayerTbl_BD16,Y;C - - - - - 0x007CB1 03:BCA1: B9 16 BD
 	LDY ptr_00                      ;C - - - - - 0x007CB4 03:BCA4: A4 00
 	STA objX,Y                      ;C - - - - - 0x007CB6 03:BCA6: 99 60 03
 	LDY ptr_00+1                    ;C - - - - - 0x007CB9 03:BCA9: A4 01
-	LDA tbl_03_BD2E,Y               ;C - - - - - 0x007CBB 03:BCAB: B9 2E BD
+	LDA EnemyChooseDirToPlayerTbl_BD2E,Y;C - - - - - 0x007CBB 03:BCAB: B9 2E BD
 	LDY ptr_00                      ;C - - - - - 0x007CBE 03:BCAE: A4 00
 	STA objFacing,Y                 ;C - - - - - 0x007CC0 03:BCB0: 99 60 04
 	RTS                             ;C - - - - - 0x007CC3 03:BCB3: 60
 loc_03_BCB4:
-	LDA tbl_03_BD06,Y               ;C - - - - - 0x007CC4 03:BCB4: B9 06 BD
+	LDA EnemyChooseDirToPlayerTbl_BD06,Y;C - - - - - 0x007CC4 03:BCB4: B9 06 BD
 	LDY ptr_00                      ;C - - - - - 0x007CC7 03:BCB7: A4 00
 	STA objY,Y                      ;C - - - - - 0x007CC9 03:BCB9: 99 C0 03
 	LDY ptr_00+1                    ;C - - - - - 0x007CCC 03:BCBC: A4 01
-	LDA tbl_03_BD1E,Y               ;C - - - - - 0x007CCE 03:BCBE: B9 1E BD
+	LDA EnemyChooseDirToPlayerTbl_BD1E,Y;C - - - - - 0x007CCE 03:BCBE: B9 1E BD
 	LDY ptr_00                      ;C - - - - - 0x007CD1 03:BCC1: A4 00
 	STA objX,Y                      ;C - - - - - 0x007CD3 03:BCC3: 99 60 03
 	LDY ptr_00+1                    ;C - - - - - 0x007CD6 03:BCC6: A4 01
-	LDA tbl_03_BD36,Y               ;C - - - - - 0x007CD8 03:BCC8: B9 36 BD
+	LDA EnemyChooseDirToPlayerTbl_BD36,Y;C - - - - - 0x007CD8 03:BCC8: B9 36 BD
 	LDY ptr_00                      ;C - - - - - 0x007CDB 03:BCCB: A4 00
 	STA objFacing,Y                 ;C - - - - - 0x007CDD 03:BCCD: 99 60 04
 	RTS                             ;C - - - - - 0x007CE0 03:BCD0: 60
@@ -1829,52 +1829,52 @@ loc_03_BCE5:
 loc_03_BCF3:
 	LDA #$00                        ;c - - - - - 0x007D03 03:BCF3: A9 00
 	RTS                             ;c - - - - - 0x007D05 03:BCF5: 60
-tbl_03_BCF6:
+EnemyChooseDirToPlayerTbl_BCF6:
 	.byte $98                       ;- D 1 - - - 0x007D06 03:BCF6:
 	.byte $88                       ;- - - - - - 0x007D07 03:BCF7:
 	.byte $78,$88                   ;- D 1 - - - 0x007D08 03:BCF8:
 	.byte $98                       ;- - - - - - 0x007D0A 03:BCFA:
 	.byte $88,$78,$98               ;- D 1 - - - 0x007D0B 03:BCFB:
-tbl_03_BCFE:
+EnemyChooseDirToPlayerTbl_BCFE:
 	.byte $98                       ;- D 1 - - - 0x007D0E 03:BCFE:
 	.byte $98                       ;- - - - - - 0x007D0F 03:BCFF:
 	.byte $A8                       ;- D 1 - - - 0x007D10 03:BD00:
 	.byte $A8,$98                   ;- - - - - - 0x007D11 03:BD01:
 	.byte $98,$A8,$A8               ;- D 1 - - - 0x007D13 03:BD03:
-tbl_03_BD06:
+EnemyChooseDirToPlayerTbl_BD06:
 	.byte $88,$98,$A8,$98,$88,$98,$A8;- D 1 - - - 0x007D16 03:BD06:
 	.byte $98                       ;- - - - - - 0x007D1D 03:BD0D:
-tbl_03_BD0E:
+EnemyChooseDirToPlayerTbl_BD0E:
 	.byte $FF                       ;- D 1 - - - 0x007D1E 03:BD0E:
 	.byte $FF                       ;- - - - - - 0x007D1F 03:BD0F:
 	.byte $FF,$FF                   ;- D 1 - - - 0x007D20 03:BD10:
 	.byte $FF                       ;- - - - - - 0x007D22 03:BD12:
 	.byte $FF,$FF,$FF               ;- D 1 - - - 0x007D23 03:BD13:
-tbl_03_BD16:
+EnemyChooseDirToPlayerTbl_BD16:
 	.byte $00                       ;- D 1 - - - 0x007D26 03:BD16:
 	.byte $00                       ;- - - - - - 0x007D27 03:BD17:
 	.byte $00                       ;- D 1 - - - 0x007D28 03:BD18:
 	.byte $00,$00                   ;- - - - - - 0x007D29 03:BD19:
 	.byte $00,$00,$00               ;- D 1 - - - 0x007D2B 03:BD1B:
-tbl_03_BD1E:
+EnemyChooseDirToPlayerTbl_BD1E:
 	.byte $00,$00,$00,$00,$00,$00,$00;- D 1 - - - 0x007D2E 03:BD1E:
 	.byte $00                       ;- - - - - - 0x007D35 03:BD25:
-tbl_03_BD26:
+EnemyChooseDirToPlayerTbl_BD26:
 	.byte $02                       ;- D 1 - - - 0x007D36 03:BD26:
 	.byte $02                       ;- - - - - - 0x007D37 03:BD27:
 	.byte $02,$02                   ;- D 1 - - - 0x007D38 03:BD28:
 	.byte $02                       ;- - - - - - 0x007D3A 03:BD2A:
 	.byte $02,$02,$02               ;- D 1 - - - 0x007D3B 03:BD2B:
-tbl_03_BD2E:
+EnemyChooseDirToPlayerTbl_BD2E:
 	.byte $01                       ;- D 1 - - - 0x007D3E 03:BD2E:
 	.byte $01                       ;- - - - - - 0x007D3F 03:BD2F:
 	.byte $01                       ;- D 1 - - - 0x007D40 03:BD30:
 	.byte $01,$01                   ;- - - - - - 0x007D41 03:BD31:
 	.byte $01,$01,$01               ;- D 1 - - - 0x007D43 03:BD33:
-tbl_03_BD36:
+EnemyChooseDirToPlayerTbl_BD36:
 	.byte $01,$01,$01,$01,$01,$01,$01;- D 1 - - - 0x007D46 03:BD36:
 	.byte $01                       ;- - - - - - 0x007D4D 03:BD3D:
-tbl_03_BD3E:
+EnemyChooseDirToPlayerTbl_BD3E:
 	.byte $44,$5A,$4B,$3C,$44,$5A,$4B,$3C;- D 1 - - - 0x007D4E 03:BD3E:
 loc_03_BD46:
 	LDA objActive,X                 ;C - - - - - 0x007D56 03:BD46: BD 00 03
@@ -1995,36 +1995,36 @@ loc_03_BE44:
 	AND #$0F                        ;C - - - - - 0x007E5A 03:BE4A: 29 0F
 	TAY                             ;C - - - - - 0x007E5C 03:BE4C: A8
 	STY ptr_00+1                    ;C - - - - - 0x007E5D 03:BE4D: 84 01
-	LDA tbl_03_BE88,Y               ;C - - - - - 0x007E5F 03:BE4F: B9 88 BE
+	LDA SpawnObjBelowEnemyTbl_BE88,Y;C - - - - - 0x007E5F 03:BE4F: B9 88 BE
 	LDY ptr_00                      ;C - - - - - 0x007E62 03:BE52: A4 00
 	STA objKind,Y                   ;C - - - - - 0x007E64 03:BE54: 99 20 03
 	CMP #$69                        ;C - - - - - 0x007E67 03:BE57: C9 69
 	BNE loc_03_BE68                 ;C - - - - - 0x007E69 03:BE59: D0 0D
 	LDY playerId                    ;C - - - - - 0x007E6B 03:BE5B: A4 34
-	LDA tbl_03_BE98,Y               ;C - - - - - 0x007E6D 03:BE5D: B9 98 BE
+	LDA SpawnObjBelowEnemyTbl_BE98,Y;C - - - - - 0x007E6D 03:BE5D: B9 98 BE
 	LDY ptr_00                      ;C - - - - - 0x007E70 03:BE60: A4 00
 	JSR SetAnimY                    ;C - - - - - 0x007E72 03:BE62: 20 A0 F2
 	JMP loc_03_BE72                 ;C - - - - - 0x007E75 03:BE65: 4C 72 BE
 loc_03_BE68:
 	LDY ptr_00+1                    ;C - - - - - 0x007E78 03:BE68: A4 01
-	LDA tbl_03_BE78,Y               ;C - - - - - 0x007E7A 03:BE6A: B9 78 BE
+	LDA SpawnObjBelowEnemyTbl_BE78,Y;C - - - - - 0x007E7A 03:BE6A: B9 78 BE
 	LDY ptr_00                      ;C - - - - - 0x007E7D 03:BE6D: A4 00
 	JSR SetAnimY                    ;C - - - - - 0x007E7F 03:BE6F: 20 A0 F2
 loc_03_BE72:
 	LDA #$90                        ;C - - - - - 0x007E82 03:BE72: A9 90
 	STA objFlags,Y                  ;C - - - - - 0x007E84 03:BE74: 99 60 05
 	RTS                             ;C - - - - - 0x007E87 03:BE77: 60
-tbl_03_BE78:
+SpawnObjBelowEnemyTbl_BE78:
 	.byte $60,$63,$62,$63           ;- - - - - - 0x007E88 03:BE78:
 	.byte $64                       ;- D 1 - - - 0x007E8C 03:BE7C:
 	.byte $65,$60,$40,$5E,$5D,$5D,$5E,$40,$60,$63,$64;- - - - - - 0x007E8D 03:BE7D:
-tbl_03_BE88:
+SpawnObjBelowEnemyTbl_BE88:
 	.byte $10,$10,$10,$10           ;- - - - - - 0x007E98 03:BE88:
 	.byte $13                       ;- D 1 - - - 0x007E9C 03:BE8C:
 	.byte $11,$10,$69,$69,$69,$69,$69;- - - - - - 0x007E9D 03:BE8D:
 	.byte $69                       ;- D 1 - - - 0x007EA4 03:BE94:
 	.byte $10,$10,$13               ;- - - - - - 0x007EA5 03:BE95:
-tbl_03_BE98:
+SpawnObjBelowEnemyTbl_BE98:
 	.byte $40                       ;- - - - - - 0x007EA8 03:BE98:
 	.byte $5E                       ;- D 1 - - - 0x007EA9 03:BE99:
 	.byte $5D                       ;- - - - - - 0x007EAA 03:BE9A:

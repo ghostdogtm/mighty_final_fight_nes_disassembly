@@ -5,11 +5,11 @@ SetSectionChr:
 	ASL A                           ;C - - - - - 0x012010 09:A000: 0A
 	PHA                             ;C - - - - - 0x012011 09:A001: 48
 	TAX                             ;C - - - - - 0x012012 09:A002: AA
-	LDA tbl_09_A035,X               ;C - - - - - 0x012013 09:A003: BD 35 A0
+	LDA SetSectionChrTbl_A035,X     ;C - - - - - 0x012013 09:A003: BD 35 A0
 	STA chrBankShadow+3             ;C - - - - - 0x012016 09:A006: 85 EB
-	LDA tbl_09_A036,X               ;C - - - - - 0x012018 09:A008: BD 36 A0
+	LDA SetSectionChrTbl_A036,X     ;C - - - - - 0x012018 09:A008: BD 36 A0
 	STA chrBankShadow+4             ;C - - - - - 0x01201B 09:A00B: 85 EC
-	LDA tbl_09_A0B5,X               ;C - - - - - 0x01201D 09:A00D: BD B5 A0
+	LDA SetSectionChrTbl_A0B5,X     ;C - - - - - 0x01201D 09:A00D: BD B5 A0
 	STA chrBankShadow+5             ;C - - - - - 0x012020 09:A010: 85 ED
 	PLA                             ;C - - - - - 0x012022 09:A012: 68
 LoadSpritePal2:
@@ -33,9 +33,9 @@ loc_09_A022:
 	LDX #$FF                        ;C - - - - - 0x012040 09:A030: A2 FF
 	STX palUpdateFlag               ;C - - - - - 0x012042 09:A032: 86 18
 	RTS                             ;C - - - - - 0x012044 09:A034: 60
-tbl_09_A035:
+SetSectionChrTbl_A035:
 	.byte $1D                       ;- D 1 - - - 0x012045 09:A035:
-tbl_09_A036:
+SetSectionChrTbl_A036:
 	.byte $1E,$1D,$1E,$1D,$1F       ;- D 1 - - - 0x012046 09:A036:
 	.byte $1D,$1E                   ;- - - - - - 0x01204B 09:A03B:
 	.byte $00,$38,$00,$28,$24,$00,$00,$2C,$1D,$1E,$1D,$18,$00,$2C,$24,$00;- D 1 - - - 0x01204D 09:A03D:
@@ -49,7 +49,7 @@ tbl_09_A036:
 	.res 31, $00                    ;- - - - - - 0x012091 09:A081: fill 31 bytes
 tbl_09_A0A0:
 	.res 21, $00                    ;- - - - - - 0x0120B0 09:A0A0: fill 21 bytes
-tbl_09_A0B5:
+SetSectionChrTbl_A0B5:
 	.byte $1B                       ;- D 1 - - - 0x0120C5 09:A0B5:
 	.byte $00                       ;- - - - - - 0x0120C6 09:A0B6:
 	.byte $1B                       ;- D 1 - - - 0x0120C7 09:A0B7:
@@ -156,17 +156,17 @@ loc_09_A318:
 	RTS                             ;C - - - - - 0x012330 09:A320: 60
 PaletteAnimChannel:
 	LDY palAnimType,X               ;C - - - - - 0x012331 09:A321: BC 08 01
-	LDA tbl_09_A445,Y               ;C - - - - - 0x012334 09:A324: B9 45 A4
+	LDA PaletteAnimChannelTbl_A445,Y;C - - - - - 0x012334 09:A324: B9 45 A4
 	TAY                             ;C - - - - - 0x012337 09:A327: A8
 	LDA palAnimTimer,X              ;C - - - - - 0x012338 09:A328: BD 0C 01
 	INC palAnimTimer,X              ;C - - - - - 0x01233B 09:A32B: FE 0C 01
-	CMP tbl_09_A459,Y               ;C - - - - - 0x01233E 09:A32E: D9 59 A4
+	CMP PaletteAnimChannelTbl_A459,Y;C - - - - - 0x01233E 09:A32E: D9 59 A4
 	BNE loc_09_A36F                 ;C - - - - - 0x012341 09:A331: D0 3C
 	LDA #$00                        ;C - - - - - 0x012343 09:A333: A9 00
 	STA palAnimTimer,X              ;C - - - - - 0x012345 09:A335: 9D 0C 01
 	LDA palAnimStep,X               ;C - - - - - 0x012348 09:A338: BD 04 01
 	INC palAnimStep,X               ;C - - - - - 0x01234B 09:A33B: FE 04 01
-	CMP tbl_09_A458,Y               ;C - - - - - 0x01234E 09:A33E: D9 58 A4
+	CMP PaletteAnimChannelTbl_A458,Y;C - - - - - 0x01234E 09:A33E: D9 58 A4
 	BNE loc_09_A348                 ;C - - - - - 0x012351 09:A341: D0 05
 	LDA #$00                        ;C - - - - - 0x012353 09:A343: A9 00
 	STA palAnimStep,X               ;C - - - - - 0x012355 09:A345: 9D 04 01
@@ -175,16 +175,16 @@ loc_09_A348:
 	CLC                             ;C - - - - - 0x012359 09:A349: 18
 	ADC palAnimStep,X               ;C - - - - - 0x01235A 09:A34A: 7D 04 01
 	TAX                             ;C - - - - - 0x01235D 09:A34D: AA
-	LDA tbl_09_A45B,X               ;C - - - - - 0x01235E 09:A34E: BD 5B A4
+	LDA PaletteAnimChannelTbl_A45B,X;C - - - - - 0x01235E 09:A34E: BD 5B A4
 	ASL A                           ;C - - - - - 0x012361 09:A351: 0A
-	ADC tbl_09_A45B,X               ;C - - - - - 0x012362 09:A352: 7D 5B A4
+	ADC PaletteAnimChannelTbl_A45B,X;C - - - - - 0x012362 09:A352: 7D 5B A4
 	TAX                             ;C - - - - - 0x012365 09:A355: AA
-	LDA tbl_09_A45A,Y               ;C - - - - - 0x012366 09:A356: B9 5A A4
+	LDA PaletteAnimChannelTbl_A45A,Y;C - - - - - 0x012366 09:A356: B9 5A A4
 	TAY                             ;C - - - - - 0x012369 09:A359: A8
 	LDA #$03                        ;C - - - - - 0x01236A 09:A35A: A9 03
 	STA ptr_00                      ;C - - - - - 0x01236C 09:A35C: 85 00
 loc_09_A35E:
-	LDA tbl_09_A370,X               ;C - - - - - 0x01236E 09:A35E: BD 70 A3
+	LDA PaletteAnimChannelTbl_A370,X;C - - - - - 0x01236E 09:A35E: BD 70 A3
 	STA palBuffer,Y                 ;C - - - - - 0x012371 09:A361: 99 00 06
 	STA palBase,Y                   ;C - - - - - 0x012374 09:A364: 99 20 06
 	INY                             ;C - - - - - 0x012377 09:A367: C8
@@ -194,7 +194,7 @@ loc_09_A35E:
 	INC spritePriorityBit           ;C - - - - - 0x01237D 09:A36D: E6 11
 loc_09_A36F:
 	RTS                             ;C - - - - - 0x01237F 09:A36F: 60
-tbl_09_A370:
+PaletteAnimChannelTbl_A370:
 	.byte $14,$2A,$12,$04,$2A,$12,$0F,$00,$01,$0C,$00,$01,$01,$00,$01;- - - - - - 0x012380 09:A370:
 	.byte $06,$0F,$2C,$06,$0F,$12   ;- D 1 - - - 0x01238F 09:A37F:
 	.byte $06,$37,$0F               ;- - - - - - 0x012395 09:A385:
@@ -216,20 +216,20 @@ tbl_09_A370:
 	.byte $06,$27,$16,$06,$16,$16   ;- D 1 - - - 0x012440 09:A430:
 	.byte $06,$16,$06,$06,$16,$06   ;- - - - - - 0x012446 09:A436:
 	.byte $18,$13,$03,$03,$13,$03,$13,$13,$03;- D 1 - - - 0x01244C 09:A43C:
-tbl_09_A445:
+PaletteAnimChannelTbl_A445:
 	.byte $00,$05                   ;- - - - - - 0x012455 09:A445:
 	.byte $0B,$3E,$51,$56,$5C,$61,$67;- D 1 - - - 0x012457 09:A447:
 	.byte $6E                       ;- - - - - - 0x01245E 09:A44E:
 	.byte $72                       ;- D 1 - - - 0x01245F 09:A44F:
 	.byte $77                       ;- - - - - - 0x012460 09:A450:
 	.byte $7C,$82,$87,$8E,$93,$9D,$D0;- D 1 - - - 0x012461 09:A451:
-tbl_09_A458:
+PaletteAnimChannelTbl_A458:
 	.byte $01                       ;- - - - - - 0x012468 09:A458:
-tbl_09_A459:
+PaletteAnimChannelTbl_A459:
 	.byte $0A                       ;- - - - - - 0x012469 09:A459:
-tbl_09_A45A:
+PaletteAnimChannelTbl_A45A:
 	.byte $05                       ;- - - - - - 0x01246A 09:A45A:
-tbl_09_A45B:
+PaletteAnimChannelTbl_A45B:
 	.byte $00,$01,$02,$1E,$05,$02,$03,$04;- - - - - - 0x01246B 09:A45B:
 	.byte $2F,$01,$09,$05,$06,$06,$06,$06,$06,$06,$06,$06,$06,$06,$06,$06;- D 1 - - - 0x012473 09:A463:
 	.byte $06,$06,$06,$05,$06,$06,$06,$06,$06,$06,$06,$05,$06,$06,$06,$06;- D 1 - - - 0x012483 09:A473:
@@ -280,9 +280,9 @@ tbl_09_A45B:
 RunTextScript_09:
 	JSR ClearTextQueueRows_09       ;C - - - - - 0x012710 09:A700: 20 8E A7
 	LDY textScriptIdx               ;C - - - - - 0x012713 09:A703: A4 B8
-	LDA tbl_09_A7D6,Y               ;C - - - - - 0x012715 09:A705: B9 D6 A7
+	LDA RunTextScript_09Tbl_A7D6,Y  ;C - - - - - 0x012715 09:A705: B9 D6 A7
 	STA ptr_0C                      ;C - - - - - 0x012718 09:A708: 85 0C
-	LDA tbl_09_A7DB,Y               ;C - - - - - 0x01271A 09:A70A: B9 DB A7
+	LDA RunTextScript_09Tbl_A7DB,Y  ;C - - - - - 0x01271A 09:A70A: B9 DB A7
 	STA ptr_0C+1                    ;C - - - - - 0x01271D 09:A70D: 85 0D
 	LDA #$00                        ;C - - - - - 0x01271F 09:A70F: A9 00
 	STA ptr_0E                      ;C - - - - - 0x012721 09:A711: 85 0E
@@ -295,9 +295,9 @@ loc_09_A719:
 	STA spritePriorityBit           ;C - - - - - 0x01272B 09:A71B: 85 11
 loc_09_A71D:
 	LDX spriteFlipMask              ;C - - - - - 0x01272D 09:A71D: A6 10
-	LDA tbl_09_A782,X               ;C - - - - - 0x01272F 09:A71F: BD 82 A7
+	LDA RunTextScript_09Tbl_A782,X  ;C - - - - - 0x01272F 09:A71F: BD 82 A7
 	STA vramQueue                   ;C - - - - - 0x012732 09:A722: 8D 80 07
-	LDA tbl_09_A785,X               ;C - - - - - 0x012735 09:A725: BD 85 A7
+	LDA RunTextScript_09Tbl_A785,X  ;C - - - - - 0x012735 09:A725: BD 85 A7
 	CLC                             ;C - - - - - 0x012738 09:A728: 18
 	ADC spritePriorityBit           ;C - - - - - 0x012739 09:A729: 65 11
 	STA vramQueue+1                 ;C - - - - - 0x01273B 09:A72B: 8D 81 07
@@ -343,9 +343,9 @@ loc_09_A76D:
 loc_09_A77E:
 	JMP Wait180Frames               ;C - - - - - 0x01278E 09:A77E: 4C D0 A7
 	.byte $60                       ;- - - - - - 0x012791 09:A781:
-tbl_09_A782:
+RunTextScript_09Tbl_A782:
 	.byte $21,$21,$22               ;- D 1 - - - 0x012792 09:A782:
-tbl_09_A785:
+RunTextScript_09Tbl_A785:
 	.byte $A7,$E7,$27               ;- D 1 - - - 0x012795 09:A785:
 MoveXSubSlot0:
 	LDX #$00                        ;C - - - - - 0x012798 09:A788: A2 00
@@ -384,9 +384,9 @@ Wait180Frames:
 	LDX #$B4                        ;C - - - - - 0x0127E0 09:A7D0: A2 B4
 	JSR WaitFrames                  ;C - - - - - 0x0127E2 09:A7D2: 20 2A FF
 	RTS                             ;C - - - - - 0x0127E5 09:A7D5: 60
-tbl_09_A7D6:
+RunTextScript_09Tbl_A7D6:
 	.lobytes tbl_09_A7E0, tbl_09_A7F1, tbl_09_A87D, tbl_09_A8CB, tbl_09_A95C;- D 1 - - - 0x0127E6 09:A7D6:
-tbl_09_A7DB:
+RunTextScript_09Tbl_A7DB:
 	.hibytes tbl_09_A7E0, tbl_09_A7F1, tbl_09_A87D, tbl_09_A8CB, tbl_09_A95C;- D 1 - - - 0x0127EB 09:A7DB:
 tbl_09_A7E0:
 	.byte $00,$00,$00,$00,$00,$22,$00,$23,$00,$10,$00,$15,$00,$15,$FE;- D 1 - I - 0x0127F0 09:A7E0: "     S T A F F/"
@@ -476,14 +476,14 @@ InitEndingPlayerObj:
 	LDA #$A8                        ;C - - - - - 0x012B2A 09:AB1A: A9 A8
 	STA objY                        ;C - - - - - 0x012B2C 09:AB1C: 8D C0 03
 	LDY playerId                    ;C - - - - - 0x012B2F 09:AB1F: A4 34
-	LDA tbl_09_AB2E,Y               ;C - - - - - 0x012B31 09:AB21: B9 2E AB
+	LDA InitEndingPlayerObjTbl_AB2E,Y;C - - - - - 0x012B31 09:AB21: B9 2E AB
 	STA ptr_00                      ;C - - - - - 0x012B34 09:AB24: 85 00
-	LDA tbl_09_AB31,Y               ;C - - - - - 0x012B36 09:AB26: B9 31 AB
+	LDA InitEndingPlayerObjTbl_AB31,Y;C - - - - - 0x012B36 09:AB26: B9 31 AB
 	STA ptr_00+1                    ;C - - - - - 0x012B39 09:AB29: 85 01
 	JMP (ptr_00)                    ;C - - - - - 0x012B3B 09:AB2B: 6C 00 00
-tbl_09_AB2E:
+InitEndingPlayerObjTbl_AB2E:
 	.lobytes loc_09_AB34, ofs_09_ABD0, loc_09_AC81;- - - - - - 0x012B3E 09:AB2E:
-tbl_09_AB31:
+InitEndingPlayerObjTbl_AB31:
 	.hibytes loc_09_AB34, ofs_09_ABD0, loc_09_AC81;- - - - - - 0x012B41 09:AB31:
 loc_09_AB34:
 	LDA objActive                   ;c - - - - - 0x012B44 09:AB34: AD 00 03
@@ -810,7 +810,7 @@ loc_09_AD11:
 	.byte $21,$21,$21,$21,$21,$21,$21;- - - - - - 0x013319 09:B309:
 	.byte $21                       ;- D 1 - I - 0x013320 09:B310:
 	.byte $21,$21,$21,$21,$21,$21,$21;- - - - - - 0x013321 09:B311:
-tbl_09_B318:
+enemyAI_78:
 	.byte $21                       ;- D 1 - I - 0x013328 09:B318:
 	.byte $21,$21,$21,$21,$21,$21,$21;- - - - - - 0x013329 09:B319:
 	.byte $21                       ;- D 1 - I - 0x013330 09:B320:

@@ -179,24 +179,24 @@ ResetScrollState:
 	STA ram_0032                    ;C - - - - - 0x01E167 0F:E157: 85 32
 	STA ram_002E                    ;C - - - - - 0x01E169 0F:E159: 85 2E
 	RTS                             ;C - - - - - 0x01E16B 0F:E15B: 60
-tbl_0F_E15C:
+Act07_SelectScreenTbl_E15C:
 	.byte $08                       ;- - - - - - 0x01E16C 0F:E15C:
 	.byte $09,$0A,$0B,$0C           ;- D 3 - - - 0x01E16D 0F:E15D:
-tbl_0F_E161:
+Act07_SelectScreenTbl_E161:
 	.byte $00,$03,$06,$09           ;- - - - - - 0x01E171 0F:E161:
 	.byte $0C                       ;- D 3 - - - 0x01E175 0F:E165:
-tbl_0F_E166:
+Act07_SelectScreenTbl_E166:
 	.byte $00,$01,$02,$03,$04       ;- D 3 - - - 0x01E176 0F:E166:
 ; objY/objX from per-stage tables indexed by stageSection
 SetPlayerStartPos:
 	LDY stage                       ;C - - - - - 0x01E17B 0F:E16B: A4 61
-	LDA tbl_0F_E18F,Y               ;C - - - - - 0x01E17D 0F:E16D: B9 8F E1
+	LDA SetPlayerStartPosTbl_E18F,Y ;C - - - - - 0x01E17D 0F:E16D: B9 8F E1
 	STA ptr_04                      ;C - - - - - 0x01E180 0F:E170: 85 04
-	LDA tbl_0F_E194,Y               ;C - - - - - 0x01E182 0F:E172: B9 94 E1
+	LDA SetPlayerStartPosTbl_E194,Y ;C - - - - - 0x01E182 0F:E172: B9 94 E1
 	STA ptr_04+1                    ;C - - - - - 0x01E185 0F:E175: 85 05
-	LDA tbl_0F_E199,Y               ;C - - - - - 0x01E187 0F:E177: B9 99 E1
+	LDA SetPlayerStartPosTbl_E199,Y ;C - - - - - 0x01E187 0F:E177: B9 99 E1
 	STA ptr_06                      ;C - - - - - 0x01E18A 0F:E17A: 85 06
-	LDA tbl_0F_E19E,Y               ;C - - - - - 0x01E18C 0F:E17C: B9 9E E1
+	LDA SetPlayerStartPosTbl_E19E,Y ;C - - - - - 0x01E18C 0F:E17C: B9 9E E1
 	STA ptr_06+1                    ;C - - - - - 0x01E18F 0F:E17F: 85 07
 	LDA stageSection                ;C - - - - - 0x01E191 0F:E181: A5 60
 	TAY                             ;C - - - - - 0x01E193 0F:E183: A8
@@ -206,13 +206,13 @@ ofs_0F_E184:
 	LDA (ptr_06),Y                  ;C - - - - - 0x01E199 0F:E189: B1 06
 	STA objX                        ;C - - - - - 0x01E19B 0F:E18B: 8D 60 03
 	RTS                             ;C - - - - - 0x01E19E 0F:E18E: 60
-tbl_0F_E18F:
+SetPlayerStartPosTbl_E18F:
 	.lobytes tbl_0F_E1A3, tbl_0F_E1A6, tbl_0F_E1A9, tbl_0F_E1AC, tbl_0F_E1AF;- D 3 - - - 0x01E19F 0F:E18F:
-tbl_0F_E194:
+SetPlayerStartPosTbl_E194:
 	.hibytes tbl_0F_E1A3, tbl_0F_E1A6, tbl_0F_E1A9, tbl_0F_E1AC, tbl_0F_E1AF;- D 3 - - - 0x01E1A4 0F:E194:
-tbl_0F_E199:
+SetPlayerStartPosTbl_E199:
 	.lobytes tbl_0F_E1B2, tbl_0F_E1B5, tbl_0F_E1B8, tbl_0F_E1BB, tbl_0F_E1BE;- D 3 - - - 0x01E1A9 0F:E199:
-tbl_0F_E19E:
+SetPlayerStartPosTbl_E19E:
 	.hibytes tbl_0F_E1B2, tbl_0F_E1B5, tbl_0F_E1B8, tbl_0F_E1BB, tbl_0F_E1BE;- D 3 - - - 0x01E1AE 0F:E19E:
 tbl_0F_E1A3:
 	.byte $90,$81,$00               ;- D 3 - I - 0x01E1B3 0F:E1A3:
@@ -242,23 +242,23 @@ tbl_0F_E1C7:
 	.byte $00,$33,$CC               ;- D 3 - - - 0x01E1D7 0F:E1C7: Cody, Guy, Haggar
 tbl_0F_E1CA:
 	.byte $01,$01,$00               ;- D 3 - - - 0x01E1DA 0F:E1CA: Cody, Guy, Haggar
-tbl_0F_E1CD:
+StartAction24Tbl_E1CD:
 	.byte $80,$B3,$33               ;- D 3 - - - 0x01E1DD 0F:E1CD: Cody, Guy, Haggar
-tbl_0F_E1D0:
+StartAction24Tbl_E1D0:
 	.byte $01,$01,$01               ;- D 3 - - - 0x01E1E0 0F:E1D0: Cody, Guy, Haggar
-tbl_0F_E1D3:
+PlaceGrabbedEnemyTbl_E1D3:
 	.byte $0F                       ;- D 3 - - - 0x01E1E3 0F:E1D3:
-tbl_0F_E1D4:
+PlaceGrabbedEnemyTbl_E1D4:
 	.byte $00,$F1,$FF               ;- D 3 - - - 0x01E1E4 0F:E1D4:
-tbl_0F_E1D7:
+Act00_WalkTbl_E1D7:
 	.byte $D9,$0F,$B5               ;- D 3 - - - 0x01E1E7 0F:E1D7:
-tbl_0F_E1DA:
+Act00_WalkTbl_E1DA:
 	.byte $00,$01                   ;- D 3 - - - 0x01E1EA 0F:E1DA:
 	.byte $00                       ;W 0x01E1EC 0F:E1DC:
-tbl_0F_E1DD:
+ActNoneTbl_E1DD:
 	.word $E6B3                     ;W 0x01E1ED 0F:E1DD:
 	.byte $80                       ;W 0x01E1EF 0F:E1DF:
-tbl_0F_E1E0:
+ActNoneTbl_E1E0:
 	.byte $00,$00,$00               ;- D 3 - - - 0x01E1F0 0F:E1E0: Cody, Guy, Haggar
 tbl_0F_E1E3:
 	.byte $01,$02,$03               ;- D 3 - - - 0x01E1F3 0F:E1E3: Cody, Guy, Haggar
@@ -266,23 +266,23 @@ tbl_0F_E1E6:
 	.byte $04,$05,$06               ;- D 3 - - - 0x01E1F6 0F:E1E6: Cody, Guy, Haggar
 tbl_0F_E1E9:
 	.byte $07,$08,$09               ;- D 3 - - - 0x01E1F9 0F:E1E9: Cody, Guy, Haggar
-tbl_0F_E1EC:
+StartAction24Tbl_E1EC:
 	.byte $0A,$0B,$0C               ;- D 3 - - - 0x01E1FC 0F:E1EC: Cody, Guy, Haggar
-tbl_0F_E1EF:
+PlaceGrabbedEnemyTbl_E1EF:
 	.byte $0D,$0E,$0F               ;- D 3 - - - 0x01E1FF 0F:E1EF: Cody, Guy, Haggar
-tbl_0F_E1F2:
+InitSlot1Follower67Tbl_E1F2:
 	.byte $10,$11,$12               ;- D 3 - - - 0x01E202 0F:E1F2: Cody, Guy, Haggar
 	.byte $13,$14,$15               ;- - - - - - 0x01E205 0F:E1F5: Cody, Guy, Haggar
 	.byte $16,$17,$18               ;- - - - - - 0x01E208 0F:E1F8: Cody, Guy, Haggar
-tbl_0F_E1FB:
+StartAction24Tbl_E1FB:
 	.byte $19,$1A,$1B               ;- D 3 - - - 0x01E20B 0F:E1FB: Cody, Guy, Haggar
-tbl_0F_E1FE:
+StartAction24Tbl_E1FE:
 	.byte $1C,$1D,$1E               ;- D 3 - - - 0x01E20E 0F:E1FE: Cody, Guy, Haggar
-tbl_0F_E201:
+StartAction24Tbl_E201:
 	.byte $1F,$20,$21               ;- D 3 - - - 0x01E211 0F:E201: Cody, Guy, Haggar
-tbl_0F_E204:
+GameActionDispatch00Tbl_E204:
 	.byte $53,$05,$54               ;- D 3 - - - 0x01E214 0F:E204: Cody, Guy, Haggar
-tbl_0F_E207:
+SetVelFromTbl_B39BTbl_E207:
 	.byte $25,$26,$27               ;- D 3 - - - 0x01E217 0F:E207: Cody, Guy, Haggar
 tbl_0F_E20A:
 	.byte $28,$29,$2A               ;- D 3 - - - 0x01E21A 0F:E20A: Cody, Guy, Haggar
@@ -290,21 +290,21 @@ tbl_0F_E20D:
 	.byte $2B,$2C,$2D               ;- D 3 - - - 0x01E21D 0F:E20D: Cody, Guy, Haggar
 tbl_0F_E210:
 	.byte $2E,$2F,$30               ;- D 3 - - - 0x01E220 0F:E210: Cody, Guy, Haggar
-tbl_0F_E213:
+GameActionDispatch00Tbl_E213:
 	.byte $31,$32,$33               ;- D 3 - - - 0x01E223 0F:E213: Cody, Guy, Haggar
-tbl_0F_E216:
+Act00_WalkTbl_E216:
 	.byte $34,$35,$36               ;- - - - - - 0x01E226 0F:E216: Cody, Guy, Haggar
 tbl_0F_E219:
 	.byte $37,$38,$39               ;- D 3 - - - 0x01E229 0F:E219: Cody, Guy, Haggar
-tbl_0F_E21C:
+StartAction24Tbl_E21C:
 	.byte $3A,$3B,$3C               ;- D 3 - - - 0x01E22C 0F:E21C: Cody, Guy, Haggar
-tbl_0F_E21F:
+ResetPlayerStandTbl_E21F:
 	.byte $42,$02,$44               ;- D 3 - - - 0x01E22F 0F:E21F: Cody, Guy, Haggar
-tbl_0F_E222:
+Act00_WalkTbl_E222:
 	.byte $45,$46,$47               ;- D 3 - - - 0x01E232 0F:E222: Cody, Guy, Haggar
-tbl_0F_E225:
+Act00_WalkTbl_E225:
 	.byte $4A,$46,$47               ;- D 3 - - - 0x01E235 0F:E225: Cody, Guy, Haggar
-tbl_0F_E228:
+Act00_WalkTbl_E228:
 	.byte $6C,$6A                   ;- D 3 - - - 0x01E238 0F:E228: Cody, Guy, Haggar
 dat_0F_E22A:
 	.byte $57                       ;- D 3 - - - 0x01E23A 0F:E22A:
@@ -314,22 +314,22 @@ tbl_0F_E22E:
 	.byte $01,$05,$12               ;- D 3 - - - 0x01E23E 0F:E22E: Cody, Guy, Haggar
 	.byte $07,$05,$12               ;- - - - - - 0x01E241 0F:E231: Cody, Guy, Haggar
 	.byte $07,$05,$12               ;- - - - - - 0x01E244 0F:E234: Cody, Guy, Haggar
-tbl_0F_E237:
+Act00_WalkTbl_E237:
 	.byte $02,$06,$09               ;- D 3 - - - 0x01E247 0F:E237: Cody, Guy, Haggar
-tbl_0F_E23A:
+InitSlot1Follower67Tbl_E23A:
 	.byte $03,$07,$09               ;- D 3 - - - 0x01E24A 0F:E23A: Cody, Guy, Haggar
-tbl_0F_E23D:
+Act00_WalkTbl_E23D:
 	.byte $03,$07,$10               ;- - - - - - 0x01E24D 0F:E23D: Cody, Guy, Haggar
 	.byte $02,$06,$09               ;- - - - - - 0x01E250 0F:E240: Cody, Guy, Haggar
-tbl_0F_E243:
+StartAction24Tbl_E243:
 	.byte $02,$06,$13               ;- D 3 - - - 0x01E253 0F:E243: Cody, Guy, Haggar
-tbl_0F_E246:
+StartAction24Tbl_E246:
 	.byte $02,$06,$13               ;- D 3 - - - 0x01E256 0F:E246: Cody, Guy, Haggar
-tbl_0F_E249:
+StartAction24Tbl_E249:
 	.byte $01,$05,$13               ;- D 3 - - - 0x01E259 0F:E249: Cody, Guy, Haggar
-tbl_0F_E24C:
+Act02_ActionEndTbl_E24C:
 	.byte $23,$18,$00               ;- - - - - - 0x01E25C 0F:E24C: Cody, Guy, Haggar
-tbl_0F_E24F:
+SetVelFromTbl_B39BTbl_E24F:
 	.byte $0D,$15,$11               ;- D 3 - - - 0x01E25F 0F:E24F: Cody, Guy, Haggar
 tbl_0F_E252:
 	.byte $0D,$15,$13               ;- D 3 - - - 0x01E262 0F:E252: Cody, Guy, Haggar
@@ -337,52 +337,52 @@ tbl_0F_E255:
 	.byte $0D,$15,$12               ;- D 3 - - - 0x01E265 0F:E255: Cody, Guy, Haggar
 tbl_0F_E258:
 	.byte $00,$04,$0B               ;- D 3 - - - 0x01E268 0F:E258: Cody, Guy, Haggar
-tbl_0F_E25B:
+GameActionDispatch00Tbl_E25B:
 	.byte $0C,$14,$08               ;- D 3 - - - 0x01E26B 0F:E25B: Cody, Guy, Haggar
-tbl_0F_E25E:
+Act00_WalkTbl_E25E:
 	.byte $0C,$14,$0B               ;- - - - - - 0x01E26E 0F:E25E: Cody, Guy, Haggar
 	.byte $07,$07,$07               ;- - - - - - 0x01E271 0F:E261: Cody, Guy, Haggar
 	.byte $00,$06,$00               ;- - - - - - 0x01E274 0F:E264: Cody, Guy, Haggar
-tbl_0F_E267:
+ResetPlayerStandTbl_E267:
 	.byte $00,$04,$08               ;- D 3 - - - 0x01E277 0F:E267: Cody, Guy, Haggar
-tbl_0F_E26A:
+Act00_WalkTbl_E26A:
 	.byte $03,$16,$0B               ;- D 3 - - - 0x01E27A 0F:E26A: Cody, Guy, Haggar
-tbl_0F_E26D:
+Act00_WalkTbl_E26D:
 	.byte $03,$16,$11               ;- D 3 - - - 0x01E27D 0F:E26D: Cody, Guy, Haggar
-tbl_0F_E270:
+Act00_WalkTbl_E270:
 	.byte $0E,$17                   ;- D 3 - - - 0x01E280 0F:E270: Cody, Guy, Haggar
 dat_0F_E272:
 	.byte $0F                       ;- D 3 - - - 0x01E282 0F:E272:
 tbl_0F_E273:
 	.byte $04,$05,$06               ;- D 3 - - - 0x01E283 0F:E273: Cody, Guy, Haggar
-tbl_0F_E276:
+StartAction24Tbl_E276:
 	.byte $1F,$20,$21               ;- D 3 - - - 0x01E286 0F:E276: Cody, Guy, Haggar
-tbl_0F_E279:
+Act01_JumpTbl_E279:
 	.byte $1C,$1D,$1E               ;- D 3 - - - 0x01E289 0F:E279: Cody, Guy, Haggar
-tbl_0F_E27C:
+Act01_JumpTbl_E27C:
 	.byte $1F,$20,$21               ;- D 3 - - - 0x01E28C 0F:E27C: Cody, Guy, Haggar
-tbl_0F_E27F:
+Act01_JumpTbl_E27F:
 	.byte $0A,$0B,$0C               ;- D 3 - - - 0x01E28F 0F:E27F: Cody, Guy, Haggar
-tbl_0F_E282:
+Act01_JumpTbl_E282:
 	.byte $07,$08,$09               ;- D 3 - - - 0x01E292 0F:E282: Cody, Guy, Haggar
-tbl_0F_E285:
+Act01_JumpTbl_E285:
 	.byte $3A,$3B,$3C               ;- D 3 - - - 0x01E295 0F:E285: Cody, Guy, Haggar
 tbl_0F_E288:
 	.byte $0D,$0E,$0F               ;- D 3 - - - 0x01E298 0F:E288: Cody, Guy, Haggar
-tbl_0F_E28B:
+Act00_WalkTbl_E28B:
 	.byte $16,$17,$18               ;- D 3 - - - 0x01E29B 0F:E28B: Cody, Guy, Haggar
-tbl_0F_E28E:
+Act03_PunchTbl_E28E:
 	.byte $45,$46,$47               ;- D 3 - - - 0x01E29E 0F:E28E: Cody, Guy, Haggar
-tbl_0F_E291:
+Act00_WalkTbl_E291:
 	.byte $13,$14,$15               ;- D 3 - - - 0x01E2A1 0F:E291: Cody, Guy, Haggar
 	.byte $10,$11,$12               ;- - - - - - 0x01E2A4 0F:E294: Cody, Guy, Haggar
-tbl_0F_E297:
+UpdatePlayerFlashTbl_E297:
 	.byte $34,$35,$52               ;- D 3 - - - 0x01E2A7 0F:E297: Cody, Guy, Haggar
-tbl_0F_E29A:
+GameActionDispatch00Tbl_E29A:
 	.byte $53,$05,$54               ;- D 3 - - - 0x01E2AA 0F:E29A: Cody, Guy, Haggar
-tbl_0F_E29D:
+Act03_PunchTbl_E29D:
 	.byte $00,$14,$15               ;- D 3 - - - 0x01E2AD 0F:E29D: Cody, Guy, Haggar
-tbl_0F_E2A0:
+Act03_PunchTbl_E2A0:
 	.byte $00,$5B,$15               ;- D 3 - - - 0x01E2B0 0F:E2A0: Cody, Guy, Haggar
 ; scroll follows the player (skipped for several gameActions)
 UpdateHorizScroll:
@@ -721,9 +721,9 @@ loc_0F_E4EB:
 	STA scrollDir                   ;c - - - - - 0x01E507 0F:E4F7: 85 23
 	AND #$01                        ;c - - - - - 0x01E509 0F:E4F9: 29 01
 	TAX                             ;c - - - - - 0x01E50B 0F:E4FB: AA
-	LDA tbl_0F_E60B,X               ;c - - - - - 0x01E50C 0F:E4FC: BD 0B E6
+	LDA UpdateHorizScrollTbl_E60B,X ;c - - - - - 0x01E50C 0F:E4FC: BD 0B E6
 	STA ram_0025                    ;c - - - - - 0x01E50F 0F:E4FF: 85 25
-	LDA tbl_0F_E60D,X               ;c - - - - - 0x01E511 0F:E501: BD 0D E6
+	LDA UpdateHorizScrollTbl_E60D,X ;c - - - - - 0x01E511 0F:E501: BD 0D E6
 	STA stageColumn                 ;c - - - - - 0x01E514 0F:E504: 85 24
 loc_0F_E506:
 	LDA spriteFlipMask              ;C - - - - - 0x01E516 0F:E506: A5 10
@@ -759,7 +759,7 @@ StageScrollUpdate:
 loc_0F_E531:
 	LDA stageColumn                 ;C - - - - - 0x01E541 0F:E531: A5 24
 	CLC                             ;C - - - - - 0x01E543 0F:E533: 18
-	ADC tbl_0F_E601,X               ;C - - - - - 0x01E544 0F:E534: 7D 01 E6
+	ADC StageScrollUpdateTbl_E601,X ;C - - - - - 0x01E544 0F:E534: 7D 01 E6
 	CMP #$20                        ;C - - - - - 0x01E547 0F:E537: C9 20
 	AND #$1F                        ;C - - - - - 0x01E549 0F:E539: 29 1F
 	STA stageColumn                 ;C - - - - - 0x01E54B 0F:E53B: 85 24
@@ -767,7 +767,7 @@ loc_0F_E531:
 loc_0F_E53F:
 	LDA stageScreen                 ;C - - - - - 0x01E54F 0F:E53F: A5 29
 	CLC                             ;C - - - - - 0x01E551 0F:E541: 18
-	ADC tbl_0F_E601,X               ;C - - - - - 0x01E552 0F:E542: 7D 01 E6
+	ADC StageScrollUpdateTbl_E601,X ;C - - - - - 0x01E552 0F:E542: 7D 01 E6
 	STA stageScreen                 ;C - - - - - 0x01E555 0F:E545: 85 29
 loc_0F_E547:
 	LDY stageData                   ;C - - - - - 0x01E557 0F:E547: A4 22
@@ -807,10 +807,10 @@ loc_0F_E58F:
 	AND #$01                        ;C - - - - - 0x01E5A1 0F:E591: 29 01
 	BEQ loc_0F_E5BE                 ;C - - - - - 0x01E5A3 0F:E593: F0 29
 	LDA spriteFlipMask              ;C - - - - - 0x01E5A5 0F:E595: A5 10
-	AND tbl_0F_E603,Y               ;C - - - - - 0x01E5A7 0F:E597: 39 03 E6
+	AND StageScrollUpdateTbl_E603,Y ;C - - - - - 0x01E5A7 0F:E597: 39 03 E6
 	STA spriteFlipMask              ;C - - - - - 0x01E5AA 0F:E59A: 85 10
 	LDA spritePriorityBit           ;C - - - - - 0x01E5AC 0F:E59C: A5 11
-	AND tbl_0F_E607,Y               ;C - - - - - 0x01E5AE 0F:E59E: 39 07 E6
+	AND StageScrollUpdateTbl_E607,Y ;C - - - - - 0x01E5AE 0F:E59E: 39 07 E6
 	ORA spriteFlipMask              ;C - - - - - 0x01E5B1 0F:E5A1: 05 10
 	STA vramQueue+27,X              ;C - - - - - 0x01E5B3 0F:E5A3: 9D 9B 07
 	LDY stageMapIndex               ;C - - - - - 0x01E5B6 0F:E5A6: A4 28
@@ -859,22 +859,22 @@ loc_0F_E5ED:
 	RTS                             ;C - - - - - 0x01E60D 0F:E5FD: 60
 loc_0F_E5FE:
 	JMP loc_0F_E560                 ;C - - - - - 0x01E60E 0F:E5FE: 4C 60 E5
-tbl_0F_E601:
+StageScrollUpdateTbl_E601:
 	.byte $FF                       ;- - - - - - 0x01E611 0F:E601:
 	.byte $01                       ;- D 3 - - - 0x01E612 0F:E602:
-tbl_0F_E603:
+StageScrollUpdateTbl_E603:
 	.byte $33                       ;- - - - - - 0x01E613 0F:E603:
 	.byte $33                       ;- D 3 - - - 0x01E614 0F:E604:
 	.byte $CC                       ;- - - - - - 0x01E615 0F:E605:
 	.byte $CC                       ;- D 3 - - - 0x01E616 0F:E606:
-tbl_0F_E607:
+StageScrollUpdateTbl_E607:
 	.byte $CC                       ;- - - - - - 0x01E617 0F:E607:
 	.byte $CC                       ;- D 3 - - - 0x01E618 0F:E608:
 	.byte $33                       ;- - - - - - 0x01E619 0F:E609:
 	.byte $33                       ;- D 3 - - - 0x01E61A 0F:E60A:
-tbl_0F_E60B:
+UpdateHorizScrollTbl_E60B:
 	.byte $00,$FF                   ;- - - - - - 0x01E61B 0F:E60B:
-tbl_0F_E60D:
+UpdateHorizScrollTbl_E60D:
 	.byte $01,$1F                   ;- - - - - - 0x01E61D 0F:E60D:
 ; 4 blocks of the current 32x32 metatile -> ram_06C0.. tile buffer, attributes -> spriteFlipMask
 StageLoadMetaTiles:
@@ -885,7 +885,7 @@ StageLoadMetaTiles:
 	STA spriteFlipMask              ;C - - - - - 0x01E628 0F:E618: 85 10
 loc_0F_E61A:
 	LDY ptr_02                      ;C - - - - - 0x01E62A 0F:E61A: A4 02
-	LDX tbl_0F_E64F,Y               ;C - - - - - 0x01E62C 0F:E61C: BE 4F E6
+	LDX StageLoadMetaTilesTbl_E64F,Y;C - - - - - 0x01E62C 0F:E61C: BE 4F E6
 	LDA (ptr_00),Y                  ;C - - - - - 0x01E62F 0F:E61F: B1 00
 	TAY                             ;C - - - - - 0x01E631 0F:E621: A8
 	LDA stageBlockTL,Y              ;C - - - - - 0x01E632 0F:E622: B9 00 BB
@@ -907,7 +907,7 @@ loc_0F_E61A:
 	JMP loc_0F_E61A                 ;C - - - - - 0x01E65B 0F:E64B: 4C 1A E6
 loc_0F_E64E:
 	RTS                             ;C - - - - - 0x01E65E 0F:E64E: 60
-tbl_0F_E64F:
+StageLoadMetaTilesTbl_E64F:
 	.byte $00,$02,$08,$0A           ;- D 3 - - - 0x01E65F 0F:E64F:
 ; ptr_00 = $B700 + 4 * map[ram_0028] (the four 16x16 block ids of the metatile)
 StageMetaPtr:
@@ -1007,13 +1007,13 @@ QueueHudHealthBar:
 	BEQ loc_0F_E6F9                 ;C - - - - - 0x01E6F9 0F:E6E9: F0 0E
 	CMP #$01                        ;C - - - - - 0x01E6FB 0F:E6EB: C9 01
 	BEQ loc_0F_E6F4                 ;C - - - - - 0x01E6FD 0F:E6ED: F0 05
-	LDA tbl_0F_E875,Y               ;C - - - - - 0x01E6FF 0F:E6EF: B9 75 E8
+	LDA QueueHudHealthBarTbl_E875,Y ;C - - - - - 0x01E6FF 0F:E6EF: B9 75 E8
 	BNE loc_0F_E6FC                 ;C - - - - - 0x01E702 0F:E6F2: D0 08
 loc_0F_E6F4:
-	LDA tbl_0F_E86F,Y               ;C - - - - - 0x01E704 0F:E6F4: B9 6F E8
+	LDA QueueHudHealthBarTbl_E86F,Y ;C - - - - - 0x01E704 0F:E6F4: B9 6F E8
 	BNE loc_0F_E6FC                 ;C - - - - - 0x01E707 0F:E6F7: D0 03
 loc_0F_E6F9:
-	LDA tbl_0F_E869,Y               ;C - - - - - 0x01E709 0F:E6F9: B9 69 E8
+	LDA QueueHudHealthBarTbl_E869,Y ;C - - - - - 0x01E709 0F:E6F9: B9 69 E8
 loc_0F_E6FC:
 	STA vramQueue,X                 ;C - - - - - 0x01E70C 0F:E6FC: 9D 80 07
 	INC vramQueue,X                 ;C - - - - - 0x01E70F 0F:E6FF: FE 80 07
@@ -1169,9 +1169,9 @@ loc_0F_E815:
 	CMP #$03                        ;C - - - - - 0x01E827 0F:E817: C9 03
 	BEQ loc_0F_E850                 ;C - - - - - 0x01E829 0F:E819: F0 35
 loc_0F_E81B:
-	LDA tbl_0F_E87B,Y               ;C - - - - - 0x01E82B 0F:E81B: B9 7B E8
+	LDA QueueHudHealthBarTbl_E87B,Y ;C - - - - - 0x01E82B 0F:E81B: B9 7B E8
 	STA ptr_00                      ;C - - - - - 0x01E82E 0F:E81E: 85 00
-	LDA tbl_0F_E87E,Y               ;C - - - - - 0x01E830 0F:E820: B9 7E E8
+	LDA QueueHudHealthBarTbl_E87E,Y ;C - - - - - 0x01E830 0F:E820: B9 7E E8
 	STA ptr_00+1                    ;C - - - - - 0x01E833 0F:E823: 85 01
 	LDA playerLevel                 ;C - - - - - 0x01E835 0F:E825: A5 6B
 	ASL A                           ;C - - - - - 0x01E837 0F:E827: 0A
@@ -1213,17 +1213,17 @@ QueueHudFiller:
 	STA vramQueue,X                 ;C - - - - - 0x01E874 0F:E864: 9D 80 07
 	INX                             ;C - - - - - 0x01E877 0F:E867: E8
 	RTS                             ;C - - - - - 0x01E878 0F:E868: 60
-tbl_0F_E869:
+QueueHudHealthBarTbl_E869:
 	.byte $08,$09,$0A,$0B,$0C       ;- D 3 - - - 0x01E879 0F:E869:
 	.byte $0D                       ;- - - - - - 0x01E87E 0F:E86E:
-tbl_0F_E86F:
+QueueHudHealthBarTbl_E86F:
 	.byte $06,$07,$08,$09,$0A,$0B   ;- D 3 - - - 0x01E87F 0F:E86F:
-tbl_0F_E875:
+QueueHudHealthBarTbl_E875:
 	.byte $0A,$0B,$0C,$0D           ;- D 3 - - - 0x01E885 0F:E875:
 	.byte $0D,$0D                   ;- - - - - - 0x01E889 0F:E879:
-tbl_0F_E87B:
+QueueHudHealthBarTbl_E87B:
 	.lobytes tbl_0F_E881, tbl_0F_E88B, tbl_0F_E895;- D 3 - - - 0x01E88B 0F:E87B:
-tbl_0F_E87E:
+QueueHudHealthBarTbl_E87E:
 	.hibytes tbl_0F_E881, tbl_0F_E88B, tbl_0F_E895;- D 3 - - - 0x01E88E 0F:E87E:
 tbl_0F_E881:
 	.byte $00,$33,$00               ;- D 3 - I - 0x01E891 0F:E881:
@@ -1362,9 +1362,9 @@ QueueHudLevelText:
 	INY                             ;C - - - - - 0x01E980 0F:E970: C8
 	INY                             ;C - - - - - 0x01E981 0F:E971: C8
 loc_0F_E972:
-	LDA tbl_0F_E98C,Y               ;C - - - - - 0x01E982 0F:E972: B9 8C E9
+	LDA QueueHudLevelTextTbl_E98C,Y ;C - - - - - 0x01E982 0F:E972: B9 8C E9
 	STA ptr_00                      ;C - - - - - 0x01E985 0F:E975: 85 00
-	LDA tbl_0F_E992,Y               ;C - - - - - 0x01E987 0F:E977: B9 92 E9
+	LDA QueueHudLevelTextTbl_E992,Y ;C - - - - - 0x01E987 0F:E977: B9 92 E9
 	STA ptr_00+1                    ;C - - - - - 0x01E98A 0F:E97A: 85 01
 	LDY #$00                        ;C - - - - - 0x01E98C 0F:E97C: A0 00
 loc_0F_E97E:
@@ -1376,9 +1376,9 @@ loc_0F_E97E:
 	BNE loc_0F_E97E                 ;C - - - - - 0x01E997 0F:E987: D0 F5
 	STX vramQueueEnd                ;C - - - - - 0x01E999 0F:E989: 86 65
 	RTS                             ;C - - - - - 0x01E99B 0F:E98B: 60
-tbl_0F_E98C:
+QueueHudLevelTextTbl_E98C:
 	.lobytes tbl_0F_E998, tbl_0F_E99E, tbl_0F_E9A4, tbl_0F_E9AA, tbl_0F_E9B0, tbl_0F_E9B6;- D 3 - - - 0x01E99C 0F:E98C:
-tbl_0F_E992:
+QueueHudLevelTextTbl_E992:
 	.hibytes tbl_0F_E998, tbl_0F_E99E, tbl_0F_E9A4, tbl_0F_E9AA, tbl_0F_E9B0, tbl_0F_E9B6;- D 3 - - - 0x01E9A2 0F:E992:
 tbl_0F_E998:
 	.byte $73,$74,$74,$74,$74,$74   ;- D 3 - I - 0x01E9A8 0F:E998:
@@ -1722,7 +1722,7 @@ DrawObjectOffscreen:
 loc_0F_EC41:
 	LDY #$00                        ;C - - - - - 0x01EC51 0F:EC41: A0 00
 loc_0F_EC43:
-	LDA tbl_0F_ECC3,Y               ;C - - - - - 0x01EC53 0F:EC43: B9 C3 EC
+	LDA DrawObjectOffscreenTbl_ECC3,Y;C - - - - - 0x01EC53 0F:EC43: B9 C3 EC
 	CMP objKind,X                   ;C - - - - - 0x01EC56 0F:EC46: DD 20 03
 	BEQ loc_0F_EC81                 ;C - - - - - 0x01EC59 0F:EC49: F0 36
 	CMP #$FF                        ;C - - - - - 0x01EC5B 0F:EC4B: C9 FF
@@ -1780,20 +1780,20 @@ ofs_0F_EC98:
 	STA objSpawnIndex,X             ;C - - - - - 0x01ECCE 0F:ECBE: 9D 80 04
 	CLC                             ;C - - - - - 0x01ECD1 0F:ECC1: 18
 	RTS                             ;C - - - - - 0x01ECD2 0F:ECC2: 60
-tbl_0F_ECC3:
+DrawObjectOffscreenTbl_ECC3:
 	.byte $2E,$9D,$7F,$91,$95,$01   ;- D 3 - - - 0x01ECD3 0F:ECC3:
 	.byte $10,$11,$12,$13,$61,$FF   ;- - - - - - 0x01ECD9 0F:ECC9:
 ; vertical tile collision probe
 TileCollideY:
-	LDA tbl_0F_EEEB,Y               ;C - - - - - 0x01ECDF 0F:ECCF: B9 EB EE
+	LDA TileCollideYTbl_EEEB,Y      ;C - - - - - 0x01ECDF 0F:ECCF: B9 EB EE
 	STA ram_0040                    ;C - - - - - 0x01ECE2 0F:ECD2: 85 40
 	JSR TileCollideBegin            ;C - - - - - 0x01ECE4 0F:ECD4: 20 C4 EE
 	TAY                             ;C - - - - - 0x01ECE7 0F:ECD7: A8
-	LDA tbl_0F_EEF6,Y               ;C - - - - - 0x01ECE8 0F:ECD8: B9 F6 EE
+	LDA TileCollideYTbl_EEF6,Y      ;C - - - - - 0x01ECE8 0F:ECD8: B9 F6 EE
 	STA ptr_02                      ;C - - - - - 0x01ECEB 0F:ECDB: 85 02
 	LDA objYPage,X                  ;C - - - - - 0x01ECED 0F:ECDD: BD E0 03
 	STA ptr_02+1                    ;C - - - - - 0x01ECF0 0F:ECE0: 85 03
-	LDA tbl_0F_EEF7,Y               ;C - - - - - 0x01ECF2 0F:ECE2: B9 F7 EE
+	LDA TileCollideYTbl_EEF7,Y      ;C - - - - - 0x01ECF2 0F:ECE2: B9 F7 EE
 	PHA                             ;C - - - - - 0x01ECF5 0F:ECE5: 48
 	CLC                             ;C - - - - - 0x01ECF6 0F:ECE6: 18
 	ADC objY,X                      ;C - - - - - 0x01ECF7 0F:ECE7: 7D C0 03
@@ -1832,7 +1832,7 @@ loc_0F_ED08:
 	STA ptr_02+1                    ;C - - - - - 0x01ED2C 0F:ED1C: 85 03
 	LDA #$00                        ;C - - - - - 0x01ED2E 0F:ED1E: A9 00
 	STA ptr_04                      ;C - - - - - 0x01ED30 0F:ED20: 85 04
-	LDA tbl_0F_EEF8,Y               ;C - - - - - 0x01ED32 0F:ED22: B9 F8 EE
+	LDA TileCollideYTbl_EEF8,Y      ;C - - - - - 0x01ED32 0F:ED22: B9 F8 EE
 	BPL loc_0F_ED29                 ;C - - - - - 0x01ED35 0F:ED25: 10 02
 	DEC ptr_04                      ;C - - - - - 0x01ED37 0F:ED27: C6 04
 loc_0F_ED29:
@@ -1890,7 +1890,7 @@ loc_0F_ED74:
 	STA ptr_04                      ;C - - - - - 0x01ED95 0F:ED85: 85 04
 	PLA                             ;C - - - - - 0x01ED97 0F:ED87: 68
 	CLC                             ;C - - - - - 0x01ED98 0F:ED88: 18
-	ADC tbl_0F_EEF8,Y               ;C - - - - - 0x01ED99 0F:ED89: 79 F8 EE
+	ADC TileCollideYTbl_EEF8,Y      ;C - - - - - 0x01ED99 0F:ED89: 79 F8 EE
 	STA spriteBaseY                 ;C - - - - - 0x01ED9C 0F:ED8C: 85 12
 	AND #$10                        ;C - - - - - 0x01ED9E 0F:ED8E: 29 10
 	CMP ptr_04                      ;C - - - - - 0x01EDA0 0F:ED90: C5 04
@@ -1917,15 +1917,15 @@ loc_0F_EDB7:
 	JMP loc_0F_EEDF                 ;C - - - - - 0x01EDC7 0F:EDB7: 4C DF EE
 ; horizontal tile collision probe
 TileCollideX:
-	LDA tbl_0F_EF23,Y               ;C - - - - - 0x01EDCA 0F:EDBA: B9 23 EF
+	LDA TileCollideXTbl_EF23,Y      ;C - - - - - 0x01EDCA 0F:EDBA: B9 23 EF
 	STA ram_0040                    ;C - - - - - 0x01EDCD 0F:EDBD: 85 40
 	JSR TileCollideBegin            ;C - - - - - 0x01EDCF 0F:EDBF: 20 C4 EE
 	TAY                             ;C - - - - - 0x01EDD2 0F:EDC2: A8
-	LDA tbl_0F_EF2D,Y               ;C - - - - - 0x01EDD3 0F:EDC3: B9 2D EF
+	LDA TileCollideXTbl_EF2D,Y      ;C - - - - - 0x01EDD3 0F:EDC3: B9 2D EF
 	STA ptr_02                      ;C - - - - - 0x01EDD6 0F:EDC6: 85 02
 	LDA #$00                        ;C - - - - - 0x01EDD8 0F:EDC8: A9 00
 	STA ptr_04                      ;C - - - - - 0x01EDDA 0F:EDCA: 85 04
-	LDA tbl_0F_EF2E,Y               ;C - - - - - 0x01EDDC 0F:EDCC: B9 2E EF
+	LDA TileCollideXTbl_EF2E,Y      ;C - - - - - 0x01EDDC 0F:EDCC: B9 2E EF
 	BPL loc_0F_EDD3                 ;C - - - - - 0x01EDDF 0F:EDCF: 10 02
 	DEC ptr_04                      ;C - - - - - 0x01EDE1 0F:EDD1: C6 04
 loc_0F_EDD3:
@@ -1952,9 +1952,9 @@ ofs_0F_EDED:
 	BNE loc_0F_EE12                 ;C - - - - - 0x01EE04 0F:EDF4: D0 1C
 	LDA objY,X                      ;C - - - - - 0x01EE06 0F:EDF6: BD C0 03
 	CLC                             ;C - - - - - 0x01EE09 0F:EDF9: 18
-	ADC tbl_0F_EF2F,Y               ;C - - - - - 0x01EE0A 0F:EDFA: 79 2F EF
+	ADC TileCollideXTbl_EF2F,Y      ;C - - - - - 0x01EE0A 0F:EDFA: 79 2F EF
 	STA spritePriorityBit           ;C - - - - - 0x01EE0D 0F:EDFD: 85 11
-	LDA tbl_0F_EF2F,Y               ;C - - - - - 0x01EE0F 0F:EDFF: B9 2F EF
+	LDA TileCollideXTbl_EF2F,Y      ;C - - - - - 0x01EE0F 0F:EDFF: B9 2F EF
 	BPL loc_0F_EE08                 ;C - - - - - 0x01EE12 0F:EE02: 10 04
 	BCC loc_0F_EE18                 ;C - - - - - 0x01EE14 0F:EE04: 90 12
 	BCS loc_0F_EE0A                 ;C - - - - - 0x01EE16 0F:EE06: B0 02
@@ -1976,7 +1976,7 @@ loc_0F_EE18:
 loc_0F_EE1E:
 	LDA spritePriorityBit           ;c - - - - - 0x01EE2E 0F:EE1E: A5 11
 	CLC                             ;c - - - - - 0x01EE30 0F:EE20: 18
-	ADC tbl_0F_EF2F,Y               ;c - - - - - 0x01EE31 0F:EE21: 79 2F EF
+	ADC TileCollideXTbl_EF2F,Y      ;c - - - - - 0x01EE31 0F:EE21: 79 2F EF
 	STA spritePriorityBit           ;c - - - - - 0x01EE34 0F:EE24: 85 11
 	CMP #$F0                        ;c - - - - - 0x01EE36 0F:EE26: C9 F0
 	BCC loc_0F_EE32                 ;c - - - - - 0x01EE38 0F:EE28: 90 08
@@ -2040,7 +2040,7 @@ loc_0F_EE81:
 	STA ptr_04                      ;C - - - - - 0x01EEA2 0F:EE92: 85 04
 	PLA                             ;C - - - - - 0x01EEA4 0F:EE94: 68
 	CLC                             ;C - - - - - 0x01EEA5 0F:EE95: 18
-	ADC tbl_0F_EF2F,Y               ;C - - - - - 0x01EEA6 0F:EE96: 79 2F EF
+	ADC TileCollideXTbl_EF2F,Y      ;C - - - - - 0x01EEA6 0F:EE96: 79 2F EF
 	STA spritePriorityBit           ;C - - - - - 0x01EEA9 0F:EE99: 85 11
 	AND #$10                        ;C - - - - - 0x01EEAB 0F:EE9B: 29 10
 	CMP ptr_04                      ;C - - - - - 0x01EEAD 0F:EE9D: C5 04
@@ -2092,27 +2092,27 @@ loc_0F_EEDF:
 	PLA                             ;C - - - - - 0x01EEF8 0F:EEE8: 68
 	TAX                             ;C - - - - - 0x01EEF9 0F:EEE9: AA
 	RTS                             ;C - - - - - 0x01EEFA 0F:EEEA: 60
-tbl_0F_EEEB:
+TileCollideYTbl_EEEB:
 	.byte $00,$05,$09,$0D,$11,$15,$19,$1E,$21;- D 3 - - - 0x01EEFB 0F:EEEB:
 tbl_0F_EEF4:
 	.byte $24,$29                   ;- D 3 - - - 0x01EF04 0F:EEF4:
-tbl_0F_EEF6:
+TileCollideYTbl_EEF6:
 	.byte $02                       ;- D 3 - - - 0x01EF06 0F:EEF6:
-tbl_0F_EEF7:
+TileCollideYTbl_EEF7:
 	.byte $12                       ;- D 3 - - - 0x01EF07 0F:EEF7:
-tbl_0F_EEF8:
+TileCollideYTbl_EEF8:
 	.byte $F9,$07,$07,$01,$EE,$F9,$0E,$01,$12,$F9,$0E,$01,$EC,$F9,$0E,$01;- D 3 - - - 0x01EF08 0F:EEF8:
 	.byte $14,$F9,$0E,$01,$EC,$F9,$0E,$02,$10,$FB,$05,$05,$00,$10,$F0,$00;- D 3 - - - 0x01EF18 0F:EF08:
 	.byte $10,$10,$02,$13,$F2,$0E,$0E,$01,$ED,$F2,$1C;- D 3 - - - 0x01EF28 0F:EF18:
-tbl_0F_EF23:
+TileCollideXTbl_EF23:
 	.byte $00,$04                   ;- D 3 - - - 0x01EF33 0F:EF23:
 	.byte $08,$0C,$10,$14,$18,$1C   ;- - - - - - 0x01EF35 0F:EF25:
 	.byte $20,$24                   ;- D 3 - - - 0x01EF3B 0F:EF2B:
-tbl_0F_EF2D:
+TileCollideXTbl_EF2D:
 	.byte $01                       ;- D 3 - - - 0x01EF3D 0F:EF2D:
-tbl_0F_EF2E:
+TileCollideXTbl_EF2E:
 	.byte $08                       ;- D 3 - - - 0x01EF3E 0F:EF2E:
-tbl_0F_EF2F:
+TileCollideXTbl_EF2F:
 	.byte $F1,$1E,$01,$F8,$F1,$1E   ;- D 3 - - - 0x01EF3F 0F:EF2F:
 	.byte $01,$13,$F1,$1E,$01,$ED,$F1,$1E,$01,$08,$F1,$1E,$01,$F8,$F1,$1E;- - - - - - 0x01EF45 0F:EF35:
 	.byte $01,$04,$FC,$04,$01,$FC,$FC,$04;- - - - - - 0x01EF55 0F:EF45:
@@ -2726,9 +2726,9 @@ loc_0F_F3DB:
 	CLC                             ;C - - - - - 0x01F3EE 0F:F3DE: 18
 	ADC ptr_02                      ;C - - - - - 0x01F3EF 0F:F3DF: 65 02
 	TAY                             ;C - - - - - 0x01F3F1 0F:F3E1: A8
-	LDA tbl_0F_F3E6,Y               ;C - - - - - 0x01F3F2 0F:F3E2: B9 E6 F3
+	LDA CalcDirToPlayerTbl_F3E6,Y   ;C - - - - - 0x01F3F2 0F:F3E2: B9 E6 F3
 	RTS                             ;C - - - - - 0x01F3F5 0F:F3E5: 60
-tbl_0F_F3E6:
+CalcDirToPlayerTbl_F3E6:
 	.byte $04,$05,$06               ;- D 3 - - - 0x01F3F6 0F:F3E6:
 	.byte $04                       ;- - - - - - 0x01F3F9 0F:F3E9:
 	.byte $08,$07,$06               ;- D 3 - - - 0x01F3FA 0F:F3EA:
@@ -2846,10 +2846,10 @@ loc_0F_F4B8:
 	TAY                             ;C - - - - - 0x01F4CC 0F:F4BC: A8
 	LDA objX                        ;C - - - - - 0x01F4CD 0F:F4BD: AD 60 03
 	CLC                             ;C - - - - - 0x01F4D0 0F:F4C0: 18
-	ADC tbl_0F_F550,Y               ;C - - - - - 0x01F4D1 0F:F4C1: 79 50 F5
+	ADC SpawnEffect7ETbl_F550,Y     ;C - - - - - 0x01F4D1 0F:F4C1: 79 50 F5
 	PHA                             ;C - - - - - 0x01F4D4 0F:F4C4: 48
 	LDA objXPage                    ;C - - - - - 0x01F4D5 0F:F4C5: AD 80 03
-	ADC tbl_0F_F551,Y               ;C - - - - - 0x01F4D8 0F:F4C8: 79 51 F5
+	ADC SpawnEffect7ETbl_F551,Y     ;C - - - - - 0x01F4D8 0F:F4C8: 79 51 F5
 	LDY ptr_0E+1                    ;C - - - - - 0x01F4DB 0F:F4CB: A4 0F
 	STA objXPage,Y                  ;C - - - - - 0x01F4DD 0F:F4CD: 99 80 03
 	PLA                             ;C - - - - - 0x01F4E0 0F:F4D0: 68
@@ -2871,10 +2871,10 @@ loc_0F_F4EA:
 loc_0F_F4EC:
 	LDA objX                        ;C - - - - - 0x01F4FC 0F:F4EC: AD 60 03
 	CLC                             ;C - - - - - 0x01F4FF 0F:F4EF: 18
-	ADC tbl_0F_F554,Y               ;C - - - - - 0x01F500 0F:F4F0: 79 54 F5
+	ADC SpawnEffect7ETbl_F554,Y     ;C - - - - - 0x01F500 0F:F4F0: 79 54 F5
 	PHA                             ;C - - - - - 0x01F503 0F:F4F3: 48
 	LDA objXPage                    ;C - - - - - 0x01F504 0F:F4F4: AD 80 03
-	ADC tbl_0F_F555,Y               ;C - - - - - 0x01F507 0F:F4F7: 79 55 F5
+	ADC SpawnEffect7ETbl_F555,Y     ;C - - - - - 0x01F507 0F:F4F7: 79 55 F5
 	LDY ptr_0E+1                    ;C - - - - - 0x01F50A 0F:F4FA: A4 0F
 	STA objXPage,Y                  ;C - - - - - 0x01F50C 0F:F4FC: 99 80 03
 	PLA                             ;C - - - - - 0x01F50F 0F:F4FF: 68
@@ -2886,10 +2886,10 @@ loc_0F_F506:
 	TAY                             ;C - - - - - 0x01F51A 0F:F50A: A8
 	LDA objX                        ;C - - - - - 0x01F51B 0F:F50B: AD 60 03
 	CLC                             ;C - - - - - 0x01F51E 0F:F50E: 18
-	ADC tbl_0F_F54C,Y               ;C - - - - - 0x01F51F 0F:F50F: 79 4C F5
+	ADC SpawnEffect7ETbl_F54C,Y     ;C - - - - - 0x01F51F 0F:F50F: 79 4C F5
 	PHA                             ;C - - - - - 0x01F522 0F:F512: 48
 	LDA objXPage                    ;C - - - - - 0x01F523 0F:F513: AD 80 03
-	ADC tbl_0F_F54D,Y               ;C - - - - - 0x01F526 0F:F516: 79 4D F5
+	ADC SpawnEffect7ETbl_F54D,Y     ;C - - - - - 0x01F526 0F:F516: 79 4D F5
 	LDY ptr_0E+1                    ;C - - - - - 0x01F529 0F:F519: A4 0F
 	STA objXPage,Y                  ;C - - - - - 0x01F52B 0F:F51B: 99 80 03
 	PLA                             ;C - - - - - 0x01F52E 0F:F51E: 68
@@ -2918,17 +2918,17 @@ loc_0F_F542:
 	ADC #$04                        ;C - - - - - 0x01F556 0F:F546: 69 04
 	STA objY,Y                      ;C - - - - - 0x01F558 0F:F548: 99 C0 03
 	RTS                             ;C - - - - - 0x01F55B 0F:F54B: 60
-tbl_0F_F54C:
+SpawnEffect7ETbl_F54C:
 	.byte $12                       ;- D 3 - - - 0x01F55C 0F:F54C:
-tbl_0F_F54D:
+SpawnEffect7ETbl_F54D:
 	.byte $00,$EE,$FF               ;- D 3 - - - 0x01F55D 0F:F54D:
-tbl_0F_F550:
+SpawnEffect7ETbl_F550:
 	.byte $13                       ;- D 3 - - - 0x01F560 0F:F550:
-tbl_0F_F551:
+SpawnEffect7ETbl_F551:
 	.byte $00,$ED,$FF               ;- D 3 - - - 0x01F561 0F:F551:
-tbl_0F_F554:
+SpawnEffect7ETbl_F554:
 	.byte $1C                       ;- D 3 - - - 0x01F564 0F:F554:
-tbl_0F_F555:
+SpawnEffect7ETbl_F555:
 	.byte $00,$E4,$FF               ;- D 3 - - - 0x01F565 0F:F555:
 loc_0F_F558:
 	SEC                             ;C - - - - - 0x01F568 0F:F558: 38
@@ -3086,7 +3086,7 @@ loc_0F_F66B:
 	BEQ loc_0F_F692                 ;C - - - - - 0x01F680 0F:F670: F0 20
 loc_0F_F672:
 	LDA ptr_00                      ;C - - - - - 0x01F682 0F:F672: A5 00
-	CMP tbl_0F_F6EA,Y               ;C - - - - - 0x01F684 0F:F674: D9 EA F6
+	CMP CheckHitEligibleTbl_F6EA,Y  ;C - - - - - 0x01F684 0F:F674: D9 EA F6
 	BCC loc_0F_F699                 ;C - - - - - 0x01F687 0F:F677: 90 20
 loc_0F_F679:
 	JMP loc_0F_F6A9                 ;C - - - - - 0x01F689 0F:F679: 4C A9 F6
@@ -3104,7 +3104,7 @@ loc_0F_F68B:
 	BEQ loc_0F_F672                 ;C - - - - - 0x01F6A0 0F:F690: F0 E0
 loc_0F_F692:
 	LDA ptr_00                      ;C - - - - - 0x01F6A2 0F:F692: A5 00
-	CMP tbl_0F_F6CA,Y               ;C - - - - - 0x01F6A4 0F:F694: D9 CA F6
+	CMP CheckHitEligibleTbl_F6CA,Y  ;C - - - - - 0x01F6A4 0F:F694: D9 CA F6
 	BCS loc_0F_F6A9                 ;C - - - - - 0x01F6A7 0F:F697: B0 10
 loc_0F_F699:
 	LDA objY                        ;C - - - - - 0x01F6A9 0F:F699: AD C0 03
@@ -3114,10 +3114,10 @@ loc_0F_F699:
 	EOR #$FF                        ;C - - - - - 0x01F6B2 0F:F6A2: 49 FF
 	ADC #$01                        ;C - - - - - 0x01F6B4 0F:F6A4: 69 01
 loc_0F_F6A6:
-	CMP tbl_0F_F6AA,Y               ;C - - - - - 0x01F6B6 0F:F6A6: D9 AA F6
+	CMP CheckHitEligibleTbl_F6AA,Y  ;C - - - - - 0x01F6B6 0F:F6A6: D9 AA F6
 loc_0F_F6A9:
 	RTS                             ;C - - - - - 0x01F6B9 0F:F6A9: 60
-tbl_0F_F6AA:
+CheckHitEligibleTbl_F6AA:
 	.byte $05,$05,$05,$05,$05,$05,$08,$08,$0C,$14,$20,$24,$18,$18;- D 3 - - - 0x01F6BA 0F:F6AA:
 	.byte $0B                       ;- - - - - - 0x01F6C8 0F:F6B8:
 	.byte $1C,$20,$23,$27           ;- D 3 - - - 0x01F6C9 0F:F6B9:
@@ -3127,7 +3127,7 @@ tbl_0F_F6AA:
 	.byte $26,$10                   ;- D 3 - - - 0x01F6D1 0F:F6C1:
 	.byte $00,$00,$00,$00,$00       ;- - - - - - 0x01F6D3 0F:F6C3:
 	.byte $0C,$12                   ;- D 3 - - - 0x01F6D8 0F:F6C8:
-tbl_0F_F6CA:
+CheckHitEligibleTbl_F6CA:
 	.byte $00,$00,$00,$00,$00,$00   ;- - - - - - 0x01F6DA 0F:F6CA:
 	.byte $00,$04,$08,$0B,$14,$00,$00;- D 3 - - - 0x01F6E0 0F:F6D0:
 	.byte $00,$00                   ;- - - - - - 0x01F6E7 0F:F6D7:
@@ -3136,7 +3136,7 @@ tbl_0F_F6CA:
 	.byte $08                       ;- D 3 - - - 0x01F6EE 0F:F6DE:
 	.byte $10,$04,$08,$00,$00,$00,$00,$00,$00;- - - - - - 0x01F6EF 0F:F6DF:
 	.byte $0A,$0D                   ;- D 3 - - - 0x01F6F8 0F:F6E8:
-tbl_0F_F6EA:
+CheckHitEligibleTbl_F6EA:
 	.byte $1D,$17,$1A,$1D,$1D,$20,$20,$04,$12,$18,$14,$25,$23,$21,$25,$14;- D 3 - - - 0x01F6FA 0F:F6EA:
 	.byte $20,$21,$23               ;- D 3 - - - 0x01F70A 0F:F6FA:
 	.byte $23                       ;- - - - - - 0x01F70D 0F:F6FD:
@@ -3322,7 +3322,7 @@ loc_0F_F82B:
 	BEQ loc_0F_F845                 ;C - - - - - 0x01F841 0F:F831: F0 12
 loc_0F_F833:
 	LDA ptr_00                      ;C - - - - - 0x01F843 0F:F833: A5 00
-	CMP tbl_0F_F8B1,Y               ;C - - - - - 0x01F845 0F:F835: D9 B1 F8
+	CMP CheckAttackEligibleTbl_F8B1,Y;C - - - - - 0x01F845 0F:F835: D9 B1 F8
 	BCS loc_0F_F862                 ;C - - - - - 0x01F848 0F:F838: B0 28
 	JMP loc_0F_F84C                 ;C - - - - - 0x01F84A 0F:F83A: 4C 4C F8
 loc_0F_F83D:
@@ -3332,7 +3332,7 @@ loc_0F_F83D:
 	BEQ loc_0F_F833                 ;C - - - - - 0x01F853 0F:F843: F0 EE
 loc_0F_F845:
 	LDA ptr_00                      ;C - - - - - 0x01F855 0F:F845: A5 00
-	CMP tbl_0F_F88D,Y               ;C - - - - - 0x01F857 0F:F847: D9 8D F8
+	CMP CheckAttackEligibleTbl_F88D,Y;C - - - - - 0x01F857 0F:F847: D9 8D F8
 	BCS loc_0F_F862                 ;C - - - - - 0x01F85A 0F:F84A: B0 16
 loc_0F_F84C:
 	LDA ptr_04                      ;C - - - - - 0x01F85C 0F:F84C: A5 04
@@ -3344,7 +3344,7 @@ loc_0F_F84C:
 	EOR #$FF                        ;C - - - - - 0x01F86A 0F:F85A: 49 FF
 	ADC #$01                        ;C - - - - - 0x01F86C 0F:F85C: 69 01
 loc_0F_F85E:
-	CMP tbl_0F_F869,Y               ;C - - - - - 0x01F86E 0F:F85E: D9 69 F8
+	CMP CheckAttackEligibleTbl_F869,Y;C - - - - - 0x01F86E 0F:F85E: D9 69 F8
 	RTS                             ;C - - - - - 0x01F871 0F:F861: 60
 loc_0F_F862:
 	LDA ptr_04                      ;C - - - - - 0x01F872 0F:F862: A5 04
@@ -3352,7 +3352,7 @@ loc_0F_F862:
 ; GG APVYNEAU hit anywhere: SEC / RTS at the end of the hit test
 	SEC                             ;C - - - - - 0x01F877 0F:F867: 38
 	RTS                             ;C - - - - - 0x01F878 0F:F868: 60
-tbl_0F_F869:
+CheckAttackEligibleTbl_F869:
 	.byte $14,$20                   ;- D 3 - - - 0x01F879 0F:F869:
 	.byte $2E                       ;- - - - - - 0x01F87B 0F:F86B:
 	.byte $28,$1C                   ;- D 3 - - - 0x01F87C 0F:F86C:
@@ -3365,7 +3365,7 @@ tbl_0F_F869:
 	.byte $14                       ;- - - - - - 0x01F892 0F:F882:
 	.byte $14,$0C,$0C,$0C           ;- D 3 - - - 0x01F893 0F:F883:
 	.byte $14,$14,$14,$14,$14,$14   ;- - - - - - 0x01F897 0F:F887:
-tbl_0F_F88D:
+CheckAttackEligibleTbl_F88D:
 	.byte $1D,$1F                   ;- D 3 - - - 0x01F89D 0F:F88D:
 	.byte $2C                       ;- - - - - - 0x01F89F 0F:F88F:
 	.byte $1E,$18                   ;- D 3 - - - 0x01F8A0 0F:F890:
@@ -3378,7 +3378,7 @@ tbl_0F_F88D:
 	.byte $24                       ;- - - - - - 0x01F8B6 0F:F8A6:
 	.byte $14,$14,$16,$14           ;- D 3 - - - 0x01F8B7 0F:F8A7:
 	.byte $0C,$0C,$1E,$1E,$0C,$0C   ;- - - - - - 0x01F8BB 0F:F8AB:
-tbl_0F_F8B1:
+CheckAttackEligibleTbl_F8B1:
 	.byte $08,$08                   ;- D 3 - - - 0x01F8C1 0F:F8B1:
 	.byte $28                       ;- - - - - - 0x01F8C3 0F:F8B3:
 	.byte $08,$08,$08,$08,$0E       ;- D 3 - - - 0x01F8C4 0F:F8B4:
@@ -3435,16 +3435,16 @@ loc_0F_F922:
 	LDY objAtkDamage,X              ;C - - - - - 0x01F932 0F:F922: BC 50 04
 	LDA playerHealth                ;C - - - - - 0x01F935 0F:F925: A5 3A
 	SEC                             ;C - - - - - 0x01F937 0F:F927: 38
-	SBC tbl_0F_FD16,Y               ;C - - - - - 0x01F938 0F:F928: F9 16 FD
+	SBC UpdatePlayerInvincibleTbl_FD16,Y;C - - - - - 0x01F938 0F:F928: F9 16 FD
 ; GG SZXNUPSA infinite health: STA playerHealth
 	STA playerHealth                ;C - - - - - 0x01F93B 0F:F92B: 85 3A
 	BMI loc_0F_F999                 ;C - - - - - 0x01F93D 0F:F92D: 30 6A
-	LDA tbl_0F_FD56,Y               ;C - - - - - 0x01F93F 0F:F92F: B9 56 FD
+	LDA UpdatePlayerInvincibleTbl_FD56,Y;C - - - - - 0x01F93F 0F:F92F: B9 56 FD
 	BNE loc_0F_F999                 ;C - - - - - 0x01F942 0F:F932: D0 65
 	LDY playerId                    ;C - - - - - 0x01F944 0F:F934: A4 34
-	LDA tbl_0F_E207,Y               ;C - - - - - 0x01F946 0F:F936: B9 07 E2
+	LDA SetVelFromTbl_B39BTbl_E207,Y;C - - - - - 0x01F946 0F:F936: B9 07 E2
 	JSR SetPlayerAnim               ;C - - - - - 0x01F949 0F:F939: 20 94 F2
-	LDA tbl_0F_E24F,Y               ;C - - - - - 0x01F94C 0F:F93C: B9 4F E2
+	LDA SetVelFromTbl_B39BTbl_E24F,Y;C - - - - - 0x01F94C 0F:F93C: B9 4F E2
 	JSR SetChrBank2                 ;C - - - - - 0x01F94F 0F:F93F: 20 40 F4
 	LDA objFacing,X                 ;C - - - - - 0x01F952 0F:F942: BD 60 04
 	EOR #$03                        ;C - - - - - 0x01F955 0F:F945: 49 03
@@ -3637,7 +3637,7 @@ TestHitBoxOverlap:
 	EOR #$FF                        ;C - - - - - 0x01FAB5 0F:FAA5: 49 FF
 	ADC #$01                        ;C - - - - - 0x01FAB7 0F:FAA7: 69 01
 loc_0F_FAA9:
-	CMP tbl_0F_FAC2,Y               ;C - - - - - 0x01FAB9 0F:FAA9: D9 C2 FA
+	CMP TestHitBoxOverlapTbl_FAC2,Y ;C - - - - - 0x01FAB9 0F:FAA9: D9 C2 FA
 	BCS loc_0F_FABF                 ;C - - - - - 0x01FABC 0F:FAAC: B0 11
 	LDA ptr_02                      ;C - - - - - 0x01FABE 0F:FAAE: A5 02
 	SEC                             ;C - - - - - 0x01FAC0 0F:FAB0: 38
@@ -3646,13 +3646,13 @@ loc_0F_FAA9:
 	EOR #$FF                        ;C - - - - - 0x01FAC6 0F:FAB6: 49 FF
 	ADC #$01                        ;C - - - - - 0x01FAC8 0F:FAB8: 69 01
 loc_0F_FABA:
-	CMP tbl_0F_FAC0,Y               ;C - - - - - 0x01FACA 0F:FABA: D9 C0 FA
+	CMP TestHitBoxOverlapTbl_FAC0,Y ;C - - - - - 0x01FACA 0F:FABA: D9 C0 FA
 	BCC loc_0F_FABF                 ;C - - - - - 0x01FACD 0F:FABD: 90 00
 loc_0F_FABF:
 	RTS                             ;C - - - - - 0x01FACF 0F:FABF: 60
-tbl_0F_FAC0:
+TestHitBoxOverlapTbl_FAC0:
 	.byte $0E,$14                   ;- D 3 - - - 0x01FAD0 0F:FAC0:
-tbl_0F_FAC2:
+TestHitBoxOverlapTbl_FAC2:
 	.byte $14,$14                   ;- D 3 - - - 0x01FAD2 0F:FAC2:
 InitSlot1Follower:
 	LDA #$80                        ;C - - - - - 0x01FAD4 0F:FAC4: A9 80
@@ -3668,7 +3668,7 @@ InitSlot1Follower:
 	LDA objYPage                    ;C - - - - - 0x01FAF0 0F:FAE0: AD E0 03
 	STA objYPage+1                  ;C - - - - - 0x01FAF3 0F:FAE3: 8D E1 03
 	LDY playerId                    ;C - - - - - 0x01FAF6 0F:FAE6: A4 34
-	LDA tbl_0F_FB06,Y               ;C - - - - - 0x01FAF8 0F:FAE8: B9 06 FB
+	LDA InitSlot1FollowerTbl_FB06,Y ;C - - - - - 0x01FAF8 0F:FAE8: B9 06 FB
 	STA objAnim+1                   ;C - - - - - 0x01FAFB 0F:FAEB: 8D 81 05
 	LDA #$00                        ;C - - - - - 0x01FAFE 0F:FAEE: A9 00
 	STA objAnimFlags+1              ;C - - - - - 0x01FB00 0F:FAF0: 8D 91 05
@@ -3680,17 +3680,17 @@ InitSlot1Follower:
 	LDA #$2F                        ;C - - - - - 0x01FB10 0F:FB00: A9 2F
 	STA objAtkBox+1                 ;C - - - - - 0x01FB12 0F:FB02: 8D 41 04
 	RTS                             ;C - - - - - 0x01FB15 0F:FB05: 60
-tbl_0F_FB06:
+InitSlot1FollowerTbl_FB06:
 	.byte $41,$41                   ;- - - - - - 0x01FB16 0F:FB06:
 	.byte $51                       ;- D 3 - - - 0x01FB18 0F:FB08:
 InitHitFields:
 	LDY attackType                  ;C - - - - - 0x01FB19 0F:FB09: A4 A7
-	LDA tbl_0F_FB17,Y               ;C - - - - - 0x01FB1B 0F:FB0B: B9 17 FB
+	LDA InitHitFieldsTbl_FB17,Y     ;C - - - - - 0x01FB1B 0F:FB0B: B9 17 FB
 	STA objStunTimer,X              ;C - - - - - 0x01FB1E 0F:FB0E: 9D B0 04
 	LDA #$1E                        ;C - - - - - 0x01FB21 0F:FB11: A9 1E
 	STA objHitTimer,X               ;C - - - - - 0x01FB23 0F:FB13: 9D E0 04
 	RTS                             ;C - - - - - 0x01FB26 0F:FB16: 60
-tbl_0F_FB17:
+InitHitFieldsTbl_FB17:
 	.byte $02,$18                   ;- D 3 - - - 0x01FB27 0F:FB17:
 	.byte $20                       ;- - - - - - 0x01FB29 0F:FB19:
 	.byte $10,$10,$10,$10,$10,$10,$10,$08,$02,$04,$18,$02,$03,$03,$03,$03;- D 3 - - - 0x01FB2A 0F:FB1A:
@@ -3740,7 +3740,7 @@ DirToPlayerOffset:
 	BCS loc_0F_FB9E                 ;C - - - - - 0x01FB97 0F:FB87: B0 15
 	LDA objX                        ;C - - - - - 0x01FB99 0F:FB89: AD 60 03
 	CLC                             ;C - - - - - 0x01FB9C 0F:FB8C: 18
-	ADC tbl_0F_FBCC,Y               ;C - - - - - 0x01FB9D 0F:FB8D: 79 CC FB
+	ADC DirToPlayerOffsetTbl_FBCC,Y ;C - - - - - 0x01FB9D 0F:FB8D: 79 CC FB
 	STA objX                        ;C - - - - - 0x01FBA0 0F:FB90: 8D 60 03
 	LDA objXPage                    ;C - - - - - 0x01FBA3 0F:FB93: AD 80 03
 	ADC #$00                        ;C - - - - - 0x01FBA6 0F:FB96: 69 00
@@ -3749,7 +3749,7 @@ DirToPlayerOffset:
 loc_0F_FB9E:
 	LDA objX                        ;C - - - - - 0x01FBAE 0F:FB9E: AD 60 03
 	SEC                             ;C - - - - - 0x01FBB1 0F:FBA1: 38
-	SBC tbl_0F_FBCC,Y               ;C - - - - - 0x01FBB2 0F:FBA2: F9 CC FB
+	SBC DirToPlayerOffsetTbl_FBCC,Y ;C - - - - - 0x01FBB2 0F:FBA2: F9 CC FB
 	STA objX                        ;C - - - - - 0x01FBB5 0F:FBA5: 8D 60 03
 	LDA objXPage                    ;C - - - - - 0x01FBB8 0F:FBA8: AD 80 03
 	SBC #$00                        ;C - - - - - 0x01FBBB 0F:FBAB: E9 00
@@ -3767,7 +3767,7 @@ loc_0F_FBB0:
 	STA objXPage                    ;C - - - - - 0x01FBD6 0F:FBC6: 8D 80 03
 	LDA ptr_0C                      ;C - - - - - 0x01FBD9 0F:FBC9: A5 0C
 	RTS                             ;C - - - - - 0x01FBDB 0F:FBCB: 60
-tbl_0F_FBCC:
+DirToPlayerOffsetTbl_FBCC:
 	.byte $1C,$16,$19,$19,$1C,$1F   ;- D 3 - - - 0x01FBDC 0F:FBCC:
 	.byte $00                       ;- - - - - - 0x01FBE2 0F:FBD2:
 	.byte $20,$20                   ;- D 3 - - - 0x01FBE3 0F:FBD3:
@@ -3786,7 +3786,7 @@ DistanceYToPlayerGround:
 tbl_0F_FBF0:
 	.byte $08,$09,$09,$09,$01,$05,$05,$05,$04,$06,$06,$06,$02,$0A,$0A,$0A;- D 3 - - - 0x01FC00 0F:FBF0:
 	.byte $08,$09,$0A,$0B,$0C,$0D,$0E,$0F,$00,$01,$02,$03,$04,$05,$06,$07;- - - - - - 0x01FC10 0F:FC00:
-tbl_0F_FC10:
+EnemyAI_NopTbl_FC10:
 	.byte $02,$04                   ;- D 3 - - - 0x01FC20 0F:FC10:
 	.byte $02                       ;- - - - - - 0x01FC22 0F:FC12:
 	.byte $01,$03,$04,$04,$04,$01   ;- D 3 - - - 0x01FC23 0F:FC13:
@@ -3803,14 +3803,14 @@ tbl_0F_FC33:
 	.byte $01                       ;- - - - - - 0x01FC4D 0F:FC3D:
 	.byte $01,$00                   ;- D 3 - - - 0x01FC4E 0F:FC3E:
 	.byte $02                       ;W 0x01FC50 0F:FC40:
-tbl_0F_FC41:
+EnemyAI_Kind0ETbl_FC41:
 	.word $B5B4, $B3B2              ;W 0x01FC51 0F:FC41:
 	.byte $B6                       ;- D 3 - - - 0x01FC55 0F:FC45:
 	.byte $B8                       ;- D 3 - - - 0x01FC56 0F:FC46:
 	.byte $00,$ED                   ;- - - - - - 0x01FC57 0F:FC47:
 	.byte $FB,$DB                   ;- D 3 - - - 0x01FC59 0F:FC49:
 	.byte $FB,$C9,$00               ;- - - - - - 0x01FC5B 0F:FC4B:
-tbl_0F_FC4E:
+EnemyAI_Kind0ETbl_FC4E:
 	.byte $18,$1B,$1D,$1F,$20,$24   ;- D 3 - - - 0x01FC5E 0F:FC4E:
 	.byte $00,$28                   ;- - - - - - 0x01FC64 0F:FC54:
 	.byte $2C,$24                   ;- D 3 - - - 0x01FC66 0F:FC56:
@@ -3834,111 +3834,111 @@ tbl_0F_FC75:
 	.byte $2D                       ;- - - - - - 0x01FC8F 0F:FC7F:
 	.byte $3A                       ;- D 3 - - - 0x01FC90 0F:FC80:
 	.byte $00                       ;- - - - - - 0x01FC91 0F:FC81:
-tbl_0F_FC82:
+EnemyRecoverTbl_FC82:
 	.byte $06,$03,$06,$06,$06,$06   ;- D 3 - - - 0x01FC92 0F:FC82:
 	.byte $00                       ;- - - - - - 0x01FC98 0F:FC88:
 	.byte $10,$1C,$1E               ;- D 3 - - - 0x01FC99 0F:FC89:
 	.byte $1C                       ;- - - - - - 0x01FC9C 0F:FC8C:
 	.byte $1E                       ;- D 3 - - - 0x01FC9D 0F:FC8D:
 	.byte $00                       ;- - - - - - 0x01FC9E 0F:FC8E:
-tbl_0F_FC8F:
+EnemySetDownAnimATbl_FC8F:
 	.byte $86,$8D,$95,$9E,$AA,$D5,$BA,$EB,$F8,$E0;- D 3 - - - 0x01FC9F 0F:FC8F:
 	.byte $F8                       ;- - - - - - 0x01FCA9 0F:FC99:
 	.byte $C4,$C8,$FD               ;- D 3 - - - 0x01FCAA 0F:FC9A:
-tbl_0F_FC9D:
+EnemySetDownAnimATbl_FC9D:
 	.byte $19,$1C,$1E,$3D,$21,$26   ;- D 3 - - - 0x01FCAD 0F:FC9D:
 	.byte $00                       ;- - - - - - 0x01FCB3 0F:FCA3:
 	.byte $2B,$2D,$26               ;- D 3 - - - 0x01FCB4 0F:FCA4:
 	.byte $2D                       ;- - - - - - 0x01FCB7 0F:FCA7:
 	.byte $39,$39                   ;- D 3 - - - 0x01FCB8 0F:FCA8:
 	.byte $2E                       ;- - - - - - 0x01FCBA 0F:FCAA:
-tbl_0F_FCAB:
+EnemySetDownAnimBTbl_FCAB:
 	.byte $87,$8E,$96,$9F,$AB,$D6,$B9,$EC,$F9,$E1;- D 3 - - - 0x01FCBB 0F:FCAB:
 	.byte $F9                       ;- - - - - - 0x01FCC5 0F:FCB5:
 	.byte $C5,$C1,$FD               ;- D 3 - - - 0x01FCC6 0F:FCB6:
 	.byte $10,$10,$10,$10,$00,$11,$11;- - - - - - 0x01FCC9 0F:FCB9:
-tbl_0F_FCC0:
+RefillPlayerHealthTbl_FCC0:
 	.byte $20,$7F                   ;- D 3 - - - 0x01FCD0 0F:FCC0:
 	.byte $30,$10,$FF               ;- - - - - - 0x01FCD2 0F:FCC2:
-tbl_0F_FCC5:
+Act02_ActionEndTbl_FCC5:
 	.byte $FF                       ;- - - - - - 0x01FCD5 0F:FCC5:
 	.byte $FF                       ;- D 3 - - - 0x01FCD6 0F:FCC6:
 	.byte $00                       ;- - - - - - 0x01FCD7 0F:FCC7:
-tbl_0F_FCC8:
+UpdatePlayerFlashTbl_FCC8:
 	.byte $21,$15,$19               ;- D 3 - - - 0x01FCD8 0F:FCC8:
-tbl_0F_FCCB:
+UpdatePlayerFlashTbl_FCCB:
 	.byte $30                       ;- D 3 - - - 0x01FCDB 0F:FCCB:
 	.byte $30,$30                   ;- - - - - - 0x01FCDC 0F:FCCC:
-tbl_0F_FCCE:
+Act03_PunchTbl_FCCE:
 	.byte $23,$27,$10               ;- D 3 - - - 0x01FCDE 0F:FCCE:
-tbl_0F_FCD1:
+EnemyAI_Item10_13Tbl_FCD1:
 	.byte $1E,$1F                   ;- D 3 - - - 0x01FCE1 0F:FCD1:
 	.byte $20,$21,$00               ;- - - - - - 0x01FCE3 0F:FCD3:
-tbl_0F_FCD6:
+EnemyAI_Kind04Tbl_FCD6:
 	.byte $F0                       ;- D 3 - - - 0x01FCE6 0F:FCD6:
-tbl_0F_FCD7:
+EnemyAI_Kind04Tbl_FCD7:
 	.byte $FF,$10,$00               ;- D 3 - - - 0x01FCE7 0F:FCD7:
-tbl_0F_FCDA:
+EnemyAI_Kind04Tbl_FCDA:
 	.byte $EE                       ;- D 3 - - - 0x01FCEA 0F:FCDA:
-tbl_0F_FCDB:
+EnemyAI_Kind04Tbl_FCDB:
 	.byte $FF,$12,$00               ;- D 3 - - - 0x01FCEB 0F:FCDB:
-tbl_0F_FCDE:
+EnemyAI_Kind04Tbl_FCDE:
 	.byte $EC                       ;- D 3 - - - 0x01FCEE 0F:FCDE:
-tbl_0F_FCDF:
+EnemyAI_Kind04Tbl_FCDF:
 	.byte $FF,$14,$00               ;- D 3 - - - 0x01FCEF 0F:FCDF:
-tbl_0F_FCE2:
+EnemyAI_Kind04Tbl_FCE2:
 	.byte $1C                       ;- D 3 - - - 0x01FCF2 0F:FCE2:
-tbl_0F_FCE3:
+EnemyAI_Kind04Tbl_FCE3:
 	.byte $00,$E4,$FF               ;- D 3 - - - 0x01FCF3 0F:FCE3:
-tbl_0F_FCE6:
+EnemyAI_Kind04Tbl_FCE6:
 	.byte $F0                       ;- D 3 - - - 0x01FCF6 0F:FCE6:
-tbl_0F_FCE7:
+EnemyAI_Kind04Tbl_FCE7:
 	.byte $FF,$10,$00               ;- D 3 - - - 0x01FCF7 0F:FCE7:
-tbl_0F_FCEA:
+EnemyAI_Kind04Tbl_FCEA:
 	.byte $F0                       ;- D 3 - - - 0x01FCFA 0F:FCEA:
-tbl_0F_FCEB:
+EnemyAI_Kind04Tbl_FCEB:
 	.byte $FF,$10,$00               ;- D 3 - - - 0x01FCFB 0F:FCEB:
-tbl_0F_FCEE:
+EnemyAI_Kind04Tbl_FCEE:
 	.byte $F6                       ;- D 3 - - - 0x01FCFE 0F:FCEE:
-tbl_0F_FCEF:
+EnemyAI_Kind04Tbl_FCEF:
 	.byte $FF,$0A,$00               ;- D 3 - - - 0x01FCFF 0F:FCEF:
-tbl_0F_FCF2:
+EnemyAI_Kind08Tbl_FCF2:
 	.byte $04                       ;- D 3 - - - 0x01FD02 0F:FCF2:
-tbl_0F_FCF3:
+EnemyAI_Kind08Tbl_FCF3:
 	.byte $00,$FC,$FF               ;- D 3 - - - 0x01FD03 0F:FCF3:
-tbl_0F_FCF6:
+EnemyAI_Kind08Tbl_FCF6:
 	.byte $1C                       ;- D 3 - - - 0x01FD06 0F:FCF6:
-tbl_0F_FCF7:
+EnemyAI_Kind08Tbl_FCF7:
 	.byte $00,$E4,$FF               ;- D 3 - - - 0x01FD07 0F:FCF7:
-tbl_0F_FCFA:
+EnemyAI_Kind08Tbl_FCFA:
 	.byte $FE                       ;- D 3 - - - 0x01FD0A 0F:FCFA:
-tbl_0F_FCFB:
+EnemyAI_Kind08Tbl_FCFB:
 	.byte $FF,$02,$00               ;- D 3 - - - 0x01FD0B 0F:FCFB:
-tbl_0F_FCFE:
+EnemyAI_Kind08Tbl_FCFE:
 	.byte $FA                       ;- D 3 - - - 0x01FD0E 0F:FCFE:
-tbl_0F_FCFF:
+EnemyAI_Kind08Tbl_FCFF:
 	.byte $FF,$06,$00               ;- D 3 - - - 0x01FD0F 0F:FCFF:
-tbl_0F_FD02:
+EnemyAI_Kind08Tbl_FD02:
 	.byte $D8                       ;- D 3 - - - 0x01FD12 0F:FD02:
-tbl_0F_FD03:
+EnemyAI_Kind08Tbl_FD03:
 	.byte $FF,$28,$00               ;- D 3 - - - 0x01FD13 0F:FD03:
-tbl_0F_FD06:
+EnemyAI_Kind0FTbl_FD06:
 	.byte $F2                       ;- D 3 - - - 0x01FD16 0F:FD06:
-tbl_0F_FD07:
+EnemyAI_Kind0FTbl_FD07:
 	.byte $FF,$0E,$00               ;- D 3 - - - 0x01FD17 0F:FD07:
-tbl_0F_FD0A:
+EnemyAI_Kind0FTbl_FD0A:
 	.byte $10                       ;- - - - - - 0x01FD1A 0F:FD0A:
-tbl_0F_FD0B:
+EnemyAI_Kind0FTbl_FD0B:
 	.byte $00,$F0,$FF               ;- - - - - - 0x01FD1B 0F:FD0B:
-tbl_0F_FD0E:
+EnemyAI_Kind0FTbl_FD0E:
 	.byte $F0                       ;- D 3 - - - 0x01FD1E 0F:FD0E:
-tbl_0F_FD0F:
+EnemyAI_Kind0FTbl_FD0F:
 	.byte $FF,$10,$00               ;- D 3 - - - 0x01FD1F 0F:FD0F:
-tbl_0F_FD12:
+EnemyAI_Kind0FTbl_FD12:
 	.byte $F8                       ;- D 3 - - - 0x01FD22 0F:FD12:
-tbl_0F_FD13:
+EnemyAI_Kind0FTbl_FD13:
 	.byte $FF,$08,$00               ;- D 3 - - - 0x01FD23 0F:FD13:
-tbl_0F_FD16:
+UpdatePlayerInvincibleTbl_FD16:
 	.byte $08,$04,$08               ;- D 3 - - - 0x01FD26 0F:FD16:
 	.byte $0A                       ;- - - - - - 0x01FD29 0F:FD19:
 	.byte $0A,$0C,$0A,$0A           ;- D 3 - - - 0x01FD2A 0F:FD1A:
@@ -3966,7 +3966,7 @@ tbl_0F_FD16:
 	.byte $0A,$06,$0A,$0E           ;- D 3 - - - 0x01FD5E 0F:FD4E:
 	.byte $24,$00,$00               ;- - - - - - 0x01FD62 0F:FD52:
 	.byte $00                       ;- D 3 - - - 0x01FD65 0F:FD55:
-tbl_0F_FD56:
+UpdatePlayerInvincibleTbl_FD56:
 	.byte $00,$00,$00               ;- D 3 - - - 0x01FD66 0F:FD56:
 	.byte $00                       ;- - - - - - 0x01FD69 0F:FD59:
 	.byte $00,$00,$FF,$00           ;- D 3 - - - 0x01FD6A 0F:FD5A:
@@ -4267,7 +4267,7 @@ loc_0F_FFB2:
 	.byte $01,$47,$00,$80,$01,$08,$10,$31,$11,$40,$00,$C4,$41,$02,$30,$24;- - - - - - 0x01FFC5 0F:FFB5:
 	.byte $00,$41,$40,$00,$12,$08,$00,$44,$00,$10,$41,$61,$45,$06,$00,$A0;- - - - - - 0x01FFD5 0F:FFC5:
 	.byte $40,$48,$04,$08,$00,$0C,$00,$84,$40,$88,$50;- - - - - - 0x01FFE5 0F:FFD5:
-tbl_0F_FFE0:
+spritePalHaggarTbl_FFE0:
 	.byte $4D,$20,$46,$49,$4E,$41,$4C,$20,$46,$49,$47,$48,$54,$59,$20,$20;- D 3 - - - 0x01FFF0 0F:FFE0:
 	.byte $10,$B9,$E8,$BB,$33,$04,$01,$0F;- - - - - - 0x020000 0F:FFF0:
 dat_0F_FFF8:

@@ -88,7 +88,7 @@ tbl_05_A3D7:
 	.byte $43                       ;- - - - - - 0x00A4FB 05:A4EB:
 	.byte $26,$17,$14,$21,$14,$2A,$22,$00,$19,$14,$22,$22,$18,$12,$10,$75;- D 1 - I - 0x00A4FC 05:A4EC:
 	.byte $FF                       ;- D 1 - I - 0x00A50C 05:A4FC:
-tbl_05_A4FD:
+ScreenDispatch9800Tbl_A4FD:
 	.byte $9D                       ;- - - - - - 0x00A50D 05:A4FD:
 	.byte $9D,$9D,$9D               ;- D 1 - - - 0x00A50E 05:A4FE:
 	.byte $9D                       ;- - - - - - 0x00A511 05:A501:
@@ -101,7 +101,7 @@ tbl_05_A4FD:
 	.byte $A1,$A1,$A2,$A2           ;- - - - - - 0x00A53C 05:A52C:
 	.byte $A2,$A2,$A2,$A2,$A2,$A2,$A2,$A3,$A3,$A3,$A3,$A3,$A3,$A3,$A3,$A3;- D 1 - - - 0x00A540 05:A530:
 	.byte $A3,$A4,$A4,$A4,$A4,$A4,$A4,$A4,$A4,$A4,$A4,$A4;- D 1 - - - 0x00A550 05:A540:
-tbl_05_A54C:
+ScreenDispatch9800Tbl_A54C:
 	.byte $71                       ;- - - - - - 0x00A55C 05:A54C:
 	.byte $71,$8E,$A7               ;- D 1 - - - 0x00A55D 05:A54D:
 	.byte $C0                       ;- - - - - - 0x00A560 05:A550:
@@ -188,14 +188,14 @@ loc_05_A731:
 	BEQ loc_05_A789                 ;C - - - - - 0x00A75D 05:A74D: F0 3A
 	LDY playerId                    ;C - - - - - 0x00A75F 05:A74F: A4 34
 	LDA objAnim                     ;C - - - - - 0x00A761 05:A751: AD 80 05
-	CMP tbl_05_A7A2,Y               ;C - - - - - 0x00A764 05:A754: D9 A2 A7
+	CMP RefillPlayerHealthTbl_A7A2,Y;C - - - - - 0x00A764 05:A754: D9 A2 A7
 	BNE loc_05_A789                 ;C - - - - - 0x00A767 05:A757: D0 30
 	LDA #$22                        ;C - - - - - 0x00A769 05:A759: A9 22
 	JSR QueueSound                  ;C - - - - - 0x00A76B 05:A75B: 20 4C F3
 	LDY playerId                    ;C - - - - - 0x00A76E 05:A75E: A4 34
-	LDA tbl_05_A78A,Y               ;C - - - - - 0x00A770 05:A760: B9 8A A7
+	LDA RefillPlayerHealthTbl_A78A,Y;C - - - - - 0x00A770 05:A760: B9 8A A7
 	STA ptr_02                      ;C - - - - - 0x00A773 05:A763: 85 02
-	LDA tbl_05_A78D,Y               ;C - - - - - 0x00A775 05:A765: B9 8D A7
+	LDA RefillPlayerHealthTbl_A78D,Y;C - - - - - 0x00A775 05:A765: B9 8D A7
 	STA ptr_02+1                    ;C - - - - - 0x00A778 05:A768: 85 03
 	LDY playerLevel                 ;C - - - - - 0x00A77A 05:A76A: A4 6B
 	LDA playerHealth                ;C - - - - - 0x00A77C 05:A76C: A5 3A
@@ -204,7 +204,7 @@ loc_05_A731:
 	LDY #$01                        ;C - - - - - 0x00A782 05:A772: A0 01
 	LDA playerHealth                ;C - - - - - 0x00A784 05:A774: A5 3A
 	CLC                             ;C - - - - - 0x00A786 05:A776: 18
-	ADC tbl_0F_FCC0,Y               ;C - - - - - 0x00A787 05:A777: 79 C0 FC
+	ADC RefillPlayerHealthTbl_FCC0,Y;C - - - - - 0x00A787 05:A777: 79 C0 FC
 	STA playerHealth                ;C - - - - - 0x00A78A 05:A77A: 85 3A
 	LDY playerLevel                 ;C - - - - - 0x00A78C 05:A77C: A4 6B
 	LDA (ptr_02),Y                  ;C - - - - - 0x00A78E 05:A77E: B1 02
@@ -215,9 +215,9 @@ loc_05_A786:
 	JSR ClearObject                 ;C - - - - - 0x00A796 05:A786: 20 BE F2
 loc_05_A789:
 	RTS                             ;C - - - - - 0x00A799 05:A789: 60
-tbl_05_A78A:
+RefillPlayerHealthTbl_A78A:
 	.lobytes ofs_05_A790, tbl_05_A796, ofs_05_A79C;- D 1 - - - 0x00A79A 05:A78A:
-tbl_05_A78D:
+RefillPlayerHealthTbl_A78D:
 	.hibytes ofs_05_A790, tbl_05_A796, ofs_05_A79C;- D 1 - - - 0x00A79D 05:A78D:
 ofs_05_A790:
 	RTI                             ;c - - - - - 0x00A7A0 05:A790: 40
@@ -232,7 +232,7 @@ ofs_05_A79C:
 	RTS                             ;c - - - - - 0x00A7AE 05:A79E: 60
 	.byte $68                       ;- D 1 - I - 0x00A7AF 05:A79F:
 	.byte $68,$68                   ;- - - - - - 0x00A7B0 05:A7A0:
-tbl_05_A7A2:
+RefillPlayerHealthTbl_A7A2:
 	.byte $0D,$0E,$0F               ;- D 1 - - - 0x00A7B2 05:A7A2:
 loc_05_A7A5:
 	LDA gameAction                  ;C - - - - - 0x00A7B5 05:A7A5: A5 30
@@ -342,7 +342,7 @@ SpawnObj6A:
 	LDA playerId                    ;- - - - - - 0x00A885 05:A875: A5 34
 	AND #$01                        ;- - - - - - 0x00A887 05:A877: 29 01
 	TAY                             ;- - - - - - 0x00A889 05:A879: A8
-	LDA tbl_05_A8A5,Y               ;- - - - - - 0x00A88A 05:A87A: B9 A5 A8
+	LDA SpawnObj6ATbl_A8A5,Y        ;- - - - - - 0x00A88A 05:A87A: B9 A5 A8
 	LDY ptr_0E+1                    ;- - - - - - 0x00A88D 05:A87D: A4 0F
 	JSR SetAnimY                    ;- - - - - - 0x00A88F 05:A87F: 20 A0 F2
 	LDA #$6A                        ;- - - - - - 0x00A892 05:A882: A9 6A
@@ -356,7 +356,7 @@ SpawnObj6A:
 	.byte $A9                       ;- - - - - - 0x00A8AA 05:A89A:
 	.byte $2F                       ;- D 1 - - - 0x00A8AB 05:A89B:
 	.byte $99,$40,$04,$A5,$AD,$99,$00,$05,$60;- - - - - - 0x00A8AC 05:A89C:
-tbl_05_A8A5:
+SpawnObj6ATbl_A8A5:
 	.byte $40,$5E,$40               ;- - - - - - 0x00A8B5 05:A8A5:
 loc_05_A8A8:
 	LDA objActive,X                 ;C - - - - - 0x00A8B8 05:A8A8: BD 00 03
@@ -451,7 +451,7 @@ loc_05_A957:
 	CMP objStep,X                   ;C - - - - - 0x00A96D 05:A95D: DD 00 05
 	BCC loc_05_A9BB                 ;C - - - - - 0x00A970 05:A960: 90 59
 	LDY playerId                    ;C - - - - - 0x00A972 05:A962: A4 34
-	LDA tbl_05_A9E1,Y               ;C - - - - - 0x00A974 05:A964: B9 E1 A9
+	LDA SpawnObj6ATbl_A9E1,Y        ;C - - - - - 0x00A974 05:A964: B9 E1 A9
 	JSR SetAnimX                    ;C - - - - - 0x00A977 05:A967: 20 88 F2
 	LDA objKind,X                   ;C - - - - - 0x00A97A 05:A96A: BD 20 03
 	CMP #$67                        ;C - - - - - 0x00A97D 05:A96D: C9 67
@@ -515,7 +515,7 @@ loc_05_A9DD:
 	RTS                             ;C - - - - - 0x00A9ED 05:A9DD: 60
 loc_05_A9DE:
 	JMP ClearObject                 ;C - - - - - 0x00A9EE 05:A9DE: 4C BE F2
-tbl_05_A9E1:
+SpawnObj6ATbl_A9E1:
 	.byte $40                       ;- - - - - - 0x00A9F1 05:A9E1:
 	.byte $5E,$5D                   ;- D 1 - - - 0x00A9F2 05:A9E2:
 loc_05_A9E4:
@@ -548,9 +548,9 @@ loc_05_AA17:
 loc_05_AA18:
 	LDY playerId                    ;C - - - - - 0x00AA28 05:AA18: A4 34
 	LDA objAnim                     ;C - - - - - 0x00AA2A 05:AA1A: AD 80 05
-	CMP tbl_05_AA7C,Y               ;C - - - - - 0x00AA2D 05:AA1D: D9 7C AA
+	CMP SpawnObj6ATbl_AA7C,Y        ;C - - - - - 0x00AA2D 05:AA1D: D9 7C AA
 	BEQ loc_05_AA28                 ;C - - - - - 0x00AA30 05:AA20: F0 06
-	CMP tbl_05_AA7F,Y               ;c - - - - - 0x00AA32 05:AA22: D9 7F AA
+	CMP SpawnObj6ATbl_AA7F,Y        ;c - - - - - 0x00AA32 05:AA22: D9 7F AA
 	BEQ loc_05_AA28                 ;c - - - - - 0x00AA35 05:AA25: F0 01
 	RTS                             ;c - - - - - 0x00AA37 05:AA27: 60
 loc_05_AA28:
@@ -561,15 +561,15 @@ loc_05_AA28:
 	CPY #$04                        ;C - - - - - 0x00AA41 05:AA31: C0 04
 	BNE loc_05_AA3C                 ;C - - - - - 0x00AA43 05:AA33: D0 07
 	LDY stageSection                ;C - - - - - 0x00AA45 05:AA35: A4 60
-	LDA tbl_05_AA64,Y               ;C - - - - - 0x00AA47 05:AA37: B9 64 AA
+	LDA SpawnObj6ATbl_AA64,Y        ;C - - - - - 0x00AA47 05:AA37: B9 64 AA
 	BNE loc_05_AA3F                 ;C - - - - - 0x00AA4A 05:AA3A: D0 03
 loc_05_AA3C:
-	LDA tbl_05_AA60,Y               ;C - - - - - 0x00AA4C 05:AA3C: B9 60 AA
+	LDA SpawnObj6ATbl_AA60,Y        ;C - - - - - 0x00AA4C 05:AA3C: B9 60 AA
 loc_05_AA3F:
 	CLC                             ;C - - - - - 0x00AA4F 05:AA3F: 18
 	ADC playerId                    ;C - - - - - 0x00AA50 05:AA40: 65 34
 	TAY                             ;C - - - - - 0x00AA52 05:AA42: A8
-	LDA tbl_05_AA67,Y               ;C - - - - - 0x00AA53 05:AA43: B9 67 AA
+	LDA SpawnObj6ATbl_AA67,Y        ;C - - - - - 0x00AA53 05:AA43: B9 67 AA
 	STA gameOverFlag                ;C - - - - - 0x00AA56 05:AA46: 85 62
 	INC objActive,X                 ;C - - - - - 0x00AA58 05:AA48: FE 00 03
 loc_05_AA4B:
@@ -583,16 +583,16 @@ loc_05_AA4B:
 	JSR ClearTimerA4                ;C - - - - - 0x00AA69 05:AA59: 20 36 F4
 	JSR ClearObject                 ;C - - - - - 0x00AA6C 05:AA5C: 20 BE F2
 	RTS                             ;C - - - - - 0x00AA6F 05:AA5F: 60
-tbl_05_AA60:
+SpawnObj6ATbl_AA60:
 	.byte $00,$03,$06,$09           ;- D 1 - - - 0x00AA70 05:AA60:
-tbl_05_AA64:
+SpawnObj6ATbl_AA64:
 	.byte $0C,$0F,$12               ;- D 1 - - - 0x00AA74 05:AA64:
-tbl_05_AA67:
+SpawnObj6ATbl_AA67:
 	.byte $01,$01,$01,$14,$14,$14,$26,$26,$26,$33,$33,$33,$4B,$4B,$4B,$4D;- D 1 - - - 0x00AA77 05:AA67:
 	.byte $4D,$4D,$3D,$3F,$40       ;- D 1 - - - 0x00AA87 05:AA77:
-tbl_05_AA7C:
+SpawnObj6ATbl_AA7C:
 	.byte $01,$02,$03               ;- D 1 - - - 0x00AA8C 05:AA7C:
-tbl_05_AA7F:
+SpawnObj6ATbl_AA7F:
 	.byte $42,$02,$44               ;- - - - - - 0x00AA8F 05:AA7F:
 loc_05_AA82:
 	LDA objActive,X                 ;C - - - - - 0x00AA92 05:AA82: BD 00 03
@@ -867,14 +867,14 @@ SpawnObj63:
 	LDA #$C4                        ;C - - - - - 0x00ACDA 05:ACCA: A9 C4
 	STA objY,Y                      ;C - - - - - 0x00ACDC 05:ACCC: 99 C0 03
 	LDX ptr_00                      ;C - - - - - 0x00ACDF 05:ACCF: A6 00
-	LDA tbl_05_ACDF,X               ;C - - - - - 0x00ACE1 05:ACD1: BD DF AC
+	LDA SpawnObj63Tbl_ACDF,X        ;C - - - - - 0x00ACE1 05:ACD1: BD DF AC
 	STA objX,Y                      ;C - - - - - 0x00ACE4 05:ACD4: 99 60 03
 	DEX                             ;C - - - - - 0x00ACE7 05:ACD7: CA
 	STX ptr_00                      ;C - - - - - 0x00ACE8 05:ACD8: 86 00
 	LDA ptr_00                      ;C - - - - - 0x00ACEA 05:ACDA: A5 00
 	BPL SpawnObj63                  ;C - - - - - 0x00ACEC 05:ACDC: 10 9F
 	RTS                             ;C - - - - - 0x00ACEE 05:ACDE: 60
-tbl_05_ACDF:
+SpawnObj63Tbl_ACDF:
 	.byte $F7,$17                   ;- D 1 - - - 0x00ACEF 05:ACDF:
 SpawnObj62:
 	JSR FindFreeEnemySlot           ;C - - - - - 0x00ACF1 05:ACE1: 20 1A F7

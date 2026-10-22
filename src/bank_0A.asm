@@ -45,7 +45,7 @@ frameLo_0A:
 	.lobytes frame_0A_8A51, frame_0A_8A6B, frame_0A_8A85, frame_0A_8A8B, frame_0A_8A8F, frame_0A_8A95, frame_0A_8A9B, frame_0A_8A9F;- D 0 - - - 0x014140 0A:8130:
 	.lobytes frame_0A_8AA3, frame_0A_8AA9, frame_0A_8AAF, frame_0A_8AB3, frame_0A_8ACF, frame_0A_8AE9, frame_0A_8B09, frame_0A_8B23;- - - - - - 0x014148 0A:8138:
 	.lobytes frame_0A_8B3F, frame_0A_8B65, frame_0A_8B87, frame_0A_8B87, frame_0A_8B87, frame_0A_8B87, frame_0A_8B87, frame_0A_8BA5;- D 0 - - - 0x014150 0A:8140:
-	.lobytes frame_0A_8BC1, ofs_0A_8BDF, frame_0A_8BFD, ofs_0A_8C19, frame_0A_8C37, frame_0A_8C53, frame_0A_8C6D, frame_0A_8C8B;- - - - - - 0x014158 0A:8148:
+	.lobytes frame_0A_8BC1, frameLo_0A_49, frame_0A_8BFD, frameLo_0A_4B, frame_0A_8C37, frame_0A_8C53, frame_0A_8C6D, frame_0A_8C8B;- - - - - - 0x014158 0A:8148:
 	.lobytes frame_0A_8CA9, frame_0A_8CC5, frame_0A_8CCB, frame_0A_8CED, frame_0A_8D0D, frame_0A_8D2B, frame_0A_8D4D, frame_0A_8D71;- D 0 - - - 0x014160 0A:8150:
 	.lobytes frame_0A_8D9B, frame_0A_8DC7, frame_0A_8DE7, frame_0A_8E03, frame_0A_8E23, frame_0A_8E49, frame_0A_8E6B, frame_0A_8E91;- D 0 - - - 0x014168 0A:8158:
 	.lobytes frame_0A_8EAD, frame_0A_8ECF, frame_0A_8EF3, frame_0A_8F19, frame_0A_8F3F, frame_0A_8F5D, frame_0A_8F67, frame_0A_8F71;- D 0 - - - 0x014170 0A:8160:
@@ -78,7 +78,7 @@ frameHi_0A:
 	.hibytes frame_0A_8A51, frame_0A_8A6B, frame_0A_8A85, frame_0A_8A8B, frame_0A_8A8F, frame_0A_8A95, frame_0A_8A9B, frame_0A_8A9F;- D 0 - - - 0x014240 0A:8230:
 	.hibytes frame_0A_8AA3, frame_0A_8AA9, frame_0A_8AAF, frame_0A_8AB3, frame_0A_8ACF, frame_0A_8AE9, frame_0A_8B09, frame_0A_8B23;- - - - - - 0x014248 0A:8238:
 	.hibytes frame_0A_8B3F, frame_0A_8B65, frame_0A_8B87, frame_0A_8B87, frame_0A_8B87, frame_0A_8B87, frame_0A_8B87, frame_0A_8BA5;- D 0 - - - 0x014250 0A:8240:
-	.hibytes frame_0A_8BC1, ofs_0A_8BDF, frame_0A_8BFD, ofs_0A_8C19, frame_0A_8C37, frame_0A_8C53, frame_0A_8C6D, frame_0A_8C8B;- - - - - - 0x014258 0A:8248:
+	.hibytes frame_0A_8BC1, frameLo_0A_49, frame_0A_8BFD, frameLo_0A_4B, frame_0A_8C37, frame_0A_8C53, frame_0A_8C6D, frame_0A_8C8B;- - - - - - 0x014258 0A:8248:
 	.hibytes frame_0A_8CA9, frame_0A_8CC5, frame_0A_8CCB, frame_0A_8CED, frame_0A_8D0D, frame_0A_8D2B, frame_0A_8D4D, frame_0A_8D71;- D 0 - - - 0x014260 0A:8250:
 	.hibytes frame_0A_8D9B, frame_0A_8DC7, frame_0A_8DE7, frame_0A_8E03, frame_0A_8E23, frame_0A_8E49, frame_0A_8E6B, frame_0A_8E91;- D 0 - - - 0x014268 0A:8258:
 	.hibytes frame_0A_8EAD, frame_0A_8ECF, frame_0A_8EF3, frame_0A_8F19, frame_0A_8F3F, frame_0A_8F5D, frame_0A_8F67, frame_0A_8F71;- D 0 - - - 0x014270 0A:8260:
@@ -576,7 +576,7 @@ frame_0A_8BA5:
 frame_0A_8BC1:
 	.byte $0D,$7C,$1B,$01,$1C,$01,$1D,$00,$1E,$00,$1F,$00,$20,$00,$21,$00;- - - - - - 0x014BD1 0A:8BC1:
 	.byte $22,$00,$23,$00,$24,$01,$25,$01,$26,$01,$27,$01,$28,$01;- - - - - - 0x014BE1 0A:8BD1:
-ofs_0A_8BDF:
+frameLo_0A_49:
 	ORA a:irqNametable              ;c - - - - - 0x014BEF 0A:8BDF: 0D 7E 00
 	RTI                             ;c - - - - - 0x014BF2 0A:8BE2: 40
 	.byte $01,$40,$02,$40,$03,$40,$04,$40,$05,$40,$06,$40,$07,$40,$08,$40;- - - - - - 0x014BF3 0A:8BE3:
@@ -584,7 +584,7 @@ ofs_0A_8BDF:
 frame_0A_8BFD:
 	.byte $0C,$80,$0E,$40,$0F,$40,$10,$40,$11,$40,$12,$40,$13,$40,$14,$40;- - - - - - 0x014C0D 0A:8BFD:
 	.byte $15,$40,$16,$41,$17,$41,$18,$41,$19,$41,$1A,$41;- - - - - - 0x014C1D 0A:8C0D:
-ofs_0A_8C19:
+frameLo_0A_4B:
 	ORA $1B82                       ;c - - - - - 0x014C29 0A:8C19: 0D 82 1B
 	EOR (ptr_1C,X)                  ;c - - - - - 0x014C2C 0A:8C1C: 41 1C
 	EOR (ptr_1C+1,X)                ;c - - - - - 0x014C2E 0A:8C1E: 41 1D
@@ -1076,7 +1076,7 @@ QueueScreenText:
 	LDX vramQueueEnd                ;C - - - - - 0x015C10 0A:9C00: A6 65
 	LDY #$00                        ;C - - - - - 0x015C12 0A:9C02: A0 00
 loc_0A_9C04:
-	LDA tbl_0A_9C20,Y               ;C - - - - - 0x015C14 0A:9C04: B9 20 9C
+	LDA QueueScreenTextTbl_9C20,Y   ;C - - - - - 0x015C14 0A:9C04: B9 20 9C
 	CMP #$FF                        ;C - - - - - 0x015C17 0A:9C07: C9 FF
 	BEQ loc_0A_9C12                 ;C - - - - - 0x015C19 0A:9C09: F0 07
 	STA vramQueue,X                 ;C - - - - - 0x015C1B 0A:9C0B: 9D 80 07
@@ -1091,7 +1091,7 @@ loc_0A_9C12:
 	LDA #$FF                        ;C - - - - - 0x015C2B 0A:9C1B: A9 FF
 	STA vramQueueFlag               ;C - - - - - 0x015C2D 0A:9C1D: 85 64
 	RTS                             ;C - - - - - 0x015C2F 0A:9C1F: 60
-tbl_0A_9C20:
+QueueScreenTextTbl_9C20:
 	.byte $07,$20,$43,$0E,$0F,$0C,$0D,$1B,$1C,$19,$05,$20,$63,$1B,$1D,$1B;- D 0 - - - 0x015C30 0A:9C20:
 	.byte $1E,$0D,$02,$20,$58,$1C,$0B,$04,$20,$78,$0E,$0F,$00,$1F,$05,$23;- D 0 - - - 0x015C40 0A:9C30:
 	.byte $43,$68,$64,$70,$64,$68,$03,$23,$52,$64,$71,$6B,$01,$23,$59,$7B;- D 0 - - - 0x015C50 0A:9C40:
