@@ -814,7 +814,7 @@ loc_0E_C5CE:
 	JSR PrepareScreenDraw           ;C - - - - - 0x01C5DE 0E:C5CE: 20 88 C8
 	LDA #$00                        ;C - - - - - 0x01C5E1 0E:C5D1: A9 00
 	STA ram_00B8                    ;C - - - - - 0x01C5E3 0E:C5D3: 85 B8
-	JSR bankedEntry9A00             ;C - - - - - 0x01C5E5 0E:C5D5: 20 00 9A  ; call into the switchable $8000 bank (bank depends on stage)
+	JSR RunTextScript_00            ;C - - - - - bank=00 0x01C5E5 0E:C5D5: 20 00 9A  ; call into the switchable $8000 bank (bank depends on stage)
 	LDA padHeld                     ;C D 2 - I - 0x01C5E8 0E:C5D8: A5 16
 	BNE loc_0E_C657                 ;C - - - - - 0x01C5EA 0E:C5DA: D0 7B
 	LDA #$07                        ;C - - - - - 0x01C5EC 0E:C5DC: A9 07
@@ -3999,9 +3999,9 @@ loc_0E_DE8B:
 	STA ram_009B                    ;C - - - - - 0x01DEBF 0E:DEAF: 85 9B
 	JSR ClearScreenSetBank04        ;C - - - - - 0x01DEC1 0E:DEB1: 20 A6 C8
 	LDX #$06                        ;C - - - - - 0x01DEC4 0E:DEB4: A2 06
-	JSR animPtrLo                   ;C - - - - - 0x01DEC6 0E:DEB6: 20 00 80
+	JSR QueueVramScript             ;C - - - - - bank=04 0x01DEC6 0E:DEB6: 20 00 80
 	JSR ScreenOn                    ;C - - - - - 0x01DEC9 0E:DEB9: 20 6F C2
-	JSR bankedEntry9000             ;C - - - - - 0x01DECC 0E:DEBC: 20 00 90  ; call into the switchable $8000 bank (bank depends on stage)
+	JSR ScreenInit9000              ;C - - - - - bank=04 0x01DECC 0E:DEBC: 20 00 90  ; call into the switchable $8000 bank (bank depends on stage)
 	LDX #$00                        ;C - - - - - 0x01DECF 0E:DEBF: A2 00
 	STX prgBank8000                 ;C - - - - - 0x01DED1 0E:DEC1: 86 F4
 	INX                             ;C - - - - - 0x01DED3 0E:DEC3: E8
@@ -4020,9 +4020,9 @@ loc_0E_DE8B:
 	JSR ClearObjects                ;C - - - - - 0x01DEF1 0E:DEE1: 20 34 C3
 	JSR ClearScreenSetBank04        ;C - - - - - 0x01DEF4 0E:DEE4: 20 A6 C8
 	LDX #$0D                        ;C - - - - - 0x01DEF7 0E:DEE7: A2 0D
-	JSR GameActionDispatch00        ;C - - - - - bank=00 0x01DEF9 0E:DEE9: 20 00 80
+	JSR QueueVramScript             ;C - - - - - bank=04 0x01DEF9 0E:DEE9: 20 00 80
 	JSR ScreenOn                    ;C - - - - - 0x01DEFC 0E:DEEC: 20 6F C2
-	JSR SetAction04Grab             ;C - - - - - bank=00 0x01DEFF 0E:DEEF: 20 00 8C
+	JSR ScreenInit8C00              ;C - - - - - bank=04 0x01DEFF 0E:DEEF: 20 00 8C
 	LDX #$00                        ;C - - - - - 0x01DF02 0E:DEF2: A2 00
 	STX prgBank8000                 ;C - - - - - 0x01DF04 0E:DEF4: 86 F4
 	INX                             ;C - - - - - 0x01DF06 0E:DEF6: E8
@@ -4043,7 +4043,7 @@ loc_0E_DE8B:
 	JSR ClearObjects                ;C - - - - - 0x01DF29 0E:DF19: 20 34 C3
 	JSR ClearScreenSetBank04        ;C - - - - - 0x01DF2C 0E:DF1C: 20 A6 C8
 	JSR ScreenOn                    ;C - - - - - 0x01DF2F 0E:DF1F: 20 6F C2
-	JSR SetAnimEnterAction0E+1      ;C - - - - - bank=00 0x01DF32 0E:DF22: 20 00 96
+	JSR ScreenInit9600              ;C - - - - - bank=04 0x01DF32 0E:DF22: 20 00 96
 	LDX #$08                        ;C - - - - - 0x01DF35 0E:DF25: A2 08
 	STX prgBank8000                 ;C - - - - - 0x01DF37 0E:DF27: 86 F4
 	INX                             ;C - - - - - 0x01DF39 0E:DF29: E8

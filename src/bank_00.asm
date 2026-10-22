@@ -1477,7 +1477,6 @@ loc_00_8BF0:
 	LDA objKind,Y                   ;C - - - - - 0x000C09 00:8BF9: B9 20 03
 	CMP #$05                        ;C - - - - - 0x000C0C 00:8BFC: C9 05
 	BEQ loc_00_8B98                 ;C - - - - - 0x000C0E 00:8BFE: F0 98
-SetAction04Grab:
 	CMP #$06                        ;C - - - - - 0x000C10 00:8C00: C9 06
 	BEQ loc_00_8B98                 ;C - - - - - 0x000C12 00:8C02: F0 94
 	CMP #$07                        ;C - - - - - 0x000C14 00:8C04: C9 07
@@ -2706,7 +2705,6 @@ loc_00_95F0:
 loc_00_95FA:
 	LDY playerId                    ;C - - - - - 0x00160A 00:95FA: A4 34
 	LDA tbl_0F_E219,Y               ;C - - - - - 0x00160C 00:95FC: B9 19 E2
-SetAnimEnterAction0E:
 	JSR SetPlayerAnim               ;C - - - - - 0x00160F 00:95FF: 20 94 F2
 	LDA tbl_0F_E22E,Y               ;C - - - - - 0x001612 00:9602: B9 2E E2
 	JSR SetChrBank2                 ;C - - - - - 0x001615 00:9605: 20 40 F4

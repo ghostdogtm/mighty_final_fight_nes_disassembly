@@ -305,10 +305,8 @@ table 08:85E6-8789 4 enemy stats: life, spriteAir, spriteDown, 0
 
 ; ---- named former sub_ routines (switchable banks) ----
 00:8000 GameActionDispatch00    ; jump table by gameAction (banks 0/1 half)
-00:8C00 SetAction04Grab
 00:9297 SpawnObj6B
 00:93AF InitSlot1Follower67
-00:95FF SetAnimEnterAction0E
 00:97C8 InitPaletteAnimSlots
 00:987A QueueVram128            ; copies 128 bytes from a table to vramQueue
 00:9A00 RunTextScript_00        ; types text from the script into the VRAM queue
@@ -430,3 +428,6 @@ table 08:85E6-8789 4 enemy stats: life, spriteAir, spriteDown, 0
 0D:AB29 EnemyGrabbedUpdate
 0D:AC34 EnemyStartVelocity
 0D:ACB3 EnemyLookupParam
+04:8C00 ScreenInit8C00
+04:9600 ScreenInit9600
+04:9000 ScreenInit9000

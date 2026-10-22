@@ -36,6 +36,7 @@ HW_REGS = {0x2000: 'PPUCTRL', 0x2001: 'PPUMASK', 0x2002: 'PPUSTATUS', 0x2003: 'O
            0x4010: 'DMC_FREQ', 0x4011: 'DMC_RAW', 0x4012: 'DMC_START', 0x4013: 'DMC_LEN',
            0x4014: 'OAMDMA', 0x4015: 'SNDCHN', 0x4016: 'JOY1', 0x4017: 'JOY2'}
 BANK_REG_LO, BANK_REG_HI = 0xF4, 0xF5      # RAM shadows of MMC3 R6 ($8000 window) and R7 ($A000 window)
+BANK_SETTERS = {0xC8A6: (4, 5), 0xC888: (0, 1)}   # 0E routines that end with these banks mapped
 PAIR_OF = {0: 1, 1: 0, 4: 5, 5: 4, 6: 7, 7: 6, 8: 9, 9: 8, 12: 13, 13: 12}   # banks always mapped together (F5 = F4+1)
 RESERVED = {o[0].lower() for o in OPS.values()} | {'a', 'x', 'y', 's', 'z'}
 
@@ -961,6 +962,9 @@ class Disasm:
                 elif mn == 'STA' and v in (BANK_REG_LO, BANK_REG_HI):
                     if v == BANK_REG_LO: f4 = a
                     else: f5 = a
+                elif mn == 'JSR' and v in BANK_SETTERS:
+                    f4, f5 = BANK_SETTERS[v]
+                    x = f5
                 elif mn in ('RTS', 'RTI', 'JMP'):
                     f4 = f5 = x = a = None
                 elif mode == 'rel' or mn in ('PLA', 'ADC', 'SBC', 'AND', 'ORA', 'EOR', 'ASL', 'LSR', 'ROL', 'ROR',
