@@ -550,7 +550,6 @@ loc_0F_E3A3:
 	BEQ loc_0F_E3F7                 ;C - - - - - 0x01E3D7 0F:E3C7: F0 2E
 	CMP #$25                        ;C - - - - - 0x01E3D9 0F:E3C9: C9 25
 	BEQ loc_0F_E3F7                 ;C - - - - - 0x01E3DB 0F:E3CB: F0 2A
-ofs_0F_E3CD:
 	CMP #$24                        ;C - - - - - 0x01E3DD 0F:E3CD: C9 24
 	BEQ loc_0F_E3F7                 ;C - - - - - 0x01E3DF 0F:E3CF: F0 26
 	CMP #$15                        ;C - - - - - 0x01E3E1 0F:E3D1: C9 15
@@ -3135,9 +3134,7 @@ tbl_0F_F6CA:
 	.byte $0C,$10                   ;- D 3 - - - 0x01F6E9 0F:F6D9:
 	.byte $08,$08,$00               ;- - - - - - 0x01F6EB 0F:F6DB:
 	.byte $08                       ;- D 3 - - - 0x01F6EE 0F:F6DE:
-	.byte $10,$04,$08               ;- - - - - - 0x01F6EF 0F:F6DF:
-tbl_0F_F6E2:
-	.byte $00,$00,$00,$00,$00,$00   ;- - - - - - 0x01F6F2 0F:F6E2:
+	.byte $10,$04,$08,$00,$00,$00,$00,$00,$00;- - - - - - 0x01F6EF 0F:F6DF:
 	.byte $0A,$0D                   ;- D 3 - - - 0x01F6F8 0F:F6E8:
 tbl_0F_F6EA:
 	.byte $1D,$17,$1A,$1D,$1D,$20,$20,$04,$12,$18,$14,$25,$23,$21,$25,$14;- D 3 - - - 0x01F6FA 0F:F6EA:

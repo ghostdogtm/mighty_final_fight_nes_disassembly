@@ -61,6 +61,7 @@ python tools/disasm.py --build      # згенерувати src/, зібрат�
 | `docs/stage_maps.md` | формат карт стадій |
 | `docs/enemy_ai.md` | диспетчер ШІ ворогів за objKind, заглушки банків стадій, поля об'єкта |
 | `docs/enemy_data.md` | розстановка і типи ворогів |
+| `docs/animation_format.md` | формат анімацій, кадрів і зсувів спрайтів |
 | `docs/unknown_data.md` | класифікація байтів, яких не торкнувся CDL (`tools/unknown_report.py`) |
 | `tools/reloc_test.py` | тест переміщуваності: збірка зі зсувом усіх змінних банків на $100 має змінити лише байти адрес |
 | `tools/chr_tool.py` | CHR ↔ `.chr` по 1 КБ ↔ PNG |

@@ -474,3 +474,23 @@ table 08:85E6-8789 4 enemy stats: life, spriteAir, spriteDown, 0
 0C:9F05 EnemyAI_CdB_V2          ; kinds 47, 4A
 0C:9F12 EnemyAI_CdB_V4          ; kinds 48, 4B
 0C:9F19 EnemyAI_CdCommon
+
+; ---- animation data (banks 02 and 0A are the $8000 side, see docs/animation_format.md)
+split 02:8000 8080 128 anim
+split 0A:8000 8080 128 anim
+split 02:8100 8200 256 frame
+split 0A:8100 8200 256 frame
+split 03:B100 B200 256 ofsset
+split 0B:B100 B200 256 ofsset
+02:8000 animLo_02               ; animation script pointers (128), low bytes; hi at 02:8080
+02:8080 animHi_02
+02:8100 frameLo_02              ; frame pointers (256), low bytes; hi at 02:8200
+02:8200 frameHi_02
+0A:8000 animLo_0A
+0A:8080 animHi_0A
+0A:8100 frameLo_0A
+0A:8200 frameHi_0A
+03:B100 ofsSetLo_03             ; sprite offset set pointers (256), low bytes; hi at 03:B200
+03:B200 ofsSetHi_03
+0B:B100 ofsSetLo_0B
+0B:B200 ofsSetHi_0B

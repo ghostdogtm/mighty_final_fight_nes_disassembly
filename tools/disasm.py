@@ -111,6 +111,10 @@ def load_rom_labels(path):
                 notes[(b, parse_addr(lo) - base_of(b), 't')] = (int(parts[2]), parse_addr(hi) - base_of(b),
                                                                 ' '.join(parts[3:]) or comment.strip())
                 force.append(('data', b, parse_addr(lo) - base_of(b), parse_addr(hi) - base_of(b)))
+            elif parts[0] == 'split':              # split BB:LO HI N  -> lo/hi pointer table of N entries, targets in bank BB
+                bs, ad = parts[1].split(':')
+                b = int(bs, 16)
+                notes[(b, parse_addr(ad) - base_of(b), 'p')] = (parse_addr(parts[2]), int(parts[3]), parts[4] if len(parts) > 4 else None)
             elif parts[0] == 'bank':               # bank BB:AAAA TT  -> raw $8000-$BFFF operand at BB:AAAA refers to bank TT
                 bs, ad = parts[1].split(':')
                 notes[(int(bs, 16), parse_addr(ad) - base_of(int(bs, 16)), 'b')] = int(parts[2], 16)
@@ -159,6 +163,7 @@ class Disasm:
         self.locked = set()         # bytes in forced 'data' ranges: never turned into word tables
         self.cur_site = None
         self.immref = {}            # (bank, idx) of an immediate -> ('<'|'>', target bank, target idx)
+        self.split_prefix = {}      # (bank, idx) -> label prefix given by the 'split' directive
         self.split = {}             # (bank, idx) -> ('lo'|'hi', target bank, target idx, adj) for split address tables
         self.hints = {}             # (site bank, idx) -> target bank for raw $8000-$BFFF operands
         self.hint_why = {}
@@ -450,6 +455,16 @@ class Disasm:
                     break
         return found
 
+    def apply_user_splits(self):
+        """Forced lo/hi tables from the 'split' directive (targets are looked up in the table's own bank)."""
+        n = 0
+        for key, v in self.user_notes.items():
+            if len(key) == 3 and key[2] == 'p':
+                b, idx = key[0], key[1]
+                lo = idx + (0x8000 if b % 2 == 0 else 0xA000)
+                n += self.try_split(b, lo, v[0], v[1], v[2])
+        return n
+
     def detect_imm_pairs(self):
         """LDx #lo / STx zp / LDx #hi / STx zp+1 where lo|hi<<8 is the address of known code."""
         ST = ('STA', 'STX', 'STY')
@@ -474,7 +489,7 @@ class Disasm:
                             self.immref[(b, i2[0])] = ('>', r[0], r[1])
                         break
 
-    def try_split(self, sb, lo, hi, cnt):
+    def try_split(self, sb, lo, hi, cnt, prefix=None):
         rl, rh = self.resolve(sb, lo), self.resolve(sb, hi)
         if not rl or not rh or rl[0] != rh[0] or (rl[0], rl[1]) in self.split:
             return 0
@@ -502,6 +517,8 @@ class Disasm:
                     self.split[(tb, il + q)] = ('lo', r[0], r[1], adj)
                     self.split[(tb, ih + q)] = ('hi', r[0], r[1], adj)
                     k[il + q] = k[ih + q] = 3
+                    if prefix and r[0] is not None:
+                        self.split_prefix[(r[0], r[1])] = prefix
                     if r[0] is not None and self.kind[r[0]][r[1]] == 0:
                         self.table_targets.add((r[0], r[1]))
                 return 1
@@ -585,6 +602,8 @@ class Disasm:
                 p = 'dat'
             if is_code and p in ('tbl', 'dat'):
                 p = 'loc'
+            if p == 'tbl' and (b, i) in self.split_prefix:
+                p = self.split_prefix[(b, i)]
             self.labels[(b, i)] = '%s_%02X_%04X' % (p, b, base_of(b) + i)
         for key, (name, _) in self.rom_user.items():
             self.labels[key] = name
@@ -695,6 +714,8 @@ class Disasm:
                     self.texts.append((key[0], key[1], text[0]))
                 elif len(key) == 3 and key[2] == 't':
                     self.tables.append((key[0], key[1], text[1], text[0], text[2]))
+                elif len(key) == 3 and key[2] == 'p':
+                    pass
                 elif len(key) == 3 and key[2] == 'b':
                     self.user_bank[(key[0], key[1])] = text
                 elif len(key) == 3:
@@ -1134,7 +1155,7 @@ def main():
     if not a.no_trace:
         for rnd in range(8):
             D.trace()
-            n_split = D.detect_split_tables()
+            n_split = D.detect_split_tables() + D.apply_user_splits()
             if not (n_split + D.detect_tables()):
                 break
         n_adopt = D.adopt_code_like()

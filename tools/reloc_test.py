@@ -44,7 +44,7 @@ def main():
     D.classify_cdl(); D.apply_force()
     for _ in range(8):
         D.trace()
-        if not (D.detect_split_tables() + D.detect_tables()):
+        if not (D.detect_split_tables() + D.apply_user_splits() + D.detect_tables()):
             break
     if D.adopt_code_like():
         D.trace()

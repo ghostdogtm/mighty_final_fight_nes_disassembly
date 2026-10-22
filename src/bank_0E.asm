@@ -1627,7 +1627,6 @@ loc_0E_CCA2:
 	LDY playerId                    ;C - - - - - 0x01CCB6 0E:CCA6: A4 34
 	LDA tbl_0F_E1EF,Y               ;C - - - - - 0x01CCB8 0E:CCA8: B9 EF E1
 	JSR SetPlayerAnim               ;C - - - - - 0x01CCBB 0E:CCAB: 20 94 F2
-ofs_0E_CCAE:
 	LDA tbl_0F_E237,Y               ;C - - - - - 0x01CCBE 0E:CCAE: B9 37 E2
 	JSR SetChrBank2                 ;C - - - - - 0x01CCC1 0E:CCB1: 20 40 F4
 ; RTS, used for every unused gameAction value
