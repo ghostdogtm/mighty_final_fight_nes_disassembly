@@ -2,7 +2,7 @@
 ; 0x01E010-0x02000F  CPU $E000-$FFFF
 
 	.byte $10                       ;C D 3 - - - 0x01E010 0F:E000: operand of the instruction at 0E:DFFF
-	JSR sub_0F_E521                 ;C D 3 - - - 0x01E011 0F:E001: 20 21 E5
+	JSR StageScrollUpdate           ;C D 3 - - - 0x01E011 0F:E001: 20 21 E5
 	JSR WaitFrame                   ;C - - - - - 0x01E014 0F:E004: 20 31 FF
 	LDA ram_0029                    ;C - - - - - 0x01E017 0F:E007: A5 29
 	.byte $F0, $F2                  ;C - - - - - BEQ loc_0E_DFFD 0x01E019 0F:E009: (branch to another bank, kept as bytes)
@@ -11,7 +11,7 @@
 	INX                             ;C - - - - - 0x01E01F 0F:E00F: E8
 	STX prgBankA000                 ;C - - - - - 0x01E020 0F:E010: 86 F5
 	JSR SetPrgBanks                 ;C - - - - - 0x01E022 0F:E012: 20 4D FF
-	JSR sub_0A_9C00                 ;C - - - - - bank=0A 0x01E025 0F:E015: 20 00 9C
+	JSR QueueScreenText             ;C - - - - - bank=0A 0x01E025 0F:E015: 20 00 9C
 	LDY stage                       ;C - - - - - 0x01E028 0F:E018: A4 61
 	LDA stageBankTable,Y            ;C - - - - - 0x01E02A 0F:E01A: B9 F8 C1
 	STA prgBankA000                 ;C - - - - - 0x01E02D 0F:E01D: 85 F5
@@ -42,8 +42,8 @@ loc_0F_E03B:
 	LDA #$00                        ;C - - - - - 0x01E05E 0F:E04E: A9 00
 	STA palUpdateFlag               ;C D 3 - I - 0x01E060 0F:E050: 85 18
 	JSR WaitFrame                   ;C - - - - - 0x01E062 0F:E052: 20 31 FF
-	JSR sub_0E_C362                 ;C - - - - - 0x01E065 0F:E055: 20 62 C3
-	JSR sub_0E_C334                 ;C D 3 - I - 0x01E068 0F:E058: 20 34 C3
+	JSR FadeOutPaletteFast          ;C - - - - - 0x01E065 0F:E055: 20 62 C3
+	JSR ClearObjects                ;C D 3 - I - 0x01E068 0F:E058: 20 34 C3
 	LDX #$00                        ;C - - - - - 0x01E06B 0F:E05B: A2 00
 	LDA #$D0                        ;C - - - - - 0x01E06D 0F:E05D: A9 D0
 	STA objFlags                    ;C - - - - - 0x01E06F 0F:E05F: 8D 60 05
@@ -54,17 +54,17 @@ loc_0F_E03B:
 	STA objKind                     ;C - - - - - 0x01E07C 0F:E06C: 8D 20 03
 	LDA scrollXPage                 ;C - - - - - 0x01E07F 0F:E06F: A5 F9
 	STA objXPage                    ;C - - - - - 0x01E081 0F:E071: 8D 80 03
-	JSR sub_0F_F26E                 ;C - - - - - 0x01E084 0F:E074: 20 6E F2
-	JSR sub_0E_C8B4                 ;C - - - - - 0x01E087 0F:E077: 20 B4 C8
-	JSR sub_0F_E16B                 ;C - - - - - 0x01E08A 0F:E07A: 20 6B E1
+	JSR SetHopVelY                  ;C - - - - - 0x01E084 0F:E074: 20 6E F2
+	JSR LoadPlayerPalette           ;C - - - - - 0x01E087 0F:E077: 20 B4 C8
+	JSR SetPlayerStartPos           ;C - - - - - 0x01E08A 0F:E07A: 20 6B E1
 	LDX #$08                        ;C - - - - - 0x01E08D 0F:E07D: A2 08
 	STX prgBank8000                 ;C - - - - - 0x01E08F 0F:E07F: 86 F4
 	INX                             ;C - - - - - 0x01E091 0F:E081: E8
 	STX prgBankA000                 ;C - - - - - 0x01E092 0F:E082: 86 F5
 	JSR SetPrgBanks                 ;C - - - - - 0x01E094 0F:E084: 20 4D FF
 	JSR LoadSpawnLists              ;C - - - - - bank=08 0x01E097 0F:E087: 20 00 80
-	JSR sub_08_8038                 ;C - - - - - bank=08 0x01E09A 0F:E08A: 20 38 80
-	JSR sub_08_8080                 ;C - - - - - bank=08 0x01E09D 0F:E08D: 20 80 80
+	JSR FindFirstVisibleSpawn       ;C - - - - - bank=08 0x01E09A 0F:E08A: 20 38 80
+	JSR SpawnEnemiesInWindow        ;C - - - - - bank=08 0x01E09D 0F:E08D: 20 80 80
 	LDA stageSection                ;C D 3 - I - 0x01E0A0 0F:E090: A5 60
 	CMP #$02                        ;C - - - - - 0x01E0A2 0F:E092: C9 02
 	BNE loc_0F_E0A3                 ;C - - - - - 0x01E0A4 0F:E094: D0 0D
@@ -148,21 +148,24 @@ loc_0F_E11C:
 	STA gameAction                  ;C - - - - - 0x01E13A 0F:E12A: 85 30
 loc_0F_E12C:
 	JMP loc_0E_C8ED                 ;C - - - - - 0x01E13C 0F:E12C: 4C ED C8
-sub_0F_E12F:
+; ram_0098=$FF, ram_009B=0, CLI
+IrqEnableModeFF:
 	LDA #$FF                        ;C - - - - - 0x01E13F 0F:E12F: A9 FF
 	STA ram_0098                    ;C - - - - - 0x01E141 0F:E131: 85 98
 	CLI                             ;C - - - - - 0x01E143 0F:E133: 58
 	LDA #$00                        ;C - - - - - 0x01E144 0F:E134: A9 00
 	STA ram_009B                    ;C - - - - - 0x01E146 0F:E136: 85 9B
 	RTS                             ;C - - - - - 0x01E148 0F:E138: 60
-sub_0F_E139:
+; ram_009B=1, ram_0098=0, CLI
+IrqEnableMode01:
 	CLI                             ;C - - - - - 0x01E149 0F:E139: 58
 	LDA #$01                        ;C - - - - - 0x01E14A 0F:E13A: A9 01
 	STA ram_009B                    ;C - - - - - 0x01E14C 0F:E13C: 85 9B
 	LDA #$00                        ;C - - - - - 0x01E14E 0F:E13E: A9 00
 	STA ram_0098                    ;C - - - - - 0x01E150 0F:E140: 85 98
 	RTS                             ;C - - - - - 0x01E152 0F:E142: 60
-sub_0F_E143:
+; zero scroll/nametable, facing=1
+ResetScrollState:
 	LDA #$00                        ;C - - - - - 0x01E153 0F:E143: A9 00
 	STA scrollX                     ;C - - - - - 0x01E155 0F:E145: 85 FC
 	STA scrollY                     ;C - - - - - 0x01E157 0F:E147: 85 FA
@@ -184,7 +187,8 @@ tbl_0F_E161:
 	.byte $0C                       ;- D 3 - - - 0x01E175 0F:E165:
 tbl_0F_E166:
 	.byte $00,$01,$02,$03,$04       ;- D 3 - - - 0x01E176 0F:E166:
-sub_0F_E16B:
+; objY/objX from per-stage tables indexed by stageSection
+SetPlayerStartPos:
 	LDY stage                       ;C - - - - - 0x01E17B 0F:E16B: A4 61
 	LDA tbl_0F_E18F,Y               ;C - - - - - 0x01E17D 0F:E16D: B9 8F E1
 	STA ptr_04                      ;C - - - - - 0x01E180 0F:E170: 85 04
@@ -380,7 +384,8 @@ tbl_0F_E29D:
 	.byte $00,$14,$15               ;- D 3 - - - 0x01E2AD 0F:E29D: Cody, Guy, Haggar
 tbl_0F_E2A0:
 	.byte $00,$5B,$15               ;- D 3 - - - 0x01E2B0 0F:E2A0: Cody, Guy, Haggar
-sub_0F_E2A3:
+; scroll follows the player (skipped for several gameActions)
+UpdateHorizScroll:
 	LDA gameAction                  ;C - - - - - 0x01E2B3 0F:E2A3: A5 30
 	CMP #$06                        ;C - - - - - 0x01E2B5 0F:E2A5: C9 06
 	BEQ loc_0F_E2BF                 ;C - - - - - 0x01E2B7 0F:E2A7: F0 16
@@ -737,11 +742,12 @@ loc_0F_E515:
 	LSR A                           ;C - - - - - 0x01E52A 0F:E51A: 4A
 	LSR A                           ;C - - - - - 0x01E52B 0F:E51B: 4A
 	LSR A                           ;C - - - - - 0x01E52C 0F:E51C: 4A
-	BNE sub_0F_E521                 ;C - - - - - 0x01E52D 0F:E51D: D0 02
+	BNE StageScrollUpdate           ;C - - - - - 0x01E52D 0F:E51D: D0 02
 loc_0F_E51F:
 	SEC                             ;C - - - - - 0x01E52F 0F:E51F: 38
 	RTS                             ;C - - - - - 0x01E530 0F:E520: 60
-sub_0F_E521:
+; steps screen/column counters, then loads metatile columns
+StageScrollUpdate:
 	LDA spriteFlipMask              ;C - - - - - 0x01E531 0F:E521: A5 10
 	PHA                             ;C - - - - - 0x01E533 0F:E523: 48
 	AND #$01                        ;C - - - - - 0x01E534 0F:E524: 29 01
@@ -961,7 +967,8 @@ ofs_0F_E6A6:
 	ADC #$AF                        ;C - - - - - 0x01E6B6 0F:E6A6: 69 AF
 	STA ptr_20+1                    ;C - - - - - 0x01E6B8 0F:E6A8: 85 21
 	RTS                             ;C - - - - - 0x01E6BA 0F:E6AA: 60
-sub_0F_E6AB:
+; queues HUD health/name for the VRAM update
+UpdateStatusBar:
 	LDA vramUpdateFlag0             ;C - - - - - 0x01E6BB 0F:E6AB: A5 19
 	ORA vramUpdateFlag1             ;C - - - - - 0x01E6BD 0F:E6AD: 05 1A
 	BNE loc_0F_E6DC                 ;C - - - - - 0x01E6BF 0F:E6AF: D0 2B
@@ -976,7 +983,7 @@ loc_0F_E6BE:
 	LDA gameAction                  ;C - - - - - 0x01E6CE 0F:E6BE: A5 30
 	CMP #$0E                        ;C - - - - - 0x01E6D0 0F:E6C0: C9 0E
 	BEQ loc_0F_E6DC                 ;C - - - - - 0x01E6D2 0F:E6C2: F0 18
-	JSR sub_0F_E6DD                 ;C - - - - - 0x01E6D4 0F:E6C4: 20 DD E6
+	JSR QueueHudHealthBar           ;C - - - - - 0x01E6D4 0F:E6C4: 20 DD E6
 	LDA gameAction                  ;C - - - - - 0x01E6D7 0F:E6C7: A5 30
 	CMP #$04                        ;C - - - - - 0x01E6D9 0F:E6C9: C9 04
 	BNE loc_0F_E6D5                 ;C - - - - - 0x01E6DB 0F:E6CB: D0 08
@@ -985,12 +992,13 @@ loc_0F_E6BE:
 	LDA #$00                        ;C - - - - - 0x01E6E1 0F:E6D1: A9 00
 	STA ram_00B1                    ;C - - - - - 0x01E6E3 0F:E6D3: 85 B1
 loc_0F_E6D5:
-	JSR sub_0F_E89B                 ;C - - - - - 0x01E6E5 0F:E6D5: 20 9B E8
+	JSR SelectHudEnemy              ;C - - - - - 0x01E6E5 0F:E6D5: 20 9B E8
 	LDA #$FF                        ;C - - - - - 0x01E6E8 0F:E6D8: A9 FF
 	STA vramQueueFlag               ;C - - - - - 0x01E6EA 0F:E6DA: 85 64
 loc_0F_E6DC:
 	RTS                             ;C - - - - - 0x01E6EC 0F:E6DC: 60
-sub_0F_E6DD:
+; player name + health bar into vramQueue
+QueueHudHealthBar:
 	LDX vramQueueEnd                ;C - - - - - 0x01E6ED 0F:E6DD: A6 65
 	LDA gameAction                  ;C - - - - - 0x01E6EF 0F:E6DF: A5 30
 	CMP #$27                        ;C - - - - - 0x01E6F1 0F:E6E1: C9 27
@@ -1139,7 +1147,7 @@ loc_0F_E7CA:
 	INX                             ;C - - - - - 0x01E7FE 0F:E7EE: E8
 	JMP loc_0F_E7F5                 ;C - - - - - 0x01E7FF 0F:E7EF: 4C F5 E7
 loc_0F_E7F2:
-	JSR sub_0F_E856                 ;C - - - - - 0x01E802 0F:E7F2: 20 56 E8
+	JSR QueueHudFiller              ;C - - - - - 0x01E802 0F:E7F2: 20 56 E8
 loc_0F_E7F5:
 	LDA #$03                        ;C - - - - - 0x01E805 0F:E7F5: A9 03
 	STA vramQueue,X                 ;C - - - - - 0x01E807 0F:E7F7: 9D 80 07
@@ -1190,11 +1198,12 @@ loc_0F_E81B:
 	INX                             ;C - - - - - 0x01E85C 0F:E84C: E8
 	JMP loc_0F_E853                 ;C - - - - - 0x01E85D 0F:E84D: 4C 53 E8
 loc_0F_E850:
-	JSR sub_0F_E856                 ;C - - - - - 0x01E860 0F:E850: 20 56 E8
+	JSR QueueHudFiller              ;C - - - - - 0x01E860 0F:E850: 20 56 E8
 loc_0F_E853:
 	STX vramQueueEnd                ;C - - - - - 0x01E863 0F:E853: 86 65
 	RTS                             ;C - - - - - 0x01E865 0F:E855: 60
-sub_0F_E856:
+; three $78 tiles into vramQueue
+QueueHudFiller:
 	LDA #$78                        ;C - - - - - 0x01E866 0F:E856: A9 78
 	STA vramQueue,X                 ;C - - - - - 0x01E868 0F:E858: 9D 80 07
 	INX                             ;C - - - - - 0x01E86B 0F:E85B: E8
@@ -1225,7 +1234,8 @@ tbl_0F_E88B:
 	.byte $00,$27,$00,$45,$00,$74,$01,$22,$02,$10;- D 3 - I - 0x01E89B 0F:E88B:
 tbl_0F_E895:
 	.byte $01,$25,$01,$93,$03,$70   ;- D 3 - I - 0x01E8A5 0F:E895:
-sub_0F_E89B:
+; picks the enemy shown on the HUD (objSpriteDown 7/8/9/B)
+SelectHudEnemy:
 	LDY #$02                        ;C - - - - - 0x01E8AB 0F:E89B: A0 02
 loc_0F_E89D:
 	LDA objSpriteDown,Y             ;C - - - - - 0x01E8AD 0F:E89D: B9 B0 05
@@ -1334,7 +1344,8 @@ loc_0F_E947:
 	BNE loc_0F_E947                 ;C - - - - - 0x01E95F 0F:E94F: D0 F6
 	STX vramQueueEnd                ;C - - - - - 0x01E961 0F:E951: 86 65
 	RTS                             ;C - - - - - 0x01E963 0F:E953: 60
-sub_0F_E954:
+; 6 bytes from tables by playerLevel to PPU $2349
+QueueHudLevelText:
 	LDX vramQueueEnd                ;C - - - - - 0x01E964 0F:E954: A6 65
 	LDA #$06                        ;C - - - - - 0x01E966 0F:E956: A9 06
 	STA vramQueue,X                 ;C - - - - - 0x01E968 0F:E958: 9D 80 07
@@ -1773,10 +1784,11 @@ ofs_0F_EC98:
 tbl_0F_ECC3:
 	.byte $2E,$9D,$7F,$91,$95,$01   ;- D 3 - - - 0x01ECD3 0F:ECC3:
 	.byte $10,$11,$12,$13,$61,$FF   ;- - - - - - 0x01ECD9 0F:ECC9:
-sub_0F_ECCF:
+; vertical tile collision probe
+TileCollideY:
 	LDA tbl_0F_EEEB,Y               ;C - - - - - 0x01ECDF 0F:ECCF: B9 EB EE
 	STA ram_0040                    ;C - - - - - 0x01ECE2 0F:ECD2: 85 40
-	JSR sub_0F_EEC4                 ;C - - - - - 0x01ECE4 0F:ECD4: 20 C4 EE
+	JSR TileCollideBegin            ;C - - - - - 0x01ECE4 0F:ECD4: 20 C4 EE
 	TAY                             ;C - - - - - 0x01ECE7 0F:ECD7: A8
 	LDA tbl_0F_EEF6,Y               ;C - - - - - 0x01ECE8 0F:ECD8: B9 F6 EE
 	STA ptr_02                      ;C - - - - - 0x01ECEB 0F:ECDB: 85 02
@@ -1904,10 +1916,11 @@ loc_0F_EDB3:
 	BNE loc_0F_EDB7                 ;C - - - - - 0x01EDC5 0F:EDB5: D0 00
 loc_0F_EDB7:
 	JMP loc_0F_EEDF                 ;C - - - - - 0x01EDC7 0F:EDB7: 4C DF EE
-sub_0F_EDBA:
+; horizontal tile collision probe
+TileCollideX:
 	LDA tbl_0F_EF23,Y               ;C - - - - - 0x01EDCA 0F:EDBA: B9 23 EF
 	STA ram_0040                    ;C - - - - - 0x01EDCD 0F:EDBD: 85 40
-	JSR sub_0F_EEC4                 ;C - - - - - 0x01EDCF 0F:EDBF: 20 C4 EE
+	JSR TileCollideBegin            ;C - - - - - 0x01EDCF 0F:EDBF: 20 C4 EE
 	TAY                             ;C - - - - - 0x01EDD2 0F:EDC2: A8
 	LDA tbl_0F_EF2D,Y               ;C - - - - - 0x01EDD3 0F:EDC3: B9 2D EF
 	STA ptr_02                      ;C - - - - - 0x01EDD6 0F:EDC6: 85 02
@@ -2053,7 +2066,8 @@ loc_0F_EEBD:
 	BNE loc_0F_EEC1                 ;C - - - - - 0x01EECF 0F:EEBF: D0 00
 loc_0F_EEC1:
 	JMP loc_0F_EEDF                 ;C - - - - - 0x01EED1 0F:EEC1: 4C DF EE
-sub_0F_EEC4:
+; switches to the stage bank, saves the old one
+TileCollideBegin:
 	PHA                             ;C - - - - - 0x01EED4 0F:EEC4: 48
 	TXA                             ;C - - - - - 0x01EED5 0F:EEC5: 8A
 	PHA                             ;C - - - - - 0x01EED6 0F:EEC6: 48
@@ -2104,7 +2118,7 @@ tbl_0F_EF2F:
 	.byte $01,$13,$F1,$1E,$01,$ED,$F1,$1E,$01,$08,$F1,$1E,$01,$F8,$F1,$1E;- - - - - - 0x01EF45 0F:EF35:
 	.byte $01,$04,$FC,$04,$01,$FC,$FC,$04;- - - - - - 0x01EF55 0F:EF45:
 	.byte $01,$10,$F0,$20,$01,$F0,$F0,$20;- D 3 - - - 0x01EF5D 0F:EF4D:
-sub_0F_EF55:
+PushOutLeft:
 	LDA spriteBaseY                 ;C - - - - - 0x01EF65 0F:EF55: A5 12
 	AND #$0F                        ;C - - - - - 0x01EF67 0F:EF57: 29 0F
 	STA spriteBaseY                 ;C - - - - - 0x01EF69 0F:EF59: 85 12
@@ -2116,7 +2130,7 @@ sub_0F_EF55:
 	SBC #$00                        ;C - - - - - 0x01EF77 0F:EF67: E9 00
 	STA objXPage,X                  ;C - - - - - 0x01EF79 0F:EF69: 9D 80 03
 	RTS                             ;C - - - - - 0x01EF7C 0F:EF6C: 60
-sub_0F_EF6D:
+PushOutRight:
 	LDA spriteBaseY                 ;C - - - - - 0x01EF7D 0F:EF6D: A5 12
 	AND #$0F                        ;C - - - - - 0x01EF7F 0F:EF6F: 29 0F
 	EOR #$0F                        ;C - - - - - 0x01EF81 0F:EF71: 49 0F
@@ -2127,7 +2141,7 @@ sub_0F_EF6D:
 	ADC #$00                        ;C - - - - - 0x01EF8D 0F:EF7D: 69 00
 	STA objXPage,X                  ;C - - - - - 0x01EF8F 0F:EF7F: 9D 80 03
 	RTS                             ;C - - - - - 0x01EF92 0F:EF82: 60
-sub_0F_EF83:
+PushOutDown:
 	LDA spritePriorityBit           ;C - - - - - 0x01EF93 0F:EF83: A5 11
 	AND #$0F                        ;C - - - - - 0x01EF95 0F:EF85: 29 0F
 	EOR #$0F                        ;C - - - - - 0x01EF97 0F:EF87: 49 0F
@@ -2141,7 +2155,7 @@ sub_0F_EF83:
 	INC objYPage,X                  ;c - - - - - 0x01EFA9 0F:EF99: FE E0 03
 loc_0F_EF9C:
 	RTS                             ;C - - - - - 0x01EFAC 0F:EF9C: 60
-sub_0F_EF9D:
+PushOutUp:
 	LDA spritePriorityBit           ;C - - - - - 0x01EFAD 0F:EF9D: A5 11
 	PHA                             ;C - - - - - 0x01EFAF 0F:EF9F: 48
 	AND #$0F                        ;C - - - - - 0x01EFB0 0F:EFA0: 29 0F
@@ -2163,9 +2177,9 @@ loc_0F_EFB7:
 	.byte $00,$1D,$41,$28,$04,$2D,$41,$13,$14,$16,$10,$80,$74,$16,$50,$24;- - - - - - 0x01EFEB 0F:EFDB:
 	.byte $54,$40,$11,$3A,$02,$A1,$14,$02,$50,$F4,$41,$80,$00,$04,$10,$18;- - - - - - 0x01EFFB 0F:EFEB:
 	.byte $00,$88,$04,$AC,$21       ;- - - - - - 0x01F00B 0F:EFFB:
-sub_0F_F000:
+SetFlag40MoveRight:
 	JSR SetObjFlag40                ;C - - - - - 0x01F010 0F:F000: 20 90 F0
-sub_0F_F003:
+MoveRightCheck:
 	CPX #$00                        ;C - - - - - 0x01F013 0F:F003: E0 00
 	BNE loc_0F_F011                 ;C - - - - - 0x01F015 0F:F005: D0 0A
 	LDA objX                        ;C - - - - - 0x01F017 0F:F007: AD 60 03
@@ -2174,14 +2188,14 @@ sub_0F_F003:
 	STA ptr_02+1                    ;C - - - - - 0x01F01F 0F:F00F: 85 03
 loc_0F_F011:
 	JSR ApplyVelXAdd                ;C - - - - - 0x01F021 0F:F011: 20 83 F1
-	JSR sub_0F_EDBA                 ;C - - - - - 0x01F024 0F:F014: 20 BA ED
+	JSR TileCollideX                ;C - - - - - 0x01F024 0F:F014: 20 BA ED
 	CLC                             ;C - - - - - 0x01F027 0F:F017: 18
 	LDA spriteFlipMask              ;C - - - - - 0x01F028 0F:F018: A5 10
 	AND #$40                        ;C - - - - - 0x01F02A 0F:F01A: 29 40
 	BNE loc_0F_F025                 ;C - - - - - 0x01F02C 0F:F01C: D0 07
 	BEQ loc_0F_F024                 ;C - - - - - 0x01F02E 0F:F01E: F0 04
 loc_0F_F020:
-	JSR sub_0F_EF55                 ;C - - - - - 0x01F030 0F:F020: 20 55 EF
+	JSR PushOutLeft                 ;C - - - - - 0x01F030 0F:F020: 20 55 EF
 	SEC                             ;C - - - - - 0x01F033 0F:F023: 38
 loc_0F_F024:
 	RTS                             ;C - - - - - 0x01F034 0F:F024: 60
@@ -2198,7 +2212,7 @@ loc_0F_F025:
 loc_0F_F035:
 	LDA objVelYHi                   ;c - - - - - 0x01F045 0F:F035: AD 30 04
 	BMI loc_0F_F024                 ;c - - - - - 0x01F048 0F:F038: 30 EA
-	JSR sub_0F_F0DC                 ;c - - - - - 0x01F04A 0F:F03A: 20 DC F0
+	JSR StartAction24FromGrab       ;c - - - - - 0x01F04A 0F:F03A: 20 DC F0
 	CLC                             ;c - - - - - 0x01F04D 0F:F03D: 18
 	RTS                             ;c - - - - - 0x01F04E 0F:F03E: 60
 ; objFlags[0] |= $40
@@ -2213,9 +2227,9 @@ ClearPlayerFlag40:
 	AND #$BF                        ;C - - - - - 0x01F05B 0F:F04B: 29 BF
 	STA objFlags                    ;C - - - - - 0x01F05D 0F:F04D: 8D 60 05
 	RTS                             ;C - - - - - 0x01F060 0F:F050: 60
-sub_0F_F051:
-	JSR sub_0F_F099                 ;C - - - - - 0x01F061 0F:F051: 20 99 F0
-sub_0F_F054:
+ClearFlag40MoveLeft:
+	JSR ClearObjFlag40              ;C - - - - - 0x01F061 0F:F051: 20 99 F0
+MoveLeftCheck:
 	CPX #$00                        ;C - - - - - 0x01F064 0F:F054: E0 00
 	BNE loc_0F_F062                 ;C - - - - - 0x01F066 0F:F056: D0 0A
 	LDA objX                        ;C - - - - - 0x01F068 0F:F058: AD 60 03
@@ -2224,14 +2238,14 @@ sub_0F_F054:
 	STA ptr_02+1                    ;C - - - - - 0x01F070 0F:F060: 85 03
 loc_0F_F062:
 	JSR ApplyVelXSub                ;C - - - - - 0x01F072 0F:F062: 20 A1 F1
-	JSR sub_0F_EDBA                 ;C - - - - - 0x01F075 0F:F065: 20 BA ED
+	JSR TileCollideX                ;C - - - - - 0x01F075 0F:F065: 20 BA ED
 	CLC                             ;C - - - - - 0x01F078 0F:F068: 18
 	LDA spriteFlipMask              ;C - - - - - 0x01F079 0F:F069: A5 10
 	AND #$40                        ;C - - - - - 0x01F07B 0F:F06B: 29 40
 	BNE loc_0F_F076                 ;C - - - - - 0x01F07D 0F:F06D: D0 07
 	BEQ loc_0F_F075                 ;C - - - - - 0x01F07F 0F:F06F: F0 04
 loc_0F_F071:
-	JSR sub_0F_EF6D                 ;C - - - - - 0x01F081 0F:F071: 20 6D EF
+	JSR PushOutRight                ;C - - - - - 0x01F081 0F:F071: 20 6D EF
 	SEC                             ;C - - - - - 0x01F084 0F:F074: 38
 loc_0F_F075:
 	RTS                             ;C - - - - - 0x01F085 0F:F075: 60
@@ -2248,7 +2262,7 @@ loc_0F_F076:
 loc_0F_F086:
 	LDA objVelYHi                   ;c - - - - - 0x01F096 0F:F086: AD 30 04
 	BMI loc_0F_F075                 ;c - - - - - 0x01F099 0F:F089: 30 EA
-	JSR sub_0F_F0DC                 ;c - - - - - 0x01F09B 0F:F08B: 20 DC F0
+	JSR StartAction24FromGrab       ;c - - - - - 0x01F09B 0F:F08B: 20 DC F0
 	CLC                             ;c - - - - - 0x01F09E 0F:F08E: 18
 	RTS                             ;c - - - - - 0x01F09F 0F:F08F: 60
 ; objFlags[X] |= $40
@@ -2257,12 +2271,12 @@ SetObjFlag40:
 	ORA #$40                        ;C - - - - - 0x01F0A3 0F:F093: 09 40
 	STA objFlags,X                  ;C - - - - - 0x01F0A5 0F:F095: 9D 60 05
 	RTS                             ;C - - - - - 0x01F0A8 0F:F098: 60
-sub_0F_F099:
+ClearObjFlag40:
 	LDA objFlags,X                  ;C - - - - - 0x01F0A9 0F:F099: BD 60 05
 	AND #$BF                        ;C - - - - - 0x01F0AC 0F:F09C: 29 BF
 	STA objFlags,X                  ;C - - - - - 0x01F0AE 0F:F09E: 9D 60 05
 	RTS                             ;C - - - - - 0x01F0B1 0F:F0A1: 60
-sub_0F_F0A2:
+MoveYAddCheck:
 	CPX #$00                        ;C - - - - - 0x01F0B2 0F:F0A2: E0 00
 	BNE loc_0F_F0B0                 ;C - - - - - 0x01F0B4 0F:F0A4: D0 0A
 	LDA objY                        ;C - - - - - 0x01F0B6 0F:F0A6: AD C0 03
@@ -2271,13 +2285,13 @@ sub_0F_F0A2:
 	STA ptr_02+1                    ;C - - - - - 0x01F0BE 0F:F0AE: 85 03
 loc_0F_F0B0:
 	JSR ApplyVelYAdd                ;C - - - - - 0x01F0C0 0F:F0B0: 20 BF F1
-	JSR sub_0F_ECCF                 ;C - - - - - 0x01F0C3 0F:F0B3: 20 CF EC
+	JSR TileCollideY                ;C - - - - - 0x01F0C3 0F:F0B3: 20 CF EC
 	CLC                             ;C - - - - - 0x01F0C6 0F:F0B6: 18
 	LDA spriteFlipMask              ;C - - - - - 0x01F0C7 0F:F0B7: A5 10
 	CMP #$10                        ;C - - - - - 0x01F0C9 0F:F0B9: C9 10
 	BNE loc_0F_F0C2                 ;C - - - - - 0x01F0CB 0F:F0BB: D0 05
 loc_0F_F0BD:
-	JSR sub_0F_EF9D                 ;C - - - - - 0x01F0CD 0F:F0BD: 20 9D EF
+	JSR PushOutUp                   ;C - - - - - 0x01F0CD 0F:F0BD: 20 9D EF
 	SEC                             ;C - - - - - 0x01F0D0 0F:F0C0: 38
 	RTS                             ;C - - - - - 0x01F0D1 0F:F0C1: 60
 loc_0F_F0C2:
@@ -2296,9 +2310,10 @@ loc_0F_F0CC:
 loc_0F_F0D4:
 	CPX #$00                        ;C - - - - - 0x01F0E4 0F:F0D4: E0 00
 	BNE loc_0F_F0BD                 ;C - - - - - 0x01F0E6 0F:F0D6: D0 E5
-	JSR sub_0F_F0DC                 ;c - - - - - 0x01F0E8 0F:F0D8: 20 DC F0
+	JSR StartAction24FromGrab       ;c - - - - - 0x01F0E8 0F:F0D8: 20 DC F0
 	RTS                             ;c - - - - - 0x01F0EB 0F:F0DB: 60
-sub_0F_F0DC:
+; gameAction=$24, remembers the old one in ram_00BE
+StartAction24FromGrab:
 	LDA gameAction                  ;c - - - - - 0x01F0EC 0F:F0DC: A5 30
 	STA ram_00BE                    ;c - - - - - 0x01F0EE 0F:F0DE: 85 BE
 	LDA #$24                        ;c - - - - - 0x01F0F0 0F:F0E0: A9 24
@@ -2313,7 +2328,7 @@ sub_0F_F0DC:
 	STA objArr_03F0,Y               ;c - - - - - 0x01F103 0F:F0F3: 99 F0 03
 loc_0F_F0F6:
 	RTS                             ;c - - - - - 0x01F106 0F:F0F6: 60
-sub_0F_F0F7:
+MoveYSubCheck:
 	CPX #$00                        ;C - - - - - 0x01F107 0F:F0F7: E0 00
 	BNE loc_0F_F105                 ;C - - - - - 0x01F109 0F:F0F9: D0 0A
 	LDA objY                        ;C - - - - - 0x01F10B 0F:F0FB: AD C0 03
@@ -2321,19 +2336,19 @@ sub_0F_F0F7:
 	LDA objXPage                    ;C - - - - - 0x01F110 0F:F100: AD 80 03
 	STA ptr_02+1                    ;C - - - - - 0x01F113 0F:F103: 85 03
 loc_0F_F105:
-	JSR sub_0F_F1DF                 ;C - - - - - 0x01F115 0F:F105: 20 DF F1
-	JSR sub_0F_ECCF                 ;C - - - - - 0x01F118 0F:F108: 20 CF EC
+	JSR ApplyVelYUpAlt              ;C - - - - - 0x01F115 0F:F105: 20 DF F1
+	JSR TileCollideY                ;C - - - - - 0x01F118 0F:F108: 20 CF EC
 	CLC                             ;C - - - - - 0x01F11B 0F:F10B: 18
 	LDA spriteFlipMask              ;C - - - - - 0x01F11C 0F:F10C: A5 10
 	CMP #$30                        ;C - - - - - 0x01F11E 0F:F10E: C9 30
 	BEQ loc_0F_F114                 ;C - - - - - 0x01F120 0F:F110: F0 02
 	BNE loc_0F_F118                 ;C - - - - - 0x01F122 0F:F112: D0 04
 loc_0F_F114:
-	JSR sub_0F_EF83                 ;C - - - - - 0x01F124 0F:F114: 20 83 EF
+	JSR PushOutDown                 ;C - - - - - 0x01F124 0F:F114: 20 83 EF
 	SEC                             ;C - - - - - 0x01F127 0F:F117: 38
 loc_0F_F118:
 	RTS                             ;C - - - - - 0x01F128 0F:F118: 60
-sub_0F_F119:
+MoveYGravityCheck:
 	CPX #$00                        ;C - - - - - 0x01F129 0F:F119: E0 00
 	BNE loc_0F_F127                 ;C - - - - - 0x01F12B 0F:F11B: D0 0A
 	LDA objY                        ;C - - - - - 0x01F12D 0F:F11D: AD C0 03
@@ -2345,7 +2360,7 @@ loc_0F_F127:
 	BPL loc_0F_F14E                 ;C - - - - - 0x01F13A 0F:F12A: 10 22
 	JSR ApplyVelYSub                ;C - - - - - 0x01F13C 0F:F12C: 20 0E F2
 	JSR ApplyGravity                ;C - - - - - 0x01F13F 0F:F12F: 20 4C F2
-	JSR sub_0F_ECCF                 ;C - - - - - 0x01F142 0F:F132: 20 CF EC
+	JSR TileCollideY                ;C - - - - - 0x01F142 0F:F132: 20 CF EC
 	CPX #$00                        ;C - - - - - 0x01F145 0F:F135: E0 00
 	BNE loc_0F_F139                 ;C - - - - - 0x01F147 0F:F137: D0 00
 loc_0F_F139:
@@ -2356,15 +2371,15 @@ loc_0F_F139:
 	BCS loc_0F_F170                 ;C - - - - - 0x01F151 0F:F141: B0 2D
 	JMP loc_0F_F16E                 ;C - - - - - 0x01F153 0F:F143: 4C 6E F1
 loc_0F_F146:
-	JSR sub_0F_EF9D                 ;C - - - - - 0x01F156 0F:F146: 20 9D EF
-	JSR sub_0F_F26E                 ;C - - - - - 0x01F159 0F:F149: 20 6E F2
+	JSR PushOutUp                   ;C - - - - - 0x01F156 0F:F146: 20 9D EF
+	JSR SetHopVelY                  ;C - - - - - 0x01F159 0F:F149: 20 6E F2
 	SEC                             ;C - - - - - 0x01F15C 0F:F14C: 38
 	RTS                             ;C - - - - - 0x01F15D 0F:F14D: 60
 loc_0F_F14E:
 	INY                             ;C - - - - - 0x01F15E 0F:F14E: C8
-	JSR sub_0F_F22E                 ;C - - - - - 0x01F15F 0F:F14F: 20 2E F2
+	JSR ApplyVelYUp                 ;C - - - - - 0x01F15F 0F:F14F: 20 2E F2
 	JSR ApplyGravity                ;C - - - - - 0x01F162 0F:F152: 20 4C F2
-	JSR sub_0F_ECCF                 ;C - - - - - 0x01F165 0F:F155: 20 CF EC
+	JSR TileCollideY                ;C - - - - - 0x01F165 0F:F155: 20 CF EC
 	LDA spriteFlipMask              ;C - - - - - 0x01F168 0F:F158: A5 10
 	CMP #$30                        ;C - - - - - 0x01F16A 0F:F15A: C9 30
 	BEQ loc_0F_F16E                 ;C - - - - - 0x01F16C 0F:F15C: F0 10
@@ -2374,8 +2389,8 @@ loc_0F_F14E:
 	BEQ loc_0F_F168                 ;C - - - - - 0x01F174 0F:F164: F0 02
 	BNE loc_0F_F16E                 ;C - - - - - 0x01F176 0F:F166: D0 06
 loc_0F_F168:
-	JSR sub_0F_EF83                 ;c - - - - - 0x01F178 0F:F168: 20 83 EF
-	JSR sub_0F_F26E                 ;c - - - - - 0x01F17B 0F:F16B: 20 6E F2
+	JSR PushOutDown                 ;c - - - - - 0x01F178 0F:F168: 20 83 EF
+	JSR SetHopVelY                  ;c - - - - - 0x01F17B 0F:F16B: 20 6E F2
 loc_0F_F16E:
 	CLC                             ;C - - - - - 0x01F17E 0F:F16E: 18
 	RTS                             ;C - - - - - 0x01F17F 0F:F16F: 60
@@ -2436,7 +2451,8 @@ ApplyVelYAdd:
 	INC objYPage,X                  ;c - - - - - 0x01F1EB 0F:F1DB: FE E0 03
 loc_0F_F1DE:
 	RTS                             ;C - - - - - 0x01F1EE 0F:F1DE: 60
-sub_0F_F1DF:
+; copy of ApplyVelYUp
+ApplyVelYUpAlt:
 	LDA objYFrac,X                  ;C - - - - - 0x01F1EF 0F:F1DF: BD A0 03
 	SEC                             ;C - - - - - 0x01F1F2 0F:F1E2: 38
 	SBC objVelYLo,X                 ;C - - - - - 0x01F1F3 0F:F1E3: FD 20 04
@@ -2457,7 +2473,7 @@ ApplyVelY:
 	JSR ApplyVelYSub                ;C - - - - - 0x01F212 0F:F202: 20 0E F2
 	JMP ApplyGravity                ;C - - - - - 0x01F215 0F:F205: 4C 4C F2
 loc_0F_F208:
-	JSR sub_0F_F22E                 ;C - - - - - 0x01F218 0F:F208: 20 2E F2
+	JSR ApplyVelYUp                 ;C - - - - - 0x01F218 0F:F208: 20 2E F2
 	JMP ApplyGravity                ;C - - - - - 0x01F21B 0F:F20B: 4C 4C F2
 ApplyVelYSub:
 	LDA objYFrac,X                  ;C - - - - - 0x01F21E 0F:F20E: BD A0 03
@@ -2474,7 +2490,7 @@ ApplyVelYSub:
 	INC objYPage,X                  ;c - - - - - 0x01F23A 0F:F22A: FE E0 03
 loc_0F_F22D:
 	RTS                             ;C - - - - - 0x01F23D 0F:F22D: 60
-sub_0F_F22E:
+ApplyVelYUp:
 	LDA objYFrac,X                  ;C - - - - - 0x01F23E 0F:F22E: BD A0 03
 	SEC                             ;C - - - - - 0x01F241 0F:F231: 38
 	SBC objVelYLo,X                 ;C - - - - - 0x01F242 0F:F232: FD 20 04
@@ -2506,7 +2522,7 @@ ApplyGravity:
 	STA objVelYLo,X                 ;C - - - - - 0x01F27A 0F:F26A: 9D 20 04
 loc_0F_F26D:
 	RTS                             ;C - - - - - 0x01F27D 0F:F26D: 60
-sub_0F_F26E:
+SetHopVelY:
 	CPX #$00                        ;C - - - - - 0x01F27E 0F:F26E: E0 00
 	BEQ loc_0F_F27D                 ;C - - - - - 0x01F280 0F:F270: F0 0B
 	LDA #$AB                        ;C - - - - - 0x01F282 0F:F272: A9 AB
@@ -2632,7 +2648,7 @@ QueueSound:
 loc_0F_F362:
 	LDX ptr_00                      ;C - - - - - 0x01F372 0F:F362: A6 00
 	RTS                             ;C - - - - - 0x01F374 0F:F364: 60
-sub_0F_F365:
+DistanceYToPlayer:
 	LDA objY                        ;C - - - - - 0x01F375 0F:F365: AD C0 03
 	SEC                             ;C - - - - - 0x01F378 0F:F368: 38
 	SBC objY,X                      ;C - - - - - 0x01F379 0F:F369: FD C0 03
@@ -2657,7 +2673,7 @@ DistanceXToPlayer:
 	CLC                             ;C - - - - - 0x01F399 0F:F389: 18
 loc_0F_F38A:
 	RTS                             ;C - - - - - 0x01F39A 0F:F38A: 60
-sub_0F_F38B:
+CalcDirToPlayer:
 	LDY #$00                        ;C - - - - - 0x01F39B 0F:F38B: A0 00
 	LDA objY                        ;C - - - - - 0x01F39D 0F:F38D: AD C0 03
 	SEC                             ;C - - - - - 0x01F3A0 0F:F390: 38
@@ -2730,7 +2746,7 @@ tbl_0F_F3E6:
 	.byte $04                       ;- - - - - - 0x01F411 0F:F401:
 	.byte $00,$0F,$0E               ;- D 3 - - - 0x01F412 0F:F402:
 	.byte $04                       ;- - - - - - 0x01F415 0F:F405:
-sub_0F_F406:
+RedrawAndWaitFrame:
 	LDA prgR6Shadow                 ;C - - - - - 0x01F416 0F:F406: A5 F2
 	PHA                             ;C - - - - - 0x01F418 0F:F408: 48
 	LDA prgR7Shadow                 ;C - - - - - 0x01F419 0F:F409: A5 F3
@@ -2748,7 +2764,7 @@ sub_0F_F406:
 	PLA                             ;C - - - - - 0x01F432 0F:F422: 68
 	STA prgBank8000                 ;C - - - - - 0x01F433 0F:F423: 85 F4
 	JMP SetPrgBanks                 ;C - - - - - 0x01F435 0F:F425: 4C 4D FF
-sub_0F_F428:
+StartHitTimer:
 	LDA #$1E                        ;C - - - - - 0x01F438 0F:F428: A9 1E
 	STA timerA4                     ;C - - - - - 0x01F43A 0F:F42A: 85 A4
 	LDA #$00                        ;C - - - - - 0x01F43C 0F:F42C: A9 00
@@ -2781,16 +2797,16 @@ SetAnimXChr4:
 	JSR SetAnimX                    ;C - - - - - 0x01F459 0F:F449: 20 88 F2
 	STY chrBankShadow+4             ;C - - - - - 0x01F45C 0F:F44C: 84 EC
 	RTS                             ;C - - - - - 0x01F45E 0F:F44E: 60
-sub_0F_F44F:
+SetAnimXChr5:
 	JSR SetAnimX                    ;C - - - - - 0x01F45F 0F:F44F: 20 88 F2
 	STY chrBankShadow+5             ;C - - - - - 0x01F462 0F:F452: 84 ED
 loc_0F_F454:
 	RTS                             ;C - - - - - 0x01F464 0F:F454: 60
-sub_0F_F455:
+SpawnEffect7E:
 	LDA objAnim,X                   ;C - - - - - 0x01F465 0F:F455: BD 80 05
 	CMP #$9D                        ;C - - - - - 0x01F468 0F:F458: C9 9D
 	BEQ loc_0F_F454                 ;C - - - - - 0x01F46A 0F:F45A: F0 F8
-	JSR sub_0F_F72A                 ;C - - - - - 0x01F46C 0F:F45C: 20 2A F7
+	JSR FindFreeEffectSlot          ;C - - - - - 0x01F46C 0F:F45C: 20 2A F7
 	BCS loc_0F_F454                 ;C - - - - - 0x01F46F 0F:F45F: B0 F3
 	STY ptr_0E+1                    ;C - - - - - 0x01F471 0F:F461: 84 0F
 	LDA #$7E                        ;C - - - - - 0x01F473 0F:F463: A9 7E
@@ -2918,7 +2934,7 @@ tbl_0F_F555:
 loc_0F_F558:
 	SEC                             ;C - - - - - 0x01F568 0F:F558: 38
 	RTS                             ;C - - - - - 0x01F569 0F:F559: 60
-sub_0F_F55A:
+CheckHitEligible:
 	SEC                             ;C - - - - - 0x01F56A 0F:F55A: 38
 	LDA objFlags,X                  ;C - - - - - 0x01F56B 0F:F55B: BD 60 05
 	BPL loc_0F_F558                 ;C - - - - - 0x01F56E 0F:F55E: 10 F8
@@ -3002,7 +3018,7 @@ loc_0F_F5E9:
 	BEQ loc_0F_F601                 ;C - - - - - 0x01F601 0F:F5F1: F0 0E
 	CMP #$03                        ;C - - - - - 0x01F603 0F:F5F3: C9 03
 	BEQ loc_0F_F628                 ;C - - - - - 0x01F605 0F:F5F5: F0 31
-	JSR sub_0F_F365                 ;C - - - - - 0x01F607 0F:F5F7: 20 65 F3
+	JSR DistanceYToPlayer           ;C - - - - - 0x01F607 0F:F5F7: 20 65 F3
 	CMP #$0C                        ;C - - - - - 0x01F60A 0F:F5FA: C9 0C
 	BCC loc_0F_F63B                 ;C - - - - - 0x01F60C 0F:F5FC: 90 3D
 	JMP loc_0F_F679                 ;C - - - - - 0x01F60E 0F:F5FE: 4C 79 F6
@@ -3144,7 +3160,8 @@ loc_0F_F70C:
 loc_0F_F718:
 	CLC                             ;c - - - - - 0x01F728 0F:F718: 18
 	RTS                             ;c - - - - - 0x01F729 0F:F719: 60
-sub_0F_F71A:
+; carry set if none
+FindFreeEnemySlot:
 	LDY #$0D                        ;C - - - - - 0x01F72A 0F:F71A: A0 0D
 loc_0F_F71C:
 	LDA objActive,Y                 ;C - - - - - 0x01F72C 0F:F71C: B9 00 03
@@ -3157,7 +3174,8 @@ loc_0F_F71C:
 loc_0F_F728:
 	CLC                             ;C - - - - - 0x01F738 0F:F728: 18
 	RTS                             ;C - - - - - 0x01F739 0F:F729: 60
-sub_0F_F72A:
+; carry set if none
+FindFreeEffectSlot:
 	LDY #$0F                        ;C - - - - - 0x01F73A 0F:F72A: A0 0F
 loc_0F_F72C:
 	LDA objActive,Y                 ;C - - - - - 0x01F73C 0F:F72C: B9 00 03
@@ -3167,7 +3185,7 @@ loc_0F_F72C:
 	BNE loc_0F_F72C                 ;C - - - - - 0x01F744 0F:F734: D0 F6
 	SEC                             ;C - - - - - 0x01F746 0F:F736: 38
 	RTS                             ;C - - - - - 0x01F747 0F:F737: 60
-sub_0F_F738:
+CheckAttackEligible:
 	LDA objFlags,X                  ;C - - - - - 0x01F748 0F:F738: BD 60 05
 	BPL loc_0F_F745                 ;C - - - - - 0x01F74B 0F:F73B: 10 08
 	AND #$04                        ;C - - - - - 0x01F74D 0F:F73D: 29 04
@@ -3374,7 +3392,7 @@ tbl_0F_F8B1:
 	.byte $08                       ;- - - - - - 0x01F8DA 0F:F8CA:
 	.byte $08                       ;- D 3 - - - 0x01F8DB 0F:F8CB:
 	.byte $00,$08,$00,$08,$08,$08,$08,$08,$08;- - - - - - 0x01F8DC 0F:F8CC:
-sub_0F_F8D5:
+UpdatePlayerInvincible:
 	LDA ram_006E                    ;C - - - - - 0x01F8E5 0F:F8D5: A5 6E
 	BPL loc_0F_F8DA                 ;C - - - - - 0x01F8E7 0F:F8D7: 10 01
 loc_0F_F8D9:
@@ -3415,7 +3433,7 @@ loc_0F_F915:
 	LDA playerId                    ;C - - - - - 0x01F929 0F:F919: A5 34
 	CMP #$01                        ;C - - - - - 0x01F92B 0F:F91B: C9 01
 	BEQ loc_0F_F922                 ;C - - - - - 0x01F92D 0F:F91D: F0 03
-	JSR sub_0F_FAC4                 ;C - - - - - 0x01F92F 0F:F91F: 20 C4 FA
+	JSR InitSlot1Follower           ;C - - - - - 0x01F92F 0F:F91F: 20 C4 FA
 loc_0F_F922:
 	LDY objArr_0450,X               ;C - - - - - 0x01F932 0F:F922: BC 50 04
 	LDA playerHealth                ;C - - - - - 0x01F935 0F:F925: A5 3A
@@ -3520,7 +3538,7 @@ loc_0F_F9DB:
 	LDA #$80                        ;C - - - - - 0x01F9EF 0F:F9DF: A9 80
 	STA objActive                   ;C - - - - - 0x01F9F1 0F:F9E1: 8D 00 03
 	RTS                             ;C - - - - - 0x01F9F4 0F:F9E4: 60
-sub_0F_F9E5:
+CheckObjContact:
 	LDA #$02                        ;C - - - - - 0x01F9F5 0F:F9E5: A9 02
 	STA spriteFlipMask              ;C - - - - - 0x01F9F7 0F:F9E7: 85 10
 loc_0F_F9E9:
@@ -3595,7 +3613,7 @@ loc_0F_FA60:
 	LDA objY,Y                      ;C - - - - - 0x01FA88 0F:FA78: B9 C0 03
 	STA ptr_02                      ;C - - - - - 0x01FA8B 0F:FA7B: 85 02
 	STY ptr_0E+1                    ;C - - - - - 0x01FA8D 0F:FA7D: 84 0F
-	JSR sub_0F_FA91                 ;C - - - - - 0x01FA8F 0F:FA7F: 20 91 FA
+	JSR TestHitBoxOverlap           ;C - - - - - 0x01FA8F 0F:FA7F: 20 91 FA
 	BCC loc_0F_FA90                 ;C - - - - - 0x01FA92 0F:FA82: 90 0C
 loc_0F_FA84:
 	DEC spriteFlipMask              ;C - - - - - 0x01FA94 0F:FA84: C6 10
@@ -3607,7 +3625,7 @@ loc_0F_FA8F:
 	SEC                             ;C - - - - - 0x01FA9F 0F:FA8F: 38
 loc_0F_FA90:
 	RTS                             ;C - - - - - 0x01FAA0 0F:FA90: 60
-sub_0F_FA91:
+TestHitBoxOverlap:
 	LDA objArr_0440,Y               ;C - - - - - 0x01FAA1 0F:FA91: B9 40 04
 	TAY                             ;C - - - - - 0x01FAA4 0F:FA94: A8
 	SEC                             ;C - - - - - 0x01FAA5 0F:FA95: 38
@@ -3639,7 +3657,7 @@ tbl_0F_FAC0:
 	.byte $0E,$14                   ;- D 3 - - - 0x01FAD0 0F:FAC0:
 tbl_0F_FAC2:
 	.byte $14,$14                   ;- D 3 - - - 0x01FAD2 0F:FAC2:
-sub_0F_FAC4:
+InitSlot1Follower:
 	LDA #$80                        ;C - - - - - 0x01FAD4 0F:FAC4: A9 80
 	STA objActive+1                 ;C - - - - - 0x01FAD6 0F:FAC6: 8D 01 03
 	LDA #$90                        ;C - - - - - 0x01FAD9 0F:FAC9: A9 90
@@ -3668,7 +3686,7 @@ sub_0F_FAC4:
 tbl_0F_FB06:
 	.byte $41,$41                   ;- - - - - - 0x01FB16 0F:FB06:
 	.byte $51                       ;- D 3 - - - 0x01FB18 0F:FB08:
-sub_0F_FB09:
+InitHitFields:
 	LDY ram_00A7                    ;C - - - - - 0x01FB19 0F:FB09: A4 A7
 	LDA tbl_0F_FB17,Y               ;C - - - - - 0x01FB1B 0F:FB0B: B9 17 FB
 	STA objArr_04B0,X               ;C - - - - - 0x01FB1E 0F:FB0E: 9D B0 04
@@ -3685,12 +3703,12 @@ tbl_0F_FB17:
 	.byte $02,$02,$02,$02           ;- - - - - - 0x01FB45 0F:FB35:
 	.byte $08                       ;- D 3 - - - 0x01FB49 0F:FB39:
 	.byte $A9,$20,$A0,$18           ;- - - - - - 0x01FB4A 0F:FB3A:
-sub_0F_FB3E:
+CheckNearPlayer:
 	STA ptr_00                      ;C - - - - - 0x01FB4E 0F:FB3E: 85 00
 	STY ptr_00+1                    ;C - - - - - 0x01FB50 0F:FB40: 84 01
 	JSR DistanceXToPlayer           ;C - - - - - 0x01FB52 0F:FB42: 20 74 F3
 	STA ptr_02                      ;C - - - - - 0x01FB55 0F:FB45: 85 02
-	JSR sub_0F_FBD9                 ;C - - - - - 0x01FB57 0F:FB47: 20 D9 FB
+	JSR DistanceYToPlayerGround     ;C - - - - - 0x01FB57 0F:FB47: 20 D9 FB
 	STA ptr_02+1                    ;C - - - - - 0x01FB5A 0F:FB4A: 85 03
 	LDA ptr_00                      ;C - - - - - 0x01FB5C 0F:FB4C: A5 00
 	SEC                             ;C - - - - - 0x01FB5E 0F:FB4E: 38
@@ -3702,18 +3720,18 @@ sub_0F_FB3E:
 	BCC loc_0F_FB5A                 ;C - - - - - 0x01FB68 0F:FB58: 90 00
 loc_0F_FB5A:
 	RTS                             ;C - - - - - 0x01FB6A 0F:FB5A: 60
-sub_0F_FB5B:
+DirToPlayerGround:
 	LDA objY                        ;C - - - - - 0x01FB6B 0F:FB5B: AD C0 03
 	STA ptr_0E+1                    ;C - - - - - 0x01FB6E 0F:FB5E: 85 0F
 	LDA playerGroundY               ;C - - - - - 0x01FB70 0F:FB60: A5 36
 	STA objY                        ;C - - - - - 0x01FB72 0F:FB62: 8D C0 03
-	JSR sub_0F_F38B                 ;C - - - - - 0x01FB75 0F:FB65: 20 8B F3
+	JSR CalcDirToPlayer             ;C - - - - - 0x01FB75 0F:FB65: 20 8B F3
 	STA ptr_0E                      ;C - - - - - 0x01FB78 0F:FB68: 85 0E
 	LDA ptr_0E+1                    ;C - - - - - 0x01FB7A 0F:FB6A: A5 0F
 	STA objY                        ;C - - - - - 0x01FB7C 0F:FB6C: 8D C0 03
 	LDA ptr_0E                      ;C - - - - - 0x01FB7F 0F:FB6F: A5 0E
 	RTS                             ;C - - - - - 0x01FB81 0F:FB71: 60
-sub_0F_FB72:
+DirToPlayerOffset:
 	LDA objY                        ;C - - - - - 0x01FB82 0F:FB72: AD C0 03
 	STA ptr_0E+1                    ;C - - - - - 0x01FB85 0F:FB75: 85 0F
 	LDA objX                        ;C - - - - - 0x01FB87 0F:FB77: AD 60 03
@@ -3742,7 +3760,7 @@ loc_0F_FB9E:
 loc_0F_FBB0:
 	LDA playerGroundY               ;C - - - - - 0x01FBC0 0F:FBB0: A5 36
 	STA objY                        ;C - - - - - 0x01FBC2 0F:FBB2: 8D C0 03
-	JSR sub_0F_F38B                 ;C - - - - - 0x01FBC5 0F:FBB5: 20 8B F3
+	JSR CalcDirToPlayer             ;C - - - - - 0x01FBC5 0F:FBB5: 20 8B F3
 	STA ptr_0C                      ;C - - - - - 0x01FBC8 0F:FBB8: 85 0C
 	LDA ptr_0E+1                    ;C - - - - - 0x01FBCA 0F:FBBA: A5 0F
 	STA objY                        ;C - - - - - 0x01FBCC 0F:FBBC: 8D C0 03
@@ -3757,12 +3775,12 @@ tbl_0F_FBCC:
 	.byte $00                       ;- - - - - - 0x01FBE2 0F:FBD2:
 	.byte $20,$20                   ;- D 3 - - - 0x01FBE3 0F:FBD3:
 	.byte $20,$20,$20,$00           ;- - - - - - 0x01FBE5 0F:FBD5:
-sub_0F_FBD9:
+DistanceYToPlayerGround:
 	LDA objY                        ;C - - - - - 0x01FBE9 0F:FBD9: AD C0 03
 	STA ptr_0E+1                    ;C - - - - - 0x01FBEC 0F:FBDC: 85 0F
 	LDA playerGroundY               ;C - - - - - 0x01FBEE 0F:FBDE: A5 36
 	STA objY                        ;C - - - - - 0x01FBF0 0F:FBE0: 8D C0 03
-	JSR sub_0F_F365                 ;C - - - - - 0x01FBF3 0F:FBE3: 20 65 F3
+	JSR DistanceYToPlayer           ;C - - - - - 0x01FBF3 0F:FBE3: 20 65 F3
 	STA ptr_0E                      ;C - - - - - 0x01FBF6 0F:FBE6: 85 0E
 	LDA ptr_0E+1                    ;C - - - - - 0x01FBF8 0F:FBE8: A5 0F
 	STA objY                        ;C - - - - - 0x01FBFA 0F:FBEA: 8D C0 03
@@ -4208,9 +4226,10 @@ SetPrgBanks:
 	STA MMC3_BANK_DATA              ;C - - - - - 0x01FF78 0F:FF68: 8D 01 80
 	DEC bankSwitchBusy              ;C - - - - - 0x01FF7B 0F:FF6B: C6 F6
 	LDA ram_00F7                    ;C - - - - - 0x01FF7D 0F:FF6D: A5 F7
-	BNE sub_0F_FF72                 ;C - - - - - 0x01FF7F 0F:FF6F: D0 01
+	BNE SoundUpdate                 ;C - - - - - 0x01FF7F 0F:FF6F: D0 01
 	RTS                             ;C - - - - - 0x01FF81 0F:FF71: 60
-sub_0F_FF72:
+; maps banks 6/7 and drains the sound queue
+SoundUpdate:
 	LDA bankSwitchBusy              ;C - - - - - 0x01FF82 0F:FF72: A5 F6
 	BNE loc_0F_FFB2                 ;C - - - - - 0x01FF84 0F:FF74: D0 3C
 	LDA #$06                        ;C - - - - - 0x01FF86 0F:FF76: A9 06

@@ -1,7 +1,7 @@
 .segment "BANK_09"
 ; 0x012010-0x01400F  CPU $A000-$BFFF
 
-sub_09_A000:
+SetSectionChr:
 	ASL A                           ;C - - - - - 0x012010 09:A000: 0A
 	PHA                             ;C - - - - - 0x012011 09:A001: 48
 	TAX                             ;C - - - - - 0x012012 09:A002: AA
@@ -12,7 +12,7 @@ sub_09_A000:
 	LDA tbl_09_A0B5,X               ;C - - - - - 0x01201D 09:A00D: BD B5 A0
 	STA chrBankShadow+5             ;C - - - - - 0x012020 09:A010: 85 ED
 	PLA                             ;C - - - - - 0x012022 09:A012: 68
-sub_09_A013:
+LoadSpritePal2:
 	ASL A                           ;C - - - - - 0x012023 09:A013: 0A
 	ASL A                           ;C - - - - - 0x012024 09:A014: 0A
 	TAY                             ;C - - - - - 0x012025 09:A015: A8
@@ -135,7 +135,7 @@ tbl_09_A0B5:
 	.byte $FA,$29,$7C,$A8,$CD,$00,$01,$A8,$C9,$28,$D5,$8A,$36,$E1,$F4,$EA;- - - - - - 0x0122E5 09:A2D5:
 	.byte $3D,$FA,$FF,$E3,$FF,$A2,$FF,$0A,$FB,$CA,$3F,$AF,$ED,$02,$3C,$A3;- - - - - - 0x0122F5 09:A2E5:
 	.byte $FF,$3C,$FF,$6A,$EB,$EA,$F7,$AA,$FC,$A9,$E7;- - - - - - 0x012305 09:A2F5:
-sub_09_A300:
+PaletteAnimTick:
 	LDA #$03                        ;C - - - - - 0x012310 09:A300: A9 03
 	STA spriteFlipMask              ;C - - - - - 0x012312 09:A302: 85 10
 	LDA palUpdateFlag               ;C - - - - - 0x012314 09:A304: A5 18
@@ -147,14 +147,14 @@ loc_09_A30E:
 	LDX spriteFlipMask              ;C - - - - - 0x01231E 09:A30E: A6 10
 	LDA ram_0100,X                  ;C - - - - - 0x012320 09:A310: BD 00 01
 	BPL loc_09_A318                 ;C - - - - - 0x012323 09:A313: 10 03
-	JSR sub_09_A321                 ;C - - - - - 0x012325 09:A315: 20 21 A3
+	JSR PaletteAnimChannel          ;C - - - - - 0x012325 09:A315: 20 21 A3
 loc_09_A318:
 	DEC spriteFlipMask              ;C - - - - - 0x012328 09:A318: C6 10
 	BPL loc_09_A30E                 ;C - - - - - 0x01232A 09:A31A: 10 F2
 	LDA spritePriorityBit           ;C - - - - - 0x01232C 09:A31C: A5 11
 	STA palUpdateFlag               ;C - - - - - 0x01232E 09:A31E: 85 18
 	RTS                             ;C - - - - - 0x012330 09:A320: 60
-sub_09_A321:
+PaletteAnimChannel:
 	LDY ram_0108,X                  ;C - - - - - 0x012331 09:A321: BC 08 01
 	LDA tbl_09_A445,Y               ;C - - - - - 0x012334 09:A324: B9 45 A4
 	TAY                             ;C - - - - - 0x012337 09:A327: A8
@@ -277,8 +277,8 @@ tbl_09_A45B:
 	.byte $02,$04,$01,$40,$81,$14,$44,$04,$00,$40,$22,$00,$A2,$01,$80,$41;- - - - - - 0x0126EE 09:A6DE:
 	.byte $08,$40,$20,$04,$41,$00,$C0,$04,$10,$00,$00,$00,$06,$00,$84,$10;- - - - - - 0x0126FE 09:A6EE:
 	.byte $20,$00                   ;- - - - - - 0x01270E 09:A6FE:
-sub_09_A700:
-	JSR sub_09_A78E                 ;C - - - - - 0x012710 09:A700: 20 8E A7
+RunTextScript_09:
+	JSR ClearTextQueueRows_09       ;C - - - - - 0x012710 09:A700: 20 8E A7
 	LDY ram_00B8                    ;C - - - - - 0x012713 09:A703: A4 B8
 	LDA tbl_09_A7D6,Y               ;C - - - - - 0x012715 09:A705: B9 D6 A7
 	STA ptr_0C                      ;C - - - - - 0x012718 09:A708: 85 0C
@@ -318,8 +318,8 @@ loc_09_A71D:
 	PHA                             ;C - - - - - 0x01275D 09:A74D: 48
 	LDA spritePriorityBit           ;C - - - - - 0x01275E 09:A74E: A5 11
 	PHA                             ;C - - - - - 0x012760 09:A750: 48
-	JSR sub_09_A788                 ;C - - - - - 0x012761 09:A751: 20 88 A7
-	JSR sub_0F_F406                 ;C - - - - - 0x012764 09:A754: 20 06 F4
+	JSR MoveXSubSlot0               ;C - - - - - 0x012761 09:A751: 20 88 A7
+	JSR RedrawAndWaitFrame          ;C - - - - - 0x012764 09:A754: 20 06 F4
 	PLA                             ;C - - - - - 0x012767 09:A757: 68
 	STA spritePriorityBit           ;C - - - - - 0x012768 09:A758: 85 11
 	PLA                             ;C - - - - - 0x01276A 09:A75A: 68
@@ -337,21 +337,21 @@ loc_09_A76D:
 	LDA spriteFlipMask              ;C - - - - - 0x01277F 09:A76F: A5 10
 	CMP #$03                        ;C - - - - - 0x012781 09:A771: C9 03
 	BNE loc_09_A719                 ;C - - - - - 0x012783 09:A773: D0 A4
-	JSR sub_09_A7D0                 ;C - - - - - 0x012785 09:A775: 20 D0 A7
-	JSR sub_09_A78E                 ;C - - - - - 0x012788 09:A778: 20 8E A7
+	JSR Wait180Frames               ;C - - - - - 0x012785 09:A775: 20 D0 A7
+	JSR ClearTextQueueRows_09       ;C - - - - - 0x012788 09:A778: 20 8E A7
 	JMP loc_09_A713                 ;C - - - - - 0x01278B 09:A77B: 4C 13 A7
 loc_09_A77E:
-	JMP sub_09_A7D0                 ;C - - - - - 0x01278E 09:A77E: 4C D0 A7
+	JMP Wait180Frames               ;C - - - - - 0x01278E 09:A77E: 4C D0 A7
 	.byte $60                       ;- - - - - - 0x012791 09:A781:
 tbl_09_A782:
 	.byte $21,$21,$22               ;- D 1 - - - 0x012792 09:A782:
 tbl_09_A785:
 	.byte $A7,$E7,$27               ;- D 1 - - - 0x012795 09:A785:
-sub_09_A788:
+MoveXSubSlot0:
 	LDX #$00                        ;C - - - - - 0x012798 09:A788: A2 00
 	JSR ApplyVelXSub                ;C - - - - - 0x01279A 09:A78A: 20 A1 F1
 	RTS                             ;C - - - - - 0x01279D 09:A78D: 60
-sub_09_A78E:
+ClearTextQueueRows_09:
 	LDA #$22                        ;C - - - - - 0x01279E 09:A78E: A9 22
 	STA vramQueue+4                 ;C - - - - - 0x0127A0 09:A790: 8D 84 07
 	LDA #$21                        ;C - - - - - 0x0127A3 09:A793: A9 21
@@ -380,7 +380,7 @@ loc_09_A7B9:
 	STA vramQueue+70                ;C - - - - - 0x0127D8 09:A7C8: 8D C6 07
 	STA vramUpdateFlag0             ;C - - - - - 0x0127DB 09:A7CB: 85 19
 	JMP WaitFrame                   ;C - - - - - 0x0127DD 09:A7CD: 4C 31 FF
-sub_09_A7D0:
+Wait180Frames:
 	LDX #$B4                        ;C - - - - - 0x0127E0 09:A7D0: A2 B4
 	JSR WaitFrames                  ;C - - - - - 0x0127E2 09:A7D2: 20 2A FF
 	RTS                             ;C - - - - - 0x0127E5 09:A7D5: 60
@@ -462,7 +462,7 @@ tbl_09_A992:
 	.byte $A7,$6B,$E7,$2B,$DE,$B2,$B7,$80,$3B,$A2,$F9,$9A,$EF,$DA,$CF,$0A;- - - - - - 0x012AE5 09:AAD5:
 	.byte $D6,$AC,$CF,$8E,$DF,$CA,$A3,$0A,$BE,$82,$FC,$E0,$51,$88,$B7,$A4;- - - - - - 0x012AF5 09:AAE5:
 	.byte $F4,$C8,$1C,$AA,$EF,$AF,$DF,$E8,$EA,$A9,$FF;- - - - - - 0x012B05 09:AAF5:
-sub_09_AB00:
+InitEndingPlayerObj:
 	LDA #$80                        ;C - - - - - 0x012B10 09:AB00: A9 80
 	STA objActive                   ;C - - - - - 0x012B12 09:AB02: 8D 00 03
 	LDA #$D0                        ;C - - - - - 0x012B15 09:AB05: A9 D0
@@ -516,7 +516,7 @@ loc_09_AB59:
 	STA objVelYHi                   ;c - - - - - 0x012B81 09:AB71: 8D 30 04
 	INC objActive                   ;c - - - - - 0x012B84 09:AB74: EE 00 03
 loc_09_AB77:
-	JSR sub_0F_F406                 ;c - - - - - 0x012B87 09:AB77: 20 06 F4
+	JSR RedrawAndWaitFrame          ;c - - - - - 0x012B87 09:AB77: 20 06 F4
 	JMP loc_09_AB34                 ;c - - - - - 0x012B8A 09:AB7A: 4C 34 AB
 loc_09_AB7D:
 	LDA objActive                   ;c - - - - - 0x012B8D 09:AB7D: AD 00 03
@@ -553,7 +553,7 @@ loc_09_ABB4:
 	JSR SetPlayerAnim               ;c - - - - - 0x012BD2 09:ABC2: 20 94 F2
 	LDA #$00                        ;c - - - - - 0x012BD5 09:ABC5: A9 00
 	JSR SetChrBank2                 ;c - - - - - 0x012BD7 09:ABC7: 20 40 F4
-	JMP sub_0F_F406                 ;c - - - - - 0x012BDA 09:ABCA: 4C 06 F4
+	JMP RedrawAndWaitFrame          ;c - - - - - 0x012BDA 09:ABCA: 4C 06 F4
 loc_09_ABCD:
 	JMP loc_09_AB77                 ;c - - - - - 0x012BDD 09:ABCD: 4C 77 AB
 ofs_09_ABD0:
@@ -580,7 +580,7 @@ loc_09_ABFA:
 	LDA objAnimFrame                ;C - - - - - 0x012C0A 09:ABFA: AD 70 05
 	CMP #$13                        ;C - - - - - 0x012C0D 09:ABFD: C9 13
 	BEQ loc_09_AC07                 ;C - - - - - 0x012C0F 09:ABFF: F0 06
-	JSR sub_0F_F406                 ;C - - - - - 0x012C11 09:AC01: 20 06 F4
+	JSR RedrawAndWaitFrame          ;C - - - - - 0x012C11 09:AC01: 20 06 F4
 	JMP loc_09_ABDF                 ;C - - - - - 0x012C14 09:AC04: 4C DF AB
 loc_09_AC07:
 	LDA #$14                        ;C - - - - - 0x012C17 09:AC07: A9 14
@@ -632,10 +632,10 @@ loc_09_AC55:
 	LDA #$04                        ;C - - - - - 0x012C80 09:AC70: A9 04
 	JSR SetChrBank2                 ;C - - - - - 0x012C82 09:AC72: 20 40 F4
 loc_09_AC75:
-	JSR sub_0F_F406                 ;C - - - - - 0x012C85 09:AC75: 20 06 F4
+	JSR RedrawAndWaitFrame          ;C - - - - - 0x012C85 09:AC75: 20 06 F4
 	JMP loc_09_AC75                 ;C - - - - - 0x012C88 09:AC78: 4C 75 AC
 loc_09_AC7B:
-	JSR sub_0F_F406                 ;C - - - - - 0x012C8B 09:AC7B: 20 06 F4
+	JSR RedrawAndWaitFrame          ;C - - - - - 0x012C8B 09:AC7B: 20 06 F4
 	JMP loc_09_AC20                 ;C - - - - - 0x012C8E 09:AC7E: 4C 20 AC
 loc_09_AC81:
 	LDA #$30                        ;C - - J - - 0x012C91 09:AC81: A9 30
@@ -658,7 +658,7 @@ loc_09_ACA9:
 	LDA objArr_0500                 ;C - - - - - 0x012CB9 09:ACA9: AD 00 05
 	BEQ loc_09_ACB7                 ;C - - - - - 0x012CBC 09:ACAC: F0 09
 	DEC objArr_0500                 ;C - - - - - 0x012CBE 09:ACAE: CE 00 05
-	JSR sub_0F_F406                 ;C - - - - - 0x012CC1 09:ACB1: 20 06 F4
+	JSR RedrawAndWaitFrame          ;C - - - - - 0x012CC1 09:ACB1: 20 06 F4
 	JMP loc_09_AC81                 ;C - - - - - 0x012CC4 09:ACB4: 4C 81 AC
 loc_09_ACB7:
 	LDA #$3D                        ;C - - - - - 0x012CC7 09:ACB7: A9 3D
@@ -676,7 +676,7 @@ loc_09_ACCB:
 	LDA objArr_0500+1               ;C - - - - - 0x012CE3 09:ACD3: AD 01 05
 	BEQ loc_09_ACE1                 ;C - - - - - 0x012CE6 09:ACD6: F0 09
 	DEC objArr_0500+1               ;C - - - - - 0x012CE8 09:ACD8: CE 01 05
-	JSR sub_0F_F406                 ;C - - - - - 0x012CEB 09:ACDB: 20 06 F4
+	JSR RedrawAndWaitFrame          ;C - - - - - 0x012CEB 09:ACDB: 20 06 F4
 	JMP loc_09_ACB7                 ;C - - - - - 0x012CEE 09:ACDE: 4C B7 AC
 loc_09_ACE1:
 	LDA #$47                        ;C - - - - - 0x012CF1 09:ACE1: A9 47
@@ -699,10 +699,10 @@ loc_09_ACFA:
 	LDA #$08                        ;C - - - - - 0x012D16 09:AD06: A9 08
 	JSR SetChrBank2                 ;C - - - - - 0x012D18 09:AD08: 20 40 F4
 loc_09_AD0B:
-	JSR sub_0F_F406                 ;C - - - - - 0x012D1B 09:AD0B: 20 06 F4
+	JSR RedrawAndWaitFrame          ;C - - - - - 0x012D1B 09:AD0B: 20 06 F4
 	JMP loc_09_AD0B                 ;C - - - - - 0x012D1E 09:AD0E: 4C 0B AD
 loc_09_AD11:
-	JSR sub_0F_F406                 ;C - - - - - 0x012D21 09:AD11: 20 06 F4
+	JSR RedrawAndWaitFrame          ;C - - - - - 0x012D21 09:AD11: 20 06 F4
 	JMP loc_09_ACE1                 ;C - - - - - 0x012D24 09:AD14: 4C E1 AC
 	.byte $44,$17,$80,$2C,$55,$64,$51,$C9,$14,$04,$04,$40,$00,$03,$00,$00;- - - - - - 0x012D27 09:AD17:
 	.byte $44,$01,$05,$00,$00,$18,$40,$0B,$00,$00,$00,$02,$84,$02,$10,$25;- - - - - - 0x012D37 09:AD27:

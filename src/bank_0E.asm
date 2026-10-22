@@ -163,7 +163,7 @@ loc_0E_C0F6:
 	LDA ram_00A1                    ;C - - - - - 0x01C13A 0E:C12A: A5 A1
 	SBC #$00                        ;C - - - - - 0x01C13C 0E:C12C: E9 00
 	STA ram_0106,X                  ;C - - - - - 0x01C13E 0E:C12E: 9D 06 01
-	JSR sub_0F_FF72                 ;C - - - - - 0x01C141 0E:C131: 20 72 FF
+	JSR SoundUpdate                 ;C - - - - - 0x01C141 0E:C131: 20 72 FF
 	PLA                             ;C - - - - - 0x01C144 0E:C134: 68
 	TAY                             ;C - - - - - 0x01C145 0E:C135: A8
 	PLA                             ;C - - - - - 0x01C146 0E:C136: 68
@@ -466,7 +466,7 @@ loc_0E_C32A:
 	INX                             ;C - - - - - 0x01C340 0E:C330: E8
 	BNE loc_0E_C32A                 ;C - - - - - 0x01C341 0E:C331: D0 F7
 	RTS                             ;C - - - - - 0x01C343 0E:C333: 60
-sub_0E_C334:
+ClearObjects:
 	LDX #$0F                        ;C - - - - - 0x01C344 0E:C334: A2 0F
 loc_0E_C336:
 	LDA #$00                        ;C - - - - - 0x01C346 0E:C336: A9 00
@@ -486,13 +486,13 @@ loc_0E_C336:
 	DEX                             ;C - - - - - 0x01C36E 0E:C35E: CA
 	BPL loc_0E_C336                 ;C - - - - - 0x01C36F 0E:C35F: 10 D5
 	RTS                             ;C - - - - - 0x01C371 0E:C361: 60
-sub_0E_C362:
+FadeOutPaletteFast:
 	JSR HideSprites                 ;C - - - - - 0x01C372 0E:C362: 20 1D C3
 	JSR WaitFrame                   ;C - - - - - 0x01C375 0E:C365: 20 31 FF
 	LDA #$30                        ;C - - - - - 0x01C378 0E:C368: A9 30
 	LDX #$F0                        ;C - - - - - 0x01C37A 0E:C36A: A2 F0
 	BNE loc_0E_C371                 ;C - - - - - 0x01C37C 0E:C36C: D0 03
-sub_0E_C36E:
+FadeOutPalette:
 	LDA #$10                        ;C - - - - - 0x01C37E 0E:C36E: A9 10
 	TAX                             ;C - - - - - 0x01C380 0E:C370: AA
 loc_0E_C371:
@@ -537,7 +537,7 @@ loc_0E_C39A:
 	BPL loc_0E_C379                 ;C - - - - - 0x01C3C1 0E:C3B1: 10 C6
 loc_0E_C3B3:
 	RTS                             ;C - - - - - 0x01C3C3 0E:C3B3: 60
-sub_0E_C3B4:
+UpdateRandom:
 	LDX #$00                        ;C - - - - - 0x01C3C4 0E:C3B4: A2 00
 	LDY #$04                        ;C - - - - - 0x01C3C6 0E:C3B6: A0 04
 ofs_0E_C3B8:
@@ -744,7 +744,7 @@ loc_0E_C527:
 	STA prgBankA000                 ;C - - - - - 0x01C542 0E:C532: 85 F5
 	JSR SetPrgBanks                 ;C - - - - - 0x01C544 0E:C534: 20 4D FF
 	PLA                             ;C - - - - - 0x01C547 0E:C537: 68
-	JSR sub_09_A000                 ;C - - - - - bank=09 0x01C548 0E:C538: 20 00 A0
+	JSR SetSectionChr               ;C - - - - - bank=09 0x01C548 0E:C538: 20 00 A0
 	JMP loc_0F_FF4C                 ;C - - - - - 0x01C54B 0E:C53B: 4C 4C FF
 spritePalCody:
 	.byte $0F,$0F,$36,$26,$0F,$0F,$30,$21;- D 2 - - - 0x01C54E 0E:C53E:
@@ -762,28 +762,28 @@ ofs_0E_C556:
 	JSR WaitFrame                   ;C - - - - - 0x01C573 0E:C563: 20 31 FF
 	LDA #$88                        ;C - - - - - 0x01C576 0E:C566: A9 88
 	STA ram_00E4                    ;C - - - - - 0x01C578 0E:C568: 85 E4
-	JSR sub_0E_C85C                 ;C - - - - - 0x01C57A 0E:C56A: 20 5C C8
+	JSR FadeAndClearScreen          ;C - - - - - 0x01C57A 0E:C56A: 20 5C C8
 	LDX #$04                        ;C - - - - - 0x01C57D 0E:C56D: A2 04
 	STX prgBank8000                 ;C - - - - - 0x01C57F 0E:C56F: 86 F4
 	INX                             ;C - - - - - 0x01C581 0E:C571: E8
 	STX prgBankA000                 ;C - - - - - 0x01C582 0E:C572: 86 F5
 	JSR SetPrgBanks                 ;C - - - - - 0x01C584 0E:C574: 20 4D FF
 	LDX #$04                        ;C - - - - - 0x01C587 0E:C577: A2 04
-	JSR sub_04_8000                 ;C - - - - - bank=04 0x01C589 0E:C579: 20 00 80
+	JSR QueueVramScript             ;C - - - - - bank=04 0x01C589 0E:C579: 20 00 80
 	JSR ScreenOn                    ;C - - - - - 0x01C58C 0E:C57C: 20 6F C2
-	JSR sub_04_89C0                 ;C - - - - - bank=04 0x01C58F 0E:C57F: 20 C0 89
+	JSR ScreenInit89C0              ;C - - - - - bank=04 0x01C58F 0E:C57F: 20 C0 89
 	LDX #$B4                        ;C - - - - - 0x01C592 0E:C582: A2 B4
 	JSR WaitFrames                  ;C - - - - - 0x01C594 0E:C584: 20 2A FF
-	JSR sub_0E_C85C                 ;C - - - - - 0x01C597 0E:C587: 20 5C C8
+	JSR FadeAndClearScreen          ;C - - - - - 0x01C597 0E:C587: 20 5C C8
 	LDX #$04                        ;C - - - - - 0x01C59A 0E:C58A: A2 04
 	STX prgBank8000                 ;C - - - - - 0x01C59C 0E:C58C: 86 F4
 	INX                             ;C - - - - - 0x01C59E 0E:C58E: E8
 	STX prgBankA000                 ;C - - - - - 0x01C59F 0E:C58F: 86 F5
 	JSR SetPrgBanks                 ;C - - - - - 0x01C5A1 0E:C591: 20 4D FF
 	LDX #$00                        ;C - - - - - 0x01C5A4 0E:C594: A2 00
-	JSR sub_04_8000                 ;C - - - - - bank=04 0x01C5A6 0E:C596: 20 00 80
+	JSR QueueVramScript             ;C - - - - - bank=04 0x01C5A6 0E:C596: 20 00 80
 	JSR ScreenOn                    ;C - - - - - 0x01C5A9 0E:C599: 20 6F C2
-	JSR sub_04_8900                 ;C - - - - - bank=04 0x01C5AC 0E:C59C: 20 00 89
+	JSR ScreenInit8900              ;C - - - - - bank=04 0x01C5AC 0E:C59C: 20 00 89
 	LDA #$B4                        ;C - - - - - 0x01C5AF 0E:C59F: A9 B4
 	STA actionTimer                 ;C - - - - - 0x01C5B1 0E:C5A1: 85 37
 loc_0E_C5A3:
@@ -811,7 +811,7 @@ loc_0E_C5CA:
 	LDA #$00                        ;c - - - - - 0x01C5DA 0E:C5CA: A9 00
 	BEQ loc_0E_C5CA                 ;c - - - - - 0x01C5DC 0E:C5CC: F0 FC
 loc_0E_C5CE:
-	JSR sub_0E_C888                 ;C - - - - - 0x01C5DE 0E:C5CE: 20 88 C8
+	JSR PrepareScreenDraw           ;C - - - - - 0x01C5DE 0E:C5CE: 20 88 C8
 	LDA #$00                        ;C - - - - - 0x01C5E1 0E:C5D1: A9 00
 	STA ram_00B8                    ;C - - - - - 0x01C5E3 0E:C5D3: 85 B8
 	JSR bankedEntry9A00             ;C - - - - - 0x01C5E5 0E:C5D5: 20 00 9A  ; call into the switchable $8000 bank (bank depends on stage)
@@ -819,16 +819,16 @@ loc_0E_C5CE:
 	BNE loc_0E_C657                 ;C - - - - - 0x01C5EA 0E:C5DA: D0 7B
 	LDA #$07                        ;C - - - - - 0x01C5EC 0E:C5DC: A9 07
 	JSR QueueSoundSaved             ;C - - - - - 0x01C5EE 0E:C5DE: 20 4A F3
-	JSR sub_0E_C85C                 ;C - - - - - 0x01C5F1 0E:C5E1: 20 5C C8
+	JSR FadeAndClearScreen          ;C - - - - - 0x01C5F1 0E:C5E1: 20 5C C8
 	LDX #$04                        ;C - - - - - 0x01C5F4 0E:C5E4: A2 04
 	STX prgBank8000                 ;C - - - - - 0x01C5F6 0E:C5E6: 86 F4
 	INX                             ;C - - - - - 0x01C5F8 0E:C5E8: E8
 	STX prgBankA000                 ;C - - - - - 0x01C5F9 0E:C5E9: 86 F5
 	JSR SetPrgBanks                 ;C - - - - - 0x01C5FB 0E:C5EB: 20 4D FF
 	LDX #$06                        ;C - - - - - 0x01C5FE 0E:C5EE: A2 06
-	JSR sub_04_8000                 ;C - - - - - bank=04 0x01C600 0E:C5F0: 20 00 80
+	JSR QueueVramScript             ;C - - - - - bank=04 0x01C600 0E:C5F0: 20 00 80
 	JSR ScreenOn                    ;C - - - - - 0x01C603 0E:C5F3: 20 6F C2
-	JSR sub_04_8B40                 ;C - - - - - bank=04 0x01C606 0E:C5F6: 20 40 8B
+	JSR ScreenInit8B40              ;C - - - - - bank=04 0x01C606 0E:C5F6: 20 40 8B
 	LDX #$00                        ;C - - - - - 0x01C609 0E:C5F9: A2 00
 	STX prgBank8000                 ;C - - - - - 0x01C60B 0E:C5FB: 86 F4
 	INX                             ;C - - - - - 0x01C60D 0E:C5FD: E8
@@ -836,25 +836,25 @@ loc_0E_C5CE:
 	JSR SetPrgBanks                 ;C - - - - - 0x01C610 0E:C600: 20 4D FF
 	LDA #$01                        ;C - - - - - 0x01C613 0E:C603: A9 01
 	STA ram_00B8                    ;C - - - - - 0x01C615 0E:C605: 85 B8
-	JSR sub_00_9A00                 ;C - - - - - bank=00 0x01C617 0E:C607: 20 00 9A
+	JSR RunTextScript_00            ;C - - - - - bank=00 0x01C617 0E:C607: 20 00 9A
 	LDA padHeld                     ;C - - - - - 0x01C61A 0E:C60A: A5 16
 	BNE loc_0E_C657                 ;C - - - - - 0x01C61C 0E:C60C: D0 49
-	JSR sub_0E_C888                 ;C - - - - - 0x01C61E 0E:C60E: 20 88 C8
+	JSR PrepareScreenDraw           ;C - - - - - 0x01C61E 0E:C60E: 20 88 C8
 	LDA #$02                        ;C - - - - - 0x01C621 0E:C611: A9 02
 	STA ram_00B8                    ;C - - - - - 0x01C623 0E:C613: 85 B8
-	JSR sub_00_9A00                 ;C - - - - - bank=00 0x01C625 0E:C615: 20 00 9A
+	JSR RunTextScript_00            ;C - - - - - bank=00 0x01C625 0E:C615: 20 00 9A
 	LDA padHeld                     ;C - - - - - 0x01C628 0E:C618: A5 16
 	BNE loc_0E_C657                 ;C - - - - - 0x01C62A 0E:C61A: D0 3B
-	JSR sub_0E_C85C                 ;C - - - - - 0x01C62C 0E:C61C: 20 5C C8
+	JSR FadeAndClearScreen          ;C - - - - - 0x01C62C 0E:C61C: 20 5C C8
 	LDX #$04                        ;C - - - - - 0x01C62F 0E:C61F: A2 04
 	STX prgBank8000                 ;C - - - - - 0x01C631 0E:C621: 86 F4
 	INX                             ;C - - - - - 0x01C633 0E:C623: E8
 	STX prgBankA000                 ;C - - - - - 0x01C634 0E:C624: 86 F5
 	JSR SetPrgBanks                 ;C - - - - - 0x01C636 0E:C626: 20 4D FF
 	LDX #$07                        ;C - - - - - 0x01C639 0E:C629: A2 07
-	JSR sub_04_8000                 ;C - - - - - bank=04 0x01C63B 0E:C62B: 20 00 80
+	JSR QueueVramScript             ;C - - - - - bank=04 0x01C63B 0E:C62B: 20 00 80
 	JSR ScreenOn                    ;C - - - - - 0x01C63E 0E:C62E: 20 6F C2
-	JSR sub_04_8AC0                 ;C - - - - - bank=04 0x01C641 0E:C631: 20 C0 8A
+	JSR ScreenInit8AC0              ;C - - - - - bank=04 0x01C641 0E:C631: 20 C0 8A
 	LDX #$00                        ;C - - - - - 0x01C644 0E:C634: A2 00
 	STX prgBank8000                 ;C - - - - - 0x01C646 0E:C636: 86 F4
 	INX                             ;C - - - - - 0x01C648 0E:C638: E8
@@ -862,27 +862,27 @@ loc_0E_C5CE:
 	JSR SetPrgBanks                 ;C - - - - - 0x01C64B 0E:C63B: 20 4D FF
 	LDA #$03                        ;C - - - - - 0x01C64E 0E:C63E: A9 03
 	STA ram_00B8                    ;C - - - - - 0x01C650 0E:C640: 85 B8
-	JSR sub_00_9A00                 ;C - - - - - bank=00 0x01C652 0E:C642: 20 00 9A
+	JSR RunTextScript_00            ;C - - - - - bank=00 0x01C652 0E:C642: 20 00 9A
 	LDA padHeld                     ;C - - - - - 0x01C655 0E:C645: A5 16
 	BNE loc_0E_C657                 ;C - - - - - 0x01C657 0E:C647: D0 0E
-	JSR sub_0E_C888                 ;C - - - - - 0x01C659 0E:C649: 20 88 C8
+	JSR PrepareScreenDraw           ;C - - - - - 0x01C659 0E:C649: 20 88 C8
 	LDA #$04                        ;C - - - - - 0x01C65C 0E:C64C: A9 04
 	STA ram_00B8                    ;C - - - - - 0x01C65E 0E:C64E: 85 B8
-	JSR sub_00_9A00                 ;C - - - - - bank=00 0x01C660 0E:C650: 20 00 9A
+	JSR RunTextScript_00            ;C - - - - - bank=00 0x01C660 0E:C650: 20 00 9A
 	LDA padHeld                     ;C - - - - - 0x01C663 0E:C653: A5 16
 	BNE loc_0E_C657                 ;C - - - - - 0x01C665 0E:C655: D0 00
 loc_0E_C657:
 	LDA #$0C                        ;C - - - - - 0x01C667 0E:C657: A9 0C
 	JSR QueueSoundSaved             ;C - - - - - 0x01C669 0E:C659: 20 4A F3
-	JSR sub_0E_C85C                 ;C - - - - - 0x01C66C 0E:C65C: 20 5C C8
+	JSR FadeAndClearScreen          ;C - - - - - 0x01C66C 0E:C65C: 20 5C C8
 	LDX #$04                        ;C - - - - - 0x01C66F 0E:C65F: A2 04
 	STX prgBank8000                 ;C - - - - - 0x01C671 0E:C661: 86 F4
 	INX                             ;C - - - - - 0x01C673 0E:C663: E8
 	STX prgBankA000                 ;C - - - - - 0x01C674 0E:C664: 86 F5
 	JSR SetPrgBanks                 ;C - - - - - 0x01C676 0E:C666: 20 4D FF
 	LDX #$01                        ;C - - - - - 0x01C679 0E:C669: A2 01
-	JSR sub_04_8000                 ;C - - - - - bank=04 0x01C67B 0E:C66B: 20 00 80
-	JSR sub_04_8940                 ;C - - - - - bank=04 0x01C67E 0E:C66E: 20 40 89
+	JSR QueueVramScript             ;C - - - - - bank=04 0x01C67B 0E:C66B: 20 00 80
+	JSR ScreenInit8940              ;C - - - - - bank=04 0x01C67E 0E:C66E: 20 40 89
 	JSR ScreenOn                    ;C - - - - - 0x01C681 0E:C671: 20 6F C2
 	LDA #$FF                        ;C - - - - - 0x01C684 0E:C674: A9 FF
 	STA objArr_0500                 ;C - - - - - 0x01C686 0E:C676: 8D 00 05
@@ -903,7 +903,7 @@ loc_0E_C681:
 	BNE loc_0E_C6CF                 ;C - - - - - 0x01C6AB 0E:C69B: D0 32
 	LDA #$00                        ;C - - - - - 0x01C6AD 0E:C69D: A9 00
 	STA renderOffCount              ;C - - - - - 0x01C6AF 0E:C69F: 85 EE
-	JSR sub_0E_C36E                 ;C - - - - - 0x01C6B1 0E:C6A1: 20 6E C3
+	JSR FadeOutPalette              ;C - - - - - 0x01C6B1 0E:C6A1: 20 6E C3
 	JMP RESET                       ;C - - - - - 0x01C6B4 0E:C6A4: 4C 00 FE
 loc_0E_C6A7:
 	DEC objArr_0500                 ;C - - - - - 0x01C6B7 0E:C6A7: CE 00 05
@@ -931,21 +931,21 @@ loc_0E_C6D2:
 	BEQ loc_0E_C681                 ;C - - - - - 0x01C6E6 0E:C6D6: F0 A9
 	LDA #$30                        ;C - - - - - 0x01C6E8 0E:C6D8: A9 30
 	JSR QueueSound                  ;C - - - - - 0x01C6EA 0E:C6DA: 20 4C F3
-	JSR sub_0E_C85C                 ;C - - - - - 0x01C6ED 0E:C6DD: 20 5C C8
+	JSR FadeAndClearScreen          ;C - - - - - 0x01C6ED 0E:C6DD: 20 5C C8
 	LDX #$04                        ;C - - - - - 0x01C6F0 0E:C6E0: A2 04
 	STX prgBank8000                 ;C - - - - - 0x01C6F2 0E:C6E2: 86 F4
 	INX                             ;C - - - - - 0x01C6F4 0E:C6E4: E8
 	STX prgBankA000                 ;C - - - - - 0x01C6F5 0E:C6E5: 86 F5
 	JSR SetPrgBanks                 ;C - - - - - 0x01C6F7 0E:C6E7: 20 4D FF
 	LDX #$02                        ;C - - - - - 0x01C6FA 0E:C6EA: A2 02
-	JSR sub_04_8000                 ;C - - - - - bank=04 0x01C6FC 0E:C6EC: 20 00 80
+	JSR QueueVramScript             ;C - - - - - bank=04 0x01C6FC 0E:C6EC: 20 00 80
 	JSR ScreenOn                    ;C - - - - - 0x01C6FF 0E:C6EF: 20 6F C2
 	LDA #$00                        ;C - - - - - 0x01C702 0E:C6F2: A9 00
 	STA playerId                    ;C - - - - - 0x01C704 0E:C6F4: 85 34
 	STA ram_00BD                    ;C - - - - - 0x01C706 0E:C6F6: 85 BD
-	JSR sub_04_9100                 ;C - - - - - bank=04 0x01C708 0E:C6F8: 20 00 91
-	JSR sub_0E_C85C                 ;C - - - - - 0x01C70B 0E:C6FB: 20 5C C8
-	JSR sub_0E_C334                 ;C - - - - - 0x01C70E 0E:C6FE: 20 34 C3
+	JSR ScreenInit9100              ;C - - - - - bank=04 0x01C708 0E:C6F8: 20 00 91
+	JSR FadeAndClearScreen          ;C - - - - - 0x01C70B 0E:C6FB: 20 5C C8
+	JSR ClearObjects                ;C - - - - - 0x01C70E 0E:C6FE: 20 34 C3
 	LDX #$04                        ;C - - - - - 0x01C711 0E:C701: A2 04
 ofs_0E_C703:
 	STX prgBank8000                 ;C - - - - - 0x01C713 0E:C703: 86 F4
@@ -953,12 +953,12 @@ ofs_0E_C703:
 	STX prgBankA000                 ;C - - - - - 0x01C716 0E:C706: 86 F5
 	JSR SetPrgBanks                 ;C - - - - - 0x01C718 0E:C708: 20 4D FF
 	LDX #$08                        ;C - - - - - 0x01C71B 0E:C70B: A2 08
-	JSR sub_04_8000                 ;C - - - - - bank=04 0x01C71D 0E:C70D: 20 00 80
+	JSR QueueVramScript             ;C - - - - - bank=04 0x01C71D 0E:C70D: 20 00 80
 	JSR ScreenOn                    ;C - - - - - 0x01C720 0E:C710: 20 6F C2
-	JSR sub_04_8D00                 ;C - - - - - bank=04 0x01C723 0E:C713: 20 00 8D
+	JSR ScreenInit8D00              ;C - - - - - bank=04 0x01C723 0E:C713: 20 00 8D
 	LDX #$2D                        ;C - - - - - 0x01C726 0E:C716: A2 2D
 	JSR WaitFrames                  ;C - - - - - 0x01C728 0E:C718: 20 2A FF
-	JSR sub_0E_C85C                 ;C - - - - - 0x01C72B 0E:C71B: 20 5C C8
+	JSR FadeAndClearScreen          ;C - - - - - 0x01C72B 0E:C71B: 20 5C C8
 	JSR ScreenOn                    ;C - - - - - 0x01C72E 0E:C71E: 20 6F C2
 	CLI                             ;C - - - - - 0x01C731 0E:C721: 58
 	LDA #$01                        ;C - - - - - 0x01C732 0E:C722: A9 01
@@ -977,7 +977,7 @@ ofs_0E_C703:
 	STA ram_005A                    ;C - - - - - 0x01C74E 0E:C73E: 85 5A
 	STA ram_0033                    ;C - - - - - 0x01C750 0E:C740: 85 33
 	STA renderOffCount              ;C - - - - - 0x01C752 0E:C742: 85 EE
-	JSR sub_0E_C334                 ;C - - - - - 0x01C754 0E:C744: 20 34 C3
+	JSR ClearObjects                ;C - - - - - 0x01C754 0E:C744: 20 34 C3
 	LDA #$01                        ;C - - - - - 0x01C757 0E:C747: A9 01
 	STA MMC3_MIRRORING              ;C - - - - - 0x01C759 0E:C749: 8D 00 A0
 	LDA #$01                        ;C - - - - - 0x01C75C 0E:C74C: A9 01
@@ -997,14 +997,14 @@ ofs_0E_C703:
 loc_0E_C768:
 	LDA #$01                        ;C - - - - - 0x01C778 0E:C768: A9 01
 	STA spriteFlipMask              ;C - - - - - 0x01C77A 0E:C76A: 85 10
-	JSR sub_0F_E521                 ;C - - - - - 0x01C77C 0E:C76C: 20 21 E5
+	JSR StageScrollUpdate           ;C - - - - - 0x01C77C 0E:C76C: 20 21 E5
 	JSR WaitFrame                   ;C - - - - - 0x01C77F 0E:C76F: 20 31 FF
 	LDA ram_0029                    ;C - - - - - 0x01C782 0E:C772: A5 29
 	BEQ loc_0E_C768                 ;C - - - - - 0x01C784 0E:C774: F0 F2
 	LDA #$0A                        ;C - - - - - 0x01C786 0E:C776: A9 0A
 	STA prgBank8000                 ;C - - - - - 0x01C788 0E:C778: 85 F4
 	JSR SetPrgBanks                 ;C - - - - - 0x01C78A 0E:C77A: 20 4D FF
-	JSR sub_0A_9C00                 ;C - - - - - bank=0A 0x01C78D 0E:C77D: 20 00 9C
+	JSR QueueScreenText             ;C - - - - - bank=0A 0x01C78D 0E:C77D: 20 00 9C
 	LDY stageData                   ;C - - - - - 0x01C790 0E:C780: A4 22
 	LDA stageBankTable,Y            ;C - - - - - 0x01C792 0E:C782: B9 F8 C1
 	STA prgBankA000                 ;C - - - - - 0x01C795 0E:C785: 85 F5
@@ -1022,8 +1022,8 @@ loc_0E_C768:
 	JSR LoadSectionGfx              ;C - - - - - 0x01C7AD 0E:C79D: 20 DD C3
 	LDA #$00                        ;C - - - - - 0x01C7B0 0E:C7A0: A9 00
 	STA palUpdateFlag               ;C - - - - - 0x01C7B2 0E:C7A2: 85 18
-	JSR sub_0E_C362                 ;C - - - - - 0x01C7B4 0E:C7A4: 20 62 C3
-	JSR sub_0E_C334                 ;C - - - - - 0x01C7B7 0E:C7A7: 20 34 C3
+	JSR FadeOutPaletteFast          ;C - - - - - 0x01C7B4 0E:C7A4: 20 62 C3
+	JSR ClearObjects                ;C - - - - - 0x01C7B7 0E:C7A7: 20 34 C3
 	LDX #$00                        ;C - - - - - 0x01C7BA 0E:C7AA: A2 00
 	LDA #$D0                        ;C - - - - - 0x01C7BC 0E:C7AC: A9 D0
 	STA objFlags                    ;C - - - - - 0x01C7BE 0E:C7AE: 8D 60 05
@@ -1038,19 +1038,19 @@ loc_0E_C768:
 	STA objYPage                    ;C - - - - - 0x01C7D5 0E:C7C5: 8D E0 03
 	STA objKind                     ;C - - - - - 0x01C7D8 0E:C7C8: 8D 20 03
 	STA ram_0067                    ;C - - - - - 0x01C7DB 0E:C7CB: 85 67
-	JSR sub_0F_F26E                 ;C - - - - - 0x01C7DD 0E:C7CD: 20 6E F2
+	JSR SetHopVelY                  ;C - - - - - 0x01C7DD 0E:C7CD: 20 6E F2
 	LDY playerId                    ;C - - - - - 0x01C7E0 0E:C7D0: A4 34
 	LDA tbl_0E_C841,Y               ;C - - - - - 0x01C7E2 0E:C7D2: B9 41 C8
 	STA playerHealth                ;C - - - - - 0x01C7E5 0E:C7D5: 85 3A
-	JSR sub_0E_C8B4                 ;C - - - - - 0x01C7E7 0E:C7D7: 20 B4 C8
+	JSR LoadPlayerPalette           ;C - - - - - 0x01C7E7 0E:C7D7: 20 B4 C8
 	LDX #$08                        ;C - - - - - 0x01C7EA 0E:C7DA: A2 08
 	STX prgBank8000                 ;C - - - - - 0x01C7EC 0E:C7DC: 86 F4
 	INX                             ;C - - - - - 0x01C7EE 0E:C7DE: E8
 	STX prgBankA000                 ;C - - - - - 0x01C7EF 0E:C7DF: 86 F5
 	JSR SetPrgBanks                 ;C - - - - - 0x01C7F1 0E:C7E1: 20 4D FF
 	JSR LoadSpawnLists              ;C - - - - - bank=08 0x01C7F4 0E:C7E4: 20 00 80
-	JSR sub_08_8038                 ;C - - - - - bank=08 0x01C7F7 0E:C7E7: 20 38 80
-	JSR sub_08_8080                 ;C - - - - - bank=08 0x01C7FA 0E:C7EA: 20 80 80
+	JSR FindFirstVisibleSpawn       ;C - - - - - bank=08 0x01C7F7 0E:C7E7: 20 38 80
+	JSR SpawnEnemiesInWindow        ;C - - - - - bank=08 0x01C7FA 0E:C7EA: 20 80 80
 ; GG PEVKTYIA/IE start lives: LDA #$05 / STA lives
 	LDA #$05                        ;C - - - - - 0x01C7FD 0E:C7ED: A9 05
 	STA lives                       ;C - - - - - 0x01C7FF 0E:C7EF: 85 3E
@@ -1094,7 +1094,8 @@ tbl_0E_C83C:
 	.byte $00,$01,$02,$03,$04       ;- D 2 - - - 0x01C84C 0E:C83C:
 tbl_0E_C841:
 	.byte $40,$30,$50               ;- D 2 - - - 0x01C851 0E:C841:
-sub_0E_C844:
+; zero $0400-$05FF
+ClearObjArrays:
 	LDA #$00                        ;C - - - - - 0x01C854 0E:C844: A9 00
 	STA ptr_00                      ;C - - - - - 0x01C856 0E:C846: 85 00
 	LDA #$04                        ;C - - - - - 0x01C858 0E:C848: A9 04
@@ -1110,15 +1111,15 @@ loc_0E_C851:
 	DEX                             ;C - - - - - 0x01C868 0E:C858: CA
 	BPL loc_0E_C851                 ;C - - - - - 0x01C869 0E:C859: 10 F6
 	RTS                             ;C - - - - - 0x01C86B 0E:C85B: 60
-sub_0E_C85C:
-	JSR sub_0E_C36E                 ;C - - - - - 0x01C86C 0E:C85C: 20 6E C3
-sub_0E_C85F:
+FadeAndClearScreen:
+	JSR FadeOutPalette              ;C - - - - - 0x01C86C 0E:C85C: 20 6E C3
+ClearScreenAndSprites:
 	JSR WaitFrame                   ;C - - - - - 0x01C86F 0E:C85F: 20 31 FF
 	JSR ScreenOff                   ;C - - - - - 0x01C872 0E:C862: 20 65 C2
 	LDA #$04                        ;C - - - - - 0x01C875 0E:C865: A9 04
 	STA oamHideStart                ;C - - - - - 0x01C877 0E:C867: 85 97
 	JSR HideSprites                 ;C - - - - - 0x01C879 0E:C869: 20 1D C3
-	JSR sub_0E_C844                 ;C - - - - - 0x01C87C 0E:C86C: 20 44 C8
+	JSR ClearObjArrays              ;C - - - - - 0x01C87C 0E:C86C: 20 44 C8
 	LDA #$00                        ;C - - - - - 0x01C87F 0E:C86F: A9 00
 	STA scrollX                     ;C - - - - - 0x01C881 0E:C871: 85 FC
 	STA scrollY                     ;C - - - - - 0x01C883 0E:C873: 85 FA
@@ -1132,30 +1133,30 @@ ofs_0E_C881:
 	JSR FillNametable               ;C - - - - - 0x01C891 0E:C881: 20 D1 C2
 	JSR HideSprites                 ;C - - - - - 0x01C894 0E:C884: 20 1D C3
 	RTS                             ;C - - - - - 0x01C897 0E:C887: 60
-sub_0E_C888:
-	JSR sub_0E_C85C                 ;C - - - - - 0x01C898 0E:C888: 20 5C C8
+PrepareScreenDraw:
+	JSR FadeAndClearScreen          ;C - - - - - 0x01C898 0E:C888: 20 5C C8
 	JSR ScreenOn                    ;C - - - - - 0x01C89B 0E:C88B: 20 6F C2
 	LDX #$04                        ;C - - - - - 0x01C89E 0E:C88E: A2 04
 	STX prgBank8000                 ;C - - - - - 0x01C8A0 0E:C890: 86 F4
 	INX                             ;C - - - - - 0x01C8A2 0E:C892: E8
 	STX prgBankA000                 ;C - - - - - 0x01C8A3 0E:C893: 86 F5
 	JSR SetPrgBanks                 ;C - - - - - 0x01C8A5 0E:C895: 20 4D FF
-	JSR sub_04_8A40                 ;C - - - - - bank=04 0x01C8A8 0E:C898: 20 40 8A
+	JSR ScreenInit8A40              ;C - - - - - bank=04 0x01C8A8 0E:C898: 20 40 8A
 	LDX #$00                        ;C - - - - - 0x01C8AB 0E:C89B: A2 00
 	STX prgBank8000                 ;C - - - - - 0x01C8AD 0E:C89D: 86 F4
 	INX                             ;C - - - - - 0x01C8AF 0E:C89F: E8
 	STX prgBankA000                 ;C - - - - - 0x01C8B0 0E:C8A0: 86 F5
 	JSR SetPrgBanks                 ;C - - - - - 0x01C8B2 0E:C8A2: 20 4D FF
 	RTS                             ;C - - - - - 0x01C8B5 0E:C8A5: 60
-sub_0E_C8A6:
-	JSR sub_0E_C85F                 ;C - - - - - 0x01C8B6 0E:C8A6: 20 5F C8
+ClearScreenSetBank04:
+	JSR ClearScreenAndSprites       ;C - - - - - 0x01C8B6 0E:C8A6: 20 5F C8
 	LDX #$04                        ;C - - - - - 0x01C8B9 0E:C8A9: A2 04
 	STX prgBank8000                 ;C - - - - - 0x01C8BB 0E:C8AB: 86 F4
 	INX                             ;C - - - - - 0x01C8BD 0E:C8AD: E8
 	STX prgBankA000                 ;C - - - - - 0x01C8BE 0E:C8AE: 86 F5
 	JSR SetPrgBanks                 ;C - - - - - 0x01C8C0 0E:C8B0: 20 4D FF
 	RTS                             ;C - - - - - 0x01C8C3 0E:C8B3: 60
-sub_0E_C8B4:
+LoadPlayerPalette:
 	LDY playerId                    ;C - - - - - 0x01C8C4 0E:C8B4: A4 34
 	LDA tbl_0E_C8DA,Y               ;C - - - - - 0x01C8C6 0E:C8B6: B9 DA C8
 	TAX                             ;C - - - - - 0x01C8C9 0E:C8B9: AA
@@ -1222,14 +1223,14 @@ loc_0E_C934:
 	BEQ loc_0E_C93B                 ;C - - - - - 0x01C946 0E:C936: F0 03
 	JMP loc_0E_C9A7                 ;C - - - - - 0x01C948 0E:C938: 4C A7 C9
 loc_0E_C93B:
-	JSR sub_0E_C9B6                 ;C - - - - - 0x01C94B 0E:C93B: 20 B6 C9
+	JSR RunGameActionFlash          ;C - - - - - 0x01C94B 0E:C93B: 20 B6 C9
 	LDX #$00                        ;C - - - - - 0x01C94E 0E:C93E: A2 00
 	STX prgBank8000                 ;C - - - - - 0x01C950 0E:C940: 86 F4
 	INX                             ;C - - - - - 0x01C952 0E:C942: E8
 	STX prgBankA000                 ;C - - - - - 0x01C953 0E:C943: 86 F5
 	JSR SetPrgBanks                 ;C - - - - - 0x01C955 0E:C945: 20 4D FF
-	JSR sub_00_8000                 ;C - - - - - bank=00 0x01C958 0E:C948: 20 00 80
-	JSR sub_0F_E2A3                 ;C - - - - - 0x01C95B 0E:C94B: 20 A3 E2
+	JSR GameActionDispatch00        ;C - - - - - bank=00 0x01C958 0E:C948: 20 00 80
+	JSR UpdateHorizScroll           ;C - - - - - 0x01C95B 0E:C94B: 20 A3 E2
 	LDA objX                        ;C - - - - - 0x01C95E 0E:C94E: AD 60 03
 	STA ram_0027                    ;C - - - - - 0x01C961 0E:C951: 85 27
 	LDA scrollX                     ;C - - - - - 0x01C963 0E:C953: A5 FC
@@ -1239,21 +1240,21 @@ loc_0E_C93B:
 	INX                             ;C - - - - - 0x01C96B 0E:C95B: E8
 	STX prgBankA000                 ;C - - - - - 0x01C96C 0E:C95C: 86 F5
 	JSR SetPrgBanks                 ;C - - - - - 0x01C96E 0E:C95E: 20 4D FF
-	JSR sub_08_8080                 ;C - - - - - bank=08 0x01C971 0E:C961: 20 80 80
-	JSR sub_08_8900                 ;C - - - - - bank=08 0x01C974 0E:C964: 20 00 89
-	JSR sub_09_A300                 ;C - - - - - bank=09 0x01C977 0E:C967: 20 00 A3
+	JSR SpawnEnemiesInWindow        ;C - - - - - bank=08 0x01C971 0E:C961: 20 80 80
+	JSR StageEventTrigger           ;C - - - - - bank=08 0x01C974 0E:C964: 20 00 89
+	JSR PaletteAnimTick             ;C - - - - - bank=09 0x01C977 0E:C967: 20 00 A3
 	LDX #$0C                        ;C - - - - - 0x01C97A 0E:C96A: A2 0C
 	STX prgBank8000                 ;C - - - - - 0x01C97C 0E:C96C: 86 F4
 	INX                             ;C - - - - - 0x01C97E 0E:C96E: E8
 	STX prgBankA000                 ;C - - - - - 0x01C97F 0E:C96F: 86 F5
 	JSR SetPrgBanks                 ;C - - - - - 0x01C981 0E:C971: 20 4D FF
-	JSR sub_0C_8000                 ;C - - - - - bank=0C 0x01C984 0E:C974: 20 00 80
+	JSR UpdateEnemiesEntry          ;C - - - - - bank=0C 0x01C984 0E:C974: 20 00 80
 	LDA gameAction                  ;C - - - - - 0x01C987 0E:C977: A5 30
 	CMP #$07                        ;C - - - - - 0x01C989 0E:C979: C9 07
 	BEQ loc_0E_C99D                 ;C - - - - - 0x01C98B 0E:C97B: F0 20
 	CMP #$09                        ;C - - - - - 0x01C98D 0E:C97D: C9 09
 	BEQ loc_0E_C99D                 ;C - - - - - 0x01C98F 0E:C97F: F0 1C
-	JSR sub_0F_E6AB                 ;C - - - - - 0x01C991 0E:C981: 20 AB E6
+	JSR UpdateStatusBar             ;C - - - - - 0x01C991 0E:C981: 20 AB E6
 	JMP loc_0E_C99D                 ;C - - - - - 0x01C994 0E:C984: 4C 9D C9
 loc_0E_C987:
 	LDX #$04                        ;C - - - - - 0x01C997 0E:C987: A2 04
@@ -1261,7 +1262,7 @@ loc_0E_C987:
 	INX                             ;C - - - - - 0x01C99B 0E:C98B: E8
 	STX prgBankA000                 ;C - - - - - 0x01C99C 0E:C98C: 86 F5
 	JSR SetPrgBanks                 ;C - - - - - 0x01C99E 0E:C98E: 20 4D FF
-	JSR sub_04_9800                 ;C - - - - - bank=04 0x01C9A1 0E:C991: 20 00 98
+	JSR ScreenDispatch9800          ;C - - - - - bank=04 0x01C9A1 0E:C991: 20 00 98
 	LDA objSpriteDown+12            ;C - - - - - 0x01C9A4 0E:C994: AD BC 05
 	CMP #$07                        ;C - - - - - 0x01C9A7 0E:C997: C9 07
 	BEQ loc_0E_C99D                 ;C - - - - - 0x01C9A9 0E:C999: F0 02
@@ -1272,14 +1273,14 @@ loc_0E_C99D:
 	JSR HideSprites                 ;C - - - - - 0x01C9B1 0E:C9A1: 20 1D C3
 	JSR DrawObjects                 ;C - - - - - 0x01C9B4 0E:C9A4: 20 BC E9
 loc_0E_C9A7:
-	JSR sub_0E_C3B4                 ;C - - - - - 0x01C9B7 0E:C9A7: 20 B4 C3
+	JSR UpdateRandom                ;C - - - - - 0x01C9B7 0E:C9A7: 20 B4 C3
 	LDA #$00                        ;C - - - - - 0x01C9BA 0E:C9AA: A9 00
 	STA renderOffCount              ;C - - - - - 0x01C9BC 0E:C9AC: 85 EE
 	JSR WaitFrame                   ;C - - - - - 0x01C9BE 0E:C9AE: 20 31 FF
 	INC renderOffCount              ;C - - - - - 0x01C9C1 0E:C9B1: E6 EE
 	JMP loc_0E_C8ED                 ;C - - - - - 0x01C9C3 0E:C9B3: 4C ED C8
-sub_0E_C9B6:
-	JSR sub_0E_CED1                 ;C - - - - - 0x01C9C6 0E:C9B6: 20 D1 CE
+RunGameActionFlash:
+	JSR UpdatePlayerFlash           ;C - - - - - 0x01C9C6 0E:C9B6: 20 D1 CE
 ; jumps to the handler for gameAction (X=0 on entry)
 RunGameAction:
 	LDX #$00                        ;C - - - - - 0x01C9C9 0E:C9B9: A2 00
@@ -1466,7 +1467,7 @@ loc_0E_CB66:
 	BEQ loc_0E_CB86                 ;C - - - - - 0x01CB7A 0E:CB6A: F0 1A
 	CMP #$02                        ;C - - - - - 0x01CB7C 0E:CB6C: C9 02
 	BEQ loc_0E_CB86                 ;C - - - - - 0x01CB7E 0E:CB6E: F0 16
-	JSR sub_0E_CF33                 ;C - - - - - 0x01CB80 0E:CB70: 20 33 CF
+	JSR FindObjNearPlayer           ;C - - - - - 0x01CB80 0E:CB70: 20 33 CF
 	BEQ loc_0E_CB86                 ;C - - - - - 0x01CB83 0E:CB73: F0 11
 	LDY playerId                    ;C - - - - - 0x01CB85 0E:CB75: A4 34
 	LDA tbl_0F_E222,Y               ;C - - - - - 0x01CB87 0E:CB77: B9 22 E2
@@ -1577,7 +1578,7 @@ loc_0E_CC29:
 	STA objFacing,Y                 ;c - - - - - 0x01CC5A 0E:CC4A: 99 60 04
 	BNE loc_0E_CC52                 ;c - - - - - 0x01CC5D 0E:CC4D: D0 03
 loc_0E_CC4F:
-	JSR sub_0E_CC85                 ;c - - - - - 0x01CC5F 0E:CC4F: 20 85 CC
+	JSR PlaceGrabbedEnemy           ;c - - - - - 0x01CC5F 0E:CC4F: 20 85 CC
 loc_0E_CC52:
 	LDA objY                        ;C - - - - - 0x01CC62 0E:CC52: AD C0 03
 	STA objY,Y                      ;C - - - - - 0x01CC65 0E:CC55: 99 C0 03
@@ -1594,7 +1595,7 @@ loc_0E_CC65:
 	BEQ loc_0E_CC70                 ;c - - - - - 0x01CC7C 0E:CC6C: F0 02
 	BNE loc_0E_CC73                 ;c - - - - - 0x01CC7E 0E:CC6E: D0 03
 loc_0E_CC70:
-	JSR sub_0E_CC85                 ;c - - - - - 0x01CC80 0E:CC70: 20 85 CC
+	JSR PlaceGrabbedEnemy           ;c - - - - - 0x01CC80 0E:CC70: 20 85 CC
 loc_0E_CC73:
 	JMP loc_0E_D88C                 ;c - - - - - 0x01CC83 0E:CC73: 4C 8C D8
 loc_0E_CC76:
@@ -1605,7 +1606,7 @@ loc_0E_CC76:
 	JMP loc_0E_CB22                 ;c - - - - - 0x01CC8F 0E:CC7F: 4C 22 CB
 loc_0E_CC82:
 	JMP loc_0E_D8A8                 ;C - - - - - 0x01CC92 0E:CC82: 4C A8 D8
-sub_0E_CC85:
+PlaceGrabbedEnemy:
 	LDA playerFacing                ;c - - - - - 0x01CC95 0E:CC85: A5 31
 	AND #$02                        ;c - - - - - 0x01CC97 0E:CC87: 29 02
 	TAY                             ;c - - - - - 0x01CC99 0E:CC89: A8
@@ -1659,11 +1660,11 @@ loc_0E_CCDA:
 	AND #$01                        ;C - - - - - 0x01CCF9 0E:CCE9: 29 01
 	BEQ loc_0E_CCF5                 ;C - - - - - 0x01CCFB 0E:CCEB: F0 08
 	LDY #$00                        ;C - - - - - 0x01CCFD 0E:CCED: A0 00
-	JSR sub_0F_F000                 ;C - - - - - 0x01CCFF 0E:CCEF: 20 00 F0
+	JSR SetFlag40MoveRight          ;C - - - - - 0x01CCFF 0E:CCEF: 20 00 F0
 	JMP loc_0E_CCFA                 ;C - - - - - 0x01CD02 0E:CCF2: 4C FA CC
 loc_0E_CCF5:
 	LDY #$01                        ;C - - - - - 0x01CD05 0E:CCF5: A0 01
-	JSR sub_0F_F051                 ;C - - - - - 0x01CD07 0E:CCF7: 20 51 F0
+	JSR ClearFlag40MoveLeft         ;C - - - - - 0x01CD07 0E:CCF7: 20 51 F0
 loc_0E_CCFA:
 	LDA padHeld                     ;C - - - - - 0x01CD0A 0E:CCFA: A5 16
 	AND #$0C                        ;C - - - - - 0x01CD0C 0E:CCFC: 29 0C
@@ -1680,7 +1681,7 @@ loc_0E_CCFA:
 loc_0E_CD12:
 	LDY #$00                        ;C - - - - - 0x01CD22 0E:CD12: A0 00
 loc_0E_CD14:
-	JSR sub_0F_F0A2                 ;C - - - - - 0x01CD24 0E:CD14: 20 A2 F0
+	JSR MoveYAddCheck               ;C - - - - - 0x01CD24 0E:CD14: 20 A2 F0
 	JMP loc_0E_CD3B                 ;C - - - - - 0x01CD27 0E:CD17: 4C 3B CD
 loc_0E_CD1A:
 	LDY playerId                    ;C - - - - - 0x01CD2A 0E:CD1A: A4 34
@@ -1698,7 +1699,7 @@ loc_0E_CD1A:
 loc_0E_CD36:
 	LDY #$01                        ;C - - - - - 0x01CD46 0E:CD36: A0 01
 loc_0E_CD38:
-	JSR sub_0F_F0F7                 ;C - - - - - 0x01CD48 0E:CD38: 20 F7 F0
+	JSR MoveYSubCheck               ;C - - - - - 0x01CD48 0E:CD38: 20 F7 F0
 loc_0E_CD3B:
 	LDA padHeld                     ;C - - - - - 0x01CD4B 0E:CD3B: A5 16
 	AND #$0F                        ;C - - - - - 0x01CD4D 0E:CD3D: 29 0F
@@ -1911,7 +1912,8 @@ loc_0E_CEC2:
 	LDA tbl_0F_E267,Y               ;C - - - - - 0x01CEDA 0E:CECA: B9 67 E2
 	JSR SetChrBank2                 ;C - - - - - 0x01CEDD 0E:CECD: 20 40 F4
 	RTS                             ;C - - - - - 0x01CEE0 0E:CED0: 60
-sub_0E_CED1:
+; blinks the player palette from ram_006A/ram_0069
+UpdatePlayerFlash:
 	LDA ram_006A                    ;C - - - - - 0x01CEE1 0E:CED1: A5 6A
 	BEQ loc_0E_CEED                 ;C - - - - - 0x01CEE3 0E:CED3: F0 18
 	DEC ram_006A                    ;C - - - - - 0x01CEE5 0E:CED5: C6 6A
@@ -1966,7 +1968,7 @@ loc_0E_CEFA:
 	STA ram_006E                    ;C - - - - - 0x01CF40 0E:CF30: 85 6E
 loc_0E_CF32:
 	RTS                             ;C - - - - - 0x01CF42 0E:CF32: 60
-sub_0E_CF33:
+FindObjNearPlayer:
 	LDY #$0F                        ;C - - - - - 0x01CF43 0E:CF33: A0 0F
 loc_0E_CF35:
 	LDA objActive,Y                 ;C - - - - - 0x01CF45 0E:CF35: B9 00 03
@@ -2017,7 +2019,7 @@ loc_0E_CF80:
 Act01_Jump:
 	LDY #$00                        ;C - - - - - 0x01CF98 0E:CF88: A0 00
 	LDX #$00                        ;C - - - - - 0x01CF9A 0E:CF8A: A2 00
-	JSR sub_0F_F119                 ;C - - - - - 0x01CF9C 0E:CF8C: 20 19 F1
+	JSR MoveYGravityCheck           ;C - - - - - 0x01CF9C 0E:CF8C: 20 19 F1
 	BCC loc_0E_CF94                 ;C - - - - - 0x01CF9F 0E:CF8F: 90 03
 	JMP loc_0E_D00E                 ;C - - - - - 0x01CFA1 0E:CF91: 4C 0E D0
 loc_0E_CF94:
@@ -2045,9 +2047,9 @@ loc_0E_CFC7:
 	LDA spriteFlipMask              ;C - - - - - 0x01CFD7 0E:CFC7: A5 10
 	CMP #$40                        ;C - - - - - 0x01CFD9 0E:CFC9: C9 40
 	BNE loc_0E_CFDF                 ;C - - - - - 0x01CFDB 0E:CFCB: D0 12
-	JSR sub_0E_CFD1                 ;c - - - - - 0x01CFDD 0E:CFCD: 20 D1 CF
+	JSR StartAction24               ;c - - - - - 0x01CFDD 0E:CFCD: 20 D1 CF
 	RTS                             ;c - - - - - 0x01CFE0 0E:CFD0: 60
-sub_0E_CFD1:
+StartAction24:
 	LDA gameAction                  ;c - - - - - 0x01CFE1 0E:CFD1: A5 30
 	STA ram_00BE                    ;c - - - - - 0x01CFE3 0E:CFD3: 85 BE
 	LDA #$24                        ;c - - - - - 0x01CFE5 0E:CFD5: A9 24
@@ -2067,7 +2069,7 @@ loc_0E_CFEE:
 	LDA spriteFlipMask              ;C - - - - - 0x01CFFE 0E:CFEE: A5 10
 	CMP #$40                        ;C - - - - - 0x01D000 0E:CFF0: C9 40
 	BNE loc_0E_CFF8                 ;C - - - - - 0x01D002 0E:CFF2: D0 04
-	JSR sub_0E_CFD1                 ;c - - - - - 0x01D004 0E:CFF4: 20 D1 CF
+	JSR StartAction24               ;c - - - - - 0x01D004 0E:CFF4: 20 D1 CF
 	RTS                             ;c - - - - - 0x01D007 0E:CFF7: 60
 loc_0E_CFF8:
 	LDA objY                        ;C - - - - - 0x01D008 0E:CFF8: AD C0 03
@@ -2087,7 +2089,7 @@ loc_0E_D00E:
 	BCS loc_0E_D016                 ;C - - - - - 0x01D022 0E:D012: B0 02
 	BCC loc_0E_D01A                 ;C - - - - - 0x01D024 0E:D014: 90 04
 loc_0E_D016:
-	JSR sub_0E_CFD1                 ;c - - - - - 0x01D026 0E:D016: 20 D1 CF
+	JSR StartAction24               ;c - - - - - 0x01D026 0E:D016: 20 D1 CF
 	RTS                             ;c - - - - - 0x01D029 0E:D019: 60
 loc_0E_D01A:
 	LDA #$02                        ;C - - - - - 0x01D02A 0E:D01A: A9 02
@@ -2346,7 +2348,7 @@ loc_0E_D1F6:
 	STA objFlags                    ;C - - - - - 0x01D228 0E:D218: 8D 60 05
 	RTS                             ;C - - - - - 0x01D22B 0E:D21B: 60
 loc_0E_D21C:
-	JSR sub_0F_F099                 ;C - - - - - 0x01D22C 0E:D21C: 20 99 F0
+	JSR ClearObjFlag40              ;C - - - - - 0x01D22C 0E:D21C: 20 99 F0
 	JSR ApplyVelXSub                ;C - - - - - 0x01D22F 0E:D21F: 20 A1 F1
 	LDA playerFacing                ;C - - - - - 0x01D232 0E:D222: A5 31
 	CMP ram_0032                    ;C - - - - - 0x01D234 0E:D224: C5 32
@@ -2584,7 +2586,7 @@ loc_0E_D3F1:
 	BNE loc_0E_D400                 ;C - - - - - 0x01D406 0E:D3F6: D0 08
 	LDA objAnimFlags                ;C - - - - - 0x01D408 0E:D3F8: AD 90 05
 	BNE loc_0E_D400                 ;C - - - - - 0x01D40B 0E:D3FB: D0 03
-	JSR sub_0F_F428                 ;C - - - - - 0x01D40D 0E:D3FD: 20 28 F4
+	JSR StartHitTimer               ;C - - - - - 0x01D40D 0E:D3FD: 20 28 F4
 loc_0E_D400:
 	LDA objAnimFrame                ;C - - - - - 0x01D410 0E:D400: AD 70 05
 	CMP #$03                        ;C - - - - - 0x01D413 0E:D403: C9 03
@@ -2647,7 +2649,7 @@ loc_0E_D473:
 loc_0E_D475:
 	STA ram_006F                    ;C - - - - - 0x01D485 0E:D475: 85 6F
 loc_0E_D477:
-	JSR sub_0E_D79A                 ;C - - - - - 0x01D487 0E:D477: 20 9A D7
+	JSR StartAction0C               ;C - - - - - 0x01D487 0E:D477: 20 9A D7
 	JMP Act0C                       ;C - - - - - 0x01D48A 0E:D47A: 4C 6A DD
 ofs_0E_D47D:
 	LDA objAnim                     ;C - - J - - 0x01D48D 0E:D47D: AD 80 05
@@ -2725,7 +2727,7 @@ loc_0E_D4FF:
 	BNE loc_0E_D4E5                 ;C - - - - - 0x01D514 0E:D504: D0 DF
 	LDA objAnimFlags                ;C - - - - - 0x01D516 0E:D506: AD 90 05
 	BNE loc_0E_D4E5                 ;C - - - - - 0x01D519 0E:D509: D0 DA
-	JSR sub_0F_F428                 ;C - - - - - 0x01D51B 0E:D50B: 20 28 F4
+	JSR StartHitTimer               ;C - - - - - 0x01D51B 0E:D50B: 20 28 F4
 	RTS                             ;C - - - - - 0x01D51E 0E:D50E: 60
 loc_0E_D50F:
 	LDA objAnimFrame                ;C - - - - - 0x01D51F 0E:D50F: AD 70 05
@@ -2747,7 +2749,7 @@ loc_0E_D52B:
 	BNE loc_0E_D53A                 ;C - - - - - 0x01D540 0E:D530: D0 08
 	LDA objAnimFlags                ;C - - - - - 0x01D542 0E:D532: AD 90 05
 	BNE loc_0E_D53A                 ;C - - - - - 0x01D545 0E:D535: D0 03
-	JSR sub_0F_F428                 ;C - - - - - 0x01D547 0E:D537: 20 28 F4
+	JSR StartHitTimer               ;C - - - - - 0x01D547 0E:D537: 20 28 F4
 loc_0E_D53A:
 	LDA objAnimFrame                ;C - - - - - 0x01D54A 0E:D53A: AD 70 05
 	CMP #$02                        ;C - - - - - 0x01D54D 0E:D53D: C9 02
@@ -2759,7 +2761,7 @@ loc_0E_D544:
 	BNE loc_0E_D553                 ;C - - - - - 0x01D559 0E:D549: D0 08
 	LDA objAnimFlags                ;C - - - - - 0x01D55B 0E:D54B: AD 90 05
 	BNE loc_0E_D553                 ;C - - - - - 0x01D55E 0E:D54E: D0 03
-	JSR sub_0F_F428                 ;C - - - - - 0x01D560 0E:D550: 20 28 F4
+	JSR StartHitTimer               ;C - - - - - 0x01D560 0E:D550: 20 28 F4
 loc_0E_D553:
 	LDA objAnimFrame                ;C - - - - - 0x01D563 0E:D553: AD 70 05
 	CMP #$05                        ;C - - - - - 0x01D566 0E:D556: C9 05
@@ -2789,7 +2791,7 @@ loc_0E_D57D:
 	BNE loc_0E_D55D                 ;C - - - - - 0x01D592 0E:D582: D0 D9
 	LDA objAnimFlags                ;C - - - - - 0x01D594 0E:D584: AD 90 05
 	BNE loc_0E_D55D                 ;C - - - - - 0x01D597 0E:D587: D0 D4
-	JSR sub_0F_F428                 ;C - - - - - 0x01D599 0E:D589: 20 28 F4
+	JSR StartHitTimer               ;C - - - - - 0x01D599 0E:D589: 20 28 F4
 	RTS                             ;C - - - - - 0x01D59C 0E:D58C: 60
 loc_0E_D58D:
 	LDA objAnimFrame                ;C - - - - - 0x01D59D 0E:D58D: AD 70 05
@@ -2840,7 +2842,7 @@ loc_0E_D5D1:
 	STA objY                        ;C - - - - - 0x01D600 0E:D5F0: 8D C0 03
 loc_0E_D5F3:
 	LDY #$00                        ;C - - - - - 0x01D603 0E:D5F3: A0 00
-	JSR sub_0F_F119                 ;C - - - - - 0x01D605 0E:D5F5: 20 19 F1
+	JSR MoveYGravityCheck           ;C - - - - - 0x01D605 0E:D5F5: 20 19 F1
 	LDA objVelYHi                   ;C - - - - - 0x01D608 0E:D5F8: AD 30 04
 	BPL loc_0E_D61E                 ;C - - - - - 0x01D60B 0E:D5FB: 10 21
 	LDA objY                        ;C - - - - - 0x01D60D 0E:D5FD: AD C0 03
@@ -2881,7 +2883,7 @@ loc_0E_D637:
 	LDA #$14                        ;C - - - - - 0x01D647 0E:D637: A9 14
 loc_0E_D639:
 	STA ram_006F                    ;C - - - - - 0x01D649 0E:D639: 85 6F
-	JSR sub_0E_D79A                 ;C - - - - - 0x01D64B 0E:D63B: 20 9A D7
+	JSR StartAction0C               ;C - - - - - 0x01D64B 0E:D63B: 20 9A D7
 	JMP Act0C                       ;C - - - - - 0x01D64E 0E:D63E: 4C 6A DD
 ofs_0E_D641:
 	LDA objAnim                     ;C - - J - - 0x01D651 0E:D641: AD 80 05
@@ -2905,7 +2907,7 @@ loc_0E_D661:
 loc_0E_D664:
 	JMP loc_0E_D70A                 ;C - - - - - 0x01D674 0E:D664: 4C 0A D7
 loc_0E_D667:
-	JMP sub_0E_D79A                 ;c - - - - - 0x01D677 0E:D667: 4C 9A D7
+	JMP StartAction0C               ;c - - - - - 0x01D677 0E:D667: 4C 9A D7
 loc_0E_D66A:
 	LDA objAnimFrame                ;C - - - - - 0x01D67A 0E:D66A: AD 70 05
 	CMP #$02                        ;C - - - - - 0x01D67D 0E:D66D: C9 02
@@ -3012,7 +3014,7 @@ loc_0E_D73A:
 	LDA #$80                        ;C - - - - - 0x01D74A 0E:D73A: A9 80
 	STA ram_006E                    ;C - - - - - 0x01D74C 0E:D73C: 85 6E
 	LDY #$02                        ;C - - - - - 0x01D74E 0E:D73E: A0 02
-	JSR sub_0F_F119                 ;C - - - - - 0x01D750 0E:D740: 20 19 F1
+	JSR MoveYGravityCheck           ;C - - - - - 0x01D750 0E:D740: 20 19 F1
 	LDA objVelYHi                   ;C - - - - - 0x01D753 0E:D743: AD 30 04
 	BPL loc_0E_D776                 ;C - - - - - 0x01D756 0E:D746: 10 2E
 	LDA objY                        ;C - - - - - 0x01D758 0E:D748: AD C0 03
@@ -3048,7 +3050,7 @@ loc_0E_D777:
 	BEQ loc_0E_D78C                 ;C - - - - - 0x01D790 0E:D780: F0 0A
 	CMP #$12                        ;C - - - - - 0x01D792 0E:D782: C9 12
 	BEQ loc_0E_D790                 ;C - - - - - 0x01D794 0E:D784: F0 0A
-	BNE sub_0E_D79A                 ;c - - - - - 0x01D796 0E:D786: D0 12
+	BNE StartAction0C               ;c - - - - - 0x01D796 0E:D786: D0 12
 loc_0E_D788:
 	LDA #$18                        ;C - - - - - 0x01D798 0E:D788: A9 18
 	BNE loc_0E_D792                 ;C - - - - - 0x01D79A 0E:D78A: D0 06
@@ -3059,9 +3061,9 @@ loc_0E_D790:
 	LDA #$15                        ;C - - - - - 0x01D7A0 0E:D790: A9 15
 loc_0E_D792:
 	STA ram_006F                    ;C - - - - - 0x01D7A2 0E:D792: 85 6F
-	JSR sub_0E_D79A                 ;C - - - - - 0x01D7A4 0E:D794: 20 9A D7
+	JSR StartAction0C               ;C - - - - - 0x01D7A4 0E:D794: 20 9A D7
 	JMP Act0C                       ;C - - - - - 0x01D7A7 0E:D797: 4C 6A DD
-sub_0E_D79A:
+StartAction0C:
 	LDA #$0C                        ;C - - - - - 0x01D7AA 0E:D79A: A9 0C
 	STA gameAction                  ;C - - - - - 0x01D7AC 0E:D79C: 85 30
 	LDA #$08                        ;C - - - - - 0x01D7AE 0E:D79E: A9 08
@@ -3255,7 +3257,7 @@ loc_0E_D900:
 	AND #$01                        ;C - - - - - 0x01D91B 0E:D90B: 29 01
 	BEQ loc_0E_D95C                 ;C - - - - - 0x01D91D 0E:D90D: F0 4D
 	LDY #$00                        ;C - - - - - 0x01D91F 0E:D90F: A0 00
-	JSR sub_0F_F003                 ;C - - - - - 0x01D921 0E:D911: 20 03 F0
+	JSR MoveRightCheck              ;C - - - - - 0x01D921 0E:D911: 20 03 F0
 	BCS loc_0E_D959                 ;C - - - - - 0x01D924 0E:D914: B0 43
 	LDY ram_0039                    ;C - - - - - 0x01D926 0E:D916: A4 39
 	LDA playerFacing                ;C - - - - - 0x01D928 0E:D918: A5 31
@@ -3293,7 +3295,7 @@ loc_0E_D959:
 	JMP loc_0E_D9A3                 ;C - - - - - 0x01D969 0E:D959: 4C A3 D9
 loc_0E_D95C:
 	LDY #$01                        ;C - - - - - 0x01D96C 0E:D95C: A0 01
-	JSR sub_0F_F054                 ;C - - - - - 0x01D96E 0E:D95E: 20 54 F0
+	JSR MoveLeftCheck               ;C - - - - - 0x01D96E 0E:D95E: 20 54 F0
 	BCS loc_0E_D9A3                 ;C - - - - - 0x01D971 0E:D961: B0 40
 	LDY ram_0039                    ;C - - - - - 0x01D973 0E:D963: A4 39
 	LDA playerFacing                ;C - - - - - 0x01D975 0E:D965: A5 31
@@ -3333,7 +3335,7 @@ loc_0E_D9A3:
 	AND #$04                        ;C - - - - - 0x01D9BB 0E:D9AB: 29 04
 	BEQ loc_0E_D9D7                 ;C - - - - - 0x01D9BD 0E:D9AD: F0 28
 	LDY #$02                        ;C - - - - - 0x01D9BF 0E:D9AF: A0 02
-	JSR sub_0F_F0A2                 ;C - - - - - 0x01D9C1 0E:D9B1: 20 A2 F0
+	JSR MoveYAddCheck               ;C - - - - - 0x01D9C1 0E:D9B1: 20 A2 F0
 	BCS loc_0E_D9E9                 ;C - - - - - 0x01D9C4 0E:D9B4: B0 33
 	LDY ram_0039                    ;C - - - - - 0x01D9C6 0E:D9B6: A4 39
 	LDA objYFrac,Y                  ;C - - - - - 0x01D9C8 0E:D9B8: B9 A0 03
@@ -3351,7 +3353,7 @@ loc_0E_D9D4:
 	JMP loc_0E_D9E9                 ;C - - - - - 0x01D9E4 0E:D9D4: 4C E9 D9
 loc_0E_D9D7:
 	LDY #$03                        ;C - - - - - 0x01D9E7 0E:D9D7: A0 03
-	JSR sub_0F_F0F7                 ;C - - - - - 0x01D9E9 0E:D9D9: 20 F7 F0
+	JSR MoveYSubCheck               ;C - - - - - 0x01D9E9 0E:D9D9: 20 F7 F0
 	BCS loc_0E_D9E9                 ;C - - - - - 0x01D9EC 0E:D9DC: B0 0B
 	LDY ram_0039                    ;C - - - - - 0x01D9EE 0E:D9DE: A4 39
 	LDA objY                        ;C - - - - - 0x01D9F0 0E:D9E0: AD C0 03
@@ -3499,7 +3501,7 @@ loc_0E_DB00:
 	JSR ApplyVelXSub                ;C - - - - - 0x01DB10 0E:DB00: 20 A1 F1
 loc_0E_DB03:
 	LDY #$04                        ;C - - - - - 0x01DB13 0E:DB03: A0 04
-	JSR sub_0F_F119                 ;C - - - - - 0x01DB15 0E:DB05: 20 19 F1
+	JSR MoveYGravityCheck           ;C - - - - - 0x01DB15 0E:DB05: 20 19 F1
 	BCC loc_0E_DB0D                 ;C - - - - - 0x01DB18 0E:DB08: 90 03
 	JMP loc_0E_DB2C                 ;C - - - - - 0x01DB1A 0E:DB0A: 4C 2C DB
 loc_0E_DB0D:
@@ -3513,10 +3515,10 @@ loc_0E_DB0D:
 	BEQ loc_0E_DB29                 ;C - - - - - 0x01DB2C 0E:DB1C: F0 0B
 	SBC #$03                        ;C - - - - - 0x01DB2E 0E:DB1E: E9 03
 	STA objY                        ;C - - - - - 0x01DB30 0E:DB20: 8D C0 03
-	JSR sub_0E_DC29                 ;C - - - - - 0x01DB33 0E:DB23: 20 29 DC
+	JSR ClampPlayerGroundY          ;C - - - - - 0x01DB33 0E:DB23: 20 29 DC
 	JMP loc_0E_DB2C                 ;C - - - - - 0x01DB36 0E:DB26: 4C 2C DB
 loc_0E_DB29:
-	JSR sub_0E_DC29                 ;C - - - - - 0x01DB39 0E:DB29: 20 29 DC
+	JSR ClampPlayerGroundY          ;C - - - - - 0x01DB39 0E:DB29: 20 29 DC
 loc_0E_DB2C:
 	INC objActive                   ;C - - - - - 0x01DB3C 0E:DB2C: EE 00 03
 	LDA ram_005C                    ;C - - - - - 0x01DB3F 0E:DB2F: A5 5C
@@ -3603,7 +3605,7 @@ loc_0E_DBD1:
 	JSR ApplyVelXSub                ;C - - - - - 0x01DBE1 0E:DBD1: 20 A1 F1
 loc_0E_DBD4:
 	LDY #$04                        ;C - - - - - 0x01DBE4 0E:DBD4: A0 04
-	JSR sub_0F_F119                 ;C - - - - - 0x01DBE6 0E:DBD6: 20 19 F1
+	JSR MoveYGravityCheck           ;C - - - - - 0x01DBE6 0E:DBD6: 20 19 F1
 	BCC loc_0E_DBDE                 ;C - - - - - 0x01DBE9 0E:DBD9: 90 03
 	JMP loc_0E_DBFD                 ;C - - - - - 0x01DBEB 0E:DBDB: 4C FD DB
 loc_0E_DBDE:
@@ -3617,10 +3619,10 @@ loc_0E_DBDE:
 	BEQ loc_0E_DBFA                 ;C - - - - - 0x01DBFD 0E:DBED: F0 0B
 	SBC #$03                        ;C - - - - - 0x01DBFF 0E:DBEF: E9 03
 	STA objY                        ;C - - - - - 0x01DC01 0E:DBF1: 8D C0 03
-	JSR sub_0E_DC29                 ;C - - - - - 0x01DC04 0E:DBF4: 20 29 DC
+	JSR ClampPlayerGroundY          ;C - - - - - 0x01DC04 0E:DBF4: 20 29 DC
 	JMP loc_0E_DBFD                 ;C - - - - - 0x01DC07 0E:DBF7: 4C FD DB
 loc_0E_DBFA:
-	JSR sub_0E_DC29                 ;C - - - - - 0x01DC0A 0E:DBFA: 20 29 DC
+	JSR ClampPlayerGroundY          ;C - - - - - 0x01DC0A 0E:DBFA: 20 29 DC
 loc_0E_DBFD:
 	LDY playerId                    ;C - - - - - 0x01DC0D 0E:DBFD: A4 34
 	LDA tbl_0F_E20D,Y               ;C - - - - - 0x01DC0F 0E:DBFF: B9 0D E2
@@ -3639,10 +3641,10 @@ loc_0E_DBFD:
 	STA ram_00A6                    ;C - - - - - 0x01DC2F 0E:DC1F: 85 A6
 	LDA playerFacing                ;C - - - - - 0x01DC31 0E:DC21: A5 31
 	STA ram_0032                    ;C - - - - - 0x01DC33 0E:DC23: 85 32
-	JSR sub_0E_DC29                 ;C - - - - - 0x01DC35 0E:DC25: 20 29 DC
+	JSR ClampPlayerGroundY          ;C - - - - - 0x01DC35 0E:DC25: 20 29 DC
 loc_0E_DC28:
 	RTS                             ;C - - - - - 0x01DC38 0E:DC28: 60
-sub_0E_DC29:
+ClampPlayerGroundY:
 	LDY stage                       ;C - - - - - 0x01DC39 0E:DC29: A4 61
 	LDA tbl_0E_DC59,Y               ;C - - - - - 0x01DC3B 0E:DC2B: B9 59 DC
 	STA ptr_04                      ;C - - - - - 0x01DC3E 0E:DC2E: 85 04
@@ -3682,7 +3684,7 @@ Act09_Continue:
 	STA renderOffCount              ;C - - - - - 0x01DC7E 0E:DC6E: 85 EE
 	LDA #$F2                        ;C - - - - - 0x01DC80 0E:DC70: A9 F2
 	JSR QueueSoundSaved             ;C - - - - - 0x01DC82 0E:DC72: 20 4A F3
-	JSR sub_0E_C36E                 ;C - - - - - 0x01DC85 0E:DC75: 20 6E C3
+	JSR FadeOutPalette              ;C - - - - - 0x01DC85 0E:DC75: 20 6E C3
 	JSR WaitFrame                   ;C - - - - - 0x01DC88 0E:DC78: 20 31 FF
 	LDA #$00                        ;C - - - - - 0x01DC8B 0E:DC7B: A9 00
 	STA scrollX                     ;C - - - - - 0x01DC8D 0E:DC7D: 85 FC
@@ -3694,7 +3696,7 @@ Act09_Continue:
 	LDA #$04                        ;C - - - - - 0x01DC9A 0E:DC8A: A9 04
 	STA oamHideStart                ;C - - - - - 0x01DC9C 0E:DC8C: 85 97
 	JSR HideSprites                 ;C - - - - - 0x01DC9E 0E:DC8E: 20 1D C3
-	JSR sub_0E_C334                 ;C - - - - - 0x01DCA1 0E:DC91: 20 34 C3
+	JSR ClearObjects                ;C - - - - - 0x01DCA1 0E:DC91: 20 34 C3
 	LDA #$20                        ;C - - - - - 0x01DCA4 0E:DC94: A9 20
 	LDX #$00                        ;C - - - - - 0x01DCA6 0E:DC96: A2 00
 	LDY #$00                        ;C - - - - - 0x01DCA8 0E:DC98: A0 00
@@ -3708,9 +3710,9 @@ Act09_Continue:
 	LDA credits                     ;C - - - - - 0x01DCBA 0E:DCAA: A5 AF
 	BEQ loc_0E_DCD1                 ;C - - - - - 0x01DCBC 0E:DCAC: F0 23
 	LDX #$03                        ;C - - - - - 0x01DCBE 0E:DCAE: A2 03
-	JSR sub_04_8000                 ;C - - - - - bank=04 0x01DCC0 0E:DCB0: 20 00 80
+	JSR QueueVramScript             ;C - - - - - bank=04 0x01DCC0 0E:DCB0: 20 00 80
 	JSR ScreenOn                    ;C - - - - - 0x01DCC3 0E:DCB3: 20 6F C2
-	JSR sub_04_9300                 ;C - - - - - bank=04 0x01DCC6 0E:DCB6: 20 00 93
+	JSR ScreenInit9300              ;C - - - - - bank=04 0x01DCC6 0E:DCB6: 20 00 93
 	LDA gameAction                  ;C - - - - - 0x01DCC9 0E:DCB9: A5 30
 	CMP #$07                        ;C - - - - - 0x01DCCB 0E:DCBB: C9 07
 	BNE loc_0E_DCC0                 ;C - - - - - 0x01DCCD 0E:DCBD: D0 01
@@ -3718,7 +3720,7 @@ Act09_Continue:
 loc_0E_DCC0:
 	LDA #$00                        ;C - - - - - 0x01DCD0 0E:DCC0: A9 00
 	STA renderOffCount              ;C - - - - - 0x01DCD2 0E:DCC2: 85 EE
-	JSR sub_0E_C85C                 ;C - - - - - 0x01DCD4 0E:DCC4: 20 5C C8
+	JSR FadeAndClearScreen          ;C - - - - - 0x01DCD4 0E:DCC4: 20 5C C8
 	LDX #$04                        ;C - - - - - 0x01DCD7 0E:DCC7: A2 04
 	STX prgBank8000                 ;C - - - - - 0x01DCD9 0E:DCC9: 86 F4
 	INX                             ;C - - - - - 0x01DCDB 0E:DCCB: E8
@@ -3726,9 +3728,9 @@ loc_0E_DCC0:
 	JSR SetPrgBanks                 ;C - - - - - 0x01DCDE 0E:DCCE: 20 4D FF
 loc_0E_DCD1:
 	LDX #$05                        ;C - - - - - 0x01DCE1 0E:DCD1: A2 05
-	JSR sub_04_8000                 ;C - - - - - bank=04 0x01DCE3 0E:DCD3: 20 00 80
+	JSR QueueVramScript             ;C - - - - - bank=04 0x01DCE3 0E:DCD3: 20 00 80
 	JSR ScreenOn                    ;C - - - - - 0x01DCE6 0E:DCD6: 20 6F C2
-	JSR sub_04_9500                 ;C - - - - - bank=04 0x01DCE9 0E:DCD9: 20 00 95
+	JSR ScreenInit9500              ;C - - - - - bank=04 0x01DCE9 0E:DCD9: 20 00 95
 	RTS                             ;c - - - - - 0x01DCEC 0E:DCDC: 60
 ; health<0: blink, then lives-- ; no lives left -> gameAction 9 (continue)
 Act0B_Death:
@@ -3925,7 +3927,7 @@ loc_0E_DE21:
 	JMP loc_0E_DE0E                 ;C - - - - - 0x01DE3D 0E:DE2D: 4C 0E DE
 loc_0E_DE30:
 	JMP loc_0E_CB07                 ;C - - - - - 0x01DE40 0E:DE30: 4C 07 CB
-sub_0E_DE33:
+LoadPlayerHealthByLevel:
 	LDY playerId                    ;C - - - - - 0x01DE43 0E:DE33: A4 34
 	LDA tbl_0E_DE46,Y               ;C - - - - - 0x01DE45 0E:DE35: B9 46 DE
 	STA ptr_02                      ;C - - - - - 0x01DE48 0E:DE38: 85 02
@@ -3964,12 +3966,12 @@ Act07_SelectScreen:
 	STA ram_00FB                    ;C - - - - - 0x01DE7C 0E:DE6C: 85 FB
 	STA scrollXPage                 ;C - - - - - 0x01DE7E 0E:DE6E: 85 F9
 	STA renderOffCount              ;C - - - - - 0x01DE80 0E:DE70: 85 EE
-	JSR sub_0E_C36E                 ;C - - - - - 0x01DE82 0E:DE72: 20 6E C3
+	JSR FadeOutPalette              ;C - - - - - 0x01DE82 0E:DE72: 20 6E C3
 	LDA #$04                        ;C - - - - - 0x01DE85 0E:DE75: A9 04
 	STA oamHideStart                ;C - - - - - 0x01DE87 0E:DE77: 85 97
 	JSR HideSprites                 ;C - - - - - 0x01DE89 0E:DE79: 20 1D C3
 	JSR WaitFrame                   ;C - - - - - 0x01DE8C 0E:DE7C: 20 31 FF
-	JSR sub_0E_C334                 ;C - - - - - 0x01DE8F 0E:DE7F: 20 34 C3
+	JSR ClearObjects                ;C - - - - - 0x01DE8F 0E:DE7F: 20 34 C3
 	LDA gameAction                  ;C - - - - - 0x01DE92 0E:DE82: A5 30
 	CMP #$07                        ;C - - - - - 0x01DE94 0E:DE84: C9 07
 	BNE loc_0E_DE8B                 ;C - - - - - 0x01DE96 0E:DE86: D0 03
@@ -3995,7 +3997,7 @@ loc_0E_DE8B:
 	CLI                             ;C - - - - - 0x01DEBC 0E:DEAC: 58
 	LDA #$00                        ;C - - - - - 0x01DEBD 0E:DEAD: A9 00
 	STA ram_009B                    ;C - - - - - 0x01DEBF 0E:DEAF: 85 9B
-	JSR sub_0E_C8A6                 ;C - - - - - 0x01DEC1 0E:DEB1: 20 A6 C8
+	JSR ClearScreenSetBank04        ;C - - - - - 0x01DEC1 0E:DEB1: 20 A6 C8
 	LDX #$06                        ;C - - - - - 0x01DEC4 0E:DEB4: A2 06
 	JSR animPtrLo                   ;C - - - - - 0x01DEC6 0E:DEB6: 20 00 80
 	JSR ScreenOn                    ;C - - - - - 0x01DEC9 0E:DEB9: 20 6F C2
@@ -4007,20 +4009,20 @@ loc_0E_DE8B:
 	JSR SetPrgBanks                 ;C - - - - - 0x01DED6 0E:DEC6: 20 4D FF
 	LDA #$05                        ;C - - - - - 0x01DED9 0E:DEC9: A9 05
 	STA ram_00B8                    ;C - - - - - 0x01DEDB 0E:DECB: 85 B8
-	JSR sub_00_9A00                 ;C - - - - - bank=00 0x01DEDD 0E:DECD: 20 00 9A
+	JSR RunTextScript_00            ;C - - - - - bank=00 0x01DEDD 0E:DECD: 20 00 9A
 	LDA #$00                        ;C - - - - - 0x01DEE0 0E:DED0: A9 00
 	STA renderOffCount              ;C - - - - - 0x01DEE2 0E:DED2: 85 EE
-	JSR sub_0E_C36E                 ;C - - - - - 0x01DEE4 0E:DED4: 20 6E C3
+	JSR FadeOutPalette              ;C - - - - - 0x01DEE4 0E:DED4: 20 6E C3
 	LDA #$04                        ;C - - - - - 0x01DEE7 0E:DED7: A9 04
 	STA oamHideStart                ;C - - - - - 0x01DEE9 0E:DED9: 85 97
 	JSR HideSprites                 ;C - - - - - 0x01DEEB 0E:DEDB: 20 1D C3
 	JSR WaitFrame                   ;C - - - - - 0x01DEEE 0E:DEDE: 20 31 FF
-	JSR sub_0E_C334                 ;C - - - - - 0x01DEF1 0E:DEE1: 20 34 C3
-	JSR sub_0E_C8A6                 ;C - - - - - 0x01DEF4 0E:DEE4: 20 A6 C8
+	JSR ClearObjects                ;C - - - - - 0x01DEF1 0E:DEE1: 20 34 C3
+	JSR ClearScreenSetBank04        ;C - - - - - 0x01DEF4 0E:DEE4: 20 A6 C8
 	LDX #$0D                        ;C - - - - - 0x01DEF7 0E:DEE7: A2 0D
-	JSR sub_00_8000                 ;C - - - - - bank=00 0x01DEF9 0E:DEE9: 20 00 80
+	JSR GameActionDispatch00        ;C - - - - - bank=00 0x01DEF9 0E:DEE9: 20 00 80
 	JSR ScreenOn                    ;C - - - - - 0x01DEFC 0E:DEEC: 20 6F C2
-	JSR sub_00_8C00                 ;C - - - - - bank=00 0x01DEFF 0E:DEEF: 20 00 8C
+	JSR SetAction04Grab             ;C - - - - - bank=00 0x01DEFF 0E:DEEF: 20 00 8C
 	LDX #$00                        ;C - - - - - 0x01DF02 0E:DEF2: A2 00
 	STX prgBank8000                 ;C - - - - - 0x01DF04 0E:DEF4: 86 F4
 	INX                             ;C - - - - - 0x01DF06 0E:DEF6: E8
@@ -4028,20 +4030,20 @@ loc_0E_DE8B:
 	JSR SetPrgBanks                 ;C - - - - - 0x01DF09 0E:DEF9: 20 4D FF
 	LDA #$06                        ;C - - - - - 0x01DF0C 0E:DEFC: A9 06
 	STA ram_00B8                    ;C - - - - - 0x01DF0E 0E:DEFE: 85 B8
-	JSR sub_00_9A00                 ;C - - - - - bank=00 0x01DF10 0E:DF00: 20 00 9A
+	JSR RunTextScript_00            ;C - - - - - bank=00 0x01DF10 0E:DF00: 20 00 9A
 	LDA ram_0150                    ;C - - - - - 0x01DF13 0E:DF03: AD 50 01
 	BNE loc_0E_DF4D                 ;C - - - - - 0x01DF16 0E:DF06: D0 45
 	LDA #$00                        ;C - - - - - 0x01DF18 0E:DF08: A9 00
 	STA renderOffCount              ;C - - - - - 0x01DF1A 0E:DF0A: 85 EE
-	JSR sub_0E_C36E                 ;C - - - - - 0x01DF1C 0E:DF0C: 20 6E C3
+	JSR FadeOutPalette              ;C - - - - - 0x01DF1C 0E:DF0C: 20 6E C3
 	LDA #$04                        ;C - - - - - 0x01DF1F 0E:DF0F: A9 04
 	STA oamHideStart                ;C - - - - - 0x01DF21 0E:DF11: 85 97
 	JSR HideSprites                 ;C - - - - - 0x01DF23 0E:DF13: 20 1D C3
 	JSR WaitFrame                   ;C - - - - - 0x01DF26 0E:DF16: 20 31 FF
-	JSR sub_0E_C334                 ;C - - - - - 0x01DF29 0E:DF19: 20 34 C3
-	JSR sub_0E_C8A6                 ;C - - - - - 0x01DF2C 0E:DF1C: 20 A6 C8
+	JSR ClearObjects                ;C - - - - - 0x01DF29 0E:DF19: 20 34 C3
+	JSR ClearScreenSetBank04        ;C - - - - - 0x01DF2C 0E:DF1C: 20 A6 C8
 	JSR ScreenOn                    ;C - - - - - 0x01DF2F 0E:DF1F: 20 6F C2
-	JSR sub_00_95FF+1               ;C - - - - - bank=00 0x01DF32 0E:DF22: 20 00 96
+	JSR SetAnimEnterAction0E+1      ;C - - - - - bank=00 0x01DF32 0E:DF22: 20 00 96
 	LDX #$08                        ;C - - - - - 0x01DF35 0E:DF25: A2 08
 	STX prgBank8000                 ;C - - - - - 0x01DF37 0E:DF27: 86 F4
 	INX                             ;C - - - - - 0x01DF39 0E:DF29: E8
@@ -4049,16 +4051,16 @@ loc_0E_DE8B:
 	JSR SetPrgBanks                 ;C - - - - - 0x01DF3C 0E:DF2C: 20 4D FF
 	LDA #$00                        ;C - - - - - 0x01DF3F 0E:DF2F: A9 00
 	STA ram_00B8                    ;C - - - - - 0x01DF41 0E:DF31: 85 B8
-	JSR sub_09_A700                 ;C - - - - - bank=09 0x01DF43 0E:DF33: 20 00 A7
+	JSR RunTextScript_09            ;C - - - - - bank=09 0x01DF43 0E:DF33: 20 00 A7
 	INC ram_00B8                    ;C - - - - - 0x01DF46 0E:DF36: E6 B8
-	JSR sub_09_A700                 ;C - - - - - bank=09 0x01DF48 0E:DF38: 20 00 A7
+	JSR RunTextScript_09            ;C - - - - - bank=09 0x01DF48 0E:DF38: 20 00 A7
 	INC ram_00B8                    ;C - - - - - 0x01DF4B 0E:DF3B: E6 B8
-	JSR sub_09_A700                 ;C - - - - - bank=09 0x01DF4D 0E:DF3D: 20 00 A7
+	JSR RunTextScript_09            ;C - - - - - bank=09 0x01DF4D 0E:DF3D: 20 00 A7
 	INC ram_00B8                    ;C - - - - - 0x01DF50 0E:DF40: E6 B8
-	JSR sub_09_A700                 ;C - - - - - bank=09 0x01DF52 0E:DF42: 20 00 A7
+	JSR RunTextScript_09            ;C - - - - - bank=09 0x01DF52 0E:DF42: 20 00 A7
 	INC ram_00B8                    ;C - - - - - 0x01DF55 0E:DF45: E6 B8
-	JSR sub_09_A700                 ;C - - - - - bank=09 0x01DF57 0E:DF47: 20 00 A7
-	JSR sub_09_AB00                 ;C - - - - - bank=09 0x01DF5A 0E:DF4A: 20 00 AB
+	JSR RunTextScript_09            ;C - - - - - bank=09 0x01DF57 0E:DF47: 20 00 A7
+	JSR InitEndingPlayerObj         ;C - - - - - bank=09 0x01DF5A 0E:DF4A: 20 00 AB
 loc_0E_DF4D:
 	JMP loc_0E_C8ED                 ;C - - - - - 0x01DF5D 0E:DF4D: 4C ED C8
 loc_0E_DF50:
@@ -4083,31 +4085,31 @@ loc_0E_DF70:
 	LDA tbl_0F_E161,Y               ;C - - - - - 0x01DF82 0E:DF72: B9 61 E1
 	STA ram_0067                    ;C - - - - - 0x01DF85 0E:DF75: 85 67
 loc_0E_DF77:
-	JSR sub_0F_E12F                 ;C - - - - - 0x01DF87 0E:DF77: 20 2F E1
-	JSR sub_0E_C85F                 ;C - - - - - 0x01DF8A 0E:DF7A: 20 5F C8
+	JSR IrqEnableModeFF             ;C - - - - - 0x01DF87 0E:DF77: 20 2F E1
+	JSR ClearScreenAndSprites       ;C - - - - - 0x01DF8A 0E:DF7A: 20 5F C8
 	LDX #$04                        ;C - - - - - 0x01DF8D 0E:DF7D: A2 04
 	STX prgBank8000                 ;C - - - - - 0x01DF8F 0E:DF7F: 86 F4
 	INX                             ;C - - - - - 0x01DF91 0E:DF81: E8
 	STX prgBankA000                 ;C - - - - - 0x01DF92 0E:DF82: 86 F5
 	JSR SetPrgBanks                 ;C - - - - - 0x01DF94 0E:DF84: 20 4D FF
 	LDX #$02                        ;C - - - - - 0x01DF97 0E:DF87: A2 02
-	JSR sub_04_8000                 ;C - - - - - bank=04 0x01DF99 0E:DF89: 20 00 80
+	JSR QueueVramScript             ;C - - - - - bank=04 0x01DF99 0E:DF89: 20 00 80
 	JSR ScreenOn                    ;C - - - - - 0x01DF9C 0E:DF8C: 20 6F C2
-	JSR sub_04_9100                 ;C - - - - - bank=04 0x01DF9F 0E:DF8F: 20 00 91
-	JSR sub_0E_C85C                 ;C - - - - - 0x01DFA2 0E:DF92: 20 5C C8
+	JSR ScreenInit9100              ;C - - - - - bank=04 0x01DF9F 0E:DF8F: 20 00 91
+	JSR FadeAndClearScreen          ;C - - - - - 0x01DFA2 0E:DF92: 20 5C C8
 	JSR ScreenOn                    ;C - - - - - 0x01DFA5 0E:DF95: 20 6F C2
-	JSR sub_0F_E143                 ;C - - - - - 0x01DFA8 0E:DF98: 20 43 E1
-	JSR sub_0F_E139                 ;C - - - - - 0x01DFAB 0E:DF9B: 20 39 E1
-	JSR sub_0E_DE33                 ;C - - - - - 0x01DFAE 0E:DF9E: 20 33 DE
+	JSR ResetScrollState            ;C - - - - - 0x01DFA8 0E:DF98: 20 43 E1
+	JSR IrqEnableMode01             ;C - - - - - 0x01DFAB 0E:DF9B: 20 39 E1
+	JSR LoadPlayerHealthByLevel     ;C - - - - - 0x01DFAE 0E:DF9E: 20 33 DE
 	JMP loc_0E_DFE9                 ;C - - - - - 0x01DFB1 0E:DFA1: 4C E9 DF
 loc_0E_DFA4:
 	LDA stageSection                ;C - - - - - 0x01DFB4 0E:DFA4: A5 60
 	BNE loc_0E_DFE2                 ;C - - - - - 0x01DFB6 0E:DFA6: D0 3A
 	LDA playerLevel                 ;C - - - - - 0x01DFB8 0E:DFA8: A5 6B
 	STA ram_0051                    ;C - - - - - 0x01DFBA 0E:DFAA: 85 51
-	JSR sub_0F_E12F                 ;C - - - - - 0x01DFBC 0E:DFAC: 20 2F E1
-	JSR sub_0E_C334                 ;C - - - - - 0x01DFBF 0E:DFAF: 20 34 C3
-	JSR sub_0E_C85F                 ;C - - - - - 0x01DFC2 0E:DFB2: 20 5F C8
+	JSR IrqEnableModeFF             ;C - - - - - 0x01DFBC 0E:DFAC: 20 2F E1
+	JSR ClearObjects                ;C - - - - - 0x01DFBF 0E:DFAF: 20 34 C3
+	JSR ClearScreenAndSprites       ;C - - - - - 0x01DFC2 0E:DFB2: 20 5F C8
 	LDX #$04                        ;C - - - - - 0x01DFC5 0E:DFB5: A2 04
 	STX prgBank8000                 ;C - - - - - 0x01DFC7 0E:DFB7: 86 F4
 	INX                             ;C - - - - - 0x01DFC9 0E:DFB9: E8
@@ -4116,16 +4118,16 @@ loc_0E_DFA4:
 	LDY stage                       ;C - - - - - 0x01DFCF 0E:DFBF: A4 61
 	LDA tbl_0F_E15C,Y               ;C - - - - - 0x01DFD1 0E:DFC1: B9 5C E1
 	TAX                             ;C - - - - - 0x01DFD4 0E:DFC4: AA
-	JSR sub_04_8000                 ;C - - - - - bank=04 0x01DFD5 0E:DFC5: 20 00 80
+	JSR QueueVramScript             ;C - - - - - bank=04 0x01DFD5 0E:DFC5: 20 00 80
 	JSR ScreenOn                    ;C - - - - - 0x01DFD8 0E:DFC8: 20 6F C2
-	JSR sub_04_8D00                 ;C - - - - - bank=04 0x01DFDB 0E:DFCB: 20 00 8D
+	JSR ScreenInit8D00              ;C - - - - - bank=04 0x01DFDB 0E:DFCB: 20 00 8D
 	LDX #$2D                        ;C - - - - - 0x01DFDE 0E:DFCE: A2 2D
 	JSR WaitFrames                  ;C - - - - - 0x01DFE0 0E:DFD0: 20 2A FF
-	JSR sub_0E_C85C                 ;C - - - - - 0x01DFE3 0E:DFD3: 20 5C C8
+	JSR FadeAndClearScreen          ;C - - - - - 0x01DFE3 0E:DFD3: 20 5C C8
 	JSR ScreenOn                    ;C - - - - - 0x01DFE6 0E:DFD6: 20 6F C2
-	JSR sub_0F_E143                 ;C - - - - - 0x01DFE9 0E:DFD9: 20 43 E1
-	JSR sub_0F_E139                 ;C - - - - - 0x01DFEC 0E:DFDC: 20 39 E1
-	JSR sub_0E_DE33                 ;C - - - - - 0x01DFEF 0E:DFDF: 20 33 DE
+	JSR ResetScrollState            ;C - - - - - 0x01DFE9 0E:DFD9: 20 43 E1
+	JSR IrqEnableMode01             ;C - - - - - 0x01DFEC 0E:DFDC: 20 39 E1
+	JSR LoadPlayerHealthByLevel     ;C - - - - - 0x01DFEF 0E:DFDF: 20 33 DE
 loc_0E_DFE2:
 	LDY stage                       ;C - - - - - 0x01DFF2 0E:DFE2: A4 61
 	LDA tbl_0F_E166,Y               ;C - - - - - 0x01DFF4 0E:DFE4: B9 66 E1

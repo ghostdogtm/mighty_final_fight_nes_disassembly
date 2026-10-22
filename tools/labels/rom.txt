@@ -232,3 +232,201 @@ comment 0F:E6A5 map screens at $AF00, 64 bytes each
 08:80E4 SpawnEnemy             ; Y = index in the level list: builds the object from enemyTypeTable/enemyStatTable
 table 08:8442-85E5 4 enemy types: flags, kind (id), anim, field 0440
 table 08:85E6-8789 4 enemy stats: life, spriteAir, spriteDown, 0
+
+; ---- named former sub_ routines (fixed banks) ----
+0F:E12F IrqEnableModeFF         ; ram_0098=$FF, ram_009B=0, CLI
+0F:E139 IrqEnableMode01         ; ram_009B=1, ram_0098=0, CLI
+0F:E143 ResetScrollState        ; zero scroll/nametable, facing=1
+0F:E16B SetPlayerStartPos       ; objY/objX from per-stage tables indexed by stageSection
+0F:E2A3 UpdateHorizScroll       ; scroll follows the player (skipped for several gameActions)
+0F:E521 StageScrollUpdate       ; steps screen/column counters, then loads metatile columns
+0F:E6AB UpdateStatusBar         ; queues HUD health/name for the VRAM update
+0F:E6DD QueueHudHealthBar       ; player name + health bar into vramQueue
+0F:E856 QueueHudFiller          ; three $78 tiles into vramQueue
+0F:E89B SelectHudEnemy          ; picks the enemy shown on the HUD (objSpriteDown 7/8/9/B)
+0F:E954 QueueHudLevelText       ; 6 bytes from tables by playerLevel to PPU $2349
+0F:ECCF TileCollideY            ; vertical tile collision probe
+0F:EDBA TileCollideX            ; horizontal tile collision probe
+0F:EEC4 TileCollideBegin        ; switches to the stage bank, saves the old one
+0F:EF55 PushOutLeft
+0F:EF6D PushOutRight
+0F:EF83 PushOutDown
+0F:EF9D PushOutUp
+0F:F000 SetFlag40MoveRight
+0F:F003 MoveRightCheck
+0F:F051 ClearFlag40MoveLeft
+0F:F054 MoveLeftCheck
+0F:F099 ClearObjFlag40
+0F:F0A2 MoveYAddCheck
+0F:F0DC StartAction24FromGrab   ; gameAction=$24, remembers the old one in ram_00BE
+0F:F0F7 MoveYSubCheck
+0F:F119 MoveYGravityCheck
+0F:F1DF ApplyVelYUpAlt          ; copy of ApplyVelYUp
+0F:F22E ApplyVelYUp
+0F:F26E SetHopVelY
+0F:F365 DistanceYToPlayer
+0F:F38B CalcDirToPlayer
+0F:F406 RedrawAndWaitFrame
+0F:F428 StartHitTimer
+0F:F44F SetAnimXChr5
+0F:F455 SpawnEffect7E
+0F:F55A CheckHitEligible
+0F:F71A FindFreeEnemySlot       ; carry set if none
+0F:F72A FindFreeEffectSlot      ; carry set if none
+0F:F738 CheckAttackEligible
+0F:F8D5 UpdatePlayerInvincible
+0F:F9E5 CheckObjContact
+0F:FA91 TestHitBoxOverlap
+0F:FAC4 InitSlot1Follower
+0F:FB09 InitHitFields
+0F:FB3E CheckNearPlayer
+0F:FB5B DirToPlayerGround
+0F:FB72 DirToPlayerOffset
+0F:FBD9 DistanceYToPlayerGround
+0F:FF72 SoundUpdate             ; maps banks 6/7 and drains the sound queue
+0E:C334 ClearObjects
+0E:C362 FadeOutPaletteFast
+0E:C36E FadeOutPalette
+0E:C3B4 UpdateRandom
+0E:C844 ClearObjArrays          ; zero $0400-$05FF
+0E:C85C FadeAndClearScreen
+0E:C85F ClearScreenAndSprites
+0E:C888 PrepareScreenDraw
+0E:C8A6 ClearScreenSetBank04
+0E:C8B4 LoadPlayerPalette
+0E:C9B6 RunGameActionFlash
+0E:CC85 PlaceGrabbedEnemy
+0E:CED1 UpdatePlayerFlash       ; blinks the player palette from ram_006A/ram_0069
+0E:CF33 FindObjNearPlayer
+0E:CFD1 StartAction24
+0E:D79A StartAction0C
+0E:DC29 ClampPlayerGroundY
+0E:DE33 LoadPlayerHealthByLevel
+
+; ---- named former sub_ routines (switchable banks) ----
+00:8000 GameActionDispatch00    ; jump table by gameAction (banks 0/1 half)
+00:8C00 SetAction04Grab
+00:9297 SpawnObj6B
+00:93AF InitSlot1Follower67
+00:95FF SetAnimEnterAction0E
+00:97C8 InitPaletteAnimSlots
+00:987A QueueVram128            ; copies 128 bytes from a table to vramQueue
+00:9A00 RunTextScript_00        ; types text from the script into the VRAM queue
+00:9A98 SetTextPortraitFrame
+00:9AC0 ClearTextQueueRows_00
+00:9B16 WaitAfterText
+01:A031 EnemyVertBounce
+01:A090 SetFlag40ToPlayer_01
+01:A557 EnemyJumpUp
+01:A6D6 EnemyGrabbedCheck_01
+01:A7E1 SetVelFromTbl_A7E1
+01:A83A SetGrabbedAnimA_01
+01:A882 SetGrabbedAnimB_01
+01:A8B7 SetGrabbedAnimC_01
+01:A8EF SetGrabbedAnimD_01
+01:A918 SetVelFromTbl_A918
+01:A971 SetVelFromTbl_A971
+01:A9CA EnemyChooseDirToPlayer_01
+01:A9F5 EnemySetDirAndParams
+03:B331 EnemyMoveProbe4Way
+03:B390 SetFlag40ToPlayer_03
+03:B39B SetVelFromTbl_B39B
+03:BAD0 SetVelFromTbl_BAD0
+03:BB29 EnemyChooseDirToPlayer
+03:BCD1 CountAnim7B            ; $00 if three objects use anim $7B, else $FF
+03:BDCE SpawnObjBelowEnemy
+03:BE9B CountKinds10to13       ; $FF if two or more
+04:8000 QueueVramScript         ; script from tbl_04_8100/810E into vramQueue
+04:8900 ScreenInit8900
+04:8940 ScreenInit8940
+04:89C0 ScreenInit89C0
+04:8A40 ScreenInit8A40
+04:8AC0 ScreenInit8AC0
+04:8B40 ScreenInit8B40
+04:8D00 ScreenInit8D00          ; player specific palette
+04:8F07 ResetSlot2Anim
+04:9100 ScreenInit9100
+04:9300 ScreenInit9300
+04:942A QueueCreditsDigit
+04:9500 ScreenInit9500
+04:9800 ScreenDispatch9800      ; jump table by ram_0066
+04:9A74 BonusEnemyHit
+04:9A9E QueueTextScript0
+04:9AA0 QueueTextScript         ; Y = script index
+04:9AC2 FindObjSpriteDown7
+04:9AF4 QueueBonusBar
+04:9B18 RefillPlayerHealth
+05:A851 SpawnObj6A
+05:AC7D SpawnObj63
+05:ACE1 SpawnObj62
+06:81D4 SoundSilenceMasked
+06:81E4 SoundResetChannels
+06:82DE SoundChannelTick
+06:8326 SoundCmdDispatch
+06:8592 SoundReadSubPtr
+06:85A3 SoundEnterState3
+06:85AE SoundStartNote
+06:85DE SoundNotePitch
+06:8636 SoundSetPeriod
+06:8644 SoundReleaseCheck
+06:8684 SoundSelectInstrument
+06:86BA SoundEnvelopeStep
+08:8038 FindFirstVisibleSpawn
+08:8080 SpawnEnemiesInWindow
+08:80C2 CompareSpawnPos
+08:8900 StageEventTrigger
+08:89D2 SetEventFlag3F
+08:89D7 StageEventDispatch
+08:9000 UpdateSpawnTimer
+08:96C3 CountActiveFoes         ; $FF if two or more
+08:96FC CountBossLikeObjs
+08:972A StageEventDispatch2
+09:A000 SetSectionChr
+09:A013 LoadSpritePal2
+09:A300 PaletteAnimTick
+09:A321 PaletteAnimChannel
+09:A700 RunTextScript_09
+09:A788 MoveXSubSlot0
+09:A78E ClearTextQueueRows_09
+09:A7D0 Wait180Frames
+09:AB00 InitEndingPlayerObj
+0A:9C00 QueueScreenText
+0B:B46F SpawnThrownObj72
+0B:B5AF EnemyRandomJump
+0B:BB0A EnemyAttackHitboxFrame3
+0B:BBE1 SetFlag40ToPlayer_0B
+0B:BBEC SpawnProjectileC7
+0B:BC6B EnemyBounceMoveVert
+0B:BCC8 SetBounceVel
+0B:BCD9 SetAnimBD
+0B:BE79 ForcePlayerId2
+0C:8000 UpdateEnemiesEntry
+0C:822F ResetEnemyActive
+0C:8244 EnemyPreAttackCheck
+0C:84F0 EnemyHitCheck
+0C:89E3 PlayerSpecialDispatch
+0C:8C00 EndAttackAction
+0C:981B EnemyFacePlayerFlag
+0C:9B1F EnemyFallLandCheck
+0C:9B62 SetObjFlag04
+0C:9B6B ClearObjFlag04
+0C:9BE1 EnemyOffscreenCheck     ; pops the caller's return address when off screen
+0C:9BFC EnemyKnockdownStep
+0C:9C29 EnemyRecover
+0C:9C55 EnemySetDownAnimA
+0C:9C7A EnemySetDownAnimB
+0C:9CAD EnemySetDownAnimC
+0C:9FF6 EnemyRoutine9FF6        ; partly data-like, kept as is
+0D:A8E8 EnemyResetAction81
+0D:A953 EnemyDirMoveCheck
+0D:A9EB SetFlag40ToPlayer_0D
+0D:A9F6 EnemyLandCheck
+0D:AA1D EnemyTileProbe3
+0D:AA60 EnemySetGrabbedAnim
+0D:AAA0 EnemyLoadKindParam
+0D:AAAE EnemySetAnimSetA
+0D:AAD7 EnemySetAnimSetB
+0D:AB00 EnemySetAnimSetC
+0D:AB29 EnemyGrabbedUpdate
+0D:AC34 EnemyStartVelocity
+0D:ACB3 EnemyLookupParam

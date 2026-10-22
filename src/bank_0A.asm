@@ -572,7 +572,7 @@
 	.byte $F9,$2A,$A2,$AA,$BF,$15,$67,$AC,$E7,$A2,$33,$A0,$EE,$22,$2E,$AE;- - - - - - 0x015BE7 0A:9BD7:
 	.byte $37,$A0,$F3,$4A,$6A,$2C,$3F,$4A,$BB,$AB,$63,$B8,$B5,$92,$D4,$AA;- - - - - - 0x015BF7 0A:9BE7:
 	.byte $E0,$A4,$71,$00,$78,$A2,$BF,$8C,$FA;- - - - - - 0x015C07 0A:9BF7:
-sub_0A_9C00:
+QueueScreenText:
 	LDX vramQueueEnd                ;C - - - - - 0x015C10 0A:9C00: A6 65
 	LDY #$00                        ;C - - - - - 0x015C12 0A:9C02: A0 00
 loc_0A_9C04:
@@ -587,7 +587,7 @@ loc_0A_9C12:
 	STX vramQueueEnd                ;C - - - - - 0x015C22 0A:9C12: 86 65
 	LDA #$00                        ;C - - - - - 0x015C24 0A:9C14: A9 00
 	STA ram_0066                    ;C - - - - - 0x015C26 0A:9C16: 85 66
-	JSR sub_0F_E954                 ;C - - - - - 0x015C28 0A:9C18: 20 54 E9
+	JSR QueueHudLevelText           ;C - - - - - 0x015C28 0A:9C18: 20 54 E9
 	LDA #$FF                        ;C - - - - - 0x015C2B 0A:9C1B: A9 FF
 	STA vramQueueFlag               ;C - - - - - 0x015C2D 0A:9C1D: 85 64
 	RTS                             ;C - - - - - 0x015C2F 0A:9C1F: 60

@@ -174,7 +174,7 @@ ofs_05_A72D:
 	.byte $60                       ;- - - - - - 0x00A740 05:A730:
 loc_05_A731:
 	JSR FaceToPlayer                ;C - - - - - 0x00A741 05:A731: 20 14 F3
-	JSR sub_0F_F365                 ;C - - - - - 0x00A744 05:A734: 20 65 F3
+	JSR DistanceYToPlayer           ;C - - - - - 0x00A744 05:A734: 20 65 F3
 	BCC loc_05_A789                 ;C - - - - - 0x00A747 05:A737: 90 50
 	CMP #$0C                        ;C - - - - - 0x00A749 05:A739: C9 0C
 	BCS loc_05_A789                 ;C - - - - - 0x00A74B 05:A73B: B0 4C
@@ -262,9 +262,9 @@ loc_05_A7A5:
 	CMP #$0B                        ;C - - - - - 0x00A7E5 05:A7D5: C9 0B
 	BEQ loc_05_A831                 ;C - - - - - 0x00A7E7 05:A7D7: F0 58
 loc_05_A7D9:
-	JSR sub_0F_F55A                 ;C - - - - - 0x00A7E9 05:A7D9: 20 5A F5
+	JSR CheckHitEligible            ;C - - - - - 0x00A7E9 05:A7D9: 20 5A F5
 	BCS loc_05_A831                 ;C - - - - - 0x00A7EC 05:A7DC: B0 53
-	JSR sub_0F_F365                 ;C - - - - - 0x00A7EE 05:A7DE: 20 65 F3
+	JSR DistanceYToPlayer           ;C - - - - - 0x00A7EE 05:A7DE: 20 65 F3
 	BCS loc_05_A850                 ;C - - - - - 0x00A7F1 05:A7E1: B0 6D
 	CMP #$10                        ;C - - - - - 0x00A7F3 05:A7E3: C9 10
 	BCS loc_05_A850                 ;C - - - - - 0x00A7F5 05:A7E5: B0 69
@@ -311,7 +311,7 @@ loc_05_A832:
 	LDA playerId                    ;- - - - - - 0x00A842 05:A832: A5 34
 	CMP #$01                        ;- - - - - - 0x00A844 05:A834: C9 01
 	BNE loc_05_A850                 ;- - - - - - 0x00A846 05:A836: D0 18
-	JSR sub_05_A851                 ;- - - - - - 0x00A848 05:A838: 20 51 A8
+	JSR SpawnObj6A                  ;- - - - - - 0x00A848 05:A838: 20 51 A8
 	LDA objKind,X                   ;- - - - - - 0x00A84B 05:A83B: BD 20 03
 	CMP #$6A                        ;- - - - - - 0x00A84E 05:A83E: C9 6A
 	BEQ loc_05_A848                 ;- - - - - - 0x00A850 05:A840: F0 06
@@ -325,8 +325,8 @@ loc_05_A84D:
 	JSR ClearObject                 ;- - - - - - 0x00A85D 05:A84D: 20 BE F2
 loc_05_A850:
 	RTS                             ;C - - - - - 0x00A860 05:A850: 60
-sub_05_A851:
-	JSR sub_0F_F71A                 ;- - - - - - 0x00A861 05:A851: 20 1A F7
+SpawnObj6A:
+	JSR FindFreeEnemySlot           ;- - - - - - 0x00A861 05:A851: 20 1A F7
 	BCS loc_05_A850                 ;- - - - - - 0x00A864 05:A854: B0 FA
 	STY ptr_0E+1                    ;- - - - - - 0x00A866 05:A856: 84 0F
 	LDA objFacing,X                 ;- - - - - - 0x00A868 05:A858: BD 60 04
@@ -413,7 +413,7 @@ ofs_05_A905:
 	BCS loc_05_A90F                 ;C - - - - - 0x00A91A 05:A90A: B0 03
 	JMP ClearObject                 ;C - - - - - 0x00A91C 05:A90C: 4C BE F2
 loc_05_A90F:
-	JSR sub_0F_F099                 ;C - - - - - 0x00A91F 05:A90F: 20 99 F0
+	JSR ClearObjFlag40              ;C - - - - - 0x00A91F 05:A90F: 20 99 F0
 	JSR ApplyVelXSub                ;C - - - - - 0x00A922 05:A912: 20 A1 F1
 	RTS                             ;C - - - - - 0x00A925 05:A915: 60
 loc_05_A916:
@@ -679,7 +679,7 @@ loc_05_AB25:
 	CMP objAnim,X                   ;C - - - - - 0x00AB3C 05:AB2C: DD 80 05
 	BEQ loc_05_AB3B                 ;C - - - - - 0x00AB3F 05:AB2F: F0 0A
 	LDY #$28                        ;C - - - - - 0x00AB41 05:AB31: A0 28
-	JSR sub_0F_F44F                 ;C - - - - - 0x00AB43 05:AB33: 20 4F F4
+	JSR SetAnimXChr5                ;C - - - - - 0x00AB43 05:AB33: 20 4F F4
 	RTS                             ;C - - - - - 0x00AB46 05:AB36: 60
 loc_05_AB37:
 	DEC objArr_0500,X               ;C - - - - - 0x00AB47 05:AB37: DE 00 05
@@ -792,9 +792,9 @@ loc_05_ABF8:
 	LDA #$01                        ;C - - - - - 0x00AC37 05:AC27: A9 01
 	STA ptr_00                      ;C - - - - - 0x00AC39 05:AC29: 85 00
 	STX ptr_00+1                    ;C - - - - - 0x00AC3B 05:AC2B: 86 01
-	JSR sub_05_AC7D                 ;C - - - - - 0x00AC3D 05:AC2D: 20 7D AC
+	JSR SpawnObj63                  ;C - - - - - 0x00AC3D 05:AC2D: 20 7D AC
 	LDX ptr_00+1                    ;C - - - - - 0x00AC40 05:AC30: A6 01
-	JSR sub_05_ACE1                 ;C - - - - - 0x00AC42 05:AC32: 20 E1 AC
+	JSR SpawnObj62                  ;C - - - - - 0x00AC42 05:AC32: 20 E1 AC
 	RTS                             ;C - - - - - 0x00AC45 05:AC35: 60
 loc_05_AC36:
 	DEC objArr_0500,X               ;C - - - - - 0x00AC46 05:AC36: DE 00 05
@@ -826,7 +826,7 @@ loc_05_AC58:
 	LDA #$01                        ;C - - - - - 0x00AC78 05:AC68: A9 01
 	STA ptr_00                      ;C - - - - - 0x00AC7A 05:AC6A: 85 00
 	STX ptr_00+1                    ;C - - - - - 0x00AC7C 05:AC6C: 86 01
-	JSR sub_05_AC7D                 ;C - - - - - 0x00AC7E 05:AC6E: 20 7D AC
+	JSR SpawnObj63                  ;C - - - - - 0x00AC7E 05:AC6E: 20 7D AC
 	LDX ptr_00+1                    ;C - - - - - 0x00AC81 05:AC71: A6 01
 loc_05_AC73:
 	RTS                             ;C - - - - - 0x00AC83 05:AC73: 60
@@ -835,8 +835,8 @@ loc_05_AC74:
 	STA ram_0102                    ;C - - - - - 0x00AC86 05:AC76: 8D 02 01
 	STA ram_0103                    ;C - - - - - 0x00AC89 05:AC79: 8D 03 01
 	RTS                             ;C - - - - - 0x00AC8C 05:AC7C: 60
-sub_05_AC7D:
-	JSR sub_0F_F71A                 ;C - - - - - 0x00AC8D 05:AC7D: 20 1A F7
+SpawnObj63:
+	JSR FindFreeEnemySlot           ;C - - - - - 0x00AC8D 05:AC7D: 20 1A F7
 	BCS loc_05_AC73                 ;C - - - - - 0x00AC90 05:AC80: B0 F1
 	LDA objXPage                    ;C - - - - - 0x00AC92 05:AC82: AD 80 03
 	STA objXPage,Y                  ;C - - - - - 0x00AC95 05:AC85: 99 80 03
@@ -872,12 +872,12 @@ sub_05_AC7D:
 	DEX                             ;C - - - - - 0x00ACE7 05:ACD7: CA
 	STX ptr_00                      ;C - - - - - 0x00ACE8 05:ACD8: 86 00
 	LDA ptr_00                      ;C - - - - - 0x00ACEA 05:ACDA: A5 00
-	BPL sub_05_AC7D                 ;C - - - - - 0x00ACEC 05:ACDC: 10 9F
+	BPL SpawnObj63                  ;C - - - - - 0x00ACEC 05:ACDC: 10 9F
 	RTS                             ;C - - - - - 0x00ACEE 05:ACDE: 60
 tbl_05_ACDF:
 	.byte $F7,$17                   ;- D 1 - - - 0x00ACEF 05:ACDF:
-sub_05_ACE1:
-	JSR sub_0F_F71A                 ;C - - - - - 0x00ACF1 05:ACE1: 20 1A F7
+SpawnObj62:
+	JSR FindFreeEnemySlot           ;C - - - - - 0x00ACF1 05:ACE1: 20 1A F7
 	BCS loc_05_AC73                 ;C - - - - - 0x00ACF4 05:ACE4: B0 8D
 	LDA objXPage                    ;C - - - - - 0x00ACF6 05:ACE6: AD 80 03
 	STA objXPage,Y                  ;C - - - - - 0x00ACF9 05:ACE9: 99 80 03
@@ -917,7 +917,7 @@ loc_05_AD37:
 	STA objAnimFrame,X              ;C - - - - - 0x00AD50 05:AD40: 9D 70 05
 	LDA #$00                        ;C - - - - - 0x00AD53 05:AD43: A9 00
 	STA objAnimFlags,X              ;C - - - - - 0x00AD55 05:AD45: 9D 90 05
-	JMP sub_0F_F1DF                 ;C - - - - - 0x00AD58 05:AD48: 4C DF F1
+	JMP ApplyVelYUpAlt              ;C - - - - - 0x00AD58 05:AD48: 4C DF F1
 loc_05_AD4B:
 	LDA #$02                        ;C - - - - - 0x00AD5B 05:AD4B: A9 02
 	STA objAnimFrame,X              ;C - - - - - 0x00AD5D 05:AD4D: 9D 70 05

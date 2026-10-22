@@ -26,7 +26,7 @@ LoadSpawnLists:
 	STA ptr_7A+1                    ;C - - - - - 0x010042 08:8032: 85 7B
 	RTS                             ;C - - - - - 0x010044 08:8034: 60
 	.byte $EE,$82,$DB               ;- - - - - - 0x010045 08:8035:
-sub_08_8038:
+FindFirstVisibleSpawn:
 	LDY #$00                        ;C - - - - - 0x010048 08:8038: A0 00
 loc_08_803A:
 	LDA (ptr_78),Y                  ;C - - - - - 0x01004A 08:803A: B1 78
@@ -68,7 +68,7 @@ loc_08_8073:
 	STY ram_009F                    ;C - - - - - 0x010085 08:8075: 84 9F
 	RTS                             ;C - - - - - 0x010087 08:8077: 60
 	.byte $AC,$7F,$A9,$FE,$B4,$FF,$0A,$7F;- - - - - - 0x010088 08:8078:
-sub_08_8080:
+SpawnEnemiesInWindow:
 	LDA ram_0023                    ;C - - - - - 0x010090 08:8080: A5 23
 	AND #$03                        ;C - - - - - 0x010092 08:8082: 29 03
 	BEQ loc_08_80A6                 ;C - - - - - 0x010094 08:8084: F0 20
@@ -78,7 +78,7 @@ sub_08_8080:
 	BEQ loc_08_808E                 ;c - - - - - 0x01009C 08:808C: F0 00
 loc_08_808E:
 	LDY ram_009F                    ;c - - - - - 0x01009E 08:808E: A4 9F
-	JSR sub_08_80C2                 ;c - - - - - 0x0100A0 08:8090: 20 C2 80
+	JSR CompareSpawnPos             ;c - - - - - 0x0100A0 08:8090: 20 C2 80
 	BNE loc_08_809C                 ;c - - - - - 0x0100A3 08:8093: D0 07
 	JSR SpawnEnemy                  ;c - - - - - 0x0100A5 08:8095: 20 E4 80
 	DEC ram_009F                    ;c - - - - - 0x0100A8 08:8098: C6 9F
@@ -87,14 +87,14 @@ loc_08_809C:
 	LDY ram_009F                    ;c - - - - - 0x0100AC 08:809C: A4 9F
 loc_08_809E:
 	INY                             ;c - - - - - 0x0100AE 08:809E: C8
-	JSR sub_08_80C2                 ;c - - - - - 0x0100AF 08:809F: 20 C2 80
+	JSR CompareSpawnPos             ;c - - - - - 0x0100AF 08:809F: 20 C2 80
 	BEQ loc_08_809E                 ;c - - - - - 0x0100B2 08:80A2: F0 FA
 	STY totalEnemies                ;c - - - - - 0x0100B4 08:80A4: 84 9E
 loc_08_80A6:
 	RTS                             ;c - - - - - 0x0100B6 08:80A6: 60
 loc_08_80A7:
 	LDY totalEnemies                ;C - - - - - 0x0100B7 08:80A7: A4 9E
-	JSR sub_08_80C2                 ;C - - - - - 0x0100B9 08:80A9: 20 C2 80
+	JSR CompareSpawnPos             ;C - - - - - 0x0100B9 08:80A9: 20 C2 80
 	BNE loc_08_80B5                 ;C - - - - - 0x0100BC 08:80AC: D0 07
 	JSR SpawnEnemy                  ;C - - - - - 0x0100BE 08:80AE: 20 E4 80
 	INC totalEnemies                ;C - - - - - 0x0100C1 08:80B1: E6 9E
@@ -104,12 +104,12 @@ loc_08_80B5:
 	BEQ loc_08_80BF                 ;C - - - - - 0x0100C7 08:80B7: F0 06
 loc_08_80B9:
 	DEY                             ;C - - - - - 0x0100C9 08:80B9: 88
-	JSR sub_08_80C2                 ;C - - - - - 0x0100CA 08:80BA: 20 C2 80
+	JSR CompareSpawnPos             ;C - - - - - 0x0100CA 08:80BA: 20 C2 80
 	BEQ loc_08_80B9                 ;C - - - - - 0x0100CD 08:80BD: F0 FA
 loc_08_80BF:
 	STY ram_009F                    ;C - - - - - 0x0100CF 08:80BF: 84 9F
 	RTS                             ;C - - - - - 0x0100D1 08:80C1: 60
-sub_08_80C2:
+CompareSpawnPos:
 	LDA (ptr_72),Y                  ;C - - - - - 0x0100D2 08:80C2: B1 72
 	STA ptr_00                      ;C - - - - - 0x0100D4 08:80C4: 85 00
 	SEC                             ;C - - - - - 0x0100D6 08:80C6: 38
@@ -213,7 +213,7 @@ loc_08_8105:
 	LDA #$80                        ;C - - - - - 0x010185 08:8175: A9 80
 	STA objActive,X                 ;C - - - - - 0x010187 08:8177: 9D 00 03
 	STA objState,X                  ;C - - - - - 0x01018A 08:817A: 9D 10 03
-	JSR sub_0F_F26E                 ;C - - - - - 0x01018D 08:817D: 20 6E F2
+	JSR SetHopVelY                  ;C - - - - - 0x01018D 08:817D: 20 6E F2
 	LDA #$00                        ;C - - - - - 0x010190 08:8180: A9 00
 	STA objAnimFlags,X              ;C - - - - - 0x010192 08:8182: 9D 90 05
 	STA objAnimFrame,X              ;C - - - - - 0x010195 08:8185: 9D 70 05
@@ -754,7 +754,7 @@ enemyStatTable:
 	.byte $60,$FF,$0A,$FF,$86,$BB,$A3,$7C,$AA,$57,$0E,$DE,$28,$16,$20,$BF;- - - - - - 0x0108EA 08:88DA:
 	.byte $2A,$BF,$A8,$74,$88,$1B,$A8,$3E,$CB,$ED,$8A,$3F,$0A,$1C,$23,$54;- - - - - - 0x0108FA 08:88EA:
 	.byte $0A,$BB,$4A,$B7,$CA,$DF   ;- - - - - - 0x01090A 08:88FA:
-sub_08_8900:
+StageEventTrigger:
 	LDA scrollXPage                 ;C - - - - - 0x010910 08:8900: A5 F9
 	BNE loc_08_8924                 ;C - - - - - 0x010912 08:8902: D0 20
 	LDA stage                       ;C - - - - - 0x010914 08:8904: A5 61
@@ -785,13 +785,13 @@ loc_08_8924:
 loc_08_892C:
 	LDA ram_00B5                    ;C - - - - - 0x01093C 08:892C: A5 B5
 	BEQ loc_08_8937                 ;C - - - - - 0x01093E 08:892E: F0 07
-	JSR sub_08_972A                 ;C - - - - - 0x010940 08:8930: 20 2A 97
+	JSR StageEventDispatch2         ;C - - - - - 0x010940 08:8930: 20 2A 97
 	LDA #$00                        ;C - - - - - 0x010943 08:8933: A9 00
 	STA ram_00B5                    ;C - - - - - 0x010945 08:8935: 85 B5
 loc_08_8937:
 	RTS                             ;C - - - - - 0x010947 08:8937: 60
 loc_08_8938:
-	JSR sub_08_89D7                 ;C - - - - - 0x010948 08:8938: 20 D7 89
+	JSR StageEventDispatch          ;C - - - - - 0x010948 08:8938: 20 D7 89
 	RTS                             ;C - - - - - 0x01094B 08:893B: 60
 loc_08_893C:
 	LDA gameAction                  ;C - - - - - 0x01094C 08:893C: A5 30
@@ -817,9 +817,9 @@ loc_08_8956:
 	BEQ loc_08_893C                 ;C - - - - - 0x01096E 08:895E: F0 DC
 	LDA gameAction                  ;C - - - - - 0x010970 08:8960: A5 30
 	BNE loc_08_8955                 ;C - - - - - 0x010972 08:8962: D0 F1
-	JSR sub_08_96FC                 ;C - - - - - 0x010974 08:8964: 20 FC 96
+	JSR CountBossLikeObjs           ;C - - - - - 0x010974 08:8964: 20 FC 96
 	BNE loc_08_8955                 ;C - - - - - 0x010977 08:8967: D0 EC
-	JSR sub_0F_F71A                 ;C - - - - - 0x010979 08:8969: 20 1A F7
+	JSR FindFreeEnemySlot           ;C - - - - - 0x010979 08:8969: 20 1A F7
 	BCS loc_08_892C                 ;C - - - - - 0x01097C 08:896C: B0 BE
 	LDA scrollXPage                 ;C - - - - - 0x01097E 08:896E: A5 F9
 	STA objXPage,Y                  ;C - - - - - 0x010980 08:8970: 99 80 03
@@ -855,15 +855,15 @@ loc_08_8956:
 	LDA #$C0                        ;C - - - - - 0x0109D3 08:89C3: A9 C0
 	STA objX,Y                      ;C - - - - - 0x0109D5 08:89C5: 99 60 03
 	LDA #$06                        ;C - - - - - 0x0109D8 08:89C8: A9 06
-	JSR sub_09_A013                 ;C - - - - - bank=09 0x0109DA 08:89CA: 20 13 A0
+	JSR LoadSpritePal2              ;C - - - - - bank=09 0x0109DA 08:89CA: 20 13 A0
 	LDA #$7F                        ;C - - - - - 0x0109DD 08:89CD: A9 7F
 	STA ram_003F                    ;C - - - - - 0x0109DF 08:89CF: 85 3F
 	RTS                             ;C - - - - - 0x0109E1 08:89D1: 60
-sub_08_89D2:
+SetEventFlag3F:
 	LDA #$FF                        ;C - - - - - 0x0109E2 08:89D2: A9 FF
 	STA ram_003F                    ;C - - - - - 0x0109E4 08:89D4: 85 3F
 	RTS                             ;C - - - - - 0x0109E6 08:89D6: 60
-sub_08_89D7:
+StageEventDispatch:
 	LDY stage                       ;C - - - - - 0x0109E7 08:89D7: A4 61
 	LDA tbl_08_89F5,Y               ;C - - - - - 0x0109E9 08:89D9: B9 F5 89
 	STA ptr_02                      ;C - - - - - 0x0109EC 08:89DC: 85 02
@@ -914,30 +914,30 @@ ofs_08_8A44:
 	LDA ram_0054                    ;C - - J - - 0x010A54 08:8A44: A5 54
 	CMP tbl_08_8DC4,Y               ;C - - - - - 0x010A56 08:8A46: D9 C4 8D
 	BCC loc_08_8A4F                 ;C - - - - - 0x010A59 08:8A49: 90 04
-	JSR sub_08_89D2                 ;C - - - - - 0x010A5B 08:8A4B: 20 D2 89
+	JSR SetEventFlag3F              ;C - - - - - 0x010A5B 08:8A4B: 20 D2 89
 	RTS                             ;C - - - - - 0x010A5E 08:8A4E: 60
 loc_08_8A4F:
-	JSR sub_08_9000                 ;C - - - - - 0x010A5F 08:8A4F: 20 00 90
+	JSR UpdateSpawnTimer            ;C - - - - - 0x010A5F 08:8A4F: 20 00 90
 	RTS                             ;C - - - - - 0x010A62 08:8A52: 60
 ofs_08_8A53:
 	LDA ram_0054                    ;C - - J - - 0x010A63 08:8A53: A5 54
 	CMP tbl_08_8DC4,Y               ;C - - - - - 0x010A65 08:8A55: D9 C4 8D
 	BCC loc_08_8A5E                 ;C - - - - - 0x010A68 08:8A58: 90 04
-	JSR sub_08_89D2                 ;C - - - - - 0x010A6A 08:8A5A: 20 D2 89
+	JSR SetEventFlag3F              ;C - - - - - 0x010A6A 08:8A5A: 20 D2 89
 	RTS                             ;C - - - - - 0x010A6D 08:8A5D: 60
 loc_08_8A5E:
-	JSR sub_08_9000                 ;C - - - - - 0x010A6E 08:8A5E: 20 00 90
+	JSR UpdateSpawnTimer            ;C - - - - - 0x010A6E 08:8A5E: 20 00 90
 	RTS                             ;C - - - - - 0x010A71 08:8A61: 60
 ofs_08_8A62:
 	LDA ram_0054                    ;C - - J - - 0x010A72 08:8A62: A5 54
 	CMP tbl_08_8DC4,Y               ;C - - - - - 0x010A74 08:8A64: D9 C4 8D
 	BCC loc_08_8A72                 ;C - - - - - 0x010A77 08:8A67: 90 09
-	JSR sub_08_96FC                 ;C - - - - - 0x010A79 08:8A69: 20 FC 96
+	JSR CountBossLikeObjs           ;C - - - - - 0x010A79 08:8A69: 20 FC 96
 	BNE loc_08_8A75                 ;C - - - - - 0x010A7C 08:8A6C: D0 07
-	JSR sub_08_89D2                 ;C - - - - - 0x010A7E 08:8A6E: 20 D2 89
+	JSR SetEventFlag3F              ;C - - - - - 0x010A7E 08:8A6E: 20 D2 89
 	RTS                             ;C - - - - - 0x010A81 08:8A71: 60
 loc_08_8A72:
-	JSR sub_08_9000                 ;C - - - - - 0x010A82 08:8A72: 20 00 90
+	JSR UpdateSpawnTimer            ;C - - - - - 0x010A82 08:8A72: 20 00 90
 loc_08_8A75:
 	RTS                             ;C - - - - - 0x010A85 08:8A75: 60
 ofs_08_8A76:
@@ -955,19 +955,19 @@ ofs_08_8A8D:
 	LDA ram_0054                    ;C - - J - - 0x010A9D 08:8A8D: A5 54
 	CMP tbl_08_8DC8,Y               ;C - - - - - 0x010A9F 08:8A8F: D9 C8 8D
 	BCC loc_08_8A9C                 ;C - - - - - 0x010AA2 08:8A92: 90 08
-	JSR sub_08_96FC                 ;C - - - - - 0x010AA4 08:8A94: 20 FC 96
+	JSR CountBossLikeObjs           ;C - - - - - 0x010AA4 08:8A94: 20 FC 96
 	BNE loc_08_8A9C                 ;C - - - - - 0x010AA7 08:8A97: D0 03
-	JSR sub_08_89D2                 ;C - - - - - 0x010AA9 08:8A99: 20 D2 89
+	JSR SetEventFlag3F              ;C - - - - - 0x010AA9 08:8A99: 20 D2 89
 loc_08_8A9C:
 	RTS                             ;C - - - - - 0x010AAC 08:8A9C: 60
 ofs_08_8A9D:
 	LDA ram_0054                    ;C - - J - - 0x010AAD 08:8A9D: A5 54
 	CMP tbl_08_8DC8,Y               ;C - - - - - 0x010AAF 08:8A9F: D9 C8 8D
 	BCC loc_08_8AA8                 ;C - - - - - 0x010AB2 08:8AA2: 90 04
-	JSR sub_08_89D2                 ;C - - - - - 0x010AB4 08:8AA4: 20 D2 89
+	JSR SetEventFlag3F              ;C - - - - - 0x010AB4 08:8AA4: 20 D2 89
 	RTS                             ;C - - - - - 0x010AB7 08:8AA7: 60
 loc_08_8AA8:
-	JSR sub_08_9000                 ;C - - - - - 0x010AB8 08:8AA8: 20 00 90
+	JSR UpdateSpawnTimer            ;C - - - - - 0x010AB8 08:8AA8: 20 00 90
 ofs_08_8AAB:
 	RTS                             ;C - - - - - 0x010ABB 08:8AAB: 60
 ofs_08_8AAC:
@@ -987,9 +987,9 @@ ofs_08_8ABF:
 	LDA ram_0054                    ;C - - - - - 0x010AD3 08:8AC3: A5 54
 	CMP tbl_08_8DCC,Y               ;C - - - - - 0x010AD5 08:8AC5: D9 CC 8D
 	BCC loc_08_8AD2                 ;C - - - - - 0x010AD8 08:8AC8: 90 08
-	JSR sub_08_96FC                 ;C - - - - - 0x010ADA 08:8ACA: 20 FC 96
+	JSR CountBossLikeObjs           ;C - - - - - 0x010ADA 08:8ACA: 20 FC 96
 	BNE loc_08_8AD2                 ;C - - - - - 0x010ADD 08:8ACD: D0 03
-	JSR sub_08_89D2                 ;C - - - - - 0x010ADF 08:8ACF: 20 D2 89
+	JSR SetEventFlag3F              ;C - - - - - 0x010ADF 08:8ACF: 20 D2 89
 loc_08_8AD2:
 	RTS                             ;C - - - - - 0x010AE2 08:8AD2: 60
 ofs_08_8AD3:
@@ -1007,30 +1007,30 @@ ofs_08_8AEA:
 	LDA ram_0054                    ;C - - J - - 0x010AFA 08:8AEA: A5 54
 	CMP tbl_08_8DCE,Y               ;C - - - - - 0x010AFC 08:8AEC: D9 CE 8D
 	BCC loc_08_8AF5                 ;C - - - - - 0x010AFF 08:8AEF: 90 04
-	JSR sub_08_89D2                 ;C - - - - - 0x010B01 08:8AF1: 20 D2 89
+	JSR SetEventFlag3F              ;C - - - - - 0x010B01 08:8AF1: 20 D2 89
 	RTS                             ;C - - - - - 0x010B04 08:8AF4: 60
 loc_08_8AF5:
-	JSR sub_08_9000                 ;C - - - - - 0x010B05 08:8AF5: 20 00 90
+	JSR UpdateSpawnTimer            ;C - - - - - 0x010B05 08:8AF5: 20 00 90
 	RTS                             ;C - - - - - 0x010B08 08:8AF8: 60
 ofs_08_8AF9:
 	LDA ram_0054                    ;C - - J - - 0x010B09 08:8AF9: A5 54
 	CMP tbl_08_8DCE,Y               ;C - - - - - 0x010B0B 08:8AFB: D9 CE 8D
 	BCC loc_08_8B04                 ;C - - - - - 0x010B0E 08:8AFE: 90 04
-	JSR sub_08_89D2                 ;C - - - - - 0x010B10 08:8B00: 20 D2 89
+	JSR SetEventFlag3F              ;C - - - - - 0x010B10 08:8B00: 20 D2 89
 	RTS                             ;C - - - - - 0x010B13 08:8B03: 60
 loc_08_8B04:
-	JSR sub_08_9000                 ;C - - - - - 0x010B14 08:8B04: 20 00 90
+	JSR UpdateSpawnTimer            ;C - - - - - 0x010B14 08:8B04: 20 00 90
 	RTS                             ;C - - - - - 0x010B17 08:8B07: 60
 ofs_08_8B08:
 	LDA ram_0054                    ;C - - J - - 0x010B18 08:8B08: A5 54
 	CMP tbl_08_8DCE,Y               ;C - - - - - 0x010B1A 08:8B0A: D9 CE 8D
 	BCC loc_08_8B18                 ;C - - - - - 0x010B1D 08:8B0D: 90 09
-	JSR sub_08_96FC                 ;C - - - - - 0x010B1F 08:8B0F: 20 FC 96
+	JSR CountBossLikeObjs           ;C - - - - - 0x010B1F 08:8B0F: 20 FC 96
 	BNE loc_08_8B1B                 ;C - - - - - 0x010B22 08:8B12: D0 07
-	JSR sub_08_89D2                 ;C - - - - - 0x010B24 08:8B14: 20 D2 89
+	JSR SetEventFlag3F              ;C - - - - - 0x010B24 08:8B14: 20 D2 89
 	RTS                             ;C - - - - - 0x010B27 08:8B17: 60
 loc_08_8B18:
-	JSR sub_08_9000                 ;C - - - - - 0x010B28 08:8B18: 20 00 90
+	JSR UpdateSpawnTimer            ;C - - - - - 0x010B28 08:8B18: 20 00 90
 loc_08_8B1B:
 	RTS                             ;C - - - - - 0x010B2B 08:8B1B: 60
 ofs_08_8B1C:
@@ -1048,42 +1048,42 @@ ofs_08_8B35:
 	LDA ram_0054                    ;C - - J - - 0x010B45 08:8B35: A5 54
 	CMP tbl_08_8DD2,Y               ;C - - - - - 0x010B47 08:8B37: D9 D2 8D
 	BCC loc_08_8B40                 ;C - - - - - 0x010B4A 08:8B3A: 90 04
-	JSR sub_08_89D2                 ;C - - - - - 0x010B4C 08:8B3C: 20 D2 89
+	JSR SetEventFlag3F              ;C - - - - - 0x010B4C 08:8B3C: 20 D2 89
 	RTS                             ;C - - - - - 0x010B4F 08:8B3F: 60
 loc_08_8B40:
-	JSR sub_08_9000                 ;C - - - - - 0x010B50 08:8B40: 20 00 90
+	JSR UpdateSpawnTimer            ;C - - - - - 0x010B50 08:8B40: 20 00 90
 	RTS                             ;C - - - - - 0x010B53 08:8B43: 60
 ofs_08_8B44:
 	LDA ram_0054                    ;C - - J - - 0x010B54 08:8B44: A5 54
 	CMP tbl_08_8DD2,Y               ;C - - - - - 0x010B56 08:8B46: D9 D2 8D
 	BCC loc_08_8B54                 ;C - - - - - 0x010B59 08:8B49: 90 09
-	JSR sub_08_96FC                 ;C - - - - - 0x010B5B 08:8B4B: 20 FC 96
+	JSR CountBossLikeObjs           ;C - - - - - 0x010B5B 08:8B4B: 20 FC 96
 	BNE loc_08_8B57                 ;C - - - - - 0x010B5E 08:8B4E: D0 07
-	JSR sub_08_89D2                 ;C - - - - - 0x010B60 08:8B50: 20 D2 89
+	JSR SetEventFlag3F              ;C - - - - - 0x010B60 08:8B50: 20 D2 89
 	RTS                             ;C - - - - - 0x010B63 08:8B53: 60
 loc_08_8B54:
-	JSR sub_08_9000                 ;C - - - - - 0x010B64 08:8B54: 20 00 90
+	JSR UpdateSpawnTimer            ;C - - - - - 0x010B64 08:8B54: 20 00 90
 loc_08_8B57:
 	RTS                             ;C - - - - - 0x010B67 08:8B57: 60
 ofs_08_8B58:
 	LDA ram_0054                    ;C - - J - - 0x010B68 08:8B58: A5 54
 	CMP tbl_08_8DD2,Y               ;C - - - - - 0x010B6A 08:8B5A: D9 D2 8D
 	BCC loc_08_8B67                 ;C - - - - - 0x010B6D 08:8B5D: 90 08
-	JSR sub_08_96FC                 ;C - - - - - 0x010B6F 08:8B5F: 20 FC 96
+	JSR CountBossLikeObjs           ;C - - - - - 0x010B6F 08:8B5F: 20 FC 96
 	BNE loc_08_8B67                 ;C - - - - - 0x010B72 08:8B62: D0 03
-	JSR sub_08_89D2                 ;C - - - - - 0x010B74 08:8B64: 20 D2 89
+	JSR SetEventFlag3F              ;C - - - - - 0x010B74 08:8B64: 20 D2 89
 loc_08_8B67:
 	RTS                             ;C - - - - - 0x010B77 08:8B67: 60
 ofs_08_8B68:
 	LDA ram_0054                    ;C - - J - - 0x010B78 08:8B68: A5 54
 	CMP tbl_08_8DD2,Y               ;C - - - - - 0x010B7A 08:8B6A: D9 D2 8D
 	BCC loc_08_8B78                 ;C - - - - - 0x010B7D 08:8B6D: 90 09
-	JSR sub_08_96FC                 ;C - - - - - 0x010B7F 08:8B6F: 20 FC 96
+	JSR CountBossLikeObjs           ;C - - - - - 0x010B7F 08:8B6F: 20 FC 96
 	BNE loc_08_8B7B                 ;C - - - - - 0x010B82 08:8B72: D0 07
-	JSR sub_08_89D2                 ;C - - - - - 0x010B84 08:8B74: 20 D2 89
+	JSR SetEventFlag3F              ;C - - - - - 0x010B84 08:8B74: 20 D2 89
 	RTS                             ;C - - - - - 0x010B87 08:8B77: 60
 loc_08_8B78:
-	JSR sub_08_9000                 ;C - - - - - 0x010B88 08:8B78: 20 00 90
+	JSR UpdateSpawnTimer            ;C - - - - - 0x010B88 08:8B78: 20 00 90
 loc_08_8B7B:
 	RTS                             ;C - - - - - 0x010B8B 08:8B7B: 60
 ofs_08_8B7C:
@@ -1101,9 +1101,9 @@ ofs_08_8B8F:
 	LDA ram_0054                    ;C - - J - - 0x010B9F 08:8B8F: A5 54
 	CMP tbl_08_8DD7,Y               ;C - - - - - 0x010BA1 08:8B91: D9 D7 8D
 	BCC loc_08_8B9E                 ;C - - - - - 0x010BA4 08:8B94: 90 08
-	JSR sub_08_96FC                 ;C - - - - - 0x010BA6 08:8B96: 20 FC 96
+	JSR CountBossLikeObjs           ;C - - - - - 0x010BA6 08:8B96: 20 FC 96
 	BNE loc_08_8B9E                 ;C - - - - - 0x010BA9 08:8B99: D0 03
-	JSR sub_08_89D2                 ;C - - - - - 0x010BAB 08:8B9B: 20 D2 89
+	JSR SetEventFlag3F              ;C - - - - - 0x010BAB 08:8B9B: 20 D2 89
 loc_08_8B9E:
 	RTS                             ;C - - - - - 0x010BAE 08:8B9E: 60
 ofs_08_8B9F:
@@ -1121,30 +1121,30 @@ ofs_08_8BB6:
 	LDA ram_0054                    ;C - - J - - 0x010BC6 08:8BB6: A5 54
 	CMP tbl_08_8DD9,Y               ;C - - - - - 0x010BC8 08:8BB8: D9 D9 8D
 	BCC loc_08_8BC1                 ;C - - - - - 0x010BCB 08:8BBB: 90 04
-	JSR sub_08_89D2                 ;C - - - - - 0x010BCD 08:8BBD: 20 D2 89
+	JSR SetEventFlag3F              ;C - - - - - 0x010BCD 08:8BBD: 20 D2 89
 	RTS                             ;C - - - - - 0x010BD0 08:8BC0: 60
 loc_08_8BC1:
-	JSR sub_08_9000                 ;C - - - - - 0x010BD1 08:8BC1: 20 00 90
+	JSR UpdateSpawnTimer            ;C - - - - - 0x010BD1 08:8BC1: 20 00 90
 	RTS                             ;C - - - - - 0x010BD4 08:8BC4: 60
 ofs_08_8BC5:
 	LDA ram_0054                    ;C - - J - - 0x010BD5 08:8BC5: A5 54
 	CMP tbl_08_8DD9,Y               ;C - - - - - 0x010BD7 08:8BC7: D9 D9 8D
 	BCC loc_08_8BD0                 ;C - - - - - 0x010BDA 08:8BCA: 90 04
-	JSR sub_08_89D2                 ;C - - - - - 0x010BDC 08:8BCC: 20 D2 89
+	JSR SetEventFlag3F              ;C - - - - - 0x010BDC 08:8BCC: 20 D2 89
 	RTS                             ;C - - - - - 0x010BDF 08:8BCF: 60
 loc_08_8BD0:
-	JSR sub_08_9000                 ;C - - - - - 0x010BE0 08:8BD0: 20 00 90
+	JSR UpdateSpawnTimer            ;C - - - - - 0x010BE0 08:8BD0: 20 00 90
 	RTS                             ;C - - - - - 0x010BE3 08:8BD3: 60
 ofs_08_8BD4:
 	LDA ram_0054                    ;C - - J - - 0x010BE4 08:8BD4: A5 54
 	CMP tbl_08_8DD9,Y               ;C - - - - - 0x010BE6 08:8BD6: D9 D9 8D
 	BCC loc_08_8BE4                 ;C - - - - - 0x010BE9 08:8BD9: 90 09
-	JSR sub_08_96FC                 ;C - - - - - 0x010BEB 08:8BDB: 20 FC 96
+	JSR CountBossLikeObjs           ;C - - - - - 0x010BEB 08:8BDB: 20 FC 96
 	BNE loc_08_8BE7                 ;C - - - - - 0x010BEE 08:8BDE: D0 07
-	JSR sub_08_89D2                 ;C - - - - - 0x010BF0 08:8BE0: 20 D2 89
+	JSR SetEventFlag3F              ;C - - - - - 0x010BF0 08:8BE0: 20 D2 89
 	RTS                             ;C - - - - - 0x010BF3 08:8BE3: 60
 loc_08_8BE4:
-	JSR sub_08_9000                 ;C - - - - - 0x010BF4 08:8BE4: 20 00 90
+	JSR UpdateSpawnTimer            ;C - - - - - 0x010BF4 08:8BE4: 20 00 90
 loc_08_8BE7:
 	RTS                             ;C - - - - - 0x010BF7 08:8BE7: 60
 ofs_08_8BE8:
@@ -1162,30 +1162,30 @@ ofs_08_8BFF:
 	LDA ram_0054                    ;C - - J - - 0x010C0F 08:8BFF: A5 54
 	CMP tbl_08_8DDD,Y               ;C - - - - - 0x010C11 08:8C01: D9 DD 8D
 	BCC loc_08_8C0A                 ;C - - - - - 0x010C14 08:8C04: 90 04
-	JSR sub_08_89D2                 ;C - - - - - 0x010C16 08:8C06: 20 D2 89
+	JSR SetEventFlag3F              ;C - - - - - 0x010C16 08:8C06: 20 D2 89
 	RTS                             ;C - - - - - 0x010C19 08:8C09: 60
 loc_08_8C0A:
-	JSR sub_08_9000                 ;C - - - - - 0x010C1A 08:8C0A: 20 00 90
+	JSR UpdateSpawnTimer            ;C - - - - - 0x010C1A 08:8C0A: 20 00 90
 	RTS                             ;C - - - - - 0x010C1D 08:8C0D: 60
 ofs_08_8C0E:
 	LDA ram_0054                    ;C - - J - - 0x010C1E 08:8C0E: A5 54
 	CMP tbl_08_8DDD,Y               ;C - - - - - 0x010C20 08:8C10: D9 DD 8D
 	BCC loc_08_8C1D                 ;C - - - - - 0x010C23 08:8C13: 90 08
-	JSR sub_08_96FC                 ;C - - - - - 0x010C25 08:8C15: 20 FC 96
+	JSR CountBossLikeObjs           ;C - - - - - 0x010C25 08:8C15: 20 FC 96
 	BNE loc_08_8C1D                 ;C - - - - - 0x010C28 08:8C18: D0 03
-	JSR sub_08_89D2                 ;C - - - - - 0x010C2A 08:8C1A: 20 D2 89
+	JSR SetEventFlag3F              ;C - - - - - 0x010C2A 08:8C1A: 20 D2 89
 loc_08_8C1D:
 	RTS                             ;C - - - - - 0x010C2D 08:8C1D: 60
 ofs_08_8C1E:
 	LDA ram_0054                    ;C - - J - - 0x010C2E 08:8C1E: A5 54
 	CMP tbl_08_8DDD,Y               ;C - - - - - 0x010C30 08:8C20: D9 DD 8D
 	BCC loc_08_8C2E                 ;C - - - - - 0x010C33 08:8C23: 90 09
-	JSR sub_08_96FC                 ;C - - - - - 0x010C35 08:8C25: 20 FC 96
+	JSR CountBossLikeObjs           ;C - - - - - 0x010C35 08:8C25: 20 FC 96
 	BNE loc_08_8C31                 ;C - - - - - 0x010C38 08:8C28: D0 07
-	JSR sub_08_89D2                 ;C - - - - - 0x010C3A 08:8C2A: 20 D2 89
+	JSR SetEventFlag3F              ;C - - - - - 0x010C3A 08:8C2A: 20 D2 89
 	RTS                             ;C - - - - - 0x010C3D 08:8C2D: 60
 loc_08_8C2E:
-	JSR sub_08_9000                 ;C - - - - - 0x010C3E 08:8C2E: 20 00 90
+	JSR UpdateSpawnTimer            ;C - - - - - 0x010C3E 08:8C2E: 20 00 90
 loc_08_8C31:
 	RTS                             ;C - - - - - 0x010C41 08:8C31: 60
 ofs_08_8C32:
@@ -1205,9 +1205,9 @@ ofs_08_8C43:
 	LDA ram_0054                    ;C - - - - - 0x010C57 08:8C47: A5 54
 	CMP tbl_08_8DE1,Y               ;C - - - - - 0x010C59 08:8C49: D9 E1 8D
 	BCC loc_08_8C56                 ;C - - - - - 0x010C5C 08:8C4C: 90 08
-	JSR sub_08_96FC                 ;C - - - - - 0x010C5E 08:8C4E: 20 FC 96
+	JSR CountBossLikeObjs           ;C - - - - - 0x010C5E 08:8C4E: 20 FC 96
 	BNE loc_08_8C56                 ;C - - - - - 0x010C61 08:8C51: D0 03
-	JSR sub_08_89D2                 ;C - - - - - 0x010C63 08:8C53: 20 D2 89
+	JSR SetEventFlag3F              ;C - - - - - 0x010C63 08:8C53: 20 D2 89
 loc_08_8C56:
 	RTS                             ;C - - - - - 0x010C66 08:8C56: 60
 ofs_08_8C57:
@@ -1225,19 +1225,19 @@ ofs_08_8C6E:
 	LDA ram_0054                    ;C - - J - - 0x010C7E 08:8C6E: A5 54
 	CMP tbl_08_8DE2,Y               ;C - - - - - 0x010C80 08:8C70: D9 E2 8D
 	BCC loc_08_8C79                 ;C - - - - - 0x010C83 08:8C73: 90 04
-	JSR sub_08_89D2                 ;C - - - - - 0x010C85 08:8C75: 20 D2 89
+	JSR SetEventFlag3F              ;C - - - - - 0x010C85 08:8C75: 20 D2 89
 	RTS                             ;C - - - - - 0x010C88 08:8C78: 60
 loc_08_8C79:
-	JSR sub_08_9000                 ;C - - - - - 0x010C89 08:8C79: 20 00 90
+	JSR UpdateSpawnTimer            ;C - - - - - 0x010C89 08:8C79: 20 00 90
 	RTS                             ;C - - - - - 0x010C8C 08:8C7C: 60
 ofs_08_8C7D:
 	LDA ram_0054                    ;C - - J - - 0x010C8D 08:8C7D: A5 54
 	CMP tbl_08_8DE2,Y               ;C - - - - - 0x010C8F 08:8C7F: D9 E2 8D
 	BCC loc_08_8C88                 ;C - - - - - 0x010C92 08:8C82: 90 04
-	JSR sub_08_89D2                 ;C - - - - - 0x010C94 08:8C84: 20 D2 89
+	JSR SetEventFlag3F              ;C - - - - - 0x010C94 08:8C84: 20 D2 89
 	RTS                             ;C - - - - - 0x010C97 08:8C87: 60
 loc_08_8C88:
-	JSR sub_08_9000                 ;C - - - - - 0x010C98 08:8C88: 20 00 90
+	JSR UpdateSpawnTimer            ;C - - - - - 0x010C98 08:8C88: 20 00 90
 ofs_08_8C8B:
 	RTS                             ;C - - - - - 0x010C9B 08:8C8B: 60
 ofs_08_8C8C:
@@ -1257,12 +1257,12 @@ ofs_08_8CA5:
 	LDA ram_0054                    ;C - - - - - 0x010CB9 08:8CA9: A5 54
 	CMP tbl_08_8DE6,Y               ;C - - - - - 0x010CBB 08:8CAB: D9 E6 8D
 	BCC loc_08_8CB9                 ;C - - - - - 0x010CBE 08:8CAE: 90 09
-	JSR sub_08_96FC                 ;C - - - - - 0x010CC0 08:8CB0: 20 FC 96
+	JSR CountBossLikeObjs           ;C - - - - - 0x010CC0 08:8CB0: 20 FC 96
 	BNE loc_08_8CBC                 ;C - - - - - 0x010CC3 08:8CB3: D0 07
-	JSR sub_08_89D2                 ;C - - - - - 0x010CC5 08:8CB5: 20 D2 89
+	JSR SetEventFlag3F              ;C - - - - - 0x010CC5 08:8CB5: 20 D2 89
 	RTS                             ;C - - - - - 0x010CC8 08:8CB8: 60
 loc_08_8CB9:
-	JSR sub_08_9000                 ;C - - - - - 0x010CC9 08:8CB9: 20 00 90
+	JSR UpdateSpawnTimer            ;C - - - - - 0x010CC9 08:8CB9: 20 00 90
 loc_08_8CBC:
 	RTS                             ;C - - - - - 0x010CCC 08:8CBC: 60
 ofs_08_8CBD:
@@ -1280,10 +1280,10 @@ ofs_08_8CD2:
 	LDA ram_0054                    ;C - - J - - 0x010CE2 08:8CD2: A5 54
 	CMP tbl_08_8DEB,Y               ;C - - - - - 0x010CE4 08:8CD4: D9 EB 8D
 	BCC loc_08_8CDD                 ;C - - - - - 0x010CE7 08:8CD7: 90 04
-	JSR sub_08_89D2                 ;C - - - - - 0x010CE9 08:8CD9: 20 D2 89
+	JSR SetEventFlag3F              ;C - - - - - 0x010CE9 08:8CD9: 20 D2 89
 	RTS                             ;C - - - - - 0x010CEC 08:8CDC: 60
 loc_08_8CDD:
-	JSR sub_08_9000                 ;C - - - - - 0x010CED 08:8CDD: 20 00 90
+	JSR UpdateSpawnTimer            ;C - - - - - 0x010CED 08:8CDD: 20 00 90
 	RTS                             ;C - - - - - 0x010CF0 08:8CE0: 60
 ofs_08_8CE1:
 	LDA #$FF                        ;C - - J - - 0x010CF1 08:8CE1: A9 FF
@@ -1291,9 +1291,9 @@ ofs_08_8CE1:
 	LDA ram_0054                    ;C - - - - - 0x010CF5 08:8CE5: A5 54
 	CMP tbl_08_8DEB,Y               ;C - - - - - 0x010CF7 08:8CE7: D9 EB 8D
 	BCC loc_08_8CF4                 ;C - - - - - 0x010CFA 08:8CEA: 90 08
-	JSR sub_08_96FC                 ;C - - - - - 0x010CFC 08:8CEC: 20 FC 96
+	JSR CountBossLikeObjs           ;C - - - - - 0x010CFC 08:8CEC: 20 FC 96
 	BNE loc_08_8CF4                 ;C - - - - - 0x010CFF 08:8CEF: D0 03
-	JSR sub_08_89D2                 ;C - - - - - 0x010D01 08:8CF1: 20 D2 89
+	JSR SetEventFlag3F              ;C - - - - - 0x010D01 08:8CF1: 20 D2 89
 loc_08_8CF4:
 	RTS                             ;C - - - - - 0x010D04 08:8CF4: 60
 ofs_08_8CF5:
@@ -1311,27 +1311,27 @@ ofs_08_8D0C:
 	LDA ram_0054                    ;C - - J - - 0x010D1C 08:8D0C: A5 54
 	CMP tbl_08_8DEE,Y               ;C - - - - - 0x010D1E 08:8D0E: D9 EE 8D
 	BCC loc_08_8D17                 ;C - - - - - 0x010D21 08:8D11: 90 04
-	JSR sub_08_89D2                 ;C - - - - - 0x010D23 08:8D13: 20 D2 89
+	JSR SetEventFlag3F              ;C - - - - - 0x010D23 08:8D13: 20 D2 89
 	RTS                             ;C - - - - - 0x010D26 08:8D16: 60
 loc_08_8D17:
-	JSR sub_08_9000                 ;C - - - - - 0x010D27 08:8D17: 20 00 90
+	JSR UpdateSpawnTimer            ;C - - - - - 0x010D27 08:8D17: 20 00 90
 	RTS                             ;C - - - - - 0x010D2A 08:8D1A: 60
 ofs_08_8D1B:
 	LDA ram_0054                    ;C - - J - - 0x010D2B 08:8D1B: A5 54
 	CMP tbl_08_8DEE,Y               ;C - - - - - 0x010D2D 08:8D1D: D9 EE 8D
 	BCC loc_08_8D26                 ;C - - - - - 0x010D30 08:8D20: 90 04
-	JSR sub_08_89D2                 ;C - - - - - 0x010D32 08:8D22: 20 D2 89
+	JSR SetEventFlag3F              ;C - - - - - 0x010D32 08:8D22: 20 D2 89
 	RTS                             ;C - - - - - 0x010D35 08:8D25: 60
 loc_08_8D26:
-	JSR sub_08_9000                 ;C - - - - - 0x010D36 08:8D26: 20 00 90
+	JSR UpdateSpawnTimer            ;C - - - - - 0x010D36 08:8D26: 20 00 90
 	RTS                             ;C - - - - - 0x010D39 08:8D29: 60
 ofs_08_8D2A:
 	LDA ram_0054                    ;C - - J - - 0x010D3A 08:8D2A: A5 54
 	CMP tbl_08_8DEE,Y               ;C - - - - - 0x010D3C 08:8D2C: D9 EE 8D
 	BCC loc_08_8D39                 ;C - - - - - 0x010D3F 08:8D2F: 90 08
-	JSR sub_08_96FC                 ;C - - - - - 0x010D41 08:8D31: 20 FC 96
+	JSR CountBossLikeObjs           ;C - - - - - 0x010D41 08:8D31: 20 FC 96
 	BNE loc_08_8D39                 ;C - - - - - 0x010D44 08:8D34: D0 03
-	JSR sub_08_89D2                 ;C - - - - - 0x010D46 08:8D36: 20 D2 89
+	JSR SetEventFlag3F              ;C - - - - - 0x010D46 08:8D36: 20 D2 89
 loc_08_8D39:
 	RTS                             ;C - - - - - 0x010D49 08:8D39: 60
 ofs_08_8D3A:
@@ -1349,19 +1349,19 @@ ofs_08_8D51:
 	LDA ram_0054                    ;C - - J - - 0x010D61 08:8D51: A5 54
 	CMP tbl_08_8DF2,Y               ;C - - - - - 0x010D63 08:8D53: D9 F2 8D
 	BCC loc_08_8D5C                 ;C - - - - - 0x010D66 08:8D56: 90 04
-	JSR sub_08_89D2                 ;C - - - - - 0x010D68 08:8D58: 20 D2 89
+	JSR SetEventFlag3F              ;C - - - - - 0x010D68 08:8D58: 20 D2 89
 	RTS                             ;C - - - - - 0x010D6B 08:8D5B: 60
 loc_08_8D5C:
-	JSR sub_08_9000                 ;C - - - - - 0x010D6C 08:8D5C: 20 00 90
+	JSR UpdateSpawnTimer            ;C - - - - - 0x010D6C 08:8D5C: 20 00 90
 	RTS                             ;C - - - - - 0x010D6F 08:8D5F: 60
 ofs_08_8D60:
 	LDA ram_0054                    ;C - - J - - 0x010D70 08:8D60: A5 54
 	CMP tbl_08_8DF2,Y               ;C - - - - - 0x010D72 08:8D62: D9 F2 8D
 	BCC loc_08_8D6B                 ;C - - - - - 0x010D75 08:8D65: 90 04
-	JSR sub_08_89D2                 ;C - - - - - 0x010D77 08:8D67: 20 D2 89
+	JSR SetEventFlag3F              ;C - - - - - 0x010D77 08:8D67: 20 D2 89
 	RTS                             ;C - - - - - 0x010D7A 08:8D6A: 60
 loc_08_8D6B:
-	JSR sub_08_9000                 ;C - - - - - 0x010D7B 08:8D6B: 20 00 90
+	JSR UpdateSpawnTimer            ;C - - - - - 0x010D7B 08:8D6B: 20 00 90
 	RTS                             ;C - - - - - 0x010D7E 08:8D6E: 60
 ofs_08_8D6F:
 	LDA #$FF                        ;C - - J - - 0x010D7F 08:8D6F: A9 FF
@@ -1369,9 +1369,9 @@ ofs_08_8D6F:
 	LDA ram_0054                    ;C - - - - - 0x010D83 08:8D73: A5 54
 	CMP tbl_08_8DF2,Y               ;C - - - - - 0x010D85 08:8D75: D9 F2 8D
 	BCC loc_08_8D82                 ;C - - - - - 0x010D88 08:8D78: 90 08
-	JSR sub_08_96FC                 ;C - - - - - 0x010D8A 08:8D7A: 20 FC 96
+	JSR CountBossLikeObjs           ;C - - - - - 0x010D8A 08:8D7A: 20 FC 96
 	BNE loc_08_8D82                 ;C - - - - - 0x010D8D 08:8D7D: D0 03
-	JSR sub_08_89D2                 ;C - - - - - 0x010D8F 08:8D7F: 20 D2 89
+	JSR SetEventFlag3F              ;C - - - - - 0x010D8F 08:8D7F: 20 D2 89
 loc_08_8D82:
 	RTS                             ;C - - - - - 0x010D92 08:8D82: 60
 ofs_08_8D83:
@@ -1389,9 +1389,9 @@ ofs_08_8D98:
 	LDA ram_0054                    ;C - - J - - 0x010DA8 08:8D98: A5 54
 	CMP tbl_08_8DF6,Y               ;C - - - - - 0x010DAA 08:8D9A: D9 F6 8D
 	BCC loc_08_8DA7                 ;C - - - - - 0x010DAD 08:8D9D: 90 08
-	JSR sub_08_96FC                 ;C - - - - - 0x010DAF 08:8D9F: 20 FC 96
+	JSR CountBossLikeObjs           ;C - - - - - 0x010DAF 08:8D9F: 20 FC 96
 	BNE loc_08_8DA7                 ;C - - - - - 0x010DB2 08:8DA2: D0 03
-	JSR sub_08_89D2                 ;C - - - - - 0x010DB4 08:8DA4: 20 D2 89
+	JSR SetEventFlag3F              ;C - - - - - 0x010DB4 08:8DA4: 20 D2 89
 loc_08_8DA7:
 	RTS                             ;C - - - - - 0x010DB7 08:8DA7: 60
 ofs_08_8DA8:
@@ -1409,7 +1409,7 @@ loc_08_8DAE:
 loc_08_8DBB:
 	LDA objLife,Y                   ;C - - - - - 0x010DCB 08:8DBB: B9 90 04
 	BPL loc_08_8DC3                 ;C - - - - - 0x010DCE 08:8DBE: 10 03
-	JSR sub_08_89D2                 ;c - - - - - 0x010DD0 08:8DC0: 20 D2 89
+	JSR SetEventFlag3F              ;c - - - - - 0x010DD0 08:8DC0: 20 D2 89
 loc_08_8DC3:
 	RTS                             ;C - - - - - 0x010DD3 08:8DC3: 60
 tbl_08_8DC4:
@@ -1491,7 +1491,7 @@ tbl_08_8DF6:
 	.byte $20,$00,$00,$00,$90,$40,$08,$00,$04,$00,$81,$14,$40,$10,$00,$00;- - - - - - 0x010FE8 08:8FD8:
 	.byte $42,$10,$04,$01,$00,$10,$00,$00,$22,$40,$10,$00,$22,$00,$88,$00;- - - - - - 0x010FF8 08:8FE8:
 	.res 8, $00                     ;- - - - - - 0x011008 08:8FF8: fill 8 bytes
-sub_08_9000:
+UpdateSpawnTimer:
 	LDA ram_0050                    ;C - - - - - 0x011010 08:9000: A5 50
 	BNE loc_08_9012                 ;C - - - - - 0x011012 08:9002: D0 0E
 	LDA stage                       ;C - - - - - 0x011014 08:9004: A5 61
@@ -1507,7 +1507,7 @@ loc_08_9011:
 loc_08_9012:
 	LDA ram_003F                    ;C - - - - - 0x011022 08:9012: A5 3F
 	BMI loc_08_9011                 ;C - - - - - 0x011024 08:9014: 30 FB
-	JSR sub_08_96C3                 ;C - - - - - 0x011026 08:9016: 20 C3 96
+	JSR CountActiveFoes             ;C - - - - - 0x011026 08:9016: 20 C3 96
 	BNE loc_08_9011                 ;C - - - - - 0x011029 08:9019: D0 F6
 	DEC enemySpawnTimer             ;C - - - - - 0x01102B 08:901B: C6 63
 	LDA enemySpawnTimer             ;C - - - - - 0x01102D 08:901D: A5 63
@@ -1534,7 +1534,7 @@ loc_08_9038:
 	BNE loc_08_9056                 ;C - - - - - 0x011061 08:9051: D0 03
 	JMP loc_08_921C                 ;C - - - - - 0x011063 08:9053: 4C 1C 92
 loc_08_9056:
-	JSR sub_0F_F71A                 ;C - - - - - 0x011066 08:9056: 20 1A F7
+	JSR FindFreeEnemySlot           ;C - - - - - 0x011066 08:9056: 20 1A F7
 	BCS loc_08_9011                 ;C - - - - - 0x011069 08:9059: B0 B6
 	STY ram_003C                    ;C - - - - - 0x01106B 08:905B: 84 3C
 	LDA playerFacing                ;C - - - - - 0x01106D 08:905D: A5 31
@@ -1756,7 +1756,7 @@ loc_08_9209:
 loc_08_921B:
 	RTS                             ;C - - - - - 0x01122B 08:921B: 60
 loc_08_921C:
-	JSR sub_0F_F71A                 ;C - - - - - 0x01122C 08:921C: 20 1A F7
+	JSR FindFreeEnemySlot           ;C - - - - - 0x01122C 08:921C: 20 1A F7
 	BCS loc_08_921B                 ;C - - - - - 0x01122F 08:921F: B0 FA
 	STY ptr_00                      ;C - - - - - 0x011231 08:9221: 84 00
 	INC ram_0054                    ;C - - - - - 0x011233 08:9223: E6 54
@@ -2172,7 +2172,8 @@ tbl_08_96B3:
 	.byte $98,$A0,$9C,$A4,$98,$A4,$98,$A0;- D 0 - - - 0x0116C3 08:96B3:
 tbl_08_96BB:
 	.byte $58,$58,$68,$78,$88,$98,$A8,$A8;- D 0 - - - 0x0116CB 08:96BB:
-sub_08_96C3:
+; $FF if two or more
+CountActiveFoes:
 	LDA #$00                        ;C - - - - - 0x0116D3 08:96C3: A9 00
 	STA ptr_00                      ;C - - - - - 0x0116D5 08:96C5: 85 00
 	LDY #$0D                        ;C - - - - - 0x0116D7 08:96C7: A0 0D
@@ -2205,7 +2206,7 @@ loc_08_96EB:
 loc_08_96F9:
 	LDA #$FF                        ;C - - - - - 0x011709 08:96F9: A9 FF
 	RTS                             ;C - - - - - 0x01170B 08:96FB: 60
-sub_08_96FC:
+CountBossLikeObjs:
 	LDA #$00                        ;C - - - - - 0x01170C 08:96FC: A9 00
 	STA ptr_00                      ;C - - - - - 0x01170E 08:96FE: 85 00
 	LDY #$0D                        ;C - - - - - 0x011710 08:9700: A0 0D
@@ -2233,7 +2234,7 @@ loc_08_971B:
 loc_08_9727:
 	LDA #$FF                        ;C - - - - - 0x011737 08:9727: A9 FF
 	RTS                             ;C - - - - - 0x011739 08:9729: 60
-sub_08_972A:
+StageEventDispatch2:
 	LDY stage                       ;C - - - - - 0x01173A 08:972A: A4 61
 	LDA tbl_08_9748,Y               ;C - - - - - 0x01173C 08:972C: B9 48 97
 	STA ptr_02                      ;C - - - - - 0x01173F 08:972F: 85 02
@@ -2275,7 +2276,7 @@ tbl_08_9770:
 ofs_08_977F:
 	LDY scrollXPage                 ;C - - J - - 0x01178F 08:977F: A4 F9
 	LDA tbl_08_99C2,Y               ;C - - - - - 0x011791 08:9781: B9 C2 99
-	JSR sub_09_A000                 ;C - - - - - bank=09 0x011794 08:9784: 20 00 A0
+	JSR SetSectionChr               ;C - - - - - bank=09 0x011794 08:9784: 20 00 A0
 ofs_08_9787:
 	RTS                             ;C - - - - - 0x011797 08:9787: 60
 ofs_08_9788:
@@ -2291,11 +2292,11 @@ tbl_08_979B:
 	.hibytes ofs_08_9787, ofs_08_979F, ofs_08_97A6, tbl_08_97AD;- - - - - - 0x0117AB 08:979B:
 ofs_08_979F:
 	LDA tbl_08_99C6,Y               ;C - - J - - 0x0117AF 08:979F: B9 C6 99
-	JSR sub_09_A000                 ;C - - - - - bank=09 0x0117B2 08:97A2: 20 00 A0
+	JSR SetSectionChr               ;C - - - - - bank=09 0x0117B2 08:97A2: 20 00 A0
 	RTS                             ;C - - - - - 0x0117B5 08:97A5: 60
 ofs_08_97A6:
 	LDA tbl_08_99C6,Y               ;C - - J - - 0x0117B6 08:97A6: B9 C6 99
-	JSR sub_09_A000                 ;C - - - - - bank=09 0x0117B9 08:97A9: 20 00 A0
+	JSR SetSectionChr               ;C - - - - - bank=09 0x0117B9 08:97A9: 20 00 A0
 	RTS                             ;C - - - - - 0x0117BC 08:97AC: 60
 tbl_08_97AD:
 	.byte $B9,$C6,$99,$20           ;- - - - - - 0x0117BD 08:97AD:
@@ -2319,15 +2320,15 @@ tbl_08_97E1:
 	.hibytes ofs_08_9787, ofs_08_97E5, ofs_08_97EC, ofs_08_97F3;- - - - - - 0x0117F1 08:97E1:
 ofs_08_97E5:
 	LDA tbl_08_99CC,Y               ;C - - J - - 0x0117F5 08:97E5: B9 CC 99
-	JSR sub_09_A000                 ;C - - - - - bank=09 0x0117F8 08:97E8: 20 00 A0
+	JSR SetSectionChr               ;C - - - - - bank=09 0x0117F8 08:97E8: 20 00 A0
 	RTS                             ;C - - - - - 0x0117FB 08:97EB: 60
 ofs_08_97EC:
 	LDA tbl_08_99CC,Y               ;C - - J - - 0x0117FC 08:97EC: B9 CC 99
-	JSR sub_09_A000                 ;C - - - - - bank=09 0x0117FF 08:97EF: 20 00 A0
+	JSR SetSectionChr               ;C - - - - - bank=09 0x0117FF 08:97EF: 20 00 A0
 	RTS                             ;C - - - - - 0x011802 08:97F2: 60
 ofs_08_97F3:
 	LDA tbl_08_99CC,Y               ;c - - - - - 0x011803 08:97F3: B9 CC 99
-	JSR sub_09_A000                 ;c - - - - - bank=09 0x011806 08:97F6: 20 00 A0
+	JSR SetSectionChr               ;c - - - - - bank=09 0x011806 08:97F6: 20 00 A0
 	RTS                             ;c - - - - - 0x011809 08:97F9: 60
 ofs_08_97FA:
 	LDY scrollXPage                 ;C - - J - - 0x01180A 08:97FA: A4 F9
@@ -2342,15 +2343,15 @@ tbl_08_980E:
 	.hibytes ofs_08_9787, ofs_08_9813, ofs_08_981A, ofs_08_9821, tbl_08_9828;- - - - - - 0x01181E 08:980E:
 ofs_08_9813:
 	LDA tbl_08_99D0,Y               ;C - - J - - 0x011823 08:9813: B9 D0 99
-	JSR sub_09_A000                 ;C - - - - - bank=09 0x011826 08:9816: 20 00 A0
+	JSR SetSectionChr               ;C - - - - - bank=09 0x011826 08:9816: 20 00 A0
 	RTS                             ;C - - - - - 0x011829 08:9819: 60
 ofs_08_981A:
 	LDA tbl_08_99D0,Y               ;C - - J - - 0x01182A 08:981A: B9 D0 99
-	JSR sub_09_A000                 ;C - - - - - bank=09 0x01182D 08:981D: 20 00 A0
+	JSR SetSectionChr               ;C - - - - - bank=09 0x01182D 08:981D: 20 00 A0
 	RTS                             ;C - - - - - 0x011830 08:9820: 60
 ofs_08_9821:
 	LDA tbl_08_99D0,Y               ;C - - J - - 0x011831 08:9821: B9 D0 99
-	JSR sub_09_A000                 ;C - - - - - bank=09 0x011834 08:9824: 20 00 A0
+	JSR SetSectionChr               ;C - - - - - bank=09 0x011834 08:9824: 20 00 A0
 	RTS                             ;C - - - - - 0x011837 08:9827: 60
 tbl_08_9828:
 	.byte $B9,$D0,$99,$20           ;- - - - - - 0x011838 08:9828:
@@ -2375,15 +2376,15 @@ tbl_08_985C:
 	.hibytes ofs_08_9787, ofs_08_9860, ofs_08_9867, ofs_08_986E;- - - - - - 0x01186C 08:985C:
 ofs_08_9860:
 	LDA tbl_08_99D7,Y               ;C - - J - - 0x011870 08:9860: B9 D7 99
-	JSR sub_09_A000                 ;C - - - - - bank=09 0x011873 08:9863: 20 00 A0
+	JSR SetSectionChr               ;C - - - - - bank=09 0x011873 08:9863: 20 00 A0
 	RTS                             ;C - - - - - 0x011876 08:9866: 60
 ofs_08_9867:
 	LDA tbl_08_99D7,Y               ;C - - J - - 0x011877 08:9867: B9 D7 99
-	JSR sub_09_A000                 ;C - - - - - bank=09 0x01187A 08:986A: 20 00 A0
+	JSR SetSectionChr               ;C - - - - - bank=09 0x01187A 08:986A: 20 00 A0
 	RTS                             ;C - - - - - 0x01187D 08:986D: 60
 ofs_08_986E:
 	LDA tbl_08_99D7,Y               ;c - - - - - 0x01187E 08:986E: B9 D7 99
-	JSR sub_09_A000                 ;c - - - - - bank=09 0x011881 08:9871: 20 00 A0
+	JSR SetSectionChr               ;c - - - - - bank=09 0x011881 08:9871: 20 00 A0
 	RTS                             ;c - - - - - 0x011884 08:9874: 60
 ofs_08_9875:
 	LDY scrollXPage                 ;C - - J - - 0x011885 08:9875: A4 F9
@@ -2398,12 +2399,12 @@ tbl_08_9888:
 	.hibytes ofs_08_9787, ofs_08_988C, ofs_08_9893, tbl_08_989A;- - - - - - 0x011898 08:9888:
 ofs_08_988C:
 	LDA tbl_08_99DB,Y               ;C - - J - - 0x01189C 08:988C: B9 DB 99
-	JSR sub_09_A000                 ;C - - - - - bank=09 0x01189F 08:988F: 20 00 A0
+	JSR SetSectionChr               ;C - - - - - bank=09 0x01189F 08:988F: 20 00 A0
 	RTS                             ;C - - - - - 0x0118A2 08:9892: 60
 ofs_08_9893:
 	LDA tbl_08_99DB,Y               ;C - - J - - 0x0118A3 08:9893: B9 DB 99
 ofs_08_9896:
-	JSR sub_09_A000                 ;C - - - - - bank=09 0x0118A6 08:9896: 20 00 A0
+	JSR SetSectionChr               ;C - - - - - bank=09 0x0118A6 08:9896: 20 00 A0
 	RTS                             ;C - - - - - 0x0118A9 08:9899: 60
 tbl_08_989A:
 	.byte $B9,$DB,$99,$20           ;- - - - - - 0x0118AA 08:989A:
@@ -2428,11 +2429,11 @@ tbl_08_98CE:
 	.hibytes ofs_08_9787, ofs_08_98D2, ofs_08_98D9, tbl_08_98E0;- - - - - - 0x0118DE 08:98CE:
 ofs_08_98D2:
 	LDA tbl_08_99E0,Y               ;C - - J - - 0x0118E2 08:98D2: B9 E0 99
-	JSR sub_09_A000                 ;C - - - - - bank=09 0x0118E5 08:98D5: 20 00 A0
+	JSR SetSectionChr               ;C - - - - - bank=09 0x0118E5 08:98D5: 20 00 A0
 	RTS                             ;C - - - - - 0x0118E8 08:98D8: 60
 ofs_08_98D9:
 	LDA tbl_08_99E0,Y               ;C - - J - - 0x0118E9 08:98D9: B9 E0 99
-	JSR sub_09_A000                 ;C - - - - - bank=09 0x0118EC 08:98DC: 20 00 A0
+	JSR SetSectionChr               ;C - - - - - bank=09 0x0118EC 08:98DC: 20 00 A0
 	RTS                             ;C - - - - - 0x0118EF 08:98DF: 60
 tbl_08_98E0:
 	.byte $B9,$E0,$99,$20           ;- - - - - - 0x0118F0 08:98E0:
@@ -2459,7 +2460,7 @@ tbl_08_9914:
 	.hibytes ofs_08_9787, ofs_08_9918, tbl_08_991F, tbl_08_9926;- - - - - - 0x011924 08:9914:
 ofs_08_9918:
 	LDA tbl_08_99EA,Y               ;C - - J - - 0x011928 08:9918: B9 EA 99
-	JSR sub_09_A000                 ;C - - - - - bank=09 0x01192B 08:991B: 20 00 A0
+	JSR SetSectionChr               ;C - - - - - bank=09 0x01192B 08:991B: 20 00 A0
 	RTS                             ;C - - - - - 0x01192E 08:991E: 60
 tbl_08_991F:
 	.byte $B9,$EB,$99,$20           ;- - - - - - 0x01192F 08:991F:
@@ -2485,15 +2486,15 @@ tbl_08_995A:
 	.hibytes ofs_08_9787, ofs_08_995E, ofs_08_9965, ofs_08_996C;- - - - - - 0x01196A 08:995A:
 ofs_08_995E:
 	LDA tbl_08_99EC,Y               ;C - - J - - 0x01196E 08:995E: B9 EC 99
-	JSR sub_09_A000                 ;C - - - - - bank=09 0x011971 08:9961: 20 00 A0
+	JSR SetSectionChr               ;C - - - - - bank=09 0x011971 08:9961: 20 00 A0
 	RTS                             ;C - - - - - 0x011974 08:9964: 60
 ofs_08_9965:
 	LDA tbl_08_99EC,Y               ;C - - J - - 0x011975 08:9965: B9 EC 99
-	JSR sub_09_A000                 ;C - - - - - bank=09 0x011978 08:9968: 20 00 A0
+	JSR SetSectionChr               ;C - - - - - bank=09 0x011978 08:9968: 20 00 A0
 	RTS                             ;C - - - - - 0x01197B 08:996B: 60
 ofs_08_996C:
 	LDA tbl_08_99EC,Y               ;c - - - - - 0x01197C 08:996C: B9 EC 99
-	JSR sub_09_A000                 ;c - - - - - bank=09 0x01197F 08:996F: 20 00 A0
+	JSR SetSectionChr               ;c - - - - - bank=09 0x01197F 08:996F: 20 00 A0
 	RTS                             ;c - - - - - 0x011982 08:9972: 60
 ofs_08_9973:
 	LDY scrollXPage                 ;C - - J - - 0x011983 08:9973: A4 F9
@@ -2508,15 +2509,15 @@ tbl_08_9986:
 	.hibytes ofs_08_9787, ofs_08_998A, ofs_08_9991, ofs_08_9998;- - - - - - 0x011996 08:9986:
 ofs_08_998A:
 	LDA tbl_08_99F0,Y               ;C - - J - - 0x01199A 08:998A: B9 F0 99
-	JSR sub_09_A000                 ;C - - - - - bank=09 0x01199D 08:998D: 20 00 A0
+	JSR SetSectionChr               ;C - - - - - bank=09 0x01199D 08:998D: 20 00 A0
 	RTS                             ;C - - - - - 0x0119A0 08:9990: 60
 ofs_08_9991:
 	LDA tbl_08_99F0,Y               ;C - - J - - 0x0119A1 08:9991: B9 F0 99
-	JSR sub_09_A000                 ;C - - - - - bank=09 0x0119A4 08:9994: 20 00 A0
+	JSR SetSectionChr               ;C - - - - - bank=09 0x0119A4 08:9994: 20 00 A0
 	RTS                             ;C - - - - - 0x0119A7 08:9997: 60
 ofs_08_9998:
 	LDA tbl_08_99F0,Y               ;c - - - - - 0x0119A8 08:9998: B9 F0 99
-	JSR sub_09_A000                 ;c - - - - - bank=09 0x0119AB 08:999B: 20 00 A0
+	JSR SetSectionChr               ;c - - - - - bank=09 0x0119AB 08:999B: 20 00 A0
 	RTS                             ;c - - - - - 0x0119AE 08:999E: 60
 ofs_08_999F:
 	LDY scrollXPage                 ;C - - J - - 0x0119AF 08:999F: A4 F9
@@ -2531,11 +2532,11 @@ tbl_08_99B1:
 	.hibytes ofs_08_9787, ofs_08_99B4, ofs_08_99BB;- - - - - - 0x0119C1 08:99B1:
 ofs_08_99B4:
 	LDA tbl_08_99F4,Y               ;C - - J - - 0x0119C4 08:99B4: B9 F4 99
-	JSR sub_09_A000                 ;C - - - - - bank=09 0x0119C7 08:99B7: 20 00 A0
+	JSR SetSectionChr               ;C - - - - - bank=09 0x0119C7 08:99B7: 20 00 A0
 	RTS                             ;C - - - - - 0x0119CA 08:99BA: 60
 ofs_08_99BB:
 	LDA tbl_08_99F4,Y               ;c - - - - - 0x0119CB 08:99BB: B9 F4 99
-	JSR sub_09_A000                 ;c - - - - - bank=09 0x0119CE 08:99BE: 20 00 A0
+	JSR SetSectionChr               ;c - - - - - bank=09 0x0119CE 08:99BE: 20 00 A0
 	RTS                             ;c - - - - - 0x0119D1 08:99C1: 60
 tbl_08_99C2:
 	.byte $00                       ;- - - - - - 0x0119D2 08:99C2:

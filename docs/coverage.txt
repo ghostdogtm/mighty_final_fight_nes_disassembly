@@ -34,7 +34,7 @@ Traced code (instruction starts, verify by hand):
   00:8235  RTS
   00:82F1  LDA #$03
   00:82F3  BNE loc_00_82F7
-  00:8311  JSR sub_0F_F26E
+  00:8311  JSR SetHopVelY
   00:8342  LDA #$1C
   00:8344  JSR QueueSound
   00:8347  LDA #$02
@@ -97,7 +97,7 @@ Traced code (instruction starts, verify by hand):
   00:8AAD  STA objY
   00:8AB0  INC objActive
   00:8AB3  LDY #$00
-  00:8AB5  JSR sub_0F_F119
+  00:8AB5  JSR MoveYGravityCheck
   00:8AB8  LDA objVelYHi
   00:8ABB  BPL loc_00_8AFF
   00:8ABD  LDA objY
@@ -155,7 +155,7 @@ Traced code (instruction starts, verify by hand):
   00:9053  RTS
   00:917F  JSR ApplyVelYAdd
   00:9182  RTS
-  00:920F  JSR sub_0F_F1DF
+  00:920F  JSR ApplyVelYUpAlt
   00:9212  RTS
   00:92F6  LDA #$0F
   00:940D  JSR ClearPlayerFlag40
@@ -166,7 +166,7 @@ Traced code (instruction starts, verify by hand):
   00:9436  JMP loc_00_943F
   00:95B1  JSR ClearPlayerFlag40
   00:95B4  JMP loc_00_95BA
-  00:95CF  JSR sub_0F_F1DF
+  00:95CF  JSR ApplyVelYUpAlt
   00:95D2  RTS
   00:95E3  JSR ApplyVelXSub
   00:95E6  LDA objX
@@ -228,7 +228,7 @@ Traced code (instruction starts, verify by hand):
   01:A644  BNE loc_01_A648
   01:A646  LDA #$84
   01:A648  STA objActive,X
-  01:A651  JSR sub_01_A882
+  01:A651  JSR SetGrabbedAnimB_01
   01:A654  LDA objXPage,X
   01:A657  CMP #$01
   01:A659  BNE loc_01_A684
@@ -240,7 +240,7 @@ Traced code (instruction starts, verify by hand):
   01:A666  BNE loc_01_A66C
   01:A668  LDA #$24
   01:A66A  LDY #$09
-  01:A66C  JSR sub_0F_FB3E
+  01:A66C  JSR CheckNearPlayer
   01:A66F  BCC loc_01_A684
   01:A671  LDA objSpriteDown,X
   01:A674  SBC #$07
@@ -251,7 +251,7 @@ Traced code (instruction starts, verify by hand):
   01:A680  STA objArr_0500,X
   01:A683  RTS
   01:A684  LDY #$04
-  01:A686  JSR sub_01_A7E1
+  01:A686  JSR SetVelFromTbl_A7E1
   01:A689  LDA objFacing,X
   01:A68C  CMP #$01
   01:A68E  BNE loc_01_A6A1
@@ -283,7 +283,7 @@ Traced code (instruction starts, verify by hand):
   01:A714  BNE loc_01_A71C
   01:A716  LDA objY
   01:A719  STA objY,X
-  01:A75A  JSR sub_01_A83A
+  01:A75A  JSR SetGrabbedAnimA_01
   01:A75D  SEC
   01:A75E  RTS
   01:A7AC  LDA objArr_0520,X
@@ -369,9 +369,9 @@ Traced code (instruction starts, verify by hand):
   04:9401  STA objY
   04:9404  BNE loc_04_9410
   04:98A7  LDY #$06
-  04:98A9  JSR sub_04_9AA0
+  04:98A9  JSR QueueTextScript
   04:98AC  JMP loc_04_98BD
-  04:98E3  JSR sub_04_9A9E
+  04:98E3  JSR QueueTextScript0
   04:98E6  INC ram_0066
   04:98E8  RTS
   04:9911  LDY playerId
@@ -516,7 +516,7 @@ Traced code (instruction starts, verify by hand):
   06:82A4  INC soundPtr+1
   06:82B3  JSR SoundStreamByte
   06:82B6  STA ram_00D2
-  06:8365  JSR sub_06_85AE
+  06:8365  JSR SoundStartNote
   06:8428  LDA #$01
   06:85E2  LDA #$5F
   06:8740  CPX #$29
@@ -568,14 +568,14 @@ Traced code (instruction starts, verify by hand):
   08:808A  CMP #$02
   08:808C  BEQ loc_08_808E
   08:808E  LDY ram_009F
-  08:8090  JSR sub_08_80C2
+  08:8090  JSR CompareSpawnPos
   08:8093  BNE loc_08_809C
   08:8095  JSR SpawnEnemy
   08:8098  DEC ram_009F
   08:809A  BNE loc_08_808E
   08:809C  LDY ram_009F
   08:809E  INY
-  08:809F  JSR sub_08_80C2
+  08:809F  JSR CompareSpawnPos
   08:80A2  BEQ loc_08_809E
   08:80A4  STY totalEnemies
   08:80A6  RTS
@@ -584,7 +584,7 @@ Traced code (instruction starts, verify by hand):
   08:8104  RTS
   08:81E7  RTS
   08:8A43  RTS
-  08:8DC0  JSR sub_08_89D2
+  08:8DC0  JSR SetEventFlag3F
   08:900A  RTS
   08:9148  CMP #$FF
   08:914A  BEQ loc_08_9170
@@ -598,19 +598,19 @@ Traced code (instruction starts, verify by hand):
   08:92E4  LDA #$07
   08:92E6  STA ptr_00+1
   08:97F3  LDA tbl_08_99CC,Y
-  08:97F6  JSR sub_09_A000
+  08:97F6  JSR SetSectionChr
   08:97F9  RTS
   08:986E  LDA tbl_08_99D7,Y
-  08:9871  JSR sub_09_A000
+  08:9871  JSR SetSectionChr
   08:9874  RTS
   08:996C  LDA tbl_08_99EC,Y
-  08:996F  JSR sub_09_A000
+  08:996F  JSR SetSectionChr
   08:9972  RTS
   08:9998  LDA tbl_08_99F0,Y
-  08:999B  JSR sub_09_A000
+  08:999B  JSR SetSectionChr
   08:999E  RTS
   08:99BB  LDA tbl_08_99F4,Y
-  08:99BE  JSR sub_09_A000
+  08:99BE  JSR SetSectionChr
   08:99C1  RTS
   09:AB34  LDA objActive
   09:AB37  AND #$0F
@@ -639,7 +639,7 @@ Traced code (instruction starts, verify by hand):
   09:AB6F  LDA #$04
   09:AB71  STA objVelYHi
   09:AB74  INC objActive
-  09:AB77  JSR sub_0F_F406
+  09:AB77  JSR RedrawAndWaitFrame
   09:AB7A  JMP loc_09_AB34
   09:AB7D  LDA objActive
   09:AB80  AND #$02
@@ -672,7 +672,7 @@ Traced code (instruction starts, verify by hand):
   09:ABC2  JSR SetPlayerAnim
   09:ABC5  LDA #$00
   09:ABC7  JSR SetChrBank2
-  09:ABCA  JMP sub_0F_F406
+  09:ABCA  JMP RedrawAndWaitFrame
   09:ABCD  JMP loc_09_AB77
   0B:B3E9  LDA #$00
   0B:B3EB  STA objActive+6
@@ -751,13 +751,13 @@ Traced code (instruction starts, verify by hand):
   0C:8BCD  CLC
   0C:8BCE  ADC #$01
   0C:8BD0  STA credits
-  0C:8BD2  JSR sub_0C_8C00
+  0C:8BD2  JSR EndAttackAction
   0C:8BD5  RTS
   0C:8BE5  LDA #$09
   0C:8BE7  STA lives
   0C:8BF8  LDA #$09
   0C:8BFA  STA lives
-  0C:8BFC  BNE sub_0C_8C00
+  0C:8BFC  BNE EndAttackAction
   0C:8DBC  LDA scrollX
   0C:8DBE  CLC
   0C:8DBF  ADC #$10
@@ -788,7 +788,7 @@ Traced code (instruction starts, verify by hand):
   0C:9242  STA objArr_0510,X
   0C:9245  LDA #$08
   0C:9247  STA objArr_0540,X
-  0C:9312  JSR sub_0C_9C55
+  0C:9312  JSR EnemySetDownAnimA
   0C:93B5  LDA objFacing,X
   0C:93B8  AND #$02
   0C:93BA  TAY
@@ -898,7 +898,7 @@ Traced code (instruction starts, verify by hand):
   0C:9DBD  CMP #$80
   0C:9DBF  BCC loc_0C_9DC2
   0C:9DC1  RTS
-  0C:9DC2  JSR sub_0F_FB5B
+  0C:9DC2  JSR DirToPlayerGround
   0C:9DC5  TAY
   0C:9DC6  LDA tbl_0D_A87E,Y
   0C:9DC9  STA objFacing,X
@@ -986,14 +986,14 @@ Traced code (instruction starts, verify by hand):
   0E:CC48  LDA playerFacing
   0E:CC4A  STA objFacing,Y
   0E:CC4D  BNE loc_0E_CC52
-  0E:CC4F  JSR sub_0E_CC85
+  0E:CC4F  JSR PlaceGrabbedEnemy
   0E:CC62  JMP loc_0E_D7F2
   0E:CC65  LDA objFacing,Y
   0E:CC68  AND #$03
   0E:CC6A  CMP playerFacing
   0E:CC6C  BEQ loc_0E_CC70
   0E:CC6E  BNE loc_0E_CC73
-  0E:CC70  JSR sub_0E_CC85
+  0E:CC70  JSR PlaceGrabbedEnemy
   0E:CC73  JMP loc_0E_D88C
   0E:CC7F  JMP loc_0E_CB22
   0E:CC85  LDA playerFacing
@@ -1014,7 +1014,7 @@ Traced code (instruction starts, verify by hand):
   0E:CF74  EOR #$FF
   0E:CF76  ADC #$01
   0E:CF78  CLC
-  0E:CFCD  JSR sub_0E_CFD1
+  0E:CFCD  JSR StartAction24
   0E:CFD0  RTS
   0E:CFD1  LDA gameAction
   0E:CFD3  STA ram_00BE
@@ -1023,9 +1023,9 @@ Traced code (instruction starts, verify by hand):
   0E:CFD9  LDA #$80
   0E:CFDB  STA objActive
   0E:CFDE  RTS
-  0E:CFF4  JSR sub_0E_CFD1
+  0E:CFF4  JSR StartAction24
   0E:CFF7  RTS
-  0E:D016  JSR sub_0E_CFD1
+  0E:D016  JSR StartAction24
   0E:D019  RTS
   0E:D0DE  JMP loc_0E_D18E
   0E:D183  LDA #$04
@@ -1065,10 +1065,10 @@ Traced code (instruction starts, verify by hand):
   0E:D65C  CMP #$47
   0E:D65E  BEQ loc_0E_D667
   0E:D660  RTS
-  0E:D667  JMP sub_0E_D79A
+  0E:D667  JMP StartAction0C
   0E:D735  LDA objY
   0E:D738  STA playerGroundY
-  0E:D786  BNE sub_0E_D79A
+  0E:D786  BNE StartAction0C
   0E:D951  LDA objXPage,Y
   0E:D954  ADC #$00
   0E:D956  STA objXPage,Y
@@ -1203,7 +1203,7 @@ Traced code (instruction starts, verify by hand):
   0F:F034  RTS
   0F:F035  LDA objVelYHi
   0F:F038  BMI loc_0F_F024
-  0F:F03A  JSR sub_0F_F0DC
+  0F:F03A  JSR StartAction24FromGrab
   0F:F03D  CLC
   0F:F03E  RTS
   0F:F07A  LDA spriteFlipMask
@@ -1215,7 +1215,7 @@ Traced code (instruction starts, verify by hand):
   0F:F085  RTS
   0F:F086  LDA objVelYHi
   0F:F089  BMI loc_0F_F075
-  0F:F08B  JSR sub_0F_F0DC
+  0F:F08B  JSR StartAction24FromGrab
   0F:F08E  CLC
   0F:F08F  RTS
   0F:F0CC  LDA gameAction
@@ -1223,7 +1223,7 @@ Traced code (instruction starts, verify by hand):
   0F:F0D0  BEQ loc_0F_F0BD
   0F:F0D2  CLC
   0F:F0D3  RTS
-  0F:F0D8  JSR sub_0F_F0DC
+  0F:F0D8  JSR StartAction24FromGrab
   0F:F0DB  RTS
   0F:F0DC  LDA gameAction
   0F:F0DE  STA ram_00BE
@@ -1238,8 +1238,8 @@ Traced code (instruction starts, verify by hand):
   0F:F0F1  LDY ram_0039
   0F:F0F3  STA objArr_03F0,Y
   0F:F0F6  RTS
-  0F:F168  JSR sub_0F_EF83
-  0F:F16B  JSR sub_0F_F26E
+  0F:F168  JSR PushOutDown
+  0F:F16B  JSR SetHopVelY
   0F:F1D6  ADC #$0F
   0F:F1D8  STA objY,X
   0F:F1DB  INC objYPage,X

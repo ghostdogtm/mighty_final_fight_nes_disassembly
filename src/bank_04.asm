@@ -1,7 +1,8 @@
 .segment "BANK_04"
 ; 0x008010-0x00A00F  CPU $8000-$9FFF
 
-sub_04_8000:
+; script from tbl_04_8100/810E into vramQueue
+QueueVramScript:
 	LDA renderOffCount              ;C D 0 - - - 0x008010 04:8000: A5 EE
 	STA ptr_04+1                    ;C - - - - - 0x008012 04:8002: 85 05
 	LDA #$01                        ;C - - - - - 0x008014 04:8004: A9 01
@@ -302,7 +303,7 @@ tbl_04_87ED:
 	.byte $B4,$3B,$0C,$4F,$BA,$F1,$A2,$DD,$E8,$EF,$A2,$3D,$2A,$8F,$0A,$FB;- - - - - - 0x0088E2 04:88D2:
 	.byte $0B,$ED,$A8,$FD,$A2,$9B,$C0,$CE,$69,$76,$08,$E5,$22,$E4,$2B,$F3;- - - - - - 0x0088F2 04:88E2:
 	.byte $08,$DE,$B3,$56,$AA,$9D,$2A,$5F,$2A,$E5,$CA,$2F,$AA,$7F;- - - - - - 0x008902 04:88F2:
-sub_04_8900:
+ScreenInit8900:
 	LDY #$0F                        ;C - - - - - 0x008910 04:8900: A0 0F
 loc_04_8902:
 	LDA tbl_04_8924,Y               ;C - - - - - 0x008912 04:8902: B9 24 89
@@ -318,12 +319,12 @@ loc_04_8902:
 	STA chrBankShadow               ;C - - - - - 0x00892A 04:891A: 85 E8
 	LDA #$7A                        ;C - - - - - 0x00892C 04:891C: A9 7A
 	STA chrBankShadow+1             ;C - - - - - 0x00892E 04:891E: 85 E9
-	JSR sub_0E_C362                 ;C - - - - - 0x008930 04:8920: 20 62 C3
+	JSR FadeOutPaletteFast          ;C - - - - - 0x008930 04:8920: 20 62 C3
 	RTS                             ;C - - - - - 0x008933 04:8923: 60
 tbl_04_8924:
 	.byte $0F,$20,$32,$22,$0F,$27,$38,$02,$0F,$17,$27,$02,$0F,$0F,$0F,$0F;- D 0 - - - 0x008934 04:8924:
 	.byte $6F,$DF,$C8,$D7,$A4,$BE,$8C,$CE,$BB,$DF,$AB,$CB;- - - - - - 0x008944 04:8934:
-sub_04_8940:
+ScreenInit8940:
 	LDY #$0F                        ;C - - - - - 0x008950 04:8940: A0 0F
 loc_04_8942:
 	LDA tbl_04_898E,Y               ;C - - - - - 0x008952 04:8942: B9 8E 89
@@ -364,7 +365,7 @@ tbl_04_899E:
 	.byte $28,$02,$2A,$0F,$2A,$02,$0F;- D 0 - - - 0x0089B7 04:89A7:
 	.byte $A2,$F4,$00,$CD,$EA,$5D,$8A,$FE,$AB,$C3,$8E,$7F,$20,$8A,$AA,$70;- - - - - - 0x0089BE 04:89AE:
 	.byte $CA,$43                   ;- - - - - - 0x0089CE 04:89BE:
-sub_04_89C0:
+ScreenInit89C0:
 	LDY #$0F                        ;C - - - - - 0x0089D0 04:89C0: A0 0F
 loc_04_89C2:
 	LDA tbl_04_898E,Y               ;C - - - - - 0x0089D2 04:89C2: B9 8E 89
@@ -386,7 +387,7 @@ loc_04_89C2:
 	.byte $EF,$BA,$8D,$22,$AF,$BA,$77,$A8,$21,$0F,$C4,$20;- - - - - - 0x008A39 04:8A29:
 	.word $AAEF, $A0E8              ;W 0x008A45 04:8A35:
 	.byte $A1,$4F,$F3,$A0,$37,$8A,$77;- - - - - - 0x008A49 04:8A39:
-sub_04_8A40:
+ScreenInit8A40:
 	LDY #$0F                        ;C - - - - - 0x008A50 04:8A40: A0 0F
 loc_04_8A42:
 	LDA tbl_04_8A59,Y               ;C - - - - - 0x008A52 04:8A42: B9 59 8A
@@ -408,7 +409,7 @@ tbl_04_8A59:
 	.byte $DB,$AC,$F4,$88,$F9,$BF,$7F,$A2,$BF,$0A,$72,$8A,$CD,$EB,$3F,$01;- - - - - - 0x008AA9 04:8A99:
 	.byte $5B,$A2,$36,$0B,$F7,$23,$DD,$DA,$7E,$02,$E2,$28,$F9,$AF,$7E,$AA;- - - - - - 0x008AB9 04:8AA9:
 	.byte $D5,$8A,$4C,$2A,$77,$9F,$B6;- - - - - - 0x008AC9 04:8AB9:
-sub_04_8AC0:
+ScreenInit8AC0:
 	LDY #$0F                        ;C - - - - - 0x008AD0 04:8AC0: A0 0F
 loc_04_8AC2:
 	LDA tbl_04_8B01,Y               ;C - - - - - 0x008AD2 04:8AC2: B9 01 8B
@@ -444,7 +445,7 @@ tbl_04_8B11:
 	.byte $0F,$30,$37,$27,$0F,$0F,$0F,$0F,$0F,$0F,$0F,$0F,$0F,$0F,$0F,$0F;- D 0 - - - 0x008B21 04:8B11:
 	.byte $FE,$A3,$A6,$D8,$99,$68,$31,$AB,$DD,$A8,$BE,$A2,$EF,$A8,$CA,$02;- - - - - - 0x008B31 04:8B21:
 	.byte $C4,$E1,$FB,$2A,$4E,$2B,$ED,$EA,$F3,$0A,$E3,$A0,$FE,$9A,$DE;- - - - - - 0x008B41 04:8B31:
-sub_04_8B40:
+ScreenInit8B40:
 	LDY #$0F                        ;C - - - - - 0x008B50 04:8B40: A0 0F
 loc_04_8B42:
 	LDA tbl_04_8A59,Y               ;C - - - - - 0x008B52 04:8B42: B9 59 8A
@@ -529,7 +530,8 @@ tbl_04_8C48:
 	.byte $20,$D0,$7D,$D0,$6A,$19,$A0,$05,$0E,$14,$CD,$01,$46,$34,$3D,$50;- - - - - - 0x008CE8 04:8CD8:
 	.byte $FF,$50,$FD,$52,$E9,$18,$A2,$14,$D9,$96,$57,$05,$1B,$41,$C2,$D2;- - - - - - 0x008CF8 04:8CE8:
 	.byte $CE,$83,$A7,$11,$D9,$7C,$02,$05;- - - - - - 0x008D08 04:8CF8:
-sub_04_8D00:
+; player specific palette
+ScreenInit8D00:
 	LDA #$F0                        ;C - - - - - 0x008D10 04:8D00: A9 F0
 	JSR QueueSoundSaved             ;C - - - - - 0x008D12 04:8D02: 20 4A F3
 	LDY #$0F                        ;C - - - - - 0x008D15 04:8D05: A0 0F
@@ -679,10 +681,10 @@ loc_04_8E45:
 	LDA objAnimFrame+1              ;C - - - - - 0x008E55 04:8E45: AD 71 05
 	CMP #$0A                        ;C - - - - - 0x008E58 04:8E48: C9 0A
 	BNE loc_04_8E50                 ;C - - - - - 0x008E5A 04:8E4A: D0 04
-	JSR sub_04_8F07                 ;C - - - - - 0x008E5C 04:8E4C: 20 07 8F
+	JSR ResetSlot2Anim              ;C - - - - - 0x008E5C 04:8E4C: 20 07 8F
 	RTS                             ;C - - - - - 0x008E5F 04:8E4F: 60
 loc_04_8E50:
-	JSR sub_0F_F406                 ;C - - - - - 0x008E60 04:8E50: 20 06 F4
+	JSR RedrawAndWaitFrame          ;C - - - - - 0x008E60 04:8E50: 20 06 F4
 	JMP loc_04_8DEC                 ;C - - - - - 0x008E63 04:8E53: 4C EC 8D
 ofs_04_8E56:
 	LDA #$46                        ;C - - J - - 0x008E66 04:8E56: A9 46
@@ -735,10 +737,10 @@ loc_04_8EB6:
 	LDA objX+1                      ;C - - - - - 0x008ED3 04:8EC3: AD 61 03
 	CMP #$D0                        ;C - - - - - 0x008ED6 04:8EC6: C9 D0
 	BCC loc_04_8ECE                 ;C - - - - - 0x008ED8 04:8EC8: 90 04
-	JSR sub_04_8F07                 ;C - - - - - 0x008EDA 04:8ECA: 20 07 8F
+	JSR ResetSlot2Anim              ;C - - - - - 0x008EDA 04:8ECA: 20 07 8F
 	RTS                             ;C - - - - - 0x008EDD 04:8ECD: 60
 loc_04_8ECE:
-	JSR sub_0F_F406                 ;C - - - - - 0x008EDE 04:8ECE: 20 06 F4
+	JSR RedrawAndWaitFrame          ;C - - - - - 0x008EDE 04:8ECE: 20 06 F4
 	JMP loc_04_8E65                 ;C - - - - - 0x008EE1 04:8ED1: 4C 65 8E
 ofs_04_8ED4:
 	LDA #$4B                        ;C - - J - - 0x008EE4 04:8ED4: A9 4B
@@ -764,14 +766,14 @@ loc_04_8EF8:
 	LDA objX                        ;C - - - - - 0x008F10 04:8F00: AD 60 03
 	CMP #$DC                        ;C - - - - - 0x008F13 04:8F03: C9 DC
 	BCC loc_04_8F12                 ;C - - - - - 0x008F15 04:8F05: 90 0B
-sub_04_8F07:
+ResetSlot2Anim:
 	LDA #$00                        ;C - - - - - 0x008F17 04:8F07: A9 00
 	STA objAnimFlags+2              ;C - - - - - 0x008F19 04:8F09: 8D 92 05
 	LDA #$01                        ;C - - - - - 0x008F1C 04:8F0C: A9 01
 	STA objAnimFrame+2              ;C - - - - - 0x008F1E 04:8F0E: 8D 72 05
 	RTS                             ;C - - - - - 0x008F21 04:8F11: 60
 loc_04_8F12:
-	JSR sub_0F_F406                 ;C - - - - - 0x008F22 04:8F12: 20 06 F4
+	JSR RedrawAndWaitFrame          ;C - - - - - 0x008F22 04:8F12: 20 06 F4
 	JMP loc_04_8EED                 ;C - - - - - 0x008F25 04:8F15: 4C ED 8E
 tbl_04_8F18:
 	.byte $0F,$20,$0F,$0F,$0F,$28,$1A,$18,$0F,$20,$16,$1A,$0F,$20,$2C,$11;- D 0 - - - 0x008F28 04:8F18:
@@ -836,7 +838,7 @@ tbl_04_9046:
 	.byte $8B,$80,$11,$84,$14,$A4,$15,$1A,$35,$AA,$AE,$E6,$95,$8E,$DD,$9A;- - - - - - 0x0090EF 04:90DF:
 	.byte $BB,$AA,$CA,$E9,$4B,$4A,$FB,$EC,$8F,$A8,$37,$AF,$3A,$A8,$FF,$82;- - - - - - 0x0090FF 04:90EF:
 	.byte $38                       ;- - - - - - 0x00910F 04:90FF:
-sub_04_9100:
+ScreenInit9100:
 	LDA playerId                    ;C - - - - - 0x009110 04:9100: A5 34
 	STA ptr_0E+1                    ;C - - - - - 0x009112 04:9102: 85 0F
 	LDA ram_00BD                    ;C - - - - - 0x009114 04:9104: A5 BD
@@ -906,7 +908,7 @@ loc_04_9181:
 	LDA #$00                        ;C - - - - - 0x0091A4 04:9194: A9 00
 	STA objAnimFrame                ;C - - - - - 0x0091A6 04:9196: 8D 70 05
 	STA objAnimFlags                ;C - - - - - 0x0091A9 04:9199: 8D 90 05
-	JSR sub_0F_F406                 ;C - - - - - 0x0091AC 04:919C: 20 06 F4
+	JSR RedrawAndWaitFrame          ;C - - - - - 0x0091AC 04:919C: 20 06 F4
 	LDY ram_0051                    ;C - - - - - 0x0091AF 04:919F: A4 51
 	LDA ptr_0E+1                    ;C - - - - - 0x0091B1 04:91A1: A5 0F
 	CMP playerId                    ;C - - - - - 0x0091B3 04:91A3: C5 34
@@ -953,7 +955,7 @@ loc_04_91E5:
 	LDA tbl_04_91F8,Y               ;C - - - - - 0x0091FC 04:91EC: B9 F8 91
 	STA objY                        ;C - - - - - 0x0091FF 04:91EF: 8D C0 03
 loc_04_91F2:
-	JSR sub_0F_F406                 ;C - - - - - 0x009202 04:91F2: 20 06 F4
+	JSR RedrawAndWaitFrame          ;C - - - - - 0x009202 04:91F2: 20 06 F4
 	JMP loc_04_9181                 ;C - - - - - 0x009205 04:91F5: 4C 81 91
 tbl_04_91F8:
 	.byte $34,$6C,$A4               ;- D 0 - - - 0x009208 04:91F8:
@@ -980,7 +982,7 @@ tbl_04_9221:
 	.byte $A0,$2B,$2E,$A7,$86,$B3,$8E,$7D,$8F,$15,$0A,$A0,$28,$CB,$02,$C9;- - - - - - 0x0092E2 04:92D2:
 	.byte $F0,$80,$10,$8F,$CA,$D6,$88,$6C,$0A,$A9,$82,$1F,$F9,$99,$2A,$47;- - - - - - 0x0092F2 04:92E2:
 	.byte $88,$8B,$A8,$7C,$21,$39,$A0,$3D,$0A,$53,$88,$FF,$0A,$DD;- - - - - - 0x009302 04:92F2:
-sub_04_9300:
+ScreenInit9300:
 	INC ram_0150                    ;C - - - - - 0x009310 04:9300: EE 50 01
 	LDY #$0F                        ;C - - - - - 0x009313 04:9303: A0 0F
 loc_04_9305:
@@ -1001,7 +1003,7 @@ loc_04_9305:
 	STA chrBankShadow+4             ;C - - - - - 0x009336 04:9326: 85 EC
 	LDA #$0A                        ;C - - - - - 0x009338 04:9328: A9 0A
 	JSR QueueSoundSaved             ;C - - - - - 0x00933A 04:932A: 20 4A F3
-	JSR sub_04_942A                 ;C - - - - - 0x00933D 04:932D: 20 2A 94
+	JSR QueueCreditsDigit           ;C - - - - - 0x00933D 04:932D: 20 2A 94
 	LDA #$72                        ;C - - - - - 0x009340 04:9330: A9 72
 	JSR SetPlayerAnim               ;C - - - - - 0x009342 04:9332: 20 94 F2
 	LDA #$3C                        ;C - - - - - 0x009345 04:9335: A9 3C
@@ -1054,7 +1056,7 @@ loc_04_9398:
 	JSR ApplyVelXAdd                ;C - - - - - 0x0093B4 04:93A4: 20 83 F1
 	JMP loc_04_93B0                 ;C - - - - - 0x0093B7 04:93A7: 4C B0 93
 loc_04_93AA:
-	JSR sub_0F_F099                 ;C - - - - - 0x0093BA 04:93AA: 20 99 F0
+	JSR ClearObjFlag40              ;C - - - - - 0x0093BA 04:93AA: 20 99 F0
 	JSR ApplyVelXSub                ;C - - - - - 0x0093BD 04:93AD: 20 A1 F1
 loc_04_93B0:
 	LDA objArr_0510                 ;C - - - - - 0x0093C0 04:93B0: AD 10 05
@@ -1066,7 +1068,7 @@ loc_04_93B0:
 	STA objFacing                   ;C - - - - - 0x0093CF 04:93BF: 8D 60 04
 loc_04_93C2:
 	DEC objArr_0510                 ;C - - - - - 0x0093D2 04:93C2: CE 10 05
-	JSR sub_0F_F406                 ;C - - - - - 0x0093D5 04:93C5: 20 06 F4
+	JSR RedrawAndWaitFrame          ;C - - - - - 0x0093D5 04:93C5: 20 06 F4
 	JMP loc_04_938A                 ;C - - - - - 0x0093D8 04:93C8: 4C 8A 93
 loc_04_93CB:
 	JMP loc_04_9413                 ;C - - - - - 0x0093DB 04:93CB: 4C 13 94
@@ -1111,13 +1113,13 @@ loc_04_9413:
 ; GG SZOOLGVG infinite credits: DEC credits
 loc_04_941B:
 	DEC credits                     ;C - - - - - 0x00942B 04:941B: C6 AF
-	JSR sub_04_942A                 ;C - - - - - 0x00942D 04:941D: 20 2A 94
+	JSR QueueCreditsDigit           ;C - - - - - 0x00942D 04:941D: 20 2A 94
 	LDA #$30                        ;C - - - - - 0x009430 04:9420: A9 30
 	JSR QueueSound                  ;C - - - - - 0x009432 04:9422: 20 4C F3
 	LDA #$07                        ;C - - - - - 0x009435 04:9425: A9 07
 	STA gameAction                  ;C - - - - - 0x009437 04:9427: 85 30
 	RTS                             ;C - - - - - 0x009439 04:9429: 60
-sub_04_942A:
+QueueCreditsDigit:
 	LDA #$23                        ;C - - - - - 0x00943A 04:942A: A9 23
 	STA vramQueue                   ;C - - - - - 0x00943C 04:942C: 8D 80 07
 	LDA #$7D                        ;C - - - - - 0x00943F 04:942F: A9 7D
@@ -1145,7 +1147,7 @@ tbl_04_9449:
 	.byte $01,$39,$44,$02,$00,$A0,$40,$38,$00,$0C,$4D,$0D,$10,$01,$00,$C2;- - - - - - 0x0094ED 04:94DD:
 	.byte $14,$B1,$30,$D1,$04,$70,$01,$43,$00,$18,$40,$10,$14,$48,$42,$69;- - - - - - 0x0094FD 04:94ED:
 	.byte $00,$02,$01               ;- - - - - - 0x00950D 04:94FD:
-sub_04_9500:
+ScreenInit9500:
 	LDY #$0F                        ;C - - - - - 0x009510 04:9500: A0 0F
 loc_04_9502:
 	LDA tbl_04_9595,Y               ;C - - - - - 0x009512 04:9502: B9 95 95
@@ -1187,7 +1189,7 @@ loc_04_9529:
 	STA objXPage                    ;C - - - - - 0x009564 04:9554: 8D 80 03
 	STA objYPage                    ;C - - - - - 0x009567 04:9557: 8D E0 03
 loc_04_955A:
-	JSR sub_0F_F406                 ;C - - - - - 0x00956A 04:955A: 20 06 F4
+	JSR RedrawAndWaitFrame          ;C - - - - - 0x00956A 04:955A: 20 06 F4
 	LDA objAnimFrame                ;C - - - - - 0x00956D 04:955D: AD 70 05
 	CMP #$06                        ;C - - - - - 0x009570 04:9560: C9 06
 	BNE loc_04_955A                 ;C - - - - - 0x009572 04:9562: D0 F6
@@ -1195,7 +1197,7 @@ loc_04_955A:
 	JSR WaitFrames                  ;C - - - - - 0x009576 04:9566: 20 2A FF
 	LDA #$00                        ;C - - - - - 0x009579 04:9569: A9 00
 	STA renderOffCount              ;C - - - - - 0x00957B 04:956B: 85 EE
-	JSR sub_0E_C36E                 ;C - - - - - 0x00957D 04:956D: 20 6E C3
+	JSR FadeOutPalette              ;C - - - - - 0x00957D 04:956D: 20 6E C3
 	JMP RESET                       ;C - - - - - 0x009580 04:9570: 4C 00 FE
 	.byte $6C,$7C                   ;- - - - - - 0x009583 04:9573:
 tbl_04_9575:
@@ -1273,7 +1275,8 @@ tbl_04_965E:
 	.byte $42,$80,$40,$C6,$45,$50,$00,$C0,$01,$00,$05,$00,$10,$38,$04,$22;- - - - - - 0x0097E3 04:97D3:
 	.byte $05,$88,$04,$82,$01,$66,$00,$4F,$01,$05,$70,$B8,$40,$C0,$54,$87;- - - - - - 0x0097F3 04:97E3:
 	.byte $00,$40,$05,$08,$54,$4A,$00,$40,$44,$12,$44,$57,$01;- - - - - - 0x009803 04:97F3:
-sub_04_9800:
+; jump table by ram_0066
+ScreenDispatch9800:
 	LDY ram_0066                    ;C - - - - - 0x009810 04:9800: A4 66
 	LDA tbl_04_9D56,Y               ;C - - - - - 0x009812 04:9802: B9 56 9D
 	STA ptr_0C                      ;C - - - - - 0x009815 04:9805: 85 0C
@@ -1304,7 +1307,7 @@ loc_04_9818:
 	LDA gameOverFlag                ;C - - - - - 0x009846 04:9836: A5 62
 	CMP #$FA                        ;C - - - - - 0x009848 04:9838: C9 FA
 	BEQ loc_04_9881                 ;C - - - - - 0x00984A 04:983A: F0 45
-	JSR sub_04_9A9E                 ;C - - - - - 0x00984C 04:983C: 20 9E 9A
+	JSR QueueTextScript0            ;C - - - - - 0x00984C 04:983C: 20 9E 9A
 	LDA #$00                        ;C - - - - - 0x00984F 04:983F: A9 00
 	STA ram_00AC                    ;C - - - - - 0x009851 04:9841: 85 AC
 	STA ram_00AA                    ;C - - - - - 0x009853 04:9843: 85 AA
@@ -1316,7 +1319,7 @@ loc_04_984C:
 	LDA playerLevel                 ;C - - - - - 0x00985C 04:984C: A5 6B
 	STA ram_0051                    ;C - - - - - 0x00985E 04:984E: 85 51
 	LDY #$03                        ;C - - - - - 0x009860 04:9850: A0 03
-	JSR sub_04_9AA0                 ;C - - - - - 0x009862 04:9852: 20 A0 9A
+	JSR QueueTextScript             ;C - - - - - 0x009862 04:9852: 20 A0 9A
 	LDX vramQueueEnd                ;C - - - - - 0x009865 04:9855: A6 65
 	LDA #$01                        ;C - - - - - 0x009867 04:9857: A9 01
 	STA vramQueue,X                 ;C - - - - - 0x009869 04:9859: 9D 80 07
@@ -1335,32 +1338,32 @@ loc_04_984C:
 	STX vramQueueEnd                ;C - - - - - 0x009885 04:9875: 86 65
 	BNE loc_04_98BD                 ;C - - - - - 0x009887 04:9877: D0 44
 loc_04_9879:
-	JSR sub_04_9B18                 ;C - - - - - 0x009889 04:9879: 20 18 9B
+	JSR RefillPlayerHealth          ;C - - - - - 0x009889 04:9879: 20 18 9B
 	LDA #$FA                        ;C - - - - - 0x00988C 04:987C: A9 FA
 	STA gameOverFlag                ;C - - - - - 0x00988E 04:987E: 85 62
 	RTS                             ;C - - - - - 0x009890 04:9880: 60
 loc_04_9881:
 	LDY #$04                        ;C - - - - - 0x009891 04:9881: A0 04
-	JSR sub_04_9AA0                 ;C - - - - - 0x009893 04:9883: 20 A0 9A
+	JSR QueueTextScript             ;C - - - - - 0x009893 04:9883: 20 A0 9A
 	JMP loc_04_98BD                 ;C - - - - - 0x009896 04:9886: 4C BD 98
 loc_04_9889:
 	LDY #$07                        ;C - - - - - 0x009899 04:9889: A0 07
-	JSR sub_04_9AA0                 ;C - - - - - 0x00989B 04:988B: 20 A0 9A
+	JSR QueueTextScript             ;C - - - - - 0x00989B 04:988B: 20 A0 9A
 	LDA ram_00B9                    ;C - - - - - 0x00989E 04:988E: A5 B9
 	TAY                             ;C - - - - - 0x0098A0 04:9890: A8
 	LDA tbl_04_98C8,Y               ;C - - - - - 0x0098A1 04:9891: B9 C8 98
 	TAY                             ;C - - - - - 0x0098A4 04:9894: A8
-	JSR sub_04_9AA0                 ;C - - - - - 0x0098A5 04:9895: 20 A0 9A
+	JSR QueueTextScript             ;C - - - - - 0x0098A5 04:9895: 20 A0 9A
 	LDA #$00                        ;C - - - - - 0x0098A8 04:9898: A9 00
 	STA ram_00B9                    ;C - - - - - 0x0098AA 04:989A: 85 B9
 	JMP loc_04_98BD                 ;C - - - - - 0x0098AC 04:989C: 4C BD 98
 loc_04_989F:
 	LDY #$05                        ;C - - - - - 0x0098AF 04:989F: A0 05
-	JSR sub_04_9AA0                 ;C - - - - - 0x0098B1 04:98A1: 20 A0 9A
+	JSR QueueTextScript             ;C - - - - - 0x0098B1 04:98A1: 20 A0 9A
 	JMP loc_04_98BD                 ;C - - - - - 0x0098B4 04:98A4: 4C BD 98
 loc_04_98A7:
 	LDY #$06                        ;c - - - - - 0x0098B7 04:98A7: A0 06
-	JSR sub_04_9AA0                 ;c - - - - - 0x0098B9 04:98A9: 20 A0 9A
+	JSR QueueTextScript             ;c - - - - - 0x0098B9 04:98A9: 20 A0 9A
 	JMP loc_04_98BD                 ;c - - - - - 0x0098BC 04:98AC: 4C BD 98
 loc_04_98AF:
 	DEC ram_00AB                    ;C - - - - - 0x0098BF 04:98AF: C6 AB
@@ -1368,7 +1371,7 @@ loc_04_98AF:
 	BNE loc_04_98BC                 ;C - - - - - 0x0098C3 04:98B3: D0 07
 	INC ram_0066                    ;C - - - - - 0x0098C5 04:98B5: E6 66
 	INC ram_0066                    ;C - - - - - 0x0098C7 04:98B7: E6 66
-	JSR sub_04_9A9E                 ;C - - - - - 0x0098C9 04:98B9: 20 9E 9A
+	JSR QueueTextScript0            ;C - - - - - 0x0098C9 04:98B9: 20 9E 9A
 loc_04_98BC:
 	RTS                             ;C - - - - - 0x0098CC 04:98BC: 60
 loc_04_98BD:
@@ -1388,7 +1391,7 @@ ofs_04_98DD:
 	LDA padPressed                  ;C - - J - - 0x0098ED 04:98DD: A5 14
 	CMP #$10                        ;C - - - - - 0x0098EF 04:98DF: C9 10
 	BNE loc_04_98E9                 ;C - - - - - 0x0098F1 04:98E1: D0 06
-	JSR sub_04_9A9E                 ;c - - - - - 0x0098F3 04:98E3: 20 9E 9A
+	JSR QueueTextScript0            ;c - - - - - 0x0098F3 04:98E3: 20 9E 9A
 	INC ram_0066                    ;c - - - - - 0x0098F6 04:98E6: E6 66
 	RTS                             ;c - - - - - 0x0098F8 04:98E8: 60
 loc_04_98E9:
@@ -1446,7 +1449,7 @@ loc_04_993D:
 loc_04_9944:
 	CMP #$FC                        ;C - - - - - 0x009954 04:9944: C9 FC
 	BNE loc_04_994B                 ;C - - - - - 0x009956 04:9946: D0 03
-	JMP sub_04_9B18                 ;C - - - - - 0x009958 04:9948: 4C 18 9B
+	JMP RefillPlayerHealth          ;C - - - - - 0x009958 04:9948: 4C 18 9B
 loc_04_994B:
 	CMP #$FD                        ;C - - - - - 0x00995B 04:994B: C9 FD
 	BNE loc_04_9952                 ;C - - - - - 0x00995D 04:994D: D0 03
@@ -1524,7 +1527,7 @@ loc_04_999B:
 	STA vramQueueFlag               ;C - - - - - 0x0099E3 04:99D3: 85 64
 	RTS                             ;C - - - - - 0x0099E5 04:99D5: 60
 loc_04_99D6:
-	JSR sub_04_9A9E                 ;C - - - - - 0x0099E6 04:99D6: 20 9E 9A
+	JSR QueueTextScript0            ;C - - - - - 0x0099E6 04:99D6: 20 9E 9A
 	LDY playerId                    ;C - - - - - 0x0099E9 04:99D9: A4 34
 	INY                             ;C - - - - - 0x0099EB 04:99DB: C8
 	INY                             ;C - - - - - 0x0099EC 04:99DC: C8
@@ -1541,7 +1544,7 @@ loc_04_99EA:
 	RTS                             ;C - - - - - 0x0099FC 04:99EC: 60
 loc_04_99ED:
 	LDY #$02                        ;C - - - - - 0x0099FD 04:99ED: A0 02
-	JSR sub_04_9AA0                 ;C - - - - - 0x0099FF 04:99EF: 20 A0 9A
+	JSR QueueTextScript             ;C - - - - - 0x0099FF 04:99EF: 20 A0 9A
 	LDA padPressed                  ;C - - - - - 0x009A02 04:99F2: A5 14
 	AND #$C0                        ;C - - - - - 0x009A04 04:99F4: 29 C0
 	BNE loc_04_9A56                 ;C - - - - - 0x009A06 04:99F6: D0 5E
@@ -1599,9 +1602,9 @@ loc_04_9A56:
 	LDA (ptr_0C),Y                  ;C - - - - - 0x009A68 04:9A58: B1 0C
 	CMP #$02                        ;C - - - - - 0x009A6A 04:9A5A: C9 02
 	BNE loc_04_9A61                 ;C - - - - - 0x009A6C 04:9A5C: D0 03
-	JSR sub_04_9A74                 ;C - - - - - 0x009A6E 04:9A5E: 20 74 9A
+	JSR BonusEnemyHit               ;C - - - - - 0x009A6E 04:9A5E: 20 74 9A
 loc_04_9A61:
-	JSR sub_04_9A9E                 ;C - - - - - 0x009A71 04:9A61: 20 9E 9A
+	JSR QueueTextScript0            ;C - - - - - 0x009A71 04:9A61: 20 9E 9A
 	LDY #$02                        ;C - - - - - 0x009A74 04:9A64: A0 02
 	LDA ram_00B4                    ;C - - - - - 0x009A76 04:9A66: A5 B4
 	BPL loc_04_9A6B                 ;C - - - - - 0x009A78 04:9A68: 10 01
@@ -1611,17 +1614,17 @@ loc_04_9A6B:
 	STA ram_00AA                    ;C - - - - - 0x009A7D 04:9A6D: 85 AA
 	STA ram_00B4                    ;C - - - - - 0x009A7F 04:9A6F: 85 B4
 	JMP loc_04_99DD                 ;C - - - - - 0x009A81 04:9A71: 4C DD 99
-sub_04_9A74:
+BonusEnemyHit:
 	LDY #$04                        ;C - - - - - 0x009A84 04:9A74: A0 04
 	LDA (ptr_0C),Y                  ;C - - - - - 0x009A86 04:9A76: B1 0C
 	CMP ram_00B4                    ;C - - - - - 0x009A88 04:9A78: C5 B4
 	BNE loc_04_9A8E                 ;C - - - - - 0x009A8A 04:9A7A: D0 12
-	JSR sub_04_9AC2                 ;C - - - - - 0x009A8C 04:9A7C: 20 C2 9A
+	JSR FindObjSpriteDown7          ;C - - - - - 0x009A8C 04:9A7C: 20 C2 9A
 	LDA objLife,X                   ;C - - - - - 0x009A8F 04:9A7F: BD 90 04
 	SEC                             ;C - - - - - 0x009A92 04:9A82: 38
 	SBC #$08                        ;C - - - - - 0x009A93 04:9A83: E9 08
 	STA objLife,X                   ;C - - - - - 0x009A95 04:9A85: 9D 90 04
-	JSR sub_04_9AF4                 ;C - - - - - 0x009A98 04:9A88: 20 F4 9A
+	JSR QueueBonusBar               ;C - - - - - 0x009A98 04:9A88: 20 F4 9A
 	INC ram_00AC                    ;C - - - - - 0x009A9B 04:9A8B: E6 AC
 	RTS                             ;C - - - - - 0x009A9D 04:9A8D: 60
 loc_04_9A8E:
@@ -1631,12 +1634,13 @@ ofs_04_9A8F:
 	STY ram_0066                    ;C - - - - - 0x009AA1 04:9A91: 84 66
 	STY gameOverFlag                ;C - - - - - 0x009AA3 04:9A93: 84 62
 	LDY #$01                        ;C - - - - - 0x009AA5 04:9A95: A0 01
-	JSR sub_04_9AA0                 ;C - - - - - 0x009AA7 04:9A97: 20 A0 9A
-	JSR sub_0F_E954                 ;C - - - - - 0x009AAA 04:9A9A: 20 54 E9
+	JSR QueueTextScript             ;C - - - - - 0x009AA7 04:9A97: 20 A0 9A
+	JSR QueueHudLevelText           ;C - - - - - 0x009AAA 04:9A9A: 20 54 E9
 	RTS                             ;C - - - - - 0x009AAD 04:9A9D: 60
-sub_04_9A9E:
+QueueTextScript0:
 	LDY #$00                        ;C - - - - - 0x009AAE 04:9A9E: A0 00
-sub_04_9AA0:
+; Y = script index
+QueueTextScript:
 	LDA tbl_04_9BAE,Y               ;C - - - - - 0x009AB0 04:9AA0: B9 AE 9B
 	STA ptr_0A                      ;C - - - - - 0x009AB3 04:9AA3: 85 0A
 	LDA tbl_04_9BBD,Y               ;C - - - - - 0x009AB5 04:9AA5: B9 BD 9B
@@ -1656,7 +1660,7 @@ loc_04_9ABB:
 	LDA #$FF                        ;C - - - - - 0x009ACD 04:9ABD: A9 FF
 	STA vramQueueFlag               ;C - - - - - 0x009ACF 04:9ABF: 85 64
 	RTS                             ;C - - - - - 0x009AD1 04:9AC1: 60
-sub_04_9AC2:
+FindObjSpriteDown7:
 	LDX #$02                        ;C - - - - - 0x009AD2 04:9AC2: A2 02
 loc_04_9AC4:
 	LDA objSpriteDown,X             ;C - - - - - 0x009AD4 04:9AC4: BD B0 05
@@ -1678,7 +1682,7 @@ loc_04_9AD9:
 	LDA #$2B                        ;C - - - - - 0x009AED 04:9ADD: A9 2B
 loc_04_9ADF:
 	STA chrBankShadow+4             ;C - - - - - 0x009AEF 04:9ADF: 85 EC
-	JSR sub_04_9AC2                 ;C - - - - - 0x009AF1 04:9AE1: 20 C2 9A
+	JSR FindObjSpriteDown7          ;C - - - - - 0x009AF1 04:9AE1: 20 C2 9A
 	LDA ptr_06+1                    ;C - - - - - 0x009AF4 04:9AE4: A5 07
 	STA objAnim,X                   ;C - - - - - 0x009AF6 04:9AE6: 9D 80 05
 	LDA #$00                        ;C - - - - - 0x009AF9 04:9AE9: A9 00
@@ -1686,7 +1690,7 @@ loc_04_9ADF:
 	STA objAnimFrame,X              ;C - - - - - 0x009AFE 04:9AEE: 9D 70 05
 	INC ram_00AA                    ;C - - - - - 0x009B01 04:9AF1: E6 AA
 	RTS                             ;C - - - - - 0x009B03 04:9AF3: 60
-sub_04_9AF4:
+QueueBonusBar:
 	LDX vramQueueEnd                ;C - - - - - 0x009B04 04:9AF4: A6 65
 	LDA #$01                        ;C - - - - - 0x009B06 04:9AF6: A9 01
 	STA vramQueue,X                 ;C - - - - - 0x009B08 04:9AF8: 9D 80 07
@@ -1706,7 +1710,7 @@ sub_04_9AF4:
 	LDA #$FF                        ;C - - - - - 0x009B23 04:9B13: A9 FF
 	STA vramQueueFlag               ;C - - - - - 0x009B25 04:9B15: 85 64
 	RTS                             ;C - - - - - 0x009B27 04:9B17: 60
-sub_04_9B18:
+RefillPlayerHealth:
 	LDA playerLevel                 ;C - - - - - 0x009B28 04:9B18: A5 6B
 	ASL A                           ;C - - - - - 0x009B2A 04:9B1A: 0A
 	ASL A                           ;C - - - - - 0x009B2B 04:9B1B: 0A
