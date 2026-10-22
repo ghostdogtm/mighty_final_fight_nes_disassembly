@@ -47,11 +47,11 @@ Traced code (instruction starts, verify by hand):
   00:8357  LDA objId,Y
   00:835A  STA objKind,Y
   00:835D  LDA #$FF
-  00:835F  STA objArr_03F0,Y
+  00:835F  STA objGrabState,Y
   00:8362  LDA objState,Y
   00:8365  STA objActive,Y
   00:8368  LDA #$00
-  00:836A  STA objArr_0470,Y
+  00:836A  STA objMoveMode,Y
   00:836D  LDA objY
   00:8370  STA objY,Y
   00:8373  RTS
@@ -181,10 +181,10 @@ Traced code (instruction starts, verify by hand):
   00:9624  CMP #$02
   00:9626  BNE loc_00_9630
   00:9628  LDA #$B4
-  00:962A  STA objArr_0500
+  00:962A  STA objStep
   00:962D  INC objActive
-  00:9630  DEC objArr_0500
-  00:9633  LDA objArr_0500
+  00:9630  DEC objStep
+  00:9633  LDA objStep
   00:9636  BNE loc_00_963C
   00:9638  LDA #$0E
   00:963A  STA gameAction
@@ -215,9 +215,9 @@ Traced code (instruction starts, verify by hand):
   01:A463  LDA #$81
   01:A465  STA objActive,X
   01:A468  LDA #$00
-  01:A46A  STA objArr_0500,X
+  01:A46A  STA objStep,X
   01:A46D  LDA #$07
-  01:A46F  STA objArr_0550,X
+  01:A46F  STA objSubStep,X
   01:A472  RTS
   01:A4AE  JMP loc_01_A54C
   01:A4BF  JMP loc_01_A54C
@@ -244,11 +244,11 @@ Traced code (instruction starts, verify by hand):
   01:A66F  BCC loc_01_A684
   01:A671  LDA objSpriteDown,X
   01:A674  SBC #$07
-  01:A676  STA objArr_0510,X
+  01:A676  STA objLandY,X
   01:A679  LDA #$82
   01:A67B  STA objActive,X
   01:A67E  LDA #$00
-  01:A680  STA objArr_0500,X
+  01:A680  STA objStep,X
   01:A683  RTS
   01:A684  LDY #$04
   01:A686  JSR SetVelFromTbl_A7E1
@@ -272,12 +272,12 @@ Traced code (instruction starts, verify by hand):
   01:A6B2  LDA #$81
   01:A6B4  STA objActive,X
   01:A6B7  LDA #$00
-  01:A6B9  STA objArr_0500,X
+  01:A6B9  STA objStep,X
   01:A6BC  LDA #$07
-  01:A6BE  STA objArr_0550,X
+  01:A6BE  STA objSubStep,X
   01:A6C1  JMP FaceToPlayerFlag
   01:A70B  LDA #$00
-  01:A70D  STA objArr_03F0,X
+  01:A70D  STA objGrabState,X
   01:A710  LDA playerId
   01:A712  CMP #$02
   01:A714  BNE loc_01_A71C
@@ -286,15 +286,15 @@ Traced code (instruction starts, verify by hand):
   01:A75A  JSR SetGrabbedAnimA_01
   01:A75D  SEC
   01:A75E  RTS
-  01:A7AC  LDA objArr_0520,X
-  01:A7AF  STA objArr_0530,X
+  01:A7AC  LDA objStartY,X
+  01:A7AF  STA objSavedY,X
   01:A7B2  JMP loc_01_A7BB
   01:ABC8  LDA #$82
   01:ABCA  STA objActive,X
   01:ABCD  LDA #$00
-  01:ABCF  STA objArr_0500,X
+  01:ABCF  STA objStep,X
   01:ABD2  LDA #$01
-  01:ABD4  STA objArr_0510,X
+  01:ABD4  STA objLandY,X
   01:ABD7  RTS
   01:ABFC  LDA #$05
   01:ABFE  STA objFacing,X
@@ -321,7 +321,7 @@ Traced code (instruction starts, verify by hand):
   03:B38B  AND #$10
   03:B38D  STA ptr_0E+1
   03:B45B  LDA #$00
-  03:B45D  STA objArr_03F0,X
+  03:B45D  STA objGrabState,X
   03:B460  LDA playerId
   03:B462  CMP #$02
   03:B464  BNE loc_03_B46C
@@ -329,7 +329,7 @@ Traced code (instruction starts, verify by hand):
   03:B469  STA objY,X
   03:B72F  JSR FaceToPlayerFlag
   03:B732  LDA #$00
-  03:B734  STA objArr_0500,X
+  03:B734  STA objStep,X
   03:B737  LDA #$87
   03:B739  STA objActive,X
   03:B73C  RTS
@@ -350,7 +350,7 @@ Traced code (instruction starts, verify by hand):
   03:BB46  TAY
   03:BB47  BNE loc_03_BB4D
   03:BBF4  LDA #$3C
-  03:BBF6  STA objArr_0500,X
+  03:BBF6  STA objStep,X
   03:BBF9  RTS
   03:BC76  CMP #$04
   03:BC78  BEQ loc_03_BCB4
@@ -359,12 +359,12 @@ Traced code (instruction starts, verify by hand):
   04:91E1  LDA #$02
   04:91E3  STA playerId
   04:93E4  LDA #$00
-  04:93E6  STA objArr_0500
+  04:93E6  STA objStep
   04:93E9  LDA #$54
   04:93EB  STA objY
   04:93EE  BNE loc_04_9398
   04:93FA  LDA #$FF
-  04:93FC  STA objArr_0500
+  04:93FC  STA objStep
   04:93FF  LDA #$64
   04:9401  STA objY
   04:9404  BNE loc_04_9410
@@ -411,7 +411,7 @@ Traced code (instruction starts, verify by hand):
   05:A790  RTI
   05:A79C  BVC loc_05_A7F6
   05:A79E  RTS
-  05:A81D  LDA objArr_0500,X
+  05:A81D  LDA objStep,X
   05:A820  STA ram_00AD
   05:A822  JMP loc_05_A82A
   05:A94E  JSR ApplyVelXAdd
@@ -589,9 +589,9 @@ Traced code (instruction starts, verify by hand):
   08:9148  CMP #$FF
   08:914A  BEQ loc_08_9170
   08:914C  LDA #$00
-  08:914E  STA objArr_05A0
-  08:9151  STA objArr_05A0+1
-  08:9154  STA objArr_05A0+2
+  08:914E  STA objAirSnapshot
+  08:9151  STA objAirSnapshot+1
+  08:9154  STA objAirSnapshot+2
   08:9157  RTS
   08:9170  LDA #$07
   08:9172  STA ptr_00+1
@@ -714,7 +714,7 @@ Traced code (instruction starts, verify by hand):
   0B:B7C8  STA objY,X
   0B:B889  LDA tbl_0B_BD5C,Y
   0B:B8A3  LDA #$00
-  0B:B8A5  STA objArr_05D0,X
+  0B:B8A5  STA objTimer,X
   0B:B8A8  DEC objActive,X
   0B:B8AB  RTS
   0B:BBB9  LDA objXPage,X
@@ -785,9 +785,9 @@ Traced code (instruction starts, verify by hand):
   0C:923C  CMP #$04
   0C:923E  BNE loc_0C_92A3
   0C:9240  LDA #$10
-  0C:9242  STA objArr_0510,X
+  0C:9242  STA objLandY,X
   0C:9245  LDA #$08
-  0C:9247  STA objArr_0540,X
+  0C:9247  STA objCooldown,X
   0C:9312  JSR EnemySetDownAnimA
   0C:93B5  LDA objFacing,X
   0C:93B8  AND #$02
@@ -889,9 +889,9 @@ Traced code (instruction starts, verify by hand):
   0C:9DA8  BNE loc_0C_9DAE
   0C:9DAA  LDY #$35
   0C:9DAC  LDA #$04
-  0C:9DAE  STA objArr_05C0,X
+  0C:9DAE  STA objVariant,X
   0C:9DB1  TYA
-  0C:9DB2  STA objArr_0510,X
+  0C:9DB2  STA objLandY,X
   0C:9DB5  LDA #$05
   0C:9DB7  STA objSpriteDown,X
   0C:9DBA  JSR DistanceXToPlayer
@@ -923,17 +923,17 @@ Traced code (instruction starts, verify by hand):
   0C:9DF8  LDA #$D2
   0C:9DFA  LDY #$24
   0C:9DFC  JSR SetAnimXChr3
-  0C:9DFF  LDA objArr_05C0,X
+  0C:9DFF  LDA objVariant,X
   0C:9E02  TAY
   0C:9E03  LDA tbl_0D_A897,Y
   0C:9E06  CLC
   0C:9E07  ADC #$33
-  0C:9E09  STA objArr_0450,X
+  0C:9E09  STA objAtkDamage,X
   0C:9E0C  LDA #$8E
   0C:9E0E  STA objActive,X
   0C:9E11  LDA #$03
-  0C:9E13  STA objArr_0500,X
-  0C:9E16  LDA objArr_0510,X
+  0C:9E13  STA objStep,X
+  0C:9E16  LDA objLandY,X
   0C:9E19  STA objKind,X
   0C:9E1C  STA objId,X
   0C:9E1F  RTS
@@ -951,10 +951,10 @@ Traced code (instruction starts, verify by hand):
   0C:9F03  BEQ loc_0C_9F07
   0D:A042  STA objY,X
   0D:A1CE  LDA #$00
-  0D:A1D0  STA objArr_03D0,X
+  0D:A1D0  STA objWallSide,X
   0D:A1D3  RTS
   0D:A4DC  LDA objSpriteDown,X
-  0D:A4DF  STA objArr_03D0,X
+  0D:A4DF  STA objWallSide,X
   0D:A4E2  RTS
   0D:A525  STA objX,X
   0D:A52F  STA objX,X
@@ -967,8 +967,8 @@ Traced code (instruction starts, verify by hand):
   0D:AB79  RTS
   0D:ABB7  SEC
   0D:ABB8  RTS
-  0D:AC04  LDA objArr_0520,X
-  0D:AC07  STA objArr_0530,X
+  0D:AC04  LDA objStartY,X
+  0D:AC07  STA objSavedY,X
   0D:AC0A  JMP loc_0D_AC13
   0E:C2C7  LDA padPressed,X
   0E:C2C9  AND #$F0
@@ -1236,7 +1236,7 @@ Traced code (instruction starts, verify by hand):
   0F:F0ED  BNE loc_0F_F0F6
   0F:F0EF  LDA #$FF
   0F:F0F1  LDY ram_0039
-  0F:F0F3  STA objArr_03F0,Y
+  0F:F0F3  STA objGrabState,Y
   0F:F0F6  RTS
   0F:F168  JSR PushOutDown
   0F:F16B  JSR SetHopVelY

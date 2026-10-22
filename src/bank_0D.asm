@@ -47,14 +47,14 @@ tbl_0D_A049:
 	.hibytes tbl_0D_B081-1, ofs_0D_A071-1, tbl_0D_B091-1;- D 1 - - - 0x01A059 0D:A049:
 ofs_0D_A04C:
 	LDA #$00                        ;C - - J - - 0x01A05C 0D:A04C: A9 00
-	STA objArr_05D0,X               ;C - - - - - 0x01A05E 0D:A04E: 9D D0 05
-	STA objArr_05E0,X               ;C - - - - - 0x01A061 0D:A051: 9D E0 05
-	STA objArr_05F0,X               ;C - - - - - 0x01A064 0D:A054: 9D F0 05
-	STA objArr_0540,X               ;C - - - - - 0x01A067 0D:A057: 9D 40 05
+	STA objTimer,X                  ;C - - - - - 0x01A05E 0D:A04E: 9D D0 05
+	STA objCounter,X                ;C - - - - - 0x01A061 0D:A051: 9D E0 05
+	STA objToggle,X                 ;C - - - - - 0x01A064 0D:A054: 9D F0 05
+	STA objCooldown,X               ;C - - - - - 0x01A067 0D:A057: 9D 40 05
 	INC objActive,X                 ;C - - - - - 0x01A06A 0D:A05A: FE 00 03
 	JMP EnemySetAnimSetA            ;C - - - - - 0x01A06D 0D:A05D: 4C AE AA
 ofs_0D_A060:
-	LDA objArr_03D0,X               ;C - - J - - 0x01A070 0D:A060: BD D0 03
+	LDA objWallSide,X               ;C - - J - - 0x01A070 0D:A060: BD D0 03
 	BNE loc_0D_A095                 ;C - - - - - 0x01A073 0D:A063: D0 30
 	JSR EnemySetAnimSetB            ;C - - - - - 0x01A075 0D:A065: 20 D7 AA
 	LDA #$38                        ;C - - - - - 0x01A078 0D:A068: A9 38
@@ -70,7 +70,7 @@ loc_0D_A07A:
 	INC objActive,X                 ;C - - - - - 0x01A08A 0D:A07A: FE 00 03
 	LDA ram_00E4                    ;C - - - - - 0x01A08D 0D:A07D: A5 E4
 	AND #$01                        ;C - - - - - 0x01A08F 0D:A07F: 29 01
-	STA objArr_05F0,X               ;C - - - - - 0x01A091 0D:A081: 9D F0 05
+	STA objToggle,X                 ;C - - - - - 0x01A091 0D:A081: 9D F0 05
 	RTS                             ;C - - - - - 0x01A094 0D:A084: 60
 loc_0D_A085:
 	JSR DirToPlayerGround           ;C - - - - - 0x01A095 0D:A085: 20 5B FB
@@ -82,7 +82,7 @@ loc_0D_A088:
 	JMP EnemyDirMoveCheck           ;C - - - - - 0x01A0A2 0D:A092: 4C 53 A9
 loc_0D_A095:
 	JSR FaceToPlayerFlag            ;C - - - - - 0x01A0A5 0D:A095: 20 43 F3
-	LDA objArr_03D0,X               ;C - - - - - 0x01A0A8 0D:A098: BD D0 03
+	LDA objWallSide,X               ;C - - - - - 0x01A0A8 0D:A098: BD D0 03
 	LSR A                           ;C - - - - - 0x01A0AB 0D:A09B: 4A
 	BCC loc_0D_A0B7                 ;C - - - - - 0x01A0AC 0D:A09C: 90 19
 	LDY #$00                        ;C - - - - - 0x01A0AE 0D:A09E: A0 00
@@ -119,23 +119,23 @@ loc_0D_A0D2:
 	BNE loc_0D_A0B6                 ;C - - - - - 0x01A0EE 0D:A0DE: D0 D6
 loc_0D_A0E0:
 	LDA #$00                        ;C - - - - - 0x01A0F0 0D:A0E0: A9 00
-	STA objArr_03D0,X               ;C - - - - - 0x01A0F2 0D:A0E2: 9D D0 03
+	STA objWallSide,X               ;C - - - - - 0x01A0F2 0D:A0E2: 9D D0 03
 	JMP EnemyResetAction81          ;C - - - - - 0x01A0F5 0D:A0E5: 4C E8 A8
 ofs_0D_A0E8:
-	DEC objArr_05D0,X               ;C - - J - - 0x01A0F8 0D:A0E8: DE D0 05
+	DEC objTimer,X                  ;C - - J - - 0x01A0F8 0D:A0E8: DE D0 05
 	BMI loc_0D_A0F0                 ;C - - - - - 0x01A0FB 0D:A0EB: 30 03
 	JMP loc_0D_A18B                 ;C - - - - - 0x01A0FD 0D:A0ED: 4C 8B A1
 loc_0D_A0F0:
 	JSR DirToPlayerGround           ;C - - - - - 0x01A100 0D:A0F0: 20 5B FB
 	TAY                             ;C - - - - - 0x01A103 0D:A0F3: A8
-	LDA objArr_05F0,X               ;C - - - - - 0x01A104 0D:A0F4: BD F0 05
+	LDA objToggle,X                 ;C - - - - - 0x01A104 0D:A0F4: BD F0 05
 	BNE loc_0D_A0FF                 ;C - - - - - 0x01A107 0D:A0F7: D0 06
 	LDA tbl_0D_AD66,Y               ;C - - - - - 0x01A109 0D:A0F9: B9 66 AD
 	JMP loc_0D_A102                 ;C - - - - - 0x01A10C 0D:A0FC: 4C 02 A1
 loc_0D_A0FF:
 	LDA tbl_0D_AD76,Y               ;C - - - - - 0x01A10F 0D:A0FF: B9 76 AD
 loc_0D_A102:
-	STA objArr_0500,X               ;C - - - - - 0x01A112 0D:A102: 9D 00 05
+	STA objStep,X                   ;C - - - - - 0x01A112 0D:A102: 9D 00 05
 	AND #$F0                        ;C - - - - - 0x01A115 0D:A105: 29 F0
 	BEQ loc_0D_A176                 ;C - - - - - 0x01A117 0D:A107: F0 6D
 	LDA objSpriteDown,X             ;C - - - - - 0x01A119 0D:A109: BD B0 05
@@ -160,7 +160,7 @@ loc_0D_A102:
 	LDA tbl_0D_A133,Y               ;C - - - - - 0x01A137 0D:A127: B9 33 A1
 	STA objActive,X                 ;C - - - - - 0x01A13A 0D:A12A: 9D 00 03
 	LDA #$00                        ;C - - - - - 0x01A13D 0D:A12D: A9 00
-	STA objArr_0500,X               ;C - - - - - 0x01A13F 0D:A12F: 9D 00 05
+	STA objStep,X                   ;C - - - - - 0x01A13F 0D:A12F: 9D 00 05
 	RTS                             ;C - - - - - 0x01A142 0D:A132: 60
 tbl_0D_A133:
 	.byte $84,$84                   ;- - - - - - 0x01A143 0D:A133:
@@ -176,18 +176,18 @@ loc_0D_A139:
 loc_0D_A14A:
 	LDA #$00                        ;C - - - - - 0x01A15A 0D:A14A: A9 00
 loc_0D_A14C:
-	STA objArr_05D0,X               ;C - - - - - 0x01A15C 0D:A14C: 9D D0 05
+	STA objTimer,X                  ;C - - - - - 0x01A15C 0D:A14C: 9D D0 05
 	LDA objKind,X                   ;C - - - - - 0x01A15F 0D:A14F: BD 20 03
 	SEC                             ;C - - - - - 0x01A162 0D:A152: 38
 	SBC #$20                        ;C - - - - - 0x01A163 0D:A153: E9 20
 	TAY                             ;C - - - - - 0x01A165 0D:A155: A8
 	LDA tbl_0D_A3DF,Y               ;C - - - - - 0x01A166 0D:A156: B9 DF A3
-	STA objArr_05E0,X               ;C - - - - - 0x01A169 0D:A159: 9D E0 05
+	STA objCounter,X                ;C - - - - - 0x01A169 0D:A159: 9D E0 05
 	LDA #$84                        ;C - - - - - 0x01A16C 0D:A15C: A9 84
 	STA objActive,X                 ;C - - - - - 0x01A16E 0D:A15E: 9D 00 03
 	RTS                             ;C - - - - - 0x01A171 0D:A161: 60
 loc_0D_A162:
-	LDA objArr_0500,X               ;C - - - - - 0x01A172 0D:A162: BD 00 05
+	LDA objStep,X                   ;C - - - - - 0x01A172 0D:A162: BD 00 05
 	AND #$30                        ;C - - - - - 0x01A175 0D:A165: 29 30
 	BEQ loc_0D_A176                 ;C - - - - - 0x01A177 0D:A167: F0 0D
 	LDA #$40                        ;C - - - - - 0x01A179 0D:A169: A9 40
@@ -197,18 +197,18 @@ loc_0D_A162:
 	DEC objActive,X                 ;C - - - - - 0x01A182 0D:A172: DE 00 03
 	RTS                             ;C - - - - - 0x01A185 0D:A175: 60
 loc_0D_A176:
-	LDA objArr_0500,X               ;C - - - - - 0x01A186 0D:A176: BD 00 05
+	LDA objStep,X                   ;C - - - - - 0x01A186 0D:A176: BD 00 05
 	AND #$0F                        ;C - - - - - 0x01A189 0D:A179: 29 0F
 	TAY                             ;C - - - - - 0x01A18B 0D:A17B: A8
 	LDA tbl_0F_FBF0,Y               ;C - - - - - 0x01A18C 0D:A17C: B9 F0 FB
 	STA objFacing,X                 ;C - - - - - 0x01A18F 0D:A17F: 9D 60 04
 	JSR EnemyStartVelocity          ;C - - - - - 0x01A192 0D:A182: 20 34 AC
 	JSR EnemyLookupParam            ;C - - - - - 0x01A195 0D:A185: 20 B3 AC
-	STA objArr_05D0,X               ;C - - - - - 0x01A198 0D:A188: 9D D0 05
+	STA objTimer,X                  ;C - - - - - 0x01A198 0D:A188: 9D D0 05
 loc_0D_A18B:
 	JMP EnemyDirMoveCheck           ;C - - - - - 0x01A19B 0D:A18B: 4C 53 A9
 ofs_0D_A18E:
-	LDA objArr_0500,X               ;C - - J - - 0x01A19E 0D:A18E: BD 00 05
+	LDA objStep,X                   ;C - - J - - 0x01A19E 0D:A18E: BD 00 05
 	CMP #$01                        ;C - - - - - 0x01A1A1 0D:A191: C9 01
 	BEQ loc_0D_A1C2                 ;C - - - - - 0x01A1A3 0D:A193: F0 2D
 	CMP #$02                        ;C - - - - - 0x01A1A5 0D:A195: C9 02
@@ -230,7 +230,7 @@ loc_0D_A1A9:
 	LDA #$00                        ;C - - - - - 0x01A1C6 0D:A1B6: A9 00
 	STA objVelYHi,X                 ;C - - - - - 0x01A1C8 0D:A1B8: 9D 30 04
 	STA objVelYLo,X                 ;C - - - - - 0x01A1CB 0D:A1BB: 9D 20 04
-	INC objArr_0500,X               ;C - - - - - 0x01A1CE 0D:A1BE: FE 00 05
+	INC objStep,X                   ;C - - - - - 0x01A1CE 0D:A1BE: FE 00 05
 	RTS                             ;C - - - - - 0x01A1D1 0D:A1C1: 60
 loc_0D_A1C2:
 	LDA #$9D                        ;C - - - - - 0x01A1D2 0D:A1C2: A9 9D
@@ -239,10 +239,10 @@ loc_0D_A1C2:
 	JSR EnemyLandCheck              ;C - - - - - 0x01A1D9 0D:A1C9: 20 F6 A9
 	BCC loc_0D_A1D4                 ;C - - - - - 0x01A1DC 0D:A1CC: 90 06
 	LDA #$00                        ;c - - - - - 0x01A1DE 0D:A1CE: A9 00
-	STA objArr_03D0,X               ;c - - - - - 0x01A1E0 0D:A1D0: 9D D0 03
+	STA objWallSide,X               ;c - - - - - 0x01A1E0 0D:A1D0: 9D D0 03
 	RTS                             ;c - - - - - 0x01A1E3 0D:A1D3: 60
 loc_0D_A1D4:
-	DEC objArr_05D0,X               ;C - - - - - 0x01A1E4 0D:A1D4: DE D0 05
+	DEC objTimer,X                  ;C - - - - - 0x01A1E4 0D:A1D4: DE D0 05
 	BEQ loc_0D_A1E6                 ;C - - - - - 0x01A1E7 0D:A1D7: F0 0D
 	LDA objFacing,X                 ;C - - - - - 0x01A1E9 0D:A1D9: BD 60 04
 	AND #$01                        ;C - - - - - 0x01A1EC 0D:A1DC: 29 01
@@ -252,12 +252,12 @@ loc_0D_A1E3:
 	JMP ApplyVelXSub                ;C - - - - - 0x01A1F3 0D:A1E3: 4C A1 F1
 loc_0D_A1E6:
 	LDA #$20                        ;C - - - - - 0x01A1F6 0D:A1E6: A9 20
-	STA objArr_05D0,X               ;C - - - - - 0x01A1F8 0D:A1E8: 9D D0 05
-	INC objArr_0500,X               ;C - - - - - 0x01A1FB 0D:A1EB: FE 00 05
+	STA objTimer,X                  ;C - - - - - 0x01A1F8 0D:A1E8: 9D D0 05
+	INC objStep,X                   ;C - - - - - 0x01A1FB 0D:A1EB: FE 00 05
 loc_0D_A1EE:
 	RTS                             ;C - - - - - 0x01A1FE 0D:A1EE: 60
 loc_0D_A1EF:
-	DEC objArr_05D0,X               ;C - - - - - 0x01A1FF 0D:A1EF: DE D0 05
+	DEC objTimer,X                  ;C - - - - - 0x01A1FF 0D:A1EF: DE D0 05
 	BNE loc_0D_A1EE                 ;C - - - - - 0x01A202 0D:A1F2: D0 FA
 	LDA ram_00E4                    ;C - - - - - 0x01A204 0D:A1F4: A5 E4
 	LSR A                           ;C - - - - - 0x01A206 0D:A1F6: 4A
@@ -269,13 +269,13 @@ loc_0D_A1FD:
 loc_0D_A1FF:
 	STA objActive,X                 ;C - - - - - 0x01A20F 0D:A1FF: 9D 00 03
 	LDA #$00                        ;C - - - - - 0x01A212 0D:A202: A9 00
-	STA objArr_0500,X               ;C - - - - - 0x01A214 0D:A204: 9D 00 05
+	STA objStep,X                   ;C - - - - - 0x01A214 0D:A204: 9D 00 05
 	STA objVelXLo,X                 ;C - - - - - 0x01A217 0D:A207: 9D 00 04
 	STA objVelXHi,X                 ;C - - - - - 0x01A21A 0D:A20A: 9D 10 04
 	JMP EnemyTileProbe3             ;C - - - - - 0x01A21D 0D:A20D: 4C 1D AA
 ofs_0D_A210:
 	JSR SetFlag40ToPlayer_0D        ;C - - J - - 0x01A220 0D:A210: 20 EB A9
-	LDA objArr_05D0,X               ;C - - - - - 0x01A223 0D:A213: BD D0 05
+	LDA objTimer,X                  ;C - - - - - 0x01A223 0D:A213: BD D0 05
 	BEQ loc_0D_A21B                 ;C - - - - - 0x01A226 0D:A216: F0 03
 	JMP loc_0D_A2A6                 ;C - - - - - 0x01A228 0D:A218: 4C A6 A2
 loc_0D_A21B:
@@ -287,7 +287,7 @@ loc_0D_A21B:
 	LDA ptr_00                      ;C - - - - - 0x01A237 0D:A227: A5 00
 	JSR CheckNearPlayer             ;C - - - - - 0x01A239 0D:A229: 20 3E FB
 	BCS loc_0D_A23C                 ;C - - - - - 0x01A23C 0D:A22C: B0 0E
-	DEC objArr_05E0,X               ;C - - - - - 0x01A23E 0D:A22E: DE E0 05
+	DEC objCounter,X                ;C - - - - - 0x01A23E 0D:A22E: DE E0 05
 	BEQ loc_0D_A239                 ;C - - - - - 0x01A241 0D:A231: F0 06
 	JSR DirToPlayerOffset           ;C - - - - - 0x01A243 0D:A233: 20 72 FB
 	JMP loc_0D_A088                 ;C - - - - - 0x01A246 0D:A236: 4C 88 A0
@@ -307,11 +307,11 @@ loc_0D_A24C:
 	CMP tbl_0D_A2BD,Y               ;C - - - - - 0x01A260 0D:A250: D9 BD A2
 	BCC loc_0D_A2B2                 ;C - - - - - 0x01A263 0D:A253: 90 5D
 	LDA #$00                        ;C - - - - - 0x01A265 0D:A255: A9 00
-	STA objArr_05E0,X               ;C - - - - - 0x01A267 0D:A257: 9D E0 05
+	STA objCounter,X                ;C - - - - - 0x01A267 0D:A257: 9D E0 05
 	LDY objSpriteDown,X             ;C - - - - - 0x01A26A 0D:A25A: BC B0 05
 	LDA tbl_0D_A2AC,Y               ;C - - - - - 0x01A26D 0D:A25D: B9 AC A2
 	BEQ loc_0D_A267                 ;C - - - - - 0x01A270 0D:A260: F0 05
-	STA objArr_05E0,X               ;C - - - - - 0x01A272 0D:A262: 9D E0 05
+	STA objCounter,X                ;C - - - - - 0x01A272 0D:A262: 9D E0 05
 	BNE loc_0D_A290                 ;C - - - - - 0x01A275 0D:A265: D0 29
 loc_0D_A267:
 	LDA objSpriteDown,X             ;C - - - - - 0x01A277 0D:A267: BD B0 05
@@ -319,7 +319,7 @@ loc_0D_A267:
 	LDA #$03                        ;C - - - - - 0x01A27C 0D:A26C: A9 03
 loc_0D_A26E:
 	STA ptr_00                      ;C - - - - - 0x01A27E 0D:A26E: 85 00
-	LDY objArr_05C0,X               ;C - - - - - 0x01A280 0D:A270: BC C0 05
+	LDY objVariant,X                ;C - - - - - 0x01A280 0D:A270: BC C0 05
 	LDA tbl_0D_A897,Y               ;C - - - - - 0x01A283 0D:A273: B9 97 A8
 	CLC                             ;C - - - - - 0x01A286 0D:A276: 18
 	ADC ptr_00                      ;C - - - - - 0x01A287 0D:A277: 65 00
@@ -330,37 +330,37 @@ loc_0D_A26E:
 	AND #$0F                        ;C - - - - - 0x01A291 0D:A281: 29 0F
 	CMP ptr_00                      ;C - - - - - 0x01A293 0D:A283: C5 00
 	BCC loc_0D_A28D                 ;C - - - - - 0x01A295 0D:A285: 90 06
-	INC objArr_05E0,X               ;C - - - - - 0x01A297 0D:A287: FE E0 05
-	INC objArr_05E0,X               ;C - - - - - 0x01A29A 0D:A28A: FE E0 05
+	INC objCounter,X                ;C - - - - - 0x01A297 0D:A287: FE E0 05
+	INC objCounter,X                ;C - - - - - 0x01A29A 0D:A28A: FE E0 05
 loc_0D_A28D:
-	INC objArr_05E0,X               ;C - - - - - 0x01A29D 0D:A28D: FE E0 05
+	INC objCounter,X                ;C - - - - - 0x01A29D 0D:A28D: FE E0 05
 loc_0D_A290:
 	LDA #$00                        ;C - - - - - 0x01A2A0 0D:A290: A9 00
-	STA objArr_05D0,X               ;C - - - - - 0x01A2A2 0D:A292: 9D D0 05
+	STA objTimer,X                  ;C - - - - - 0x01A2A2 0D:A292: 9D D0 05
 	JSR FaceToPlayerFlag            ;C - - - - - 0x01A2A5 0D:A295: 20 43 F3
 	LDA #$FF                        ;C - - - - - 0x01A2A8 0D:A298: A9 FF
-	STA objArr_0540,X               ;C - - - - - 0x01A2AA 0D:A29A: 9D 40 05
-	STA objArr_0530,X               ;C - - - - - 0x01A2AD 0D:A29D: 9D 30 05
+	STA objCooldown,X               ;C - - - - - 0x01A2AA 0D:A29A: 9D 40 05
+	STA objSavedY,X                 ;C - - - - - 0x01A2AD 0D:A29D: 9D 30 05
 	LDA #$85                        ;C - - - - - 0x01A2B0 0D:A2A0: A9 85
 	STA objActive,X                 ;C - - - - - 0x01A2B2 0D:A2A2: 9D 00 03
 	RTS                             ;C - - - - - 0x01A2B5 0D:A2A5: 60
 loc_0D_A2A6:
-	DEC objArr_05D0,X               ;C - - - - - 0x01A2B6 0D:A2A6: DE D0 05
+	DEC objTimer,X                  ;C - - - - - 0x01A2B6 0D:A2A6: DE D0 05
 	JMP EnemySetAnimSetA            ;C - - - - - 0x01A2B9 0D:A2A9: 4C AE AA
 tbl_0D_A2AC:
 	.byte $03,$01,$00,$01,$01,$00   ;- D 1 - - - 0x01A2BC 0D:A2AC:
 loc_0D_A2B2:
 	LDA #$1E                        ;C - - - - - 0x01A2C2 0D:A2B2: A9 1E
-	STA objArr_05D0,X               ;C - - - - - 0x01A2C4 0D:A2B4: 9D D0 05
+	STA objTimer,X                  ;C - - - - - 0x01A2C4 0D:A2B4: 9D D0 05
 	LDA #$87                        ;C - - - - - 0x01A2C7 0D:A2B7: A9 87
 	STA objActive,X                 ;C - - - - - 0x01A2C9 0D:A2B9: 9D 00 03
 	RTS                             ;C - - - - - 0x01A2CC 0D:A2BC: 60
 tbl_0D_A2BD:
 	.byte $04,$04,$06,$04,$09,$08   ;- D 1 - - - 0x01A2CD 0D:A2BD:
 ofs_0D_A2C3:
-	LDA objArr_05D0,X               ;C - - J - - 0x01A2D3 0D:A2C3: BD D0 05
+	LDA objTimer,X                  ;C - - J - - 0x01A2D3 0D:A2C3: BD D0 05
 	BEQ loc_0D_A2CE                 ;C - - - - - 0x01A2D6 0D:A2C6: F0 06
-	DEC objArr_05D0,X               ;C - - - - - 0x01A2D8 0D:A2C8: DE D0 05
+	DEC objTimer,X                  ;C - - - - - 0x01A2D8 0D:A2C8: DE D0 05
 	JMP EnemySetAnimSetA            ;C - - - - - 0x01A2DB 0D:A2CB: 4C AE AA
 loc_0D_A2CE:
 	JSR EnemySetAnimSetC            ;C - - - - - 0x01A2DE 0D:A2CE: 20 00 AB
@@ -377,9 +377,9 @@ loc_0D_A2E6:
 	LDA objAnimFlags,X              ;C - - - - - 0x01A2F6 0D:A2E6: BD 90 05
 	ORA objAnimFrame,X              ;C - - - - - 0x01A2F9 0D:A2E9: 1D 70 05
 	BNE loc_0D_A2F7                 ;C - - - - - 0x01A2FC 0D:A2EC: D0 09
-	LDA objArr_0540,X               ;C - - - - - 0x01A2FE 0D:A2EE: BD 40 05
+	LDA objCooldown,X               ;C - - - - - 0x01A2FE 0D:A2EE: BD 40 05
 	BEQ loc_0D_A34D                 ;C - - - - - 0x01A301 0D:A2F1: F0 5A
-	INC objArr_0540,X               ;C - - - - - 0x01A303 0D:A2F3: FE 40 05
+	INC objCooldown,X               ;C - - - - - 0x01A303 0D:A2F3: FE 40 05
 	RTS                             ;C - - - - - 0x01A306 0D:A2F6: 60
 loc_0D_A2F7:
 	LDA objAnimFlags,X              ;C - - - - - 0x01A307 0D:A2F7: BD 90 05
@@ -390,7 +390,7 @@ loc_0D_A2F7:
 	CMP objAnimFrame,X              ;C - - - - - 0x01A314 0D:A304: DD 70 05
 	BEQ loc_0D_A324                 ;C - - - - - 0x01A317 0D:A307: F0 1B
 loc_0D_A309:
-	LDA objArr_04D0,X               ;C - - - - - 0x01A319 0D:A309: BD D0 04
+	LDA objAtkHeavy,X               ;C - - - - - 0x01A319 0D:A309: BD D0 04
 	BEQ loc_0D_A323                 ;C - - - - - 0x01A31C 0D:A30C: F0 15
 	LDA objSpriteDown,X             ;C - - - - - 0x01A31E 0D:A30E: BD B0 05
 	CMP #$04                        ;C - - - - - 0x01A321 0D:A311: C9 04
@@ -402,7 +402,7 @@ loc_0D_A319:
 loc_0D_A31B:
 	JSR QueueSound                  ;C - - - - - 0x01A32B 0D:A31B: 20 4C F3
 	LDA #$00                        ;C - - - - - 0x01A32E 0D:A31E: A9 00
-	STA objArr_04D0,X               ;C - - - - - 0x01A330 0D:A320: 9D D0 04
+	STA objAtkHeavy,X               ;C - - - - - 0x01A330 0D:A320: 9D D0 04
 loc_0D_A323:
 	RTS                             ;C - - - - - 0x01A333 0D:A323: 60
 loc_0D_A324:
@@ -413,7 +413,7 @@ loc_0D_A324:
 	LDA objSpriteDown,X             ;C - - - - - 0x01A33B 0D:A32B: BD B0 05
 	CMP #$03                        ;C - - - - - 0x01A33E 0D:A32E: C9 03
 	BEQ loc_0D_A337                 ;C - - - - - 0x01A340 0D:A330: F0 05
-	LDA objArr_0530,X               ;C - - - - - 0x01A342 0D:A332: BD 30 05
+	LDA objSavedY,X                 ;C - - - - - 0x01A342 0D:A332: BD 30 05
 	BNE loc_0D_A33D                 ;C - - - - - 0x01A345 0D:A335: D0 06
 loc_0D_A337:
 	LDA tbl_0D_A3C9,Y               ;C - - - - - 0x01A347 0D:A337: B9 C9 A3
@@ -421,20 +421,20 @@ loc_0D_A337:
 loc_0D_A33D:
 	LDA tbl_0D_A3B3,Y               ;C - - - - - 0x01A34D 0D:A33D: B9 B3 A3
 loc_0D_A340:
-	STA objArr_0450,X               ;C - - - - - 0x01A350 0D:A340: 9D 50 04
+	STA objAtkDamage,X              ;C - - - - - 0x01A350 0D:A340: 9D 50 04
 	LDA objSpriteDown,X             ;C - - - - - 0x01A353 0D:A343: BD B0 05
 	CLC                             ;C - - - - - 0x01A356 0D:A346: 18
 	ADC #$80                        ;C - - - - - 0x01A357 0D:A347: 69 80
-	STA objArr_0440,X               ;C - - - - - 0x01A359 0D:A349: 9D 40 04
+	STA objAtkBox,X                 ;C - - - - - 0x01A359 0D:A349: 9D 40 04
 	RTS                             ;C - - - - - 0x01A35C 0D:A34C: 60
 loc_0D_A34D:
-	DEC objArr_05E0,X               ;C - - - - - 0x01A35D 0D:A34D: DE E0 05
+	DEC objCounter,X                ;C - - - - - 0x01A35D 0D:A34D: DE E0 05
 	BNE loc_0D_A365                 ;C - - - - - 0x01A360 0D:A350: D0 13
 	LDA #$00                        ;C - - - - - 0x01A362 0D:A352: A9 00
-	STA objArr_0530,X               ;C - - - - - 0x01A364 0D:A354: 9D 30 05
-	STA objArr_0540,X               ;C - - - - - 0x01A367 0D:A357: 9D 40 05
+	STA objSavedY,X                 ;C - - - - - 0x01A364 0D:A354: 9D 30 05
+	STA objCooldown,X               ;C - - - - - 0x01A367 0D:A357: 9D 40 05
 	LDA #$0F                        ;C - - - - - 0x01A36A 0D:A35A: A9 0F
-	STA objArr_05D0,X               ;C - - - - - 0x01A36C 0D:A35C: 9D D0 05
+	STA objTimer,X                  ;C - - - - - 0x01A36C 0D:A35C: 9D D0 05
 	LDA #$87                        ;C - - - - - 0x01A36F 0D:A35F: A9 87
 	STA objActive,X                 ;C - - - - - 0x01A371 0D:A361: 9D 00 03
 	RTS                             ;C - - - - - 0x01A374 0D:A364: 60
@@ -449,8 +449,8 @@ loc_0D_A365:
 	BCS loc_0D_A383                 ;C - - - - - 0x01A386 0D:A376: B0 0B
 loc_0D_A378:
 	LDA #$00                        ;C - - - - - 0x01A388 0D:A378: A9 00
-	STA objArr_0530,X               ;C - - - - - 0x01A38A 0D:A37A: 9D 30 05
-	STA objArr_0540,X               ;C - - - - - 0x01A38D 0D:A37D: 9D 40 05
+	STA objSavedY,X                 ;C - - - - - 0x01A38A 0D:A37A: 9D 30 05
+	STA objCooldown,X               ;C - - - - - 0x01A38D 0D:A37D: 9D 40 05
 	JMP EnemyResetAction81          ;C - - - - - 0x01A390 0D:A380: 4C E8 A8
 loc_0D_A383:
 	LDA gameAction                  ;C - - - - - 0x01A393 0D:A383: A5 30
@@ -460,11 +460,11 @@ loc_0D_A383:
 	BEQ loc_0D_A378                 ;C - - - - - 0x01A39B 0D:A38B: F0 EB
 	JSR FaceToPlayerFlag            ;C - - - - - 0x01A39D 0D:A38D: 20 43 F3
 	JSR EnemyLoadKindParam          ;C - - - - - 0x01A3A0 0D:A390: 20 A0 AA
-	DEC objArr_0540,X               ;C - - - - - 0x01A3A3 0D:A393: DE 40 05
-	LDA objArr_05E0,X               ;C - - - - - 0x01A3A6 0D:A396: BD E0 05
+	DEC objCooldown,X               ;C - - - - - 0x01A3A3 0D:A393: DE 40 05
+	LDA objCounter,X                ;C - - - - - 0x01A3A6 0D:A396: BD E0 05
 	CMP #$01                        ;C - - - - - 0x01A3A9 0D:A399: C9 01
 	BNE loc_0D_A3A0                 ;C - - - - - 0x01A3AB 0D:A39B: D0 03
-	INC objArr_0530,X               ;C - - - - - 0x01A3AD 0D:A39D: FE 30 05
+	INC objSavedY,X                 ;C - - - - - 0x01A3AD 0D:A39D: FE 30 05
 loc_0D_A3A0:
 	RTS                             ;C - - - - - 0x01A3B0 0D:A3A0: 60
 tbl_0D_A3A1:
@@ -498,7 +498,7 @@ tbl_0D_A3DF:
 	.byte $00,$00,$00,$00           ;- - - - - - 0x01A3FB 0D:A3EB:
 	.byte $5A,$3C,$1E,$B4,$78,$3C   ;- D 1 - - - 0x01A3FF 0D:A3EF:
 ofs_0D_A3F5:
-	DEC objArr_05D0,X               ;C - - J - - 0x01A405 0D:A3F5: DE D0 05
+	DEC objTimer,X                  ;C - - J - - 0x01A405 0D:A3F5: DE D0 05
 	BMI loc_0D_A40E                 ;C - - - - - 0x01A408 0D:A3F8: 30 14
 	JSR DirToPlayerGround           ;C - - - - - 0x01A40A 0D:A3FA: 20 5B FB
 	TAY                             ;C - - - - - 0x01A40D 0D:A3FD: A8
@@ -512,7 +512,7 @@ loc_0D_A40E:
 	JMP EnemyResetAction81          ;C - - - - - 0x01A41E 0D:A40E: 4C E8 A8
 ofs_0D_A411:
 	JSR FaceToPlayerFlag            ;C - - J - - 0x01A421 0D:A411: 20 43 F3
-	DEC objArr_04E0,X               ;C - - - - - 0x01A424 0D:A414: DE E0 04
+	DEC objHitTimer,X               ;C - - - - - 0x01A424 0D:A414: DE E0 04
 	BNE loc_0D_A41C                 ;C - - - - - 0x01A427 0D:A417: D0 03
 	JMP EnemyResetAction81          ;C - - - - - 0x01A429 0D:A419: 4C E8 A8
 loc_0D_A41C:
@@ -533,7 +533,7 @@ loc_0D_A42C:
 loc_0D_A434:
 	JSR FaceToPlayerFlag            ;C - - - - - 0x01A444 0D:A434: 20 43 F3
 	LDA objY,X                      ;C - - - - - 0x01A447 0D:A437: BD C0 03
-	STA objArr_0520,X               ;C - - - - - 0x01A44A 0D:A43A: 9D 20 05
+	STA objStartY,X                 ;C - - - - - 0x01A44A 0D:A43A: 9D 20 05
 	LDA objSpriteDown,X             ;C - - - - - 0x01A44D 0D:A43D: BD B0 05
 	BNE loc_0D_A469                 ;C - - - - - 0x01A450 0D:A440: D0 27
 	LDA #$00                        ;C - - - - - 0x01A452 0D:A442: A9 00
@@ -544,13 +544,13 @@ loc_0D_A434:
 	STA objVelYLo,X                 ;C - - - - - 0x01A45E 0D:A44E: 9D 20 04
 	LDA #$04                        ;C - - - - - 0x01A461 0D:A451: A9 04
 	STA objVelYHi,X                 ;C - - - - - 0x01A463 0D:A453: 9D 30 04
-	LDY objArr_05C0,X               ;C - - - - - 0x01A466 0D:A456: BC C0 05
+	LDY objVariant,X                ;C - - - - - 0x01A466 0D:A456: BC C0 05
 	LDA tbl_0D_A897,Y               ;C - - - - - 0x01A469 0D:A459: B9 97 A8
 	CLC                             ;C - - - - - 0x01A46C 0D:A45C: 18
 	ADC #$36                        ;C - - - - - 0x01A46D 0D:A45D: 69 36
-	STA objArr_0450,X               ;C - - - - - 0x01A46F 0D:A45F: 9D 50 04
+	STA objAtkDamage,X              ;C - - - - - 0x01A46F 0D:A45F: 9D 50 04
 	LDA #$08                        ;C - - - - - 0x01A472 0D:A462: A9 08
-	STA objArr_05D0,X               ;C - - - - - 0x01A474 0D:A464: 9D D0 05
+	STA objTimer,X                  ;C - - - - - 0x01A474 0D:A464: 9D D0 05
 	BNE loc_0D_A48E                 ;C - - - - - 0x01A477 0D:A467: D0 25
 loc_0D_A469:
 	LDA #$00                        ;C - - - - - 0x01A479 0D:A469: A9 00
@@ -561,23 +561,23 @@ loc_0D_A469:
 	STA objVelYLo,X                 ;C - - - - - 0x01A485 0D:A475: 9D 20 04
 	LDA #$03                        ;C - - - - - 0x01A488 0D:A478: A9 03
 	STA objVelYHi,X                 ;C - - - - - 0x01A48A 0D:A47A: 9D 30 04
-	LDY objArr_05C0,X               ;C - - - - - 0x01A48D 0D:A47D: BC C0 05
+	LDY objVariant,X                ;C - - - - - 0x01A48D 0D:A47D: BC C0 05
 	LDA tbl_0D_A897,Y               ;C - - - - - 0x01A490 0D:A480: B9 97 A8
 	CLC                             ;C - - - - - 0x01A493 0D:A483: 18
 	ADC #$39                        ;C - - - - - 0x01A494 0D:A484: 69 39
-	STA objArr_0450,X               ;C - - - - - 0x01A496 0D:A486: 9D 50 04
+	STA objAtkDamage,X              ;C - - - - - 0x01A496 0D:A486: 9D 50 04
 	LDA #$10                        ;C - - - - - 0x01A499 0D:A489: A9 10
-	STA objArr_05D0,X               ;C - - - - - 0x01A49B 0D:A48B: 9D D0 05
+	STA objTimer,X                  ;C - - - - - 0x01A49B 0D:A48B: 9D D0 05
 loc_0D_A48E:
 	LDA #$89                        ;C - - - - - 0x01A49E 0D:A48E: A9 89
 	STA objActive,X                 ;C - - - - - 0x01A4A0 0D:A490: 9D 00 03
 	RTS                             ;C - - - - - 0x01A4A3 0D:A493: 60
 ofs_0D_A494:
-	LDA objArr_0500,X               ;C - - J - - 0x01A4A4 0D:A494: BD 00 05
+	LDA objStep,X                   ;C - - J - - 0x01A4A4 0D:A494: BD 00 05
 	BNE loc_0D_A4C6                 ;C - - - - - 0x01A4A7 0D:A497: D0 2D
-	LDA objArr_05D0,X               ;C - - - - - 0x01A4A9 0D:A499: BD D0 05
+	LDA objTimer,X                  ;C - - - - - 0x01A4A9 0D:A499: BD D0 05
 	BEQ loc_0D_A4B0                 ;C - - - - - 0x01A4AC 0D:A49C: F0 12
-	DEC objArr_05D0,X               ;C - - - - - 0x01A4AE 0D:A49E: DE D0 05
+	DEC objTimer,X                  ;C - - - - - 0x01A4AE 0D:A49E: DE D0 05
 	LDA objSpriteDown,X             ;C - - - - - 0x01A4B1 0D:A4A1: BD B0 05
 	BNE loc_0D_A4AD                 ;C - - - - - 0x01A4B4 0D:A4A4: D0 07
 	LDA #$E8                        ;C - - - - - 0x01A4B6 0D:A4A6: A9 E8
@@ -586,7 +586,7 @@ ofs_0D_A494:
 loc_0D_A4AD:
 	JMP EnemySetDownAnimC           ;C - - - - - bank=0C 0x01A4BD 0D:A4AD: 4C AD 9C
 loc_0D_A4B0:
-	INC objArr_0500,X               ;C - - - - - 0x01A4C0 0D:A4B0: FE 00 05
+	INC objStep,X                   ;C - - - - - 0x01A4C0 0D:A4B0: FE 00 05
 	LDA objSpriteDown,X             ;C - - - - - 0x01A4C3 0D:A4B3: BD B0 05
 	BNE loc_0D_A4BF                 ;C - - - - - 0x01A4C6 0D:A4B6: D0 07
 	LDA #$84                        ;C - - - - - 0x01A4C8 0D:A4B8: A9 84
@@ -599,24 +599,24 @@ loc_0D_A4BF:
 loc_0D_A4C6:
 	JSR ApplyVelY                   ;C - - - - - 0x01A4D6 0D:A4C6: 20 FD F1
 	LDA objY,X                      ;C - - - - - 0x01A4D9 0D:A4C9: BD C0 03
-	CMP objArr_0520,X               ;C - - - - - 0x01A4DC 0D:A4CC: DD 20 05
+	CMP objStartY,X                 ;C - - - - - 0x01A4DC 0D:A4CC: DD 20 05
 	BCC loc_0D_A4FB                 ;C - - - - - 0x01A4DF 0D:A4CF: 90 2A
-	LDA objArr_0520,X               ;C - - - - - 0x01A4E1 0D:A4D1: BD 20 05
+	LDA objStartY,X                 ;C - - - - - 0x01A4E1 0D:A4D1: BD 20 05
 	STA objY,X                      ;C - - - - - 0x01A4E4 0D:A4D4: 9D C0 03
 	JSR EnemyLandCheck              ;C - - - - - 0x01A4E7 0D:A4D7: 20 F6 A9
 	BCC loc_0D_A4E3                 ;C - - - - - 0x01A4EA 0D:A4DA: 90 07
 	LDA objSpriteDown,X             ;c - - - - - 0x01A4EC 0D:A4DC: BD B0 05
-	STA objArr_03D0,X               ;c - - - - - 0x01A4EF 0D:A4DF: 9D D0 03
+	STA objWallSide,X               ;c - - - - - 0x01A4EF 0D:A4DF: 9D D0 03
 	RTS                             ;c - - - - - 0x01A4F2 0D:A4E2: 60
 loc_0D_A4E3:
 	LDA #$00                        ;C - - - - - 0x01A4F3 0D:A4E3: A9 00
 	STA objVelYLo,X                 ;C - - - - - 0x01A4F5 0D:A4E5: 9D 20 04
 	STA objVelYHi,X                 ;C - - - - - 0x01A4F8 0D:A4E8: 9D 30 04
-	STA objArr_0440,X               ;C - - - - - 0x01A4FB 0D:A4EB: 9D 40 04
+	STA objAtkBox,X                 ;C - - - - - 0x01A4FB 0D:A4EB: 9D 40 04
 	LDA #$8C                        ;C - - - - - 0x01A4FE 0D:A4EE: A9 8C
 	STA objActive,X                 ;C - - - - - 0x01A500 0D:A4F0: 9D 00 03
 	LDA #$08                        ;C - - - - - 0x01A503 0D:A4F3: A9 08
-	STA objArr_05D0,X               ;C - - - - - 0x01A505 0D:A4F5: 9D D0 05
+	STA objTimer,X                  ;C - - - - - 0x01A505 0D:A4F5: 9D D0 05
 	JMP EnemySetDownAnimC           ;C - - - - - bank=0C 0x01A508 0D:A4F8: 4C AD 9C
 loc_0D_A4FB:
 	LDA objFacing,X                 ;C - - - - - 0x01A50B 0D:A4FB: BD 60 04
@@ -657,14 +657,14 @@ loc_0D_A532:
 loc_0D_A542:
 	LDA #$8A                        ;C - - - - - 0x01A552 0D:A542: A9 8A
 loc_0D_A544:
-	STA objArr_0440,X               ;C - - - - - 0x01A554 0D:A544: 9D 40 04
+	STA objAtkBox,X                 ;C - - - - - 0x01A554 0D:A544: 9D 40 04
 	RTS                             ;C - - - - - 0x01A557 0D:A547: 60
 loc_0D_A548:
 	LDA #$00                        ;C - - - - - 0x01A558 0D:A548: A9 00
 	STA objAnimFlags,X              ;C - - - - - 0x01A55A 0D:A54A: 9D 90 05
 	BEQ loc_0D_A544                 ;C - - - - - 0x01A55D 0D:A54D: F0 F5
 ofs_0D_A54F:
-	LDA objArr_0500,X               ;C - - J - - 0x01A55F 0D:A54F: BD 00 05
+	LDA objStep,X                   ;C - - J - - 0x01A55F 0D:A54F: BD 00 05
 	CMP #$01                        ;C - - - - - 0x01A562 0D:A552: C9 01
 	BEQ loc_0D_A593                 ;C - - - - - 0x01A564 0D:A554: F0 3D
 	CMP #$02                        ;C - - - - - 0x01A566 0D:A556: C9 02
@@ -695,7 +695,7 @@ loc_0D_A57D:
 	JSR DistanceYToPlayerGround     ;C - - - - - 0x01A598 0D:A588: 20 D9 FB
 	CMP #$08                        ;C - - - - - 0x01A59B 0D:A58B: C9 08
 	BCS loc_0D_A592                 ;C - - - - - 0x01A59D 0D:A58D: B0 03
-	INC objArr_0500,X               ;C - - - - - 0x01A59F 0D:A58F: FE 00 05
+	INC objStep,X                   ;C - - - - - 0x01A59F 0D:A58F: FE 00 05
 loc_0D_A592:
 	RTS                             ;C - - - - - 0x01A5A2 0D:A592: 60
 loc_0D_A593:
@@ -720,15 +720,15 @@ loc_0D_A5B4:
 	LDA objAnimFlags,X              ;C - - - - - 0x01A5CB 0D:A5BB: BD 90 05
 	CMP #$04                        ;C - - - - - 0x01A5CE 0D:A5BE: C9 04
 	BNE loc_0D_A592                 ;C - - - - - 0x01A5D0 0D:A5C0: D0 D0
-	INC objArr_0500,X               ;C - - - - - 0x01A5D2 0D:A5C2: FE 00 05
+	INC objStep,X                   ;C - - - - - 0x01A5D2 0D:A5C2: FE 00 05
 	LDA #$30                        ;C - - - - - 0x01A5D5 0D:A5C5: A9 30
-	STA objArr_05D0,X               ;C - - - - - 0x01A5D7 0D:A5C7: 9D D0 05
+	STA objTimer,X                  ;C - - - - - 0x01A5D7 0D:A5C7: 9D D0 05
 	JMP EnemySetAnimSetA            ;C - - - - - 0x01A5DA 0D:A5CA: 4C AE AA
 loc_0D_A5CD:
-	DEC objArr_05D0,X               ;C - - - - - 0x01A5DD 0D:A5CD: DE D0 05
+	DEC objTimer,X                  ;C - - - - - 0x01A5DD 0D:A5CD: DE D0 05
 	BNE loc_0D_A592                 ;C - - - - - 0x01A5E0 0D:A5D0: D0 C0
 	LDA #$00                        ;C - - - - - 0x01A5E2 0D:A5D2: A9 00
-	STA objArr_0500,X               ;C - - - - - 0x01A5E4 0D:A5D4: 9D 00 05
+	STA objStep,X                   ;C - - - - - 0x01A5E4 0D:A5D4: 9D 00 05
 	JMP loc_0D_A8E4                 ;C - - - - - 0x01A5E7 0D:A5D7: 4C E4 A8
 loc_0D_A5DA:
 	JSR FindFreeEnemySlot           ;C - - - - - 0x01A5EA 0D:A5DA: 20 1A F7
@@ -763,7 +763,7 @@ loc_0D_A5EE:
 	STA objYPage,Y                  ;C - - - - - 0x01A627 0D:A617: 99 E0 03
 	LDA #$00                        ;C - - - - - 0x01A62A 0D:A61A: A9 00
 	STA objLife,Y                   ;C - - - - - 0x01A62C 0D:A61C: 99 90 04
-	STA objArr_04A0,Y               ;C - - - - - 0x01A62F 0D:A61F: 99 A0 04
+	STA objHudLife,Y                ;C - - - - - 0x01A62F 0D:A61F: 99 A0 04
 	LDA #$30                        ;C - - - - - 0x01A632 0D:A622: A9 30
 	STA objVelXLo,Y                 ;C - - - - - 0x01A634 0D:A624: 99 00 04
 	LDA #$03                        ;C - - - - - 0x01A637 0D:A627: A9 03
@@ -773,9 +773,9 @@ loc_0D_A5EE:
 	LDA #$1B                        ;C - - - - - 0x01A641 0D:A631: A9 1B
 	JSR QueueSound                  ;C - - - - - 0x01A643 0D:A633: 20 4C F3
 	LDA #$87                        ;C - - - - - 0x01A646 0D:A636: A9 87
-	STA objArr_0440,Y               ;C - - - - - 0x01A648 0D:A638: 99 40 04
+	STA objAtkBox,Y                 ;C - - - - - 0x01A648 0D:A638: 99 40 04
 	LDA #$06                        ;C - - - - - 0x01A64B 0D:A63B: A9 06
-	STA objArr_0450,Y               ;C - - - - - 0x01A64D 0D:A63D: 99 50 04
+	STA objAtkDamage,Y              ;C - - - - - 0x01A64D 0D:A63D: 99 50 04
 	LDA #$2E                        ;C - - - - - 0x01A650 0D:A640: A9 2E
 	STA objKind,Y                   ;C - - - - - 0x01A652 0D:A642: 99 20 03
 	STA objId,Y                     ;C - - - - - 0x01A655 0D:A645: 99 30 03
@@ -787,7 +787,7 @@ tbl_0D_A64E:
 tbl_0D_A64F:
 	.byte $00,$EE,$FF               ;- D 1 - - - 0x01A65F 0D:A64F:
 ofs_0D_A652:
-	LDA objArr_0500,X               ;C - - J - - 0x01A662 0D:A652: BD 00 05
+	LDA objStep,X                   ;C - - J - - 0x01A662 0D:A652: BD 00 05
 	CMP #$01                        ;C - - - - - 0x01A665 0D:A655: C9 01
 	BEQ loc_0D_A677                 ;C - - - - - 0x01A667 0D:A657: F0 1E
 	CMP #$02                        ;C - - - - - 0x01A669 0D:A659: C9 02
@@ -800,16 +800,16 @@ ofs_0D_A652:
 loc_0D_A669:
 	JSR EnemySetDownAnimC           ;C - - - - - bank=0C 0x01A679 0D:A669: 20 AD 9C
 	LDA #$18                        ;C - - - - - 0x01A67C 0D:A66C: A9 18
-	STA objArr_05D0,X               ;C - - - - - 0x01A67E 0D:A66E: 9D D0 05
-	INC objArr_0500,X               ;C - - - - - 0x01A681 0D:A671: FE 00 05
+	STA objTimer,X                  ;C - - - - - 0x01A67E 0D:A66E: 9D D0 05
+	INC objStep,X                   ;C - - - - - 0x01A681 0D:A671: FE 00 05
 	JMP FaceToPlayerFlag            ;C - - - - - 0x01A684 0D:A674: 4C 43 F3
 loc_0D_A677:
-	DEC objArr_05D0,X               ;C - - - - - 0x01A687 0D:A677: DE D0 05
+	DEC objTimer,X                  ;C - - - - - 0x01A687 0D:A677: DE D0 05
 	BNE loc_0D_A6B0                 ;C - - - - - 0x01A68A 0D:A67A: D0 34
 	LDA #$03                        ;C - - - - - 0x01A68C 0D:A67C: A9 03
-	STA objArr_05D0,X               ;C - - - - - 0x01A68E 0D:A67E: 9D D0 05
+	STA objTimer,X                  ;C - - - - - 0x01A68E 0D:A67E: 9D D0 05
 	LDA #$0E                        ;C - - - - - 0x01A691 0D:A681: A9 0E
-	STA objArr_05E0,X               ;C - - - - - 0x01A693 0D:A683: 9D E0 05
+	STA objCounter,X                ;C - - - - - 0x01A693 0D:A683: 9D E0 05
 	LDA #$00                        ;C - - - - - 0x01A696 0D:A686: A9 00
 	STA objVelYLo,X                 ;C - - - - - 0x01A698 0D:A688: 9D 20 04
 	STA objVelYHi,X                 ;C - - - - - 0x01A69B 0D:A68B: 9D 30 04
@@ -820,35 +820,35 @@ loc_0D_A677:
 	STA objVelXLo,X                 ;C - - - - - 0x01A6A8 0D:A698: 9D 00 04
 	LDA dat_0D_A716                 ;C - - - - - 0x01A6AB 0D:A69B: AD 16 A7
 	STA objVelXHi,X                 ;C - - - - - 0x01A6AE 0D:A69E: 9D 10 04
-	LDY objArr_05C0,X               ;C - - - - - 0x01A6B1 0D:A6A1: BC C0 05
+	LDY objVariant,X                ;C - - - - - 0x01A6B1 0D:A6A1: BC C0 05
 	LDA tbl_0D_A897,Y               ;C - - - - - 0x01A6B4 0D:A6A4: B9 97 A8
 	CLC                             ;C - - - - - 0x01A6B7 0D:A6A7: 18
 	ADC #$30                        ;C - - - - - 0x01A6B8 0D:A6A8: 69 30
-	STA objArr_0450,X               ;C - - - - - 0x01A6BA 0D:A6AA: 9D 50 04
-	INC objArr_0500,X               ;C - - - - - 0x01A6BD 0D:A6AD: FE 00 05
+	STA objAtkDamage,X              ;C - - - - - 0x01A6BA 0D:A6AA: 9D 50 04
+	INC objStep,X                   ;C - - - - - 0x01A6BD 0D:A6AD: FE 00 05
 loc_0D_A6B0:
 	RTS                             ;C - - - - - 0x01A6C0 0D:A6B0: 60
 loc_0D_A6B1:
 	LDA #$86                        ;C - - - - - 0x01A6C1 0D:A6B1: A9 86
-	STA objArr_0440,X               ;C - - - - - 0x01A6C3 0D:A6B3: 9D 40 04
-	DEC objArr_05D0,X               ;C - - - - - 0x01A6C6 0D:A6B6: DE D0 05
+	STA objAtkBox,X                 ;C - - - - - 0x01A6C3 0D:A6B3: 9D 40 04
+	DEC objTimer,X                  ;C - - - - - 0x01A6C6 0D:A6B6: DE D0 05
 	BNE loc_0D_A6EC                 ;C - - - - - 0x01A6C9 0D:A6B9: D0 31
 	LDA #$03                        ;C - - - - - 0x01A6CB 0D:A6BB: A9 03
-	STA objArr_05D0,X               ;C - - - - - 0x01A6CD 0D:A6BD: 9D D0 05
-	DEC objArr_05E0,X               ;C - - - - - 0x01A6D0 0D:A6C0: DE E0 05
+	STA objTimer,X                  ;C - - - - - 0x01A6CD 0D:A6BD: 9D D0 05
+	DEC objCounter,X                ;C - - - - - 0x01A6D0 0D:A6C0: DE E0 05
 	BNE loc_0D_A6D8                 ;C - - - - - 0x01A6D3 0D:A6C3: D0 13
 	LDA #$08                        ;C - - - - - 0x01A6D5 0D:A6C5: A9 08
-	STA objArr_05D0,X               ;C - - - - - 0x01A6D7 0D:A6C7: 9D D0 05
+	STA objTimer,X                  ;C - - - - - 0x01A6D7 0D:A6C7: 9D D0 05
 	INC objActive,X                 ;C - - - - - 0x01A6DA 0D:A6CA: FE 00 03
 loc_0D_A6CD:
 	LDA #$00                        ;C - - - - - 0x01A6DD 0D:A6CD: A9 00
-	STA objArr_0440,X               ;C - - - - - 0x01A6DF 0D:A6CF: 9D 40 04
-	STA objArr_0500,X               ;C - - - - - 0x01A6E2 0D:A6D2: 9D 00 05
+	STA objAtkBox,X                 ;C - - - - - 0x01A6DF 0D:A6CF: 9D 40 04
+	STA objStep,X                   ;C - - - - - 0x01A6E2 0D:A6D2: 9D 00 05
 	JMP EnemySetDownAnimC           ;C - - - - - bank=0C 0x01A6E5 0D:A6D5: 4C AD 9C
 loc_0D_A6D8:
 	JSR EnemyLandCheck              ;C - - - - - 0x01A6E8 0D:A6D8: 20 F6 A9
 	BCS loc_0D_A6CD                 ;C - - - - - 0x01A6EB 0D:A6DB: B0 F0
-	LDY objArr_05E0,X               ;C - - - - - 0x01A6ED 0D:A6DD: BC E0 05
+	LDY objCounter,X                ;C - - - - - 0x01A6ED 0D:A6DD: BC E0 05
 	LDA tbl_0D_A6F9,Y               ;C - - - - - 0x01A6F0 0D:A6E0: B9 F9 A6
 	STA objVelXLo,X                 ;C - - - - - 0x01A6F3 0D:A6E3: 9D 00 04
 	LDA tbl_0D_A708,Y               ;C - - - - - 0x01A6F6 0D:A6E6: B9 08 A7
@@ -874,24 +874,24 @@ tbl_0D_A708:
 dat_0D_A716:
 	.byte $02                       ;- D 1 - - - 0x01A726 0D:A716:
 ofs_0D_A717:
-	DEC objArr_05D0,X               ;C - - J - - 0x01A727 0D:A717: DE D0 05
+	DEC objTimer,X                  ;C - - J - - 0x01A727 0D:A717: DE D0 05
 	BNE loc_0D_A731                 ;C - - - - - 0x01A72A 0D:A71A: D0 15
 	JSR EnemySetAnimSetA            ;C - - - - - 0x01A72C 0D:A71C: 20 AE AA
 	JSR EnemyTileProbe3             ;C - - - - - 0x01A72F 0D:A71F: 20 1D AA
-	LDA objArr_03D0,X               ;C - - - - - 0x01A732 0D:A722: BD D0 03
+	LDA objWallSide,X               ;C - - - - - 0x01A732 0D:A722: BD D0 03
 	BNE loc_0D_A731                 ;C - - - - - 0x01A735 0D:A725: D0 0A
 	LDA #$1E                        ;C - - - - - 0x01A737 0D:A727: A9 1E
-	STA objArr_05D0,X               ;C - - - - - 0x01A739 0D:A729: 9D D0 05
+	STA objTimer,X                  ;C - - - - - 0x01A739 0D:A729: 9D D0 05
 	LDA #$87                        ;C - - - - - 0x01A73C 0D:A72C: A9 87
 	STA objActive,X                 ;C - - - - - 0x01A73E 0D:A72E: 9D 00 03
 loc_0D_A731:
 	RTS                             ;C - - - - - 0x01A741 0D:A731: 60
 ofs_0D_A732:
-	DEC objArr_05D0,X               ;C - - J - - 0x01A742 0D:A732: DE D0 05
+	DEC objTimer,X                  ;C - - J - - 0x01A742 0D:A732: DE D0 05
 	BNE loc_0D_A731                 ;C - - - - - 0x01A745 0D:A735: D0 FA
 	JMP EnemyResetAction81          ;C - - - - - 0x01A747 0D:A737: 4C E8 A8
 ofs_0D_A73A:
-	LDA objArr_0500,X               ;C - - J - - 0x01A74A 0D:A73A: BD 00 05
+	LDA objStep,X                   ;C - - J - - 0x01A74A 0D:A73A: BD 00 05
 	BNE loc_0D_A76F                 ;C - - - - - 0x01A74D 0D:A73D: D0 30
 	JSR DistanceXToPlayer           ;C - - - - - 0x01A74F 0D:A73F: 20 74 F3
 	BCS loc_0D_A748                 ;C - - - - - 0x01A752 0D:A742: B0 04
@@ -903,19 +903,19 @@ loc_0D_A74A:
 	LDY #$0C                        ;C - - - - - 0x01A75A 0D:A74A: A0 0C
 	STA objFacing,X                 ;C - - - - - 0x01A75C 0D:A74C: 9D 60 04
 	JSR EnemyStartVelocity          ;C - - - - - 0x01A75F 0D:A74F: 20 34 AC
-	LDY objArr_05C0,X               ;C - - - - - 0x01A762 0D:A752: BC C0 05
+	LDY objVariant,X                ;C - - - - - 0x01A762 0D:A752: BC C0 05
 	LDA tbl_0D_A897,Y               ;C - - - - - 0x01A765 0D:A755: B9 97 A8
 	TAY                             ;C - - - - - 0x01A768 0D:A758: A8
 	LDA tbl_0D_A88E,Y               ;C - - - - - 0x01A769 0D:A759: B9 8E A8
-	STA objArr_05D0,X               ;C - - - - - 0x01A76C 0D:A75C: 9D D0 05
+	STA objTimer,X                  ;C - - - - - 0x01A76C 0D:A75C: 9D D0 05
 	LDA tbl_0D_A894,Y               ;C - - - - - 0x01A76F 0D:A75F: B9 94 A8
-	STA objArr_0520,X               ;C - - - - - 0x01A772 0D:A762: 9D 20 05
+	STA objStartY,X                 ;C - - - - - 0x01A772 0D:A762: 9D 20 05
 	LDA tbl_0D_A891,Y               ;C - - - - - 0x01A775 0D:A765: B9 91 A8
-	STA objArr_05E0,X               ;C - - - - - 0x01A778 0D:A768: 9D E0 05
-	INC objArr_0500,X               ;C - - - - - 0x01A77B 0D:A76B: FE 00 05
+	STA objCounter,X                ;C - - - - - 0x01A778 0D:A768: 9D E0 05
+	INC objStep,X                   ;C - - - - - 0x01A77B 0D:A76B: FE 00 05
 	RTS                             ;C - - - - - 0x01A77E 0D:A76E: 60
 loc_0D_A76F:
-	LDY objArr_0500,X               ;C - - - - - 0x01A77F 0D:A76F: BC 00 05
+	LDY objStep,X                   ;C - - - - - 0x01A77F 0D:A76F: BC 00 05
 	DEY                             ;C - - - - - 0x01A782 0D:A772: 88
 	LDA tbl_0D_A878,Y               ;C - - - - - 0x01A783 0D:A773: B9 78 A8
 	STA ptr_00                      ;C - - - - - 0x01A786 0D:A776: 85 00
@@ -923,34 +923,34 @@ loc_0D_A76F:
 	STA ptr_00+1                    ;C - - - - - 0x01A78B 0D:A77B: 85 01
 	JMP (ptr_00)                    ;C - - - - - 0x01A78D 0D:A77D: 6C 00 00
 ofs_0D_A780:
-	DEC objArr_05D0,X               ;C - - J - - 0x01A790 0D:A780: DE D0 05
+	DEC objTimer,X                  ;C - - J - - 0x01A790 0D:A780: DE D0 05
 	BEQ loc_0D_A7A9                 ;C - - - - - 0x01A793 0D:A783: F0 24
 	JSR EnemyDirMoveCheck           ;C - - - - - 0x01A795 0D:A785: 20 53 A9
 	JSR SetFlag40ToPlayer_0D        ;C - - - - - 0x01A798 0D:A788: 20 EB A9
-	LDA objArr_05D0,X               ;C - - - - - 0x01A79B 0D:A78B: BD D0 05
-	CMP objArr_05E0,X               ;C - - - - - 0x01A79E 0D:A78E: DD E0 05
+	LDA objTimer,X                  ;C - - - - - 0x01A79B 0D:A78B: BD D0 05
+	CMP objCounter,X                ;C - - - - - 0x01A79E 0D:A78E: DD E0 05
 	BCS loc_0D_A7AC                 ;C - - - - - 0x01A7A1 0D:A791: B0 19
-	LDA objArr_05D0,X               ;C - - - - - 0x01A7A3 0D:A793: BD D0 05
-	AND objArr_0520,X               ;C - - - - - 0x01A7A6 0D:A796: 3D 20 05
-	EOR objArr_0520,X               ;C - - - - - 0x01A7A9 0D:A799: 5D 20 05
+	LDA objTimer,X                  ;C - - - - - 0x01A7A3 0D:A793: BD D0 05
+	AND objStartY,X                 ;C - - - - - 0x01A7A6 0D:A796: 3D 20 05
+	EOR objStartY,X                 ;C - - - - - 0x01A7A9 0D:A799: 5D 20 05
 	BNE loc_0D_A7AC                 ;C - - - - - 0x01A7AC 0D:A79C: D0 0E
 	LDA ram_00E4                    ;C - - - - - 0x01A7AE 0D:A79E: A5 E4
 	AND #$03                        ;C - - - - - 0x01A7B0 0D:A7A0: 29 03
 	BEQ loc_0D_A7AC                 ;C - - - - - 0x01A7B2 0D:A7A2: F0 08
 	LDA #$00                        ;C - - - - - 0x01A7B4 0D:A7A4: A9 00
-	STA objArr_05D0,X               ;C - - - - - 0x01A7B6 0D:A7A6: 9D D0 05
+	STA objTimer,X                  ;C - - - - - 0x01A7B6 0D:A7A6: 9D D0 05
 loc_0D_A7A9:
-	INC objArr_0500,X               ;C - - - - - 0x01A7B9 0D:A7A9: FE 00 05
+	INC objStep,X                   ;C - - - - - 0x01A7B9 0D:A7A9: FE 00 05
 loc_0D_A7AC:
 	RTS                             ;C - - - - - 0x01A7BC 0D:A7AC: 60
 ofs_0D_A7AD:
-	LDA objArr_05D0,X               ;C - - J - - 0x01A7BD 0D:A7AD: BD D0 05
+	LDA objTimer,X                  ;C - - J - - 0x01A7BD 0D:A7AD: BD D0 05
 	BNE loc_0D_A7B7                 ;C - - - - - 0x01A7C0 0D:A7B0: D0 05
 	LDA #$04                        ;C - - - - - 0x01A7C2 0D:A7B2: A9 04
-	STA objArr_05D0,X               ;C - - - - - 0x01A7C4 0D:A7B4: 9D D0 05
+	STA objTimer,X                  ;C - - - - - 0x01A7C4 0D:A7B4: 9D D0 05
 loc_0D_A7B7:
 	JSR EnemySetAnimSetA            ;C - - - - - 0x01A7C7 0D:A7B7: 20 AE AA
-	DEC objArr_05D0,X               ;C - - - - - 0x01A7CA 0D:A7BA: DE D0 05
+	DEC objTimer,X                  ;C - - - - - 0x01A7CA 0D:A7BA: DE D0 05
 	BNE loc_0D_A828                 ;C - - - - - 0x01A7CD 0D:A7BD: D0 69
 	LDA ram_00E4                    ;C - - - - - 0x01A7CF 0D:A7BF: A5 E4
 	AND #$0F                        ;C - - - - - 0x01A7D1 0D:A7C1: 29 0F
@@ -992,14 +992,14 @@ loc_0D_A80D:
 	LDA #$D2                        ;C - - - - - 0x01A81D 0D:A80D: A9 D2
 	LDY #$24                        ;C - - - - - 0x01A81F 0D:A80F: A0 24
 	JSR SetAnimXChr3                ;C - - - - - 0x01A821 0D:A811: 20 43 F4
-	LDY objArr_05C0,X               ;C - - - - - 0x01A824 0D:A814: BC C0 05
+	LDY objVariant,X                ;C - - - - - 0x01A824 0D:A814: BC C0 05
 	LDA tbl_0D_A897,Y               ;C - - - - - 0x01A827 0D:A817: B9 97 A8
 	CLC                             ;C - - - - - 0x01A82A 0D:A81A: 18
 	ADC #$33                        ;C - - - - - 0x01A82B 0D:A81B: 69 33
-	STA objArr_0450,X               ;C - - - - - 0x01A82D 0D:A81D: 9D 50 04
+	STA objAtkDamage,X              ;C - - - - - 0x01A82D 0D:A81D: 9D 50 04
 	LDA #$01                        ;C - - - - - 0x01A830 0D:A820: A9 01
-	STA objArr_05E0,X               ;C - - - - - 0x01A832 0D:A822: 9D E0 05
-	INC objArr_0500,X               ;C - - - - - 0x01A835 0D:A825: FE 00 05
+	STA objCounter,X                ;C - - - - - 0x01A832 0D:A822: 9D E0 05
+	INC objStep,X                   ;C - - - - - 0x01A835 0D:A825: FE 00 05
 loc_0D_A828:
 	RTS                             ;C - - - - - 0x01A838 0D:A828: 60
 loc_0D_A829:
@@ -1013,16 +1013,16 @@ ofs_0D_A82C:
 	JSR SetAnimXChr3                ;C - - - - - 0x01A847 0D:A837: 20 43 F4
 loc_0D_A83A:
 	LDA #$88                        ;C - - - - - 0x01A84A 0D:A83A: A9 88
-	STA objArr_0440,X               ;C - - - - - 0x01A84C 0D:A83C: 9D 40 04
+	STA objAtkBox,X                 ;C - - - - - 0x01A84C 0D:A83C: 9D 40 04
 	JSR EnemyDirMoveCheck           ;C - - - - - 0x01A84F 0D:A83F: 20 53 A9
 	LDA ptr_0E+1                    ;C - - - - - 0x01A852 0D:A842: A5 0F
 	BNE loc_0D_A86C                 ;C - - - - - 0x01A854 0D:A844: D0 26
-	DEC objArr_05E0,X               ;C - - - - - 0x01A856 0D:A846: DE E0 05
+	DEC objCounter,X                ;C - - - - - 0x01A856 0D:A846: DE E0 05
 	BNE loc_0D_A855                 ;C - - - - - 0x01A859 0D:A849: D0 0A
 	LDA #$2A                        ;C - - - - - 0x01A85B 0D:A84B: A9 2A
 	JSR QueueSound                  ;C - - - - - 0x01A85D 0D:A84D: 20 4C F3
 	LDA #$10                        ;C - - - - - 0x01A860 0D:A850: A9 10
-	STA objArr_05E0,X               ;C - - - - - 0x01A862 0D:A852: 9D E0 05
+	STA objCounter,X                ;C - - - - - 0x01A862 0D:A852: 9D E0 05
 loc_0D_A855:
 	JSR DistanceXToPlayer           ;C - - - - - 0x01A865 0D:A855: 20 74 F3
 	LDA objFlags,X                  ;C - - - - - 0x01A868 0D:A858: BD 60 05
@@ -1038,8 +1038,8 @@ loc_0D_A865:
 	BCC loc_0D_A877                 ;C - - - - - 0x01A87A 0D:A86A: 90 0B
 loc_0D_A86C:
 	LDA #$00                        ;C - - - - - 0x01A87C 0D:A86C: A9 00
-	STA objArr_0440,X               ;C - - - - - 0x01A87E 0D:A86E: 9D 40 04
-	STA objArr_0500,X               ;C - - - - - 0x01A881 0D:A871: 9D 00 05
+	STA objAtkBox,X                 ;C - - - - - 0x01A87E 0D:A86E: 9D 40 04
+	STA objStep,X                   ;C - - - - - 0x01A881 0D:A871: 9D 00 05
 	JMP EnemyResetAction81          ;C - - - - - 0x01A884 0D:A874: 4C E8 A8
 loc_0D_A877:
 	RTS                             ;C - - - - - 0x01A887 0D:A877: 60
@@ -1067,22 +1067,22 @@ tbl_0D_A897:
 ofs_0D_A89C:
 	LDY objSpriteDown,X             ;C - - J - - 0x01A8AC 0D:A89C: BC B0 05
 	LDA tbl_0D_A8DF,Y               ;C - - - - - 0x01A8AF 0D:A89F: B9 DF A8
-	STA objArr_0440,X               ;C - - - - - 0x01A8B2 0D:A8A2: 9D 40 04
+	STA objAtkBox,X                 ;C - - - - - 0x01A8B2 0D:A8A2: 9D 40 04
 	JSR ApplyVelY                   ;C - - - - - 0x01A8B5 0D:A8A5: 20 FD F1
 	LDA objY,X                      ;C - - - - - 0x01A8B8 0D:A8A8: BD C0 03
-	CMP objArr_0520,X               ;C - - - - - 0x01A8BB 0D:A8AB: DD 20 05
+	CMP objStartY,X                 ;C - - - - - 0x01A8BB 0D:A8AB: DD 20 05
 	BCC loc_0D_A8D6                 ;C - - - - - 0x01A8BE 0D:A8AE: 90 26
-	LDA objArr_0520,X               ;C - - - - - 0x01A8C0 0D:A8B0: BD 20 05
+	LDA objStartY,X                 ;C - - - - - 0x01A8C0 0D:A8B0: BD 20 05
 	STA objY,X                      ;C - - - - - 0x01A8C3 0D:A8B3: 9D C0 03
 	LDA #$00                        ;C - - - - - 0x01A8C6 0D:A8B6: A9 00
 	STA objVelYLo,X                 ;C - - - - - 0x01A8C8 0D:A8B8: 9D 20 04
 	STA objVelYHi,X                 ;C - - - - - 0x01A8CB 0D:A8BB: 9D 30 04
-	STA objArr_0440,X               ;C - - - - - 0x01A8CE 0D:A8BE: 9D 40 04
-	STA objArr_0540,X               ;C - - - - - 0x01A8D1 0D:A8C1: 9D 40 05
+	STA objAtkBox,X                 ;C - - - - - 0x01A8CE 0D:A8BE: 9D 40 04
+	STA objCooldown,X               ;C - - - - - 0x01A8D1 0D:A8C1: 9D 40 05
 	LDA #$08                        ;C - - - - - 0x01A8D4 0D:A8C4: A9 08
-	STA objArr_05D0,X               ;C - - - - - 0x01A8D6 0D:A8C6: 9D D0 05
+	STA objTimer,X                  ;C - - - - - 0x01A8D6 0D:A8C6: 9D D0 05
 	LDA #$00                        ;C - - - - - 0x01A8D9 0D:A8C9: A9 00
-	STA objArr_0500,X               ;C - - - - - 0x01A8DB 0D:A8CB: 9D 00 05
+	STA objStep,X                   ;C - - - - - 0x01A8DB 0D:A8CB: 9D 00 05
 	LDA #$8C                        ;C - - - - - 0x01A8DE 0D:A8CE: A9 8C
 	STA objActive,X                 ;C - - - - - 0x01A8E0 0D:A8D0: 9D 00 03
 	JMP EnemySetDownAnimC           ;C - - - - - bank=0C 0x01A8E3 0D:A8D3: 4C AD 9C
@@ -1102,7 +1102,7 @@ loc_0D_A8E4:
 EnemyResetAction81:
 	LDA #$00                        ;C - - - - - 0x01A8F8 0D:A8E8: A9 00
 loc_0D_A8EA:
-	STA objArr_05D0,X               ;C - - - - - 0x01A8FA 0D:A8EA: 9D D0 05
+	STA objTimer,X                  ;C - - - - - 0x01A8FA 0D:A8EA: 9D D0 05
 	LDA #$81                        ;C - - - - - 0x01A8FD 0D:A8ED: A9 81
 	STA objActive,X                 ;C - - - - - 0x01A8FF 0D:A8EF: 9D 00 03
 	RTS                             ;C - - - - - 0x01A902 0D:A8F2: 60
@@ -1125,9 +1125,9 @@ loc_0D_A90C:
 	LDA #$81                        ;C - - - - - 0x01A923 0D:A913: A9 81
 	STA objActive,X                 ;C - - - - - 0x01A925 0D:A915: 9D 00 03
 loc_0D_A918:
-	LDA objArr_05F0,X               ;C - - - - - 0x01A928 0D:A918: BD F0 05
+	LDA objToggle,X                 ;C - - - - - 0x01A928 0D:A918: BD F0 05
 	EOR #$01                        ;C - - - - - 0x01A92B 0D:A91B: 49 01
-	STA objArr_05F0,X               ;C - - - - - 0x01A92D 0D:A91D: 9D F0 05
+	STA objToggle,X                 ;C - - - - - 0x01A92D 0D:A91D: 9D F0 05
 	LDY #$0C                        ;C - - - - - 0x01A930 0D:A920: A0 0C
 	JSR EnemyStartVelocity          ;C - - - - - 0x01A932 0D:A922: 20 34 AC
 	JSR DistanceXToPlayer           ;C - - - - - 0x01A935 0D:A925: 20 74 F3
@@ -1144,11 +1144,11 @@ loc_0D_A937:
 	JSR SetFlag40MoveRight          ;C - - - - - 0x01A94E 0D:A93E: 20 00 F0
 	JMP loc_0D_A9E3                 ;C - - - - - 0x01A951 0D:A941: 4C E3 A9
 loc_0D_A944:
-	LDA objArr_05F0,X               ;C - - - - - 0x01A954 0D:A944: BD F0 05
+	LDA objToggle,X                 ;C - - - - - 0x01A954 0D:A944: BD F0 05
 	EOR #$01                        ;C - - - - - 0x01A957 0D:A947: 49 01
-	STA objArr_05F0,X               ;C - - - - - 0x01A959 0D:A949: 9D F0 05
+	STA objToggle,X                 ;C - - - - - 0x01A959 0D:A949: 9D F0 05
 	LDA #$00                        ;C - - - - - 0x01A95C 0D:A94C: A9 00
-	STA objArr_05D0,X               ;C - - - - - 0x01A95E 0D:A94E: 9D D0 05
+	STA objTimer,X                  ;C - - - - - 0x01A95E 0D:A94E: 9D D0 05
 	BEQ loc_0D_A995                 ;C - - - - - 0x01A961 0D:A951: F0 42
 EnemyDirMoveCheck:
 	LDA #$00                        ;C - - - - - 0x01A963 0D:A953: A9 00
@@ -1218,7 +1218,7 @@ loc_0D_A9D3:
 	AND #$40                        ;C - - - - - 0x01A9E5 0D:A9D5: 29 40
 	BEQ loc_0D_A9E3                 ;C - - - - - 0x01A9E7 0D:A9D7: F0 0A
 	LDA #$01                        ;C - - - - - 0x01A9E9 0D:A9D9: A9 01
-	STA objArr_03D0,X               ;C - - - - - 0x01A9EB 0D:A9DB: 9D D0 03
+	STA objWallSide,X               ;C - - - - - 0x01A9EB 0D:A9DB: 9D D0 03
 	LDA #$81                        ;C - - - - - 0x01A9EE 0D:A9DE: A9 81
 	STA objActive,X                 ;C - - - - - 0x01A9F0 0D:A9E0: 9D 00 03
 loc_0D_A9E3:
@@ -1244,9 +1244,9 @@ EnemyLandCheck:
 	LDA #$1F                        ;C - - - - - 0x01AA1A 0D:AA0A: A9 1F
 	STA objKind,X                   ;C - - - - - 0x01AA1C 0D:AA0C: 9D 20 03
 	LDA #$00                        ;C - - - - - 0x01AA1F 0D:AA0F: A9 00
-	STA objArr_0500,X               ;C - - - - - 0x01AA21 0D:AA11: 9D 00 05
+	STA objStep,X                   ;C - - - - - 0x01AA21 0D:AA11: 9D 00 05
 	LDA #$FF                        ;C - - - - - 0x01AA24 0D:AA14: A9 FF
-	STA objArr_04C0,X               ;C - - - - - 0x01AA26 0D:AA16: 9D C0 04
+	STA objDownState,X              ;C - - - - - 0x01AA26 0D:AA16: 9D C0 04
 	SEC                             ;C - - - - - 0x01AA29 0D:AA19: 38
 	RTS                             ;C - - - - - 0x01AA2A 0D:AA1A: 60
 loc_0D_AA1B:
@@ -1269,7 +1269,7 @@ EnemyTileProbe3:
 	LDA spriteFlipMask              ;C - - - - - 0x01AA4B 0D:AA3B: A5 10
 	AND #$40                        ;C - - - - - 0x01AA4D 0D:AA3D: 29 40
 	BNE loc_0D_AA55                 ;C - - - - - 0x01AA4F 0D:AA3F: D0 14
-	STA objArr_03D0,X               ;C - - - - - 0x01AA51 0D:AA41: 9D D0 03
+	STA objWallSide,X               ;C - - - - - 0x01AA51 0D:AA41: 9D D0 03
 	RTS                             ;C - - - - - 0x01AA54 0D:AA44: 60
 loc_0D_AA45:
 	LDA #$02                        ;C - - - - - 0x01AA55 0D:AA45: A9 02
@@ -1279,11 +1279,11 @@ loc_0D_AA49:
 loc_0D_AA4B:
 	STA objFacing,X                 ;C - - - - - 0x01AA5B 0D:AA4B: 9D 60 04
 	LDA #$02                        ;C - - - - - 0x01AA5E 0D:AA4E: A9 02
-	STA objArr_03D0,X               ;C - - - - - 0x01AA60 0D:AA50: 9D D0 03
+	STA objWallSide,X               ;C - - - - - 0x01AA60 0D:AA50: 9D D0 03
 	BNE loc_0D_AA5A                 ;C - - - - - 0x01AA63 0D:AA53: D0 05
 loc_0D_AA55:
 	LDA #$01                        ;C - - - - - 0x01AA65 0D:AA55: A9 01
-	STA objArr_03D0,X               ;C - - - - - 0x01AA67 0D:AA57: 9D D0 03
+	STA objWallSide,X               ;C - - - - - 0x01AA67 0D:AA57: 9D D0 03
 loc_0D_AA5A:
 	LDA #$81                        ;C - - - - - 0x01AA6A 0D:AA5A: A9 81
 	STA objActive,X                 ;C - - - - - 0x01AA6C 0D:AA5C: 9D 00 03
@@ -1327,7 +1327,7 @@ EnemyLoadKindParam:
 	SBC #$20                        ;C - - - - - 0x01AAB4 0D:AAA4: E9 20
 	TAY                             ;C - - - - - 0x01AAB6 0D:AAA6: A8
 	LDA tbl_0D_AD86,Y               ;C - - - - - 0x01AAB7 0D:AAA7: B9 86 AD
-	STA objArr_05D0,X               ;C - - - - - 0x01AABA 0D:AAAA: 9D D0 05
+	STA objTimer,X                  ;C - - - - - 0x01AABA 0D:AAAA: 9D D0 05
 	RTS                             ;C - - - - - 0x01AABD 0D:AAAD: 60
 EnemySetAnimSetA:
 	LDY objSpriteDown,X             ;C - - - - - 0x01AABE 0D:AAAE: BC B0 05
@@ -1384,7 +1384,7 @@ tbl_0D_AB1D:
 tbl_0D_AB23:
 	.byte $18,$1B,$1D,$1F,$20,$25   ;- D 1 - - - 0x01AB33 0D:AB23:
 EnemyGrabbedUpdate:
-	LDA objArr_03F0,X               ;C - - - - - 0x01AB39 0D:AB29: BD F0 03
+	LDA objGrabState,X              ;C - - - - - 0x01AB39 0D:AB29: BD F0 03
 	BEQ loc_0D_AB82                 ;C - - - - - 0x01AB3C 0D:AB2C: F0 54
 	CMP #$FF                        ;C - - - - - 0x01AB3E 0D:AB2E: C9 FF
 	BEQ loc_0D_AB5C                 ;C - - - - - 0x01AB40 0D:AB30: F0 2A
@@ -1405,7 +1405,7 @@ loc_0D_AB4C:
 	JSR EnemySetAnimSetA            ;C - - - - - 0x01AB5C 0D:AB4C: 20 AE AA
 loc_0D_AB4F:
 	LDA #$00                        ;C - - - - - 0x01AB5F 0D:AB4F: A9 00
-	STA objArr_04E0,X               ;C - - - - - 0x01AB61 0D:AB51: 9D E0 04
+	STA objHitTimer,X               ;C - - - - - 0x01AB61 0D:AB51: 9D E0 04
 	JSR EnemyResetAction81          ;C - - - - - 0x01AB64 0D:AB54: 20 E8 A8
 	JSR FaceToPlayerFlag            ;C - - - - - 0x01AB67 0D:AB57: 20 43 F3
 	SEC                             ;C - - - - - 0x01AB6A 0D:AB5A: 38
@@ -1426,12 +1426,12 @@ loc_0D_AB5C:
 	RTS                             ;c - - - - - 0x01AB89 0D:AB79: 60
 loc_0D_AB7A:
 	LDA #$00                        ;C - - - - - 0x01AB8A 0D:AB7A: A9 00
-	STA objArr_03F0,X               ;C - - - - - 0x01AB8C 0D:AB7C: 9D F0 03
+	STA objGrabState,X              ;C - - - - - 0x01AB8C 0D:AB7C: 9D F0 03
 	JSR EnemyTileProbe3             ;C - - - - - 0x01AB8F 0D:AB7F: 20 1D AA
 loc_0D_AB82:
-	LDA objArr_04E0,X               ;C - - - - - 0x01AB92 0D:AB82: BD E0 04
+	LDA objHitTimer,X               ;C - - - - - 0x01AB92 0D:AB82: BD E0 04
 	BEQ loc_0D_ABA9                 ;C - - - - - 0x01AB95 0D:AB85: F0 22
-	LDA objArr_04E0,X               ;C - - - - - 0x01AB97 0D:AB87: BD E0 04
+	LDA objHitTimer,X               ;C - - - - - 0x01AB97 0D:AB87: BD E0 04
 	CMP #$1E                        ;C - - - - - 0x01AB9A 0D:AB8A: C9 1E
 	BEQ loc_0D_AB96                 ;C - - - - - 0x01AB9C 0D:AB8C: F0 08
 	CMP #$1C                        ;C - - - - - 0x01AB9E 0D:AB8E: C9 1C
@@ -1462,7 +1462,7 @@ loc_0D_ABB7:
 	RTS                             ;c - - - - - 0x01ABC8 0D:ABB8: 60
 loc_0D_ABB9:
 	LDA #$00                        ;C - - - - - 0x01ABC9 0D:ABB9: A9 00
-	STA objArr_04D0,X               ;C - - - - - 0x01ABCB 0D:ABBB: 9D D0 04
+	STA objAtkHeavy,X               ;C - - - - - 0x01ABCB 0D:ABBB: 9D D0 04
 	CLC                             ;C - - - - - 0x01ABCE 0D:ABBE: 18
 	RTS                             ;C - - - - - 0x01ABCF 0D:ABBF: 60
 loc_0D_ABC0:
@@ -1485,7 +1485,7 @@ loc_0D_ABD3:
 	BNE loc_0D_ABEE                 ;C - - - - - 0x01ABEF 0D:ABDF: D0 0D
 loc_0D_ABE1:
 	LDA #$00                        ;C - - - - - 0x01ABF1 0D:ABE1: A9 00
-	STA objArr_04D0,X               ;C - - - - - 0x01ABF3 0D:ABE3: 9D D0 04
+	STA objAtkHeavy,X               ;C - - - - - 0x01ABF3 0D:ABE3: 9D D0 04
 	JSR EnemySetAnimSetA            ;C - - - - - 0x01ABF6 0D:ABE6: 20 AE AA
 	JSR EnemyResetAction81          ;C - - - - - 0x01ABF9 0D:ABE9: 20 E8 A8
 	SEC                             ;C - - - - - 0x01ABFC 0D:ABEC: 38
@@ -1504,12 +1504,12 @@ loc_0D_ABFD:
 	LDA objActive,X                 ;C - - - - - 0x01AC0D 0D:ABFD: BD 00 03
 	CMP #$89                        ;C - - - - - 0x01AC10 0D:AC00: C9 89
 	BNE loc_0D_AC0D                 ;C - - - - - 0x01AC12 0D:AC02: D0 09
-	LDA objArr_0520,X               ;c - - - - - 0x01AC14 0D:AC04: BD 20 05
-	STA objArr_0530,X               ;c - - - - - 0x01AC17 0D:AC07: 9D 30 05
+	LDA objStartY,X                 ;c - - - - - 0x01AC14 0D:AC04: BD 20 05
+	STA objSavedY,X                 ;c - - - - - 0x01AC17 0D:AC07: 9D 30 05
 	JMP loc_0D_AC13                 ;c - - - - - 0x01AC1A 0D:AC0A: 4C 13 AC
 loc_0D_AC0D:
 	LDA objY,X                      ;C - - - - - 0x01AC1D 0D:AC0D: BD C0 03
-	STA objArr_0530,X               ;C - - - - - 0x01AC20 0D:AC10: 9D 30 05
+	STA objSavedY,X                 ;C - - - - - 0x01AC20 0D:AC10: 9D 30 05
 loc_0D_AC13:
 	LDA #$8E                        ;C - - - - - 0x01AC23 0D:AC13: A9 8E
 	STA objVelYLo,X                 ;C - - - - - 0x01AC25 0D:AC15: 9D 20 04
@@ -1522,7 +1522,7 @@ loc_0D_AC13:
 	LDA #$80                        ;C - - - - - 0x01AC38 0D:AC28: A9 80
 	STA objActive,X                 ;C - - - - - 0x01AC3A 0D:AC2A: 9D 00 03
 	LDA #$FF                        ;C - - - - - 0x01AC3D 0D:AC2D: A9 FF
-	STA objArr_04C0,X               ;C - - - - - 0x01AC3F 0D:AC2F: 9D C0 04
+	STA objDownState,X              ;C - - - - - 0x01AC3F 0D:AC2F: 9D C0 04
 	SEC                             ;C - - - - - 0x01AC42 0D:AC32: 38
 	RTS                             ;C - - - - - 0x01AC43 0D:AC33: 60
 EnemyStartVelocity:

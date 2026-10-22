@@ -72,38 +72,38 @@
 0390 objArr_0390 16
 03A0 objYFrac       16   ; 
 03B0 objArr_03B0 16
-03D0 objArr_03D0 16
+03D0 objWallSide 16   ; wall contact side from EnemyTileProbe3: 0 none, 1/2 side
 03E0 objYPage       16   ; incremented when Y wraps past $EF
-03F0 objArr_03F0 16
+03F0 objGrabState 16   ; nonzero = held by the player (grab); $FF = being thrown
 0400 objVelXLo      16   ; 
 0410 objVelXHi      16   ; 
 0420 objVelYLo      16   ; 
 0430 objVelYHi      16   ; sign: negative = moving up
-0440 objArr_0440 16
-0450 objArr_0450 16
+0440 objAtkBox 16   ; attack hitbox: bit 7 = attack active, bits 0-4 = hitbox size index (TestHitBoxOverlap)
+0450 objAtkDamage 16   ; index into tbl_0F_FD16 = health removed from the player on hit
 0460 objFacing      16   ; 1 = right, 2 = left (FaceToPlayer)
-0470 objArr_0470 16
-0480 objArr_0480 16
-04A0 objArr_04A0 16
-04B0 objArr_04B0 16
-04C0 objArr_04C0 16
-04D0 objArr_04D0 16
-04E0 objArr_04E0 16
-0500 objArr_0500 16
-0510 objArr_0510 16
-0520 objArr_0520 16
-0530 objArr_0530 16
-0540 objArr_0540 16
-0550 objArr_0550 16
+0470 objMoveMode 16   ; movement sub-mode, 0 = default (selects the facing/direction branch in bank 0C)
+0480 objSpawnIndex 16   ; spawn list index the enemy came from ($FF = none); SpawnEnemy checks it to avoid respawn
+04A0 objHudLife 16   ; life shown on the HUD enemy bar (>>3 = bar segments)
+04B0 objStunTimer 16   ; frames to skip the enemy update (counts down in UpdateEnemies)
+04C0 objDownState 16   ; knockdown phase: $FF = invulnerable/airborne, $FE/$FD = get-up countdown
+04D0 objAtkHeavy 16   ; nonzero = heavy hit (plays sound $18, longer cooldown)
+04E0 objHitTimer 16   ; hit-reaction timer ($1E on hit, counts down)
+0500 objStep 16   ; general per-object phase/step counter used by the AI handlers
+0510 objLandY 16   ; Y at which a falling/jumping object lands
+0520 objStartY 16   ; objY saved when a jump/dive starts
+0530 objSavedY 16   ; second saved Y (copy of objY or objStartY)
+0540 objCooldown 16   ; attack cooldown (counts down)
+0550 objSubStep 16   ; secondary AI step/flags (mostly bank 01 and 0B)
 0560 objFlags       16   ; bit 6 = horizontal flip (set from objFacing)
 0570 objAnimFrame   16   ; frame counter, reset by SetAnim
 0580 objAnim        16   ; animation id (SetPlayerAnim/SetAnimX)
 0590 objAnimFlags   16   ; bit 7 survives SetAnimY
-05A0 objArr_05A0 16
-05C0 objArr_05C0 16
-05D0 objArr_05D0 16
-05E0 objArr_05E0 16
-05F0 objArr_05F0 16
+05A0 objAirSnapshot 16   ; slots 0-1 only: objSpriteAir of two active enemies, summed by the spawner (bank 08)
+05C0 objVariant 16   ; enemy variant selector (0-3), indexes parameter tables
+05D0 objTimer 16   ; general countdown timer of the AI handlers
+05E0 objCounter 16   ; small repeat counter
+05F0 objToggle 16   ; direction toggle (EOR #1)
 
 ; ---- cooperative task scheduler (bank 0F, FEBA..FF3F); 4 tasks x 4 bytes
 0080 taskTable 16               ; per task: +0 state (0 free, 1 waiting, 2 running, 4 ready, 8 new), +1 wait frames, +2 saved SP (or entry lo), +3 entry hi

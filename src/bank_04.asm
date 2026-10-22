@@ -1019,9 +1019,9 @@ loc_04_9305:
 	STA objYPage                    ;C - - - - - 0x00935F 04:934F: 8D E0 03
 	STA objXPage+1                  ;C - - - - - 0x009362 04:9352: 8D 81 03
 	STA objYPage+1                  ;C - - - - - 0x009365 04:9355: 8D E1 03
-	STA objArr_0500                 ;C - - - - - 0x009368 04:9358: 8D 00 05
+	STA objStep                     ;C - - - - - 0x009368 04:9358: 8D 00 05
 	LDA #$3C                        ;C - - - - - 0x00936B 04:935B: A9 3C
-	STA objArr_0510                 ;C - - - - - 0x00936D 04:935D: 8D 10 05
+	STA objLandY                    ;C - - - - - 0x00936D 04:935D: 8D 10 05
 	LDA #$01                        ;C - - - - - 0x009370 04:9360: A9 01
 	STA objFacing                   ;C - - - - - 0x009372 04:9362: 8D 60 04
 	LDA #$00                        ;C - - - - - 0x009375 04:9365: A9 00
@@ -1059,15 +1059,15 @@ loc_04_93AA:
 	JSR ClearObjFlag40              ;C - - - - - 0x0093BA 04:93AA: 20 99 F0
 	JSR ApplyVelXSub                ;C - - - - - 0x0093BD 04:93AD: 20 A1 F1
 loc_04_93B0:
-	LDA objArr_0510                 ;C - - - - - 0x0093C0 04:93B0: AD 10 05
+	LDA objLandY                    ;C - - - - - 0x0093C0 04:93B0: AD 10 05
 	BNE loc_04_93C2                 ;C - - - - - 0x0093C3 04:93B3: D0 0D
 	LDA #$79                        ;C - - - - - 0x0093C5 04:93B5: A9 79
-	STA objArr_0510                 ;C - - - - - 0x0093C7 04:93B7: 8D 10 05
+	STA objLandY                    ;C - - - - - 0x0093C7 04:93B7: 8D 10 05
 	LDA objFacing                   ;C - - - - - 0x0093CA 04:93BA: AD 60 04
 	EOR #$03                        ;C - - - - - 0x0093CD 04:93BD: 49 03
 	STA objFacing                   ;C - - - - - 0x0093CF 04:93BF: 8D 60 04
 loc_04_93C2:
-	DEC objArr_0510                 ;C - - - - - 0x0093D2 04:93C2: CE 10 05
+	DEC objLandY                    ;C - - - - - 0x0093D2 04:93C2: CE 10 05
 	JSR RedrawAndWaitFrame          ;C - - - - - 0x0093D5 04:93C5: 20 06 F4
 	JMP loc_04_938A                 ;C - - - - - 0x0093D8 04:93C8: 4C 8A 93
 loc_04_93CB:
@@ -1075,32 +1075,32 @@ loc_04_93CB:
 loc_04_93CE:
 	LDA #$2F                        ;C - - - - - 0x0093DE 04:93CE: A9 2F
 	JSR QueueSound                  ;C - - - - - 0x0093E0 04:93D0: 20 4C F3
-	LDA objArr_0500                 ;C - - - - - 0x0093E3 04:93D3: AD 00 05
+	LDA objStep                     ;C - - - - - 0x0093E3 04:93D3: AD 00 05
 	BNE loc_04_93E4                 ;C - - - - - 0x0093E6 04:93D6: D0 0C
 	LDA #$FF                        ;C - - - - - 0x0093E8 04:93D8: A9 FF
-	STA objArr_0500                 ;C - - - - - 0x0093EA 04:93DA: 8D 00 05
+	STA objStep                     ;C - - - - - 0x0093EA 04:93DA: 8D 00 05
 	LDA #$64                        ;C - - - - - 0x0093ED 04:93DD: A9 64
 	STA objY                        ;C - - - - - 0x0093EF 04:93DF: 8D C0 03
 	BNE loc_04_9398                 ;C - - - - - 0x0093F2 04:93E2: D0 B4
 loc_04_93E4:
 	LDA #$00                        ;c - - - - - 0x0093F4 04:93E4: A9 00
-	STA objArr_0500                 ;c - - - - - 0x0093F6 04:93E6: 8D 00 05
+	STA objStep                     ;c - - - - - 0x0093F6 04:93E6: 8D 00 05
 	LDA #$54                        ;c - - - - - 0x0093F9 04:93E9: A9 54
 	STA objY                        ;c - - - - - 0x0093FB 04:93EB: 8D C0 03
 	BNE loc_04_9398                 ;c - - - - - 0x0093FE 04:93EE: D0 A8
 loc_04_93F0:
 	LDA #$2F                        ;C - - - - - 0x009400 04:93F0: A9 2F
 	JSR QueueSound                  ;C - - - - - 0x009402 04:93F2: 20 4C F3
-	LDA objArr_0500                 ;C - - - - - 0x009405 04:93F5: AD 00 05
+	LDA objStep                     ;C - - - - - 0x009405 04:93F5: AD 00 05
 	BNE loc_04_9406                 ;C - - - - - 0x009408 04:93F8: D0 0C
 	LDA #$FF                        ;c - - - - - 0x00940A 04:93FA: A9 FF
-	STA objArr_0500                 ;c - - - - - 0x00940C 04:93FC: 8D 00 05
+	STA objStep                     ;c - - - - - 0x00940C 04:93FC: 8D 00 05
 	LDA #$64                        ;c - - - - - 0x00940F 04:93FF: A9 64
 	STA objY                        ;c - - - - - 0x009411 04:9401: 8D C0 03
 	BNE loc_04_9410                 ;c - - - - - 0x009414 04:9404: D0 0A
 loc_04_9406:
 	LDA #$00                        ;C - - - - - 0x009416 04:9406: A9 00
-	STA objArr_0500                 ;C - - - - - 0x009418 04:9408: 8D 00 05
+	STA objStep                     ;C - - - - - 0x009418 04:9408: 8D 00 05
 	LDA #$54                        ;C - - - - - 0x00941B 04:940B: A9 54
 	STA objY                        ;C - - - - - 0x00941D 04:940D: 8D C0 03
 loc_04_9410:

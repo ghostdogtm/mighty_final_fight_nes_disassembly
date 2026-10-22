@@ -200,41 +200,41 @@ objArr_0390            = $0390 ; 0 (size 16)
 objYFrac               = $03A0 ; 10 (size 16)
 objArr_03B0            = $03B0 ; 0 (size 16)
 objY                   = $03C0 ; 377 (size 16) ; Y position (array of 16 object slots; slot 0 = player; Data Crystal addresses are slot $0C)
-objArr_03D0            = $03D0 ; 12 (size 16)
+objWallSide            = $03D0 ; 12 (size 16) ; wall contact side from EnemyTileProbe3: 0 none, 1/2 side
 objYPage               = $03E0 ; 73 (size 16) ; incremented when Y wraps past $EF
-objArr_03F0            = $03F0 ; 28 (size 16)
+objGrabState           = $03F0 ; 28 (size 16) ; nonzero = held by the player (grab); $FF = being thrown
 objVelXLo              = $0400 ; 112 (size 16)
 objVelXHi              = $0410 ; 107 (size 16)
 objVelYLo              = $0420 ; 114 (size 16)
 objVelYHi              = $0430 ; 150 (size 16) ; sign: negative = moving up
-objArr_0440            = $0440 ; 65 (size 16)
-objArr_0450            = $0450 ; 36 (size 16)
+objAtkBox              = $0440 ; 65 (size 16) ; attack hitbox: bit 7 = attack active, bits 0-4 = hitbox size index (TestHitBoxOverlap)
+objAtkDamage           = $0450 ; 36 (size 16) ; index into tbl_0F_FD16 = health removed from the player on hit
 objFacing              = $0460 ; 217 (size 16) ; 1 = right, 2 = left (FaceToPlayer)
-objArr_0470            = $0470 ; 24 (size 16)
-objArr_0480            = $0480 ; 6 (size 16)
+objMoveMode            = $0470 ; 24 (size 16) ; movement sub-mode, 0 = default (selects the facing/direction branch in bank 0C)
+objSpawnIndex          = $0480 ; 6 (size 16) ; spawn list index the enemy came from ($FF = none); SpawnEnemy checks it to avoid respawn
 objLife                = $0490 ; 39 (size 16) ; enemy life; "one hit kills" cheat patches the SBC that subtracts from it (array of 16 object slots; slot 0 = player; Data Crystal addresses are slot $0C)
-objArr_04A0            = $04A0 ; 16 (size 16)
-objArr_04B0            = $04B0 ; 15 (size 16)
-objArr_04C0            = $04C0 ; 70 (size 16)
-objArr_04D0            = $04D0 ; 26 (size 16)
-objArr_04E0            = $04E0 ; 36 (size 16)
+objHudLife             = $04A0 ; 16 (size 16) ; life shown on the HUD enemy bar (>>3 = bar segments)
+objStunTimer           = $04B0 ; 15 (size 16) ; frames to skip the enemy update (counts down in UpdateEnemies)
+objDownState           = $04C0 ; 70 (size 16) ; knockdown phase: $FF = invulnerable/airborne, $FE/$FD = get-up countdown
+objAtkHeavy            = $04D0 ; 26 (size 16) ; nonzero = heavy hit (plays sound $18, longer cooldown)
+objHitTimer            = $04E0 ; 36 (size 16) ; hit-reaction timer ($1E on hit, counts down)
 objSpriteAir           = $04F0 ; 20 (size 16) ; (?) sprite id while in the air (array of 16 object slots; slot 0 = player; Data Crystal addresses are slot $0C)
-objArr_0500            = $0500 ; 242 (size 16)
-objArr_0510            = $0510 ; 90 (size 16)
-objArr_0520            = $0520 ; 65 (size 16)
-objArr_0530            = $0530 ; 71 (size 16)
-objArr_0540            = $0540 ; 29 (size 16)
-objArr_0550            = $0550 ; 37 (size 16)
+objStep                = $0500 ; 242 (size 16) ; general per-object phase/step counter used by the AI handlers
+objLandY               = $0510 ; 90 (size 16) ; Y at which a falling/jumping object lands
+objStartY              = $0520 ; 65 (size 16) ; objY saved when a jump/dive starts
+objSavedY              = $0530 ; 71 (size 16) ; second saved Y (copy of objY or objStartY)
+objCooldown            = $0540 ; 29 (size 16) ; attack cooldown (counts down)
+objSubStep             = $0550 ; 37 (size 16) ; secondary AI step/flags (mostly bank 01 and 0B)
 objFlags               = $0560 ; 143 (size 16) ; bit 6 = horizontal flip (set from objFacing)
 objAnimFrame           = $0570 ; 163 (size 16) ; frame counter, reset by SetAnim
 objAnim                = $0580 ; 128 (size 16) ; animation id (SetPlayerAnim/SetAnimX)
 objAnimFlags           = $0590 ; 128 (size 16) ; bit 7 survives SetAnimY
-objArr_05A0            = $05A0 ; 20 (size 16)
+objAirSnapshot         = $05A0 ; 20 (size 16) ; slots 0-1 only: objSpriteAir of two active enemies, summed by the spawner (bank 08)
 objSpriteDown          = $05B0 ; 96 (size 16) ; (?) sprite id while lying down (array of 16 object slots; slot 0 = player; Data Crystal addresses are slot $0C)
-objArr_05C0            = $05C0 ; 45 (size 16)
-objArr_05D0            = $05D0 ; 132 (size 16)
-objArr_05E0            = $05E0 ; 46 (size 16)
-objArr_05F0            = $05F0 ; 27 (size 16)
+objVariant             = $05C0 ; 45 (size 16) ; enemy variant selector (0-3), indexes parameter tables
+objTimer               = $05D0 ; 132 (size 16) ; general countdown timer of the AI handlers
+objCounter             = $05E0 ; 46 (size 16) ; small repeat counter
+objToggle              = $05F0 ; 27 (size 16) ; direction toggle (EOR #1)
 palBuffer              = $0600 ; 59 (size 32) ; palette buffer copied to $3F00 by NMI when palUpdateFlag is set
 ram_0620               = $0620 ; 23
 ram_0630               = $0630 ; 16

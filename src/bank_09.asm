@@ -645,9 +645,9 @@ loc_09_AC81:
 	LDA #$0B                        ;C - - - - - 0x012C9B 09:AC8B: A9 0B
 	JSR SetChrBank2                 ;C - - - - - 0x012C9D 09:AC8D: 20 40 F4
 	LDA #$08                        ;C - - - - - 0x012CA0 09:AC90: A9 08
-	STA objArr_0500                 ;C - - - - - 0x012CA2 09:AC92: 8D 00 05
+	STA objStep                     ;C - - - - - 0x012CA2 09:AC92: 8D 00 05
 	LDA #$1E                        ;C - - - - - 0x012CA5 09:AC95: A9 1E
-	STA objArr_0500+1               ;C - - - - - 0x012CA7 09:AC97: 8D 01 05
+	STA objStep+1                   ;C - - - - - 0x012CA7 09:AC97: 8D 01 05
 	LDA #$00                        ;C - - - - - 0x012CAA 09:AC9A: A9 00
 	STA objVelXLo                   ;C - - - - - 0x012CAC 09:AC9C: 8D 00 04
 	LDA #$03                        ;C - - - - - 0x012CAF 09:AC9F: A9 03
@@ -655,9 +655,9 @@ loc_09_AC81:
 	LDA #$90                        ;C - - - - - 0x012CB4 09:ACA4: A9 90
 	STA objFlags                    ;C - - - - - 0x012CB6 09:ACA6: 8D 60 05
 loc_09_ACA9:
-	LDA objArr_0500                 ;C - - - - - 0x012CB9 09:ACA9: AD 00 05
+	LDA objStep                     ;C - - - - - 0x012CB9 09:ACA9: AD 00 05
 	BEQ loc_09_ACB7                 ;C - - - - - 0x012CBC 09:ACAC: F0 09
-	DEC objArr_0500                 ;C - - - - - 0x012CBE 09:ACAE: CE 00 05
+	DEC objStep                     ;C - - - - - 0x012CBE 09:ACAE: CE 00 05
 	JSR RedrawAndWaitFrame          ;C - - - - - 0x012CC1 09:ACB1: 20 06 F4
 	JMP loc_09_AC81                 ;C - - - - - 0x012CC4 09:ACB4: 4C 81 AC
 loc_09_ACB7:
@@ -673,9 +673,9 @@ loc_09_ACCB:
 	LDX #$00                        ;C - - - - - 0x012CDB 09:ACCB: A2 00
 	JSR SetPlayerFlag40             ;C - - - - - 0x012CDD 09:ACCD: 20 3F F0
 	JSR ApplyVelXAdd                ;C - - - - - 0x012CE0 09:ACD0: 20 83 F1
-	LDA objArr_0500+1               ;C - - - - - 0x012CE3 09:ACD3: AD 01 05
+	LDA objStep+1                   ;C - - - - - 0x012CE3 09:ACD3: AD 01 05
 	BEQ loc_09_ACE1                 ;C - - - - - 0x012CE6 09:ACD6: F0 09
-	DEC objArr_0500+1               ;C - - - - - 0x012CE8 09:ACD8: CE 01 05
+	DEC objStep+1                   ;C - - - - - 0x012CE8 09:ACD8: CE 01 05
 	JSR RedrawAndWaitFrame          ;C - - - - - 0x012CEB 09:ACDB: 20 06 F4
 	JMP loc_09_ACB7                 ;C - - - - - 0x012CEE 09:ACDE: 4C B7 AC
 loc_09_ACE1:

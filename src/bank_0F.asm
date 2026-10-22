@@ -106,9 +106,9 @@ loc_0F_E0A5:
 	STA ram_00BE                    ;C - - - - - 0x01E0E7 0F:E0D7: 85 BE
 	STA ram_00BA                    ;C - - - - - 0x01E0E9 0F:E0D9: 85 BA
 	STA ram_00B2                    ;C - - - - - 0x01E0EB 0F:E0DB: 85 B2
-	STA objArr_05A0                 ;C - - - - - 0x01E0ED 0F:E0DD: 8D A0 05
-	STA objArr_05A0+1               ;C - - - - - 0x01E0F0 0F:E0E0: 8D A1 05
-	STA objArr_05A0+2               ;C - - - - - 0x01E0F3 0F:E0E3: 8D A2 05
+	STA objAirSnapshot              ;C - - - - - 0x01E0ED 0F:E0DD: 8D A0 05
+	STA objAirSnapshot+1            ;C - - - - - 0x01E0F0 0F:E0E0: 8D A1 05
+	STA objAirSnapshot+2            ;C - - - - - 0x01E0F3 0F:E0E3: 8D A2 05
 	LDA stage                       ;C - - - - - 0x01E0F6 0F:E0E6: A5 61
 	BNE loc_0F_E10A                 ;C - - - - - 0x01E0F8 0F:E0E8: D0 20
 	LDA stageSection                ;C - - - - - 0x01E0FA 0F:E0EA: A5 60
@@ -1277,7 +1277,7 @@ loc_0F_E8C9:
 	LDA #$69                        ;C - - - - - 0x01E8EA 0F:E8DA: A9 69
 	STA vramQueue,X                 ;C - - - - - 0x01E8EC 0F:E8DC: 9D 80 07
 	INX                             ;C - - - - - 0x01E8EF 0F:E8DF: E8
-	LDA objArr_04A0,Y               ;C - - - - - 0x01E8F0 0F:E8E0: B9 A0 04
+	LDA objHudLife,Y                ;C - - - - - 0x01E8F0 0F:E8E0: B9 A0 04
 	LSR A                           ;C - - - - - 0x01E8F3 0F:E8E3: 4A
 	LSR A                           ;C - - - - - 0x01E8F4 0F:E8E4: 4A
 	LSR A                           ;C - - - - - 0x01E8F5 0F:E8E5: 4A
@@ -1760,25 +1760,25 @@ loc_0F_EC81:
 	STA objActive,X                 ;C - - - - - 0x01EC93 0F:EC83: 9D 00 03
 	STA objState,X                  ;C - - - - - 0x01EC96 0F:EC86: 9D 10 03
 	STA objFlags,X                  ;C - - - - - 0x01EC99 0F:EC89: 9D 60 05
-	STA objArr_0470,X               ;C - - - - - 0x01EC9C 0F:EC8C: 9D 70 04
-	STA objArr_04B0,X               ;C - - - - - 0x01EC9F 0F:EC8F: 9D B0 04
+	STA objMoveMode,X               ;C - - - - - 0x01EC9C 0F:EC8C: 9D 70 04
+	STA objStunTimer,X              ;C - - - - - 0x01EC9F 0F:EC8F: 9D B0 04
 	STA objKind,X                   ;C - - - - - 0x01ECA2 0F:EC92: 9D 20 03
 	STA objId,X                     ;C - - - - - 0x01ECA5 0F:EC95: 9D 30 03
 ofs_0F_EC98:
-	STA objArr_0440,X               ;C - - - - - 0x01ECA8 0F:EC98: 9D 40 04
-	STA objArr_0450,X               ;C - - - - - 0x01ECAB 0F:EC9B: 9D 50 04
-	STA objArr_04C0,X               ;C - - - - - 0x01ECAE 0F:EC9E: 9D C0 04
-	STA objArr_04D0,X               ;C - - - - - 0x01ECB1 0F:ECA1: 9D D0 04
-	STA objArr_04E0,X               ;C - - - - - 0x01ECB4 0F:ECA4: 9D E0 04
+	STA objAtkBox,X                 ;C - - - - - 0x01ECA8 0F:EC98: 9D 40 04
+	STA objAtkDamage,X              ;C - - - - - 0x01ECAB 0F:EC9B: 9D 50 04
+	STA objDownState,X              ;C - - - - - 0x01ECAE 0F:EC9E: 9D C0 04
+	STA objAtkHeavy,X               ;C - - - - - 0x01ECB1 0F:ECA1: 9D D0 04
+	STA objHitTimer,X               ;C - - - - - 0x01ECB4 0F:ECA4: 9D E0 04
 	STA objSpriteDown,X             ;C - - - - - 0x01ECB7 0F:ECA7: 9D B0 05
-	STA objArr_05C0,X               ;C - - - - - 0x01ECBA 0F:ECAA: 9D C0 05
-	STA objArr_05D0,X               ;C - - - - - 0x01ECBD 0F:ECAD: 9D D0 05
-	STA objArr_05E0,X               ;C - - - - - 0x01ECC0 0F:ECB0: 9D E0 05
-	STA objArr_05F0,X               ;C - - - - - 0x01ECC3 0F:ECB3: 9D F0 05
+	STA objVariant,X                ;C - - - - - 0x01ECBA 0F:ECAA: 9D C0 05
+	STA objTimer,X                  ;C - - - - - 0x01ECBD 0F:ECAD: 9D D0 05
+	STA objCounter,X                ;C - - - - - 0x01ECC0 0F:ECB0: 9D E0 05
+	STA objToggle,X                 ;C - - - - - 0x01ECC3 0F:ECB3: 9D F0 05
 	STA objSpriteAir,X              ;C - - - - - 0x01ECC6 0F:ECB6: 9D F0 04
-	STA objArr_03F0,X               ;C - - - - - 0x01ECC9 0F:ECB9: 9D F0 03
+	STA objGrabState,X              ;C - - - - - 0x01ECC9 0F:ECB9: 9D F0 03
 	LDA #$FF                        ;C - - - - - 0x01ECCC 0F:ECBC: A9 FF
-	STA objArr_0480,X               ;C - - - - - 0x01ECCE 0F:ECBE: 9D 80 04
+	STA objSpawnIndex,X             ;C - - - - - 0x01ECCE 0F:ECBE: 9D 80 04
 	CLC                             ;C - - - - - 0x01ECD1 0F:ECC1: 18
 	RTS                             ;C - - - - - 0x01ECD2 0F:ECC2: 60
 tbl_0F_ECC3:
@@ -2325,7 +2325,7 @@ StartAction24FromGrab:
 	BNE loc_0F_F0F6                 ;c - - - - - 0x01F0FD 0F:F0ED: D0 07
 	LDA #$FF                        ;c - - - - - 0x01F0FF 0F:F0EF: A9 FF
 	LDY ram_0039                    ;c - - - - - 0x01F101 0F:F0F1: A4 39
-	STA objArr_03F0,Y               ;c - - - - - 0x01F103 0F:F0F3: 99 F0 03
+	STA objGrabState,Y              ;c - - - - - 0x01F103 0F:F0F3: 99 F0 03
 loc_0F_F0F6:
 	RTS                             ;c - - - - - 0x01F106 0F:F0F6: 60
 MoveYSubCheck:
@@ -2570,31 +2570,31 @@ ClearObject:
 	STA objActive,X                 ;C - - - - - 0x01F2D0 0F:F2C0: 9D 00 03
 	STA objState,X                  ;C - - - - - 0x01F2D3 0F:F2C3: 9D 10 03
 	STA objFlags,X                  ;C - - - - - 0x01F2D6 0F:F2C6: 9D 60 05
-	STA objArr_04B0,X               ;C - - - - - 0x01F2D9 0F:F2C9: 9D B0 04
+	STA objStunTimer,X              ;C - - - - - 0x01F2D9 0F:F2C9: 9D B0 04
 	STA objKind,X                   ;C - - - - - 0x01F2DC 0F:F2CC: 9D 20 03
 	STA objId,X                     ;C - - - - - 0x01F2DF 0F:F2CF: 9D 30 03
-	STA objArr_0440,X               ;C - - - - - 0x01F2E2 0F:F2D2: 9D 40 04
-	STA objArr_0450,X               ;C - - - - - 0x01F2E5 0F:F2D5: 9D 50 04
+	STA objAtkBox,X                 ;C - - - - - 0x01F2E2 0F:F2D2: 9D 40 04
+	STA objAtkDamage,X              ;C - - - - - 0x01F2E5 0F:F2D5: 9D 50 04
 	STA objLife,X                   ;C - - - - - 0x01F2E8 0F:F2D8: 9D 90 04
-	STA objArr_04A0,X               ;C - - - - - 0x01F2EB 0F:F2DB: 9D A0 04
-	STA objArr_04C0,X               ;C - - - - - 0x01F2EE 0F:F2DE: 9D C0 04
-	STA objArr_04D0,X               ;C - - - - - 0x01F2F1 0F:F2E1: 9D D0 04
-	STA objArr_04E0,X               ;C - - - - - 0x01F2F4 0F:F2E4: 9D E0 04
-	STA objArr_03F0,X               ;C - - - - - 0x01F2F7 0F:F2E7: 9D F0 03
+	STA objHudLife,X                ;C - - - - - 0x01F2EB 0F:F2DB: 9D A0 04
+	STA objDownState,X              ;C - - - - - 0x01F2EE 0F:F2DE: 9D C0 04
+	STA objAtkHeavy,X               ;C - - - - - 0x01F2F1 0F:F2E1: 9D D0 04
+	STA objHitTimer,X               ;C - - - - - 0x01F2F4 0F:F2E4: 9D E0 04
+	STA objGrabState,X              ;C - - - - - 0x01F2F7 0F:F2E7: 9D F0 03
 	STA objSpriteDown,X             ;C - - - - - 0x01F2FA 0F:F2EA: 9D B0 05
-	STA objArr_05C0,X               ;C - - - - - 0x01F2FD 0F:F2ED: 9D C0 05
-	STA objArr_05D0,X               ;C - - - - - 0x01F300 0F:F2F0: 9D D0 05
-	STA objArr_05E0,X               ;C - - - - - 0x01F303 0F:F2F3: 9D E0 05
-	STA objArr_05F0,X               ;C - - - - - 0x01F306 0F:F2F6: 9D F0 05
+	STA objVariant,X                ;C - - - - - 0x01F2FD 0F:F2ED: 9D C0 05
+	STA objTimer,X                  ;C - - - - - 0x01F300 0F:F2F0: 9D D0 05
+	STA objCounter,X                ;C - - - - - 0x01F303 0F:F2F3: 9D E0 05
+	STA objToggle,X                 ;C - - - - - 0x01F306 0F:F2F6: 9D F0 05
 	STA objSpriteAir,X              ;C - - - - - 0x01F309 0F:F2F9: 9D F0 04
-	STA objArr_0500,X               ;C - - - - - 0x01F30C 0F:F2FC: 9D 00 05
-	STA objArr_0510,X               ;C - - - - - 0x01F30F 0F:F2FF: 9D 10 05
-	STA objArr_0520,X               ;C - - - - - 0x01F312 0F:F302: 9D 20 05
-	STA objArr_0530,X               ;C - - - - - 0x01F315 0F:F305: 9D 30 05
-	STA objArr_0540,X               ;C - - - - - 0x01F318 0F:F308: 9D 40 05
-	STA objArr_0550,X               ;C - - - - - 0x01F31B 0F:F30B: 9D 50 05
+	STA objStep,X                   ;C - - - - - 0x01F30C 0F:F2FC: 9D 00 05
+	STA objLandY,X                  ;C - - - - - 0x01F30F 0F:F2FF: 9D 10 05
+	STA objStartY,X                 ;C - - - - - 0x01F312 0F:F302: 9D 20 05
+	STA objSavedY,X                 ;C - - - - - 0x01F315 0F:F305: 9D 30 05
+	STA objCooldown,X               ;C - - - - - 0x01F318 0F:F308: 9D 40 05
+	STA objSubStep,X                ;C - - - - - 0x01F31B 0F:F30B: 9D 50 05
 	LDA #$FF                        ;C - - - - - 0x01F31E 0F:F30E: A9 FF
-	STA objArr_0480,X               ;C - - - - - 0x01F320 0F:F310: 9D 80 04
+	STA objSpawnIndex,X             ;C - - - - - 0x01F320 0F:F310: 9D 80 04
 	RTS                             ;C - - - - - 0x01F323 0F:F313: 60
 ; objFacing[X] = 1/2 depending on side of player
 FaceToPlayer:
@@ -2815,20 +2815,20 @@ SpawnEffect7E:
 	STA objKind,Y                   ;C - - - - - 0x01F47A 0F:F46A: 99 20 03
 	STA objId,Y                     ;C - - - - - 0x01F47D 0F:F46D: 99 30 03
 	LDA #$00                        ;C - - - - - 0x01F480 0F:F470: A9 00
-	STA objArr_04B0,Y               ;C - - - - - 0x01F482 0F:F472: 99 B0 04
-	STA objArr_0440,Y               ;C - - - - - 0x01F485 0F:F475: 99 40 04
-	STA objArr_0450,Y               ;C - - - - - 0x01F488 0F:F478: 99 50 04
+	STA objStunTimer,Y              ;C - - - - - 0x01F482 0F:F472: 99 B0 04
+	STA objAtkBox,Y                 ;C - - - - - 0x01F485 0F:F475: 99 40 04
+	STA objAtkDamage,Y              ;C - - - - - 0x01F488 0F:F478: 99 50 04
 	STA objLife,Y                   ;C - - - - - 0x01F48B 0F:F47B: 99 90 04
-	STA objArr_04A0,Y               ;C - - - - - 0x01F48E 0F:F47E: 99 A0 04
-	STA objArr_04C0,Y               ;C - - - - - 0x01F491 0F:F481: 99 C0 04
-	STA objArr_04D0,Y               ;C - - - - - 0x01F494 0F:F484: 99 D0 04
-	STA objArr_04E0,Y               ;C - - - - - 0x01F497 0F:F487: 99 E0 04
-	STA objArr_03F0,Y               ;C - - - - - 0x01F49A 0F:F48A: 99 F0 03
+	STA objHudLife,Y                ;C - - - - - 0x01F48E 0F:F47E: 99 A0 04
+	STA objDownState,Y              ;C - - - - - 0x01F491 0F:F481: 99 C0 04
+	STA objAtkHeavy,Y               ;C - - - - - 0x01F494 0F:F484: 99 D0 04
+	STA objHitTimer,Y               ;C - - - - - 0x01F497 0F:F487: 99 E0 04
+	STA objGrabState,Y              ;C - - - - - 0x01F49A 0F:F48A: 99 F0 03
 	STA objSpriteDown,Y             ;C - - - - - 0x01F49D 0F:F48D: 99 B0 05
-	STA objArr_05C0,Y               ;C - - - - - 0x01F4A0 0F:F490: 99 C0 05
-	STA objArr_05D0,Y               ;C - - - - - 0x01F4A3 0F:F493: 99 D0 05
-	STA objArr_05E0,Y               ;C - - - - - 0x01F4A6 0F:F496: 99 E0 05
-	STA objArr_05F0,Y               ;C - - - - - 0x01F4A9 0F:F499: 99 F0 05
+	STA objVariant,Y                ;C - - - - - 0x01F4A0 0F:F490: 99 C0 05
+	STA objTimer,Y                  ;C - - - - - 0x01F4A3 0F:F493: 99 D0 05
+	STA objCounter,Y                ;C - - - - - 0x01F4A6 0F:F496: 99 E0 05
+	STA objToggle,Y                 ;C - - - - - 0x01F4A9 0F:F499: 99 F0 05
 	STA objSpriteAir,Y              ;C - - - - - 0x01F4AC 0F:F49C: 99 F0 04
 	LDA objYPage                    ;C - - - - - 0x01F4AF 0F:F49F: AD E0 03
 	STA objYPage,Y                  ;C - - - - - 0x01F4B2 0F:F4A2: 99 E0 03
@@ -3025,7 +3025,7 @@ loc_0F_F5E9:
 loc_0F_F601:
 	LDA objY                        ;C - - - - - 0x01F611 0F:F601: AD C0 03
 	SEC                             ;C - - - - - 0x01F614 0F:F604: 38
-	SBC objArr_0520,X               ;C - - - - - 0x01F615 0F:F605: FD 20 05
+	SBC objStartY,X                 ;C - - - - - 0x01F615 0F:F605: FD 20 05
 	BCS loc_0F_F60E                 ;C - - - - - 0x01F618 0F:F608: B0 04
 	EOR #$FF                        ;C - - - - - 0x01F61A 0F:F60A: 49 FF
 	ADC #$01                        ;C - - - - - 0x01F61C 0F:F60C: 69 01
@@ -3047,7 +3047,7 @@ loc_0F_F621:
 loc_0F_F628:
 	LDA playerGroundY               ;C - - - - - 0x01F638 0F:F628: A5 36
 	SEC                             ;C - - - - - 0x01F63A 0F:F62A: 38
-	SBC objArr_0520,X               ;C - - - - - 0x01F63B 0F:F62B: FD 20 05
+	SBC objStartY,X                 ;C - - - - - 0x01F63B 0F:F62B: FD 20 05
 	BCS loc_0F_F634                 ;C - - - - - 0x01F63E 0F:F62E: B0 04
 	EOR #$FF                        ;C - - - - - 0x01F640 0F:F630: 49 FF
 	ADC #$01                        ;C - - - - - 0x01F642 0F:F632: 69 01
@@ -3059,7 +3059,7 @@ loc_0F_F63B:
 	LDA #$FF                        ;C - - - - - 0x01F64B 0F:F63B: A9 FF
 	STA ptr_02+1                    ;C - - - - - 0x01F64D 0F:F63D: 85 03
 loc_0F_F63F:
-	LDA objArr_0440,X               ;C - - - - - 0x01F64F 0F:F63F: BD 40 04
+	LDA objAtkBox,X                 ;C - - - - - 0x01F64F 0F:F63F: BD 40 04
 	AND #$1F                        ;C - - - - - 0x01F652 0F:F642: 29 1F
 	TAY                             ;C - - - - - 0x01F654 0F:F644: A8
 	LDA objX                        ;C - - - - - 0x01F655 0F:F645: AD 60 03
@@ -3196,7 +3196,7 @@ loc_0F_F745:
 	SEC                             ;C - - - - - 0x01F755 0F:F745: 38
 	RTS                             ;C - - - - - 0x01F756 0F:F746: 60
 loc_0F_F747:
-	LDA objArr_04C0,X               ;C - - - - - 0x01F757 0F:F747: BD C0 04
+	LDA objDownState,X              ;C - - - - - 0x01F757 0F:F747: BD C0 04
 	BNE loc_0F_F745                 ;C - - - - - 0x01F75A 0F:F74A: D0 F9
 	LDA objKind,X                   ;C - - - - - 0x01F75C 0F:F74C: BD 20 03
 	CMP #$1F                        ;C - - - - - 0x01F75F 0F:F74F: C9 1F
@@ -3230,7 +3230,7 @@ loc_0F_F747:
 	CMP #$BE                        ;C - - - - - 0x01F79A 0F:F78A: C9 BE
 	BNE loc_0F_F794                 ;C - - - - - 0x01F79C 0F:F78C: D0 06
 loc_0F_F78E:
-	LDA objArr_0520,X               ;C - - - - - 0x01F79E 0F:F78E: BD 20 05
+	LDA objStartY,X                 ;C - - - - - 0x01F79E 0F:F78E: BD 20 05
 	STA objY,X                      ;C - - - - - 0x01F7A1 0F:F791: 9D C0 03
 loc_0F_F794:
 	LDA ram_00A7                    ;C - - - - - 0x01F7A4 0F:F794: A5 A7
@@ -3426,7 +3426,7 @@ loc_0F_F8FE:
 loc_0F_F90E:
 	LDA #$FF                        ;C - - - - - 0x01F91E 0F:F90E: A9 FF
 	LDY ram_0039                    ;C - - - - - 0x01F920 0F:F910: A4 39
-	STA objArr_03F0,Y               ;C - - - - - 0x01F922 0F:F912: 99 F0 03
+	STA objGrabState,Y              ;C - - - - - 0x01F922 0F:F912: 99 F0 03
 loc_0F_F915:
 	LDA weaponHeld                  ;C - - - - - 0x01F925 0F:F915: A5 A9
 	BEQ loc_0F_F922                 ;C - - - - - 0x01F927 0F:F917: F0 09
@@ -3435,7 +3435,7 @@ loc_0F_F915:
 	BEQ loc_0F_F922                 ;C - - - - - 0x01F92D 0F:F91D: F0 03
 	JSR InitSlot1Follower           ;C - - - - - 0x01F92F 0F:F91F: 20 C4 FA
 loc_0F_F922:
-	LDY objArr_0450,X               ;C - - - - - 0x01F932 0F:F922: BC 50 04
+	LDY objAtkDamage,X              ;C - - - - - 0x01F932 0F:F922: BC 50 04
 	LDA playerHealth                ;C - - - - - 0x01F935 0F:F925: A5 3A
 	SEC                             ;C - - - - - 0x01F937 0F:F927: 38
 	SBC tbl_0F_FD16,Y               ;C - - - - - 0x01F938 0F:F928: F9 16 FD
@@ -3600,7 +3600,7 @@ loc_0F_F9E9:
 loc_0F_FA5D:
 	JMP loc_0F_FA84                 ;C - - - - - 0x01FA6D 0F:FA5D: 4C 84 FA
 loc_0F_FA60:
-	LDA objArr_04C0,X               ;C - - - - - 0x01FA70 0F:FA60: BD C0 04
+	LDA objDownState,X              ;C - - - - - 0x01FA70 0F:FA60: BD C0 04
 	BNE loc_0F_FA84                 ;C - - - - - 0x01FA73 0F:FA63: D0 1F
 	LDA objFlags,X                  ;C - - - - - 0x01FA75 0F:FA65: BD 60 05
 	BPL loc_0F_FA84                 ;C - - - - - 0x01FA78 0F:FA68: 10 1A
@@ -3626,7 +3626,7 @@ loc_0F_FA8F:
 loc_0F_FA90:
 	RTS                             ;C - - - - - 0x01FAA0 0F:FA90: 60
 TestHitBoxOverlap:
-	LDA objArr_0440,Y               ;C - - - - - 0x01FAA1 0F:FA91: B9 40 04
+	LDA objAtkBox,Y                 ;C - - - - - 0x01FAA1 0F:FA91: B9 40 04
 	TAY                             ;C - - - - - 0x01FAA4 0F:FA94: A8
 	SEC                             ;C - - - - - 0x01FAA5 0F:FA95: 38
 	LDA ptr_00                      ;C - - - - - 0x01FAA6 0F:FA96: A5 00
@@ -3681,7 +3681,7 @@ InitSlot1Follower:
 	LDA #$66                        ;C - - - - - 0x01FB0B 0F:FAFB: A9 66
 	STA objKind+1                   ;C - - - - - 0x01FB0D 0F:FAFD: 8D 21 03
 	LDA #$2F                        ;C - - - - - 0x01FB10 0F:FB00: A9 2F
-	STA objArr_0440+1               ;C - - - - - 0x01FB12 0F:FB02: 8D 41 04
+	STA objAtkBox+1                 ;C - - - - - 0x01FB12 0F:FB02: 8D 41 04
 	RTS                             ;C - - - - - 0x01FB15 0F:FB05: 60
 tbl_0F_FB06:
 	.byte $41,$41                   ;- - - - - - 0x01FB16 0F:FB06:
@@ -3689,9 +3689,9 @@ tbl_0F_FB06:
 InitHitFields:
 	LDY ram_00A7                    ;C - - - - - 0x01FB19 0F:FB09: A4 A7
 	LDA tbl_0F_FB17,Y               ;C - - - - - 0x01FB1B 0F:FB0B: B9 17 FB
-	STA objArr_04B0,X               ;C - - - - - 0x01FB1E 0F:FB0E: 9D B0 04
+	STA objStunTimer,X              ;C - - - - - 0x01FB1E 0F:FB0E: 9D B0 04
 	LDA #$1E                        ;C - - - - - 0x01FB21 0F:FB11: A9 1E
-	STA objArr_04E0,X               ;C - - - - - 0x01FB23 0F:FB13: 9D E0 04
+	STA objHitTimer,X               ;C - - - - - 0x01FB23 0F:FB13: 9D E0 04
 	RTS                             ;C - - - - - 0x01FB26 0F:FB16: 60
 tbl_0F_FB17:
 	.byte $02,$18                   ;- D 3 - - - 0x01FB27 0F:FB17:
