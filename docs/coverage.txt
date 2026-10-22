@@ -473,20 +473,20 @@ Traced code (instruction starts, verify by hand):
   06:80C3  ADC soundBusy
   06:80C5  STA soundBusy
   06:80C7  LDA ptr_C1
-  06:80C9  ADC ram_00CD
+  06:80C9  ADC sndFadeLevel
   06:80CB  BCC loc_06_80D5
-  06:80CD  LDA ram_00CC
+  06:80CD  LDA sndFadeRate
   06:80CF  AND #$80
-  06:80D1  STA ram_00CC
+  06:80D1  STA sndFadeRate
   06:80D3  LDA #$FF
-  06:80D5  STA ram_00CD
+  06:80D5  STA sndFadeLevel
   06:8112  SEC
   06:8113  SBC songCount
   06:8116  BCS loc_06_810D
   06:813F  LDA sndTmp
   06:8141  BMI loc_06_8145
-  06:8143  STY ram_00D7
-  06:814D  STX ram_00D7
+  06:8143  STY sfxChain
+  06:814D  STX sfxChain
   06:8157  INC ptr_C1+1
   06:818D  INC ptr_C1+1
   06:819D  INC ptr_C1+1
@@ -498,13 +498,13 @@ Traced code (instruction starts, verify by hand):
   06:8236  AND #$0F
   06:8238  STA soundBusy
   06:823A  LDY sndParam
-  06:823C  STY ram_00CC
+  06:823C  STY sndFadeRate
   06:823E  BEQ loc_06_8247
   06:8240  LDY #$FF
-  06:8242  CPY ram_00CD
+  06:8242  CPY sndFadeLevel
   06:8244  BNE loc_06_8249
   06:8246  INY
-  06:8247  STY ram_00CD
+  06:8247  STY sndFadeLevel
   06:8249  RTS
   06:824A  LDA #$00
   06:824C  SEC
@@ -515,7 +515,7 @@ Traced code (instruction starts, verify by hand):
   06:826D  JMP loc_06_825B
   06:82A4  INC soundPtr+1
   06:82B3  JSR SoundStreamByte
-  06:82B6  STA ram_00D2
+  06:82B6  STA sfxTranspose
   06:8365  JSR SoundStartNote
   06:8428  LDA #$01
   06:85E2  LDA #$5F

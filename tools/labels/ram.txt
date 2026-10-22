@@ -191,3 +191,17 @@
 0710 sndNoteTimer 4             ; per channel: frames left / gate length
 0714 sndParamC 4                ; per channel: parameter of command 0C
 0718 sndParamD 4                ; per channel: parameter of command 0D (bit 7 selects the release length)
+
+; ---- sound driver details (phase 3)
+00C7 sndTicks                   ; tempo ticks elapsed this frame (high byte of the tempo accumulator)
+00C8 sndTempoAcc                ; tempo accumulator (low)
+00C9 sndTempoHi                 ; tempo, 8.8 fixed point (command 05)
+00CA sndTempoLo
+00CC sndFadeRate                ; (?) master fade speed, bit 7 = flag
+00CD sndFadeLevel               ; (?) master fade level
+00D2 sfxTranspose               ; SFX record: pitch added to the note index of tone channels
+00D3 sfxDelay                   ; SFX record: frames left until the next record
+00D4 sfxGateRatio               ; SFX record: gate length ratio (x/256 of the delay)
+00D5 sfxGateTimer               ; SFX record: frames until the envelopes are released
+00D6 sfxFlags                   ; bit 7 = effect applies the detune ram_00D8; low bits = loop counter
+00D7 sfxChain                   ; chained sound request (bit 0 = start follow-up)

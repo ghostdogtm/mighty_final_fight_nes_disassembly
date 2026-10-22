@@ -129,22 +129,22 @@ ptr_C1                 = $00C1 ; 80 (size 2) ; auto: indirect pointer
 sndParam               = $00C3 ; 51 ; sound driver: parameter byte of the current command / scratch
 sndTmp                 = $00C4 ; 31 ; sound driver scratch
 ptr_C5                 = $00C5 ; 12 (size 2) ; auto: indirect pointer
-ram_00C7               = $00C7 ; 3
-ram_00C8               = $00C8 ; 4
-ram_00C9               = $00C9 ; 3
-ram_00CA               = $00CA ; 3
+sndTicks               = $00C7 ; 3 ; tempo ticks elapsed this frame (high byte of the tempo accumulator)
+sndTempoAcc            = $00C8 ; 4 ; tempo accumulator (low)
+sndTempoHi             = $00C9 ; 3 ; tempo, 8.8 fixed point (command 05)
+sndTempoLo             = $00CA ; 3
 ram_00CB               = $00CB ; 3
-ram_00CC               = $00CC ; 6
-ram_00CD               = $00CD ; 6
+sndFadeRate            = $00CC ; 6 ; (?) master fade speed, bit 7 = flag
+sndFadeLevel           = $00CD ; 6 ; (?) master fade level
 soundPriority          = $00CE ; 4 ; priority of the current effect/song (request is ignored if lower)
 sndChannelMask         = $00CF ; 17 ; sound driver: channels reserved by sound effects
 soundPtr               = $00D0 ; 15 (size 2) ; read pointer into the current song stream
-ram_00D2               = $00D2 ; 3
-ram_00D3               = $00D3 ; 6
-ram_00D4               = $00D4 ; 3
-ram_00D5               = $00D5 ; 4
-ram_00D6               = $00D6 ; 9
-ram_00D7               = $00D7 ; 4
+sfxTranspose           = $00D2 ; 3 ; SFX record: pitch added to the note index of tone channels
+sfxDelay               = $00D3 ; 6 ; SFX record: frames left until the next record
+sfxGateRatio           = $00D4 ; 3 ; SFX record: gate length ratio (x/256 of the delay)
+sfxGateTimer           = $00D5 ; 4 ; SFX record: frames until the envelopes are released
+sfxFlags               = $00D6 ; 9 ; bit 7 = effect applies the detune ram_00D8; low bits = loop counter
+sfxChain               = $00D7 ; 4 ; chained sound request (bit 0 = start follow-up)
 ram_00D8               = $00D8 ; 3
 soundLast              = $00D9 ; 3 ; last id passed to QueueSoundSaved
 soundQueueWrite        = $00DA ; 2 ; write index (0..7)

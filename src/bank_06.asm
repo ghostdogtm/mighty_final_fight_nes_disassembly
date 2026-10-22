@@ -84,13 +84,13 @@ SoundFrameBody:
 	JSR SoundStreamTick             ;C - - - - - 0x00C087 06:8077: 20 52 82
 loc_06_807A:
 	CLC                             ;C - - - - - 0x00C08A 06:807A: 18
-	LDA ram_00CA                    ;C - - - - - 0x00C08B 06:807B: A5 CA
-	ADC ram_00C8                    ;C - - - - - 0x00C08D 06:807D: 65 C8
-	STA ram_00C8                    ;C - - - - - 0x00C08F 06:807F: 85 C8
-	LDA ram_00C9                    ;C - - - - - 0x00C091 06:8081: A5 C9
+	LDA sndTempoLo                  ;C - - - - - 0x00C08B 06:807B: A5 CA
+	ADC sndTempoAcc                 ;C - - - - - 0x00C08D 06:807D: 65 C8
+	STA sndTempoAcc                 ;C - - - - - 0x00C08F 06:807F: 85 C8
+	LDA sndTempoHi                  ;C - - - - - 0x00C091 06:8081: A5 C9
 	ADC #$00                        ;C - - - - - 0x00C093 06:8083: 69 00
 ofs_06_8085:
-	STA ram_00C7                    ;C - - - - - 0x00C095 06:8085: 85 C7
+	STA sndTicks                    ;C - - - - - 0x00C095 06:8085: 85 C7
 	LDA sndChannelMask              ;C - - - - - 0x00C097 06:8087: A5 CF
 	PHA                             ;C - - - - - 0x00C099 06:8089: 48
 	LDX #$03                        ;C - - - - - 0x00C09A 06:808A: A2 03
@@ -120,7 +120,7 @@ ofs_06_80AA:
 	LSR soundBusy                   ;C - - - - - 0x00C0BC 06:80AC: 46 C0
 	ASL soundBusy                   ;C - - - - - 0x00C0BE 06:80AE: 06 C0
 ofs_06_80B0:
-	LDA ram_00CC                    ;C - - - - - 0x00C0C0 06:80B0: A5 CC
+	LDA sndFadeRate                 ;C - - - - - 0x00C0C0 06:80B0: A5 CC
 ofs_06_80B2:
 	AND #$7F                        ;C - - - - - 0x00C0C2 06:80B2: 29 7F
 	BEQ loc_06_80D7                 ;C - - - - - 0x00C0C4 06:80B4: F0 21
@@ -136,14 +136,14 @@ loc_06_80BC:
 	ADC soundBusy                   ;c - - - - - 0x00C0D3 06:80C3: 65 C0
 	STA soundBusy                   ;c - - - - - 0x00C0D5 06:80C5: 85 C0
 	LDA ptr_C1                      ;c - - - - - 0x00C0D7 06:80C7: A5 C1
-	ADC ram_00CD                    ;c - - - - - 0x00C0D9 06:80C9: 65 CD
+	ADC sndFadeLevel                ;c - - - - - 0x00C0D9 06:80C9: 65 CD
 	BCC loc_06_80D5                 ;c - - - - - 0x00C0DB 06:80CB: 90 08
-	LDA ram_00CC                    ;c - - - - - 0x00C0DD 06:80CD: A5 CC
+	LDA sndFadeRate                 ;c - - - - - 0x00C0DD 06:80CD: A5 CC
 	AND #$80                        ;c - - - - - 0x00C0DF 06:80CF: 29 80
-	STA ram_00CC                    ;c - - - - - 0x00C0E1 06:80D1: 85 CC
+	STA sndFadeRate                 ;c - - - - - 0x00C0E1 06:80D1: 85 CC
 	LDA #$FF                        ;c - - - - - 0x00C0E3 06:80D3: A9 FF
 loc_06_80D5:
-	STA ram_00CD                    ;c - - - - - 0x00C0E5 06:80D5: 85 CD
+	STA sndFadeLevel                ;c - - - - - 0x00C0E5 06:80D5: 85 CD
 loc_06_80D7:
 	RTS                             ;C - - - - - 0x00C0E7 06:80D7: 60
 ; X = channel; volume register := $30 (triangle: $00)
@@ -212,17 +212,17 @@ SoundStart:
 	BCC loc_06_816E                 ;C - - - - - 0x00C145 06:8135: 90 37
 	STA soundPriority               ;C - - - - - 0x00C147 06:8137: 85 CE
 	BNE loc_06_8145                 ;C - - - - - 0x00C149 06:8139: D0 0A
-	LDA ram_00D6                    ;C - - - - - 0x00C14B 06:813B: A5 D6
+	LDA sfxFlags                    ;C - - - - - 0x00C14B 06:813B: A5 D6
 	BPL loc_06_8145                 ;C - - - - - 0x00C14D 06:813D: 10 06
 	LDA sndTmp                      ;c - - - - - 0x00C14F 06:813F: A5 C4
 	BMI loc_06_8145                 ;c - - - - - 0x00C151 06:8141: 30 02
-	STY ram_00D7                    ;c - - - - - 0x00C153 06:8143: 84 D7
+	STY sfxChain                    ;c - - - - - 0x00C153 06:8143: 84 D7
 loc_06_8145:
-	STY ram_00D6                    ;C - - - - - 0x00C155 06:8145: 84 D6
+	STY sfxFlags                    ;C - - - - - 0x00C155 06:8145: 84 D6
 	ASL sndTmp                      ;C - - - - - 0x00C157 06:8147: 06 C4
-	ROR ram_00D6                    ;C - - - - - 0x00C159 06:8149: 66 D6
+	ROR sfxFlags                    ;C - - - - - 0x00C159 06:8149: 66 D6
 	BPL loc_06_814F                 ;C - - - - - 0x00C15B 06:814B: 10 02
-	STX ram_00D7                    ;c - - - - - 0x00C15D 06:814D: 86 D7
+	STX sfxChain                    ;c - - - - - 0x00C15D 06:814D: 86 D7
 loc_06_814F:
 	INC ptr_C1                      ;C - - - - - 0x00C15F 06:814F: E6 C1
 	LDA ptr_C1                      ;C - - - - - 0x00C161 06:8151: A5 C1
@@ -233,10 +233,10 @@ loc_06_8159:
 	LDA ptr_C1+1                    ;C - - - - - 0x00C169 06:8159: A5 C2
 	STA soundPtr+1                  ;C - - - - - 0x00C16B 06:815B: 85 D1
 	TYA                             ;C - - - - - 0x00C16D 06:815D: 98
-	STA ram_00D2                    ;C - - - - - 0x00C16E 06:815E: 85 D2
-	STA ram_00D3                    ;C - - - - - 0x00C170 06:8160: 85 D3
-	STA ram_00D4                    ;C - - - - - 0x00C172 06:8162: 85 D4
-	STA ram_00D5                    ;C - - - - - 0x00C174 06:8164: 85 D5
+	STA sfxTranspose                ;C - - - - - 0x00C16E 06:815E: 85 D2
+	STA sfxDelay                    ;C - - - - - 0x00C170 06:8160: 85 D3
+	STA sfxGateRatio                ;C - - - - - 0x00C172 06:8162: 85 D4
+	STA sfxGateTimer                ;C - - - - - 0x00C174 06:8164: 85 D5
 	LDY #$27                        ;C - - - - - 0x00C176 06:8166: A0 27
 loc_06_8168:
 	STA sndInstrument,Y             ;C - - - - - 0x00C178 06:8168: 99 00 07
@@ -246,13 +246,13 @@ loc_06_816E:
 	RTS                             ;C - - - - - 0x00C17E 06:816E: 60
 loc_06_816F:
 	LDX #$01                        ;C - - - - - 0x00C17F 06:816F: A2 01
-	STX ram_00C9                    ;C - - - - - 0x00C181 06:8171: 86 C9
+	STX sndTempoHi                  ;C - - - - - 0x00C181 06:8171: 86 C9
 	LDX #$99                        ;C - - - - - 0x00C183 06:8173: A2 99
-	STX ram_00CA                    ;C - - - - - 0x00C185 06:8175: 86 CA
-	STA ram_00C8                    ;C - - - - - 0x00C187 06:8177: 85 C8
+	STX sndTempoLo                  ;C - - - - - 0x00C185 06:8175: 86 CA
+	STA sndTempoAcc                 ;C - - - - - 0x00C187 06:8177: 85 C8
 	STA ram_00CB                    ;C - - - - - 0x00C189 06:8179: 85 CB
-	STA ram_00CC                    ;C - - - - - 0x00C18B 06:817B: 85 CC
-	STA ram_00CD                    ;C - - - - - 0x00C18D 06:817D: 85 CD
+	STA sndFadeRate                 ;C - - - - - 0x00C18B 06:817B: 85 CC
+	STA sndFadeLevel                ;C - - - - - 0x00C18D 06:817D: 85 CD
 	LDX #$53                        ;C - - - - - 0x00C18F 06:817F: A2 53
 loc_06_8181:
 	STA ram_0728,X                  ;C - - - - - 0x00C191 06:8181: 9D 28 07
@@ -293,7 +293,7 @@ SoundStop:
 	STA soundPriority               ;C - - - - - 0x00C1DA 06:81CA: 85 CE
 	STA soundPtr                    ;C - - - - - 0x00C1DC 06:81CC: 85 D0
 	STA soundPtr+1                  ;C - - - - - 0x00C1DE 06:81CE: 85 D1
-	STA ram_00D7                    ;C - - - - - 0x00C1E0 06:81D0: 85 D7
+	STA sfxChain                    ;C - - - - - 0x00C1E0 06:81D0: 85 D7
 	STA ram_00D8                    ;C - - - - - 0x00C1E2 06:81D2: 85 D8
 SoundSilenceMasked:
 	LDA sndChannelMask              ;C - - - - - 0x00C1E4 06:81D4: A5 CF
@@ -357,14 +357,14 @@ loc_06_8234:
 	AND #$0F                        ;c - - - - - 0x00C246 06:8236: 29 0F
 	STA soundBusy                   ;c - - - - - 0x00C248 06:8238: 85 C0
 	LDY sndParam                    ;c - - - - - 0x00C24A 06:823A: A4 C3
-	STY ram_00CC                    ;c - - - - - 0x00C24C 06:823C: 84 CC
+	STY sndFadeRate                 ;c - - - - - 0x00C24C 06:823C: 84 CC
 	BEQ loc_06_8247                 ;c - - - - - 0x00C24E 06:823E: F0 07
 	LDY #$FF                        ;c - - - - - 0x00C250 06:8240: A0 FF
-	CPY ram_00CD                    ;c - - - - - 0x00C252 06:8242: C4 CD
+	CPY sndFadeLevel                ;c - - - - - 0x00C252 06:8242: C4 CD
 	BNE loc_06_8249                 ;c - - - - - 0x00C254 06:8244: D0 03
 	INY                             ;c - - - - - 0x00C256 06:8246: C8
 loc_06_8247:
-	STY ram_00CD                    ;c - - - - - 0x00C257 06:8247: 84 CD
+	STY sndFadeLevel                ;c - - - - - 0x00C257 06:8247: 84 CD
 loc_06_8249:
 	RTS                             ;c - - - - - 0x00C259 06:8249: 60
 	LDA #$00                        ;c - - - - - 0x00C25A 06:824A: A9 00
@@ -374,10 +374,10 @@ loc_06_8249:
 	RTS                             ;c - - - - - 0x00C261 06:8251: 60
 ; read command bytes of the current stream when its delay expires
 SoundStreamTick:
-	LDA ram_00D3                    ;C - - - - - 0x00C262 06:8252: A5 D3
+	LDA sfxDelay                    ;C - - - - - 0x00C262 06:8252: A5 D3
 	BEQ loc_06_825B                 ;C - - - - - 0x00C264 06:8254: F0 05
-	DEC ram_00D3                    ;C - - - - - 0x00C266 06:8256: C6 D3
-	DEC ram_00D5                    ;C - - - - - 0x00C268 06:8258: C6 D5
+	DEC sfxDelay                    ;C - - - - - 0x00C266 06:8256: C6 D3
+	DEC sfxGateTimer                ;C - - - - - 0x00C268 06:8258: C6 D5
 	RTS                             ;C - - - - - 0x00C26A 06:825A: 60
 loc_06_825B:
 	JSR SoundStreamByte             ;C - - - - - 0x00C26B 06:825B: 20 86 83
@@ -385,7 +385,7 @@ loc_06_825B:
 	ASL A                           ;C - - - - - 0x00C270 06:8260: 0A
 	BCC loc_06_8273                 ;C - - - - - 0x00C271 06:8261: 90 10
 	STY soundPriority               ;C - - - - - 0x00C273 06:8263: 84 CE
-	LDA ram_00D7                    ;C - - - - - 0x00C275 06:8265: A5 D7
+	LDA sfxChain                    ;C - - - - - 0x00C275 06:8265: A5 D7
 	LSR A                           ;C - - - - - 0x00C277 06:8267: 4A
 	BCC loc_06_8270                 ;C - - - - - 0x00C278 06:8268: 90 06
 	JSR SoundStart                  ;c - - - - - 0x00C27A 06:826A: 20 18 81
@@ -398,13 +398,13 @@ loc_06_8273:
 	JSR SoundStreamByte             ;C - - - - - 0x00C287 06:8277: 20 86 83
 	ASL A                           ;C - - - - - 0x00C28A 06:827A: 0A
 	BEQ loc_06_8289                 ;C - - - - - 0x00C28B 06:827B: F0 0C
-	ASL ram_00D6                    ;C - - - - - 0x00C28D 06:827D: 06 D6
+	ASL sfxFlags                    ;C - - - - - 0x00C28D 06:827D: 06 D6
 	PHP                             ;C - - - - - 0x00C28F 06:827F: 08
-	CMP ram_00D6                    ;C - - - - - 0x00C290 06:8280: C5 D6
+	CMP sfxFlags                    ;C - - - - - 0x00C290 06:8280: C5 D6
 	BEQ loc_06_8296                 ;C - - - - - 0x00C292 06:8282: F0 12
 	PLP                             ;C - - - - - 0x00C294 06:8284: 28
-	ROR ram_00D6                    ;C - - - - - 0x00C295 06:8285: 66 D6
-	INC ram_00D6                    ;C - - - - - 0x00C297 06:8287: E6 D6
+	ROR sfxFlags                    ;C - - - - - 0x00C295 06:8285: 66 D6
+	INC sfxFlags                    ;C - - - - - 0x00C297 06:8287: E6 D6
 loc_06_8289:
 	JSR SoundStreamByte             ;C - - - - - 0x00C299 06:8289: 20 86 83
 	TAX                             ;C - - - - - 0x00C29C 06:828C: AA
@@ -416,7 +416,7 @@ loc_06_8296:
 	TYA                             ;C - - - - - 0x00C2A6 06:8296: 98
 	PLP                             ;C - - - - - 0x00C2A7 06:8297: 28
 	ROR A                           ;C - - - - - 0x00C2A8 06:8298: 6A
-	STA ram_00D6                    ;C - - - - - 0x00C2A9 06:8299: 85 D6
+	STA sfxFlags                    ;C - - - - - 0x00C2A9 06:8299: 85 D6
 	CLC                             ;C - - - - - 0x00C2AB 06:829B: 18
 	LDA #$02                        ;C - - - - - 0x00C2AC 06:829C: A9 02
 	ADC soundPtr                    ;C - - - - - 0x00C2AE 06:829E: 65 D0
@@ -427,22 +427,22 @@ loc_06_82A6:
 	LSR sndTmp                      ;C - - - - - 0x00C2B6 06:82A6: 46 C4
 	BCC loc_06_82AF                 ;C - - - - - 0x00C2B8 06:82A8: 90 05
 	JSR SoundStreamByte             ;C - - - - - 0x00C2BA 06:82AA: 20 86 83
-	STA ram_00D4                    ;C - - - - - 0x00C2BD 06:82AD: 85 D4
+	STA sfxGateRatio                ;C - - - - - 0x00C2BD 06:82AD: 85 D4
 loc_06_82AF:
 	LSR sndTmp                      ;C - - - - - 0x00C2BF 06:82AF: 46 C4
 	BCC loc_06_82B8                 ;C - - - - - 0x00C2C1 06:82B1: 90 05
 	JSR SoundStreamByte             ;c - - - - - 0x00C2C3 06:82B3: 20 86 83
-	STA ram_00D2                    ;c - - - - - 0x00C2C6 06:82B6: 85 D2
+	STA sfxTranspose                ;c - - - - - 0x00C2C6 06:82B6: 85 D2
 loc_06_82B8:
 	JSR SoundStreamByte             ;C - - - - - 0x00C2C8 06:82B8: 20 86 83
-	STA ram_00D3                    ;C - - - - - 0x00C2CB 06:82BB: 85 D3
+	STA sfxDelay                    ;C - - - - - 0x00C2CB 06:82BB: 85 D3
 	STA ptr_C1                      ;C - - - - - 0x00C2CD 06:82BD: 85 C1
-	LDA ram_00D4                    ;C - - - - - 0x00C2CF 06:82BF: A5 D4
+	LDA sfxGateRatio                ;C - - - - - 0x00C2CF 06:82BF: A5 D4
 	STA sndTmp                      ;C - - - - - 0x00C2D1 06:82C1: 85 C4
 	JSR SoundMul8                   ;C - - - - - 0x00C2D3 06:82C3: 20 06 80
 	LDY ptr_C1                      ;C - - - - - 0x00C2D6 06:82C6: A4 C1
 	INY                             ;C - - - - - 0x00C2D8 06:82C8: C8
-	STY ram_00D5                    ;C - - - - - 0x00C2D9 06:82C9: 84 D5
+	STY sfxGateTimer                ;C - - - - - 0x00C2D9 06:82C9: 84 D5
 	INC soundBusy                   ;C - - - - - 0x00C2DB 06:82CB: E6 C0
 	JSR SoundStreamByte             ;C - - - - - 0x00C2DD 06:82CD: 20 86 83
 	PHA                             ;C - - - - - 0x00C2E0 06:82D0: 48
@@ -463,11 +463,11 @@ loc_06_82E6:
 	LSR A                           ;C - - - - - 0x00C2F8 06:82E8: 4A
 	BCS loc_06_830A                 ;C - - - - - 0x00C2F9 06:82E9: B0 1F
 	JSR SoundEnvelopeStep           ;C - - - - - 0x00C2FB 06:82EB: 20 BA 86
-	LDA ram_00D3                    ;C - - - - - 0x00C2FE 06:82EE: A5 D3
+	LDA sfxDelay                    ;C - - - - - 0x00C2FE 06:82EE: A5 D3
 	BEQ loc_06_82FA                 ;C - - - - - 0x00C300 06:82F0: F0 08
 	CPX #$01                        ;C - - - - - 0x00C302 06:82F2: E0 01
 	BEQ loc_06_82FB                 ;C - - - - - 0x00C304 06:82F4: F0 05
-	LDA ram_00D5                    ;C - - - - - 0x00C306 06:82F6: A5 D5
+	LDA sfxGateTimer                ;C - - - - - 0x00C306 06:82F6: A5 D5
 	BEQ loc_06_8300                 ;C - - - - - 0x00C308 06:82F8: F0 06
 loc_06_82FA:
 	RTS                             ;C - - - - - 0x00C30A 06:82FA: 60
@@ -541,7 +541,7 @@ loc_06_836B:
 loc_06_837F:
 	TYA                             ;C - - - - - 0x00C38F 06:837F: 98
 	CLC                             ;C - - - - - 0x00C390 06:8380: 18
-	ADC ram_00D2                    ;C - - - - - 0x00C391 06:8381: 65 D2
+	ADC sfxTranspose                ;C - - - - - 0x00C391 06:8381: 65 D2
 	JMP SoundNotePitch              ;C - - - - - 0x00C393 06:8383: 4C DE 85
 ; next byte from the stream at soundPtr
 SoundStreamByte:
@@ -569,7 +569,7 @@ SoundChannelStep:
 loc_06_83AF:
 	LDA ram_0740,X                  ;C - - - - - 0x00C3BF 06:83AF: BD 40 07
 	SEC                             ;C - - - - - 0x00C3C2 06:83B2: 38
-	SBC ram_00C7                    ;C - - - - - 0x00C3C3 06:83B3: E5 C7
+	SBC sndTicks                    ;C - - - - - 0x00C3C3 06:83B3: E5 C7
 	STA ram_0740,X                  ;C - - - - - 0x00C3C5 06:83B5: 9D 40 07
 	BEQ loc_06_83BC                 ;C - - - - - 0x00C3C8 06:83B8: F0 02
 	BCS loc_06_83BF                 ;C - - - - - 0x00C3CA 06:83BA: B0 03
@@ -578,7 +578,7 @@ loc_06_83BC:
 loc_06_83BF:
 	LDA ram_0738,X                  ;C - - - - - 0x00C3CF 06:83BF: BD 38 07
 	SEC                             ;C - - - - - 0x00C3D2 06:83C2: 38
-	SBC ram_00C7                    ;C - - - - - 0x00C3D3 06:83C3: E5 C7
+	SBC sndTicks                    ;C - - - - - 0x00C3D3 06:83C3: E5 C7
 	STA ram_0738,X                  ;C - - - - - 0x00C3D5 06:83C5: 9D 38 07
 	BEQ SoundNextNote               ;C - - - - - 0x00C3D8 06:83C8: F0 03
 	BCC SoundNextNote               ;C - - - - - 0x00C3DA 06:83CA: 90 01
@@ -733,11 +733,11 @@ loc_06_84ED:
 ; params: hi, lo of the 16-bit tempo (ticks/frame, 8.8)
 SndCmd05_Tempo:
 	LDA #$00                        ;C - - J - - 0x00C501 06:84F1: A9 00
-	STA ram_00C8                    ;C - - - - - 0x00C503 06:84F3: 85 C8
+	STA sndTempoAcc                 ;C - - - - - 0x00C503 06:84F3: 85 C8
 	JSR SoundReadSubPtr             ;C - - - - - 0x00C505 06:84F5: 20 92 85
 	LDY sndParam                    ;C - - - - - 0x00C508 06:84F8: A4 C3
-	STA ram_00CA                    ;C - - - - - 0x00C50A 06:84FA: 85 CA
-	STY ram_00C9                    ;C - - - - - 0x00C50C 06:84FC: 84 C9
+	STA sndTempoLo                  ;C - - - - - 0x00C50A 06:84FA: 85 CA
+	STY sndTempoHi                  ;C - - - - - 0x00C50C 06:84FC: 84 C9
 	RTS                             ;C - - - - - 0x00C50E 06:84FE: 60
 ; ram_073C,X := param
 SndCmd06_NoteScale:
@@ -859,7 +859,7 @@ SoundStartNote:
 	BEQ loc_06_85D0                 ;C - - - - - 0x00C5CC 06:85BC: F0 12
 	CPX #$01                        ;C - - - - - 0x00C5CE 06:85BE: E0 01
 	BNE loc_06_85D7                 ;C - - - - - 0x00C5D0 06:85C0: D0 15
-	LDA ram_00D3                    ;C - - - - - 0x00C5D2 06:85C2: A5 D3
+	LDA sfxDelay                    ;C - - - - - 0x00C5D2 06:85C2: A5 D3
 	STA ptr_C1                      ;C - - - - - 0x00C5D4 06:85C4: 85 C1
 	LDA sndVolReg,X                 ;C - - - - - 0x00C5D6 06:85C6: BD 0C 07
 	STA sndTmp                      ;C - - - - - 0x00C5D9 06:85C9: 85 C4
@@ -1063,8 +1063,8 @@ loc_06_8720:
 	BPL loc_06_872B                 ;C - - - - - 0x00C736 06:8726: 10 03
 	JMP loc_06_88A0                 ;C - - - - - 0x00C738 06:8728: 4C A0 88
 loc_06_872B:
-	LDA ram_00CD                    ;C - - - - - 0x00C73B 06:872B: A5 CD
-	LDY ram_00CC                    ;C - - - - - 0x00C73D 06:872D: A4 CC
+	LDA sndFadeLevel                ;C - - - - - 0x00C73B 06:872B: A5 CD
+	LDY sndFadeRate                 ;C - - - - - 0x00C73D 06:872D: A4 CC
 	BMI loc_06_8733                 ;C - - - - - 0x00C73F 06:872F: 30 02
 	EOR #$FF                        ;C - - - - - 0x00C741 06:8731: 49 FF
 loc_06_8733:
@@ -1200,7 +1200,7 @@ loc_06_880C:
 loc_06_8814:
 	CPX #$28                        ;C - - - - - 0x00C824 06:8814: E0 28
 	BCS loc_06_8835                 ;C - - - - - 0x00C826 06:8816: B0 1D
-	LDA ram_00D6                    ;C - - - - - 0x00C828 06:8818: A5 D6
+	LDA sfxFlags                    ;C - - - - - 0x00C828 06:8818: A5 D6
 	BPL loc_06_8835                 ;C - - - - - 0x00C82A 06:881A: 10 19
 	LDA ram_00D8                    ;c - - - - - 0x00C82C 06:881C: A5 D8
 	BEQ loc_06_8835                 ;c - - - - - 0x00C82E 06:881E: F0 15

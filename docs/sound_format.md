@@ -57,7 +57,50 @@ all others read one parameter byte first. Per-channel flags live in `ram_0730,X`
 Note pitch: word table at 06:8959 (index = pitch*2, clamped to $5F). Duration: code from the note byte
 looks up 06:8915 or 06:891C, is scaled by `ram_073C` and counted down by the tempo ticks.
 
-## Sound effect streams (partial)
-After the priority byte, `SoundStreamTick` (06:8252) reads an element: a flag byte, then optional bytes selected by its bits
-(a jump address, two parameters `ram_00D4`/`ram_00D2`), a delay byte (`ram_00D3`) and a channel-mask byte (`ram_00CF`).
-Bit 7 ends the sound or starts a chained one. The exact register-write opcodes are not decoded.
+## Sound effect streams
+A sound effect (header byte != 0) is a time line of **records** read by `SoundStreamTick` (06:8252) from the one
+shared stream pointer `soundPtr`. Header byte: bits 0-6 = priority (ignored while a higher one plays), bit 7 is copied
+into `sfxFlags` bit 7 (effect uses the global detune `ram_00D8`). The stream starts right after it.
+
+Record layout:
+```
+flags                 bit 7: end of effect (starts the chained request in sfxChain if its bit 0 is set, else stops)
+                      bit 0: loop/jump follows: count byte, then hi, lo of the target (big endian);
+                             count 0 = plain jump, else the target is taken while the counter in sfxFlags lasts
+                      bit 1: one byte -> sfxGateRatio (gate length = delay * ratio / 256 + 1 frames)
+                      bit 2: one byte -> sfxTranspose (added to the note index of tone channels)
+delay                 frames until the next record (sfxDelay)
+channel mask          bit 0 square 1, bit 1 square 2, bit 2 triangle, bit 3 noise; the channels in the mask are
+                      taken over from the music (SoundSilenceMasked) and get one note each
+```
+Directly after a record the driver runs `SoundChannelTick` for each channel in the mask (in bit order: square 1 first, noise
+last) and each reads its own data from the same stream:
+```
+param mask            bit 0: instrument (+1)        (SndCmd08)
+                      bit 1: noise volume           (SndCmd18)
+                      bit 2: volume / duty          (SndCmd07)
+                      bit 3: parameter D            (SndCmd0D)
+                      bit 4: parameter C            (SndCmd0C)
+param bytes           one byte for every bit set, in the order above
+note                  0 = silence the channel; otherwise note index + 1 (bit 7 set = retrigger the envelope
+                      only for the triangle); noise channel: (note-1) xor $0F is the noise period
+```
+The layout was checked by parsing all 99 sound effects below $C000 (`tools/sfx_dump.py`): every one parses cleanly to an
+end record. During the `delay` frames the instruments' envelopes run; at `sfxGateTimer` = 0 they enter the release phase.
+
+## Instruments (8 bytes each, table address at 06:8A41)
+Read through `ptr_C5` by `SoundEnvelopeStep` (06:86BA), the envelope runs in 4 states (attack, decay/sustain, release, off):
+
+| byte | meaning |
+|---|---|
+| 0 | attack rate: index into the step table at 06:8933; the level rises to $F0, then the state advances |
+| 1 | decay rate index (0 = skip, jump straight to the sustain level) |
+| 2 | sustain level (decay stops here; also the level used when there is no decay) |
+| 3 | release rate index (0 = end immediately); not used by the triangle (it is cut) |
+| 4 | bit 7 set = the release phase starts without waiting (checked in `SoundSetPeriod`/`SoundReleaseCheck`) |
+| 5 | pitch vibrato depth (0 = off), scaled by the LFO position `sndEnvPos` |
+| 6 | volume LFO (tremolo) depth, active when >= 5 |
+| 7 | noise mode bits OR-ed into the noise period register (channel index 0 only) |
+
+The final volume is `sndVolReg` minus the inverted envelope level high nibble; the result is written with `SoundWriteReg`.
+Bytes 4-7 are read from the code only (no instrument has been verified by ear).
