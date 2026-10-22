@@ -586,7 +586,7 @@ loc_0A_9C04:
 loc_0A_9C12:
 	STX vramQueueEnd                ;C - - - - - 0x015C22 0A:9C12: 86 65
 	LDA #$00                        ;C - - - - - 0x015C24 0A:9C14: A9 00
-	STA ram_0066                    ;C - - - - - 0x015C26 0A:9C16: 85 66
+	STA screenStep                  ;C - - - - - 0x015C26 0A:9C16: 85 66
 	JSR QueueHudLevelText           ;C - - - - - 0x015C28 0A:9C18: 20 54 E9
 	LDA #$FF                        ;C - - - - - 0x015C2B 0A:9C1B: A9 FF
 	STA vramQueueFlag               ;C - - - - - 0x015C2D 0A:9C1D: 85 64

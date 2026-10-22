@@ -18,7 +18,7 @@ loc_06_800C:
 	BCC loc_06_801F                 ;C - - - - - 0x00C020 06:8010: 90 0D
 	CLC                             ;C - - - - - 0x00C022 06:8012: 18
 	LDA ptr_C1+1                    ;C - - - - - 0x00C023 06:8013: A5 C2
-	ADC ram_00C4                    ;C - - - - - 0x00C025 06:8015: 65 C4
+	ADC sndTmp                      ;C - - - - - 0x00C025 06:8015: 65 C4
 	STA ptr_C1+1                    ;C - - - - - 0x00C027 06:8017: 85 C2
 	LDA ptr_C1                      ;C - - - - - 0x00C029 06:8019: A5 C1
 	ADC #$00                        ;C - - - - - 0x00C02B 06:801B: 69 00
@@ -91,15 +91,15 @@ loc_06_807A:
 	ADC #$00                        ;C - - - - - 0x00C093 06:8083: 69 00
 ofs_06_8085:
 	STA ram_00C7                    ;C - - - - - 0x00C095 06:8085: 85 C7
-	LDA ram_00CF                    ;C - - - - - 0x00C097 06:8087: A5 CF
+	LDA sndChannelMask              ;C - - - - - 0x00C097 06:8087: A5 CF
 	PHA                             ;C - - - - - 0x00C099 06:8089: 48
 	LDX #$03                        ;C - - - - - 0x00C09A 06:808A: A2 03
 loc_06_808C:
-	LSR ram_00CF                    ;C - - - - - 0x00C09C 06:808C: 46 CF
+	LSR sndChannelMask              ;C - - - - - 0x00C09C 06:808C: 46 CF
 	BCC loc_06_8099                 ;C - - - - - 0x00C09E 06:808E: 90 09
-	LDA ram_00CF                    ;C - - - - - 0x00C0A0 06:8090: A5 CF
+	LDA sndChannelMask              ;C - - - - - 0x00C0A0 06:8090: A5 CF
 	ORA #$80                        ;C - - - - - 0x00C0A2 06:8092: 09 80
-	STA ram_00CF                    ;C - - - - - 0x00C0A4 06:8094: 85 CF
+	STA sndChannelMask              ;C - - - - - 0x00C0A4 06:8094: 85 CF
 	JSR SoundChannelTick            ;C - - - - - 0x00C0A6 06:8096: 20 DE 82
 loc_06_8099:
 	LDA soundBusy                   ;C - - - - - 0x00C0A9 06:8099: A5 C0
@@ -116,7 +116,7 @@ loc_06_80A6:
 	BPL loc_06_808C                 ;C - - - - - 0x00C0B7 06:80A7: 10 E3
 	PLA                             ;C - - - - - 0x00C0B9 06:80A9: 68
 ofs_06_80AA:
-	STA ram_00CF                    ;C - - - - - 0x00C0BA 06:80AA: 85 CF
+	STA sndChannelMask              ;C - - - - - 0x00C0BA 06:80AA: 85 CF
 	LSR soundBusy                   ;C - - - - - 0x00C0BC 06:80AC: 46 C0
 	ASL soundBusy                   ;C - - - - - 0x00C0BE 06:80AE: 06 C0
 ofs_06_80B0:
@@ -169,8 +169,8 @@ SoundWriteReg:
 	EOR #$03                        ;C - - - - - 0x00C100 06:80F0: 49 03
 	ASL A                           ;C - - - - - 0x00C102 06:80F2: 0A
 	ASL A                           ;C - - - - - 0x00C103 06:80F3: 0A
-	STY ram_00C4                    ;C - - - - - 0x00C104 06:80F4: 84 C4
-	ORA ram_00C4                    ;C - - - - - 0x00C106 06:80F6: 05 C4
+	STY sndTmp                      ;C - - - - - 0x00C104 06:80F4: 84 C4
+	ORA sndTmp                      ;C - - - - - 0x00C106 06:80F6: 05 C4
 	TAY                             ;C - - - - - 0x00C108 06:80F8: A8
 	PLA                             ;C - - - - - 0x00C109 06:80F9: 68
 	STA SQ1_VOL,Y                   ;C - - - - - 0x00C10A 06:80FA: 99 00 40
@@ -206,7 +206,7 @@ SoundStart:
 	BEQ loc_06_816F                 ;C - - - - - 0x00C13A 06:812A: F0 43
 	LDY #$00                        ;C - - - - - 0x00C13C 06:812C: A0 00
 	INX                             ;C - - - - - 0x00C13E 06:812E: E8
-	STA ram_00C4                    ;C - - - - - 0x00C13F 06:812F: 85 C4
+	STA sndTmp                      ;C - - - - - 0x00C13F 06:812F: 85 C4
 	AND #$7F                        ;C - - - - - 0x00C141 06:8131: 29 7F
 	CMP soundPriority               ;C - - - - - 0x00C143 06:8133: C5 CE
 	BCC loc_06_816E                 ;C - - - - - 0x00C145 06:8135: 90 37
@@ -214,12 +214,12 @@ SoundStart:
 	BNE loc_06_8145                 ;C - - - - - 0x00C149 06:8139: D0 0A
 	LDA ram_00D6                    ;C - - - - - 0x00C14B 06:813B: A5 D6
 	BPL loc_06_8145                 ;C - - - - - 0x00C14D 06:813D: 10 06
-	LDA ram_00C4                    ;c - - - - - 0x00C14F 06:813F: A5 C4
+	LDA sndTmp                      ;c - - - - - 0x00C14F 06:813F: A5 C4
 	BMI loc_06_8145                 ;c - - - - - 0x00C151 06:8141: 30 02
 	STY ram_00D7                    ;c - - - - - 0x00C153 06:8143: 84 D7
 loc_06_8145:
 	STY ram_00D6                    ;C - - - - - 0x00C155 06:8145: 84 D6
-	ASL ram_00C4                    ;C - - - - - 0x00C157 06:8147: 06 C4
+	ASL sndTmp                      ;C - - - - - 0x00C157 06:8147: 06 C4
 	ROR ram_00D6                    ;C - - - - - 0x00C159 06:8149: 66 D6
 	BPL loc_06_814F                 ;C - - - - - 0x00C15B 06:814B: 10 02
 	STX ram_00D7                    ;c - - - - - 0x00C15D 06:814D: 86 D7
@@ -239,7 +239,7 @@ loc_06_8159:
 	STA ram_00D5                    ;C - - - - - 0x00C174 06:8164: 85 D5
 	LDY #$27                        ;C - - - - - 0x00C176 06:8166: A0 27
 loc_06_8168:
-	STA ram_0700,Y                  ;C - - - - - 0x00C178 06:8168: 99 00 07
+	STA sndInstrument,Y             ;C - - - - - 0x00C178 06:8168: 99 00 07
 	DEY                             ;C - - - - - 0x00C17B 06:816B: 88
 	BPL loc_06_8168                 ;C - - - - - 0x00C17C 06:816C: 10 FA
 loc_06_816E:
@@ -281,7 +281,7 @@ loc_06_819F:
 	BMI SoundSilenceAll             ;C - - - - - 0x00C1BC 06:81AC: 30 43
 ; $F0-$F7 control commands (jump table follows)
 SoundControl:
-	STY ram_00C3                    ;C - - - - - 0x00C1BE 06:81AE: 84 C3
+	STY sndParam                    ;C - - - - - 0x00C1BE 06:81AE: 84 C3
 	AND #$07                        ;C - - - - - 0x00C1C0 06:81B0: 29 07
 	JSR SoundJumpInline             ;C - - - - - 0x00C1C2 06:81B2: 20 23 80
 	.word ofs_06_81C5, SoundStop, SoundResetChannels, ofs_06_821E, ofs_06_8226, $822D, loc_06_8234, $824A;W 0x00C1C5 06:81B5:
@@ -296,13 +296,13 @@ SoundStop:
 	STA ram_00D7                    ;C - - - - - 0x00C1E0 06:81D0: 85 D7
 	STA ram_00D8                    ;C - - - - - 0x00C1E2 06:81D2: 85 D8
 SoundSilenceMasked:
-	LDA ram_00CF                    ;C - - - - - 0x00C1E4 06:81D4: A5 CF
+	LDA sndChannelMask              ;C - - - - - 0x00C1E4 06:81D4: A5 CF
 	BEQ loc_06_81E3                 ;C - - - - - 0x00C1E6 06:81D6: F0 0B
 	EOR #$0F                        ;C - - - - - 0x00C1E8 06:81D8: 49 0F
-	STA ram_00CF                    ;C - - - - - 0x00C1EA 06:81DA: 85 CF
+	STA sndChannelMask              ;C - - - - - 0x00C1EA 06:81DA: 85 CF
 	JSR SoundSilenceAll             ;C - - - - - 0x00C1EC 06:81DC: 20 F1 81
 	LDA #$00                        ;C - - - - - 0x00C1EF 06:81DF: A9 00
-	STA ram_00CF                    ;C - - - - - 0x00C1F1 06:81E1: 85 CF
+	STA sndChannelMask              ;C - - - - - 0x00C1F1 06:81E1: 85 CF
 loc_06_81E3:
 	RTS                             ;C - - - - - 0x00C1F3 06:81E3: 60
 SoundResetChannels:
@@ -315,11 +315,11 @@ loc_06_81E8:
 	BPL loc_06_81E8                 ;C - - - - - 0x00C1FF 06:81EF: 10 F7
 ; silence channels not in the mask, enable channels via SNDCHN
 SoundSilenceAll:
-	LDA ram_00CF                    ;C - - - - - 0x00C201 06:81F1: A5 CF
+	LDA sndChannelMask              ;C - - - - - 0x00C201 06:81F1: A5 CF
 	PHA                             ;C - - - - - 0x00C203 06:81F3: 48
 	LDX #$03                        ;C - - - - - 0x00C204 06:81F4: A2 03
 loc_06_81F6:
-	LSR ram_00CF                    ;C - - - - - 0x00C206 06:81F6: 46 CF
+	LSR sndChannelMask              ;C - - - - - 0x00C206 06:81F6: 46 CF
 	BCS loc_06_820A                 ;C - - - - - 0x00C208 06:81F8: B0 10
 	JSR SoundSilenceChannel         ;C - - - - - 0x00C20A 06:81FA: 20 D8 80
 	LDA ram_0754,X                  ;C - - - - - 0x00C20D 06:81FD: BD 54 07
@@ -331,7 +331,7 @@ loc_06_820A:
 	DEX                             ;C - - - - - 0x00C21A 06:820A: CA
 	BPL loc_06_81F6                 ;C - - - - - 0x00C21B 06:820B: 10 E9
 	PLA                             ;C - - - - - 0x00C21D 06:820D: 68
-	STA ram_00CF                    ;C - - - - - 0x00C21E 06:820E: 85 CF
+	STA sndChannelMask              ;C - - - - - 0x00C21E 06:820E: 85 CF
 	LDA #$08                        ;C - - - - - 0x00C220 06:8210: A9 08
 	STA SQ1_SWEEP                   ;C - - - - - 0x00C222 06:8212: 8D 01 40
 	STA SQ2_SWEEP                   ;C - - - - - 0x00C225 06:8215: 8D 05 40
@@ -348,15 +348,15 @@ ofs_06_8226:
 	AND #$FD                        ;C - - - - - 0x00C238 06:8228: 29 FD
 	STA soundBusy                   ;C - - - - - 0x00C23A 06:822A: 85 C0
 	RTS                             ;C - - - - - 0x00C23C 06:822C: 60
-	ASL ram_00C3                    ;c - - - - - 0x00C23D 06:822D: 06 C3
+	ASL sndParam                    ;c - - - - - 0x00C23D 06:822D: 06 C3
 	BEQ loc_06_8234                 ;c - - - - - 0x00C23F 06:822F: F0 03
 	SEC                             ;c - - - - - 0x00C241 06:8231: 38
-	ROR ram_00C3                    ;c - - - - - 0x00C242 06:8232: 66 C3
+	ROR sndParam                    ;c - - - - - 0x00C242 06:8232: 66 C3
 loc_06_8234:
 	LDA soundBusy                   ;c - - - - - 0x00C244 06:8234: A5 C0
 	AND #$0F                        ;c - - - - - 0x00C246 06:8236: 29 0F
 	STA soundBusy                   ;c - - - - - 0x00C248 06:8238: 85 C0
-	LDY ram_00C3                    ;c - - - - - 0x00C24A 06:823A: A4 C3
+	LDY sndParam                    ;c - - - - - 0x00C24A 06:823A: A4 C3
 	STY ram_00CC                    ;c - - - - - 0x00C24C 06:823C: 84 CC
 	BEQ loc_06_8247                 ;c - - - - - 0x00C24E 06:823E: F0 07
 	LDY #$FF                        ;c - - - - - 0x00C250 06:8240: A0 FF
@@ -369,7 +369,7 @@ loc_06_8249:
 	RTS                             ;c - - - - - 0x00C259 06:8249: 60
 	LDA #$00                        ;c - - - - - 0x00C25A 06:824A: A9 00
 	SEC                             ;c - - - - - 0x00C25C 06:824C: 38
-	SBC ram_00C3                    ;c - - - - - 0x00C25D 06:824D: E5 C3
+	SBC sndParam                    ;c - - - - - 0x00C25D 06:824D: E5 C3
 	STA ram_00D8                    ;c - - - - - 0x00C25F 06:824F: 85 D8
 	RTS                             ;c - - - - - 0x00C261 06:8251: 60
 ; read command bytes of the current stream when its delay expires
@@ -381,7 +381,7 @@ SoundStreamTick:
 	RTS                             ;C - - - - - 0x00C26A 06:825A: 60
 loc_06_825B:
 	JSR SoundStreamByte             ;C - - - - - 0x00C26B 06:825B: 20 86 83
-	STA ram_00C4                    ;C - - - - - 0x00C26E 06:825E: 85 C4
+	STA sndTmp                      ;C - - - - - 0x00C26E 06:825E: 85 C4
 	ASL A                           ;C - - - - - 0x00C270 06:8260: 0A
 	BCC loc_06_8273                 ;C - - - - - 0x00C271 06:8261: 90 10
 	STY soundPriority               ;C - - - - - 0x00C273 06:8263: 84 CE
@@ -393,7 +393,7 @@ loc_06_825B:
 loc_06_8270:
 	JMP SoundStop                   ;C - - - - - 0x00C280 06:8270: 4C C8 81
 loc_06_8273:
-	LSR ram_00C4                    ;C - - - - - 0x00C283 06:8273: 46 C4
+	LSR sndTmp                      ;C - - - - - 0x00C283 06:8273: 46 C4
 	BCC loc_06_82A6                 ;C - - - - - 0x00C285 06:8275: 90 2F
 	JSR SoundStreamByte             ;C - - - - - 0x00C287 06:8277: 20 86 83
 	ASL A                           ;C - - - - - 0x00C28A 06:827A: 0A
@@ -424,12 +424,12 @@ loc_06_8296:
 	BCC loc_06_82A6                 ;C - - - - - 0x00C2B2 06:82A2: 90 02
 	INC soundPtr+1                  ;c - - - - - 0x00C2B4 06:82A4: E6 D1
 loc_06_82A6:
-	LSR ram_00C4                    ;C - - - - - 0x00C2B6 06:82A6: 46 C4
+	LSR sndTmp                      ;C - - - - - 0x00C2B6 06:82A6: 46 C4
 	BCC loc_06_82AF                 ;C - - - - - 0x00C2B8 06:82A8: 90 05
 	JSR SoundStreamByte             ;C - - - - - 0x00C2BA 06:82AA: 20 86 83
 	STA ram_00D4                    ;C - - - - - 0x00C2BD 06:82AD: 85 D4
 loc_06_82AF:
-	LSR ram_00C4                    ;C - - - - - 0x00C2BF 06:82AF: 46 C4
+	LSR sndTmp                      ;C - - - - - 0x00C2BF 06:82AF: 46 C4
 	BCC loc_06_82B8                 ;C - - - - - 0x00C2C1 06:82B1: 90 05
 	JSR SoundStreamByte             ;c - - - - - 0x00C2C3 06:82B3: 20 86 83
 	STA ram_00D2                    ;c - - - - - 0x00C2C6 06:82B6: 85 D2
@@ -438,7 +438,7 @@ loc_06_82B8:
 	STA ram_00D3                    ;C - - - - - 0x00C2CB 06:82BB: 85 D3
 	STA ptr_C1                      ;C - - - - - 0x00C2CD 06:82BD: 85 C1
 	LDA ram_00D4                    ;C - - - - - 0x00C2CF 06:82BF: A5 D4
-	STA ram_00C4                    ;C - - - - - 0x00C2D1 06:82C1: 85 C4
+	STA sndTmp                      ;C - - - - - 0x00C2D1 06:82C1: 85 C4
 	JSR SoundMul8                   ;C - - - - - 0x00C2D3 06:82C3: 20 06 80
 	LDY ptr_C1                      ;C - - - - - 0x00C2D6 06:82C6: A4 C1
 	INY                             ;C - - - - - 0x00C2D8 06:82C8: C8
@@ -446,16 +446,16 @@ loc_06_82B8:
 	INC soundBusy                   ;C - - - - - 0x00C2DB 06:82CB: E6 C0
 	JSR SoundStreamByte             ;C - - - - - 0x00C2DD 06:82CD: 20 86 83
 	PHA                             ;C - - - - - 0x00C2E0 06:82D0: 48
-	EOR ram_00CF                    ;C - - - - - 0x00C2E1 06:82D1: 45 CF
+	EOR sndChannelMask              ;C - - - - - 0x00C2E1 06:82D1: 45 CF
 	BEQ loc_06_82DA                 ;C - - - - - 0x00C2E3 06:82D3: F0 05
-	STA ram_00CF                    ;C - - - - - 0x00C2E5 06:82D5: 85 CF
+	STA sndChannelMask              ;C - - - - - 0x00C2E5 06:82D5: 85 CF
 	JSR SoundSilenceMasked          ;C - - - - - 0x00C2E7 06:82D7: 20 D4 81
 loc_06_82DA:
 	PLA                             ;C - - - - - 0x00C2EA 06:82DA: 68
-	STA ram_00CF                    ;C - - - - - 0x00C2EB 06:82DB: 85 CF
+	STA sndChannelMask              ;C - - - - - 0x00C2EB 06:82DB: 85 CF
 	RTS                             ;C - - - - - 0x00C2ED 06:82DD: 60
 SoundChannelTick:
-	LDY ram_0700,X                  ;C - - - - - 0x00C2EE 06:82DE: BC 00 07
+	LDY sndInstrument,X             ;C - - - - - 0x00C2EE 06:82DE: BC 00 07
 	BEQ loc_06_82E6                 ;C - - - - - 0x00C2F1 06:82E1: F0 03
 	JSR SoundSelectInstrument       ;C - - - - - 0x00C2F3 06:82E3: 20 84 86
 loc_06_82E6:
@@ -472,29 +472,29 @@ loc_06_82E6:
 loc_06_82FA:
 	RTS                             ;C - - - - - 0x00C30A 06:82FA: 60
 loc_06_82FB:
-	DEC ram_0710,X                  ;C - - - - - 0x00C30B 06:82FB: DE 10 07
+	DEC sndNoteTimer,X              ;C - - - - - 0x00C30B 06:82FB: DE 10 07
 	BNE loc_06_82FA                 ;C - - - - - 0x00C30E 06:82FE: D0 FA
 loc_06_8300:
-	LDA ram_0704,X                  ;C - - - - - 0x00C310 06:8300: BD 04 07
+	LDA sndState,X                  ;C - - - - - 0x00C310 06:8300: BD 04 07
 	AND #$04                        ;C - - - - - 0x00C313 06:8303: 29 04
 	BNE loc_06_82FA                 ;C - - - - - 0x00C315 06:8305: D0 F3
 	JMP SoundEnterState3            ;C - - - - - 0x00C317 06:8307: 4C A3 85
 loc_06_830A:
 	LDA #$00                        ;C - - - - - 0x00C31A 06:830A: A9 00
-	STA ram_00C4                    ;C - - - - - 0x00C31C 06:830C: 85 C4
+	STA sndTmp                      ;C - - - - - 0x00C31C 06:830C: 85 C4
 	JSR SoundStreamByte             ;C - - - - - 0x00C31E 06:830E: 20 86 83
 loc_06_8311:
 	LSR A                           ;C - - - - - 0x00C321 06:8311: 4A
 	BCC loc_06_8320                 ;C - - - - - 0x00C322 06:8312: 90 0C
 	PHA                             ;C - - - - - 0x00C324 06:8314: 48
 	JSR SoundStreamByte             ;C - - - - - 0x00C325 06:8315: 20 86 83
-	STA ram_00C3                    ;C - - - - - 0x00C328 06:8318: 85 C3
-	LDA ram_00C4                    ;C - - - - - 0x00C32A 06:831A: A5 C4
+	STA sndParam                    ;C - - - - - 0x00C328 06:8318: 85 C3
+	LDA sndTmp                      ;C - - - - - 0x00C32A 06:831A: A5 C4
 	JSR SoundCmdDispatch            ;C - - - - - 0x00C32C 06:831C: 20 26 83
 	PLA                             ;C - - - - - 0x00C32F 06:831F: 68
 loc_06_8320:
 	BEQ loc_06_8333                 ;C - - - - - 0x00C330 06:8320: F0 11
-	INC ram_00C4                    ;C - - - - - 0x00C332 06:8322: E6 C4
+	INC sndTmp                      ;C - - - - - 0x00C332 06:8322: E6 C4
 	BNE loc_06_8311                 ;C - - - - - 0x00C334 06:8324: D0 EB
 SoundCmdDispatch:
 	JSR SoundJumpInline             ;C - - - - - 0x00C336 06:8326: 20 23 80
@@ -503,17 +503,17 @@ loc_06_8333:
 	JSR SoundStreamByte             ;C - - - - - 0x00C343 06:8333: 20 86 83
 	TAY                             ;C - - - - - 0x00C346 06:8336: A8
 	BNE loc_06_8349                 ;C - - - - - 0x00C347 06:8337: D0 10
-	STA ram_0710,X                  ;C - - - - - 0x00C349 06:8339: 9D 10 07
-	LDA ram_0704,X                  ;C - - - - - 0x00C34C 06:833C: BD 04 07
+	STA sndNoteTimer,X              ;C - - - - - 0x00C349 06:8339: 9D 10 07
+	LDA sndState,X                  ;C - - - - - 0x00C34C 06:833C: BD 04 07
 	AND #$F8                        ;C - - - - - 0x00C34F 06:833F: 29 F8
 	ORA #$04                        ;C - - - - - 0x00C351 06:8341: 09 04
-	STA ram_0704,X                  ;C - - - - - 0x00C353 06:8343: 9D 04 07
+	STA sndState,X                  ;C - - - - - 0x00C353 06:8343: 9D 04 07
 	JMP SoundSilenceChannel         ;C - - - - - 0x00C356 06:8346: 4C D8 80
 loc_06_8349:
-	LDA ram_0704,X                  ;C - - - - - 0x00C359 06:8349: BD 04 07
+	LDA sndState,X                  ;C - - - - - 0x00C359 06:8349: BD 04 07
 	ORA #$20                        ;C - - - - - 0x00C35C 06:834C: 09 20
-	STA ram_0704,X                  ;C - - - - - 0x00C35E 06:834E: 9D 04 07
-	LDA ram_0718,X                  ;C - - - - - 0x00C361 06:8351: BD 18 07
+	STA sndState,X                  ;C - - - - - 0x00C35E 06:834E: 9D 04 07
+	LDA sndParamD,X                 ;C - - - - - 0x00C361 06:8351: BD 18 07
 	ASL A                           ;C - - - - - 0x00C364 06:8354: 0A
 	LDA #$54                        ;C - - - - - 0x00C365 06:8355: A9 54
 	BCS loc_06_835B                 ;C - - - - - 0x00C367 06:8357: B0 02
@@ -534,7 +534,7 @@ loc_06_836B:
 	DEY                             ;C - - - - - 0x00C383 06:8373: 88
 	TXA                             ;C - - - - - 0x00C384 06:8374: 8A
 	BNE loc_06_837F                 ;C - - - - - 0x00C385 06:8375: D0 08
-	STA ram_00C3                    ;C - - - - - 0x00C387 06:8377: 85 C3
+	STA sndParam                    ;C - - - - - 0x00C387 06:8377: 85 C3
 	TYA                             ;C - - - - - 0x00C389 06:8379: 98
 	EOR #$0F                        ;C - - - - - 0x00C38A 06:837A: 49 0F
 	JMP SoundSetPeriod              ;C - - - - - 0x00C38C 06:837C: 4C 36 86
@@ -562,7 +562,7 @@ SoundChannelStep:
 	BEQ loc_06_83CC                 ;C - - - - - 0x00C3AD 06:839D: F0 2D
 	LDA ram_0738,X                  ;C - - - - - 0x00C3AF 06:839F: BD 38 07
 	BEQ SoundNextNote               ;C - - - - - 0x00C3B2 06:83A2: F0 29
-	LDY ram_0700,X                  ;C - - - - - 0x00C3B4 06:83A4: BC 00 07
+	LDY sndInstrument,X             ;C - - - - - 0x00C3B4 06:83A4: BC 00 07
 	BEQ loc_06_83AF                 ;C - - - - - 0x00C3B7 06:83A7: F0 06
 	JSR SoundSelectInstrument       ;C - - - - - 0x00C3B9 06:83A9: 20 84 86
 	JSR SoundEnvelopeStep           ;C - - - - - 0x00C3BC 06:83AC: 20 BA 86
@@ -611,14 +611,14 @@ loc_06_83EF:
 	ASL A                           ;C - - - - - 0x00C400 06:83F0: 0A
 	LDA tbl_06_891C,Y               ;C - - - - - 0x00C401 06:83F1: B9 1C 89
 	BCC loc_06_8406                 ;C - - - - - 0x00C404 06:83F4: 90 10
-	STA ram_00C3                    ;C - - - - - 0x00C406 06:83F6: 85 C3
+	STA sndParam                    ;C - - - - - 0x00C406 06:83F6: 85 C3
 	LDA ram_0730,X                  ;C - - - - - 0x00C408 06:83F8: BD 30 07
 	AND #$EF                        ;C - - - - - 0x00C40B 06:83FB: 29 EF
 	STA ram_0730,X                  ;C - - - - - 0x00C40D 06:83FD: 9D 30 07
-	LDA ram_00C3                    ;C - - - - - 0x00C410 06:8400: A5 C3
+	LDA sndParam                    ;C - - - - - 0x00C410 06:8400: A5 C3
 	LSR A                           ;C - - - - - 0x00C412 06:8402: 4A
 	CLC                             ;C - - - - - 0x00C413 06:8403: 18
-	ADC ram_00C3                    ;C - - - - - 0x00C414 06:8404: 65 C3
+	ADC sndParam                    ;C - - - - - 0x00C414 06:8404: 65 C3
 loc_06_8406:
 	CLC                             ;C - - - - - 0x00C416 06:8406: 18
 	ADC ram_0738,X                  ;C - - - - - 0x00C417 06:8407: 7D 38 07
@@ -631,7 +631,7 @@ loc_06_8406:
 	JMP loc_06_8491                 ;C - - - - - 0x00C426 06:8416: 4C 91 84
 loc_06_8419:
 	PHA                             ;C - - - - - 0x00C429 06:8419: 48
-	STY ram_00C4                    ;C - - - - - 0x00C42A 06:841A: 84 C4
+	STY sndTmp                      ;C - - - - - 0x00C42A 06:841A: 84 C4
 	LDA ram_073C,X                  ;C - - - - - 0x00C42C 06:841C: BD 3C 07
 	STA ptr_C1                      ;C - - - - - 0x00C42F 06:841F: 85 C1
 	JSR SoundMul8                   ;C - - - - - 0x00C431 06:8421: 20 06 80
@@ -645,39 +645,39 @@ loc_06_842A:
 	DEY                             ;C - - - - - 0x00C43F 06:842F: 88
 	LDA ram_0730,X                  ;C - - - - - 0x00C440 06:8430: BD 30 07
 	BPL loc_06_8440                 ;C - - - - - 0x00C443 06:8433: 10 0B
-	LDA ram_0718,X                  ;C - - - - - 0x00C445 06:8435: BD 18 07
+	LDA sndParamD,X                 ;C - - - - - 0x00C445 06:8435: BD 18 07
 	BNE loc_06_8454                 ;C - - - - - 0x00C448 06:8438: D0 1A
 	JSR SoundReleaseCheck           ;C - - - - - 0x00C44A 06:843A: 20 44 86
 	JMP loc_06_847E                 ;C - - - - - 0x00C44D 06:843D: 4C 7E 84
 loc_06_8440:
 	JSR SoundStartNote              ;C - - - - - 0x00C450 06:8440: 20 AE 85
-	LDA ram_00CF                    ;C - - - - - 0x00C453 06:8443: A5 CF
+	LDA sndChannelMask              ;C - - - - - 0x00C453 06:8443: A5 CF
 	BMI loc_06_8454                 ;C - - - - - 0x00C455 06:8445: 30 0D
-	STY ram_00C3                    ;C - - - - - 0x00C457 06:8447: 84 C3
+	STY sndParam                    ;C - - - - - 0x00C457 06:8447: 84 C3
 	TXA                             ;C - - - - - 0x00C459 06:8449: 8A
 	AND #$03                        ;C - - - - - 0x00C45A 06:844A: 29 03
 	TAY                             ;C - - - - - 0x00C45C 06:844C: A8
 	LDA #$FF                        ;C - - - - - 0x00C45D 06:844D: A9 FF
 	STA ram_077C,Y                  ;C - - - - - 0x00C45F 06:844F: 99 7C 07
-	LDY ram_00C3                    ;C - - - - - 0x00C462 06:8452: A4 C3
+	LDY sndParam                    ;C - - - - - 0x00C462 06:8452: A4 C3
 loc_06_8454:
 	TXA                             ;C - - - - - 0x00C464 06:8454: 8A
 	AND #$03                        ;C - - - - - 0x00C465 06:8455: 29 03
 	BNE loc_06_8466                 ;C - - - - - 0x00C467 06:8457: D0 0D
-	STA ram_00C3                    ;C - - - - - 0x00C469 06:8459: 85 C3
+	STA sndParam                    ;C - - - - - 0x00C469 06:8459: 85 C3
 	TYA                             ;C - - - - - 0x00C46B 06:845B: 98
 	AND #$0F                        ;C - - - - - 0x00C46C 06:845C: 29 0F
 	EOR #$0F                        ;C - - - - - 0x00C46E 06:845E: 49 0F
 	JSR SoundSetPeriod              ;C - - - - - 0x00C470 06:8460: 20 36 86
 	JMP loc_06_847E                 ;C - - - - - 0x00C473 06:8463: 4C 7E 84
 loc_06_8466:
-	STY ram_00C3                    ;C - - - - - 0x00C476 06:8466: 84 C3
+	STY sndParam                    ;C - - - - - 0x00C476 06:8466: 84 C3
 	LDA ram_0730,X                  ;C - - - - - 0x00C478 06:8468: BD 30 07
 	AND #$0F                        ;C - - - - - 0x00C47B 06:846B: 29 0F
 	TAY                             ;C - - - - - 0x00C47D 06:846D: A8
 	LDA tbl_06_8923,Y               ;C - - - - - 0x00C47E 06:846E: B9 23 89
 	CLC                             ;C - - - - - 0x00C481 06:8471: 18
-	ADC ram_00C3                    ;C - - - - - 0x00C482 06:8472: 65 C3
+	ADC sndParam                    ;C - - - - - 0x00C482 06:8472: 65 C3
 	CLC                             ;C - - - - - 0x00C484 06:8474: 18
 	ADC ram_00CB                    ;C - - - - - 0x00C485 06:8475: 65 CB
 	CLC                             ;C - - - - - 0x00C487 06:8477: 18
@@ -688,10 +688,10 @@ loc_06_847E:
 	TAY                             ;C - - - - - 0x00C491 06:8481: A8
 	AND #$40                        ;C - - - - - 0x00C492 06:8482: 29 40
 	ASL A                           ;C - - - - - 0x00C494 06:8484: 0A
-	STA ram_00C4                    ;C - - - - - 0x00C495 06:8485: 85 C4
+	STA sndTmp                      ;C - - - - - 0x00C495 06:8485: 85 C4
 	TYA                             ;C - - - - - 0x00C497 06:8487: 98
 	AND #$7F                        ;C - - - - - 0x00C498 06:8488: 29 7F
-	ORA ram_00C4                    ;C - - - - - 0x00C49A 06:848A: 05 C4
+	ORA sndTmp                      ;C - - - - - 0x00C49A 06:848A: 05 C4
 	STA ram_0730,X                  ;C - - - - - 0x00C49C 06:848C: 9D 30 07
 	BPL loc_06_8496                 ;C - - - - - 0x00C49F 06:848F: 10 05
 loc_06_8491:
@@ -703,10 +703,10 @@ loc_06_8496:
 SoundCommand:
 	CMP #$04                        ;C - - - - - 0x00C4A7 06:8497: C9 04
 	BCC loc_06_84A4                 ;C - - - - - 0x00C4A9 06:8499: 90 09
-	STA ram_00C4                    ;C - - - - - 0x00C4AB 06:849B: 85 C4
+	STA sndTmp                      ;C - - - - - 0x00C4AB 06:849B: 85 C4
 	JSR SoundReadSubPtr             ;C - - - - - 0x00C4AD 06:849D: 20 92 85
-	STA ram_00C3                    ;C - - - - - 0x00C4B0 06:84A0: 85 C3
-	LDA ram_00C4                    ;C - - - - - 0x00C4B2 06:84A2: A5 C4
+	STA sndParam                    ;C - - - - - 0x00C4B0 06:84A0: 85 C3
+	LDA sndTmp                      ;C - - - - - 0x00C4B2 06:84A2: A5 C4
 loc_06_84A4:
 	JSR SoundJumpInline             ;C - - - - - 0x00C4B4 06:84A4: 20 23 80
 	.word SndCmd00_ToggleFlag20, SndCmd01_ToggleFlag40, SndCmd02_SetFlag10, SndCmd03_ToggleFlag08, SndCmd04_SetModeBits, SndCmd05_Tempo, SndCmd06_NoteScale, SndCmd07_Volume;W 0x00C4B7 06:84A7:
@@ -735,29 +735,29 @@ SndCmd05_Tempo:
 	LDA #$00                        ;C - - J - - 0x00C501 06:84F1: A9 00
 	STA ram_00C8                    ;C - - - - - 0x00C503 06:84F3: 85 C8
 	JSR SoundReadSubPtr             ;C - - - - - 0x00C505 06:84F5: 20 92 85
-	LDY ram_00C3                    ;C - - - - - 0x00C508 06:84F8: A4 C3
+	LDY sndParam                    ;C - - - - - 0x00C508 06:84F8: A4 C3
 	STA ram_00CA                    ;C - - - - - 0x00C50A 06:84FA: 85 CA
 	STY ram_00C9                    ;C - - - - - 0x00C50C 06:84FC: 84 C9
 	RTS                             ;C - - - - - 0x00C50E 06:84FE: 60
 ; ram_073C,X := param
 SndCmd06_NoteScale:
-	LDA ram_00C3                    ;C - - J - - 0x00C50F 06:84FF: A5 C3
+	LDA sndParam                    ;C - - J - - 0x00C50F 06:84FF: A5 C3
 	STA ram_073C,X                  ;C - - - - - 0x00C511 06:8501: 9D 3C 07
 	RTS                             ;C - - - - - 0x00C514 06:8504: 60
 ; low 3 bits of flags := param
 SndCmd09_LenMode:
 	LDA ram_0730,X                  ;C - - J - - 0x00C515 06:8505: BD 30 07
 	AND #$F8                        ;C - - - - - 0x00C518 06:8508: 29 F8
-	ORA ram_00C3                    ;C - - - - - 0x00C51A 06:850A: 05 C3
+	ORA sndParam                    ;C - - - - - 0x00C51A 06:850A: 05 C3
 	STA ram_0730,X                  ;C - - - - - 0x00C51C 06:850C: 9D 30 07
 	RTS                             ;C - - - - - 0x00C51F 06:850F: 60
 ; global transpose
 SndCmd0A_Transpose:
-	LDA ram_00C3                    ;C - - J - - 0x00C520 06:8510: A5 C3
+	LDA sndParam                    ;C - - J - - 0x00C520 06:8510: A5 C3
 	STA ram_00CB                    ;C - - - - - 0x00C522 06:8512: 85 CB
 	RTS                             ;C - - - - - 0x00C524 06:8514: 60
 SndCmd0B_ChanTranspose:
-	LDA ram_00C3                    ;C - - J - - 0x00C525 06:8515: A5 C3
+	LDA sndParam                    ;C - - J - - 0x00C525 06:8515: A5 C3
 	STA ram_0734,X                  ;C - - - - - 0x00C527 06:8517: 9D 34 07
 	RTS                             ;C - - - - - 0x00C52A 06:851A: 60
 ; loop slot 0..3 (also $12-$15): count param, then big-endian address
@@ -778,14 +778,14 @@ loc_06_8529:
 	CLC                             ;C - - - - - 0x00C53C 06:852C: 18
 	ADC ptr_C1+1                    ;C - - - - - 0x00C53D 06:852D: 65 C2
 	TAY                             ;C - - - - - 0x00C53F 06:852F: A8
-	LDA ram_00C4                    ;C - - - - - 0x00C540 06:8530: A5 C4
+	LDA sndTmp                      ;C - - - - - 0x00C540 06:8530: A5 C4
 	CMP #$12                        ;C - - - - - 0x00C542 06:8532: C9 12
 	BCS loc_06_8547                 ;C - - - - - 0x00C544 06:8534: B0 11
 	LDA ram_0744,Y                  ;C - - - - - 0x00C546 06:8536: B9 44 07
 	SEC                             ;C - - - - - 0x00C549 06:8539: 38
 	SBC #$01                        ;C - - - - - 0x00C54A 06:853A: E9 01
 	BCS loc_06_8540                 ;C - - - - - 0x00C54C 06:853C: B0 02
-	LDA ram_00C3                    ;C - - - - - 0x00C54E 06:853E: A5 C3
+	LDA sndParam                    ;C - - - - - 0x00C54E 06:853E: A5 C3
 loc_06_8540:
 	STA ram_0744,Y                  ;C - - - - - 0x00C550 06:8540: 99 44 07
 	BEQ loc_06_8566                 ;C - - - - - 0x00C553 06:8543: F0 21
@@ -799,10 +799,10 @@ loc_06_8547:
 	JSR SndCmd04_SetModeBits        ;C - - - - - 0x00C562 06:8552: 20 75 85
 loc_06_8555:
 	JSR SoundReadSubPtr             ;C - - - - - 0x00C565 06:8555: 20 92 85
-	STA ram_00C3                    ;C - - - - - 0x00C568 06:8558: 85 C3
+	STA sndParam                    ;C - - - - - 0x00C568 06:8558: 85 C3
 	JSR SoundReadSubPtr             ;C - - - - - 0x00C56A 06:855A: 20 92 85
 	STA ram_0728,X                  ;C - - - - - 0x00C56D 06:855D: 9D 28 07
-	LDA ram_00C3                    ;C - - - - - 0x00C570 06:8560: A5 C3
+	LDA sndParam                    ;C - - - - - 0x00C570 06:8560: A5 C3
 	STA ram_072C,X                  ;C - - - - - 0x00C572 06:8562: 9D 2C 07
 	RTS                             ;C - - - - - 0x00C575 06:8565: 60
 loc_06_8566:
@@ -818,7 +818,7 @@ loc_06_8574:
 SndCmd04_SetModeBits:
 	LDA ram_0730,X                  ;C - - J - - 0x00C585 06:8575: BD 30 07
 	AND #$97                        ;C - - - - - 0x00C588 06:8578: 29 97
-	ORA ram_00C3                    ;C - - - - - 0x00C58A 06:857A: 05 C3
+	ORA sndParam                    ;C - - - - - 0x00C58A 06:857A: 05 C3
 	STA ram_0730,X                  ;C - - - - - 0x00C58C 06:857C: 9D 30 07
 	RTS                             ;C - - - - - 0x00C58F 06:857F: 60
 SndCmd17_EndChannel:
@@ -829,7 +829,7 @@ ofs_06_8584:
 	STA ram_0728,X                  ;C - - - - - 0x00C594 06:8584: 9D 28 07
 	STA ram_072C,X                  ;C - - - - - 0x00C597 06:8587: 9D 2C 07
 ofs_06_858A:
-	LDA ram_00CF                    ;C - - - - - 0x00C59A 06:858A: A5 CF
+	LDA sndChannelMask              ;C - - - - - 0x00C59A 06:858A: A5 CF
 	BMI loc_06_8591                 ;C - - - - - 0x00C59C 06:858C: 30 03
 	JMP SoundSilenceChannel         ;C - - - - - 0x00C59E 06:858E: 4C D8 80
 loc_06_8591:
@@ -843,35 +843,35 @@ SoundReadSubPtr:
 loc_06_85A0:
 	JMP SoundReadByte               ;C - - - - - 0x00C5B0 06:85A0: 4C 3A 80
 SoundEnterState3:
-	LDA ram_0704,X                  ;C - - - - - 0x00C5B3 06:85A3: BD 04 07
+	LDA sndState,X                  ;C - - - - - 0x00C5B3 06:85A3: BD 04 07
 	AND #$F8                        ;C - - - - - 0x00C5B6 06:85A6: 29 F8
 	ORA #$03                        ;C - - - - - 0x00C5B8 06:85A8: 09 03
-	STA ram_0704,X                  ;C - - - - - 0x00C5BA 06:85AA: 9D 04 07
+	STA sndState,X                  ;C - - - - - 0x00C5BA 06:85AA: 9D 04 07
 	RTS                             ;C - - - - - 0x00C5BD 06:85AD: 60
 SoundStartNote:
 	TYA                             ;C - - - - - 0x00C5BE 06:85AE: 98
 	PHA                             ;C - - - - - 0x00C5BF 06:85AF: 48
 	LDY #$00                        ;C - - - - - 0x00C5C0 06:85B0: A0 00
-	LDA ram_0704,X                  ;C - - - - - 0x00C5C2 06:85B2: BD 04 07
+	LDA sndState,X                  ;C - - - - - 0x00C5C2 06:85B2: BD 04 07
 	AND #$F8                        ;C - - - - - 0x00C5C5 06:85B5: 29 F8
-	STA ram_0704,X                  ;C - - - - - 0x00C5C7 06:85B7: 9D 04 07
+	STA sndState,X                  ;C - - - - - 0x00C5C7 06:85B7: 9D 04 07
 	CPX #$29                        ;C - - - - - 0x00C5CA 06:85BA: E0 29
 	BEQ loc_06_85D0                 ;C - - - - - 0x00C5CC 06:85BC: F0 12
 	CPX #$01                        ;C - - - - - 0x00C5CE 06:85BE: E0 01
 	BNE loc_06_85D7                 ;C - - - - - 0x00C5D0 06:85C0: D0 15
 	LDA ram_00D3                    ;C - - - - - 0x00C5D2 06:85C2: A5 D3
 	STA ptr_C1                      ;C - - - - - 0x00C5D4 06:85C4: 85 C1
-	LDA ram_070C,X                  ;C - - - - - 0x00C5D6 06:85C6: BD 0C 07
-	STA ram_00C4                    ;C - - - - - 0x00C5D9 06:85C9: 85 C4
+	LDA sndVolReg,X                 ;C - - - - - 0x00C5D6 06:85C6: BD 0C 07
+	STA sndTmp                      ;C - - - - - 0x00C5D9 06:85C9: 85 C4
 	JSR SoundMul8                   ;C - - - - - 0x00C5DB 06:85CB: 20 06 80
 	LDY ptr_C1                      ;C - - - - - 0x00C5DE 06:85CE: A4 C1
 loc_06_85D0:
 	INY                             ;C - - - - - 0x00C5E0 06:85D0: C8
-	INC ram_0704,X                  ;C - - - - - 0x00C5E1 06:85D1: FE 04 07
-	INC ram_0704,X                  ;C - - - - - 0x00C5E4 06:85D4: FE 04 07
+	INC sndState,X                  ;C - - - - - 0x00C5E1 06:85D1: FE 04 07
+	INC sndState,X                  ;C - - - - - 0x00C5E4 06:85D4: FE 04 07
 loc_06_85D7:
 	TYA                             ;C - - - - - 0x00C5E7 06:85D7: 98
-	STA ram_0710,X                  ;C - - - - - 0x00C5E8 06:85D8: 9D 10 07
+	STA sndNoteTimer,X              ;C - - - - - 0x00C5E8 06:85D8: 9D 10 07
 	PLA                             ;C - - - - - 0x00C5EB 06:85DB: 68
 	TAY                             ;C - - - - - 0x00C5EC 06:85DC: A8
 	RTS                             ;C - - - - - 0x00C5ED 06:85DD: 60
@@ -880,19 +880,19 @@ SoundNotePitch:
 	BCC loc_06_85E4                 ;C - - - - - 0x00C5F0 06:85E0: 90 02
 	LDA #$5F                        ;c - - - - - 0x00C5F2 06:85E2: A9 5F
 loc_06_85E4:
-	STA ram_00C3                    ;C - - - - - 0x00C5F4 06:85E4: 85 C3
-	INC ram_00C3                    ;C - - - - - 0x00C5F6 06:85E6: E6 C3
+	STA sndParam                    ;C - - - - - 0x00C5F4 06:85E4: 85 C3
+	INC sndParam                    ;C - - - - - 0x00C5F6 06:85E6: E6 C3
 	CPX #$28                        ;C - - - - - 0x00C5F8 06:85E8: E0 28
 	BCC loc_06_862A                 ;C - - - - - 0x00C5FA 06:85EA: 90 3E
 	LDA ram_071C,X                  ;C - - - - - 0x00C5FC 06:85EC: BD 1C 07
 	BEQ loc_06_861D                 ;C - - - - - 0x00C5FF 06:85EF: F0 2C
-	CMP ram_00C3                    ;C - - - - - 0x00C601 06:85F1: C5 C3
+	CMP sndParam                    ;C - - - - - 0x00C601 06:85F1: C5 C3
 	BNE loc_06_85FC                 ;C - - - - - 0x00C603 06:85F3: D0 07
 	LDA ram_0730,X                  ;C - - - - - 0x00C605 06:85F5: BD 30 07
 	BPL loc_06_861D                 ;C - - - - - 0x00C608 06:85F8: 10 23
 	BMI SoundReleaseCheck           ;C - - - - - 0x00C60A 06:85FA: 30 48
 loc_06_85FC:
-	LDA ram_0718,X                  ;C - - - - - 0x00C60C 06:85FC: BD 18 07
+	LDA sndParamD,X                 ;C - - - - - 0x00C60C 06:85FC: BD 18 07
 	BEQ loc_06_861D                 ;C - - - - - 0x00C60F 06:85FF: F0 1C
 	BCS loc_06_8607                 ;C - - - - - 0x00C611 06:8601: B0 04
 	ORA #$80                        ;C - - - - - 0x00C613 06:8603: 09 80
@@ -900,111 +900,111 @@ loc_06_85FC:
 loc_06_8607:
 	AND #$7F                        ;C - - - - - 0x00C617 06:8607: 29 7F
 loc_06_8609:
-	STA ram_0718,X                  ;C - - - - - 0x00C619 06:8609: 9D 18 07
-	LDA ram_0704,X                  ;C - - - - - 0x00C61C 06:860C: BD 04 07
+	STA sndParamD,X                 ;C - - - - - 0x00C619 06:8609: 9D 18 07
+	LDA sndState,X                  ;C - - - - - 0x00C61C 06:860C: BD 04 07
 	ORA #$20                        ;C - - - - - 0x00C61F 06:860F: 09 20
-	STA ram_0704,X                  ;C - - - - - 0x00C621 06:8611: 9D 04 07
-	LDA ram_00C3                    ;C - - - - - 0x00C624 06:8614: A5 C3
+	STA sndState,X                  ;C - - - - - 0x00C621 06:8611: 9D 04 07
+	LDA sndParam                    ;C - - - - - 0x00C624 06:8614: A5 C3
 	LDY ram_071C,X                  ;C - - - - - 0x00C626 06:8616: BC 1C 07
-	STY ram_00C3                    ;C - - - - - 0x00C629 06:8619: 84 C3
+	STY sndParam                    ;C - - - - - 0x00C629 06:8619: 84 C3
 	BNE loc_06_8627                 ;C - - - - - 0x00C62B 06:861B: D0 0A
 loc_06_861D:
-	LDA ram_0704,X                  ;C - - - - - 0x00C62D 06:861D: BD 04 07
+	LDA sndState,X                  ;C - - - - - 0x00C62D 06:861D: BD 04 07
 	AND #$DF                        ;C - - - - - 0x00C630 06:8620: 29 DF
-	STA ram_0704,X                  ;C - - - - - 0x00C632 06:8622: 9D 04 07
-	LDA ram_00C3                    ;C - - - - - 0x00C635 06:8625: A5 C3
+	STA sndState,X                  ;C - - - - - 0x00C632 06:8622: 9D 04 07
+	LDA sndParam                    ;C - - - - - 0x00C635 06:8625: A5 C3
 loc_06_8627:
 	STA ram_071C,X                  ;C - - - - - 0x00C637 06:8627: 9D 1C 07
 loc_06_862A:
-	ASL ram_00C3                    ;C - - - - - 0x00C63A 06:862A: 06 C3
-	LDY ram_00C3                    ;C - - - - - 0x00C63C 06:862C: A4 C3
+	ASL sndParam                    ;C - - - - - 0x00C63A 06:862A: 06 C3
+	LDY sndParam                    ;C - - - - - 0x00C63C 06:862C: A4 C3
 	LDA tbl_06_8959,Y               ;C - - - - - 0x00C63E 06:862E: B9 59 89
-	STA ram_00C3                    ;C - - - - - 0x00C641 06:8631: 85 C3
+	STA sndParam                    ;C - - - - - 0x00C641 06:8631: 85 C3
 	LDA tbl_06_895A,Y               ;C - - - - - 0x00C643 06:8633: B9 5A 89
 SoundSetPeriod:
 	STA ram_0724,X                  ;C - - - - - 0x00C646 06:8636: 9D 24 07
-	LDA ram_00C3                    ;C - - - - - 0x00C649 06:8639: A5 C3
+	LDA sndParam                    ;C - - - - - 0x00C649 06:8639: A5 C3
 	STA ram_0720,X                  ;C - - - - - 0x00C64B 06:863B: 9D 20 07
 	LDY #$04                        ;C - - - - - 0x00C64E 06:863E: A0 04
 	LDA (ptr_C5),Y                  ;C - - - - - 0x00C650 06:8640: B1 C5
 	BMI loc_06_864C                 ;C - - - - - 0x00C652 06:8642: 30 08
 SoundReleaseCheck:
-	LDA ram_0704,X                  ;C - - - - - 0x00C654 06:8644: BD 04 07
+	LDA sndState,X                  ;C - - - - - 0x00C654 06:8644: BD 04 07
 	AND #$08                        ;C - - - - - 0x00C657 06:8647: 29 08
 	BNE loc_06_864C                 ;C - - - - - 0x00C659 06:8649: D0 01
 	RTS                             ;C - - - - - 0x00C65B 06:864B: 60
 loc_06_864C:
 	LDA #$00                        ;C - - - - - 0x00C65C 06:864C: A9 00
-	STA ram_0708,X                  ;C - - - - - 0x00C65E 06:864E: 9D 08 07
-	LDA ram_0704,X                  ;C - - - - - 0x00C661 06:8651: BD 04 07
+	STA sndEnvPos,X                 ;C - - - - - 0x00C65E 06:864E: 9D 08 07
+	LDA sndState,X                  ;C - - - - - 0x00C661 06:8651: BD 04 07
 	AND #$37                        ;C - - - - - 0x00C664 06:8654: 29 37
-	STA ram_0704,X                  ;C - - - - - 0x00C666 06:8656: 9D 04 07
+	STA sndState,X                  ;C - - - - - 0x00C666 06:8656: 9D 04 07
 	RTS                             ;C - - - - - 0x00C669 06:8659: 60
 ; volume/duty register value
 SndCmd07_Volume:
 	CPX #$01                        ;C - - J - - 0x00C66A 06:865A: E0 01
 	BNE loc_06_8662                 ;C - - - - - 0x00C66C 06:865C: D0 04
-	LDA ram_00C3                    ;C - - - - - 0x00C66E 06:865E: A5 C3
+	LDA sndParam                    ;C - - - - - 0x00C66E 06:865E: A5 C3
 	BNE loc_06_866B                 ;C - - - - - 0x00C670 06:8660: D0 09
 loc_06_8662:
-	LDA ram_070C,X                  ;C - - - - - 0x00C672 06:8662: BD 0C 07
+	LDA sndVolReg,X                 ;C - - - - - 0x00C672 06:8662: BD 0C 07
 	AND #$C0                        ;C - - - - - 0x00C675 06:8665: 29 C0
-	ORA ram_00C3                    ;C - - - - - 0x00C677 06:8667: 05 C3
+	ORA sndParam                    ;C - - - - - 0x00C677 06:8667: 05 C3
 	ORA #$30                        ;C - - - - - 0x00C679 06:8669: 09 30
 loc_06_866B:
-	STA ram_070C,X                  ;C - - - - - 0x00C67B 06:866B: 9D 0C 07
+	STA sndVolReg,X                 ;C - - - - - 0x00C67B 06:866B: 9D 0C 07
 	RTS                             ;C - - - - - 0x00C67E 06:866E: 60
 ; param+1 = instrument number (8-byte entries, base at 06:8A41)
 SndCmd08_Instrument:
-	INC ram_00C3                    ;C - - J - - 0x00C67F 06:866F: E6 C3
-	LDA ram_00C3                    ;C - - - - - 0x00C681 06:8671: A5 C3
-	CMP ram_0700,X                  ;C - - - - - 0x00C683 06:8673: DD 00 07
+	INC sndParam                    ;C - - J - - 0x00C67F 06:866F: E6 C3
+	LDA sndParam                    ;C - - - - - 0x00C681 06:8671: A5 C3
+	CMP sndInstrument,X             ;C - - - - - 0x00C683 06:8673: DD 00 07
 	BEQ loc_06_86A0                 ;C - - - - - 0x00C686 06:8676: F0 28
-	STA ram_0700,X                  ;C - - - - - 0x00C688 06:8678: 9D 00 07
+	STA sndInstrument,X             ;C - - - - - 0x00C688 06:8678: 9D 00 07
 	TAY                             ;C - - - - - 0x00C68B 06:867B: A8
-	LDA ram_0704,X                  ;C - - - - - 0x00C68C 06:867C: BD 04 07
+	LDA sndState,X                  ;C - - - - - 0x00C68C 06:867C: BD 04 07
 	ORA #$08                        ;C - - - - - 0x00C68F 06:867F: 09 08
 ofs_06_8681:
-	STA ram_0704,X                  ;C - - - - - 0x00C691 06:8681: 9D 04 07
+	STA sndState,X                  ;C - - - - - 0x00C691 06:8681: 9D 04 07
 SoundSelectInstrument:
 	DEY                             ;C - - - - - 0x00C694 06:8684: 88
 ofs_06_8685:
 	LDA #$00                        ;C - - - - - 0x00C695 06:8685: A9 00
-	STA ram_00C3                    ;C - - - - - 0x00C697 06:8687: 85 C3
+	STA sndParam                    ;C - - - - - 0x00C697 06:8687: 85 C3
 	TYA                             ;C - - - - - 0x00C699 06:8689: 98
 	ASL A                           ;C - - - - - 0x00C69A 06:868A: 0A
-	ROL ram_00C3                    ;C - - - - - 0x00C69B 06:868B: 26 C3
+	ROL sndParam                    ;C - - - - - 0x00C69B 06:868B: 26 C3
 	ASL A                           ;C - - - - - 0x00C69D 06:868D: 0A
-	ROL ram_00C3                    ;C - - - - - 0x00C69E 06:868E: 26 C3
+	ROL sndParam                    ;C - - - - - 0x00C69E 06:868E: 26 C3
 	ASL A                           ;C - - - - - 0x00C6A0 06:8690: 0A
-	ROL ram_00C3                    ;C - - - - - 0x00C6A1 06:8691: 26 C3
+	ROL sndParam                    ;C - - - - - 0x00C6A1 06:8691: 26 C3
 	CLC                             ;C - - - - - 0x00C6A3 06:8693: 18
 	ADC dat_06_8A42                 ;C - - - - - 0x00C6A4 06:8694: 6D 42 8A
 	STA ptr_C5                      ;C - - - - - 0x00C6A7 06:8697: 85 C5
-	LDA ram_00C3                    ;C - - - - - 0x00C6A9 06:8699: A5 C3
+	LDA sndParam                    ;C - - - - - 0x00C6A9 06:8699: A5 C3
 	ADC dat_06_8A41                 ;C - - - - - 0x00C6AB 06:869B: 6D 41 8A
 	STA ptr_C5+1                    ;C - - - - - 0x00C6AE 06:869E: 85 C6
 loc_06_86A0:
 	RTS                             ;C - - - - - 0x00C6B0 06:86A0: 60
 SndCmd0C_Param714:
-	LDA ram_00C3                    ;C - - J - - 0x00C6B1 06:86A1: A5 C3
-	STA ram_0714,X                  ;C - - - - - 0x00C6B3 06:86A3: 9D 14 07
+	LDA sndParam                    ;C - - J - - 0x00C6B1 06:86A1: A5 C3
+	STA sndParamC,X                 ;C - - - - - 0x00C6B3 06:86A3: 9D 14 07
 	RTS                             ;C - - - - - 0x00C6B6 06:86A6: 60
 SndCmd0D_Param718:
-	LDA ram_00C3                    ;C - - J - - 0x00C6B7 06:86A7: A5 C3
-	STA ram_0718,X                  ;C - - - - - 0x00C6B9 06:86A9: 9D 18 07
+	LDA sndParam                    ;C - - J - - 0x00C6B7 06:86A7: A5 C3
+	STA sndParamD,X                 ;C - - - - - 0x00C6B9 06:86A9: 9D 18 07
 	RTS                             ;C - - - - - 0x00C6BC 06:86AC: 60
 SndCmd18_NoiseVolume:
-	LDA ram_070C,X                  ;C - - J - - 0x00C6BD 06:86AD: BD 0C 07
+	LDA sndVolReg,X                 ;C - - J - - 0x00C6BD 06:86AD: BD 0C 07
 	AND #$0F                        ;C - - - - - 0x00C6C0 06:86B0: 29 0F
-	ORA ram_00C3                    ;C - - - - - 0x00C6C2 06:86B2: 05 C3
+	ORA sndParam                    ;C - - - - - 0x00C6C2 06:86B2: 05 C3
 	ORA #$30                        ;C - - - - - 0x00C6C4 06:86B4: 09 30
-	STA ram_070C,X                  ;C - - - - - 0x00C6C6 06:86B6: 9D 0C 07
+	STA sndVolReg,X                 ;C - - - - - 0x00C6C6 06:86B6: 9D 0C 07
 	RTS                             ;C - - - - - 0x00C6C9 06:86B9: 60
 SoundEnvelopeStep:
-	LDA ram_0710,X                  ;C - - - - - 0x00C6CA 06:86BA: BD 10 07
-	STA ram_00C4                    ;C - - - - - 0x00C6CD 06:86BD: 85 C4
-	LDA ram_0704,X                  ;C - - - - - 0x00C6CF 06:86BF: BD 04 07
+	LDA sndNoteTimer,X              ;C - - - - - 0x00C6CA 06:86BA: BD 10 07
+	STA sndTmp                      ;C - - - - - 0x00C6CD 06:86BD: 85 C4
+	LDA sndState,X                  ;C - - - - - 0x00C6CF 06:86BF: BD 04 07
 	AND #$07                        ;C - - - - - 0x00C6D2 06:86C2: 29 07
 	JSR SoundJumpInline             ;C - - - - - 0x00C6D4 06:86C4: 20 23 80
 	.word ofs_06_86D1, ofs_06_86E6, loc_06_8720, ofs_06_8702, loc_06_8914;W 0x00C6D7 06:86C7:
@@ -1012,7 +1012,7 @@ ofs_06_86D1:
 	LDY #$00                        ;C - - J - - 0x00C6E1 06:86D1: A0 00
 	LDA (ptr_C5),Y                  ;C - - - - - 0x00C6E3 06:86D3: B1 C5
 	TAY                             ;C - - - - - 0x00C6E5 06:86D5: A8
-	LDA ram_00C4                    ;C - - - - - 0x00C6E6 06:86D6: A5 C4
+	LDA sndTmp                      ;C - - - - - 0x00C6E6 06:86D6: A5 C4
 	CLC                             ;C - - - - - 0x00C6E8 06:86D8: 18
 	ADC tbl_06_8933,Y               ;C - - - - - 0x00C6E9 06:86D9: 79 33 89
 	BCS loc_06_86E2                 ;C - - - - - 0x00C6EC 06:86DC: B0 04
@@ -1026,7 +1026,7 @@ ofs_06_86E6:
 	LDA (ptr_C5),Y                  ;C - - - - - 0x00C6F8 06:86E8: B1 C5
 	BEQ loc_06_86FB                 ;C - - - - - 0x00C6FA 06:86EA: F0 0F
 	TAY                             ;C - - - - - 0x00C6FC 06:86EC: A8
-	LDA ram_00C4                    ;C - - - - - 0x00C6FD 06:86ED: A5 C4
+	LDA sndTmp                      ;C - - - - - 0x00C6FD 06:86ED: A5 C4
 	SEC                             ;C - - - - - 0x00C6FF 06:86EF: 38
 	SBC tbl_06_8933,Y               ;C - - - - - 0x00C700 06:86F0: F9 33 89
 	BCC loc_06_86FB                 ;C - - - - - 0x00C703 06:86F3: 90 06
@@ -1046,20 +1046,20 @@ ofs_06_8702:
 	LDA (ptr_C5),Y                  ;C - - - - - 0x00C71B 06:870B: B1 C5
 	BEQ loc_06_8720                 ;C - - - - - 0x00C71D 06:870D: F0 11
 	TAY                             ;C - - - - - 0x00C71F 06:870F: A8
-	LDA ram_00C4                    ;C - - - - - 0x00C720 06:8710: A5 C4
+	LDA sndTmp                      ;C - - - - - 0x00C720 06:8710: A5 C4
 	SEC                             ;C - - - - - 0x00C722 06:8712: 38
 	SBC tbl_06_8933,Y               ;C - - - - - 0x00C723 06:8713: F9 33 89
 	BCS loc_06_871D                 ;C - - - - - 0x00C726 06:8716: B0 05
 loc_06_8718:
 	LDA #$00                        ;C - - - - - 0x00C728 06:8718: A9 00
 loc_06_871A:
-	INC ram_0704,X                  ;C - - - - - 0x00C72A 06:871A: FE 04 07
+	INC sndState,X                  ;C - - - - - 0x00C72A 06:871A: FE 04 07
 loc_06_871D:
-	STA ram_0710,X                  ;C - - - - - 0x00C72D 06:871D: 9D 10 07
+	STA sndNoteTimer,X              ;C - - - - - 0x00C72D 06:871D: 9D 10 07
 loc_06_8720:
 	CPX #$28                        ;C - - - - - 0x00C730 06:8720: E0 28
 	BCC loc_06_8737                 ;C - - - - - 0x00C732 06:8722: 90 13
-	LDA ram_00CF                    ;C - - - - - 0x00C734 06:8724: A5 CF
+	LDA sndChannelMask              ;C - - - - - 0x00C734 06:8724: A5 CF
 	BPL loc_06_872B                 ;C - - - - - 0x00C736 06:8726: 10 03
 	JMP loc_06_88A0                 ;C - - - - - 0x00C738 06:8728: 4C A0 88
 loc_06_872B:
@@ -1079,36 +1079,36 @@ loc_06_8737:
 loc_06_8740:
 	CPX #$29                        ;c - - - - - 0x00C750 06:8740: E0 29
 	BNE loc_06_875B                 ;c - - - - - 0x00C752 06:8742: D0 17
-	STA ram_00C4                    ;c - - - - - 0x00C754 06:8744: 85 C4
+	STA sndTmp                      ;c - - - - - 0x00C754 06:8744: 85 C4
 	LDA ram_0740,X                  ;c - - - - - 0x00C756 06:8746: BD 40 07
 	STA ptr_C1                      ;c - - - - - 0x00C759 06:8749: 85 C1
 	JSR SoundMul8                   ;c - - - - - 0x00C75B 06:874B: 20 06 80
 	LDA ptr_C1                      ;c - - - - - 0x00C75E 06:874E: A5 C1
 	BEQ loc_06_87AA                 ;c - - - - - 0x00C760 06:8750: F0 58
 loc_06_8752:
-	LDA ram_0710,X                  ;C - - - - - 0x00C762 06:8752: BD 10 07
+	LDA sndNoteTimer,X              ;C - - - - - 0x00C762 06:8752: BD 10 07
 	BEQ loc_06_87AA                 ;C - - - - - 0x00C765 06:8755: F0 53
 	LDA #$FF                        ;C - - - - - 0x00C767 06:8757: A9 FF
 	BNE loc_06_87AA                 ;C - - - - - 0x00C769 06:8759: D0 4F
 loc_06_875B:
-	CMP ram_0710,X                  ;c - - - - - 0x00C76B 06:875B: DD 10 07
+	CMP sndNoteTimer,X              ;c - - - - - 0x00C76B 06:875B: DD 10 07
 	BCC loc_06_8763                 ;c - - - - - 0x00C76E 06:875E: 90 03
 loc_06_8760:
-	LDA ram_0710,X                  ;C - - - - - 0x00C770 06:8760: BD 10 07
+	LDA sndNoteTimer,X              ;C - - - - - 0x00C770 06:8760: BD 10 07
 loc_06_8763:
 	LSR A                           ;C - - - - - 0x00C773 06:8763: 4A
 	LSR A                           ;C - - - - - 0x00C774 06:8764: 4A
 	LSR A                           ;C - - - - - 0x00C775 06:8765: 4A
 	LSR A                           ;C - - - - - 0x00C776 06:8766: 4A
 	EOR #$0F                        ;C - - - - - 0x00C777 06:8767: 49 0F
-	STA ram_00C3                    ;C - - - - - 0x00C779 06:8769: 85 C3
+	STA sndParam                    ;C - - - - - 0x00C779 06:8769: 85 C3
 	LDY #$06                        ;C - - - - - 0x00C77B 06:876B: A0 06
 	LDA (ptr_C5),Y                  ;C - - - - - 0x00C77D 06:876D: B1 C5
 	CMP #$05                        ;C - - - - - 0x00C77F 06:876F: C9 05
 	BCC loc_06_8797                 ;C - - - - - 0x00C781 06:8771: 90 24
-	STA ram_00C4                    ;C - - - - - 0x00C783 06:8773: 85 C4
-	LDY ram_0708,X                  ;C - - - - - 0x00C785 06:8775: BC 08 07
-	LDA ram_0704,X                  ;C - - - - - 0x00C788 06:8778: BD 04 07
+	STA sndTmp                      ;C - - - - - 0x00C783 06:8773: 85 C4
+	LDY sndEnvPos,X                 ;C - - - - - 0x00C785 06:8775: BC 08 07
+	LDA sndState,X                  ;C - - - - - 0x00C788 06:8778: BD 04 07
 	ASL A                           ;C - - - - - 0x00C78B 06:877B: 0A
 	ASL A                           ;C - - - - - 0x00C78C 06:877C: 0A
 	TYA                             ;C - - - - - 0x00C78D 06:877D: 98
@@ -1123,19 +1123,19 @@ loc_06_8782:
 	LSR A                           ;C - - - - - 0x00C79C 06:878C: 4A
 	CMP #$10                        ;C - - - - - 0x00C79D 06:878D: C9 10
 	BCS loc_06_87A5                 ;C - - - - - 0x00C79F 06:878F: B0 14
-	CMP ram_00C3                    ;C - - - - - 0x00C7A1 06:8791: C5 C3
+	CMP sndParam                    ;C - - - - - 0x00C7A1 06:8791: C5 C3
 	BCC loc_06_8797                 ;C - - - - - 0x00C7A3 06:8793: 90 02
-	STA ram_00C3                    ;C - - - - - 0x00C7A5 06:8795: 85 C3
+	STA sndParam                    ;C - - - - - 0x00C7A5 06:8795: 85 C3
 loc_06_8797:
 	LDA #$10                        ;C - - - - - 0x00C7A7 06:8797: A9 10
-	STA ram_00C4                    ;C - - - - - 0x00C7A9 06:8799: 85 C4
-	LDA ram_070C,X                  ;C - - - - - 0x00C7AB 06:879B: BD 0C 07
+	STA sndTmp                      ;C - - - - - 0x00C7A9 06:8799: 85 C4
+	LDA sndVolReg,X                 ;C - - - - - 0x00C7AB 06:879B: BD 0C 07
 	SEC                             ;C - - - - - 0x00C7AE 06:879E: 38
-	SBC ram_00C3                    ;C - - - - - 0x00C7AF 06:879F: E5 C3
-	BIT ram_00C4                    ;C - - - - - 0x00C7B1 06:87A1: 24 C4
+	SBC sndParam                    ;C - - - - - 0x00C7AF 06:879F: E5 C3
+	BIT sndTmp                      ;C - - - - - 0x00C7B1 06:87A1: 24 C4
 	BNE loc_06_87AA                 ;C - - - - - 0x00C7B3 06:87A3: D0 05
 loc_06_87A5:
-	LDA ram_070C,X                  ;C - - - - - 0x00C7B5 06:87A5: BD 0C 07
+	LDA sndVolReg,X                 ;C - - - - - 0x00C7B5 06:87A5: BD 0C 07
 	AND #$F0                        ;C - - - - - 0x00C7B8 06:87A8: 29 F0
 loc_06_87AA:
 	LDY #$00                        ;C - - - - - 0x00C7BA 06:87AA: A0 00
@@ -1148,9 +1148,9 @@ loc_06_87AA:
 	LDY #$05                        ;C - - - - - 0x00C7C8 06:87B8: A0 05
 	LDA (ptr_C5),Y                  ;C - - - - - 0x00C7CA 06:87BA: B1 C5
 	BEQ loc_06_880C                 ;C - - - - - 0x00C7CC 06:87BC: F0 4E
-	STA ram_00C4                    ;C - - - - - 0x00C7CE 06:87BE: 85 C4
-	LDY ram_0708,X                  ;C - - - - - 0x00C7D0 06:87C0: BC 08 07
-	LDA ram_0704,X                  ;C - - - - - 0x00C7D3 06:87C3: BD 04 07
+	STA sndTmp                      ;C - - - - - 0x00C7CE 06:87BE: 85 C4
+	LDY sndEnvPos,X                 ;C - - - - - 0x00C7D0 06:87C0: BC 08 07
+	LDA sndState,X                  ;C - - - - - 0x00C7D3 06:87C3: BD 04 07
 	ASL A                           ;C - - - - - 0x00C7D6 06:87C6: 0A
 	ASL A                           ;C - - - - - 0x00C7D7 06:87C7: 0A
 	TYA                             ;C - - - - - 0x00C7D8 06:87C8: 98
@@ -1172,7 +1172,7 @@ loc_06_87CD:
 	TAY                             ;C - - - - - 0x00C7F2 06:87E2: A8
 	ORA ptr_C1+1                    ;C - - - - - 0x00C7F3 06:87E3: 05 C2
 	BEQ loc_06_880C                 ;C - - - - - 0x00C7F5 06:87E5: F0 25
-	LDA ram_0704,X                  ;C - - - - - 0x00C7F7 06:87E7: BD 04 07
+	LDA sndState,X                  ;C - - - - - 0x00C7F7 06:87E7: BD 04 07
 	BMI loc_06_87FA                 ;C - - - - - 0x00C7FA 06:87EA: 30 0E
 	CLC                             ;C - - - - - 0x00C7FC 06:87EC: 18
 	LDA ptr_C1+1                    ;C - - - - - 0x00C7FD 06:87ED: A5 C2
@@ -1204,7 +1204,7 @@ loc_06_8814:
 	BPL loc_06_8835                 ;C - - - - - 0x00C82A 06:881A: 10 19
 	LDA ram_00D8                    ;c - - - - - 0x00C82C 06:881C: A5 D8
 	BEQ loc_06_8835                 ;c - - - - - 0x00C82E 06:881E: F0 15
-	STA ram_00C4                    ;c - - - - - 0x00C830 06:8820: 85 C4
+	STA sndTmp                      ;c - - - - - 0x00C830 06:8820: 85 C4
 	STY ptr_C1                      ;c - - - - - 0x00C832 06:8822: 84 C1
 	LDA ptr_C1+1                    ;c - - - - - 0x00C834 06:8824: A5 C2
 	PHA                             ;c - - - - - 0x00C836 06:8826: 48
@@ -1256,7 +1256,7 @@ loc_06_8867:
 	BNE loc_06_8867                 ;C - - - - - 0x00C87E 06:886E: D0 F7
 loc_06_8870:
 	LDY #$00                        ;C - - - - - 0x00C880 06:8870: A0 00
-	LDA ram_0714,X                  ;C - - - - - 0x00C882 06:8872: BD 14 07
+	LDA sndParamC,X                 ;C - - - - - 0x00C882 06:8872: BD 14 07
 	BEQ loc_06_8884                 ;C - - - - - 0x00C885 06:8875: F0 0D
 	BPL loc_06_887A                 ;C - - - - - 0x00C887 06:8877: 10 01
 	DEY                             ;C - - - - - 0x00C889 06:8879: 88
@@ -1283,10 +1283,10 @@ ofs_06_8888:
 	LDY #$03                        ;C - - - - - 0x00C8AB 06:889B: A0 03
 	JSR SoundWriteReg               ;C - - - - - 0x00C8AD 06:889D: 20 EC 80
 loc_06_88A0:
-	LDA ram_0704,X                  ;C - - - - - 0x00C8B0 06:88A0: BD 04 07
+	LDA sndState,X                  ;C - - - - - 0x00C8B0 06:88A0: BD 04 07
 	AND #$20                        ;C - - - - - 0x00C8B3 06:88A3: 29 20
 	BEQ loc_06_88FA                 ;C - - - - - 0x00C8B5 06:88A5: F0 53
-	LDA ram_0718,X                  ;C - - - - - 0x00C8B7 06:88A7: BD 18 07
+	LDA sndParamD,X                 ;C - - - - - 0x00C8B7 06:88A7: BD 18 07
 	BEQ loc_06_88F2                 ;C - - - - - 0x00C8BA 06:88AA: F0 46
 	LDY #$00                        ;C - - - - - 0x00C8BC 06:88AC: A0 00
 	ASL A                           ;C - - - - - 0x00C8BE 06:88AE: 0A
@@ -1324,22 +1324,22 @@ loc_06_88B8:
 	LDA tbl_06_895A,Y               ;C - - - - - 0x00C8FC 06:88EC: B9 5A 89
 	STA ram_0724,X                  ;C - - - - - 0x00C8FF 06:88EF: 9D 24 07
 loc_06_88F2:
-	LDA ram_0704,X                  ;C - - - - - 0x00C902 06:88F2: BD 04 07
+	LDA sndState,X                  ;C - - - - - 0x00C902 06:88F2: BD 04 07
 	AND #$DF                        ;C - - - - - 0x00C905 06:88F5: 29 DF
-	STA ram_0704,X                  ;C - - - - - 0x00C907 06:88F7: 9D 04 07
+	STA sndState,X                  ;C - - - - - 0x00C907 06:88F7: 9D 04 07
 loc_06_88FA:
 	LDY #$04                        ;C - - - - - 0x00C90A 06:88FA: A0 04
 	LDA (ptr_C5),Y                  ;C - - - - - 0x00C90C 06:88FC: B1 C5
 	AND #$7F                        ;C - - - - - 0x00C90E 06:88FE: 29 7F
 	BEQ loc_06_8914                 ;C - - - - - 0x00C910 06:8900: F0 12
 	CLC                             ;C - - - - - 0x00C912 06:8902: 18
-	ADC ram_0708,X                  ;C - - - - - 0x00C913 06:8903: 7D 08 07
-	STA ram_0708,X                  ;C - - - - - 0x00C916 06:8906: 9D 08 07
+	ADC sndEnvPos,X                 ;C - - - - - 0x00C913 06:8903: 7D 08 07
+	STA sndEnvPos,X                 ;C - - - - - 0x00C916 06:8906: 9D 08 07
 	BCC loc_06_8914                 ;C - - - - - 0x00C919 06:8909: 90 09
-	LDA ram_0704,X                  ;C - - - - - 0x00C91B 06:890B: BD 04 07
+	LDA sndState,X                  ;C - - - - - 0x00C91B 06:890B: BD 04 07
 	CLC                             ;C - - - - - 0x00C91E 06:890E: 18
 	ADC #$40                        ;C - - - - - 0x00C91F 06:890F: 69 40
-	STA ram_0704,X                  ;C - - - - - 0x00C921 06:8911: 9D 04 07
+	STA sndState,X                  ;C - - - - - 0x00C921 06:8911: 9D 04 07
 loc_06_8914:
 	RTS                             ;C - - - - - 0x00C924 06:8914: 60
 tbl_06_8915:

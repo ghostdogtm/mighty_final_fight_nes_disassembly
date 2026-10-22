@@ -25,7 +25,7 @@ LoadSpritePal2:
 loc_09_A022:
 	LDA (ptr_00),Y                  ;C - - - - - 0x012032 09:A022: B1 00
 	STA palBuffer+24,X              ;C - - - - - 0x012034 09:A024: 9D 18 06
-	STA ram_0638,X                  ;C - - - - - 0x012037 09:A027: 9D 38 06
+	STA palBase+24,X                ;C - - - - - 0x012037 09:A027: 9D 38 06
 	INY                             ;C - - - - - 0x01203A 09:A02A: C8
 	INX                             ;C - - - - - 0x01203B 09:A02B: E8
 	CPX #$08                        ;C - - - - - 0x01203C 09:A02C: E0 08
@@ -145,7 +145,7 @@ PaletteAnimTick:
 	STA palUpdateFlag               ;C - - - - - 0x01231C 09:A30C: 85 18
 loc_09_A30E:
 	LDX spriteFlipMask              ;C - - - - - 0x01231E 09:A30E: A6 10
-	LDA ram_0100,X                  ;C - - - - - 0x012320 09:A310: BD 00 01
+	LDA palAnimActive,X             ;C - - - - - 0x012320 09:A310: BD 00 01
 	BPL loc_09_A318                 ;C - - - - - 0x012323 09:A313: 10 03
 	JSR PaletteAnimChannel          ;C - - - - - 0x012325 09:A315: 20 21 A3
 loc_09_A318:
@@ -155,25 +155,25 @@ loc_09_A318:
 	STA palUpdateFlag               ;C - - - - - 0x01232E 09:A31E: 85 18
 	RTS                             ;C - - - - - 0x012330 09:A320: 60
 PaletteAnimChannel:
-	LDY ram_0108,X                  ;C - - - - - 0x012331 09:A321: BC 08 01
+	LDY palAnimType,X               ;C - - - - - 0x012331 09:A321: BC 08 01
 	LDA tbl_09_A445,Y               ;C - - - - - 0x012334 09:A324: B9 45 A4
 	TAY                             ;C - - - - - 0x012337 09:A327: A8
-	LDA ram_010C,X                  ;C - - - - - 0x012338 09:A328: BD 0C 01
-	INC ram_010C,X                  ;C - - - - - 0x01233B 09:A32B: FE 0C 01
+	LDA palAnimTimer,X              ;C - - - - - 0x012338 09:A328: BD 0C 01
+	INC palAnimTimer,X              ;C - - - - - 0x01233B 09:A32B: FE 0C 01
 	CMP tbl_09_A459,Y               ;C - - - - - 0x01233E 09:A32E: D9 59 A4
 	BNE loc_09_A36F                 ;C - - - - - 0x012341 09:A331: D0 3C
 	LDA #$00                        ;C - - - - - 0x012343 09:A333: A9 00
-	STA ram_010C,X                  ;C - - - - - 0x012345 09:A335: 9D 0C 01
-	LDA ram_0104,X                  ;C - - - - - 0x012348 09:A338: BD 04 01
-	INC ram_0104,X                  ;C - - - - - 0x01234B 09:A33B: FE 04 01
+	STA palAnimTimer,X              ;C - - - - - 0x012345 09:A335: 9D 0C 01
+	LDA palAnimStep,X               ;C - - - - - 0x012348 09:A338: BD 04 01
+	INC palAnimStep,X               ;C - - - - - 0x01234B 09:A33B: FE 04 01
 	CMP tbl_09_A458,Y               ;C - - - - - 0x01234E 09:A33E: D9 58 A4
 	BNE loc_09_A348                 ;C - - - - - 0x012351 09:A341: D0 05
 	LDA #$00                        ;C - - - - - 0x012353 09:A343: A9 00
-	STA ram_0104,X                  ;C - - - - - 0x012355 09:A345: 9D 04 01
+	STA palAnimStep,X               ;C - - - - - 0x012355 09:A345: 9D 04 01
 loc_09_A348:
 	TYA                             ;C - - - - - 0x012358 09:A348: 98
 	CLC                             ;C - - - - - 0x012359 09:A349: 18
-	ADC ram_0104,X                  ;C - - - - - 0x01235A 09:A34A: 7D 04 01
+	ADC palAnimStep,X               ;C - - - - - 0x01235A 09:A34A: 7D 04 01
 	TAX                             ;C - - - - - 0x01235D 09:A34D: AA
 	LDA tbl_09_A45B,X               ;C - - - - - 0x01235E 09:A34E: BD 5B A4
 	ASL A                           ;C - - - - - 0x012361 09:A351: 0A
@@ -186,7 +186,7 @@ loc_09_A348:
 loc_09_A35E:
 	LDA tbl_09_A370,X               ;C - - - - - 0x01236E 09:A35E: BD 70 A3
 	STA palBuffer,Y                 ;C - - - - - 0x012371 09:A361: 99 00 06
-	STA ram_0620,Y                  ;C - - - - - 0x012374 09:A364: 99 20 06
+	STA palBase,Y                   ;C - - - - - 0x012374 09:A364: 99 20 06
 	INY                             ;C - - - - - 0x012377 09:A367: C8
 	INX                             ;C - - - - - 0x012378 09:A368: E8
 	DEC ptr_00                      ;C - - - - - 0x012379 09:A369: C6 00
@@ -279,7 +279,7 @@ tbl_09_A45B:
 	.byte $20,$00                   ;- - - - - - 0x01270E 09:A6FE:
 RunTextScript_09:
 	JSR ClearTextQueueRows_09       ;C - - - - - 0x012710 09:A700: 20 8E A7
-	LDY ram_00B8                    ;C - - - - - 0x012713 09:A703: A4 B8
+	LDY textScriptIdx               ;C - - - - - 0x012713 09:A703: A4 B8
 	LDA tbl_09_A7D6,Y               ;C - - - - - 0x012715 09:A705: B9 D6 A7
 	STA ptr_0C                      ;C - - - - - 0x012718 09:A708: 85 0C
 	LDA tbl_09_A7DB,Y               ;C - - - - - 0x01271A 09:A70A: B9 DB A7

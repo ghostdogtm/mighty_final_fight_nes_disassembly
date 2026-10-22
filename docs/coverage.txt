@@ -43,7 +43,7 @@ Traced code (instruction starts, verify by hand):
   00:834D  STA actionTimer
   00:834F  JSR ClearTimerA4
   00:8352  JSR ResetPlayerStand
-  00:8355  LDY ram_0039
+  00:8355  LDY grabbedSlot
   00:8357  LDA objId,Y
   00:835A  STA objKind,Y
   00:835D  LDA #$FF
@@ -68,7 +68,7 @@ Traced code (instruction starts, verify by hand):
   00:8A64  LDA #$01
   00:8A66  STA objVelYHi
   00:8A69  LDA #$FF
-  00:8A6B  STA ram_006E
+  00:8A6B  STA playerBusy
   00:8A71  LDA objActive
   00:8A74  AND #$02
   00:8A76  BNE loc_00_8AB3
@@ -79,7 +79,7 @@ Traced code (instruction starts, verify by hand):
   00:8A82  BNE loc_00_8A8E
   00:8A84  JSR ArmTimerA4
   00:8A87  LDA #$01
-  00:8A89  STA ram_00A7
+  00:8A89  STA attackType
   00:8A8B  JSR PlayHitSound
   00:8A8E  LDA objAnimFrame
   00:8A91  CMP #$06
@@ -130,7 +130,7 @@ Traced code (instruction starts, verify by hand):
   00:8EE7  INC gameOverFlag
   00:8F5D  LDA #$81
   00:8F5F  STA objActive
-  00:8F62  STA ram_006E
+  00:8F62  STA playerBusy
   00:8F64  LDA playerFacing
   00:8F66  AND #$01
   00:8F68  BEQ loc_00_8F6F
@@ -372,7 +372,7 @@ Traced code (instruction starts, verify by hand):
   04:98A9  JSR QueueTextScript
   04:98AC  JMP loc_04_98BD
   04:98E3  JSR QueueTextScript0
-  04:98E6  INC ram_0066
+  04:98E6  INC screenStep
   04:98E8  RTS
   04:9911  LDY playerId
   04:9913  LDA tbl_04_9D5C,Y
@@ -483,21 +483,21 @@ Traced code (instruction starts, verify by hand):
   06:8112  SEC
   06:8113  SBC songCount
   06:8116  BCS loc_06_810D
-  06:813F  LDA ram_00C4
+  06:813F  LDA sndTmp
   06:8141  BMI loc_06_8145
   06:8143  STY ram_00D7
   06:814D  STX ram_00D7
   06:8157  INC ptr_C1+1
   06:818D  INC ptr_C1+1
   06:819D  INC ptr_C1+1
-  06:822D  ASL ram_00C3
+  06:822D  ASL sndParam
   06:822F  BEQ loc_06_8234
   06:8231  SEC
-  06:8232  ROR ram_00C3
+  06:8232  ROR sndParam
   06:8234  LDA soundBusy
   06:8236  AND #$0F
   06:8238  STA soundBusy
-  06:823A  LDY ram_00C3
+  06:823A  LDY sndParam
   06:823C  STY ram_00CC
   06:823E  BEQ loc_06_8247
   06:8240  LDY #$FF
@@ -508,7 +508,7 @@ Traced code (instruction starts, verify by hand):
   06:8249  RTS
   06:824A  LDA #$00
   06:824C  SEC
-  06:824D  SBC ram_00C3
+  06:824D  SBC sndParam
   06:824F  STA ram_00D8
   06:8251  RTS
   06:826A  JSR SoundStart
@@ -521,17 +521,17 @@ Traced code (instruction starts, verify by hand):
   06:85E2  LDA #$5F
   06:8740  CPX #$29
   06:8742  BNE loc_06_875B
-  06:8744  STA ram_00C4
+  06:8744  STA sndTmp
   06:8746  LDA ram_0740,X
   06:8749  STA ptr_C1
   06:874B  JSR SoundMul8
   06:874E  LDA ptr_C1
   06:8750  BEQ loc_06_87AA
-  06:875B  CMP ram_0710,X
+  06:875B  CMP sndNoteTimer,X
   06:875E  BCC loc_06_8763
   06:881C  LDA ram_00D8
   06:881E  BEQ loc_06_8835
-  06:8820  STA ram_00C4
+  06:8820  STA sndTmp
   06:8822  STY ptr_C1
   06:8824  LDA ptr_C1+1
   06:8826  PHA
@@ -550,7 +550,7 @@ Traced code (instruction starts, verify by hand):
   08:8052  CLC
   08:8053  ADC #$FF
   08:8055  STA ptr_00
-  08:8057  LDA ram_002D
+  08:8057  LDA worldXPage
   08:8059  ADC #$00
   08:805B  STA ptr_00+1
   08:805D  LDY #$00
@@ -567,13 +567,13 @@ Traced code (instruction starts, verify by hand):
   08:8071  BNE loc_08_805F
   08:808A  CMP #$02
   08:808C  BEQ loc_08_808E
-  08:808E  LDY ram_009F
+  08:808E  LDY spawnLeftIdx
   08:8090  JSR CompareSpawnPos
   08:8093  BNE loc_08_809C
   08:8095  JSR SpawnEnemy
-  08:8098  DEC ram_009F
+  08:8098  DEC spawnLeftIdx
   08:809A  BNE loc_08_808E
-  08:809C  LDY ram_009F
+  08:809C  LDY spawnLeftIdx
   08:809E  INY
   08:809F  JSR CompareSpawnPos
   08:80A2  BEQ loc_08_809E
@@ -738,7 +738,7 @@ Traced code (instruction starts, verify by hand):
   0C:871A  STA objActive
   0C:871D  LDY playerId
   0C:871F  LDA tbl_0F_E288,Y
-  0C:8722  STA ram_006F
+  0C:8722  STA playerStandAnim
   0C:8724  JSR ResetPlayerStand
   0C:8727  LDA objY
   0C:872A  STA objY,X
@@ -762,7 +762,7 @@ Traced code (instruction starts, verify by hand):
   0C:8DBE  CLC
   0C:8DBF  ADC #$10
   0C:8DC1  STA objX,X
-  0C:8DC4  LDA ram_002D
+  0C:8DC4  LDA worldXPage
   0C:8DC6  ADC #$00
   0C:8DC8  STA objXPage,X
   0C:8DCB  JMP loc_0C_8DEE
@@ -770,7 +770,7 @@ Traced code (instruction starts, verify by hand):
   0C:8DE1  CLC
   0C:8DE2  ADC #$F0
   0C:8DE4  STA objX,X
-  0C:8DE7  LDA ram_002D
+  0C:8DE7  LDA worldXPage
   0C:8DE9  ADC #$00
   0C:8DEB  STA objXPage,X
   0C:8DEE  RTS
@@ -806,7 +806,7 @@ Traced code (instruction starts, verify by hand):
   0C:93FE  CLC
   0C:93FF  ADC #$10
   0C:9401  STA objX,X
-  0C:9404  LDA ram_002D
+  0C:9404  LDA worldXPage
   0C:9406  ADC #$00
   0C:9408  STA objXPage,X
   0C:940B  JMP loc_0C_942E
@@ -814,7 +814,7 @@ Traced code (instruction starts, verify by hand):
   0C:9421  CLC
   0C:9422  ADC #$F0
   0C:9424  STA objX,X
-  0C:9427  LDA ram_002D
+  0C:9427  LDA worldXPage
   0C:9429  ADC #$00
   0C:942B  STA objXPage,X
   0C:942E  RTS
@@ -822,7 +822,7 @@ Traced code (instruction starts, verify by hand):
   0C:9484  CLC
   0C:9485  ADC #$10
   0C:9487  STA objX,X
-  0C:948A  LDA ram_002D
+  0C:948A  LDA worldXPage
   0C:948C  ADC #$00
   0C:948E  STA objXPage,X
   0C:9491  JMP loc_0C_94B4
@@ -830,7 +830,7 @@ Traced code (instruction starts, verify by hand):
   0C:94A7  CLC
   0C:94A8  ADC #$F0
   0C:94AA  STA objX,X
-  0C:94AD  LDA ram_002D
+  0C:94AD  LDA worldXPage
   0C:94AF  ADC #$00
   0C:94B1  STA objXPage,X
   0C:94B4  RTS
@@ -838,7 +838,7 @@ Traced code (instruction starts, verify by hand):
   0C:9501  CLC
   0C:9502  ADC #$10
   0C:9504  STA objX,X
-  0C:9507  LDA ram_002D
+  0C:9507  LDA worldXPage
   0C:9509  ADC #$00
   0C:950B  STA objXPage,X
   0C:950E  JMP loc_0C_9531
@@ -846,7 +846,7 @@ Traced code (instruction starts, verify by hand):
   0C:9524  CLC
   0C:9525  ADC #$F0
   0C:9527  STA objX,X
-  0C:952A  LDA ram_002D
+  0C:952A  LDA worldXPage
   0C:952C  ADC #$00
   0C:952E  STA objXPage,X
   0C:9531  RTS
@@ -854,14 +854,14 @@ Traced code (instruction starts, verify by hand):
   0C:95A1  CLC
   0C:95A2  ADC #$F0
   0C:95A4  STA objX,X
-  0C:95A7  LDA ram_002D
+  0C:95A7  LDA worldXPage
   0C:95A9  ADC #$00
   0C:95AB  STA objXPage,X
   0C:9647  LDA scrollX
   0C:9649  CLC
   0C:964A  ADC #$F0
   0C:964C  STA objX,X
-  0C:964F  LDA ram_002D
+  0C:964F  LDA worldXPage
   0C:9651  ADC #$00
   0C:9653  STA objXPage,X
   0C:9656  JMP loc_0C_965C
@@ -869,7 +869,7 @@ Traced code (instruction starts, verify by hand):
   0C:96D8  CLC
   0C:96D9  ADC #$F0
   0C:96DB  STA objX,X
-  0C:96DE  LDA ram_002D
+  0C:96DE  LDA worldXPage
   0C:96E0  ADC #$00
   0C:96E2  STA objXPage,X
   0C:96E5  JMP loc_0C_96EB
@@ -877,7 +877,7 @@ Traced code (instruction starts, verify by hand):
   0C:9A9F  CLC
   0C:9AA0  ADC #$F0
   0C:9AA2  STA objX,X
-  0C:9AA5  LDA ram_002D
+  0C:9AA5  LDA worldXPage
   0C:9AA7  ADC #$00
   0C:9AA9  STA objXPage,X
   0C:9AAC  JMP loc_0C_9AD8
@@ -1005,7 +1005,7 @@ Traced code (instruction starts, verify by hand):
   0E:CC91  PHA
   0E:CC92  LDA objXPage
   0E:CC95  ADC tbl_0F_E1D4,Y
-  0E:CC98  LDY ram_0039
+  0E:CC98  LDY grabbedSlot
   0E:CC9A  STA objXPage,Y
   0E:CC9D  PLA
   0E:CC9E  STA objX,Y
@@ -1033,7 +1033,7 @@ Traced code (instruction starts, verify by hand):
   0E:D1E5  CLC
   0E:D1E6  ADC #$F0
   0E:D1E8  STA objX
-  0E:D1EB  LDA ram_002D
+  0E:D1EB  LDA worldXPage
   0E:D1ED  ADC #$00
   0E:D1EF  STA objXPage
   0E:D1F2  RTS
@@ -1048,14 +1048,14 @@ Traced code (instruction starts, verify by hand):
   0E:D2A3  CLC
   0E:D2A4  ADC #$F0
   0E:D2A6  STA objX
-  0E:D2A9  LDA ram_002D
+  0E:D2A9  LDA worldXPage
   0E:D2AB  ADC #$00
   0E:D2AD  STA objXPage
   0E:D2B0  RTS
   0E:D4A4  CMP #$35
   0E:D4A6  BEQ loc_0E_D4C4
   0E:D4A8  RTS
-  0E:D4C4  LDY ram_0039
+  0E:D4C4  LDY grabbedSlot
   0E:D4C6  LDA objY
   0E:D4C9  STA objY,Y
   0E:D4CC  JMP loc_0E_D88C
@@ -1078,7 +1078,7 @@ Traced code (instruction starts, verify by hand):
   0E:DBBE  CLC
   0E:DBBF  ADC #$19
   0E:DBC1  STA objX
-  0E:DBC4  LDA ram_002D
+  0E:DBC4  LDA worldXPage
   0E:DBC6  ADC #$00
   0E:DBC8  STA objXPage
   0E:DCDC  RTS
@@ -1087,11 +1087,11 @@ Traced code (instruction starts, verify by hand):
   0F:E3FB  LDA #$00
   0F:E3FD  STA gameAction
   0F:E3FF  STA ram_00BB
-  0F:E401  STA ram_0035
+  0F:E401  STA actionStep
   0F:E403  LDA #$80
   0F:E405  STA objActive
   0F:E408  RTS
-  0F:E412  INC ram_002D
+  0F:E412  INC worldXPage
   0F:E414  RTS
   0F:E42A  LDA #$01
   0F:E42C  STA ptr_00+1
@@ -1107,13 +1107,13 @@ Traced code (instruction starts, verify by hand):
   0F:E4E8  CLC
   0F:E4E9  ADC #$01
   0F:E4F5  LDA spriteFlipMask
-  0F:E4F7  STA ram_0023
+  0F:E4F7  STA scrollDir
   0F:E4F9  AND #$01
   0F:E4FB  TAX
   0F:E4FC  LDA tbl_0F_E60B,X
   0F:E4FF  STA ram_0025
   0F:E501  LDA tbl_0F_E60D,X
-  0F:E504  STA ram_0024
+  0F:E504  STA stageColumn
   0F:E511  LDA ram_0025
   0F:E513  EOR #$FF
   0F:E52E  JMP loc_0F_E53F
@@ -1186,7 +1186,7 @@ Traced code (instruction starts, verify by hand):
   0F:EE3C  DEC ptr_02
   0F:EE3E  BPL loc_0F_EE1E
   0F:EE40  JMP loc_0F_EEDF
-  0F:EEB8  STA ram_0028
+  0F:EEB8  STA stageMapIndex
   0F:EEBA  JMP loc_0F_EE6C
   0F:EF94  ADC #$0F
   0F:EF96  STA objY,X
@@ -1235,7 +1235,7 @@ Traced code (instruction starts, verify by hand):
   0F:F0EB  CMP #$04
   0F:F0ED  BNE loc_0F_F0F6
   0F:F0EF  LDA #$FF
-  0F:F0F1  LDY ram_0039
+  0F:F0F1  LDY grabbedSlot
   0F:F0F3  STA objGrabState,Y
   0F:F0F6  RTS
   0F:F168  JSR PushOutDown

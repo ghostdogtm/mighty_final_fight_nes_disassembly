@@ -308,9 +308,9 @@ ScreenInit8900:
 loc_04_8902:
 	LDA tbl_04_8924,Y               ;C - - - - - 0x008912 04:8902: B9 24 89
 	STA palBuffer,Y                 ;C - - - - - 0x008915 04:8905: 99 00 06
-	STA ram_0620,Y                  ;C - - - - - 0x008918 04:8908: 99 20 06
+	STA palBase,Y                   ;C - - - - - 0x008918 04:8908: 99 20 06
 	STA palBuffer+16,Y              ;C - - - - - 0x00891B 04:890B: 99 10 06
-	STA ram_0630,Y                  ;C - - - - - 0x00891E 04:890E: 99 30 06
+	STA palBase+16,Y                ;C - - - - - 0x00891E 04:890E: 99 30 06
 	DEY                             ;C - - - - - 0x008921 04:8911: 88
 	BPL loc_04_8902                 ;C - - - - - 0x008922 04:8912: 10 EE
 	LDA #$00                        ;C - - - - - 0x008924 04:8914: A9 00
@@ -329,10 +329,10 @@ ScreenInit8940:
 loc_04_8942:
 	LDA tbl_04_898E,Y               ;C - - - - - 0x008952 04:8942: B9 8E 89
 	STA palBuffer,Y                 ;C - - - - - 0x008955 04:8945: 99 00 06
-	STA ram_0620,Y                  ;C - - - - - 0x008958 04:8948: 99 20 06
+	STA palBase,Y                   ;C - - - - - 0x008958 04:8948: 99 20 06
 	LDA tbl_04_899E,Y               ;C - - - - - 0x00895B 04:894B: B9 9E 89
 	STA palBuffer+16,Y              ;C - - - - - 0x00895E 04:894E: 99 10 06
-	STA ram_0630,Y                  ;C - - - - - 0x008961 04:8951: 99 30 06
+	STA palBase+16,Y                ;C - - - - - 0x008961 04:8951: 99 30 06
 	DEY                             ;C - - - - - 0x008964 04:8954: 88
 	BPL loc_04_8942                 ;C - - - - - 0x008965 04:8955: 10 EB
 	STY palUpdateFlag               ;C - - - - - 0x008967 04:8957: 84 18
@@ -370,7 +370,7 @@ ScreenInit89C0:
 loc_04_89C2:
 	LDA tbl_04_898E,Y               ;C - - - - - 0x0089D2 04:89C2: B9 8E 89
 	STA palBuffer,Y                 ;C - - - - - 0x0089D5 04:89C5: 99 00 06
-	STA ram_0620,Y                  ;C - - - - - 0x0089D8 04:89C8: 99 20 06
+	STA palBase,Y                   ;C - - - - - 0x0089D8 04:89C8: 99 20 06
 	DEY                             ;C - - - - - 0x0089DB 04:89CB: 88
 	BPL loc_04_89C2                 ;C - - - - - 0x0089DC 04:89CC: 10 F4
 	STY palUpdateFlag               ;C - - - - - 0x0089DE 04:89CE: 84 18
@@ -392,7 +392,7 @@ ScreenInit8A40:
 loc_04_8A42:
 	LDA tbl_04_8A59,Y               ;C - - - - - 0x008A52 04:8A42: B9 59 8A
 	STA palBuffer,Y                 ;C - - - - - 0x008A55 04:8A45: 99 00 06
-	STA ram_0620,Y                  ;C - - - - - 0x008A58 04:8A48: 99 20 06
+	STA palBase,Y                   ;C - - - - - 0x008A58 04:8A48: 99 20 06
 	DEY                             ;C - - - - - 0x008A5B 04:8A4B: 88
 	BPL loc_04_8A42                 ;C - - - - - 0x008A5C 04:8A4C: 10 F4
 	STY palUpdateFlag               ;C - - - - - 0x008A5E 04:8A4E: 84 18
@@ -414,16 +414,16 @@ ScreenInit8AC0:
 loc_04_8AC2:
 	LDA tbl_04_8B01,Y               ;C - - - - - 0x008AD2 04:8AC2: B9 01 8B
 	STA palBuffer,Y                 ;C - - - - - 0x008AD5 04:8AC5: 99 00 06
-	STA ram_0620,Y                  ;C - - - - - 0x008AD8 04:8AC8: 99 20 06
+	STA palBase,Y                   ;C - - - - - 0x008AD8 04:8AC8: 99 20 06
 	LDA tbl_04_8B11,Y               ;C - - - - - 0x008ADB 04:8ACB: B9 11 8B
 	STA palBuffer+16,Y              ;C - - - - - 0x008ADE 04:8ACE: 99 10 06
-	STA ram_0630,Y                  ;C - - - - - 0x008AE1 04:8AD1: 99 30 06
+	STA palBase+16,Y                ;C - - - - - 0x008AE1 04:8AD1: 99 30 06
 	DEY                             ;C - - - - - 0x008AE4 04:8AD4: 88
 	BPL loc_04_8AC2                 ;C - - - - - 0x008AE5 04:8AD5: 10 EB
 	LDA #$36                        ;C - - - - - 0x008AE7 04:8AD7: A9 36
 	STA palBuffer+18                ;C - - - - - 0x008AE9 04:8AD9: 8D 12 06
 	LDA #$26                        ;C - - - - - 0x008AEC 04:8ADC: A9 26
-	STA ram_0633                    ;C - - - - - 0x008AEE 04:8ADE: 8D 33 06
+	STA palBase+19                  ;C - - - - - 0x008AEE 04:8ADE: 8D 33 06
 	LDA #$FF                        ;C - - - - - 0x008AF1 04:8AE1: A9 FF
 	STA palUpdateFlag               ;C - - - - - 0x008AF3 04:8AE3: 85 18
 	LDA #$78                        ;C - - - - - 0x008AF5 04:8AE5: A9 78
@@ -450,10 +450,10 @@ ScreenInit8B40:
 loc_04_8B42:
 	LDA tbl_04_8A59,Y               ;C - - - - - 0x008B52 04:8B42: B9 59 8A
 	STA palBuffer,Y                 ;C - - - - - 0x008B55 04:8B45: 99 00 06
-	STA ram_0620,Y                  ;C - - - - - 0x008B58 04:8B48: 99 20 06
+	STA palBase,Y                   ;C - - - - - 0x008B58 04:8B48: 99 20 06
 	LDA tbl_04_8B88,Y               ;C - - - - - 0x008B5B 04:8B4B: B9 88 8B
 	STA palBuffer+16,Y              ;C - - - - - 0x008B5E 04:8B4E: 99 10 06
-	STA ram_0630,Y                  ;C - - - - - 0x008B61 04:8B51: 99 30 06
+	STA palBase+16,Y                ;C - - - - - 0x008B61 04:8B51: 99 30 06
 	DEY                             ;C - - - - - 0x008B64 04:8B54: 88
 	BPL loc_04_8B42                 ;C - - - - - 0x008B65 04:8B55: 10 EB
 	STY palUpdateFlag               ;C - - - - - 0x008B67 04:8B57: 84 18
@@ -491,10 +491,10 @@ ScreenInit8C00:
 loc_04_8C02:
 	LDA tbl_04_9046,Y               ;C - - - - - 0x008C12 04:8C02: B9 46 90
 	STA palBuffer,Y                 ;C - - - - - 0x008C15 04:8C05: 99 00 06
-	STA ram_0620,Y                  ;C - - - - - 0x008C18 04:8C08: 99 20 06
+	STA palBase,Y                   ;C - - - - - 0x008C18 04:8C08: 99 20 06
 	LDA tbl_04_8C48,Y               ;C - - - - - 0x008C1B 04:8C0B: B9 48 8C
 	STA palBuffer+16,Y              ;C - - - - - 0x008C1E 04:8C0E: 99 10 06
-	STA ram_0630,Y                  ;C - - - - - 0x008C21 04:8C11: 99 30 06
+	STA palBase+16,Y                ;C - - - - - 0x008C21 04:8C11: 99 30 06
 	DEY                             ;C - - - - - 0x008C24 04:8C14: 88
 	BPL loc_04_8C02                 ;C - - - - - 0x008C25 04:8C15: 10 EB
 	STY palUpdateFlag               ;C - - - - - 0x008C27 04:8C17: 84 18
@@ -545,7 +545,7 @@ ScreenInit8D00:
 loc_04_8D13:
 	LDA tbl_04_8F18,Y               ;C - - - - - 0x008D23 04:8D13: B9 18 8F
 	STA palBuffer,Y                 ;C - - - - - 0x008D26 04:8D16: 99 00 06
-	STA ram_0620,Y                  ;C - - - - - 0x008D29 04:8D19: 99 20 06
+	STA palBase,Y                   ;C - - - - - 0x008D29 04:8D19: 99 20 06
 	DEY                             ;C - - - - - 0x008D2C 04:8D1C: 88
 	BPL loc_04_8D13                 ;C - - - - - 0x008D2D 04:8D1D: 10 F4
 	STY palUpdateFlag               ;C - - - - - 0x008D2F 04:8D1F: 84 18
@@ -553,7 +553,7 @@ loc_04_8D13:
 loc_04_8D23:
 	LDA tbl_04_8F28,Y               ;C - - - - - 0x008D33 04:8D23: B9 28 8F
 	STA palBuffer,Y                 ;C - - - - - 0x008D36 04:8D26: 99 00 06
-	STA ram_0620,Y                  ;C - - - - - 0x008D39 04:8D29: 99 20 06
+	STA palBase,Y                   ;C - - - - - 0x008D39 04:8D29: 99 20 06
 	DEY                             ;C - - - - - 0x008D3C 04:8D2C: 88
 	BPL loc_04_8D23                 ;C - - - - - 0x008D3D 04:8D2D: 10 F4
 	STY palUpdateFlag               ;C - - - - - 0x008D3F 04:8D2F: 84 18
@@ -561,7 +561,7 @@ loc_04_8D23:
 loc_04_8D33:
 	LDA tbl_04_8F38,Y               ;C - - - - - 0x008D43 04:8D33: B9 38 8F
 	STA palBuffer,Y                 ;C - - - - - 0x008D46 04:8D36: 99 00 06
-	STA ram_0620,Y                  ;C - - - - - 0x008D49 04:8D39: 99 20 06
+	STA palBase,Y                   ;C - - - - - 0x008D49 04:8D39: 99 20 06
 	DEY                             ;C - - - - - 0x008D4C 04:8D3C: 88
 	BPL loc_04_8D33                 ;C - - - - - 0x008D4D 04:8D3D: 10 F4
 	STY palUpdateFlag               ;C - - - - - 0x008D4F 04:8D3F: 84 18
@@ -579,13 +579,13 @@ loc_04_8D41:
 loc_04_8D55:
 	LDA spritePalCody,X             ;C - - - - - 0x008D65 04:8D55: BD 3E C5
 	STA palBuffer+16,Y              ;C - - - - - 0x008D68 04:8D58: 99 10 06
-	STA ram_0630,Y                  ;C - - - - - 0x008D6B 04:8D5B: 99 30 06
+	STA palBase+16,Y                ;C - - - - - 0x008D6B 04:8D5B: 99 30 06
 	DEX                             ;C - - - - - 0x008D6E 04:8D5E: CA
 	DEY                             ;C - - - - - 0x008D6F 04:8D5F: 88
 	BPL loc_04_8D55                 ;C - - - - - 0x008D70 04:8D60: 10 F3
 	LDA #$30                        ;C - - - - - 0x008D72 04:8D62: A9 30
 	STA palBuffer+26                ;C - - - - - 0x008D74 04:8D64: 8D 1A 06
-	STA ram_063A                    ;C - - - - - 0x008D77 04:8D67: 8D 3A 06
+	STA palBase+26                  ;C - - - - - 0x008D77 04:8D67: 8D 3A 06
 	LDA #$25                        ;C - - - - - 0x008D7A 04:8D6A: A9 25
 	STA palBuffer+27                ;C - - - - - 0x008D7C 04:8D6C: 8D 1B 06
 	STA ram_06DA                    ;C - - - - - 0x008D7F 04:8D6F: 8D DA 06
@@ -799,10 +799,10 @@ ScreenInit9000:
 loc_04_9002:
 	LDA tbl_04_9046,Y               ;C - - - - - 0x009012 04:9002: B9 46 90
 	STA palBuffer,Y                 ;C - - - - - 0x009015 04:9005: 99 00 06
-	STA ram_0620,Y                  ;C - - - - - 0x009018 04:9008: 99 20 06
+	STA palBase,Y                   ;C - - - - - 0x009018 04:9008: 99 20 06
 	LDA tbl_04_8B88,Y               ;C - - - - - 0x00901B 04:900B: B9 88 8B
 	STA palBuffer+16,Y              ;C - - - - - 0x00901E 04:900E: 99 10 06
-	STA ram_0630,Y                  ;C - - - - - 0x009021 04:9011: 99 30 06
+	STA palBase+16,Y                ;C - - - - - 0x009021 04:9011: 99 30 06
 	DEY                             ;C - - - - - 0x009024 04:9014: 88
 	BPL loc_04_9002                 ;C - - - - - 0x009025 04:9015: 10 EB
 	STY palUpdateFlag               ;C - - - - - 0x009027 04:9017: 84 18
@@ -855,10 +855,10 @@ loc_04_9110:
 loc_04_9112:
 	LDA tbl_04_91FB,Y               ;C - - - - - 0x009122 04:9112: B9 FB 91
 	STA palBuffer,Y                 ;C - - - - - 0x009125 04:9115: 99 00 06
-	STA ram_0620,Y                  ;C - - - - - 0x009128 04:9118: 99 20 06
+	STA palBase,Y                   ;C - - - - - 0x009128 04:9118: 99 20 06
 	LDA tbl_04_920B,Y               ;C - - - - - 0x00912B 04:911B: B9 0B 92
 	STA palBuffer+16,Y              ;C - - - - - 0x00912E 04:911E: 99 10 06
-	STA ram_0630,Y                  ;C - - - - - 0x009131 04:9121: 99 30 06
+	STA palBase+16,Y                ;C - - - - - 0x009131 04:9121: 99 30 06
 	DEY                             ;C - - - - - 0x009134 04:9124: 88
 	BPL loc_04_9112                 ;C - - - - - 0x009135 04:9125: 10 EB
 	STY palUpdateFlag               ;C - - - - - 0x009137 04:9127: 84 18
@@ -990,10 +990,10 @@ ScreenInit9300:
 loc_04_9305:
 	LDA tbl_04_9575,Y               ;C - - - - - 0x009315 04:9305: B9 75 95
 	STA palBuffer,Y                 ;C - - - - - 0x009318 04:9308: 99 00 06
-	STA ram_0620,Y                  ;C - - - - - 0x00931B 04:930B: 99 20 06
+	STA palBase,Y                   ;C - - - - - 0x00931B 04:930B: 99 20 06
 	LDA tbl_04_9585,Y               ;C - - - - - 0x00931E 04:930E: B9 85 95
 	STA palBuffer+16,Y              ;C - - - - - 0x009321 04:9311: 99 10 06
-	STA ram_0630,Y                  ;C - - - - - 0x009324 04:9314: 99 30 06
+	STA palBase+16,Y                ;C - - - - - 0x009324 04:9314: 99 30 06
 	DEY                             ;C - - - - - 0x009327 04:9317: 88
 	BPL loc_04_9305                 ;C - - - - - 0x009328 04:9318: 10 EB
 	STY palUpdateFlag               ;C - - - - - 0x00932A 04:931A: 84 18
@@ -1154,7 +1154,7 @@ ScreenInit9500:
 loc_04_9502:
 	LDA tbl_04_9595,Y               ;C - - - - - 0x009512 04:9502: B9 95 95
 	STA palBuffer,Y                 ;C - - - - - 0x009515 04:9505: 99 00 06
-	STA ram_0620,Y                  ;C - - - - - 0x009518 04:9508: 99 20 06
+	STA palBase,Y                   ;C - - - - - 0x009518 04:9508: 99 20 06
 	DEY                             ;C - - - - - 0x00951B 04:950B: 88
 	BPL loc_04_9502                 ;C - - - - - 0x00951C 04:950C: 10 F4
 	STY palUpdateFlag               ;C - - - - - 0x00951E 04:950E: 84 18
@@ -1171,7 +1171,7 @@ loc_04_9502:
 loc_04_9529:
 	LDA spritePalCody,X             ;C - - - - - 0x009539 04:9529: BD 3E C5
 	STA palBuffer+16,Y              ;C - - - - - 0x00953C 04:952C: 99 10 06
-	STA ram_0630,Y                  ;C - - - - - 0x00953F 04:952F: 99 30 06
+	STA palBase+16,Y                ;C - - - - - 0x00953F 04:952F: 99 30 06
 	DEX                             ;C - - - - - 0x009542 04:9532: CA
 	DEY                             ;C - - - - - 0x009543 04:9533: 88
 	BPL loc_04_9529                 ;C - - - - - 0x009544 04:9534: 10 F3
@@ -1219,7 +1219,7 @@ ScreenInit9600:
 loc_04_9602:
 	LDA tbl_04_9636,Y               ;C - - - - - 0x009612 04:9602: B9 36 96
 	STA palBuffer,Y                 ;C - - - - - 0x009615 04:9605: 99 00 06
-	STA ram_0620,Y                  ;C - - - - - 0x009618 04:9608: 99 20 06
+	STA palBase,Y                   ;C - - - - - 0x009618 04:9608: 99 20 06
 	DEY                             ;C - - - - - 0x00961B 04:960B: 88
 	BPL loc_04_9602                 ;C - - - - - 0x00961C 04:960C: 10 F4
 	LDY playerId                    ;C - - - - - 0x00961E 04:960E: A4 34
@@ -1229,7 +1229,7 @@ loc_04_9602:
 loc_04_9616:
 	LDA tbl_04_9646,X               ;C - - - - - 0x009626 04:9616: BD 46 96
 	STA palBuffer+16,Y              ;C - - - - - 0x009629 04:9619: 99 10 06
-	STA ram_0630,Y                  ;C - - - - - 0x00962C 04:961C: 99 30 06
+	STA palBase+16,Y                ;C - - - - - 0x00962C 04:961C: 99 30 06
 	DEX                             ;C - - - - - 0x00962F 04:961F: CA
 	DEY                             ;C - - - - - 0x009630 04:9620: 88
 	BPL loc_04_9616                 ;C - - - - - 0x009631 04:9621: 10 F3
@@ -1280,7 +1280,7 @@ tbl_04_965E:
 	.byte $00,$40,$05,$08,$54,$4A,$00,$40,$44,$12,$44,$57,$01;- - - - - - 0x009803 04:97F3:
 ; jump table by ram_0066
 ScreenDispatch9800:
-	LDY ram_0066                    ;C - - - - - 0x009810 04:9800: A4 66
+	LDY screenStep                  ;C - - - - - 0x009810 04:9800: A4 66
 	LDA tbl_04_9D56,Y               ;C - - - - - 0x009812 04:9802: B9 56 9D
 	STA ptr_0C                      ;C - - - - - 0x009815 04:9805: 85 0C
 	LDA tbl_04_9D59,Y               ;C - - - - - 0x009817 04:9807: B9 59 9D
@@ -1312,11 +1312,11 @@ loc_04_9818:
 	BEQ loc_04_9881                 ;C - - - - - 0x00984A 04:983A: F0 45
 	JSR QueueTextScript0            ;C - - - - - 0x00984C 04:983C: 20 9E 9A
 	LDA #$00                        ;C - - - - - 0x00984F 04:983F: A9 00
-	STA ram_00AC                    ;C - - - - - 0x009851 04:9841: 85 AC
+	STA bonusHits                   ;C - - - - - 0x009851 04:9841: 85 AC
 	STA ram_00AA                    ;C - - - - - 0x009853 04:9843: 85 AA
 	STA ram_00B4                    ;C - - - - - 0x009855 04:9845: 85 B4
 	STA ram_00AB                    ;C - - - - - 0x009857 04:9847: 85 AB
-	INC ram_0066                    ;C - - - - - 0x009859 04:9849: E6 66
+	INC screenStep                  ;C - - - - - 0x009859 04:9849: E6 66
 	RTS                             ;C - - - - - 0x00985B 04:984B: 60
 loc_04_984C:
 	LDA playerLevel                 ;C - - - - - 0x00985C 04:984C: A5 6B
@@ -1372,8 +1372,8 @@ loc_04_98AF:
 	DEC ram_00AB                    ;C - - - - - 0x0098BF 04:98AF: C6 AB
 	LDA ram_00AB                    ;C - - - - - 0x0098C1 04:98B1: A5 AB
 	BNE loc_04_98BC                 ;C - - - - - 0x0098C3 04:98B3: D0 07
-	INC ram_0066                    ;C - - - - - 0x0098C5 04:98B5: E6 66
-	INC ram_0066                    ;C - - - - - 0x0098C7 04:98B7: E6 66
+	INC screenStep                  ;C - - - - - 0x0098C5 04:98B5: E6 66
+	INC screenStep                  ;C - - - - - 0x0098C7 04:98B7: E6 66
 	JSR QueueTextScript0            ;C - - - - - 0x0098C9 04:98B9: 20 9E 9A
 loc_04_98BC:
 	RTS                             ;C - - - - - 0x0098CC 04:98BC: 60
@@ -1395,7 +1395,7 @@ ofs_04_98DD:
 	CMP #$10                        ;C - - - - - 0x0098EF 04:98DF: C9 10
 	BNE loc_04_98E9                 ;C - - - - - 0x0098F1 04:98E1: D0 06
 	JSR QueueTextScript0            ;c - - - - - 0x0098F3 04:98E3: 20 9E 9A
-	INC ram_0066                    ;c - - - - - 0x0098F6 04:98E6: E6 66
+	INC screenStep                  ;c - - - - - 0x0098F6 04:98E6: E6 66
 	RTS                             ;c - - - - - 0x0098F8 04:98E8: 60
 loc_04_98E9:
 	DEC ram_00AB                    ;C - - - - - 0x0098F9 04:98E9: C6 AB
@@ -1543,7 +1543,7 @@ loc_04_99DD:
 	STA ram_00AB                    ;C - - - - - 0x0099F7 04:99E7: 85 AB
 	RTS                             ;C - - - - - 0x0099F9 04:99E9: 60
 loc_04_99EA:
-	INC ram_0066                    ;C - - - - - 0x0099FA 04:99EA: E6 66
+	INC screenStep                  ;C - - - - - 0x0099FA 04:99EA: E6 66
 	RTS                             ;C - - - - - 0x0099FC 04:99EC: 60
 loc_04_99ED:
 	LDY #$02                        ;C - - - - - 0x0099FD 04:99ED: A0 02
@@ -1628,13 +1628,13 @@ BonusEnemyHit:
 	SBC #$08                        ;C - - - - - 0x009A93 04:9A83: E9 08
 	STA objLife,X                   ;C - - - - - 0x009A95 04:9A85: 9D 90 04
 	JSR QueueBonusBar               ;C - - - - - 0x009A98 04:9A88: 20 F4 9A
-	INC ram_00AC                    ;C - - - - - 0x009A9B 04:9A8B: E6 AC
+	INC bonusHits                   ;C - - - - - 0x009A9B 04:9A8B: E6 AC
 	RTS                             ;C - - - - - 0x009A9D 04:9A8D: 60
 loc_04_9A8E:
 	RTS                             ;C - - - - - 0x009A9E 04:9A8E: 60
 ofs_04_9A8F:
 	LDY #$00                        ;C - - J - - 0x009A9F 04:9A8F: A0 00
-	STY ram_0066                    ;C - - - - - 0x009AA1 04:9A91: 84 66
+	STY screenStep                  ;C - - - - - 0x009AA1 04:9A91: 84 66
 	STY gameOverFlag                ;C - - - - - 0x009AA3 04:9A93: 84 62
 	LDY #$01                        ;C - - - - - 0x009AA5 04:9A95: A0 01
 	JSR QueueTextScript             ;C - - - - - 0x009AA7 04:9A97: 20 A0 9A
@@ -1703,7 +1703,7 @@ QueueBonusBar:
 	INX                             ;C - - - - - 0x009B11 04:9B01: E8
 	LDA #$72                        ;C - - - - - 0x009B12 04:9B02: A9 72
 	SEC                             ;C - - - - - 0x009B14 04:9B04: 38
-	SBC ram_00AC                    ;C - - - - - 0x009B15 04:9B05: E5 AC
+	SBC bonusHits                   ;C - - - - - 0x009B15 04:9B05: E5 AC
 	STA vramQueue,X                 ;C - - - - - 0x009B17 04:9B07: 9D 80 07
 	INX                             ;C - - - - - 0x009B1A 04:9B0A: E8
 	LDA #$10                        ;C - - - - - 0x009B1B 04:9B0B: A9 10

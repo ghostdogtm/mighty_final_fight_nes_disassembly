@@ -6,7 +6,7 @@ UpdateEnemiesEntry:
 ; slots 1-15: per-object countdown (objArr_04B0), then AI handler = enemyAIPtr[objKind]; handler returns to the loop via a pushed address
 UpdateEnemies:
 	LDA #$38                        ;C - - - - - 0x018013 0C:8003: A9 38
-	STA ram_0099                    ;C - - - - - 0x018015 0C:8005: 85 99
+	STA gravity                     ;C - - - - - 0x018015 0C:8005: 85 99
 	LDX #$01                        ;C - - - - - 0x018017 0C:8007: A2 01
 	STX ram_00EF                    ;C - - - - - 0x018019 0C:8009: 86 EF
 loc_0C_800B:
@@ -78,7 +78,7 @@ loc_0C_8072:
 	BEQ loc_0C_808D                 ;C - - - - - 0x01808F 0C:807F: F0 0C
 	CMP #$0E                        ;C - - - - - 0x018091 0C:8081: C9 0E
 	BNE loc_0C_8090                 ;C - - - - - 0x018093 0C:8083: D0 0B
-	LDA ram_00A7                    ;C - - - - - 0x018095 0C:8085: A5 A7
+	LDA attackType                  ;C - - - - - 0x018095 0C:8085: A5 A7
 	CMP #$09                        ;C - - - - - 0x018097 0C:8087: C9 09
 	BEQ loc_0C_808D                 ;C - - - - - 0x018099 0C:8089: F0 02
 	BNE loc_0C_8090                 ;C - - - - - 0x01809B 0C:808B: D0 03
@@ -152,7 +152,7 @@ loc_0C_8116:
 	LDA objKind,X                   ;C - - - - - 0x018126 0C:8116: BD 20 03
 	CMP #$91                        ;C - - - - - 0x018129 0C:8119: C9 91
 	BEQ loc_0C_8131                 ;C - - - - - 0x01812B 0C:811B: F0 14
-	LDA ram_00A7                    ;C - - - - - 0x01812D 0C:811D: A5 A7
+	LDA attackType                  ;C - - - - - 0x01812D 0C:811D: A5 A7
 	CMP #$1D                        ;C - - - - - 0x01812F 0C:811F: C9 1D
 	BNE loc_0C_812B                 ;C - - - - - 0x018131 0C:8121: D0 08
 	LDA objY                        ;C - - - - - 0x018133 0C:8123: AD C0 03
@@ -172,7 +172,7 @@ loc_0C_8131:
 	LDA objHitTimer,X               ;C - - - - - 0x018151 0C:8141: BD E0 04
 	BEQ loc_0C_81B5                 ;C - - - - - 0x018154 0C:8144: F0 6F
 loc_0C_8146:
-	LDA ram_00A7                    ;C - - - - - 0x018156 0C:8146: A5 A7
+	LDA attackType                  ;C - - - - - 0x018156 0C:8146: A5 A7
 	CMP #$01                        ;C - - - - - 0x018158 0C:8148: C9 01
 	BEQ loc_0C_81AB                 ;C - - - - - 0x01815A 0C:814A: F0 5F
 	CMP #$0D                        ;C - - - - - 0x01815C 0C:814C: C9 0D
@@ -241,9 +241,9 @@ loc_0C_81B8:
 	LDA objAnim,X                   ;C - - - - - 0x0181D7 0C:81C7: BD 80 05
 	CMP #$7B                        ;C - - - - - 0x0181DA 0C:81CA: C9 7B
 	BEQ loc_0C_821F                 ;C - - - - - 0x0181DC 0C:81CC: F0 51
-	INC ram_0054                    ;C - - - - - 0x0181DE 0C:81CE: E6 54
+	INC enemiesDefeated             ;C - - - - - 0x0181DE 0C:81CE: E6 54
 	JSR ResetEnemyActive            ;C - - - - - 0x0181E0 0C:81D0: 20 2F 82
-	LDA ram_00A7                    ;C - - - - - 0x0181E3 0C:81D3: A5 A7
+	LDA attackType                  ;C - - - - - 0x0181E3 0C:81D3: A5 A7
 	CMP #$01                        ;C - - - - - 0x0181E5 0C:81D5: C9 01
 	BEQ loc_0C_81E7                 ;C - - - - - 0x0181E7 0C:81D7: F0 0E
 	CMP #$07                        ;C - - - - - 0x0181E9 0C:81D9: C9 07
@@ -261,7 +261,7 @@ loc_0C_81EB:
 loc_0C_81ED:
 	STA objKind,X                   ;C - - - - - 0x0181FD 0C:81ED: 9D 20 03
 loc_0C_81F0:
-	LDA ram_006E                    ;C - - - - - 0x018200 0C:81F0: A5 6E
+	LDA playerBusy                  ;C - - - - - 0x018200 0C:81F0: A5 6E
 	BMI loc_0C_820E                 ;C - - - - - 0x018202 0C:81F2: 30 1A
 	LDA playerInvincible            ;C - - - - - 0x018204 0C:81F4: A5 3B
 	BNE loc_0C_820E                 ;C - - - - - 0x018206 0C:81F6: D0 16
@@ -277,7 +277,7 @@ loc_0C_81F0:
 loc_0C_820E:
 	JMP loc_0C_800B                 ;C - - - - - 0x01821E 0C:820E: 4C 0B 80
 loc_0C_8211:
-	INC ram_0054                    ;C - - - - - 0x018221 0C:8211: E6 54
+	INC enemiesDefeated             ;C - - - - - 0x018221 0C:8211: E6 54
 	JSR ResetEnemyActive            ;C - - - - - 0x018223 0C:8213: 20 2F 82
 	LDA #$9F                        ;C - - - - - 0x018226 0C:8216: A9 9F
 	STA objKind,X                   ;C - - - - - 0x018228 0C:8218: 9D 20 03
@@ -320,7 +320,7 @@ loc_0C_8256:
 	LDA playerId                    ;C - - - - - 0x01826E 0C:825E: A5 34
 	CMP #$02                        ;C - - - - - 0x018270 0C:8260: C9 02
 	BCC loc_0C_8278                 ;C - - - - - 0x018272 0C:8262: 90 14
-	LDA ram_00A7                    ;C - - - - - 0x018274 0C:8264: A5 A7
+	LDA attackType                  ;C - - - - - 0x018274 0C:8264: A5 A7
 	CMP #$09                        ;C - - - - - 0x018276 0C:8266: C9 09
 	BEQ loc_0C_8270                 ;C - - - - - 0x018278 0C:8268: F0 06
 	CMP #$13                        ;C - - - - - 0x01827A 0C:826A: C9 13
@@ -409,12 +409,12 @@ loc_0C_830F:
 	LDA ptr_00                      ;C - - - - - 0x018321 0C:8311: A5 00
 	CMP #$1A                        ;C - - - - - 0x018323 0C:8313: C9 1A
 	BCS loc_0C_8333                 ;C - - - - - 0x018325 0C:8315: B0 1C
-	LDA ram_00A7                    ;C - - - - - 0x018327 0C:8317: A5 A7
+	LDA attackType                  ;C - - - - - 0x018327 0C:8317: A5 A7
 	CMP #$09                        ;C - - - - - 0x018329 0C:8319: C9 09
 	BEQ loc_0C_831F                 ;C - - - - - 0x01832B 0C:831B: F0 02
 	BNE loc_0C_8336                 ;C - - - - - 0x01832D 0C:831D: D0 17
 loc_0C_831F:
-	LDA ram_00A6                    ;C - - - - - 0x01832F 0C:831F: A5 A6
+	LDA jumpBaseY                   ;C - - - - - 0x01832F 0C:831F: A5 A6
 	SEC                             ;C - - - - - 0x018331 0C:8321: 38
 	SBC objY,Y                      ;C - - - - - 0x018332 0C:8322: F9 C0 03
 	BCS loc_0C_832C                 ;C - - - - - 0x018335 0C:8325: B0 05
@@ -564,7 +564,7 @@ loc_0C_851C:
 	LDY objVariant,X                ;C - - - - - 0x01852C 0C:851C: BC C0 05
 	LDA tbl_0D_A897,Y               ;C - - - - - bank=0D 0x01852F 0C:851F: B9 97 A8
 	TAY                             ;C - - - - - 0x018532 0C:8522: A8
-	LDA ram_00E4                    ;C - - - - - 0x018533 0C:8523: A5 E4
+	LDA rngState0                   ;C - - - - - 0x018533 0C:8523: A5 E4
 	AND #$0F                        ;C - - - - - 0x018535 0C:8525: 29 0F
 	CMP tbl_0C_8590,Y               ;C - - - - - 0x018537 0C:8527: D9 90 85
 	BCS loc_0C_8593                 ;C - - - - - 0x01853A 0C:852A: B0 67
@@ -572,7 +572,7 @@ loc_0C_852C:
 	LDA gameAction                  ;C - - - - - 0x01853C 0C:852C: A5 30
 	CMP #$23                        ;C - - - - - 0x01853E 0C:852E: C9 23
 	BEQ loc_0C_8564                 ;C - - - - - 0x018540 0C:8530: F0 32
-	LDA ram_00A7                    ;C - - - - - 0x018542 0C:8532: A5 A7
+	LDA attackType                  ;C - - - - - 0x018542 0C:8532: A5 A7
 	CMP #$00                        ;C - - - - - 0x018544 0C:8534: C9 00
 	BEQ loc_0C_8560                 ;C - - - - - 0x018546 0C:8536: F0 28
 	CMP #$01                        ;C - - - - - 0x018548 0C:8538: C9 01
@@ -602,9 +602,9 @@ loc_0C_8564:
 	LDA #$08                        ;C - - - - - 0x018574 0C:8564: A9 08
 loc_0C_8566:
 	STA objTimer,X                  ;C - - - - - 0x018576 0C:8566: 9D D0 05
-	STX ram_00B0                    ;C - - - - - 0x018579 0C:8569: 86 B0
+	STX hudEnemySlot                ;C - - - - - 0x018579 0C:8569: 86 B0
 	LDA #$00                        ;C - - - - - 0x01857B 0C:856B: A9 00
-	STA ram_00B1                    ;C - - - - - 0x01857D 0C:856D: 85 B1
+	STA hudEnemyActive              ;C - - - - - 0x01857D 0C:856D: 85 B1
 	LDA #$26                        ;C - - - - - 0x01857F 0C:856F: A9 26
 	JSR QueueSound                  ;C - - - - - 0x018581 0C:8571: 20 4C F3
 	LDA #$83                        ;C - - - - - 0x018584 0C:8574: A9 83
@@ -612,7 +612,7 @@ loc_0C_8566:
 	LDA #$00                        ;C - - - - - 0x018589 0C:8579: A9 00
 	STA objStep,X                   ;C - - - - - 0x01858B 0C:857B: 9D 00 05
 	STA objHitTimer,X               ;C - - - - - 0x01858E 0C:857E: 9D E0 04
-	LDA ram_00A7                    ;C - - - - - 0x018591 0C:8581: A5 A7
+	LDA attackType                  ;C - - - - - 0x018591 0C:8581: A5 A7
 	CMP #$06                        ;C - - - - - 0x018593 0C:8583: C9 06
 	BEQ loc_0C_858B                 ;C - - - - - 0x018595 0C:8585: F0 04
 	CMP #$0C                        ;C - - - - - 0x018597 0C:8587: C9 0C
@@ -626,9 +626,9 @@ tbl_0C_8590:
 loc_0C_8593:
 	LDA objKind,X                   ;C - - - - - 0x0185A3 0C:8593: BD 20 03
 	BEQ loc_0C_85B6                 ;C - - - - - 0x0185A6 0C:8596: F0 1E
-	STX ram_00B0                    ;C - - - - - 0x0185A8 0C:8598: 86 B0
+	STX hudEnemySlot                ;C - - - - - 0x0185A8 0C:8598: 86 B0
 	LDA #$00                        ;C - - - - - 0x0185AA 0C:859A: A9 00
-	STA ram_00B1                    ;C - - - - - 0x0185AC 0C:859C: 85 B1
+	STA hudEnemyActive              ;C - - - - - 0x0185AC 0C:859C: 85 B1
 	LDA gameAction                  ;C - - - - - 0x0185AE 0C:859E: A5 30
 	CMP #$17                        ;C - - - - - 0x0185B0 0C:85A0: C9 17
 	BNE loc_0C_85A8                 ;C - - - - - 0x0185B2 0C:85A2: D0 04
@@ -651,7 +651,7 @@ loc_0C_85B6:
 	STA ptr_02+1                    ;C - - - - - 0x0185D3 0C:85C3: 85 03
 	JMP (ptr_02)                    ;C - - - - - 0x0185D5 0C:85C5: 6C 02 00
 ofs_0C_85C8:
-	LDA ram_00A7                    ;C - - J - - 0x0185D8 0C:85C8: A5 A7
+	LDA attackType                  ;C - - J - - 0x0185D8 0C:85C8: A5 A7
 	CMP #$07                        ;C - - - - - 0x0185DA 0C:85CA: C9 07
 	BNE loc_0C_85D2                 ;C - - - - - 0x0185DC 0C:85CC: D0 04
 	LDA #$19                        ;C - - - - - 0x0185DE 0C:85CE: A9 19
@@ -670,10 +670,10 @@ loc_0C_85DC:
 	STA ptr_04                      ;C - - - - - 0x0185F4 0C:85E4: 85 04
 	LDA tbl_0C_87BC,Y               ;C - - - - - 0x0185F6 0C:85E6: B9 BC 87
 	STA ptr_04+1                    ;C - - - - - 0x0185F9 0C:85E9: 85 05
-	LDY ram_00A7                    ;C - - - - - 0x0185FB 0C:85EB: A4 A7
+	LDY attackType                  ;C - - - - - 0x0185FB 0C:85EB: A4 A7
 	JMP (ptr_04)                    ;C - - - - - 0x0185FD 0C:85ED: 6C 04 00
 ofs_0C_85F0:
-	LDA ram_00A7                    ;C - - J - - 0x018600 0C:85F0: A5 A7
+	LDA attackType                  ;C - - J - - 0x018600 0C:85F0: A5 A7
 	CMP #$01                        ;C - - - - - 0x018602 0C:85F2: C9 01
 	BNE loc_0C_85FA                 ;C - - - - - 0x018604 0C:85F4: D0 04
 	LDA #$1A                        ;C - - - - - 0x018606 0C:85F6: A9 1A
@@ -693,10 +693,10 @@ loc_0C_8604:
 	STA ptr_04                      ;C - - - - - 0x01861C 0C:860C: 85 04
 	LDA tbl_0C_87C8,Y               ;C - - - - - 0x01861E 0C:860E: B9 C8 87
 	STA ptr_04+1                    ;C - - - - - 0x018621 0C:8611: 85 05
-	LDY ram_00A7                    ;C - - - - - 0x018623 0C:8613: A4 A7
+	LDY attackType                  ;C - - - - - 0x018623 0C:8613: A4 A7
 	JMP (ptr_04)                    ;C - - - - - 0x018625 0C:8615: 6C 04 00
 ofs_0C_8618:
-	LDA ram_00A7                    ;C - - J - - 0x018628 0C:8618: A5 A7
+	LDA attackType                  ;C - - J - - 0x018628 0C:8618: A5 A7
 	CMP #$0D                        ;C - - - - - 0x01862A 0C:861A: C9 0D
 	BNE loc_0C_8622                 ;C - - - - - 0x01862C 0C:861C: D0 04
 	LDA #$27                        ;C - - - - - 0x01862E 0C:861E: A9 27
@@ -710,7 +710,7 @@ loc_0C_8624:
 	STA ptr_04                      ;C - - - - - 0x01863C 0C:862C: 85 04
 	LDA tbl_0C_87D2,Y               ;C - - - - - 0x01863E 0C:862E: B9 D2 87
 	STA ptr_04+1                    ;C - - - - - 0x018641 0C:8631: 85 05
-	LDY ram_00A7                    ;C - - - - - 0x018643 0C:8633: A4 A7
+	LDY attackType                  ;C - - - - - 0x018643 0C:8633: A4 A7
 	JMP (ptr_04)                    ;C - - - - - 0x018645 0C:8635: 6C 04 00
 ofs_0C_8638:
 	LDA tbl_0C_87D6,Y               ;C - - J - - 0x018648 0C:8638: B9 D6 87
@@ -761,7 +761,7 @@ ofs_0C_8683:
 	LDA tbl_0C_89C0,Y               ;C - - J - - 0x018693 0C:8683: B9 C0 89
 loc_0C_8686:
 	STA ptr_00                      ;C - - - - - 0x018696 0C:8686: 85 00
-	LDA ram_00A7                    ;C - - - - - 0x018698 0C:8688: A5 A7
+	LDA attackType                  ;C - - - - - 0x018698 0C:8688: A5 A7
 	CMP #$06                        ;C - - - - - 0x01869A 0C:868A: C9 06
 	BEQ loc_0C_8692                 ;C - - - - - 0x01869C 0C:868C: F0 04
 	CMP #$0C                        ;C - - - - - 0x01869E 0C:868E: C9 0C
@@ -848,7 +848,7 @@ loc_0C_870D:
 	STA objActive                   ;c - - - - - 0x01872A 0C:871A: 8D 00 03
 	LDY playerId                    ;c - - - - - 0x01872D 0C:871D: A4 34
 	LDA tbl_0F_E288,Y               ;c - - - - - 0x01872F 0C:871F: B9 88 E2
-	STA ram_006F                    ;c - - - - - 0x018732 0C:8722: 85 6F
+	STA playerStandAnim             ;c - - - - - 0x018732 0C:8722: 85 6F
 	JSR ResetPlayerStand            ;c - - - - - 0x018734 0C:8724: 20 AA CE
 	LDA objY                        ;c - - - - - 0x018737 0C:8727: AD C0 03
 	STA objY,X                      ;c - - - - - 0x01873A 0C:872A: 9D C0 03
@@ -1159,7 +1159,7 @@ loc_0C_8A31:
 	LDA playerExp+1                 ;C - - - - - 0x018A4D 0C:8A3D: A5 6D
 	AND #$0F                        ;C - - - - - 0x018A4F 0C:8A3F: 29 0F
 	STA ptr_06+1                    ;C - - - - - 0x018A51 0C:8A41: 85 07
-	LDY ram_00A7                    ;C - - - - - 0x018A53 0C:8A43: A4 A7
+	LDY attackType                  ;C - - - - - 0x018A53 0C:8A43: A4 A7
 	CPY #$03                        ;C - - - - - 0x018A55 0C:8A45: C0 03
 	BNE loc_0C_8A56                 ;C - - - - - 0x018A57 0C:8A47: D0 0D
 	LDA objAnim                     ;C - - - - - 0x018A59 0C:8A49: AD 80 05
@@ -1341,7 +1341,7 @@ loc_0C_8B97:
 	SBC #$60                        ;C - - - - - 0x018BAB 0C:8B9B: E9 60
 	TAY                             ;C - - - - - 0x018BAD 0C:8B9D: A8
 	LDA tbl_0F_FCD1,Y               ;C - - - - - 0x018BAE 0C:8B9E: B9 D1 FC
-	STA ram_00A7                    ;C - - - - - 0x018BB1 0C:8BA1: 85 A7
+	STA attackType                  ;C - - - - - 0x018BB1 0C:8BA1: 85 A7
 	JSR PlayerSpecialDispatch       ;C - - - - - 0x018BB3 0C:8BA3: 20 E3 89
 loc_0C_8BA6:
 	JSR EndAttackAction             ;C - - - - - 0x018BB6 0C:8BA6: 20 00 8C
@@ -1615,7 +1615,7 @@ loc_0C_8DB2:
 	CLC                             ;c - - - - - 0x018DCE 0C:8DBE: 18
 	ADC #$10                        ;c - - - - - 0x018DCF 0C:8DBF: 69 10
 	STA objX,X                      ;c - - - - - 0x018DD1 0C:8DC1: 9D 60 03
-	LDA ram_002D                    ;c - - - - - 0x018DD4 0C:8DC4: A5 2D
+	LDA worldXPage                  ;c - - - - - 0x018DD4 0C:8DC4: A5 2D
 	ADC #$00                        ;c - - - - - 0x018DD6 0C:8DC6: 69 00
 	STA objXPage,X                  ;c - - - - - 0x018DD8 0C:8DC8: 9D 80 03
 	JMP loc_0C_8DEE                 ;c - - - - - 0x018DDB 0C:8DCB: 4C EE 8D
@@ -1633,7 +1633,7 @@ loc_0C_8DD1:
 	CLC                             ;c - - - - - 0x018DF1 0C:8DE1: 18
 	ADC #$F0                        ;c - - - - - 0x018DF2 0C:8DE2: 69 F0
 	STA objX,X                      ;c - - - - - 0x018DF4 0C:8DE4: 9D 60 03
-	LDA ram_002D                    ;c - - - - - 0x018DF7 0C:8DE7: A5 2D
+	LDA worldXPage                  ;c - - - - - 0x018DF7 0C:8DE7: A5 2D
 	ADC #$00                        ;c - - - - - 0x018DF9 0C:8DE9: 69 00
 	STA objXPage,X                  ;c - - - - - 0x018DFB 0C:8DEB: 9D 80 03
 loc_0C_8DEE:
@@ -1707,7 +1707,7 @@ loc_0C_8E64:
 	CLC                             ;C - - - - - 0x018E8B 0C:8E7B: 18
 	ADC #$10                        ;C - - - - - 0x018E8C 0C:8E7C: 69 10
 	STA objX,X                      ;C - - - - - 0x018E8E 0C:8E7E: 9D 60 03
-	LDA ram_002D                    ;C - - - - - 0x018E91 0C:8E81: A5 2D
+	LDA worldXPage                  ;C - - - - - 0x018E91 0C:8E81: A5 2D
 	ADC #$00                        ;C - - - - - 0x018E93 0C:8E83: 69 00
 	STA objXPage,X                  ;C - - - - - 0x018E95 0C:8E85: 9D 80 03
 	JMP loc_0C_8EB4                 ;C - - - - - 0x018E98 0C:8E88: 4C B4 8E
@@ -1726,7 +1726,7 @@ loc_0C_8E91:
 	CLC                             ;C - - - - - 0x018EB1 0C:8EA1: 18
 	ADC #$F0                        ;C - - - - - 0x018EB2 0C:8EA2: 69 F0
 	STA objX,X                      ;C - - - - - 0x018EB4 0C:8EA4: 9D 60 03
-	LDA ram_002D                    ;C - - - - - 0x018EB7 0C:8EA7: A5 2D
+	LDA worldXPage                  ;C - - - - - 0x018EB7 0C:8EA7: A5 2D
 	ADC #$00                        ;C - - - - - 0x018EB9 0C:8EA9: 69 00
 	STA objXPage,X                  ;C - - - - - 0x018EBB 0C:8EAB: 9D 80 03
 	JMP loc_0C_8EB4                 ;C - - - - - 0x018EBE 0C:8EAE: 4C B4 8E
@@ -1778,7 +1778,7 @@ loc_0C_8EF5:
 	CLC                             ;C - - - - - 0x018F1C 0C:8F0C: 18
 	ADC #$10                        ;C - - - - - 0x018F1D 0C:8F0D: 69 10
 	STA objX,X                      ;C - - - - - 0x018F1F 0C:8F0F: 9D 60 03
-	LDA ram_002D                    ;C - - - - - 0x018F22 0C:8F12: A5 2D
+	LDA worldXPage                  ;C - - - - - 0x018F22 0C:8F12: A5 2D
 	ADC #$00                        ;C - - - - - 0x018F24 0C:8F14: 69 00
 	STA objXPage,X                  ;C - - - - - 0x018F26 0C:8F16: 9D 80 03
 	JMP loc_0C_8F45                 ;C - - - - - 0x018F29 0C:8F19: 4C 45 8F
@@ -1797,7 +1797,7 @@ loc_0C_8F22:
 	CLC                             ;C - - - - - 0x018F42 0C:8F32: 18
 	ADC #$F0                        ;C - - - - - 0x018F43 0C:8F33: 69 F0
 	STA objX,X                      ;C - - - - - 0x018F45 0C:8F35: 9D 60 03
-	LDA ram_002D                    ;C - - - - - 0x018F48 0C:8F38: A5 2D
+	LDA worldXPage                  ;C - - - - - 0x018F48 0C:8F38: A5 2D
 	ADC #$00                        ;C - - - - - 0x018F4A 0C:8F3A: 69 00
 	STA objXPage,X                  ;C - - - - - 0x018F4C 0C:8F3C: 9D 80 03
 	JMP loc_0C_8F45                 ;C - - - - - 0x018F4F 0C:8F3F: 4C 45 8F
@@ -1816,22 +1816,22 @@ loc_0C_8F56:
 	LDA objSavedY,X                 ;C - - - - - 0x018F66 0C:8F56: BD 30 05
 	STA objY,X                      ;C - - - - - 0x018F69 0C:8F59: 9D C0 03
 	JSR EnemyFallLandCheck          ;C - - - - - 0x018F6C 0C:8F5C: 20 1F 9B
-	LDA ram_00A7                    ;C - - - - - 0x018F6F 0C:8F5F: A5 A7
+	LDA attackType                  ;C - - - - - 0x018F6F 0C:8F5F: A5 A7
 	STA ram_0151                    ;C - - - - - 0x018F71 0C:8F61: 8D 51 01
 	LDA #$05                        ;C - - - - - 0x018F74 0C:8F64: A9 05
-	STA ram_00A7                    ;C - - - - - 0x018F76 0C:8F66: 85 A7
+	STA attackType                  ;C - - - - - 0x018F76 0C:8F66: 85 A7
 	JSR EnemyHitCheck               ;C - - - - - 0x018F78 0C:8F68: 20 F0 84
 	LDA objLife,X                   ;C - - - - - 0x018F7B 0C:8F6B: BD 90 04
 	BPL loc_0C_8F80                 ;C - - - - - 0x018F7E 0C:8F6E: 10 10
 	LDA #$00                        ;C - - - - - 0x018F80 0C:8F70: A9 00
 	STA objAtkBox,X                 ;C - - - - - 0x018F82 0C:8F72: 9D 40 04
 	INC objActive,X                 ;C - - - - - 0x018F85 0C:8F75: FE 00 03
-	INC ram_0054                    ;C - - - - - 0x018F88 0C:8F78: E6 54
+	INC enemiesDefeated             ;C - - - - - 0x018F88 0C:8F78: E6 54
 	JSR PlayerSpecialDispatch       ;C - - - - - 0x018F8A 0C:8F7A: 20 E3 89
 	JMP EnemySetDownAnimB           ;C - - - - - 0x018F8D 0C:8F7D: 4C 7A 9C
 loc_0C_8F80:
 	LDA ram_0151                    ;C - - - - - 0x018F90 0C:8F80: AD 51 01
-	STA ram_00A7                    ;C - - - - - 0x018F93 0C:8F83: 85 A7
+	STA attackType                  ;C - - - - - 0x018F93 0C:8F83: 85 A7
 	LDA #$FF                        ;C - - - - - 0x018F95 0C:8F85: A9 FF
 	STA objDownState,X              ;C - - - - - 0x018F97 0C:8F87: 9D C0 04
 	JMP EnemyKnockdownStep          ;C - - - - - 0x018F9A 0C:8F8A: 4C FC 9B
@@ -2042,16 +2042,16 @@ loc_0C_9138:
 	LDA objStartY,X                 ;C - - - - - 0x019148 0C:9138: BD 20 05
 	BNE loc_0C_916F                 ;C - - - - - 0x01914B 0C:913B: D0 32
 	JSR EnemySetDownAnimA           ;C - - - - - 0x01914D 0C:913D: 20 55 9C
-	LDA ram_00A7                    ;C - - - - - 0x019150 0C:9140: A5 A7
+	LDA attackType                  ;C - - - - - 0x019150 0C:9140: A5 A7
 	STA ram_0151                    ;C - - - - - 0x019152 0C:9142: 8D 51 01
 	LDA #$05                        ;C - - - - - 0x019155 0C:9145: A9 05
-	STA ram_00A7                    ;C - - - - - 0x019157 0C:9147: 85 A7
+	STA attackType                  ;C - - - - - 0x019157 0C:9147: 85 A7
 	JSR EnemyHitCheck               ;C - - - - - 0x019159 0C:9149: 20 F0 84
 	LDA #$00                        ;C - - - - - 0x01915C 0C:914C: A9 00
-	STA ram_006E                    ;C - - - - - 0x01915E 0C:914E: 85 6E
+	STA playerBusy                  ;C - - - - - 0x01915E 0C:914E: 85 6E
 	LDA objLife,X                   ;C - - - - - 0x019160 0C:9150: BD 90 04
 	BPL loc_0C_9173                 ;C - - - - - 0x019163 0C:9153: 10 1E
-	INC ram_0054                    ;C - - - - - 0x019165 0C:9155: E6 54
+	INC enemiesDefeated             ;C - - - - - 0x019165 0C:9155: E6 54
 	LDA #$00                        ;C - - - - - 0x019167 0C:9157: A9 00
 	STA objAtkBox,X                 ;C - - - - - 0x019169 0C:9159: 9D 40 04
 	LDA #$80                        ;C - - - - - 0x01916C 0C:915C: A9 80
@@ -2067,7 +2067,7 @@ loc_0C_916F:
 	RTS                             ;C - - - - - 0x019182 0C:9172: 60
 loc_0C_9173:
 	LDA ram_0151                    ;C - - - - - 0x019183 0C:9173: AD 51 01
-	STA ram_00A7                    ;C - - - - - 0x019186 0C:9176: 85 A7
+	STA attackType                  ;C - - - - - 0x019186 0C:9176: 85 A7
 	INC objActive,X                 ;C - - - - - 0x019188 0C:9178: FE 00 03
 	INC objActive,X                 ;C - - - - - 0x01918B 0C:917B: FE 00 03
 ofs_0C_917E:
@@ -2137,7 +2137,7 @@ loc_0C_91F4:
 	BEQ loc_0C_9209                 ;c - - - - - 0x019216 0C:9206: F0 01
 	RTS                             ;c - - - - - 0x019218 0C:9208: 60
 loc_0C_9209:
-	LDA ram_00A6                    ;C - - - - - 0x019219 0C:9209: A5 A6
+	LDA jumpBaseY                   ;C - - - - - 0x019219 0C:9209: A5 A6
 	STA objSavedY,X                 ;C - - - - - 0x01921B 0C:920B: 9D 30 05
 	LDA objY,X                      ;C - - - - - 0x01921E 0C:920E: BD C0 03
 	CMP objSavedY,X                 ;C - - - - - 0x019221 0C:9211: DD 30 05
@@ -2189,14 +2189,14 @@ loc_0C_9273:
 	JSR ClearObjFlag40              ;C - - - - - 0x019283 0C:9273: 20 99 F0
 loc_0C_9276:
 	LDA #$13                        ;C - - - - - 0x019286 0C:9276: A9 13
-	STA ram_00A7                    ;C - - - - - 0x019288 0C:9278: 85 A7
+	STA attackType                  ;C - - - - - 0x019288 0C:9278: 85 A7
 	JSR EnemyHitCheck               ;C - - - - - 0x01928A 0C:927A: 20 F0 84
 	LDA objLife,X                   ;C - - - - - 0x01928D 0C:927D: BD 90 04
 	BPL loc_0C_92D3                 ;C - - - - - 0x019290 0C:9280: 10 51
 	JSR PlayerSpecialDispatch       ;C - - - - - 0x019292 0C:9282: 20 E3 89
 	LDA #$00                        ;C - - - - - 0x019295 0C:9285: A9 00
 	STA objAtkBox,X                 ;C - - - - - 0x019297 0C:9287: 9D 40 04
-	INC ram_0054                    ;C - - - - - 0x01929A 0C:928A: E6 54
+	INC enemiesDefeated             ;C - - - - - 0x01929A 0C:928A: E6 54
 	LDA #$80                        ;C - - - - - 0x01929C 0C:928C: A9 80
 	STA objActive,X                 ;C - - - - - 0x01929E 0C:928E: 9D 00 03
 	LDA #$16                        ;C - - - - - 0x0192A1 0C:9291: A9 16
@@ -2204,7 +2204,7 @@ loc_0C_9276:
 	LDA objFacing,X                 ;C - - - - - 0x0192A6 0C:9296: BD 60 04
 	EOR #$03                        ;C - - - - - 0x0192A9 0C:9299: 49 03
 	STA objFacing,X                 ;C - - - - - 0x0192AB 0C:929B: 9D 60 04
-	LDA ram_00A6                    ;C - - - - - 0x0192AE 0C:929E: A5 A6
+	LDA jumpBaseY                   ;C - - - - - 0x0192AE 0C:929E: A5 A6
 	STA objSavedY,X                 ;C - - - - - 0x0192B0 0C:92A0: 9D 30 05
 loc_0C_92A3:
 	LDA gameAction                  ;C - - - - - 0x0192B3 0C:92A3: A5 30
@@ -2218,7 +2218,7 @@ loc_0C_92A3:
 	STA objVelYLo,X                 ;C - - - - - 0x0192C5 0C:92B5: 9D 20 04
 	RTS                             ;C - - - - - 0x0192C8 0C:92B8: 60
 loc_0C_92B9:
-	LDA ram_00A6                    ;C - - - - - 0x0192C9 0C:92B9: A5 A6
+	LDA jumpBaseY                   ;C - - - - - 0x0192C9 0C:92B9: A5 A6
 	STA objSavedY,X                 ;C - - - - - 0x0192CB 0C:92BB: 9D 30 05
 	LDA objY,X                      ;C - - - - - 0x0192CE 0C:92BE: BD C0 03
 	CMP objSavedY,X                 ;C - - - - - 0x0192D1 0C:92C1: DD 30 05
@@ -2372,7 +2372,7 @@ loc_0C_93E7:
 	CLC                             ;c - - - - - 0x01940E 0C:93FE: 18
 	ADC #$10                        ;c - - - - - 0x01940F 0C:93FF: 69 10
 	STA objX,X                      ;c - - - - - 0x019411 0C:9401: 9D 60 03
-	LDA ram_002D                    ;c - - - - - 0x019414 0C:9404: A5 2D
+	LDA worldXPage                  ;c - - - - - 0x019414 0C:9404: A5 2D
 	ADC #$00                        ;c - - - - - 0x019416 0C:9406: 69 00
 	STA objXPage,X                  ;c - - - - - 0x019418 0C:9408: 9D 80 03
 	JMP loc_0C_942E                 ;c - - - - - 0x01941B 0C:940B: 4C 2E 94
@@ -2390,7 +2390,7 @@ loc_0C_9411:
 	CLC                             ;c - - - - - 0x019431 0C:9421: 18
 	ADC #$F0                        ;c - - - - - 0x019432 0C:9422: 69 F0
 	STA objX,X                      ;c - - - - - 0x019434 0C:9424: 9D 60 03
-	LDA ram_002D                    ;c - - - - - 0x019437 0C:9427: A5 2D
+	LDA worldXPage                  ;c - - - - - 0x019437 0C:9427: A5 2D
 	ADC #$00                        ;c - - - - - 0x019439 0C:9429: 69 00
 	STA objXPage,X                  ;c - - - - - 0x01943B 0C:942B: 9D 80 03
 loc_0C_942E:
@@ -2441,7 +2441,7 @@ loc_0C_946D:
 	CLC                             ;c - - - - - 0x019494 0C:9484: 18
 	ADC #$10                        ;c - - - - - 0x019495 0C:9485: 69 10
 	STA objX,X                      ;c - - - - - 0x019497 0C:9487: 9D 60 03
-	LDA ram_002D                    ;c - - - - - 0x01949A 0C:948A: A5 2D
+	LDA worldXPage                  ;c - - - - - 0x01949A 0C:948A: A5 2D
 	ADC #$00                        ;c - - - - - 0x01949C 0C:948C: 69 00
 	STA objXPage,X                  ;c - - - - - 0x01949E 0C:948E: 9D 80 03
 	JMP loc_0C_94B4                 ;c - - - - - 0x0194A1 0C:9491: 4C B4 94
@@ -2459,7 +2459,7 @@ loc_0C_9497:
 	CLC                             ;c - - - - - 0x0194B7 0C:94A7: 18
 	ADC #$F0                        ;c - - - - - 0x0194B8 0C:94A8: 69 F0
 	STA objX,X                      ;c - - - - - 0x0194BA 0C:94AA: 9D 60 03
-	LDA ram_002D                    ;c - - - - - 0x0194BD 0C:94AD: A5 2D
+	LDA worldXPage                  ;c - - - - - 0x0194BD 0C:94AD: A5 2D
 	ADC #$00                        ;c - - - - - 0x0194BF 0C:94AF: 69 00
 	STA objXPage,X                  ;c - - - - - 0x0194C1 0C:94B1: 9D 80 03
 loc_0C_94B4:
@@ -2506,7 +2506,7 @@ loc_0C_94EA:
 	CLC                             ;c - - - - - 0x019511 0C:9501: 18
 	ADC #$10                        ;c - - - - - 0x019512 0C:9502: 69 10
 	STA objX,X                      ;c - - - - - 0x019514 0C:9504: 9D 60 03
-	LDA ram_002D                    ;c - - - - - 0x019517 0C:9507: A5 2D
+	LDA worldXPage                  ;c - - - - - 0x019517 0C:9507: A5 2D
 	ADC #$00                        ;c - - - - - 0x019519 0C:9509: 69 00
 	STA objXPage,X                  ;c - - - - - 0x01951B 0C:950B: 9D 80 03
 	JMP loc_0C_9531                 ;c - - - - - 0x01951E 0C:950E: 4C 31 95
@@ -2524,7 +2524,7 @@ loc_0C_9514:
 	CLC                             ;c - - - - - 0x019534 0C:9524: 18
 	ADC #$F0                        ;c - - - - - 0x019535 0C:9525: 69 F0
 	STA objX,X                      ;c - - - - - 0x019537 0C:9527: 9D 60 03
-	LDA ram_002D                    ;c - - - - - 0x01953A 0C:952A: A5 2D
+	LDA worldXPage                  ;c - - - - - 0x01953A 0C:952A: A5 2D
 	ADC #$00                        ;c - - - - - 0x01953C 0C:952C: 69 00
 	STA objXPage,X                  ;c - - - - - 0x01953E 0C:952E: 9D 80 03
 loc_0C_9531:
@@ -2571,7 +2571,7 @@ loc_0C_9567:
 	CLC                             ;C - - - - - 0x01958E 0C:957E: 18
 	ADC #$10                        ;C - - - - - 0x01958F 0C:957F: 69 10
 	STA objX,X                      ;C - - - - - 0x019591 0C:9581: 9D 60 03
-	LDA ram_002D                    ;C - - - - - 0x019594 0C:9584: A5 2D
+	LDA worldXPage                  ;C - - - - - 0x019594 0C:9584: A5 2D
 	ADC #$00                        ;C - - - - - 0x019596 0C:9586: 69 00
 	STA objXPage,X                  ;C - - - - - 0x019598 0C:9588: 9D 80 03
 	JMP loc_0C_95AE                 ;C - - - - - 0x01959B 0C:958B: 4C AE 95
@@ -2589,7 +2589,7 @@ loc_0C_9591:
 	CLC                             ;c - - - - - 0x0195B1 0C:95A1: 18
 	ADC #$F0                        ;c - - - - - 0x0195B2 0C:95A2: 69 F0
 	STA objX,X                      ;c - - - - - 0x0195B4 0C:95A4: 9D 60 03
-	LDA ram_002D                    ;c - - - - - 0x0195B7 0C:95A7: A5 2D
+	LDA worldXPage                  ;c - - - - - 0x0195B7 0C:95A7: A5 2D
 	ADC #$00                        ;c - - - - - 0x0195B9 0C:95A9: 69 00
 	STA objXPage,X                  ;c - - - - - 0x0195BB 0C:95AB: 9D 80 03
 loc_0C_95AE:
@@ -2653,7 +2653,7 @@ loc_0C_960C:
 	CLC                             ;C - - - - - 0x019633 0C:9623: 18
 	ADC #$10                        ;C - - - - - 0x019634 0C:9624: 69 10
 	STA objX,X                      ;C - - - - - 0x019636 0C:9626: 9D 60 03
-	LDA ram_002D                    ;C - - - - - 0x019639 0C:9629: A5 2D
+	LDA worldXPage                  ;C - - - - - 0x019639 0C:9629: A5 2D
 	ADC #$00                        ;C - - - - - 0x01963B 0C:962B: 69 00
 	STA objXPage,X                  ;C - - - - - 0x01963D 0C:962D: 9D 80 03
 	JMP loc_0C_965C                 ;C - - - - - 0x019640 0C:9630: 4C 5C 96
@@ -2672,7 +2672,7 @@ loc_0C_9639:
 	CLC                             ;c - - - - - 0x019659 0C:9649: 18
 	ADC #$F0                        ;c - - - - - 0x01965A 0C:964A: 69 F0
 	STA objX,X                      ;c - - - - - 0x01965C 0C:964C: 9D 60 03
-	LDA ram_002D                    ;c - - - - - 0x01965F 0C:964F: A5 2D
+	LDA worldXPage                  ;c - - - - - 0x01965F 0C:964F: A5 2D
 	ADC #$00                        ;c - - - - - 0x019661 0C:9651: 69 00
 	STA objXPage,X                  ;c - - - - - 0x019663 0C:9653: 9D 80 03
 	JMP loc_0C_965C                 ;c - - - - - 0x019666 0C:9656: 4C 5C 96
@@ -2720,7 +2720,7 @@ ofs_0C_968D:
 	CLC                             ;C - - - - - 0x0196BF 0C:96AF: 18
 	ADC #$10                        ;C - - - - - 0x0196C0 0C:96B0: 69 10
 	STA objX,X                      ;C - - - - - 0x0196C2 0C:96B2: 9D 60 03
-	LDA ram_002D                    ;C - - - - - 0x0196C5 0C:96B5: A5 2D
+	LDA worldXPage                  ;C - - - - - 0x0196C5 0C:96B5: A5 2D
 	ADC #$00                        ;C - - - - - 0x0196C7 0C:96B7: 69 00
 	STA objXPage,X                  ;C - - - - - 0x0196C9 0C:96B9: 9D 80 03
 	JMP loc_0C_96EB                 ;C - - - - - 0x0196CC 0C:96BC: 4C EB 96
@@ -2741,7 +2741,7 @@ loc_0C_96C8:
 	CLC                             ;c - - - - - 0x0196E8 0C:96D8: 18
 	ADC #$F0                        ;c - - - - - 0x0196E9 0C:96D9: 69 F0
 	STA objX,X                      ;c - - - - - 0x0196EB 0C:96DB: 9D 60 03
-	LDA ram_002D                    ;c - - - - - 0x0196EE 0C:96DE: A5 2D
+	LDA worldXPage                  ;c - - - - - 0x0196EE 0C:96DE: A5 2D
 	ADC #$00                        ;c - - - - - 0x0196F0 0C:96E0: 69 00
 	STA objXPage,X                  ;c - - - - - 0x0196F2 0C:96E2: 9D 80 03
 	JMP loc_0C_96EB                 ;c - - - - - 0x0196F5 0C:96E5: 4C EB 96
@@ -2760,10 +2760,10 @@ loc_0C_96FC:
 	LDA objSavedY,X                 ;C - - - - - 0x01970C 0C:96FC: BD 30 05
 	STA objY,X                      ;C - - - - - 0x01970F 0C:96FF: 9D C0 03
 	JSR EnemyFallLandCheck          ;C - - - - - 0x019712 0C:9702: 20 1F 9B
-	LDA ram_00A7                    ;C - - - - - 0x019715 0C:9705: A5 A7
+	LDA attackType                  ;C - - - - - 0x019715 0C:9705: A5 A7
 	STA ram_0151                    ;C - - - - - 0x019717 0C:9707: 8D 51 01
 	LDA #$05                        ;C - - - - - 0x01971A 0C:970A: A9 05
-	STA ram_00A7                    ;C - - - - - 0x01971C 0C:970C: 85 A7
+	STA attackType                  ;C - - - - - 0x01971C 0C:970C: 85 A7
 	JSR EnemyHitCheck               ;C - - - - - 0x01971E 0C:970E: 20 F0 84
 	LDA objLife,X                   ;C - - - - - 0x019721 0C:9711: BD 90 04
 	BPL loc_0C_9726                 ;C - - - - - 0x019724 0C:9714: 10 10
@@ -2771,11 +2771,11 @@ loc_0C_96FC:
 	LDA #$00                        ;C - - - - - 0x019729 0C:9719: A9 00
 	STA objAtkBox,X                 ;C - - - - - 0x01972B 0C:971B: 9D 40 04
 	INC objActive,X                 ;C - - - - - 0x01972E 0C:971E: FE 00 03
-	INC ram_0054                    ;C - - - - - 0x019731 0C:9721: E6 54
+	INC enemiesDefeated             ;C - - - - - 0x019731 0C:9721: E6 54
 	JMP EnemySetDownAnimB           ;C - - - - - 0x019733 0C:9723: 4C 7A 9C
 loc_0C_9726:
 	LDA ram_0151                    ;C - - - - - 0x019736 0C:9726: AD 51 01
-	STA ram_00A7                    ;C - - - - - 0x019739 0C:9729: 85 A7
+	STA attackType                  ;C - - - - - 0x019739 0C:9729: 85 A7
 	LDA #$FF                        ;C - - - - - 0x01973B 0C:972B: A9 FF
 	STA objDownState,X              ;C - - - - - 0x01973D 0C:972D: 9D C0 04
 loc_0C_9730:
@@ -2788,7 +2788,7 @@ ofs_0C_9733:
 	STA objVelXHi,X                 ;C - - - - - 0x01974D 0C:973D: 9D 10 04
 	LDA #$99                        ;C - - - - - 0x019750 0C:9740: A9 99
 	STA objVelXLo,X                 ;C - - - - - 0x019752 0C:9742: 9D 00 04
-	LDA ram_00A7                    ;C - - - - - 0x019755 0C:9745: A5 A7
+	LDA attackType                  ;C - - - - - 0x019755 0C:9745: A5 A7
 	CMP #$07                        ;C - - - - - 0x019757 0C:9747: C9 07
 	BNE loc_0C_975C                 ;C - - - - - 0x019759 0C:9749: D0 11
 	LDA #$CC                        ;C - - - - - 0x01975B 0C:974B: A9 CC
@@ -2838,7 +2838,7 @@ loc_0C_9794:
 	CLC                             ;C - - - - - 0x0197BB 0C:97AB: 18
 	ADC #$F0                        ;C - - - - - 0x0197BC 0C:97AC: 69 F0
 	STA objX,X                      ;C - - - - - 0x0197BE 0C:97AE: 9D 60 03
-	LDA ram_002D                    ;C - - - - - 0x0197C1 0C:97B1: A5 2D
+	LDA worldXPage                  ;C - - - - - 0x0197C1 0C:97B1: A5 2D
 	ADC #$00                        ;C - - - - - 0x0197C3 0C:97B3: 69 00
 	STA objXPage,X                  ;C - - - - - 0x0197C5 0C:97B5: 9D 80 03
 	JMP loc_0C_97E4                 ;C - - - - - 0x0197C8 0C:97B8: 4C E4 97
@@ -2857,7 +2857,7 @@ loc_0C_97C1:
 	CLC                             ;C - - - - - 0x0197E1 0C:97D1: 18
 	ADC #$10                        ;C - - - - - 0x0197E2 0C:97D2: 69 10
 	STA objX,X                      ;C - - - - - 0x0197E4 0C:97D4: 9D 60 03
-	LDA ram_002D                    ;C - - - - - 0x0197E7 0C:97D7: A5 2D
+	LDA worldXPage                  ;C - - - - - 0x0197E7 0C:97D7: A5 2D
 	ADC #$00                        ;C - - - - - 0x0197E9 0C:97D9: 69 00
 	STA objXPage,X                  ;C - - - - - 0x0197EB 0C:97DB: 9D 80 03
 	JMP loc_0C_97E4                 ;C - - - - - 0x0197EE 0C:97DE: 4C E4 97
@@ -2956,7 +2956,7 @@ loc_0C_988B:
 	CLC                             ;C - - - - - 0x0198B2 0C:98A2: 18
 	ADC #$F0                        ;C - - - - - 0x0198B3 0C:98A3: 69 F0
 	STA objX,X                      ;C - - - - - 0x0198B5 0C:98A5: 9D 60 03
-	LDA ram_002D                    ;C - - - - - 0x0198B8 0C:98A8: A5 2D
+	LDA worldXPage                  ;C - - - - - 0x0198B8 0C:98A8: A5 2D
 	ADC #$00                        ;C - - - - - 0x0198BA 0C:98AA: 69 00
 	STA objXPage,X                  ;C - - - - - 0x0198BC 0C:98AC: 9D 80 03
 	JMP loc_0C_98DE                 ;C - - - - - 0x0198BF 0C:98AF: 4C DE 98
@@ -2977,7 +2977,7 @@ loc_0C_98BB:
 	CLC                             ;C - - - - - 0x0198DB 0C:98CB: 18
 	ADC #$10                        ;C - - - - - 0x0198DC 0C:98CC: 69 10
 	STA objX,X                      ;C - - - - - 0x0198DE 0C:98CE: 9D 60 03
-	LDA ram_002D                    ;C - - - - - 0x0198E1 0C:98D1: A5 2D
+	LDA worldXPage                  ;C - - - - - 0x0198E1 0C:98D1: A5 2D
 	ADC #$00                        ;C - - - - - 0x0198E3 0C:98D3: 69 00
 	STA objXPage,X                  ;C - - - - - 0x0198E5 0C:98D5: 9D 80 03
 	JMP loc_0C_98DE                 ;C - - - - - 0x0198E8 0C:98D8: 4C DE 98
@@ -3025,14 +3025,14 @@ loc_0C_9923:
 	CMP #$FD                        ;C - - - - - 0x019941 0C:9931: C9 FD
 	BEQ loc_0C_9920                 ;C - - - - - 0x019943 0C:9933: F0 EB
 	LDA #$09                        ;C - - - - - 0x019945 0C:9935: A9 09
-	STA ram_00A7                    ;C - - - - - 0x019947 0C:9937: 85 A7
+	STA attackType                  ;C - - - - - 0x019947 0C:9937: 85 A7
 	JSR EnemyHitCheck               ;C - - - - - 0x019949 0C:9939: 20 F0 84
 	LDA #$00                        ;C - - - - - 0x01994C 0C:993C: A9 00
-	STA ram_00A7                    ;C - - - - - 0x01994E 0C:993E: 85 A7
+	STA attackType                  ;C - - - - - 0x01994E 0C:993E: 85 A7
 	LDA objLife,X                   ;C - - - - - 0x019950 0C:9940: BD 90 04
 	BPL loc_0C_991B                 ;C - - - - - 0x019953 0C:9943: 10 D6
 	INC objActive,X                 ;C - - - - - 0x019955 0C:9945: FE 00 03
-	INC ram_0054                    ;C - - - - - 0x019958 0C:9948: E6 54
+	INC enemiesDefeated             ;C - - - - - 0x019958 0C:9948: E6 54
 loc_0C_994A:
 	DEC objLandY,X                  ;C - - - - - 0x01995A 0C:994A: DE 10 05
 	LDA objLandY,X                  ;C - - - - - 0x01995D 0C:994D: BD 10 05
@@ -3094,7 +3094,7 @@ loc_0C_99AC:
 	CLC                             ;C - - - - - 0x0199D3 0C:99C3: 18
 	ADC #$F0                        ;C - - - - - 0x0199D4 0C:99C4: 69 F0
 	STA objX,X                      ;C - - - - - 0x0199D6 0C:99C6: 9D 60 03
-	LDA ram_002D                    ;C - - - - - 0x0199D9 0C:99C9: A5 2D
+	LDA worldXPage                  ;C - - - - - 0x0199D9 0C:99C9: A5 2D
 	ADC #$00                        ;C - - - - - 0x0199DB 0C:99CB: 69 00
 	STA objXPage,X                  ;C - - - - - 0x0199DD 0C:99CD: 9D 80 03
 	JMP loc_0C_99FC                 ;C - - - - - 0x0199E0 0C:99D0: 4C FC 99
@@ -3113,7 +3113,7 @@ loc_0C_99D9:
 	CLC                             ;C - - - - - 0x0199F9 0C:99E9: 18
 	ADC #$10                        ;C - - - - - 0x0199FA 0C:99EA: 69 10
 	STA objX,X                      ;C - - - - - 0x0199FC 0C:99EC: 9D 60 03
-	LDA ram_002D                    ;C - - - - - 0x0199FF 0C:99EF: A5 2D
+	LDA worldXPage                  ;C - - - - - 0x0199FF 0C:99EF: A5 2D
 	ADC #$00                        ;C - - - - - 0x019A01 0C:99F1: 69 00
 	STA objXPage,X                  ;C - - - - - 0x019A03 0C:99F3: 9D 80 03
 	JMP loc_0C_99FC                 ;C - - - - - 0x019A06 0C:99F6: 4C FC 99
@@ -3195,7 +3195,7 @@ loc_0C_9A88:
 	CLC                             ;c - - - - - 0x019AAF 0C:9A9F: 18
 	ADC #$F0                        ;c - - - - - 0x019AB0 0C:9AA0: 69 F0
 	STA objX,X                      ;c - - - - - 0x019AB2 0C:9AA2: 9D 60 03
-	LDA ram_002D                    ;c - - - - - 0x019AB5 0C:9AA5: A5 2D
+	LDA worldXPage                  ;c - - - - - 0x019AB5 0C:9AA5: A5 2D
 	ADC #$00                        ;c - - - - - 0x019AB7 0C:9AA7: 69 00
 	STA objXPage,X                  ;c - - - - - 0x019AB9 0C:9AA9: 9D 80 03
 	JMP loc_0C_9AD8                 ;c - - - - - 0x019ABC 0C:9AAC: 4C D8 9A
@@ -3214,7 +3214,7 @@ loc_0C_9AB5:
 	CLC                             ;C - - - - - 0x019AD5 0C:9AC5: 18
 	ADC #$10                        ;C - - - - - 0x019AD6 0C:9AC6: 69 10
 	STA objX,X                      ;C - - - - - 0x019AD8 0C:9AC8: 9D 60 03
-	LDA ram_002D                    ;C - - - - - 0x019ADB 0C:9ACB: A5 2D
+	LDA worldXPage                  ;C - - - - - 0x019ADB 0C:9ACB: A5 2D
 	ADC #$00                        ;C - - - - - 0x019ADD 0C:9ACD: 69 00
 	STA objXPage,X                  ;C - - - - - 0x019ADF 0C:9ACF: 9D 80 03
 	JMP loc_0C_9AD8                 ;C - - - - - 0x019AE2 0C:9AD2: 4C D8 9A
@@ -3329,17 +3329,17 @@ loc_0C_9B86:
 	BNE loc_0C_9BC3                 ;C - - - - - 0x019BCA 0C:9BBA: D0 07
 loc_0C_9BBC:
 	LDA #$03                        ;C - - - - - 0x019BCC 0C:9BBC: A9 03
-	STA ram_00A7                    ;C - - - - - 0x019BCE 0C:9BBE: 85 A7
+	STA attackType                  ;C - - - - - 0x019BCE 0C:9BBE: 85 A7
 	JSR PlayerSpecialDispatch       ;C - - - - - 0x019BD0 0C:9BC0: 20 E3 89
 loc_0C_9BC3:
 	LDA #$FF                        ;C - - - - - 0x019BD3 0C:9BC3: A9 FF
 	STA objLife,X                   ;C - - - - - 0x019BD5 0C:9BC5: 9D 90 04
-	STX ram_00B0                    ;C - - - - - 0x019BD8 0C:9BC8: 86 B0
+	STX hudEnemySlot                ;C - - - - - 0x019BD8 0C:9BC8: 86 B0
 	LDA #$00                        ;C - - - - - 0x019BDA 0C:9BCA: A9 00
-	STA ram_00B1                    ;C - - - - - 0x019BDC 0C:9BCC: 85 B1
+	STA hudEnemyActive              ;C - - - - - 0x019BDC 0C:9BCC: 85 B1
 	LDA #$10                        ;C - - - - - 0x019BDE 0C:9BCE: A9 10
 	STA objTimer,X                  ;C - - - - - 0x019BE0 0C:9BD0: 9D D0 05
-	INC ram_0054                    ;C - - - - - 0x019BE3 0C:9BD3: E6 54
+	INC enemiesDefeated             ;C - - - - - 0x019BE3 0C:9BD3: E6 54
 	INC objStep,X                   ;C - - - - - 0x019BE5 0C:9BD5: FE 00 05
 loc_0C_9BD8:
 	RTS                             ;C - - - - - 0x019BE8 0C:9BD8: 60
@@ -3500,10 +3500,10 @@ loc_0C_9D02:
 	LDA #$00                        ;C - - - - - 0x019D12 0C:9D02: A9 00
 	STA objAtkBox,X                 ;C - - - - - 0x019D14 0C:9D04: 9D 40 04
 	LDA oamBuffer+15                ;C - - - - - 0x019D17 0C:9D07: AD 0F 02
-	ADC ram_00E4                    ;C - - - - - 0x019D1A 0C:9D0A: 65 E4
-	ADC ram_00E5                    ;C - - - - - 0x019D1C 0C:9D0C: 65 E5
-	ADC ram_00E6                    ;C - - - - - 0x019D1E 0C:9D0E: 65 E6
-	STA ram_00E4                    ;C - - - - - 0x019D20 0C:9D10: 85 E4
+	ADC rngState0                   ;C - - - - - 0x019D1A 0C:9D0A: 65 E4
+	ADC rngState1                   ;C - - - - - 0x019D1C 0C:9D0C: 65 E5
+	ADC rngState2                   ;C - - - - - 0x019D1E 0C:9D0E: 65 E6
+	STA rngState0                   ;C - - - - - 0x019D20 0C:9D10: 85 E4
 	LDA objKind,X                   ;C - - - - - 0x019D22 0C:9D12: BD 20 03
 	SEC                             ;C - - - - - 0x019D25 0C:9D15: 38
 	SBC #$20                        ;C - - - - - 0x019D26 0C:9D16: E9 20

@@ -68,7 +68,7 @@ ofs_0D_A071:
 	BCC loc_0D_A085                 ;C - - - - - 0x01A088 0D:A078: 90 0B
 loc_0D_A07A:
 	INC objActive,X                 ;C - - - - - 0x01A08A 0D:A07A: FE 00 03
-	LDA ram_00E4                    ;C - - - - - 0x01A08D 0D:A07D: A5 E4
+	LDA rngState0                   ;C - - - - - 0x01A08D 0D:A07D: A5 E4
 	AND #$01                        ;C - - - - - 0x01A08F 0D:A07F: 29 01
 	STA objToggle,X                 ;C - - - - - 0x01A091 0D:A081: 9D F0 05
 	RTS                             ;C - - - - - 0x01A094 0D:A084: 60
@@ -143,7 +143,7 @@ loc_0D_A102:
 	ASL A                           ;C - - - - - 0x01A11D 0D:A10D: 0A
 	ASL A                           ;C - - - - - 0x01A11E 0D:A10E: 0A
 	STA ptr_00                      ;C - - - - - 0x01A11F 0D:A10F: 85 00
-	LDA ram_00E4                    ;C - - - - - 0x01A121 0D:A111: A5 E4
+	LDA rngState0                   ;C - - - - - 0x01A121 0D:A111: A5 E4
 	AND #$07                        ;C - - - - - 0x01A123 0D:A113: 29 07
 	CLC                             ;C - - - - - 0x01A125 0D:A115: 18
 	ADC ptr_00                      ;C - - - - - 0x01A126 0D:A116: 65 00
@@ -167,7 +167,7 @@ tbl_0D_A133:
 	.byte $86,$8B,$8A,$8E           ;- D 1 - - - 0x01A145 0D:A135:
 loc_0D_A139:
 	LDY objSpriteDown,X             ;C - - - - - 0x01A149 0D:A139: BC B0 05
-	LDA ram_00E5                    ;C - - - - - 0x01A14C 0D:A13C: A5 E5
+	LDA rngState1                   ;C - - - - - 0x01A14C 0D:A13C: A5 E5
 	AND #$0F                        ;C - - - - - 0x01A14E 0D:A13E: 29 0F
 	CMP tbl_0D_AE32,Y               ;C - - - - - 0x01A150 0D:A140: D9 32 AE
 	BCS loc_0D_A14A                 ;C - - - - - 0x01A153 0D:A143: B0 05
@@ -259,7 +259,7 @@ loc_0D_A1EE:
 loc_0D_A1EF:
 	DEC objTimer,X                  ;C - - - - - 0x01A1FF 0D:A1EF: DE D0 05
 	BNE loc_0D_A1EE                 ;C - - - - - 0x01A202 0D:A1F2: D0 FA
-	LDA ram_00E4                    ;C - - - - - 0x01A204 0D:A1F4: A5 E4
+	LDA rngState0                   ;C - - - - - 0x01A204 0D:A1F4: A5 E4
 	LSR A                           ;C - - - - - 0x01A206 0D:A1F6: 4A
 	BCC loc_0D_A1FD                 ;C - - - - - 0x01A207 0D:A1F7: 90 04
 	LDA #$84                        ;C - - - - - 0x01A209 0D:A1F9: A9 84
@@ -302,7 +302,7 @@ loc_0D_A23C:
 	BNE loc_0D_A24C                 ;C - - - - - 0x01A257 0D:A247: D0 03
 	JMP EnemyResetAction81          ;C - - - - - 0x01A259 0D:A249: 4C E8 A8
 loc_0D_A24C:
-	LDA ram_00E4                    ;C - - - - - 0x01A25C 0D:A24C: A5 E4
+	LDA rngState0                   ;C - - - - - 0x01A25C 0D:A24C: A5 E4
 	AND #$0F                        ;C - - - - - 0x01A25E 0D:A24E: 29 0F
 	CMP tbl_0D_A2BD,Y               ;C - - - - - 0x01A260 0D:A250: D9 BD A2
 	BCC loc_0D_A2B2                 ;C - - - - - 0x01A263 0D:A253: 90 5D
@@ -326,7 +326,7 @@ loc_0D_A26E:
 	TAY                             ;C - - - - - 0x01A289 0D:A279: A8
 	LDA tbl_0D_AE2C,Y               ;C - - - - - 0x01A28A 0D:A27A: B9 2C AE
 	STA ptr_00                      ;C - - - - - 0x01A28D 0D:A27D: 85 00
-	LDA ram_00E4                    ;C - - - - - 0x01A28F 0D:A27F: A5 E4
+	LDA rngState0                   ;C - - - - - 0x01A28F 0D:A27F: A5 E4
 	AND #$0F                        ;C - - - - - 0x01A291 0D:A281: 29 0F
 	CMP ptr_00                      ;C - - - - - 0x01A293 0D:A283: C5 00
 	BCC loc_0D_A28D                 ;C - - - - - 0x01A295 0D:A285: 90 06
@@ -934,7 +934,7 @@ ofs_0D_A780:
 	AND objStartY,X                 ;C - - - - - 0x01A7A6 0D:A796: 3D 20 05
 	EOR objStartY,X                 ;C - - - - - 0x01A7A9 0D:A799: 5D 20 05
 	BNE loc_0D_A7AC                 ;C - - - - - 0x01A7AC 0D:A79C: D0 0E
-	LDA ram_00E4                    ;C - - - - - 0x01A7AE 0D:A79E: A5 E4
+	LDA rngState0                   ;C - - - - - 0x01A7AE 0D:A79E: A5 E4
 	AND #$03                        ;C - - - - - 0x01A7B0 0D:A7A0: 29 03
 	BEQ loc_0D_A7AC                 ;C - - - - - 0x01A7B2 0D:A7A2: F0 08
 	LDA #$00                        ;C - - - - - 0x01A7B4 0D:A7A4: A9 00
@@ -952,7 +952,7 @@ loc_0D_A7B7:
 	JSR EnemySetAnimSetA            ;C - - - - - 0x01A7C7 0D:A7B7: 20 AE AA
 	DEC objTimer,X                  ;C - - - - - 0x01A7CA 0D:A7BA: DE D0 05
 	BNE loc_0D_A828                 ;C - - - - - 0x01A7CD 0D:A7BD: D0 69
-	LDA ram_00E4                    ;C - - - - - 0x01A7CF 0D:A7BF: A5 E4
+	LDA rngState0                   ;C - - - - - 0x01A7CF 0D:A7BF: A5 E4
 	AND #$0F                        ;C - - - - - 0x01A7D1 0D:A7C1: 29 0F
 	STA ptr_00                      ;C - - - - - 0x01A7D3 0D:A7C3: 85 00
 	LDA objFlags                    ;C - - - - - 0x01A7D5 0D:A7C5: AD 60 05
@@ -1394,7 +1394,7 @@ EnemyGrabbedUpdate:
 	CMP #$21                        ;C - - - - - 0x01AB48 0D:AB38: C9 21
 	BNE loc_0D_AB82                 ;C - - - - - 0x01AB4A 0D:AB3A: D0 46
 loc_0D_AB3C:
-	CPX ram_0039                    ;C - - - - - 0x01AB4C 0D:AB3C: E4 39
+	CPX grabbedSlot                 ;C - - - - - 0x01AB4C 0D:AB3C: E4 39
 	BNE loc_0D_AB82                 ;C - - - - - 0x01AB4E 0D:AB3E: D0 42
 	LDA gameAction                  ;C - - - - - 0x01AB50 0D:AB40: A5 30
 	CMP #$21                        ;C - - - - - 0x01AB52 0D:AB42: C9 21

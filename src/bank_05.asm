@@ -456,10 +456,10 @@ loc_05_A957:
 	LDA objKind,X                   ;C - - - - - 0x00A97A 05:A96A: BD 20 03
 	CMP #$67                        ;C - - - - - 0x00A97D 05:A96D: C9 67
 	BEQ loc_05_A9BC                 ;C - - - - - 0x00A97F 05:A96F: F0 4B
-	LDA ram_00E4                    ;C - - - - - 0x00A981 05:A971: A5 E4
+	LDA rngState0                   ;C - - - - - 0x00A981 05:A971: A5 E4
 	CLC                             ;C - - - - - 0x00A983 05:A973: 18
-	ADC ram_00E5                    ;C - - - - - 0x00A984 05:A974: 65 E5
-	STA ram_00E4                    ;C - - - - - 0x00A986 05:A976: 85 E4
+	ADC rngState1                   ;C - - - - - 0x00A984 05:A974: 65 E5
+	STA rngState0                   ;C - - - - - 0x00A986 05:A976: 85 E4
 	AND #$0F                        ;C - - - - - 0x00A988 05:A978: 29 0F
 	CMP #$0C                        ;C - - - - - 0x00A98A 05:A97A: C9 0C
 	BCS loc_05_A9BC                 ;C - - - - - 0x00A98C 05:A97C: B0 3E
@@ -541,7 +541,7 @@ loc_05_A9E4:
 	LDA #$0A                        ;C - - - - - 0x00AA1C 05:AA0C: A9 0A
 	STA gameAction                  ;C - - - - - 0x00AA1E 05:AA0E: 85 30
 	LDA #$00                        ;C - - - - - 0x00AA20 05:AA10: A9 00
-	STA ram_0035                    ;C - - - - - 0x00AA22 05:AA12: 85 35
+	STA actionStep                  ;C - - - - - 0x00AA22 05:AA12: 85 35
 	INC objActive,X                 ;C - - - - - 0x00AA24 05:AA14: FE 00 03
 loc_05_AA17:
 	RTS                             ;C - - - - - 0x00AA27 05:AA17: 60
@@ -579,7 +579,7 @@ loc_05_AA4B:
 	STA ram_0050                    ;C - - - - - 0x00AA61 05:AA51: 85 50
 	LDA #$00                        ;C - - - - - 0x00AA63 05:AA53: A9 00
 	STA gameAction                  ;C - - - - - 0x00AA65 05:AA55: 85 30
-	STA ram_0035                    ;C - - - - - 0x00AA67 05:AA57: 85 35
+	STA actionStep                  ;C - - - - - 0x00AA67 05:AA57: 85 35
 	JSR ClearTimerA4                ;C - - - - - 0x00AA69 05:AA59: 20 36 F4
 	JSR ClearObject                 ;C - - - - - 0x00AA6C 05:AA5C: 20 BE F2
 	RTS                             ;C - - - - - 0x00AA6F 05:AA5F: 60
@@ -606,7 +606,7 @@ loc_05_AA82:
 	INC objActive,X                 ;C - - - - - 0x00AAA6 05:AA96: FE 00 03
 	LDA #$00                        ;C - - - - - 0x00AAA9 05:AA99: A9 00
 	STA ram_0050                    ;C - - - - - 0x00AAAB 05:AA9B: 85 50
-	STA ram_0054                    ;C - - - - - 0x00AAAD 05:AA9D: 85 54
+	STA enemiesDefeated             ;C - - - - - 0x00AAAD 05:AA9D: 85 54
 	JSR ClearTimerA4                ;C - - - - - 0x00AAAF 05:AA9F: 20 36 F4
 loc_05_AAA2:
 	LDA scrollX                     ;C - - - - - 0x00AAB2 05:AAA2: A5 FC
@@ -751,12 +751,12 @@ loc_05_ABC4:
 	CMP #$10                        ;C - - - - - 0x00ABD7 05:ABC7: C9 10
 	BCS loc_05_ABE0                 ;C - - - - - 0x00ABD9 05:ABC9: B0 15
 	LDA #$80                        ;C - - - - - 0x00ABDB 05:ABCB: A9 80
-	STA ram_0102                    ;C - - - - - 0x00ABDD 05:ABCD: 8D 02 01
+	STA palAnimActive+2             ;C - - - - - 0x00ABDD 05:ABCD: 8D 02 01
 	LDA #$07                        ;C - - - - - 0x00ABE0 05:ABD0: A9 07
-	STA ram_010A                    ;C - - - - - 0x00ABE2 05:ABD2: 8D 0A 01
+	STA palAnimType+2               ;C - - - - - 0x00ABE2 05:ABD2: 8D 0A 01
 	LDA #$00                        ;C - - - - - 0x00ABE5 05:ABD5: A9 00
-	STA ram_0106                    ;C - - - - - 0x00ABE7 05:ABD7: 8D 06 01
-	STA ram_010E                    ;C - - - - - 0x00ABEA 05:ABDA: 8D 0E 01
+	STA palAnimStep+2               ;C - - - - - 0x00ABE7 05:ABD7: 8D 06 01
+	STA palAnimTimer+2              ;C - - - - - 0x00ABEA 05:ABDA: 8D 0E 01
 	JSR ClearObject                 ;C - - - - - 0x00ABED 05:ABDD: 20 BE F2
 loc_05_ABE0:
 	RTS                             ;C - - - - - 0x00ABF0 05:ABE0: 60
@@ -777,17 +777,17 @@ loc_05_ABF8:
 	LDA objStep,X                   ;C - - - - - 0x00AC0F 05:ABFF: BD 00 05
 	BNE loc_05_AC36                 ;C - - - - - 0x00AC12 05:AC02: D0 32
 	LDA #$80                        ;C - - - - - 0x00AC14 05:AC04: A9 80
-	STA ram_0102                    ;C - - - - - 0x00AC16 05:AC06: 8D 02 01
-	STA ram_0103                    ;C - - - - - 0x00AC19 05:AC09: 8D 03 01
+	STA palAnimActive+2             ;C - - - - - 0x00AC16 05:AC06: 8D 02 01
+	STA palAnimActive+3             ;C - - - - - 0x00AC19 05:AC09: 8D 03 01
 	LDA #$0C                        ;C - - - - - 0x00AC1C 05:AC0C: A9 0C
-	STA ram_010A                    ;C - - - - - 0x00AC1E 05:AC0E: 8D 0A 01
+	STA palAnimType+2               ;C - - - - - 0x00AC1E 05:AC0E: 8D 0A 01
 	LDA #$0D                        ;C - - - - - 0x00AC21 05:AC11: A9 0D
-	STA ram_010B                    ;C - - - - - 0x00AC23 05:AC13: 8D 0B 01
+	STA palAnimType+3               ;C - - - - - 0x00AC23 05:AC13: 8D 0B 01
 	LDA #$00                        ;C - - - - - 0x00AC26 05:AC16: A9 00
-	STA ram_0106                    ;C - - - - - 0x00AC28 05:AC18: 8D 06 01
-	STA ram_010E                    ;C - - - - - 0x00AC2B 05:AC1B: 8D 0E 01
-	STA ram_0107                    ;C - - - - - 0x00AC2E 05:AC1E: 8D 07 01
-	STA ram_010F                    ;C - - - - - 0x00AC31 05:AC21: 8D 0F 01
+	STA palAnimStep+2               ;C - - - - - 0x00AC28 05:AC18: 8D 06 01
+	STA palAnimTimer+2              ;C - - - - - 0x00AC2B 05:AC1B: 8D 0E 01
+	STA palAnimStep+3               ;C - - - - - 0x00AC2E 05:AC1E: 8D 07 01
+	STA palAnimTimer+3              ;C - - - - - 0x00AC31 05:AC21: 8D 0F 01
 	INC objActive,X                 ;C - - - - - 0x00AC34 05:AC24: FE 00 03
 	LDA #$01                        ;C - - - - - 0x00AC37 05:AC27: A9 01
 	STA ptr_00                      ;C - - - - - 0x00AC39 05:AC29: 85 00
@@ -832,8 +832,8 @@ loc_05_AC73:
 	RTS                             ;C - - - - - 0x00AC83 05:AC73: 60
 loc_05_AC74:
 	LDA #$00                        ;C - - - - - 0x00AC84 05:AC74: A9 00
-	STA ram_0102                    ;C - - - - - 0x00AC86 05:AC76: 8D 02 01
-	STA ram_0103                    ;C - - - - - 0x00AC89 05:AC79: 8D 03 01
+	STA palAnimActive+2             ;C - - - - - 0x00AC86 05:AC76: 8D 02 01
+	STA palAnimActive+3             ;C - - - - - 0x00AC89 05:AC79: 8D 03 01
 	RTS                             ;C - - - - - 0x00AC8C 05:AC7C: 60
 SpawnObj63:
 	JSR FindFreeEnemySlot           ;C - - - - - 0x00AC8D 05:AC7D: 20 1A F7
@@ -937,7 +937,7 @@ loc_05_AD65:
 	JSR QueueSound                  ;C - - - - - 0x00AD7C 05:AD6C: 20 4C F3
 	INC objStep,X                   ;C - - - - - 0x00AD7F 05:AD6F: FE 00 05
 loc_05_AD72:
-	LDA ram_0054                    ;C - - - - - 0x00AD82 05:AD72: A5 54
+	LDA enemiesDefeated             ;C - - - - - 0x00AD82 05:AD72: A5 54
 	CMP #$05                        ;C - - - - - 0x00AD84 05:AD74: C9 05
 	BCS loc_05_AD81                 ;C - - - - - 0x00AD86 05:AD76: B0 09
 	LDA #$00                        ;C - - - - - 0x00AD88 05:AD78: A9 00
@@ -952,7 +952,7 @@ loc_05_AD81:
 	JSR QueueSound                  ;C - - - - - 0x00AD9A 05:AD8A: 20 4C F3
 	INC objStep,X                   ;C - - - - - 0x00AD9D 05:AD8D: FE 00 05
 loc_05_AD90:
-	LDA ram_0054                    ;C - - - - - 0x00ADA0 05:AD90: A5 54
+	LDA enemiesDefeated             ;C - - - - - 0x00ADA0 05:AD90: A5 54
 	CMP #$0A                        ;C - - - - - 0x00ADA2 05:AD92: C9 0A
 	BCS loc_05_AD9D                 ;C - - - - - 0x00ADA4 05:AD94: B0 07
 	LDA #$01                        ;C - - - - - 0x00ADA6 05:AD96: A9 01
@@ -966,7 +966,7 @@ loc_05_AD9D:
 	JSR QueueSound                  ;C - - - - - 0x00ADB6 05:ADA6: 20 4C F3
 	INC objStep,X                   ;C - - - - - 0x00ADB9 05:ADA9: FE 00 05
 loc_05_ADAC:
-	LDA ram_0054                    ;C - - - - - 0x00ADBC 05:ADAC: A5 54
+	LDA enemiesDefeated             ;C - - - - - 0x00ADBC 05:ADAC: A5 54
 	CMP #$0F                        ;C - - - - - 0x00ADBE 05:ADAE: C9 0F
 	BCS loc_05_ADB9                 ;C - - - - - 0x00ADC0 05:ADB0: B0 07
 	LDA #$02                        ;C - - - - - 0x00ADC2 05:ADB2: A9 02

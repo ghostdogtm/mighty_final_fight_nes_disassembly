@@ -87,7 +87,7 @@ loc_01_A09B:
 	LDA #$01                        ;C - - - - - 0x0020B9 01:A0A9: A9 01
 	STA playerFacing                ;C - - - - - 0x0020BB 01:A0AB: 85 31
 	LDA #$0D                        ;C - - - - - 0x0020BD 01:A0AD: A9 0D
-	STA ram_00A7                    ;C - - - - - 0x0020BF 01:A0AF: 85 A7
+	STA attackType                  ;C - - - - - 0x0020BF 01:A0AF: 85 A7
 	JSR SpawnEffect7E               ;C - - - - - 0x0020C1 01:A0B1: 20 55 F4
 	LDA #$18                        ;C - - - - - 0x0020C4 01:A0B4: A9 18
 	JSR QueueSound                  ;C - - - - - 0x0020C6 01:A0B6: 20 4C F3
@@ -208,7 +208,7 @@ loc_01_A19A:
 	JSR SetGrabbedAnimB_01          ;C - - - - - 0x0021AA 01:A19A: 20 82 A8
 	LDA objStep,X                   ;C - - - - - 0x0021AD 01:A19D: BD 00 05
 	BNE loc_01_A1BC                 ;C - - - - - 0x0021B0 01:A1A0: D0 1A
-	LDA ram_00E4                    ;C - - - - - 0x0021B2 01:A1A2: A5 E4
+	LDA rngState0                   ;C - - - - - 0x0021B2 01:A1A2: A5 E4
 	AND #$01                        ;C - - - - - 0x0021B4 01:A1A4: 29 01
 	STA objToggle,X                 ;C - - - - - 0x0021B6 01:A1A6: 9D F0 05
 	LDA #$04                        ;C - - - - - 0x0021B9 01:A1A9: A9 04
@@ -318,7 +318,7 @@ loc_01_A26F:
 	BNE loc_01_A28A                 ;C - - - - - 0x002284 01:A274: D0 14
 	LDA #$03                        ;C - - - - - 0x002286 01:A276: A9 03
 	STA objSubStep,X                ;C - - - - - 0x002288 01:A278: 9D 50 05
-	LDA ram_00E4                    ;C - - - - - 0x00228B 01:A27B: A5 E4
+	LDA rngState0                   ;C - - - - - 0x00228B 01:A27B: A5 E4
 	AND #$0F                        ;C - - - - - 0x00228D 01:A27D: 29 0F
 	CMP #$0C                        ;C - - - - - 0x00228F 01:A27F: C9 0C
 	BCS loc_01_A28A                 ;C - - - - - 0x002291 01:A281: B0 07
@@ -336,7 +336,7 @@ loc_01_A28B:
 	BEQ loc_01_A2B3                 ;C - - - - - 0x0022A6 01:A296: F0 1B
 	LDA #$00                        ;C - - - - - 0x0022A8 01:A298: A9 00
 	STA objSubStep,X                ;C - - - - - 0x0022AA 01:A29A: 9D 50 05
-	LDA ram_00E4                    ;C - - - - - 0x0022AD 01:A29D: A5 E4
+	LDA rngState0                   ;C - - - - - 0x0022AD 01:A29D: A5 E4
 	AND #$0F                        ;C - - - - - 0x0022AF 01:A29F: 29 0F
 	CMP #$08                        ;C - - - - - 0x0022B1 01:A2A1: C9 08
 	BCS loc_01_A2A9                 ;C - - - - - 0x0022B3 01:A2A3: B0 04
@@ -352,7 +352,7 @@ loc_01_A2AA:
 loc_01_A2B3:
 	LDA #$00                        ;C - - - - - 0x0022C3 01:A2B3: A9 00
 	STA objSubStep,X                ;C - - - - - 0x0022C5 01:A2B5: 9D 50 05
-	LDA ram_00E4                    ;C - - - - - 0x0022C8 01:A2B8: A5 E4
+	LDA rngState0                   ;C - - - - - 0x0022C8 01:A2B8: A5 E4
 	AND #$0F                        ;C - - - - - 0x0022CA 01:A2BA: 29 0F
 	CMP #$08                        ;C - - - - - 0x0022CC 01:A2BC: C9 08
 	BCS loc_01_A2CA                 ;C - - - - - 0x0022CE 01:A2BE: B0 0A
@@ -369,7 +369,7 @@ loc_01_A2CB:
 	BNE loc_01_A2E3                 ;C - - - - - 0x0022E0 01:A2D0: D0 11
 	LDA #$05                        ;C - - - - - 0x0022E2 01:A2D2: A9 05
 	STA objSubStep,X                ;C - - - - - 0x0022E4 01:A2D4: 9D 50 05
-	LDA ram_00E4                    ;C - - - - - 0x0022E7 01:A2D7: A5 E4
+	LDA rngState0                   ;C - - - - - 0x0022E7 01:A2D7: A5 E4
 	AND #$0F                        ;C - - - - - 0x0022E9 01:A2D9: 29 0F
 	CMP #$0A                        ;C - - - - - 0x0022EB 01:A2DB: C9 0A
 	BCS loc_01_A2E3                 ;C - - - - - 0x0022ED 01:A2DD: B0 04
@@ -884,7 +884,7 @@ EnemyGrabbedCheck_01:
 	CMP #$21                        ;C - - - - - 0x0026F5 01:A6E5: C9 21
 	BNE loc_01_A71C                 ;C - - - - - 0x0026F7 01:A6E7: D0 33
 loc_01_A6E9:
-	CPX ram_0039                    ;C - - - - - 0x0026F9 01:A6E9: E4 39
+	CPX grabbedSlot                 ;C - - - - - 0x0026F9 01:A6E9: E4 39
 	BNE loc_01_A71C                 ;C - - - - - 0x0026FB 01:A6EB: D0 2F
 	LDA gameAction                  ;C - - - - - 0x0026FD 01:A6ED: A5 30
 	CMP #$21                        ;C - - - - - 0x0026FF 01:A6EF: C9 21
@@ -1439,7 +1439,7 @@ loc_01_AB2E:
 	BEQ loc_01_AB46                 ;C - - - - - 0x002B4B 01:AB3B: F0 09
 	CMP #$1F                        ;C - - - - - 0x002B4D 01:AB3D: C9 1F
 	BEQ loc_01_AB46                 ;C - - - - - 0x002B4F 01:AB3F: F0 05
-	LDA ram_00E4                    ;C - - - - - 0x002B51 01:AB41: A5 E4
+	LDA rngState0                   ;C - - - - - 0x002B51 01:AB41: A5 E4
 	LSR A                           ;C - - - - - 0x002B53 01:AB43: 4A
 	BCS loc_01_AB51                 ;C - - - - - 0x002B54 01:AB44: B0 0B
 loc_01_AB46:
@@ -1517,7 +1517,7 @@ ofs_01_ABB6:
 loc_01_ABD8:
 	LDA objStep,X                   ;C - - - - - 0x002BE8 01:ABD8: BD 00 05
 	BNE loc_01_AC28                 ;C - - - - - 0x002BEB 01:ABDB: D0 4B
-	LDA ram_00E4                    ;C - - - - - 0x002BED 01:ABDD: A5 E4
+	LDA rngState0                   ;C - - - - - 0x002BED 01:ABDD: A5 E4
 	AND #$0F                        ;C - - - - - 0x002BEF 01:ABDF: 29 0F
 	CMP #$08                        ;C - - - - - 0x002BF1 01:ABE1: C9 08
 	BCS loc_01_ABEC                 ;C - - - - - 0x002BF3 01:ABE3: B0 07
@@ -1795,7 +1795,7 @@ loc_01_ADFE:
 	LDA #$0E                        ;C - - - - - 0x002E0E 01:ADFE: A9 0E
 loc_01_AE00:
 	STA ptr_00                      ;C - - - - - 0x002E10 01:AE00: 85 00
-	LDA ram_00E4                    ;C - - - - - 0x002E12 01:AE02: A5 E4
+	LDA rngState0                   ;C - - - - - 0x002E12 01:AE02: A5 E4
 	AND #$0F                        ;C - - - - - 0x002E14 01:AE04: 29 0F
 	CMP ptr_00                      ;C - - - - - 0x002E16 01:AE06: C5 00
 	BCS loc_01_AE15                 ;C - - - - - 0x002E18 01:AE08: B0 0B

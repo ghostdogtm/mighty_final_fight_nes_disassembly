@@ -144,3 +144,50 @@
 0037 actionTimer                ; frame counter of the current gameAction (Act02/Act0B count it down)
 002B paletteSetIdx              ; index (x2) into the per-section palette set tables of the stage bank
 0062 gameOverFlag               ; $00 after the last life is lost (-> continue screen); tested with BPL
+
+; ---- named from code analysis (phase 3)
+0023 scrollDir                  ; (?) last scroll direction (spriteFlipMask & 1); StageScrollUpdate compares it
+0024 stageColumn                ; 8px column counter 0-31 inside the screen; >>2 = metatile column (ram_0028)
+0028 stageMapIndex              ; index into the 64-byte screen map (row*8+col), see docs/stage_maps.md
+0029 stageScreen                ; current screen number (indexes stageField60/68)
+002D worldXPage                 ; world X page of the scroll position (scrollX = low byte)
+002F savedPrgBank               ; PRG bank at $A000 saved by TileCollideBegin
+0035 actionStep                 ; sub-step of the current player action
+0039 grabbedSlot                ; object slot of the enemy held by the player
+0054 enemiesDefeated            ; kill counter for the stage events (compared with tbl_08_8DC4)
+0066 screenStep                 ; step counter of the bank 04 end/bonus screens
+0067 enemyLevelIdx              ; 0-14 index of the enemy placement set (docs/enemy_data.md)
+0069 flashTimerA                ; palette flash timer (UpdatePlayerFlash)
+006A flashTimerB                ; palette flash timer (UpdatePlayerFlash)
+006E playerBusy                 ; (?) bit 7 set while a special player action runs
+006F playerStandAnim            ; animation to return to after an action (from tbl_0F_E288)
+0098 irqActive                  ; $FF while the raster IRQ is enabled
+0099 gravity                    ; subtracted from objVelYLo/Hi every frame (ApplyGravity), $38 in UpdateEnemies
+009B irqEnableIdx               ; 0/1: STA $E000,X disables/enables the MMC3 IRQ
+009F spawnLeftIdx               ; left edge of the enemy spawn window (totalEnemies is the right edge)
+00A6 jumpBaseY                  ; playerGroundY saved when an attack/jump starts
+00A7 attackType                 ; id of the current player attack/move
+00AC bonusHits                  ; hits counted on the bonus screen
+00B0 hudEnemySlot               ; object slot shown on the enemy health bar
+00B1 hudEnemyActive             ; nonzero when a HUD enemy is selected
+00B8 textScriptIdx              ; index of the text script for RunTextScript
+00C3 sndParam                   ; sound driver: parameter byte of the current command / scratch
+00C4 sndTmp                     ; sound driver scratch
+00CF sndChannelMask             ; sound driver: channels reserved by sound effects
+00E4 rngState0                  ; random generator (UpdateRandom)
+00E5 rngState1                  ; random generator (UpdateRandom)
+00E6 rngState2                  ; random generator used by the spawner
+
+0100 palAnimActive 4            ; palette animation channels (PaletteAnimTick): bit 7 = running
+0104 palAnimStep 4              ; current step
+0108 palAnimType 4              ; animation type (index into tbl_09_A445)
+010C palAnimTimer 4             ; frame timer of the step
+0620 palBase 32                 ; palette copy for fades: $0620 background, $0630 sprites
+
+0700 sndInstrument 4            ; per channel: current instrument id (command 08)
+0704 sndState 4                 ; per channel: bits 0-2 envelope state, bit 2 = released, bit 5 = note on
+0708 sndEnvPos 4                ; per channel: envelope position
+070C sndVolReg 4                ; per channel: value for the APU volume/duty register
+0710 sndNoteTimer 4             ; per channel: frames left / gate length
+0714 sndParamC 4                ; per channel: parameter of command 0C
+0718 sndParamD 4                ; per channel: parameter of command 0D (bit 7 selects the release length)

@@ -109,7 +109,7 @@ loc_0E_C0BA:
 	STA irqVector                   ;C - - - - - 0x01C0E4 0E:C0D4: 85 9C
 	LDA #>IrqSplit1                 ;C - - - - - 0x01C0E6 0E:C0D6: A9 C1
 	STA irqVector+1                 ;C - - - - - 0x01C0E8 0E:C0D8: 85 9D
-	LDX ram_009B                    ;C - - - - - 0x01C0EA 0E:C0DA: A6 9B
+	LDX irqEnableIdx                ;C - - - - - 0x01C0EA 0E:C0DA: A6 9B
 	STA $E000,X                     ;C - - - - - 0x01C0EC 0E:C0DC: 9D 00 E0  ; write to $E000+X (MMC3 IRQ disable/enable, X = ram_009B)
 	INC frameCounter                ;C - - - - - 0x01C0EF 0E:C0DF: E6 92
 	LDX #$FF                        ;C - - - - - 0x01C0F1 0E:C0E1: A2 FF
@@ -132,14 +132,14 @@ loc_0E_C0F6:
 	DEY                             ;C - - - - - 0x01C10A 0E:C0FA: 88
 	BNE loc_0E_C0E8                 ;C - - - - - 0x01C10B 0E:C0FB: D0 EB
 	TSX                             ;C - - - - - 0x01C10D 0E:C0FD: BA
-	LDA ram_0107,X                  ;C - - - - - 0x01C10E 0E:C0FE: BD 07 01
+	LDA palAnimStep+3,X             ;C - - - - - 0x01C10E 0E:C0FE: BD 07 01
 	STA ram_00A1                    ;C - - - - - 0x01C111 0E:C101: 85 A1
-	LDA ram_0106,X                  ;C - - - - - 0x01C113 0E:C103: BD 06 01
+	LDA palAnimStep+2,X             ;C - - - - - 0x01C113 0E:C103: BD 06 01
 	STA ram_00A0                    ;C - - - - - 0x01C116 0E:C106: 85 A0
 	LDA #$C1                        ;C - - - - - 0x01C118 0E:C108: A9 C1
-	STA ram_0107,X                  ;C - - - - - 0x01C11A 0E:C10A: 9D 07 01
+	STA palAnimStep+3,X             ;C - - - - - 0x01C11A 0E:C10A: 9D 07 01
 	LDA #$19                        ;C - - - - - 0x01C11D 0E:C10D: A9 19
-	STA ram_0106,X                  ;C - - - - - 0x01C11F 0E:C10F: 9D 06 01
+	STA palAnimStep+2,X             ;C - - - - - 0x01C11F 0E:C10F: 9D 06 01
 	PLA                             ;C - - - - - 0x01C122 0E:C112: 68
 	TAY                             ;C - - - - - 0x01C123 0E:C113: A8
 	PLA                             ;C - - - - - 0x01C124 0E:C114: 68
@@ -159,10 +159,10 @@ loc_0E_C0F6:
 	SEC                             ;C - - - - - 0x01C132 0E:C122: 38
 	LDA ram_00A0                    ;C - - - - - 0x01C133 0E:C123: A5 A0
 	SBC #$01                        ;C - - - - - 0x01C135 0E:C125: E9 01
-	STA ram_0105,X                  ;C - - - - - 0x01C137 0E:C127: 9D 05 01
+	STA palAnimStep+1,X             ;C - - - - - 0x01C137 0E:C127: 9D 05 01
 	LDA ram_00A1                    ;C - - - - - 0x01C13A 0E:C12A: A5 A1
 	SBC #$00                        ;C - - - - - 0x01C13C 0E:C12C: E9 00
-	STA ram_0106,X                  ;C - - - - - 0x01C13E 0E:C12E: 9D 06 01
+	STA palAnimStep+2,X             ;C - - - - - 0x01C13E 0E:C12E: 9D 06 01
 	JSR SoundUpdate                 ;C - - - - - 0x01C141 0E:C131: 20 72 FF
 	PLA                             ;C - - - - - 0x01C144 0E:C134: 68
 	TAY                             ;C - - - - - 0x01C145 0E:C135: A8
@@ -503,7 +503,7 @@ loc_0E_C371:
 loc_0E_C379:
 	LDY #$1F                        ;C - - - - - 0x01C389 0E:C379: A0 1F
 loc_0E_C37B:
-	LDA ram_0620,Y                  ;C - - - - - 0x01C38B 0E:C37B: B9 20 06
+	LDA palBase,Y                   ;C - - - - - 0x01C38B 0E:C37B: B9 20 06
 	STA palBuffer,Y                 ;C - - - - - 0x01C38E 0E:C37E: 99 00 06
 	DEY                             ;C - - - - - 0x01C391 0E:C381: 88
 	BPL loc_0E_C37B                 ;C - - - - - 0x01C392 0E:C382: 10 F7
@@ -541,27 +541,27 @@ UpdateRandom:
 	LDX #$00                        ;C - - - - - 0x01C3C4 0E:C3B4: A2 00
 	LDY #$04                        ;C - - - - - 0x01C3C6 0E:C3B6: A0 04
 ofs_0E_C3B8:
-	LDA ram_00E4,X                  ;C - - - - - 0x01C3C8 0E:C3B8: B5 E4
+	LDA rngState0,X                 ;C - - - - - 0x01C3C8 0E:C3B8: B5 E4
 	AND #$02                        ;C - - - - - 0x01C3CA 0E:C3BA: 29 02
 	STA ptr_00                      ;C - - - - - 0x01C3CC 0E:C3BC: 85 00
-	LDA ram_00E5,X                  ;C - - - - - 0x01C3CE 0E:C3BE: B5 E5
+	LDA rngState1,X                 ;C - - - - - 0x01C3CE 0E:C3BE: B5 E5
 	AND #$02                        ;C - - - - - 0x01C3D0 0E:C3C0: 29 02
 	EOR ptr_00                      ;C - - - - - 0x01C3D2 0E:C3C2: 45 00
 	CLC                             ;C - - - - - 0x01C3D4 0E:C3C4: 18
 	BEQ loc_0E_C3C8                 ;C - - - - - 0x01C3D5 0E:C3C5: F0 01
 	SEC                             ;C - - - - - 0x01C3D7 0E:C3C7: 38
 loc_0E_C3C8:
-	ROR ram_00E4,X                  ;C - - - - - 0x01C3D8 0E:C3C8: 76 E4
+	ROR rngState0,X                 ;C - - - - - 0x01C3D8 0E:C3C8: 76 E4
 	INX                             ;C - - - - - 0x01C3DA 0E:C3CA: E8
 	DEY                             ;C - - - - - 0x01C3DB 0E:C3CB: 88
 	BNE loc_0E_C3C8                 ;C - - - - - 0x01C3DC 0E:C3CC: D0 FA
 	LDA drawOrderToggle             ;C - - - - - 0x01C3DE 0E:C3CE: A5 95
-	EOR ram_00E4                    ;C - - - - - 0x01C3E0 0E:C3D0: 45 E4
-	STA ram_00E5                    ;C - - - - - 0x01C3E2 0E:C3D2: 85 E5
-	LDA ram_00E4                    ;C - - - - - 0x01C3E4 0E:C3D4: A5 E4
-	SBC ram_00E5                    ;C - - - - - 0x01C3E6 0E:C3D6: E5 E5
+	EOR rngState0                   ;C - - - - - 0x01C3E0 0E:C3D0: 45 E4
+	STA rngState1                   ;C - - - - - 0x01C3E2 0E:C3D2: 85 E5
+	LDA rngState0                   ;C - - - - - 0x01C3E4 0E:C3D4: A5 E4
+	SBC rngState1                   ;C - - - - - 0x01C3E6 0E:C3D6: E5 E5
 	ADC frameCounter                ;C - - - - - 0x01C3E8 0E:C3D8: 65 92
-	STA ram_00E4                    ;C - - - - - 0x01C3EA 0E:C3DA: 85 E4
+	STA rngState0                   ;C - - - - - 0x01C3EA 0E:C3DA: 85 E4
 	RTS                             ;C - - - - - 0x01C3EC 0E:C3DC: 60
 ; stage setup: CHR banks, sprite palette of the character (tbl_0E_C53E/C546/C54E) and 16-colour palette from the stage bank
 LoadSectionGfx:
@@ -604,21 +604,21 @@ loc_0E_C417:
 loc_0E_C425:
 	LDA spritePalCody,X             ;C - - - - - 0x01C435 0E:C425: BD 3E C5
 	STA palBuffer+16,X              ;C - - - - - 0x01C438 0E:C428: 9D 10 06
-	STA ram_0630,X                  ;C - - - - - 0x01C43B 0E:C42B: 9D 30 06
+	STA palBase+16,X                ;C - - - - - 0x01C43B 0E:C42B: 9D 30 06
 	DEX                             ;C - - - - - 0x01C43E 0E:C42E: CA
 	BPL loc_0E_C425                 ;C - - - - - 0x01C43F 0E:C42F: 10 F4
 	JMP loc_0E_C44F                 ;C - - - - - 0x01C441 0E:C431: 4C 4F C4
 loc_0E_C434:
 	LDA spritePalGuy,X              ;C - - - - - 0x01C444 0E:C434: BD 46 C5
 	STA palBuffer+16,X              ;C - - - - - 0x01C447 0E:C437: 9D 10 06
-	STA ram_0630,X                  ;C - - - - - 0x01C44A 0E:C43A: 9D 30 06
+	STA palBase+16,X                ;C - - - - - 0x01C44A 0E:C43A: 9D 30 06
 	DEX                             ;C - - - - - 0x01C44D 0E:C43D: CA
 	BPL loc_0E_C434                 ;C - - - - - 0x01C44E 0E:C43E: 10 F4
 	JMP loc_0E_C44F                 ;C - - - - - 0x01C450 0E:C440: 4C 4F C4
 loc_0E_C443:
 	LDA spritePalHaggar,X           ;C - - - - - 0x01C453 0E:C443: BD 4E C5
 	STA palBuffer+16,X              ;C - - - - - 0x01C456 0E:C446: 9D 10 06
-	STA ram_0630,X                  ;C - - - - - 0x01C459 0E:C449: 9D 30 06
+	STA palBase+16,X                ;C - - - - - 0x01C459 0E:C449: 9D 30 06
 	DEX                             ;C - - - - - 0x01C45C 0E:C44C: CA
 	BPL loc_0E_C443                 ;C - - - - - 0x01C45D 0E:C44D: 10 F4
 loc_0E_C44F:
@@ -664,7 +664,7 @@ loc_0E_C47D:
 loc_0E_C494:
 	LDA stagePalettes_s0,Y          ;C - - - - - 0x01C4A4 0E:C494: B9 7C AE
 	STA palBuffer,X                 ;C - - - - - 0x01C4A7 0E:C497: 9D 00 06
-	STA ram_0620,X                  ;C - - - - - 0x01C4AA 0E:C49A: 9D 20 06
+	STA palBase,X                   ;C - - - - - 0x01C4AA 0E:C49A: 9D 20 06
 	INY                             ;C - - - - - 0x01C4AD 0E:C49D: C8
 	INX                             ;C - - - - - 0x01C4AE 0E:C49E: E8
 	CPX #$10                        ;C - - - - - 0x01C4AF 0E:C49F: E0 10
@@ -674,13 +674,13 @@ loc_0E_C4A5:
 	LDA stagePalettes_s0,Y          ;C - - - - - 0x01C4B5 0E:C4A5: B9 7C AE
 	PHA                             ;C - - - - - 0x01C4B8 0E:C4A8: 48
 	AND #$80                        ;C - - - - - 0x01C4B9 0E:C4A9: 29 80
-	STA ram_0100,X                  ;C - - - - - 0x01C4BB 0E:C4AB: 9D 00 01
+	STA palAnimActive,X             ;C - - - - - 0x01C4BB 0E:C4AB: 9D 00 01
 	PLA                             ;C - - - - - 0x01C4BE 0E:C4AE: 68
 	AND #$7F                        ;C - - - - - 0x01C4BF 0E:C4AF: 29 7F
-	STA ram_0108,X                  ;C - - - - - 0x01C4C1 0E:C4B1: 9D 08 01
+	STA palAnimType,X               ;C - - - - - 0x01C4C1 0E:C4B1: 9D 08 01
 	LDA #$00                        ;C - - - - - 0x01C4C4 0E:C4B4: A9 00
-	STA ram_0104,X                  ;C - - - - - 0x01C4C6 0E:C4B6: 9D 04 01
-	STA ram_010C,X                  ;C - - - - - 0x01C4C9 0E:C4B9: 9D 0C 01
+	STA palAnimStep,X               ;C - - - - - 0x01C4C6 0E:C4B6: 9D 04 01
+	STA palAnimTimer,X              ;C - - - - - 0x01C4C9 0E:C4B9: 9D 0C 01
 	INY                             ;C - - - - - 0x01C4CC 0E:C4BC: C8
 	INX                             ;C - - - - - 0x01C4CD 0E:C4BD: E8
 	CPX #$04                        ;C - - - - - 0x01C4CE 0E:C4BE: E0 04
@@ -689,7 +689,7 @@ loc_0E_C4A5:
 loc_0E_C4C5:
 	LDA stagePalettes_s1,Y          ;C - - - - - 0x01C4D5 0E:C4C5: B9 AC AE
 	STA palBuffer,X                 ;C - - - - - 0x01C4D8 0E:C4C8: 9D 00 06
-	STA ram_0620,X                  ;C - - - - - 0x01C4DB 0E:C4CB: 9D 20 06
+	STA palBase,X                   ;C - - - - - 0x01C4DB 0E:C4CB: 9D 20 06
 	INY                             ;C - - - - - 0x01C4DE 0E:C4CE: C8
 	INX                             ;C - - - - - 0x01C4DF 0E:C4CF: E8
 	CPX #$10                        ;C - - - - - 0x01C4E0 0E:C4D0: E0 10
@@ -699,13 +699,13 @@ loc_0E_C4D6:
 	LDA stagePalettes_s1,Y          ;C - - - - - 0x01C4E6 0E:C4D6: B9 AC AE
 	PHA                             ;C - - - - - 0x01C4E9 0E:C4D9: 48
 	AND #$80                        ;C - - - - - 0x01C4EA 0E:C4DA: 29 80
-	STA ram_0100,X                  ;C - - - - - 0x01C4EC 0E:C4DC: 9D 00 01
+	STA palAnimActive,X             ;C - - - - - 0x01C4EC 0E:C4DC: 9D 00 01
 	PLA                             ;C - - - - - 0x01C4EF 0E:C4DF: 68
 	AND #$7F                        ;C - - - - - 0x01C4F0 0E:C4E0: 29 7F
-	STA ram_0108,X                  ;C - - - - - 0x01C4F2 0E:C4E2: 9D 08 01
+	STA palAnimType,X               ;C - - - - - 0x01C4F2 0E:C4E2: 9D 08 01
 	LDA #$00                        ;C - - - - - 0x01C4F5 0E:C4E5: A9 00
-	STA ram_0104,X                  ;C - - - - - 0x01C4F7 0E:C4E7: 9D 04 01
-	STA ram_010C,X                  ;C - - - - - 0x01C4FA 0E:C4EA: 9D 0C 01
+	STA palAnimStep,X               ;C - - - - - 0x01C4F7 0E:C4E7: 9D 04 01
+	STA palAnimTimer,X              ;C - - - - - 0x01C4FA 0E:C4EA: 9D 0C 01
 	INY                             ;C - - - - - 0x01C4FD 0E:C4ED: C8
 	INX                             ;C - - - - - 0x01C4FE 0E:C4EE: E8
 	CPX #$04                        ;C - - - - - 0x01C4FF 0E:C4EF: E0 04
@@ -714,7 +714,7 @@ loc_0E_C4D6:
 loc_0E_C4F6:
 	LDA stagePalettes_s2,Y          ;C - - - - - 0x01C506 0E:C4F6: B9 DC AE
 	STA palBuffer,X                 ;C - - - - - 0x01C509 0E:C4F9: 9D 00 06
-	STA ram_0620,X                  ;C - - - - - 0x01C50C 0E:C4FC: 9D 20 06
+	STA palBase,X                   ;C - - - - - 0x01C50C 0E:C4FC: 9D 20 06
 	INY                             ;C - - - - - 0x01C50F 0E:C4FF: C8
 	INX                             ;C - - - - - 0x01C510 0E:C500: E8
 	CPX #$10                        ;C - - - - - 0x01C511 0E:C501: E0 10
@@ -724,13 +724,13 @@ loc_0E_C507:
 	LDA stagePalettes_s2,Y          ;C - - - - - 0x01C517 0E:C507: B9 DC AE
 	PHA                             ;C - - - - - 0x01C51A 0E:C50A: 48
 	AND #$80                        ;C - - - - - 0x01C51B 0E:C50B: 29 80
-	STA ram_0100,X                  ;C - - - - - 0x01C51D 0E:C50D: 9D 00 01
+	STA palAnimActive,X             ;C - - - - - 0x01C51D 0E:C50D: 9D 00 01
 	PLA                             ;C - - - - - 0x01C520 0E:C510: 68
 	AND #$7F                        ;C - - - - - 0x01C521 0E:C511: 29 7F
-	STA ram_0108,X                  ;C - - - - - 0x01C523 0E:C513: 9D 08 01
+	STA palAnimType,X               ;C - - - - - 0x01C523 0E:C513: 9D 08 01
 	LDA #$00                        ;C - - - - - 0x01C526 0E:C516: A9 00
-	STA ram_0104,X                  ;C - - - - - 0x01C528 0E:C518: 9D 04 01
-	STA ram_010C,X                  ;C - - - - - 0x01C52B 0E:C51B: 9D 0C 01
+	STA palAnimStep,X               ;C - - - - - 0x01C528 0E:C518: 9D 04 01
+	STA palAnimTimer,X              ;C - - - - - 0x01C52B 0E:C51B: 9D 0C 01
 	INY                             ;C - - - - - 0x01C52E 0E:C51E: C8
 	INX                             ;C - - - - - 0x01C52F 0E:C51F: E8
 	CPX #$04                        ;C - - - - - 0x01C530 0E:C520: E0 04
@@ -739,7 +739,7 @@ loc_0E_C507:
 loc_0E_C527:
 	LDA palBuffer                   ;C - - - - - 0x01C537 0E:C527: AD 00 06
 	STA palBuffer+16                ;C - - - - - 0x01C53A 0E:C52A: 8D 10 06
-	STA ram_0630                    ;C - - - - - 0x01C53D 0E:C52D: 8D 30 06
+	STA palBase+16                  ;C - - - - - 0x01C53D 0E:C52D: 8D 30 06
 	LDA #$09                        ;C - - - - - 0x01C540 0E:C530: A9 09
 	STA prgBankA000                 ;C - - - - - 0x01C542 0E:C532: 85 F5
 	JSR SetPrgBanks                 ;C - - - - - 0x01C544 0E:C534: 20 4D FF
@@ -761,7 +761,7 @@ ofs_0E_C556:
 	JSR QueueSoundSaved             ;C - - - - - 0x01C570 0E:C560: 20 4A F3
 	JSR WaitFrame                   ;C - - - - - 0x01C573 0E:C563: 20 31 FF
 	LDA #$88                        ;C - - - - - 0x01C576 0E:C566: A9 88
-	STA ram_00E4                    ;C - - - - - 0x01C578 0E:C568: 85 E4
+	STA rngState0                   ;C - - - - - 0x01C578 0E:C568: 85 E4
 	JSR FadeAndClearScreen          ;C - - - - - 0x01C57A 0E:C56A: 20 5C C8
 	LDX #$04                        ;C - - - - - 0x01C57D 0E:C56D: A2 04
 	STX prgBank8000                 ;C - - - - - 0x01C57F 0E:C56F: 86 F4
@@ -813,7 +813,7 @@ loc_0E_C5CA:
 loc_0E_C5CE:
 	JSR PrepareScreenDraw           ;C - - - - - 0x01C5DE 0E:C5CE: 20 88 C8
 	LDA #$00                        ;C - - - - - 0x01C5E1 0E:C5D1: A9 00
-	STA ram_00B8                    ;C - - - - - 0x01C5E3 0E:C5D3: 85 B8
+	STA textScriptIdx               ;C - - - - - 0x01C5E3 0E:C5D3: 85 B8
 	JSR RunTextScript_00            ;C - - - - - bank=00 0x01C5E5 0E:C5D5: 20 00 9A  ; call into the switchable $8000 bank (bank depends on stage)
 	LDA padHeld                     ;C D 2 - I - 0x01C5E8 0E:C5D8: A5 16
 	BNE loc_0E_C657                 ;C - - - - - 0x01C5EA 0E:C5DA: D0 7B
@@ -835,13 +835,13 @@ loc_0E_C5CE:
 	STX prgBankA000                 ;C - - - - - 0x01C60E 0E:C5FE: 86 F5
 	JSR SetPrgBanks                 ;C - - - - - 0x01C610 0E:C600: 20 4D FF
 	LDA #$01                        ;C - - - - - 0x01C613 0E:C603: A9 01
-	STA ram_00B8                    ;C - - - - - 0x01C615 0E:C605: 85 B8
+	STA textScriptIdx               ;C - - - - - 0x01C615 0E:C605: 85 B8
 	JSR RunTextScript_00            ;C - - - - - bank=00 0x01C617 0E:C607: 20 00 9A
 	LDA padHeld                     ;C - - - - - 0x01C61A 0E:C60A: A5 16
 	BNE loc_0E_C657                 ;C - - - - - 0x01C61C 0E:C60C: D0 49
 	JSR PrepareScreenDraw           ;C - - - - - 0x01C61E 0E:C60E: 20 88 C8
 	LDA #$02                        ;C - - - - - 0x01C621 0E:C611: A9 02
-	STA ram_00B8                    ;C - - - - - 0x01C623 0E:C613: 85 B8
+	STA textScriptIdx               ;C - - - - - 0x01C623 0E:C613: 85 B8
 	JSR RunTextScript_00            ;C - - - - - bank=00 0x01C625 0E:C615: 20 00 9A
 	LDA padHeld                     ;C - - - - - 0x01C628 0E:C618: A5 16
 	BNE loc_0E_C657                 ;C - - - - - 0x01C62A 0E:C61A: D0 3B
@@ -861,13 +861,13 @@ loc_0E_C5CE:
 	STX prgBankA000                 ;C - - - - - 0x01C649 0E:C639: 86 F5
 	JSR SetPrgBanks                 ;C - - - - - 0x01C64B 0E:C63B: 20 4D FF
 	LDA #$03                        ;C - - - - - 0x01C64E 0E:C63E: A9 03
-	STA ram_00B8                    ;C - - - - - 0x01C650 0E:C640: 85 B8
+	STA textScriptIdx               ;C - - - - - 0x01C650 0E:C640: 85 B8
 	JSR RunTextScript_00            ;C - - - - - bank=00 0x01C652 0E:C642: 20 00 9A
 	LDA padHeld                     ;C - - - - - 0x01C655 0E:C645: A5 16
 	BNE loc_0E_C657                 ;C - - - - - 0x01C657 0E:C647: D0 0E
 	JSR PrepareScreenDraw           ;C - - - - - 0x01C659 0E:C649: 20 88 C8
 	LDA #$04                        ;C - - - - - 0x01C65C 0E:C64C: A9 04
-	STA ram_00B8                    ;C - - - - - 0x01C65E 0E:C64E: 85 B8
+	STA textScriptIdx               ;C - - - - - 0x01C65E 0E:C64E: 85 B8
 	JSR RunTextScript_00            ;C - - - - - bank=00 0x01C660 0E:C650: 20 00 9A
 	LDA padHeld                     ;C - - - - - 0x01C663 0E:C653: A5 16
 	BNE loc_0E_C657                 ;C - - - - - 0x01C665 0E:C655: D0 00
@@ -962,7 +962,7 @@ ofs_0E_C703:
 	JSR ScreenOn                    ;C - - - - - 0x01C72E 0E:C71E: 20 6F C2
 	CLI                             ;C - - - - - 0x01C731 0E:C721: 58
 	LDA #$01                        ;C - - - - - 0x01C732 0E:C722: A9 01
-	STA ram_009B                    ;C - - - - - 0x01C734 0E:C724: 85 9B
+	STA irqEnableIdx                ;C - - - - - 0x01C734 0E:C724: 85 9B
 	LDA #$00                        ;C - - - - - 0x01C736 0E:C726: A9 00
 	STA nametableSelect             ;C - - - - - 0x01C738 0E:C728: 85 FD
 	STA ram_00FB                    ;C - - - - - 0x01C73A 0E:C72A: 85 FB
@@ -973,7 +973,7 @@ ofs_0E_C703:
 	STA objXPage                    ;C - - - - - 0x01C744 0E:C734: 8D 80 03
 	STA objYPage                    ;C - - - - - 0x01C747 0E:C737: 8D E0 03
 	STA totalEnemies                ;C - - - - - 0x01C74A 0E:C73A: 85 9E
-	STA ram_009F                    ;C - - - - - 0x01C74C 0E:C73C: 85 9F
+	STA spawnLeftIdx                ;C - - - - - 0x01C74C 0E:C73C: 85 9F
 	STA ram_005A                    ;C - - - - - 0x01C74E 0E:C73E: 85 5A
 	STA ram_0033                    ;C - - - - - 0x01C750 0E:C740: 85 33
 	STA renderOffCount              ;C - - - - - 0x01C752 0E:C742: 85 EE
@@ -982,24 +982,24 @@ ofs_0E_C703:
 	STA MMC3_MIRRORING              ;C - - - - - 0x01C759 0E:C749: 8D 00 A0
 	LDA #$01                        ;C - - - - - 0x01C75C 0E:C74C: A9 01
 	STA playerFacing                ;C - - - - - 0x01C75E 0E:C74E: 85 31
-	STA ram_0023                    ;C - - - - - 0x01C760 0E:C750: 85 23
+	STA scrollDir                   ;C - - - - - 0x01C760 0E:C750: 85 23
 	STA ram_002E                    ;C - - - - - 0x01C762 0E:C752: 85 2E
 ; GG PASGIYAA..GASGIYAA start stage: LDA #$00 / STA stage
 	LDY #$00                        ;C - - - - - 0x01C764 0E:C754: A0 00
-	STY ram_0067                    ;C - - - - - 0x01C766 0E:C756: 84 67
+	STY enemyLevelIdx               ;C - - - - - 0x01C766 0E:C756: 84 67
 	STY stageData                   ;C - - - - - 0x01C768 0E:C758: 84 22
 	LDA tbl_0E_C83C,Y               ;C - - - - - 0x01C76A 0E:C75A: B9 3C C8
 	JSR QueueSoundSaved             ;C - - - - - 0x01C76D 0E:C75D: 20 4A F3
 	LDA #$FF                        ;C - - - - - 0x01C770 0E:C760: A9 FF
-	STA ram_0029                    ;C - - - - - 0x01C772 0E:C762: 85 29
+	STA stageScreen                 ;C - - - - - 0x01C772 0E:C762: 85 29
 	LDA #$1F                        ;C - - - - - 0x01C774 0E:C764: A9 1F
-	STA ram_0024                    ;C - - - - - 0x01C776 0E:C766: 85 24
+	STA stageColumn                 ;C - - - - - 0x01C776 0E:C766: 85 24
 loc_0E_C768:
 	LDA #$01                        ;C - - - - - 0x01C778 0E:C768: A9 01
 	STA spriteFlipMask              ;C - - - - - 0x01C77A 0E:C76A: 85 10
 	JSR StageScrollUpdate           ;C - - - - - 0x01C77C 0E:C76C: 20 21 E5
 	JSR WaitFrame                   ;C - - - - - 0x01C77F 0E:C76F: 20 31 FF
-	LDA ram_0029                    ;C - - - - - 0x01C782 0E:C772: A5 29
+	LDA stageScreen                 ;C - - - - - 0x01C782 0E:C772: A5 29
 	BEQ loc_0E_C768                 ;C - - - - - 0x01C784 0E:C774: F0 F2
 	LDA #$0A                        ;C - - - - - 0x01C786 0E:C776: A9 0A
 	STA prgBank8000                 ;C - - - - - 0x01C788 0E:C778: 85 F4
@@ -1018,7 +1018,7 @@ loc_0E_C768:
 	STA ram_002C                    ;C - - - - - 0x01C7A5 0E:C795: 85 2C
 	LDA #$00                        ;C - - - - - 0x01C7A7 0E:C797: A9 00
 	STA paletteSetIdx               ;C - - - - - 0x01C7A9 0E:C799: 85 2B
-	STA ram_002D                    ;C - - - - - 0x01C7AB 0E:C79B: 85 2D
+	STA worldXPage                  ;C - - - - - 0x01C7AB 0E:C79B: 85 2D
 	JSR LoadSectionGfx              ;C - - - - - 0x01C7AD 0E:C79D: 20 DD C3
 	LDA #$00                        ;C - - - - - 0x01C7B0 0E:C7A0: A9 00
 	STA palUpdateFlag               ;C - - - - - 0x01C7B2 0E:C7A2: 85 18
@@ -1037,7 +1037,7 @@ loc_0E_C768:
 	STA objXPage                    ;C - - - - - 0x01C7D2 0E:C7C2: 8D 80 03
 	STA objYPage                    ;C - - - - - 0x01C7D5 0E:C7C5: 8D E0 03
 	STA objKind                     ;C - - - - - 0x01C7D8 0E:C7C8: 8D 20 03
-	STA ram_0067                    ;C - - - - - 0x01C7DB 0E:C7CB: 85 67
+	STA enemyLevelIdx               ;C - - - - - 0x01C7DB 0E:C7CB: 85 67
 	JSR SetHopVelY                  ;C - - - - - 0x01C7DD 0E:C7CD: 20 6E F2
 	LDY playerId                    ;C - - - - - 0x01C7E0 0E:C7D0: A4 34
 	LDA tbl_0E_C841,Y               ;C - - - - - 0x01C7E2 0E:C7D2: B9 41 C8
@@ -1071,11 +1071,11 @@ loc_0E_C768:
 	STA playerExp+1                 ;C - - - - - 0x01C81B 0E:C80B: 85 6D
 	STA weaponHeld                  ;C - - - - - 0x01C81D 0E:C80D: 85 A9
 	STA ram_00AD                    ;C - - - - - 0x01C81F 0E:C80F: 85 AD
-	STA ram_0069                    ;C - - - - - 0x01C821 0E:C811: 85 69
-	STA ram_006A                    ;C - - - - - 0x01C823 0E:C813: 85 6A
+	STA flashTimerA                 ;C - - - - - 0x01C821 0E:C811: 85 69
+	STA flashTimerB                 ;C - - - - - 0x01C823 0E:C813: 85 6A
 	STA ram_0050                    ;C - - - - - 0x01C825 0E:C815: 85 50
 	STA ram_003F                    ;C - - - - - 0x01C827 0E:C817: 85 3F
-	STA ram_0054                    ;C - - - - - 0x01C829 0E:C819: 85 54
+	STA enemiesDefeated             ;C - - - - - 0x01C829 0E:C819: 85 54
 	STA gameOverFlag                ;C - - - - - 0x01C82B 0E:C81B: 85 62
 	STA ram_00B5                    ;C - - - - - 0x01C82D 0E:C81D: 85 B5
 	STA ram_00B6                    ;C - - - - - 0x01C82F 0E:C81F: 85 B6
@@ -1164,7 +1164,7 @@ LoadPlayerPalette:
 loc_0E_C8BC:
 	LDA spritePalCody,X             ;C - - - - - 0x01C8CC 0E:C8BC: BD 3E C5
 	STA palBuffer+16,Y              ;C - - - - - 0x01C8CF 0E:C8BF: 99 10 06
-	STA ram_0630,Y                  ;C - - - - - 0x01C8D2 0E:C8C2: 99 30 06
+	STA palBase+16,Y                ;C - - - - - 0x01C8D2 0E:C8C2: 99 30 06
 	DEX                             ;C - - - - - 0x01C8D5 0E:C8C5: CA
 	DEY                             ;C - - - - - 0x01C8D6 0E:C8C6: 88
 	BPL loc_0E_C8BC                 ;C - - - - - 0x01C8D7 0E:C8C7: 10 F3
@@ -1210,16 +1210,16 @@ loc_0E_C904:
 	LDA #$15                        ;C - - - - - 0x01C930 0E:C920: A9 15
 	JSR QueueSound                  ;C - - - - - 0x01C932 0E:C922: 20 4C F3
 	LDY #$F3                        ;C - - - - - 0x01C935 0E:C925: A0 F3
-	LDA ram_0098                    ;C - - - - - 0x01C937 0E:C927: A5 98
+	LDA irqActive                   ;C - - - - - 0x01C937 0E:C927: A5 98
 	EOR #$01                        ;C - - - - - 0x01C939 0E:C929: 49 01
-	STA ram_0098                    ;C - - - - - 0x01C93B 0E:C92B: 85 98
+	STA irqActive                   ;C - - - - - 0x01C93B 0E:C92B: 85 98
 	BNE loc_0E_C930                 ;C - - - - - 0x01C93D 0E:C92D: D0 01
 	INY                             ;C - - - - - 0x01C93F 0E:C92F: C8
 loc_0E_C930:
 	TYA                             ;C - - - - - 0x01C940 0E:C930: 98
 	JSR QueueSound                  ;C - - - - - 0x01C941 0E:C931: 20 4C F3
 loc_0E_C934:
-	LDA ram_0098                    ;C - - - - - 0x01C944 0E:C934: A5 98
+	LDA irqActive                   ;C - - - - - 0x01C944 0E:C934: A5 98
 	BEQ loc_0E_C93B                 ;C - - - - - 0x01C946 0E:C936: F0 03
 	JMP loc_0E_C9A7                 ;C - - - - - 0x01C948 0E:C938: 4C A7 C9
 loc_0E_C93B:
@@ -1365,7 +1365,7 @@ loc_0E_CA77:
 	STA gameAction                  ;C - - - - - 0x01CAA1 0E:CA91: 85 30
 	LDA objY                        ;C - - - - - 0x01CAA3 0E:CA93: AD C0 03
 	STA playerGroundY               ;C - - - - - 0x01CAA6 0E:CA96: 85 36
-	STA ram_00A6                    ;C - - - - - 0x01CAA8 0E:CA98: 85 A6
+	STA jumpBaseY                   ;C - - - - - 0x01CAA8 0E:CA98: 85 A6
 	LDA #$1B                        ;C - - - - - 0x01CAAA 0E:CA9A: A9 1B
 	JSR QueueSound                  ;C - - - - - 0x01CAAC 0E:CA9C: 20 4C F3
 	JMP Act01_Jump                  ;C - - - - - 0x01CAAF 0E:CA9F: 4C 88 CF
@@ -1426,12 +1426,12 @@ loc_0E_CB12:
 	LDA #$00                        ;C - - - - - 0x01CB22 0E:CB12: A9 00
 	STA timerA3                     ;C - - - - - 0x01CB24 0E:CB14: 85 A3
 	LDY playerId                    ;C - - - - - 0x01CB26 0E:CB16: A4 34
-	LDA ram_006F                    ;C - - - - - 0x01CB28 0E:CB18: A5 6F
+	LDA playerStandAnim             ;C - - - - - 0x01CB28 0E:CB18: A5 6F
 	CMP tbl_0F_E291,Y               ;C - - - - - 0x01CB2A 0E:CB1A: D9 91 E2
 	BNE loc_0E_CB22                 ;C - - - - - 0x01CB2D 0E:CB1D: D0 03
 	JMP loc_0E_CBA3                 ;C - - - - - 0x01CB2F 0E:CB1F: 4C A3 CB
 loc_0E_CB22:
-	LDA ram_006F                    ;C - - - - - 0x01CB32 0E:CB22: A5 6F
+	LDA playerStandAnim             ;C - - - - - 0x01CB32 0E:CB22: A5 6F
 	JSR SetPlayerAnim               ;C - - - - - 0x01CB34 0E:CB24: 20 94 F2
 	LDY playerId                    ;C - - - - - 0x01CB37 0E:CB27: A4 34
 	LDA objAnim                     ;C - - - - - 0x01CB39 0E:CB29: AD 80 05
@@ -1567,7 +1567,7 @@ loc_0E_CC29:
 	LDA tbl_0F_E25E,Y               ;C - - - - - 0x01CC41 0E:CC31: B9 5E E2
 	JSR SetChrBank2                 ;C - - - - - 0x01CC44 0E:CC34: 20 40 F4
 	LDY ram_00A8                    ;C - - - - - 0x01CC47 0E:CC37: A4 A8
-	STY ram_0039                    ;C - - - - - 0x01CC49 0E:CC39: 84 39
+	STY grabbedSlot                 ;C - - - - - 0x01CC49 0E:CC39: 84 39
 	LDA playerId                    ;C - - - - - 0x01CC4B 0E:CC3B: A5 34
 	BNE loc_0E_CC52                 ;C - - - - - 0x01CC4D 0E:CC3D: D0 13
 	LDA objFacing,Y                 ;c - - - - - 0x01CC4F 0E:CC3F: B9 60 04
@@ -1616,7 +1616,7 @@ PlaceGrabbedEnemy:
 	PHA                             ;c - - - - - 0x01CCA1 0E:CC91: 48
 	LDA objXPage                    ;c - - - - - 0x01CCA2 0E:CC92: AD 80 03
 	ADC tbl_0F_E1D4,Y               ;c - - - - - 0x01CCA5 0E:CC95: 79 D4 E1
-	LDY ram_0039                    ;c - - - - - 0x01CCA8 0E:CC98: A4 39
+	LDY grabbedSlot                 ;c - - - - - 0x01CCA8 0E:CC98: A4 39
 	STA objXPage,Y                  ;c - - - - - 0x01CCAA 0E:CC9A: 99 80 03
 	PLA                             ;c - - - - - 0x01CCAD 0E:CC9D: 68
 	STA objX,Y                      ;c - - - - - 0x01CCAE 0E:CC9E: 99 60 03
@@ -1844,7 +1844,7 @@ loc_0E_CE38:
 loc_0E_CE42:
 	LDA objY                        ;C - - - - - 0x01CE52 0E:CE42: AD C0 03
 	STA objY,Y                      ;C - - - - - 0x01CE55 0E:CE45: 99 C0 03
-	STY ram_0039                    ;C - - - - - 0x01CE58 0E:CE48: 84 39
+	STY grabbedSlot                 ;C - - - - - 0x01CE58 0E:CE48: 84 39
 	LDA playerFacing                ;C - - - - - 0x01CE5A 0E:CE4A: A5 31
 	AND #$02                        ;C - - - - - 0x01CE5C 0E:CE4C: 29 02
 	TAY                             ;C - - - - - 0x01CE5E 0E:CE4E: A8
@@ -1854,7 +1854,7 @@ loc_0E_CE42:
 	PHA                             ;C - - - - - 0x01CE66 0E:CE56: 48
 	LDA objXPage                    ;C - - - - - 0x01CE67 0E:CE57: AD 80 03
 	ADC tbl_0F_E1D4,Y               ;C - - - - - 0x01CE6A 0E:CE5A: 79 D4 E1
-	LDY ram_0039                    ;C - - - - - 0x01CE6D 0E:CE5D: A4 39
+	LDY grabbedSlot                 ;C - - - - - 0x01CE6D 0E:CE5D: A4 39
 	STA objXPage,Y                  ;C - - - - - 0x01CE6F 0E:CE5F: 99 80 03
 	PLA                             ;C - - - - - 0x01CE72 0E:CE62: 68
 	STA objX,Y                      ;C - - - - - 0x01CE73 0E:CE63: 99 60 03
@@ -1866,7 +1866,7 @@ loc_0E_CE42:
 	LDY playerId                    ;C - - - - - 0x01CE80 0E:CE70: A4 34
 	CPY #$02                        ;C - - - - - 0x01CE82 0E:CE72: C0 02
 	BNE loc_0E_CE85                 ;C - - - - - 0x01CE84 0E:CE74: D0 0F
-	LDY ram_0039                    ;C - - - - - 0x01CE86 0E:CE76: A4 39
+	LDY grabbedSlot                 ;C - - - - - 0x01CE86 0E:CE76: A4 39
 	LDA objY,Y                      ;C - - - - - 0x01CE88 0E:CE78: B9 C0 03
 	SEC                             ;C - - - - - 0x01CE8B 0E:CE7B: 38
 	SBC #$06                        ;C - - - - - 0x01CE8C 0E:CE7C: E9 06
@@ -1878,7 +1878,7 @@ loc_0E_CE85:
 	BNE loc_0E_CE89                 ;C - - - - - 0x01CE97 0E:CE87: D0 00
 loc_0E_CE89:
 	STA ram_0038                    ;C - - - - - 0x01CE99 0E:CE89: 85 38
-	LDY ram_0039                    ;C - - - - - 0x01CE9B 0E:CE8B: A4 39
+	LDY grabbedSlot                 ;C - - - - - 0x01CE9B 0E:CE8B: A4 39
 	STA objGrabState,Y              ;C - - - - - 0x01CE9D 0E:CE8D: 99 F0 03
 	LDA #$00                        ;C - - - - - 0x01CEA0 0E:CE90: A9 00
 	STA objAtkBox,Y                 ;C - - - - - 0x01CEA2 0E:CE92: 99 40 04
@@ -1914,9 +1914,9 @@ loc_0E_CEC2:
 	RTS                             ;C - - - - - 0x01CEE0 0E:CED0: 60
 ; blinks the player palette from ram_006A/ram_0069
 UpdatePlayerFlash:
-	LDA ram_006A                    ;C - - - - - 0x01CEE1 0E:CED1: A5 6A
+	LDA flashTimerB                 ;C - - - - - 0x01CEE1 0E:CED1: A5 6A
 	BEQ loc_0E_CEED                 ;C - - - - - 0x01CEE3 0E:CED3: F0 18
-	DEC ram_006A                    ;C - - - - - 0x01CEE5 0E:CED5: C6 6A
+	DEC flashTimerB                 ;C - - - - - 0x01CEE5 0E:CED5: C6 6A
 	AND #$02                        ;C - - - - - 0x01CEE7 0E:CED7: 29 02
 	BNE loc_0E_CEE2                 ;C - - - - - 0x01CEE9 0E:CED9: D0 07
 loc_0E_CEDB:
@@ -1931,9 +1931,9 @@ loc_0E_CEE5:
 	STA palUpdateFlag               ;C - - - - - 0x01CEFA 0E:CEEA: 85 18
 	RTS                             ;C - - - - - 0x01CEFC 0E:CEEC: 60
 loc_0E_CEED:
-	LDA ram_0069                    ;C - - - - - 0x01CEFD 0E:CEED: A5 69
+	LDA flashTimerA                 ;C - - - - - 0x01CEFD 0E:CEED: A5 69
 	BEQ loc_0E_CEFA                 ;C - - - - - 0x01CEFF 0E:CEEF: F0 09
-	DEC ram_0069                    ;C - - - - - 0x01CF01 0E:CEF1: C6 69
+	DEC flashTimerA                 ;C - - - - - 0x01CF01 0E:CEF1: C6 69
 	AND #$02                        ;C - - - - - 0x01CF03 0E:CEF3: 29 02
 	BNE loc_0E_CEE2                 ;C - - - - - 0x01CF05 0E:CEF5: D0 EB
 	BEQ loc_0E_CEDB                 ;C - - - - - 0x01CF07 0E:CEF7: F0 E2
@@ -1965,7 +1965,7 @@ loc_0E_CEFA:
 	CMP #$14                        ;C - - - - - 0x01CF3A 0E:CF2A: C9 14
 	BEQ loc_0E_CF32                 ;C - - - - - 0x01CF3C 0E:CF2C: F0 04
 	LDA #$00                        ;C - - - - - 0x01CF3E 0E:CF2E: A9 00
-	STA ram_006E                    ;C - - - - - 0x01CF40 0E:CF30: 85 6E
+	STA playerBusy                  ;C - - - - - 0x01CF40 0E:CF30: 85 6E
 loc_0E_CF32:
 	RTS                             ;C - - - - - 0x01CF42 0E:CF32: 60
 FindObjNearPlayer:
@@ -2139,7 +2139,7 @@ loc_0E_D06A:
 	BCS loc_0E_D076                 ;C - - - - - 0x01D081 0E:D071: B0 03
 	JMP loc_0E_D18E                 ;C - - - - - 0x01D083 0E:D073: 4C 8E D1
 loc_0E_D076:
-	LDA ram_0035                    ;C - - - - - 0x01D086 0E:D076: A5 35
+	LDA actionStep                  ;C - - - - - 0x01D086 0E:D076: A5 35
 	BNE loc_0E_D0D8                 ;C - - - - - 0x01D088 0E:D078: D0 5E
 	LDA padHeld                     ;C - - - - - 0x01D08A 0E:D07A: A5 16
 	AND #$0F                        ;C - - - - - 0x01D08C 0E:D07C: 29 0F
@@ -2169,10 +2169,10 @@ loc_0E_D098:
 loc_0E_D0AE:
 	LDA #$04                        ;C - - - - - 0x01D0BE 0E:D0AE: A9 04
 loc_0E_D0B0:
-	STA ram_00A7                    ;C - - - - - 0x01D0C0 0E:D0B0: 85 A7
+	STA attackType                  ;C - - - - - 0x01D0C0 0E:D0B0: 85 A7
 	JSR ArmTimerA4                  ;C - - - - - 0x01D0C2 0E:D0B2: 20 3B F4
 	LDA playerGroundY               ;C - - - - - 0x01D0C5 0E:D0B5: A5 36
-	STA ram_00A6                    ;C - - - - - 0x01D0C7 0E:D0B7: 85 A6
+	STA jumpBaseY                   ;C - - - - - 0x01D0C7 0E:D0B7: 85 A6
 	JMP loc_0E_D18E                 ;C - - - - - 0x01D0C9 0E:D0B9: 4C 8E D1
 loc_0E_D0BC:
 	LDY playerId                    ;C - - - - - 0x01D0CC 0E:D0BC: A4 34
@@ -2181,10 +2181,10 @@ loc_0E_D0BC:
 	LDA tbl_0F_E246,Y               ;C - - - - - 0x01D0D4 0E:D0C4: B9 46 E2
 	JSR SetChrBank2                 ;C - - - - - 0x01D0D7 0E:D0C7: 20 40 F4
 	LDA #$03                        ;C - - - - - 0x01D0DA 0E:D0CA: A9 03
-	STA ram_00A7                    ;C - - - - - 0x01D0DC 0E:D0CC: 85 A7
+	STA attackType                  ;C - - - - - 0x01D0DC 0E:D0CC: 85 A7
 	JSR ArmTimerA4                  ;C - - - - - 0x01D0DE 0E:D0CE: 20 3B F4
 	LDA playerGroundY               ;C - - - - - 0x01D0E1 0E:D0D1: A5 36
-	STA ram_00A6                    ;C - - - - - 0x01D0E3 0E:D0D3: 85 A6
+	STA jumpBaseY                   ;C - - - - - 0x01D0E3 0E:D0D3: 85 A6
 	JMP loc_0E_D18E                 ;C - - - - - 0x01D0E5 0E:D0D5: 4C 8E D1
 loc_0E_D0D8:
 	LDA padPressed                  ;C - - - - - 0x01D0E8 0E:D0D8: A5 14
@@ -2234,10 +2234,10 @@ loc_0E_D11D:
 loc_0E_D133:
 	LDA #$04                        ;C - - - - - 0x01D143 0E:D133: A9 04
 loc_0E_D135:
-	STA ram_00A7                    ;C - - - - - 0x01D145 0E:D135: 85 A7
+	STA attackType                  ;C - - - - - 0x01D145 0E:D135: 85 A7
 	JSR ArmTimerA4                  ;C - - - - - 0x01D147 0E:D137: 20 3B F4
 	LDA playerGroundY               ;C - - - - - 0x01D14A 0E:D13A: A5 36
-	STA ram_00A6                    ;C - - - - - 0x01D14C 0E:D13C: 85 A6
+	STA jumpBaseY                   ;C - - - - - 0x01D14C 0E:D13C: 85 A6
 	RTS                             ;C - - - - - 0x01D14E 0E:D13E: 60
 loc_0E_D13F:
 	LDY playerId                    ;C - - - - - 0x01D14F 0E:D13F: A4 34
@@ -2246,10 +2246,10 @@ loc_0E_D13F:
 	LDA tbl_0F_E249,Y               ;C - - - - - 0x01D157 0E:D147: B9 49 E2
 	JSR SetChrBank2                 ;C - - - - - 0x01D15A 0E:D14A: 20 40 F4
 	LDA #$03                        ;C - - - - - 0x01D15D 0E:D14D: A9 03
-	STA ram_00A7                    ;C - - - - - 0x01D15F 0E:D14F: 85 A7
+	STA attackType                  ;C - - - - - 0x01D15F 0E:D14F: 85 A7
 	JSR ArmTimerA4                  ;C - - - - - 0x01D161 0E:D151: 20 3B F4
 	LDA playerGroundY               ;C - - - - - 0x01D164 0E:D154: A5 36
-	STA ram_00A6                    ;C - - - - - 0x01D166 0E:D156: 85 A6
+	STA jumpBaseY                   ;C - - - - - 0x01D166 0E:D156: 85 A6
 loc_0E_D158:
 	RTS                             ;C - - - - - 0x01D168 0E:D158: 60
 loc_0E_D159:
@@ -2276,12 +2276,12 @@ loc_0E_D16D:
 loc_0E_D183:
 	LDA #$04                        ;c - - - - - 0x01D193 0E:D183: A9 04
 loc_0E_D185:
-	STA ram_00A7                    ;C - - - - - 0x01D195 0E:D185: 85 A7
+	STA attackType                  ;C - - - - - 0x01D195 0E:D185: 85 A7
 	JSR ArmTimerA4                  ;C - - - - - 0x01D197 0E:D187: 20 3B F4
 	LDA playerGroundY               ;C - - - - - 0x01D19A 0E:D18A: A5 36
-	STA ram_00A6                    ;C - - - - - 0x01D19C 0E:D18C: 85 A6
+	STA jumpBaseY                   ;C - - - - - 0x01D19C 0E:D18C: 85 A6
 loc_0E_D18E:
-	LDA ram_0035                    ;C - - - - - 0x01D19E 0E:D18E: A5 35
+	LDA actionStep                  ;C - - - - - 0x01D19E 0E:D18E: A5 35
 	BNE loc_0E_D1F3                 ;C - - - - - 0x01D1A0 0E:D190: D0 61
 	LDA objVelYHi                   ;C - - - - - 0x01D1A2 0E:D192: AD 30 04
 	BMI loc_0E_D158                 ;C - - - - - 0x01D1A5 0E:D195: 30 C1
@@ -2307,7 +2307,7 @@ ofs_0E_D1A5:
 	LDA tbl_0F_E22E,Y               ;C - - - - - 0x01D1D1 0E:D1C1: B9 2E E2
 	JSR SetChrBank2                 ;C - - - - - 0x01D1D4 0E:D1C4: 20 40 F4
 loc_0E_D1C7:
-	INC ram_0035                    ;C - - - - - 0x01D1D7 0E:D1C7: E6 35
+	INC actionStep                  ;C - - - - - 0x01D1D7 0E:D1C7: E6 35
 	LDA ptr_00                      ;C - - - - - 0x01D1D9 0E:D1C9: A5 00
 	STA ram_0032                    ;C - - - - - 0x01D1DB 0E:D1CB: 85 32
 	AND #$01                        ;C - - - - - 0x01D1DD 0E:D1CD: 29 01
@@ -2325,7 +2325,7 @@ loc_0E_D1C7:
 	CLC                             ;c - - - - - 0x01D1F5 0E:D1E5: 18
 	ADC #$F0                        ;c - - - - - 0x01D1F6 0E:D1E6: 69 F0
 	STA objX                        ;c - - - - - 0x01D1F8 0E:D1E8: 8D 60 03
-	LDA ram_002D                    ;c - - - - - 0x01D1FB 0E:D1EB: A5 2D
+	LDA worldXPage                  ;c - - - - - 0x01D1FB 0E:D1EB: A5 2D
 	ADC #$00                        ;c - - - - - 0x01D1FD 0E:D1ED: 69 00
 	STA objXPage                    ;c - - - - - 0x01D1FF 0E:D1EF: 8D 80 03
 	RTS                             ;c - - - - - 0x01D202 0E:D1F2: 60
@@ -2412,7 +2412,7 @@ loc_0E_D289:
 	CLC                             ;c - - - - - 0x01D2B3 0E:D2A3: 18
 	ADC #$F0                        ;c - - - - - 0x01D2B4 0E:D2A4: 69 F0
 	STA objX                        ;c - - - - - 0x01D2B6 0E:D2A6: 8D 60 03
-	LDA ram_002D                    ;c - - - - - 0x01D2B9 0E:D2A9: A5 2D
+	LDA worldXPage                  ;c - - - - - 0x01D2B9 0E:D2A9: A5 2D
 	ADC #$00                        ;c - - - - - 0x01D2BB 0E:D2AB: 69 00
 	STA objXPage                    ;c - - - - - 0x01D2BD 0E:D2AD: 8D 80 03
 	RTS                             ;c - - - - - 0x01D2C0 0E:D2B0: 60
@@ -2435,7 +2435,7 @@ loc_0E_D2BE:
 loc_0E_D2C8:
 	LDA #$00                        ;C - - - - - 0x01D2D8 0E:D2C8: A9 00
 	STA gameAction                  ;C - - - - - 0x01D2DA 0E:D2CA: 85 30
-	STA ram_0035                    ;C - - - - - 0x01D2DC 0E:D2CC: 85 35
+	STA actionStep                  ;C - - - - - 0x01D2DC 0E:D2CC: 85 35
 	STA timerA3                     ;C - - - - - 0x01D2DE 0E:D2CE: 85 A3
 	STA timerA4                     ;C - - - - - 0x01D2E0 0E:D2D0: 85 A4
 	STA playerInvincible            ;C - - - - - 0x01D2E2 0E:D2D2: 85 3B
@@ -2446,7 +2446,7 @@ loc_0E_D2C8:
 	JSR ResetPlayerStand            ;C - - - - - 0x01D2EF 0E:D2DF: 20 AA CE
 	LDY playerId                    ;C - - - - - 0x01D2F2 0E:D2E2: A4 34
 	LDA tbl_0F_E288,Y               ;C - - - - - 0x01D2F4 0E:D2E4: B9 88 E2
-	STA ram_006F                    ;C - - - - - 0x01D2F7 0E:D2E7: 85 6F
+	STA playerStandAnim             ;C - - - - - 0x01D2F7 0E:D2E7: 85 6F
 	RTS                             ;C - - - - - 0x01D2F9 0E:D2E9: 60
 loc_0E_D2EA:
 	DEC ram_00B3                    ;C - - - - - 0x01D2FA 0E:D2EA: C6 B3
@@ -2461,7 +2461,7 @@ loc_0E_D2F8:
 	LDA tbl_0F_E24C,Y               ;C - - - - - 0x01D30A 0E:D2FA: B9 4C E2
 	STA gameAction                  ;C - - - - - 0x01D30D 0E:D2FD: 85 30
 	LDA tbl_0F_FCC5,Y               ;C - - - - - 0x01D30F 0E:D2FF: B9 C5 FC
-	STA ram_006E                    ;C - - - - - 0x01D312 0E:D302: 85 6E
+	STA playerBusy                  ;C - - - - - 0x01D312 0E:D302: 85 6E
 	LDA #$80                        ;C - - - - - 0x01D314 0E:D304: A9 80
 	STA objActive                   ;C - - - - - 0x01D316 0E:D306: 8D 00 03
 	LDA objY                        ;C - - - - - 0x01D319 0E:D309: AD C0 03
@@ -2566,7 +2566,7 @@ loc_0E_D3C9:
 	BNE loc_0E_D3D7                 ;C - - - - - 0x01D3DE 0E:D3CE: D0 07
 	JSR ArmTimerA4                  ;C - - - - - 0x01D3E0 0E:D3D0: 20 3B F4
 	LDA #$08                        ;C - - - - - 0x01D3E3 0E:D3D3: A9 08
-	STA ram_00A7                    ;C - - - - - 0x01D3E5 0E:D3D5: 85 A7
+	STA attackType                  ;C - - - - - 0x01D3E5 0E:D3D5: 85 A7
 loc_0E_D3D7:
 	LDA objAnimFrame                ;C - - - - - 0x01D3E7 0E:D3D7: AD 70 05
 	CMP #$02                        ;C - - - - - 0x01D3EA 0E:D3DA: C9 02
@@ -2603,7 +2603,7 @@ loc_0E_D40E:
 	BNE loc_0E_D424                 ;C - - - - - 0x01D428 0E:D418: D0 0A
 	JSR ArmTimerA4                  ;C - - - - - 0x01D42A 0E:D41A: 20 3B F4
 	LDA #$06                        ;C - - - - - 0x01D42D 0E:D41D: A9 06
-	STA ram_00A7                    ;C - - - - - 0x01D42F 0E:D41F: 85 A7
+	STA attackType                  ;C - - - - - 0x01D42F 0E:D41F: 85 A7
 	JSR PlayHitSound                ;C - - - - - 0x01D431 0E:D421: 20 30 F4
 loc_0E_D424:
 	LDA objAnimFrame                ;C - - - - - 0x01D434 0E:D424: AD 70 05
@@ -2623,7 +2623,7 @@ loc_0E_D438:
 	STA actionTimer                 ;C - - - - - 0x01D451 0E:D441: 85 37
 	LDA #$80                        ;C - - - - - 0x01D453 0E:D443: A9 80
 	STA objActive                   ;C - - - - - 0x01D455 0E:D445: 8D 00 03
-	STA ram_006E                    ;C - - - - - 0x01D458 0E:D448: 85 6E
+	STA playerBusy                  ;C - - - - - 0x01D458 0E:D448: 85 6E
 	LDA objY                        ;C - - - - - 0x01D45A 0E:D44A: AD C0 03
 	STA playerGroundY               ;C - - - - - 0x01D45D 0E:D44D: 85 36
 	RTS                             ;C - - - - - 0x01D45F 0E:D44F: 60
@@ -2647,7 +2647,7 @@ loc_0E_D46F:
 loc_0E_D473:
 	LDA #$13                        ;C - - - - - 0x01D483 0E:D473: A9 13
 loc_0E_D475:
-	STA ram_006F                    ;C - - - - - 0x01D485 0E:D475: 85 6F
+	STA playerStandAnim             ;C - - - - - 0x01D485 0E:D475: 85 6F
 loc_0E_D477:
 	JSR StartAction0C               ;C - - - - - 0x01D487 0E:D477: 20 9A D7
 	JMP Act0C                       ;C - - - - - 0x01D48A 0E:D47A: 4C 6A DD
@@ -2693,7 +2693,7 @@ loc_0E_D4BE:
 loc_0E_D4C1:
 	JMP loc_0E_D5F3                 ;C - - - - - 0x01D4D1 0E:D4C1: 4C F3 D5
 loc_0E_D4C4:
-	LDY ram_0039                    ;c - - - - - 0x01D4D4 0E:D4C4: A4 39
+	LDY grabbedSlot                 ;c - - - - - 0x01D4D4 0E:D4C4: A4 39
 	LDA objY                        ;c - - - - - 0x01D4D6 0E:D4C6: AD C0 03
 	STA objY,Y                      ;c - - - - - 0x01D4D9 0E:D4C9: 99 C0 03
 	JMP loc_0E_D88C                 ;c - - - - - 0x01D4DC 0E:D4CC: 4C 8C D8
@@ -2801,7 +2801,7 @@ loc_0E_D58D:
 	BNE loc_0E_D5A3                 ;C - - - - - 0x01D5A7 0E:D597: D0 0A
 	JSR ArmTimerA4                  ;C - - - - - 0x01D5A9 0E:D599: 20 3B F4
 	LDA #$06                        ;C - - - - - 0x01D5AC 0E:D59C: A9 06
-	STA ram_00A7                    ;C - - - - - 0x01D5AE 0E:D59E: 85 A7
+	STA attackType                  ;C - - - - - 0x01D5AE 0E:D59E: 85 A7
 	JSR PlayHitSound                ;C - - - - - 0x01D5B0 0E:D5A0: 20 30 F4
 loc_0E_D5A3:
 	LDA objAnimFrame                ;C - - - - - 0x01D5B3 0E:D5A3: AD 70 05
@@ -2815,7 +2815,7 @@ loc_0E_D5AD:
 	JMP loc_0E_D61F                 ;C - - - - - 0x01D5C4 0E:D5B4: 4C 1F D6
 loc_0E_D5B7:
 	LDA #$80                        ;C - - - - - 0x01D5C7 0E:D5B7: A9 80
-	STA ram_006E                    ;C - - - - - 0x01D5C9 0E:D5B9: 85 6E
+	STA playerBusy                  ;C - - - - - 0x01D5C9 0E:D5B9: 85 6E
 	LDA objAnimFrame                ;C - - - - - 0x01D5CB 0E:D5BB: AD 70 05
 	CMP #$04                        ;C - - - - - 0x01D5CE 0E:D5BE: C9 04
 	BNE loc_0E_D5D1                 ;C - - - - - 0x01D5D0 0E:D5C0: D0 0F
@@ -2823,7 +2823,7 @@ loc_0E_D5B7:
 	BNE loc_0E_D5D1                 ;C - - - - - 0x01D5D5 0E:D5C5: D0 0A
 	JSR ArmTimerA4                  ;C - - - - - 0x01D5D7 0E:D5C7: 20 3B F4
 	LDA #$01                        ;C - - - - - 0x01D5DA 0E:D5CA: A9 01
-	STA ram_00A7                    ;C - - - - - 0x01D5DC 0E:D5CC: 85 A7
+	STA attackType                  ;C - - - - - 0x01D5DC 0E:D5CC: 85 A7
 	JSR PlayHitSound                ;C - - - - - 0x01D5DE 0E:D5CE: 20 30 F4
 loc_0E_D5D1:
 	LDA objAnimFrame                ;C - - - - - 0x01D5E1 0E:D5D1: AD 70 05
@@ -2882,7 +2882,7 @@ loc_0E_D633:
 loc_0E_D637:
 	LDA #$14                        ;C - - - - - 0x01D647 0E:D637: A9 14
 loc_0E_D639:
-	STA ram_006F                    ;C - - - - - 0x01D649 0E:D639: 85 6F
+	STA playerStandAnim             ;C - - - - - 0x01D649 0E:D639: 85 6F
 	JSR StartAction0C               ;C - - - - - 0x01D64B 0E:D63B: 20 9A D7
 	JMP Act0C                       ;C - - - - - 0x01D64E 0E:D63E: 4C 6A DD
 ofs_0E_D641:
@@ -2916,7 +2916,7 @@ loc_0E_D66A:
 	BNE loc_0E_D680                 ;C - - - - - 0x01D684 0E:D674: D0 0A
 	JSR ArmTimerA4                  ;C - - - - - 0x01D686 0E:D676: 20 3B F4
 	LDA #$0B                        ;C - - - - - 0x01D689 0E:D679: A9 0B
-	STA ram_00A7                    ;C - - - - - 0x01D68B 0E:D67B: 85 A7
+	STA attackType                  ;C - - - - - 0x01D68B 0E:D67B: 85 A7
 	JSR PlayHitSound                ;C - - - - - 0x01D68D 0E:D67D: 20 30 F4
 loc_0E_D680:
 	LDA objAnimFrame                ;C - - - - - 0x01D690 0E:D680: AD 70 05
@@ -2946,7 +2946,7 @@ loc_0E_D6A6:
 	BNE loc_0E_D6BC                 ;C - - - - - 0x01D6C0 0E:D6B0: D0 0A
 	JSR ArmTimerA4                  ;C - - - - - 0x01D6C2 0E:D6B2: 20 3B F4
 	LDA #$0B                        ;C - - - - - 0x01D6C5 0E:D6B5: A9 0B
-	STA ram_00A7                    ;C - - - - - 0x01D6C7 0E:D6B7: 85 A7
+	STA attackType                  ;C - - - - - 0x01D6C7 0E:D6B7: 85 A7
 	JSR PlayHitSound                ;C - - - - - 0x01D6C9 0E:D6B9: 20 30 F4
 loc_0E_D6BC:
 	LDA objAnimFrame                ;C - - - - - 0x01D6CC 0E:D6BC: AD 70 05
@@ -2975,7 +2975,7 @@ loc_0E_D6E0:
 	BNE loc_0E_D6F6                 ;C - - - - - 0x01D6FA 0E:D6EA: D0 0A
 	JSR ArmTimerA4                  ;C - - - - - 0x01D6FC 0E:D6EC: 20 3B F4
 	LDA #$0C                        ;C - - - - - 0x01D6FF 0E:D6EF: A9 0C
-	STA ram_00A7                    ;C - - - - - 0x01D701 0E:D6F1: 85 A7
+	STA attackType                  ;C - - - - - 0x01D701 0E:D6F1: 85 A7
 	JSR PlayHitSound                ;C - - - - - 0x01D703 0E:D6F3: 20 30 F4
 loc_0E_D6F6:
 	LDA objAnimFrame                ;C - - - - - 0x01D706 0E:D6F6: AD 70 05
@@ -2995,9 +2995,9 @@ loc_0E_D70A:
 	BNE loc_0E_D724                 ;C - - - - - 0x01D724 0E:D714: D0 0E
 	JSR ArmTimerA4                  ;C - - - - - 0x01D726 0E:D716: 20 3B F4
 	LDA #$0D                        ;C - - - - - 0x01D729 0E:D719: A9 0D
-	STA ram_00A7                    ;C - - - - - 0x01D72B 0E:D71B: 85 A7
+	STA attackType                  ;C - - - - - 0x01D72B 0E:D71B: 85 A7
 	LDA playerGroundY               ;C - - - - - 0x01D72D 0E:D71D: A5 36
-	STA ram_00A6                    ;C - - - - - 0x01D72F 0E:D71F: 85 A6
+	STA jumpBaseY                   ;C - - - - - 0x01D72F 0E:D71F: 85 A6
 	JSR PlayHitSound                ;C - - - - - 0x01D731 0E:D721: 20 30 F4
 loc_0E_D724:
 	LDA objAnimFrame                ;C - - - - - 0x01D734 0E:D724: AD 70 05
@@ -3012,7 +3012,7 @@ loc_0E_D72E:
 	STA playerGroundY               ;c - - - - - 0x01D748 0E:D738: 85 36
 loc_0E_D73A:
 	LDA #$80                        ;C - - - - - 0x01D74A 0E:D73A: A9 80
-	STA ram_006E                    ;C - - - - - 0x01D74C 0E:D73C: 85 6E
+	STA playerBusy                  ;C - - - - - 0x01D74C 0E:D73C: 85 6E
 	LDY #$02                        ;C - - - - - 0x01D74E 0E:D73E: A0 02
 	JSR MoveYGravityCheck           ;C - - - - - 0x01D750 0E:D740: 20 19 F1
 	LDA objVelYHi                   ;C - - - - - 0x01D753 0E:D743: AD 30 04
@@ -3060,7 +3060,7 @@ loc_0E_D78C:
 loc_0E_D790:
 	LDA #$15                        ;C - - - - - 0x01D7A0 0E:D790: A9 15
 loc_0E_D792:
-	STA ram_006F                    ;C - - - - - 0x01D7A2 0E:D792: 85 6F
+	STA playerStandAnim             ;C - - - - - 0x01D7A2 0E:D792: 85 6F
 	JSR StartAction0C               ;C - - - - - 0x01D7A4 0E:D794: 20 9A D7
 	JMP Act0C                       ;C - - - - - 0x01D7A7 0E:D797: 4C 6A DD
 StartAction0C:
@@ -3087,7 +3087,7 @@ ofs_0E_D7B8:
 	LDA padPressed                  ;C - - J - - 0x01D7C8 0E:D7B8: A5 14
 	CMP #$40                        ;C - - - - - 0x01D7CA 0E:D7BA: C9 40
 	BNE loc_0E_D82E                 ;C - - - - - 0x01D7CC 0E:D7BC: D0 70
-	LDY ram_0039                    ;C - - - - - 0x01D7CE 0E:D7BE: A4 39
+	LDY grabbedSlot                 ;C - - - - - 0x01D7CE 0E:D7BE: A4 39
 	LDA padHeld                     ;C - - - - - 0x01D7D0 0E:D7C0: A5 16
 	AND #$0F                        ;C - - - - - 0x01D7D2 0E:D7C2: 29 0F
 	BEQ loc_0E_D829                 ;C - - - - - 0x01D7D4 0E:D7C4: F0 63
@@ -3115,8 +3115,8 @@ loc_0E_D7EB:
 	JSR SetPlayerAnim               ;C - - - - - 0x01D7FF 0E:D7EF: 20 94 F2
 loc_0E_D7F2:
 	LDA #$80                        ;C - - - - - 0x01D802 0E:D7F2: A9 80
-	STA ram_006E                    ;C - - - - - 0x01D804 0E:D7F4: 85 6E
-	LDY ram_0039                    ;C - - - - - 0x01D806 0E:D7F6: A4 39
+	STA playerBusy                  ;C - - - - - 0x01D804 0E:D7F4: 85 6E
+	LDY grabbedSlot                 ;C - - - - - 0x01D806 0E:D7F6: A4 39
 	LDA #$04                        ;C - - - - - 0x01D808 0E:D7F8: A9 04
 	STA objKind,Y                   ;C - - - - - 0x01D80A 0E:D7FA: 99 20 03
 	LDA #$80                        ;C - - - - - 0x01D80D 0E:D7FD: A9 80
@@ -3158,7 +3158,7 @@ loc_0E_D83B:
 	STA ram_00B3                    ;C - - - - - 0x01D84F 0E:D83F: 85 B3
 	STA ram_00BA                    ;C - - - - - 0x01D851 0E:D841: 85 BA
 	LDA #$FF                        ;C - - - - - 0x01D853 0E:D843: A9 FF
-	LDY ram_0039                    ;C - - - - - 0x01D855 0E:D845: A4 39
+	LDY grabbedSlot                 ;C - - - - - 0x01D855 0E:D845: A4 39
 	STA objGrabState,Y              ;C - - - - - 0x01D857 0E:D847: 99 F0 03
 	JSR ResetPlayerStand            ;C - - - - - 0x01D85A 0E:D84A: 20 AA CE
 	RTS                             ;C - - - - - 0x01D85D 0E:D84D: 60
@@ -3176,13 +3176,13 @@ loc_0E_D84E:
 	STA ram_0038                    ;C - - - - - 0x01D878 0E:D868: 85 38
 	STA ram_00BA                    ;C - - - - - 0x01D87A 0E:D86A: 85 BA
 	LDA #$FF                        ;C - - - - - 0x01D87C 0E:D86C: A9 FF
-	LDY ram_0039                    ;C - - - - - 0x01D87E 0E:D86E: A4 39
+	LDY grabbedSlot                 ;C - - - - - 0x01D87E 0E:D86E: A4 39
 	STA objGrabState,Y              ;C - - - - - 0x01D880 0E:D870: 99 F0 03
 	LDA #$01                        ;C - - - - - 0x01D883 0E:D873: A9 01
 	STA gameAction                  ;C - - - - - 0x01D885 0E:D875: 85 30
 	LDA objY                        ;C - - - - - 0x01D887 0E:D877: AD C0 03
 	STA playerGroundY               ;C - - - - - 0x01D88A 0E:D87A: 85 36
-	STA ram_00A6                    ;C - - - - - 0x01D88C 0E:D87C: 85 A6
+	STA jumpBaseY                   ;C - - - - - 0x01D88C 0E:D87C: 85 A6
 	LDA #$1B                        ;C - - - - - 0x01D88E 0E:D87E: A9 1B
 	JSR QueueSound                  ;C - - - - - 0x01D890 0E:D880: 20 4C F3
 	JMP Act01_Jump                  ;C - - - - - 0x01D893 0E:D883: 4C 88 CF
@@ -3192,7 +3192,7 @@ ofs_0E_D886:
 	BNE loc_0E_D82E                 ;C - - - - - 0x01D89A 0E:D88A: D0 A2
 loc_0E_D88C:
 	LDA #$80                        ;C - - - - - 0x01D89C 0E:D88C: A9 80
-	STA ram_006E                    ;C - - - - - 0x01D89E 0E:D88E: 85 6E
+	STA playerBusy                  ;C - - - - - 0x01D89E 0E:D88E: 85 6E
 	LDA #$13                        ;C - - - - - 0x01D8A0 0E:D890: A9 13
 	STA gameAction                  ;C - - - - - 0x01D8A2 0E:D892: 85 30
 	LDA #$80                        ;C - - - - - 0x01D8A4 0E:D894: A9 80
@@ -3206,7 +3206,7 @@ ofs_0E_D89A:
 	STA playerGroundY               ;C - - - - - 0x01D8B3 0E:D8A3: 85 36
 	JMP loc_0E_D8E5                 ;C - - - - - 0x01D8B5 0E:D8A5: 4C E5 D8
 loc_0E_D8A8:
-	LDY ram_0039                    ;C - - - - - 0x01D8B8 0E:D8A8: A4 39
+	LDY grabbedSlot                 ;C - - - - - 0x01D8B8 0E:D8A8: A4 39
 	LDA #$15                        ;C - - - - - 0x01D8BA 0E:D8AA: A9 15
 	STA gameAction                  ;C - - - - - 0x01D8BC 0E:D8AC: 85 30
 	LDA #$80                        ;C - - - - - 0x01D8BE 0E:D8AE: A9 80
@@ -3214,7 +3214,7 @@ loc_0E_D8A8:
 	STA objActive,Y                 ;C - - - - - 0x01D8C3 0E:D8B3: 99 00 03
 	RTS                             ;C - - - - - 0x01D8C6 0E:D8B6: 60
 loc_0E_D8B7:
-	LDY ram_0039                    ;C - - - - - 0x01D8C7 0E:D8B7: A4 39
+	LDY grabbedSlot                 ;C - - - - - 0x01D8C7 0E:D8B7: A4 39
 	LDA #$80                        ;C - - - - - 0x01D8C9 0E:D8B9: A9 80
 	STA objActive,Y                 ;C - - - - - 0x01D8CB 0E:D8BB: 99 00 03
 	LDA #$12                        ;C - - - - - 0x01D8CE 0E:D8BE: A9 12
@@ -3231,7 +3231,7 @@ loc_0E_D8B7:
 	STA objVelXHi                   ;C - - - - - 0x01D8E7 0E:D8D7: 8D 10 04
 	LDA objY                        ;C - - - - - 0x01D8EA 0E:D8DA: AD C0 03
 	STA playerGroundY               ;C - - - - - 0x01D8ED 0E:D8DD: 85 36
-	STA ram_00A6                    ;C - - - - - 0x01D8EF 0E:D8DF: 85 A6
+	STA jumpBaseY                   ;C - - - - - 0x01D8EF 0E:D8DF: 85 A6
 	RTS                             ;C - - - - - 0x01D8F1 0E:D8E1: 60
 loc_0E_D8E2:
 	JMP loc_0E_D83B                 ;C - - - - - 0x01D8F2 0E:D8E2: 4C 3B D8
@@ -3259,7 +3259,7 @@ loc_0E_D900:
 	LDY #$00                        ;C - - - - - 0x01D91F 0E:D90F: A0 00
 	JSR MoveRightCheck              ;C - - - - - 0x01D921 0E:D911: 20 03 F0
 	BCS loc_0E_D959                 ;C - - - - - 0x01D924 0E:D914: B0 43
-	LDY ram_0039                    ;C - - - - - 0x01D926 0E:D916: A4 39
+	LDY grabbedSlot                 ;C - - - - - 0x01D926 0E:D916: A4 39
 	LDA playerFacing                ;C - - - - - 0x01D928 0E:D918: A5 31
 	CMP #$01                        ;C - - - - - 0x01D92A 0E:D91A: C9 01
 	BEQ loc_0E_D930                 ;C - - - - - 0x01D92C 0E:D91C: F0 12
@@ -3297,7 +3297,7 @@ loc_0E_D95C:
 	LDY #$01                        ;C - - - - - 0x01D96C 0E:D95C: A0 01
 	JSR MoveLeftCheck               ;C - - - - - 0x01D96E 0E:D95E: 20 54 F0
 	BCS loc_0E_D9A3                 ;C - - - - - 0x01D971 0E:D961: B0 40
-	LDY ram_0039                    ;C - - - - - 0x01D973 0E:D963: A4 39
+	LDY grabbedSlot                 ;C - - - - - 0x01D973 0E:D963: A4 39
 	LDA playerFacing                ;C - - - - - 0x01D975 0E:D965: A5 31
 	CMP #$01                        ;C - - - - - 0x01D977 0E:D967: C9 01
 	BEQ loc_0E_D97A                 ;C - - - - - 0x01D979 0E:D969: F0 0F
@@ -3337,7 +3337,7 @@ loc_0E_D9A3:
 	LDY #$02                        ;C - - - - - 0x01D9BF 0E:D9AF: A0 02
 	JSR MoveYAddCheck               ;C - - - - - 0x01D9C1 0E:D9B1: 20 A2 F0
 	BCS loc_0E_D9E9                 ;C - - - - - 0x01D9C4 0E:D9B4: B0 33
-	LDY ram_0039                    ;C - - - - - 0x01D9C6 0E:D9B6: A4 39
+	LDY grabbedSlot                 ;C - - - - - 0x01D9C6 0E:D9B6: A4 39
 	LDA objYFrac,Y                  ;C - - - - - 0x01D9C8 0E:D9B8: B9 A0 03
 	CLC                             ;C - - - - - 0x01D9CB 0E:D9BB: 18
 	ADC objVelYLo                   ;C - - - - - 0x01D9CC 0E:D9BC: 6D 20 04
@@ -3355,7 +3355,7 @@ loc_0E_D9D7:
 	LDY #$03                        ;C - - - - - 0x01D9E7 0E:D9D7: A0 03
 	JSR MoveYSubCheck               ;C - - - - - 0x01D9E9 0E:D9D9: 20 F7 F0
 	BCS loc_0E_D9E9                 ;C - - - - - 0x01D9EC 0E:D9DC: B0 0B
-	LDY ram_0039                    ;C - - - - - 0x01D9EE 0E:D9DE: A4 39
+	LDY grabbedSlot                 ;C - - - - - 0x01D9EE 0E:D9DE: A4 39
 	LDA objY                        ;C - - - - - 0x01D9F0 0E:D9E0: AD C0 03
 	SEC                             ;C - - - - - 0x01D9F3 0E:D9E3: 38
 	SBC #$08                        ;C - - - - - 0x01D9F4 0E:D9E4: E9 08
@@ -3392,13 +3392,13 @@ loc_0E_DA03:
 	STA ram_0038                    ;C - - - - - 0x01DA35 0E:DA25: 85 38
 	STA gameAction                  ;C - - - - - 0x01DA37 0E:DA27: 85 30
 	STA timerA3                     ;C - - - - - 0x01DA39 0E:DA29: 85 A3
-	STA ram_0035                    ;C - - - - - 0x01DA3B 0E:DA2B: 85 35
+	STA actionStep                  ;C - - - - - 0x01DA3B 0E:DA2B: 85 35
 	STA ram_00BA                    ;C - - - - - 0x01DA3D 0E:DA2D: 85 BA
 	STA playerInvincible            ;C - - - - - 0x01DA3F 0E:DA2F: 85 3B
 	JSR ResetPlayerStand            ;C - - - - - 0x01DA41 0E:DA31: 20 AA CE
 	LDY playerId                    ;C - - - - - 0x01DA44 0E:DA34: A4 34
 	LDA tbl_0F_E288,Y               ;C - - - - - 0x01DA46 0E:DA36: B9 88 E2
-	STA ram_006F                    ;C - - - - - 0x01DA49 0E:DA39: 85 6F
+	STA playerStandAnim             ;C - - - - - 0x01DA49 0E:DA39: 85 6F
 	RTS                             ;C - - - - - 0x01DA4B 0E:DA3B: 60
 loc_0E_DA3C:
 	DEC playerInvincible            ;C - - - - - 0x01DA4C 0E:DA3C: C6 3B
@@ -3460,7 +3460,7 @@ loc_0E_DA90:
 	CLC                             ;C - - - - - 0x01DAC2 0E:DAB2: 18
 	ADC #$E8                        ;C - - - - - 0x01DAC3 0E:DAB3: 69 E8
 	STA objX                        ;C - - - - - 0x01DAC5 0E:DAB5: 8D 60 03
-	LDA ram_002D                    ;C - - - - - 0x01DAC8 0E:DAB8: A5 2D
+	LDA worldXPage                  ;C - - - - - 0x01DAC8 0E:DAB8: A5 2D
 	ADC #$00                        ;C - - - - - 0x01DACA 0E:DABA: 69 00
 	STA objXPage                    ;C - - - - - 0x01DACC 0E:DABC: 8D 80 03
 loc_0E_DABF:
@@ -3491,7 +3491,7 @@ loc_0E_DACE:
 	CLC                             ;C - - - - - 0x01DAFD 0E:DAED: 18
 	ADC #$19                        ;C - - - - - 0x01DAFE 0E:DAEE: 69 19
 	STA objX                        ;C - - - - - 0x01DB00 0E:DAF0: 8D 60 03
-	LDA ram_002D                    ;C - - - - - 0x01DB03 0E:DAF3: A5 2D
+	LDA worldXPage                  ;C - - - - - 0x01DB03 0E:DAF3: A5 2D
 	ADC #$00                        ;C - - - - - 0x01DB05 0E:DAF5: 69 00
 	STA objXPage                    ;C - - - - - 0x01DB07 0E:DAF7: 8D 80 03
 loc_0E_DAFA:
@@ -3567,7 +3567,7 @@ loc_0E_DB6C:
 	CLC                             ;C - - - - - 0x01DB9A 0E:DB8A: 18
 	ADC #$E9                        ;C - - - - - 0x01DB9B 0E:DB8B: 69 E9
 	STA objX                        ;C - - - - - 0x01DB9D 0E:DB8D: 8D 60 03
-	LDA ram_002D                    ;C - - - - - 0x01DBA0 0E:DB90: A5 2D
+	LDA worldXPage                  ;C - - - - - 0x01DBA0 0E:DB90: A5 2D
 	ADC #$00                        ;C - - - - - 0x01DBA2 0E:DB92: 69 00
 	STA objXPage                    ;C - - - - - 0x01DBA4 0E:DB94: 8D 80 03
 loc_0E_DB97:
@@ -3594,7 +3594,7 @@ loc_0E_DBA3:
 	CLC                             ;c - - - - - 0x01DBCE 0E:DBBE: 18
 	ADC #$19                        ;c - - - - - 0x01DBCF 0E:DBBF: 69 19
 	STA objX                        ;c - - - - - 0x01DBD1 0E:DBC1: 8D 60 03
-	LDA ram_002D                    ;c - - - - - 0x01DBD4 0E:DBC4: A5 2D
+	LDA worldXPage                  ;c - - - - - 0x01DBD4 0E:DBC4: A5 2D
 	ADC #$00                        ;c - - - - - 0x01DBD6 0E:DBC6: 69 00
 	STA objXPage                    ;c - - - - - 0x01DBD8 0E:DBC8: 8D 80 03
 loc_0E_DBCB:
@@ -3638,7 +3638,7 @@ loc_0E_DBFD:
 	LDA #$00                        ;C - - - - - 0x01DC28 0E:DC18: A9 00
 	STA objStep                     ;C - - - - - 0x01DC2A 0E:DC1A: 8D 00 05
 	STA timerA4                     ;C - - - - - 0x01DC2D 0E:DC1D: 85 A4
-	STA ram_00A6                    ;C - - - - - 0x01DC2F 0E:DC1F: 85 A6
+	STA jumpBaseY                   ;C - - - - - 0x01DC2F 0E:DC1F: 85 A6
 	LDA playerFacing                ;C - - - - - 0x01DC31 0E:DC21: A5 31
 	STA ram_0032                    ;C - - - - - 0x01DC33 0E:DC23: 85 32
 	JSR ClampPlayerGroundY          ;C - - - - - 0x01DC35 0E:DC25: 20 29 DC
@@ -3747,7 +3747,7 @@ Act0B_Death:
 loc_0E_DCF0:
 	LDA #$00                        ;C - - - - - 0x01DD00 0E:DCF0: A9 00
 	STA gameAction                  ;C - - - - - 0x01DD02 0E:DCF2: 85 30
-	STA ram_0035                    ;C - - - - - 0x01DD04 0E:DCF4: 85 35
+	STA actionStep                  ;C - - - - - 0x01DD04 0E:DCF4: 85 35
 	STA timerA4                     ;C - - - - - 0x01DD06 0E:DCF6: 85 A4
 	STA timerA3                     ;C - - - - - 0x01DD08 0E:DCF8: 85 A3
 	STA ram_00B3                    ;C - - - - - 0x01DD0A 0E:DCFA: 85 B3
@@ -3774,7 +3774,7 @@ loc_0E_DD1F:
 loc_0E_DD25:
 	LDY playerId                    ;C - - - - - 0x01DD35 0E:DD25: A4 34
 	LDA tbl_0F_E288,Y               ;C - - - - - 0x01DD37 0E:DD27: B9 88 E2
-	STA ram_006F                    ;C - - - - - 0x01DD3A 0E:DD2A: 85 6F
+	STA playerStandAnim             ;C - - - - - 0x01DD3A 0E:DD2A: 85 6F
 	RTS                             ;C - - - - - 0x01DD3C 0E:DD2C: 60
 loc_0E_DD2D:
 	LDA actionTimer                 ;C - - - - - 0x01DD3D 0E:DD2D: A5 37
@@ -3836,7 +3836,7 @@ loc_0E_DD8E:
 	LDA objAnim                     ;C - - - - - 0x01DD9E 0E:DD8E: AD 80 05
 	CMP #$45                        ;C - - - - - 0x01DDA1 0E:DD91: C9 45
 	BEQ loc_0E_DD9D                 ;C - - - - - 0x01DDA3 0E:DD93: F0 08
-	LDA ram_006F                    ;C - - - - - 0x01DDA5 0E:DD95: A5 6F
+	LDA playerStandAnim             ;C - - - - - 0x01DDA5 0E:DD95: A5 6F
 	CMP #$16                        ;C - - - - - 0x01DDA7 0E:DD97: C9 16
 	BEQ loc_0E_DD9D                 ;C - - - - - 0x01DDA9 0E:DD99: F0 02
 	BNE loc_0E_DDC4                 ;C - - - - - 0x01DDAB 0E:DD9B: D0 27
@@ -3881,7 +3881,7 @@ ofs_0E_DDD3:
 	STA gameAction                  ;C - - - - - 0x01DDEF 0E:DDDF: 85 30
 	RTS                             ;C - - - - - 0x01DDF1 0E:DDE1: 60
 loc_0E_DDE2:
-	LDA ram_006F                    ;C - - - - - 0x01DDF2 0E:DDE2: A5 6F
+	LDA playerStandAnim             ;C - - - - - 0x01DDF2 0E:DDE2: A5 6F
 	CMP #$17                        ;C - - - - - 0x01DDF4 0E:DDE4: C9 17
 	BEQ loc_0E_DDEA                 ;C - - - - - 0x01DDF6 0E:DDE6: F0 02
 	BNE loc_0E_DDC4                 ;C - - - - - 0x01DDF8 0E:DDE8: D0 DA
@@ -3907,7 +3907,7 @@ ofs_0E_DDFF:
 	STA gameAction                  ;C - - - - - 0x01DE1B 0E:DE0B: 85 30
 	RTS                             ;C - - - - - 0x01DE1D 0E:DE0D: 60
 loc_0E_DE0E:
-	LDA ram_006F                    ;C - - - - - 0x01DE1E 0E:DE0E: A5 6F
+	LDA playerStandAnim             ;C - - - - - 0x01DE1E 0E:DE0E: A5 6F
 	CMP #$18                        ;C - - - - - 0x01DE20 0E:DE10: C9 18
 	BEQ loc_0E_DE16                 ;C - - - - - 0x01DE22 0E:DE12: F0 02
 	BNE loc_0E_DDC4                 ;C - - - - - 0x01DE24 0E:DE14: D0 AE
@@ -3959,7 +3959,7 @@ Act07_SelectScreen:
 	LDA #$00                        ;C - - J - - 0x01DE6E 0E:DE5E: A9 00
 	STA vramQueueEnd                ;C D 2 - I - 0x01DE70 0E:DE60: 85 65
 	STA vramQueueFlag               ;C - - - - - 0x01DE72 0E:DE62: 85 64
-	STA ram_00B0                    ;C - - - - - 0x01DE74 0E:DE64: 85 B0
+	STA hudEnemySlot                ;C - - - - - 0x01DE74 0E:DE64: 85 B0
 	STA scrollX                     ;C - - - - - 0x01DE76 0E:DE66: 85 FC
 	STA scrollY                     ;C - - - - - 0x01DE78 0E:DE68: 85 FA
 	STA nametableSelect             ;C - - - - - 0x01DE7A 0E:DE6A: 85 FD
@@ -3978,7 +3978,7 @@ Act07_SelectScreen:
 loc_0E_DE88:
 	JMP loc_0E_DF50                 ;C - - - - - 0x01DE98 0E:DE88: 4C 50 DF
 loc_0E_DE8B:
-	INC ram_0067                    ;C - - - - - 0x01DE9B 0E:DE8B: E6 67
+	INC enemyLevelIdx               ;C - - - - - 0x01DE9B 0E:DE8B: E6 67
 	INC stageSection                ;C - - - - - 0x01DE9D 0E:DE8D: E6 60
 	LDA stageSection                ;C - - - - - 0x01DE9F 0E:DE8F: A5 60
 	CMP #$03                        ;C - - - - - 0x01DEA1 0E:DE91: C9 03
@@ -3992,11 +3992,11 @@ loc_0E_DE8B:
 	LDA #$08                        ;C - - - - - 0x01DEB1 0E:DEA1: A9 08
 	JSR QueueSoundSaved             ;C - - - - - 0x01DEB3 0E:DEA3: 20 4A F3
 	LDA #$FF                        ;C - - - - - 0x01DEB6 0E:DEA6: A9 FF
-	STA ram_0098                    ;C - - - - - 0x01DEB8 0E:DEA8: 85 98
+	STA irqActive                   ;C - - - - - 0x01DEB8 0E:DEA8: 85 98
 	STA ram_00B7                    ;C - - - - - 0x01DEBA 0E:DEAA: 85 B7
 	CLI                             ;C - - - - - 0x01DEBC 0E:DEAC: 58
 	LDA #$00                        ;C - - - - - 0x01DEBD 0E:DEAD: A9 00
-	STA ram_009B                    ;C - - - - - 0x01DEBF 0E:DEAF: 85 9B
+	STA irqEnableIdx                ;C - - - - - 0x01DEBF 0E:DEAF: 85 9B
 	JSR ClearScreenSetBank04        ;C - - - - - 0x01DEC1 0E:DEB1: 20 A6 C8
 	LDX #$06                        ;C - - - - - 0x01DEC4 0E:DEB4: A2 06
 	JSR QueueVramScript             ;C - - - - - bank=04 0x01DEC6 0E:DEB6: 20 00 80
@@ -4008,7 +4008,7 @@ loc_0E_DE8B:
 	STX prgBankA000                 ;C - - - - - 0x01DED4 0E:DEC4: 86 F5
 	JSR SetPrgBanks                 ;C - - - - - 0x01DED6 0E:DEC6: 20 4D FF
 	LDA #$05                        ;C - - - - - 0x01DED9 0E:DEC9: A9 05
-	STA ram_00B8                    ;C - - - - - 0x01DEDB 0E:DECB: 85 B8
+	STA textScriptIdx               ;C - - - - - 0x01DEDB 0E:DECB: 85 B8
 	JSR RunTextScript_00            ;C - - - - - bank=00 0x01DEDD 0E:DECD: 20 00 9A
 	LDA #$00                        ;C - - - - - 0x01DEE0 0E:DED0: A9 00
 	STA renderOffCount              ;C - - - - - 0x01DEE2 0E:DED2: 85 EE
@@ -4029,7 +4029,7 @@ loc_0E_DE8B:
 	STX prgBankA000                 ;C - - - - - 0x01DF07 0E:DEF7: 86 F5
 	JSR SetPrgBanks                 ;C - - - - - 0x01DF09 0E:DEF9: 20 4D FF
 	LDA #$06                        ;C - - - - - 0x01DF0C 0E:DEFC: A9 06
-	STA ram_00B8                    ;C - - - - - 0x01DF0E 0E:DEFE: 85 B8
+	STA textScriptIdx               ;C - - - - - 0x01DF0E 0E:DEFE: 85 B8
 	JSR RunTextScript_00            ;C - - - - - bank=00 0x01DF10 0E:DF00: 20 00 9A
 	LDA ram_0150                    ;C - - - - - 0x01DF13 0E:DF03: AD 50 01
 	BNE loc_0E_DF4D                 ;C - - - - - 0x01DF16 0E:DF06: D0 45
@@ -4050,15 +4050,15 @@ loc_0E_DE8B:
 	STX prgBankA000                 ;C - - - - - 0x01DF3A 0E:DF2A: 86 F5
 	JSR SetPrgBanks                 ;C - - - - - 0x01DF3C 0E:DF2C: 20 4D FF
 	LDA #$00                        ;C - - - - - 0x01DF3F 0E:DF2F: A9 00
-	STA ram_00B8                    ;C - - - - - 0x01DF41 0E:DF31: 85 B8
+	STA textScriptIdx               ;C - - - - - 0x01DF41 0E:DF31: 85 B8
 	JSR RunTextScript_09            ;C - - - - - bank=09 0x01DF43 0E:DF33: 20 00 A7
-	INC ram_00B8                    ;C - - - - - 0x01DF46 0E:DF36: E6 B8
+	INC textScriptIdx               ;C - - - - - 0x01DF46 0E:DF36: E6 B8
 	JSR RunTextScript_09            ;C - - - - - bank=09 0x01DF48 0E:DF38: 20 00 A7
-	INC ram_00B8                    ;C - - - - - 0x01DF4B 0E:DF3B: E6 B8
+	INC textScriptIdx               ;C - - - - - 0x01DF4B 0E:DF3B: E6 B8
 	JSR RunTextScript_09            ;C - - - - - bank=09 0x01DF4D 0E:DF3D: 20 00 A7
-	INC ram_00B8                    ;C - - - - - 0x01DF50 0E:DF40: E6 B8
+	INC textScriptIdx               ;C - - - - - 0x01DF50 0E:DF40: E6 B8
 	JSR RunTextScript_09            ;C - - - - - bank=09 0x01DF52 0E:DF42: 20 00 A7
-	INC ram_00B8                    ;C - - - - - 0x01DF55 0E:DF45: E6 B8
+	INC textScriptIdx               ;C - - - - - 0x01DF55 0E:DF45: E6 B8
 	JSR RunTextScript_09            ;C - - - - - bank=09 0x01DF57 0E:DF47: 20 00 A7
 	JSR InitEndingPlayerObj         ;C - - - - - bank=09 0x01DF5A 0E:DF4A: 20 00 AB
 loc_0E_DF4D:
@@ -4078,12 +4078,12 @@ loc_0E_DF50:
 	LDA stage                       ;C - - - - - 0x01DF76 0E:DF66: A5 61
 	BNE loc_0E_DF70                 ;C - - - - - 0x01DF78 0E:DF68: D0 06
 	LDA #$00                        ;C - - - - - 0x01DF7A 0E:DF6A: A9 00
-	STA ram_0067                    ;C - - - - - 0x01DF7C 0E:DF6C: 85 67
+	STA enemyLevelIdx               ;C - - - - - 0x01DF7C 0E:DF6C: 85 67
 	BEQ loc_0E_DF77                 ;C - - - - - 0x01DF7E 0E:DF6E: F0 07
 loc_0E_DF70:
 	LDY stage                       ;C - - - - - 0x01DF80 0E:DF70: A4 61
 	LDA tbl_0F_E161,Y               ;C - - - - - 0x01DF82 0E:DF72: B9 61 E1
-	STA ram_0067                    ;C - - - - - 0x01DF85 0E:DF75: 85 67
+	STA enemyLevelIdx               ;C - - - - - 0x01DF85 0E:DF75: 85 67
 loc_0E_DF77:
 	JSR IrqEnableModeFF             ;C - - - - - 0x01DF87 0E:DF77: 20 2F E1
 	JSR ClearScreenAndSprites       ;C - - - - - 0x01DF8A 0E:DF7A: 20 5F C8
@@ -4140,9 +4140,9 @@ loc_0E_DFE9:
 	JSR QueueSoundSaved             ;C - - - - - 0x01E002 0E:DFF2: 20 4A F3
 loc_0E_DFF5:
 	LDA #$FF                        ;C - - - - - 0x01E005 0E:DFF5: A9 FF
-	STA ram_0029                    ;C - - - - - 0x01E007 0E:DFF7: 85 29
+	STA stageScreen                 ;C - - - - - 0x01E007 0E:DFF7: 85 29
 	LDA #$1F                        ;C - - - - - 0x01E009 0E:DFF9: A9 1F
-	STA ram_0024                    ;C - - - - - 0x01E00B 0E:DFFB: 85 24
+	STA stageColumn                 ;C - - - - - 0x01E00B 0E:DFFB: 85 24
 loc_0E_DFFD:
 	LDA #$01                        ;C - - - - - 0x01E00D 0E:DFFD: A9 01
 	.byte $85                       ;C - - - - - 0x01E00F 0E:DFFF: crosses into bank 0F: STA $10 (zp)

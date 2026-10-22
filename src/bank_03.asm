@@ -573,7 +573,7 @@ loc_03_B421:
 	CMP #$21                        ;C - - - - - 0x007440 03:B430: C9 21
 	BNE loc_03_B46C                 ;C - - - - - 0x007442 03:B432: D0 38
 loc_03_B434:
-	CPX ram_0039                    ;C - - - - - 0x007444 03:B434: E4 39
+	CPX grabbedSlot                 ;C - - - - - 0x007444 03:B434: E4 39
 	BNE loc_03_B46C                 ;C - - - - - 0x007446 03:B436: D0 34
 	LDA gameAction                  ;C - - - - - 0x007448 03:B438: A5 30
 	CMP #$21                        ;C - - - - - 0x00744A 03:B43A: C9 21
@@ -619,7 +619,7 @@ loc_03_B483:
 loc_03_B487:
 	JSR SetAnimXChr3                ;C - - - - - 0x007497 03:B487: 20 43 F4
 loc_03_B48A:
-	LDA ram_00E4                    ;C - - - - - 0x00749A 03:B48A: A5 E4
+	LDA rngState0                   ;C - - - - - 0x00749A 03:B48A: A5 E4
 	ASL A                           ;C - - - - - 0x00749C 03:B48C: 0A
 	BCC loc_03_B495                 ;C - - - - - 0x00749D 03:B48D: 90 06
 	LDA #$85                        ;C - - - - - 0x00749F 03:B48F: A9 85
@@ -764,7 +764,7 @@ loc_03_B5A7:
 	LDA #$00                        ;C - - - - - 0x0075C0 03:B5B0: A9 00
 	STA objToggle,X                 ;C - - - - - 0x0075C2 03:B5B2: 9D F0 05
 	STA objTimer,X                  ;C - - - - - 0x0075C5 03:B5B5: 9D D0 05
-	LDA ram_00E4                    ;C - - - - - 0x0075C8 03:B5B8: A5 E4
+	LDA rngState0                   ;C - - - - - 0x0075C8 03:B5B8: A5 E4
 	AND #$0F                        ;C - - - - - 0x0075CA 03:B5BA: 29 0F
 	CMP #$06                        ;C - - - - - 0x0075CC 03:B5BC: C9 06
 	BCS loc_03_B5C6                 ;C - - - - - 0x0075CE 03:B5BE: B0 06
@@ -861,7 +861,7 @@ ofs_03_B666:
 loc_03_B672:
 	LDA objStep,X                   ;C - - - - - 0x007682 03:B672: BD 00 05
 	BNE loc_03_B6D0                 ;C - - - - - 0x007685 03:B675: D0 59
-	LDA ram_00E4                    ;C - - - - - 0x007687 03:B677: A5 E4
+	LDA rngState0                   ;C - - - - - 0x007687 03:B677: A5 E4
 	AND #$0F                        ;C - - - - - 0x007689 03:B679: 29 0F
 	CMP #$05                        ;C - - - - - 0x00768B 03:B67B: C9 05
 	BCS loc_03_B686                 ;C - - - - - 0x00768D 03:B67D: B0 07
@@ -893,7 +893,7 @@ loc_03_B6AD:
 	LDY objFacing,X                 ;C - - - - - 0x0076BD 03:B6AD: BC 60 04
 	LDA tbl_0F_FBF0,Y               ;C - - - - - 0x0076C0 03:B6B0: B9 F0 FB
 	STA objFacing,X                 ;C - - - - - 0x0076C3 03:B6B3: 9D 60 04
-	LDA ram_00E5                    ;C - - - - - 0x0076C6 03:B6B6: A5 E5
+	LDA rngState1                   ;C - - - - - 0x0076C6 03:B6B6: A5 E5
 	AND #$07                        ;C - - - - - 0x0076C8 03:B6B8: 29 07
 	BNE loc_03_B6C0                 ;C - - - - - 0x0076CA 03:B6BA: D0 04
 	LDA #$30                        ;C - - - - - 0x0076CC 03:B6BC: A9 30
@@ -937,7 +937,7 @@ ofs_03_B6F5:
 loc_03_B701:
 	LDA #$00                        ;C - - - - - 0x007711 03:B701: A9 00
 	STA objLandY,X                  ;C - - - - - 0x007713 03:B703: 9D 10 05
-	LDA ram_00E4                    ;C - - - - - 0x007716 03:B706: A5 E4
+	LDA rngState0                   ;C - - - - - 0x007716 03:B706: A5 E4
 	AND #$07                        ;C - - - - - 0x007718 03:B708: 29 07
 	BEQ loc_03_B711                 ;C - - - - - 0x00771A 03:B70A: F0 05
 	LDA #$02                        ;C - - - - - 0x00771C 03:B70C: A9 02
@@ -1126,7 +1126,7 @@ loc_03_B881:
 	JSR FaceToPlayerFlag            ;C - - - - - 0x007891 03:B881: 20 43 F3
 	LDA objVariant,X                ;C - - - - - 0x007894 03:B884: BD C0 05
 	BNE loc_03_B8BA                 ;C - - - - - 0x007897 03:B887: D0 31
-	LDA ram_006E                    ;C - - - - - 0x007899 03:B889: A5 6E
+	LDA playerBusy                  ;C - - - - - 0x007899 03:B889: A5 6E
 	BMI loc_03_B8BA                 ;C - - - - - 0x00789B 03:B88B: 30 2D
 	LDA gameAction                  ;C - - - - - 0x00789D 03:B88D: A5 30
 	CMP #$0B                        ;C - - - - - 0x00789F 03:B88F: C9 0B
@@ -1339,7 +1339,7 @@ loc_03_BA37:
 	LDA #$0E                        ;C - - - - - 0x007A47 03:BA37: A9 0E
 loc_03_BA39:
 	STA ptr_00                      ;C - - - - - 0x007A49 03:BA39: 85 00
-	LDA ram_00E4                    ;C - - - - - 0x007A4B 03:BA3B: A5 E4
+	LDA rngState0                   ;C - - - - - 0x007A4B 03:BA3B: A5 E4
 	AND #$0F                        ;C - - - - - 0x007A4D 03:BA3D: 29 0F
 	CMP ptr_00                      ;C - - - - - 0x007A4F 03:BA3F: C5 00
 	BCS loc_03_BA4D                 ;C - - - - - 0x007A51 03:BA41: B0 0A
@@ -1574,7 +1574,7 @@ loc_03_BBE6:
 loc_03_BBE7:
 	JSR ClearObject                 ;C - - - - - 0x007BF7 03:BBE7: 20 BE F2
 	LDA #$08                        ;C - - - - - 0x007BFA 03:BBEA: A9 08
-	STA ram_0054                    ;C - - - - - 0x007BFC 03:BBEC: 85 54
+	STA enemiesDefeated             ;C - - - - - 0x007BFC 03:BBEC: 85 54
 	RTS                             ;C - - - - - 0x007BFE 03:BBEE: 60
 loc_03_BBEF:
 	JSR CountAnim7B                 ;C - - - - - 0x007BFF 03:BBEF: 20 D1 BC
@@ -1620,9 +1620,9 @@ loc_03_BBFA:
 loc_03_BC54:
 	LDA #$7B                        ;C - - - - - 0x007C64 03:BC54: A9 7B
 	JSR SetAnimY                    ;C - - - - - 0x007C66 03:BC56: 20 A0 F2
-	LDA ram_00E4                    ;C - - - - - 0x007C69 03:BC59: A5 E4
-	ADC ram_00E5                    ;C - - - - - 0x007C6B 03:BC5B: 65 E5
-	STA ram_00E4                    ;C - - - - - 0x007C6D 03:BC5D: 85 E4
+	LDA rngState0                   ;C - - - - - 0x007C69 03:BC59: A5 E4
+	ADC rngState1                   ;C - - - - - 0x007C6B 03:BC5B: 65 E5
+	STA rngState0                   ;C - - - - - 0x007C6D 03:BC5D: 85 E4
 	AND #$07                        ;C - - - - - 0x007C6F 03:BC5F: 29 07
 	TAY                             ;C - - - - - 0x007C71 03:BC61: A8
 	STY ptr_00+1                    ;C - - - - - 0x007C72 03:BC62: 84 01
@@ -1815,9 +1815,9 @@ SpawnObjBelowEnemy:
 	BPL loc_03_BDD5                 ;C - - - - - 0x007DE1 03:BDD1: 10 02
 	BMI loc_03_BDDF                 ;C - - - - - 0x007DE3 03:BDD3: 30 0A
 loc_03_BDD5:
-	LDA ram_00E4                    ;C - - - - - 0x007DE5 03:BDD5: A5 E4
-	ADC ram_00E5                    ;C - - - - - 0x007DE7 03:BDD7: 65 E5
-	STA ram_00E4                    ;C - - - - - 0x007DE9 03:BDD9: 85 E4
+	LDA rngState0                   ;C - - - - - 0x007DE5 03:BDD5: A5 E4
+	ADC rngState1                   ;C - - - - - 0x007DE7 03:BDD7: 65 E5
+	STA rngState0                   ;C - - - - - 0x007DE9 03:BDD9: 85 E4
 	CMP #$7F                        ;C - - - - - 0x007DEB 03:BDDB: C9 7F
 	BCC loc_03_BDAF                 ;C - - - - - 0x007DED 03:BDDD: 90 D0
 loc_03_BDDF:
@@ -1859,9 +1859,9 @@ loc_03_BDDF:
 	JSR SetAnimY                    ;C - - - - - 0x007E4E 03:BE3E: 20 A0 F2
 	JMP loc_03_BE72                 ;C - - - - - 0x007E51 03:BE41: 4C 72 BE
 loc_03_BE44:
-	LDA ram_00E5                    ;C - - - - - 0x007E54 03:BE44: A5 E5
-	ADC ram_00E6                    ;C - - - - - 0x007E56 03:BE46: 65 E6
-	STA ram_00E5                    ;C - - - - - 0x007E58 03:BE48: 85 E5
+	LDA rngState1                   ;C - - - - - 0x007E54 03:BE44: A5 E5
+	ADC rngState2                   ;C - - - - - 0x007E56 03:BE46: 65 E6
+	STA rngState1                   ;C - - - - - 0x007E58 03:BE48: 85 E5
 	AND #$0F                        ;C - - - - - 0x007E5A 03:BE4A: 29 0F
 	TAY                             ;C - - - - - 0x007E5C 03:BE4C: A8
 	STY ptr_00+1                    ;C - - - - - 0x007E5D 03:BE4D: 84 01
@@ -1937,7 +1937,7 @@ loc_03_BED2:
 	STA objDownState,X              ;C - - - - - 0x007EE4 03:BED4: 9D C0 04
 	LDA gameAction                  ;C - - - - - 0x007EE7 03:BED7: A5 30
 	BEQ loc_03_BEEB                 ;C - - - - - 0x007EE9 03:BED9: F0 10
-	LDA ram_00A7                    ;C - - - - - 0x007EEB 03:BEDB: A5 A7
+	LDA attackType                  ;C - - - - - 0x007EEB 03:BEDB: A5 A7
 	BEQ loc_03_BEEB                 ;C - - - - - 0x007EED 03:BEDD: F0 0C
 	CMP #$06                        ;C - - - - - 0x007EEF 03:BEDF: C9 06
 	BEQ loc_03_BEEB                 ;C - - - - - 0x007EF1 03:BEE1: F0 08
