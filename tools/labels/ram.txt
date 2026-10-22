@@ -90,9 +90,9 @@
 04D0 objAtkHeavy 16   ; nonzero = heavy hit (plays sound $18, longer cooldown)
 04E0 objHitTimer 16   ; hit-reaction timer ($1E on hit, counts down)
 0500 objStep 16   ; general per-object phase/step counter used by the AI handlers
-0510 objLandY 16   ; Y at which a falling/jumping object lands
-0520 objStartY 16   ; objY saved when a jump/dive starts
-0530 objSavedY 16   ; second saved Y (copy of objY or objStartY)
+0510 objParamA 16   ; AI parameter; often a landing Y or a timer ($10, $3C ...)
+0520 objParamB 16   ; AI parameter; often objY saved at the start of a jump/dive
+0530 objParamC 16   ; AI parameter; often a second saved Y
 0540 objCooldown 16   ; attack cooldown (counts down)
 0550 objSubStep 16   ; secondary AI step/flags (mostly bank 01 and 0B)
 0560 objFlags       16   ; bit 6 = horizontal flip (set from objFacing)

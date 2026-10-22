@@ -1023,7 +1023,7 @@ loc_04_9305:
 	STA objYPage+1                  ;C - - - - - 0x009365 04:9355: 8D E1 03
 	STA objStep                     ;C - - - - - 0x009368 04:9358: 8D 00 05
 	LDA #$3C                        ;C - - - - - 0x00936B 04:935B: A9 3C
-	STA objLandY                    ;C - - - - - 0x00936D 04:935D: 8D 10 05
+	STA objParamA                   ;C - - - - - 0x00936D 04:935D: 8D 10 05
 	LDA #$01                        ;C - - - - - 0x009370 04:9360: A9 01
 	STA objFacing                   ;C - - - - - 0x009372 04:9362: 8D 60 04
 	LDA #$00                        ;C - - - - - 0x009375 04:9365: A9 00
@@ -1061,15 +1061,15 @@ loc_04_93AA:
 	JSR ClearObjFlag40              ;C - - - - - 0x0093BA 04:93AA: 20 99 F0
 	JSR ApplyVelXSub                ;C - - - - - 0x0093BD 04:93AD: 20 A1 F1
 loc_04_93B0:
-	LDA objLandY                    ;C - - - - - 0x0093C0 04:93B0: AD 10 05
+	LDA objParamA                   ;C - - - - - 0x0093C0 04:93B0: AD 10 05
 	BNE loc_04_93C2                 ;C - - - - - 0x0093C3 04:93B3: D0 0D
 	LDA #$79                        ;C - - - - - 0x0093C5 04:93B5: A9 79
-	STA objLandY                    ;C - - - - - 0x0093C7 04:93B7: 8D 10 05
+	STA objParamA                   ;C - - - - - 0x0093C7 04:93B7: 8D 10 05
 	LDA objFacing                   ;C - - - - - 0x0093CA 04:93BA: AD 60 04
 	EOR #$03                        ;C - - - - - 0x0093CD 04:93BD: 49 03
 	STA objFacing                   ;C - - - - - 0x0093CF 04:93BF: 8D 60 04
 loc_04_93C2:
-	DEC objLandY                    ;C - - - - - 0x0093D2 04:93C2: CE 10 05
+	DEC objParamA                   ;C - - - - - 0x0093D2 04:93C2: CE 10 05
 	JSR RedrawAndWaitFrame          ;C - - - - - 0x0093D5 04:93C5: 20 06 F4
 	JMP loc_04_938A                 ;C - - - - - 0x0093D8 04:93C8: 4C 8A 93
 loc_04_93CB:

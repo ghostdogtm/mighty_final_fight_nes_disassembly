@@ -431,3 +431,46 @@ table 08:85E6-8789 4 enemy stats: life, spriteAir, spriteDown, 0
 04:8C00 ScreenInit8C00
 04:9600 ScreenInit9600
 04:9000 ScreenInit9000
+
+; ---- enemy AI handlers (bank 0C, indexed by objKind through enemyAILo/Hi)
+0C:89F8 EnemyAI_Nop             ; kinds 01, 09 (shares an RTS)
+0C:9733 EnemyAI_Launched        ; kind 02: thrown / launched object
+0C:983B EnemyAI_KnockedBack     ; kinds 03, 05
+0C:8C1C EnemyAI_Kind04          ; kind 04: 8-state machine (jump table by objActive & $0F)
+0C:9962 EnemyAI_Falling         ; kind 06
+0C:9A3F EnemyAI_Kind07_16       ; kinds 07, 16
+0C:8FA5 EnemyAI_Kind08          ; kind 08: 7-state machine
+0C:91B7 EnemyAI_Kind0E          ; kind 0E
+0C:9332 EnemyAI_Kind0F          ; kind 0F: 9-state machine
+0C:8AEE EnemyAI_Item10_13       ; kinds 10-13: pick-up checks against gameAction
+0C:9B74 EnemyAI_Downed          ; kind 1F: enemy that has been knocked down
+0C:9CED EnemyAI_Grunt1          ; kinds 20-25, objVariant 1
+0C:9CF1 EnemyAI_Grunt2          ; kinds 26-2B, objVariant 2
+0C:9CF5 EnemyAI_Grunt4          ; kinds 30-35, objVariant 4
+0C:9CF7 EnemyAI_GruntCommon
+0C:9D9E EnemyAI_Leaper1         ; kind 2C
+0C:9DA4 EnemyAI_Leaper2         ; kind 2D
+0C:9D71 EnemyAI_Projectile2E    ; kind 2E: straight mover, removed when off screen
+0C:9DAA EnemyAI_Leaper4         ; kind 2F
+0C:9DAE EnemyAI_LeaperCommon
+0C:9E20 EnemyAI_TypeA1          ; kind 36
+0C:9E24 EnemyAI_TypeA2          ; kind 37
+0C:9E28 EnemyAI_TypeA4          ; kind 38
+0C:9E3C EnemyAI_TypeB1          ; kind 39
+0C:9E40 EnemyAI_TypeB2          ; kind 3A
+0C:9E44 EnemyAI_TypeB4          ; kind 3B
+0C:9E2E EnemyAI_TypeC1          ; kind 3C
+0C:9E32 EnemyAI_TypeC2          ; kind 3D
+0C:9E36 EnemyAI_TypeC4          ; kind 3E
+0C:9E48 EnemyAI_TypeCommon
+0C:9EC5 EnemyAI_Var1            ; kinds 3F 50 53 56 57 59 5C
+0C:9EC9 EnemyAI_Var2            ; kinds 4F 51 54 58 5A 5D
+0C:9ECD EnemyAI_Var4            ; kinds 52 55 5B 5E 5F
+0C:9ECF EnemyAI_VarCommon
+0C:9EF4 EnemyAI_CdA_V1          ; kinds 40, 43
+0C:9F01 EnemyAI_CdA_V2          ; kinds 41, 44
+0C:9F0E EnemyAI_CdA_V4          ; kinds 42, 45
+0C:9EF8 EnemyAI_CdB_V1          ; kinds 46, 49
+0C:9F05 EnemyAI_CdB_V2          ; kinds 47, 4A
+0C:9F12 EnemyAI_CdB_V4          ; kinds 48, 4B
+0C:9F19 EnemyAI_CdCommon

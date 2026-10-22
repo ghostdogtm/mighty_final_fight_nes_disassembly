@@ -61,6 +61,7 @@ in `tools/labels/*.txt` and regenerate.
 | `tools/disasm.py`, `opcodes.py` | asm generator from ROM + CDL |
 | `docs/sound_format.md` | sound driver data format (partial) |
 | `docs/stage_maps.md` | stage map format |
+| `docs/enemy_ai.md` | Enemy AI dispatch by object kind, stage-bank stubs, per-object fields |
 | `docs/enemy_data.md` | enemy placement and types |
 | `tools/reloc_test.py` | relocation test: rebuilds with all switchable banks moved by $100; only address bytes may change |
 | `tools/chr_tool.py` | CHR ↔ 1 KB `.chr` ↔ PNG |

@@ -244,7 +244,7 @@ Traced code (instruction starts, verify by hand):
   01:A66F  BCC loc_01_A684
   01:A671  LDA objSpriteDown,X
   01:A674  SBC #$07
-  01:A676  STA objLandY,X
+  01:A676  STA objParamA,X
   01:A679  LDA #$82
   01:A67B  STA objActive,X
   01:A67E  LDA #$00
@@ -286,15 +286,15 @@ Traced code (instruction starts, verify by hand):
   01:A75A  JSR SetGrabbedAnimA_01
   01:A75D  SEC
   01:A75E  RTS
-  01:A7AC  LDA objStartY,X
-  01:A7AF  STA objSavedY,X
+  01:A7AC  LDA objParamB,X
+  01:A7AF  STA objParamC,X
   01:A7B2  JMP loc_01_A7BB
   01:ABC8  LDA #$82
   01:ABCA  STA objActive,X
   01:ABCD  LDA #$00
   01:ABCF  STA objStep,X
   01:ABD2  LDA #$01
-  01:ABD4  STA objLandY,X
+  01:ABD4  STA objParamA,X
   01:ABD7  RTS
   01:ABFC  LDA #$05
   01:ABFE  STA objFacing,X
@@ -785,7 +785,7 @@ Traced code (instruction starts, verify by hand):
   0C:923C  CMP #$04
   0C:923E  BNE loc_0C_92A3
   0C:9240  LDA #$10
-  0C:9242  STA objLandY,X
+  0C:9242  STA objParamA,X
   0C:9245  LDA #$08
   0C:9247  STA objCooldown,X
   0C:9312  JSR EnemySetDownAnimA
@@ -883,15 +883,15 @@ Traced code (instruction starts, verify by hand):
   0C:9AAC  JMP loc_0C_9AD8
   0C:9D9E  LDY #$25
   0C:9DA0  LDA #$01
-  0C:9DA2  BNE loc_0C_9DAE
+  0C:9DA2  BNE EnemyAI_LeaperCommon
   0C:9DA4  LDY #$2B
   0C:9DA6  LDA #$02
-  0C:9DA8  BNE loc_0C_9DAE
+  0C:9DA8  BNE EnemyAI_LeaperCommon
   0C:9DAA  LDY #$35
   0C:9DAC  LDA #$04
   0C:9DAE  STA objVariant,X
   0C:9DB1  TYA
-  0C:9DB2  STA objLandY,X
+  0C:9DB2  STA objParamA,X
   0C:9DB5  LDA #$05
   0C:9DB7  STA objSpriteDown,X
   0C:9DBA  JSR DistanceXToPlayer
@@ -933,7 +933,7 @@ Traced code (instruction starts, verify by hand):
   0C:9E0E  STA objActive,X
   0C:9E11  LDA #$03
   0C:9E13  STA objStep,X
-  0C:9E16  LDA objLandY,X
+  0C:9E16  LDA objParamA,X
   0C:9E19  STA objKind,X
   0C:9E1C  STA objId,X
   0C:9E1F  RTS
@@ -946,7 +946,7 @@ Traced code (instruction starts, verify by hand):
   0C:9E40  LDA #$02
   0C:9E42  BNE loc_0C_9E46
   0C:9EC9  LDA #$02
-  0C:9ECB  BNE loc_0C_9ECF
+  0C:9ECB  BNE EnemyAI_VarCommon
   0C:9F01  LDA #$00
   0C:9F03  BEQ loc_0C_9F07
   0D:A042  STA objY,X
@@ -967,8 +967,8 @@ Traced code (instruction starts, verify by hand):
   0D:AB79  RTS
   0D:ABB7  SEC
   0D:ABB8  RTS
-  0D:AC04  LDA objStartY,X
-  0D:AC07  STA objSavedY,X
+  0D:AC04  LDA objParamB,X
+  0D:AC07  STA objParamC,X
   0D:AC0A  JMP loc_0D_AC13
   0E:C2C7  LDA padPressed,X
   0E:C2C9  AND #$F0

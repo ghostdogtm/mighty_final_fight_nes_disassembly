@@ -2588,9 +2588,9 @@ ClearObject:
 	STA objToggle,X                 ;C - - - - - 0x01F306 0F:F2F6: 9D F0 05
 	STA objSpriteAir,X              ;C - - - - - 0x01F309 0F:F2F9: 9D F0 04
 	STA objStep,X                   ;C - - - - - 0x01F30C 0F:F2FC: 9D 00 05
-	STA objLandY,X                  ;C - - - - - 0x01F30F 0F:F2FF: 9D 10 05
-	STA objStartY,X                 ;C - - - - - 0x01F312 0F:F302: 9D 20 05
-	STA objSavedY,X                 ;C - - - - - 0x01F315 0F:F305: 9D 30 05
+	STA objParamA,X                 ;C - - - - - 0x01F30F 0F:F2FF: 9D 10 05
+	STA objParamB,X                 ;C - - - - - 0x01F312 0F:F302: 9D 20 05
+	STA objParamC,X                 ;C - - - - - 0x01F315 0F:F305: 9D 30 05
 	STA objCooldown,X               ;C - - - - - 0x01F318 0F:F308: 9D 40 05
 	STA objSubStep,X                ;C - - - - - 0x01F31B 0F:F30B: 9D 50 05
 	LDA #$FF                        ;C - - - - - 0x01F31E 0F:F30E: A9 FF
@@ -3025,7 +3025,7 @@ loc_0F_F5E9:
 loc_0F_F601:
 	LDA objY                        ;C - - - - - 0x01F611 0F:F601: AD C0 03
 	SEC                             ;C - - - - - 0x01F614 0F:F604: 38
-	SBC objStartY,X                 ;C - - - - - 0x01F615 0F:F605: FD 20 05
+	SBC objParamB,X                 ;C - - - - - 0x01F615 0F:F605: FD 20 05
 	BCS loc_0F_F60E                 ;C - - - - - 0x01F618 0F:F608: B0 04
 	EOR #$FF                        ;C - - - - - 0x01F61A 0F:F60A: 49 FF
 	ADC #$01                        ;C - - - - - 0x01F61C 0F:F60C: 69 01
@@ -3047,7 +3047,7 @@ loc_0F_F621:
 loc_0F_F628:
 	LDA playerGroundY               ;C - - - - - 0x01F638 0F:F628: A5 36
 	SEC                             ;C - - - - - 0x01F63A 0F:F62A: 38
-	SBC objStartY,X                 ;C - - - - - 0x01F63B 0F:F62B: FD 20 05
+	SBC objParamB,X                 ;C - - - - - 0x01F63B 0F:F62B: FD 20 05
 	BCS loc_0F_F634                 ;C - - - - - 0x01F63E 0F:F62E: B0 04
 	EOR #$FF                        ;C - - - - - 0x01F640 0F:F630: 49 FF
 	ADC #$01                        ;C - - - - - 0x01F642 0F:F632: 69 01
@@ -3230,7 +3230,7 @@ loc_0F_F747:
 	CMP #$BE                        ;C - - - - - 0x01F79A 0F:F78A: C9 BE
 	BNE loc_0F_F794                 ;C - - - - - 0x01F79C 0F:F78C: D0 06
 loc_0F_F78E:
-	LDA objStartY,X                 ;C - - - - - 0x01F79E 0F:F78E: BD 20 05
+	LDA objParamB,X                 ;C - - - - - 0x01F79E 0F:F78E: BD 20 05
 	STA objY,X                      ;C - - - - - 0x01F7A1 0F:F791: 9D C0 03
 loc_0F_F794:
 	LDA attackType                  ;C - - - - - 0x01F7A4 0F:F794: A5 A7

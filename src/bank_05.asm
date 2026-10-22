@@ -374,7 +374,7 @@ loc_05_A8BF:
 loc_05_A8C1:
 	STA objVelXHi,X                 ;C - - - - - 0x00A8D1 05:A8C1: 9D 10 04
 	LDA #$3C                        ;C - - - - - 0x00A8D4 05:A8C4: A9 3C
-	STA objLandY,X                  ;C - - - - - 0x00A8D6 05:A8C6: 9D 10 05
+	STA objParamA,X                 ;C - - - - - 0x00A8D6 05:A8C6: 9D 10 05
 	INC objActive,X                 ;C - - - - - 0x00A8D9 05:A8C9: FE 00 03
 loc_05_A8CC:
 	LDA objAnim,X                   ;C - - - - - 0x00A8DC 05:A8CC: BD 80 05
@@ -428,7 +428,7 @@ loc_05_A916:
 	LDA #$03                        ;C - - - - - 0x00A93A 05:A92A: A9 03
 	STA objVelYHi,X                 ;C - - - - - 0x00A93C 05:A92C: 9D 30 04
 	LDA #$3C                        ;C - - - - - 0x00A93F 05:A92F: A9 3C
-	STA objLandY,X                  ;C - - - - - 0x00A941 05:A931: 9D 10 05
+	STA objParamA,X                 ;C - - - - - 0x00A941 05:A931: 9D 10 05
 	INC objActive,X                 ;C - - - - - 0x00A944 05:A934: FE 00 03
 	LDA objY                        ;C - - - - - 0x00A947 05:A937: AD C0 03
 	CLC                             ;C - - - - - 0x00A94A 05:A93A: 18
@@ -498,8 +498,8 @@ loc_05_A9BB:
 loc_05_A9BC:
 	INC objActive,X                 ;C - - - - - 0x00A9CC 05:A9BC: FE 00 03
 loc_05_A9BF:
-	DEC objLandY,X                  ;C - - - - - 0x00A9CF 05:A9BF: DE 10 05
-	LDA objLandY,X                  ;C - - - - - 0x00A9D2 05:A9C2: BD 10 05
+	DEC objParamA,X                 ;C - - - - - 0x00A9CF 05:A9BF: DE 10 05
+	LDA objParamA,X                 ;C - - - - - 0x00A9D2 05:A9C2: BD 10 05
 	BEQ loc_05_A9DE                 ;C - - - - - 0x00A9D5 05:A9C5: F0 17
 	AND #$01                        ;C - - - - - 0x00A9D7 05:A9C7: 29 01
 	BNE loc_05_A9D5                 ;C - - - - - 0x00A9D9 05:A9C9: D0 0A
@@ -600,9 +600,9 @@ loc_05_AA82:
 	BNE loc_05_AAA2                 ;C - - - - - 0x00AA97 05:AA87: D0 19
 	LDA #$C5                        ;C - - - - - 0x00AA99 05:AA89: A9 C5
 	STA objStep,X                   ;C - - - - - 0x00AA9B 05:AA8B: 9D 00 05
-	STA objLandY,X                  ;C - - - - - 0x00AA9E 05:AA8E: 9D 10 05
+	STA objParamA,X                 ;C - - - - - 0x00AA9E 05:AA8E: 9D 10 05
 	LDA #$20                        ;C - - - - - 0x00AAA1 05:AA91: A9 20
-	STA objStartY,X                 ;C - - - - - 0x00AAA3 05:AA93: 9D 20 05
+	STA objParamB,X                 ;C - - - - - 0x00AAA3 05:AA93: 9D 20 05
 	INC objActive,X                 ;C - - - - - 0x00AAA6 05:AA96: FE 00 03
 	LDA #$00                        ;C - - - - - 0x00AAA9 05:AA99: A9 00
 	STA ram_0050                    ;C - - - - - 0x00AAAB 05:AA9B: 85 50
@@ -637,25 +637,25 @@ loc_05_AAD3:
 	LDA objStep,X                   ;C - - - - - 0x00AAE3 05:AAD3: BD 00 05
 	BEQ loc_05_AAEE                 ;C - - - - - 0x00AAE6 05:AAD6: F0 16
 	DEC objStep,X                   ;C - - - - - 0x00AAE8 05:AAD8: DE 00 05
-	LDA objStartY,X                 ;C - - - - - 0x00AAEB 05:AADB: BD 20 05
+	LDA objParamB,X                 ;C - - - - - 0x00AAEB 05:AADB: BD 20 05
 	BNE loc_05_AAEA                 ;C - - - - - 0x00AAEE 05:AADE: D0 0A
 	LDA #$31                        ;C - - - - - 0x00AAF0 05:AAE0: A9 31
 	JSR QueueSound                  ;C - - - - - 0x00AAF2 05:AAE2: 20 4C F3
 	LDA #$21                        ;C - - - - - 0x00AAF5 05:AAE5: A9 21
-	STA objStartY,X                 ;C - - - - - 0x00AAF7 05:AAE7: 9D 20 05
+	STA objParamB,X                 ;C - - - - - 0x00AAF7 05:AAE7: 9D 20 05
 loc_05_AAEA:
-	DEC objStartY,X                 ;C - - - - - 0x00AAFA 05:AAEA: DE 20 05
+	DEC objParamB,X                 ;C - - - - - 0x00AAFA 05:AAEA: DE 20 05
 	RTS                             ;C - - - - - 0x00AAFD 05:AAED: 60
 loc_05_AAEE:
-	LDA objLandY,X                  ;C - - - - - 0x00AAFE 05:AAEE: BD 10 05
+	LDA objParamA,X                 ;C - - - - - 0x00AAFE 05:AAEE: BD 10 05
 	BEQ loc_05_AAFA                 ;C - - - - - 0x00AB01 05:AAF1: F0 07
-	DEC objLandY,X                  ;C - - - - - 0x00AB03 05:AAF3: DE 10 05
+	DEC objParamA,X                 ;C - - - - - 0x00AB03 05:AAF3: DE 10 05
 	LDA #$6B                        ;C - - - - - 0x00AB06 05:AAF6: A9 6B
 	BNE loc_05_AB04                 ;C - - - - - 0x00AB08 05:AAF8: D0 0A
 loc_05_AAFA:
 	LDA #$C5                        ;C - - - - - 0x00AB0A 05:AAFA: A9 C5
 	STA objStep,X                   ;C - - - - - 0x00AB0C 05:AAFC: 9D 00 05
-	STA objLandY,X                  ;C - - - - - 0x00AB0F 05:AAFF: 9D 10 05
+	STA objParamA,X                 ;C - - - - - 0x00AB0F 05:AAFF: 9D 10 05
 	LDA #$6D                        ;C - - - - - 0x00AB12 05:AB02: A9 6D
 loc_05_AB04:
 	JSR SetAnimX                    ;C - - - - - 0x00AB14 05:AB04: 20 88 F2
@@ -764,11 +764,11 @@ loc_05_ABE1:
 	LDA objActive,X                 ;C - - - - - 0x00ABF1 05:ABE1: BD 00 03
 	AND #$0F                        ;C - - - - - 0x00ABF4 05:ABE4: 29 0F
 	BNE loc_05_ABF8                 ;C - - - - - 0x00ABF6 05:ABE6: D0 10
-	STA objSavedY,X                 ;C - - - - - 0x00ABF8 05:ABE8: 9D 30 05
+	STA objParamC,X                 ;C - - - - - 0x00ABF8 05:ABE8: 9D 30 05
 	LDA #$2D                        ;C - - - - - 0x00ABFB 05:ABEB: A9 2D
 	STA objStep,X                   ;C - - - - - 0x00ABFD 05:ABED: 9D 00 05
 	LDA #$87                        ;C - - - - - 0x00AC00 05:ABF0: A9 87
-	STA objStartY,X                 ;C - - - - - 0x00AC02 05:ABF2: 9D 20 05
+	STA objParamB,X                 ;C - - - - - 0x00AC02 05:ABF2: 9D 20 05
 	INC objActive,X                 ;C - - - - - 0x00AC05 05:ABF5: FE 00 03
 loc_05_ABF8:
 	LDA objActive,X                 ;C - - - - - 0x00AC08 05:ABF8: BD 00 03
@@ -803,7 +803,7 @@ loc_05_AC3A:
 	LDA gameAction                  ;C - - - - - 0x00AC4A 05:AC3A: A5 30
 	CMP #$0E                        ;C - - - - - 0x00AC4C 05:AC3C: C9 0E
 	BEQ loc_05_AC74                 ;C - - - - - 0x00AC4E 05:AC3E: F0 34
-	LDA objLandY,X                  ;C - - - - - 0x00AC50 05:AC40: BD 10 05
+	LDA objParamA,X                 ;C - - - - - 0x00AC50 05:AC40: BD 10 05
 	AND #$01                        ;C - - - - - 0x00AC53 05:AC43: 29 01
 	BNE loc_05_AC51                 ;C - - - - - 0x00AC55 05:AC45: D0 0A
 	LDA scrollY                     ;C - - - - - 0x00AC57 05:AC47: A5 FA
@@ -817,12 +817,12 @@ loc_05_AC51:
 	ADC #$01                        ;C - - - - - 0x00AC64 05:AC54: 69 01
 	STA scrollY                     ;C - - - - - 0x00AC66 05:AC56: 85 FA
 loc_05_AC58:
-	DEC objLandY,X                  ;C - - - - - 0x00AC68 05:AC58: DE 10 05
-	DEC objStartY,X                 ;C - - - - - 0x00AC6B 05:AC5B: DE 20 05
-	LDA objStartY,X                 ;C - - - - - 0x00AC6E 05:AC5E: BD 20 05
+	DEC objParamA,X                 ;C - - - - - 0x00AC68 05:AC58: DE 10 05
+	DEC objParamB,X                 ;C - - - - - 0x00AC6B 05:AC5B: DE 20 05
+	LDA objParamB,X                 ;C - - - - - 0x00AC6E 05:AC5E: BD 20 05
 	BNE loc_05_AC73                 ;C - - - - - 0x00AC71 05:AC61: D0 10
 	LDA #$87                        ;C - - - - - 0x00AC73 05:AC63: A9 87
-	STA objStartY,X                 ;C - - - - - 0x00AC75 05:AC65: 9D 20 05
+	STA objParamB,X                 ;C - - - - - 0x00AC75 05:AC65: 9D 20 05
 	LDA #$01                        ;C - - - - - 0x00AC78 05:AC68: A9 01
 	STA ptr_00                      ;C - - - - - 0x00AC7A 05:AC6A: 85 00
 	STX ptr_00+1                    ;C - - - - - 0x00AC7C 05:AC6C: 86 01

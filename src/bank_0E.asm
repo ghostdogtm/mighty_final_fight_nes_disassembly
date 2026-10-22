@@ -886,9 +886,9 @@ loc_0E_C657:
 	JSR ScreenOn                    ;C - - - - - 0x01C681 0E:C671: 20 6F C2
 	LDA #$FF                        ;C - - - - - 0x01C684 0E:C674: A9 FF
 	STA objStep                     ;C - - - - - 0x01C686 0E:C676: 8D 00 05
-	STA objLandY                    ;C - - - - - 0x01C689 0E:C679: 8D 10 05
+	STA objParamA                   ;C - - - - - 0x01C689 0E:C679: 8D 10 05
 	LDA #$8B                        ;C - - - - - 0x01C68C 0E:C67C: A9 8B
-	STA objStartY                   ;C - - - - - 0x01C68E 0E:C67E: 8D 20 05
+	STA objParamB                   ;C - - - - - 0x01C68E 0E:C67E: 8D 20 05
 loc_0E_C681:
 	LDA #$04                        ;C - - - - - 0x01C691 0E:C681: A9 04
 	STA oamHideStart                ;C - - - - - 0x01C693 0E:C683: 85 97
@@ -897,9 +897,9 @@ loc_0E_C681:
 	JSR WaitFrame                   ;C - - - - - 0x01C69B 0E:C68B: 20 31 FF
 	LDA objStep                     ;C - - - - - 0x01C69E 0E:C68E: AD 00 05
 	BNE loc_0E_C6A7                 ;C - - - - - 0x01C6A1 0E:C691: D0 14
-	LDA objLandY                    ;C - - - - - 0x01C6A3 0E:C693: AD 10 05
+	LDA objParamA                   ;C - - - - - 0x01C6A3 0E:C693: AD 10 05
 	BNE loc_0E_C6C9                 ;C - - - - - 0x01C6A6 0E:C696: D0 31
-	LDA objStartY                   ;C - - - - - 0x01C6A8 0E:C698: AD 20 05
+	LDA objParamB                   ;C - - - - - 0x01C6A8 0E:C698: AD 20 05
 	BNE loc_0E_C6CF                 ;C - - - - - 0x01C6AB 0E:C69B: D0 32
 	LDA #$00                        ;C - - - - - 0x01C6AD 0E:C69D: A9 00
 	STA renderOffCount              ;C - - - - - 0x01C6AF 0E:C69F: 85 EE
@@ -921,10 +921,10 @@ loc_0E_C6A7:
 loc_0E_C6C6:
 	JMP loc_0E_C6D2                 ;C - - - - - 0x01C6D6 0E:C6C6: 4C D2 C6
 loc_0E_C6C9:
-	DEC objLandY                    ;C - - - - - 0x01C6D9 0E:C6C9: CE 10 05
+	DEC objParamA                   ;C - - - - - 0x01C6D9 0E:C6C9: CE 10 05
 	JMP loc_0E_C6D2                 ;C - - - - - 0x01C6DC 0E:C6CC: 4C D2 C6
 loc_0E_C6CF:
-	DEC objStartY                   ;C - - - - - 0x01C6DF 0E:C6CF: CE 20 05
+	DEC objParamB                   ;C - - - - - 0x01C6DF 0E:C6CF: CE 20 05
 loc_0E_C6D2:
 	LDA padPressed                  ;C - - - - - 0x01C6E2 0E:C6D2: A5 14
 	AND #$10                        ;C - - - - - 0x01C6E4 0E:C6D4: 29 10
@@ -2113,7 +2113,7 @@ loc_0E_D03F:
 	LDA #$1C                        ;C - - - - - 0x01D04F 0E:D03F: A9 1C
 	JSR QueueSound                  ;C - - - - - 0x01D051 0E:D041: 20 4C F3
 	LDA #$00                        ;C - - - - - 0x01D054 0E:D044: A9 00
-	STA objLandY                    ;C - - - - - 0x01D056 0E:D046: 8D 10 05
+	STA objParamA                   ;C - - - - - 0x01D056 0E:D046: 8D 10 05
 	RTS                             ;C - - - - - 0x01D059 0E:D049: 60
 loc_0E_D04A:
 	LDA playerId                    ;C - - - - - 0x01D05A 0E:D04A: A5 34
@@ -2441,8 +2441,8 @@ loc_0E_D2C8:
 	STA playerInvincible            ;C - - - - - 0x01D2E2 0E:D2D2: 85 3B
 	STA ram_00BA                    ;C - - - - - 0x01D2E4 0E:D2D4: 85 BA
 	STA objStep                     ;C - - - - - 0x01D2E6 0E:D2D6: 8D 00 05
-	STA objLandY                    ;C - - - - - 0x01D2E9 0E:D2D9: 8D 10 05
-	STA objStartY                   ;C - - - - - 0x01D2EC 0E:D2DC: 8D 20 05
+	STA objParamA                   ;C - - - - - 0x01D2E9 0E:D2D9: 8D 10 05
+	STA objParamB                   ;C - - - - - 0x01D2EC 0E:D2DC: 8D 20 05
 	JSR ResetPlayerStand            ;C - - - - - 0x01D2EF 0E:D2DF: 20 AA CE
 	LDY playerId                    ;C - - - - - 0x01D2F2 0E:D2E2: A4 34
 	LDA tbl_0F_E288,Y               ;C - - - - - 0x01D2F4 0E:D2E4: B9 88 E2
@@ -3753,7 +3753,7 @@ loc_0E_DCF0:
 	STA ram_00B3                    ;C - - - - - 0x01DD0A 0E:DCFA: 85 B3
 	STA ram_00BA                    ;C - - - - - 0x01DD0C 0E:DCFC: 85 BA
 	STA objStep                     ;C - - - - - 0x01DD0E 0E:DCFE: 8D 00 05
-	STA objLandY                    ;C - - - - - 0x01DD11 0E:DD01: 8D 10 05
+	STA objParamA                   ;C - - - - - 0x01DD11 0E:DD01: 8D 10 05
 	JSR ResetPlayerStand            ;C - - - - - 0x01DD14 0E:DD04: 20 AA CE
 	LDA playerId                    ;C - - - - - 0x01DD17 0E:DD07: A5 34
 	CMP #$01                        ;C - - - - - 0x01DD19 0E:DD09: C9 01

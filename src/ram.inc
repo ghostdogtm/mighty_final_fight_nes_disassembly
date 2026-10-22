@@ -211,9 +211,9 @@ objAtkHeavy            = $04D0 ; 26 (size 16) ; nonzero = heavy hit (plays sound
 objHitTimer            = $04E0 ; 36 (size 16) ; hit-reaction timer ($1E on hit, counts down)
 objSpriteAir           = $04F0 ; 20 (size 16) ; (?) sprite id while in the air (array of 16 object slots; slot 0 = player; Data Crystal addresses are slot $0C)
 objStep                = $0500 ; 242 (size 16) ; general per-object phase/step counter used by the AI handlers
-objLandY               = $0510 ; 90 (size 16) ; Y at which a falling/jumping object lands
-objStartY              = $0520 ; 65 (size 16) ; objY saved when a jump/dive starts
-objSavedY              = $0530 ; 71 (size 16) ; second saved Y (copy of objY or objStartY)
+objParamA              = $0510 ; 90 (size 16) ; AI parameter; often a landing Y or a timer ($10, $3C ...)
+objParamB              = $0520 ; 65 (size 16) ; AI parameter; often objY saved at the start of a jump/dive
+objParamC              = $0530 ; 71 (size 16) ; AI parameter; often a second saved Y
 objCooldown            = $0540 ; 29 (size 16) ; attack cooldown (counts down)
 objSubStep             = $0550 ; 37 (size 16) ; secondary AI step/flags (mostly bank 01 and 0B)
 objFlags               = $0560 ; 143 (size 16) ; bit 6 = horizontal flip (set from objFacing)

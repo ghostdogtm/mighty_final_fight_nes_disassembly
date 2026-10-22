@@ -219,9 +219,9 @@ loc_08_8105:
 	STA objAnimFrame,X              ;C - - - - - 0x010195 08:8185: 9D 70 05
 	STA objMoveMode,X               ;C - - - - - 0x010198 08:8188: 9D 70 04
 	STA objStep,X                   ;C - - - - - 0x01019B 08:818B: 9D 00 05
-	STA objLandY,X                  ;C - - - - - 0x01019E 08:818E: 9D 10 05
-	STA objStartY,X                 ;C - - - - - 0x0101A1 08:8191: 9D 20 05
-	STA objSavedY,X                 ;C - - - - - 0x0101A4 08:8194: 9D 30 05
+	STA objParamA,X                 ;C - - - - - 0x01019E 08:818E: 9D 10 05
+	STA objParamB,X                 ;C - - - - - 0x0101A1 08:8191: 9D 20 05
+	STA objParamC,X                 ;C - - - - - 0x0101A4 08:8194: 9D 30 05
 	STA objCooldown,X               ;C - - - - - 0x0101A7 08:8197: 9D 40 05
 	STA objSubStep,X                ;C - - - - - 0x0101AA 08:819A: 9D 50 05
 	STA objStunTimer,X              ;C - - - - - 0x0101AD 08:819D: 9D B0 04
@@ -1553,9 +1553,9 @@ loc_08_9056:
 	STA objCounter,Y                ;C - - - - - 0x011092 08:9082: 99 E0 05
 	STA objToggle,Y                 ;C - - - - - 0x011095 08:9085: 99 F0 05
 	STA objStep,Y                   ;C - - - - - 0x011098 08:9088: 99 00 05
-	STA objLandY,Y                  ;C - - - - - 0x01109B 08:908B: 99 10 05
-	STA objStartY,Y                 ;C - - - - - 0x01109E 08:908E: 99 20 05
-	STA objSavedY,Y                 ;C - - - - - 0x0110A1 08:9091: 99 30 05
+	STA objParamA,Y                 ;C - - - - - 0x01109B 08:908B: 99 10 05
+	STA objParamB,Y                 ;C - - - - - 0x01109E 08:908E: 99 20 05
+	STA objParamC,Y                 ;C - - - - - 0x0110A1 08:9091: 99 30 05
 	STA objCooldown,Y               ;C - - - - - 0x0110A4 08:9094: 99 40 05
 	STA objSubStep,Y                ;C - - - - - 0x0110A7 08:9097: 99 50 05
 	STA objVelXLo,Y                 ;C - - - - - 0x0110AA 08:909A: 99 00 04
@@ -1776,9 +1776,9 @@ loc_08_921C:
 	STA objCounter,Y                ;C - - - - - 0x01125A 08:924A: 99 E0 05
 	STA objToggle,Y                 ;C - - - - - 0x01125D 08:924D: 99 F0 05
 	STA objStep,Y                   ;C - - - - - 0x011260 08:9250: 99 00 05
-	STA objLandY,Y                  ;C - - - - - 0x011263 08:9253: 99 10 05
-	STA objStartY,Y                 ;C - - - - - 0x011266 08:9256: 99 20 05
-	STA objSavedY,Y                 ;C - - - - - 0x011269 08:9259: 99 30 05
+	STA objParamA,Y                 ;C - - - - - 0x011263 08:9253: 99 10 05
+	STA objParamB,Y                 ;C - - - - - 0x011266 08:9256: 99 20 05
+	STA objParamC,Y                 ;C - - - - - 0x011269 08:9259: 99 30 05
 	STA objCooldown,Y               ;C - - - - - 0x01126C 08:925C: 99 40 05
 	STA objSubStep,Y                ;C - - - - - 0x01126F 08:925F: 99 50 05
 	STA objVelXLo,Y                 ;C - - - - - 0x011272 08:9262: 99 00 04

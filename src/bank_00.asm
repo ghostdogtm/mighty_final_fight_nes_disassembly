@@ -630,7 +630,7 @@ loc_00_8511:
 	JSR SetChrBank2                 ;C - - - - - 0x000536 00:8526: 20 40 F4
 	LDA #$00                        ;C - - - - - 0x000539 00:8529: A9 00
 	STA objStep                     ;C - - - - - 0x00053B 00:852B: 8D 00 05
-	STA objLandY                    ;C - - - - - 0x00053E 00:852E: 8D 10 05
+	STA objParamA                   ;C - - - - - 0x00053E 00:852E: 8D 10 05
 loc_00_8531:
 	RTS                             ;C - - - - - 0x000541 00:8531: 60
 loc_00_8532:
@@ -667,7 +667,7 @@ loc_00_8559:
 	INC objActive                   ;C - - - - - 0x00057E 00:856E: EE 00 03
 	LDA #$00                        ;C - - - - - 0x000581 00:8571: A9 00
 	STA objStep                     ;C - - - - - 0x000583 00:8573: 8D 00 05
-	STA objLandY                    ;C - - - - - 0x000586 00:8576: 8D 10 05
+	STA objParamA                   ;C - - - - - 0x000586 00:8576: 8D 10 05
 loc_00_8579:
 	LDA objAnimFrame                ;C - - - - - 0x000589 00:8579: AD 70 05
 	CMP #$06                        ;C - - - - - 0x00058C 00:857C: C9 06
@@ -747,7 +747,7 @@ loc_00_85FE:
 	STA objVelXHi                   ;C - - - - - 0x00062B 00:861B: 8D 10 04
 	LDA #$00                        ;C - - - - - 0x00062E 00:861E: A9 00
 	STA objStep                     ;C - - - - - 0x000630 00:8620: 8D 00 05
-	STA objLandY                    ;C - - - - - 0x000633 00:8623: 8D 10 05
+	STA objParamA                   ;C - - - - - 0x000633 00:8623: 8D 10 05
 	LDA #$80                        ;C - - - - - 0x000636 00:8626: A9 80
 	STA objActive                   ;C - - - - - 0x000638 00:8628: 8D 00 03
 	RTS                             ;C - - - - - 0x00063B 00:862B: 60
@@ -1143,7 +1143,7 @@ ofs_00_891B:
 	LDA #$07                        ;C - - - - - 0x00094C 00:893C: A9 07
 	STA objStep                     ;C - - - - - 0x00094E 00:893E: 8D 00 05
 	LDA objY                        ;C - - - - - 0x000951 00:8941: AD C0 03
-	STA objLandY                    ;C - - - - - 0x000954 00:8944: 8D 10 05
+	STA objParamA                   ;C - - - - - 0x000954 00:8944: 8D 10 05
 	INC objActive                   ;C - - - - - 0x000957 00:8947: EE 00 03
 loc_00_894A:
 	LDA objActive                   ;C - - - - - 0x00095A 00:894A: AD 00 03
@@ -1197,7 +1197,7 @@ loc_00_89A2:
 	LDA #$FF                        ;C - - - - - 0x0009C4 00:89B4: A9 FF
 	STA objVelYHi                   ;C - - - - - 0x0009C6 00:89B6: 8D 30 04
 loc_00_89B9:
-	LDA objLandY                    ;C - - - - - 0x0009C9 00:89B9: AD 10 05
+	LDA objParamA                   ;C - - - - - 0x0009C9 00:89B9: AD 10 05
 	CLC                             ;C - - - - - 0x0009CC 00:89BC: 18
 	ADC #$02                        ;C - - - - - 0x0009CD 00:89BD: 69 02
 	CMP objY                        ;C - - - - - 0x0009CF 00:89BF: CD C0 03
@@ -1230,7 +1230,7 @@ loc_00_89F0:
 loc_00_89F5:
 	RTS                             ;C - - - - - 0x000A05 00:89F5: 60
 loc_00_89F6:
-	LDA objLandY                    ;C - - - - - 0x000A06 00:89F6: AD 10 05
+	LDA objParamA                   ;C - - - - - 0x000A06 00:89F6: AD 10 05
 	STA objY                        ;C - - - - - 0x000A09 00:89F9: 8D C0 03
 	LDA #$2F                        ;C - - - - - 0x000A0C 00:89FC: A9 2F
 	JSR SetPlayerAnim               ;C - - - - - 0x000A0E 00:89FE: 20 94 F2
@@ -1732,8 +1732,8 @@ loc_00_8E02:
 	STA timerA4                     ;C - - - - - 0x000E1C 00:8E0C: 85 A4
 	STA playerInvincible            ;C - - - - - 0x000E1E 00:8E0E: 85 3B
 	STA objStep                     ;C - - - - - 0x000E20 00:8E10: 8D 00 05
-	STA objLandY                    ;C - - - - - 0x000E23 00:8E13: 8D 10 05
-	STA objStartY                   ;C - - - - - 0x000E26 00:8E16: 8D 20 05
+	STA objParamA                   ;C - - - - - 0x000E23 00:8E13: 8D 10 05
+	STA objParamB                   ;C - - - - - 0x000E26 00:8E16: 8D 20 05
 	JSR ClearTimerA4                ;C - - - - - 0x000E29 00:8E19: 20 36 F4
 	LDA objY                        ;C - - - - - 0x000E2C 00:8E1C: AD C0 03
 	CMP #$E4                        ;C - - - - - 0x000E2F 00:8E1F: C9 E4
@@ -1817,7 +1817,7 @@ loc_00_8E9E:
 	STA actionStep                  ;C - - - - - 0x000ECE 00:8EBE: 85 35
 	STA scrollY                     ;C - - - - - 0x000ED0 00:8EC0: 85 FA
 	STA objStep                     ;C - - - - - 0x000ED2 00:8EC2: 8D 00 05
-	STA objLandY                    ;C - - - - - 0x000ED5 00:8EC5: 8D 10 05
+	STA objParamA                   ;C - - - - - 0x000ED5 00:8EC5: 8D 10 05
 	STA ram_00BA                    ;C - - - - - 0x000ED8 00:8EC8: 85 BA
 	STA timerA4                     ;C - - - - - 0x000EDA 00:8ECA: 85 A4
 	STA weaponHeld                  ;C - - - - - 0x000EDC 00:8ECC: 85 A9
@@ -2095,7 +2095,7 @@ loc_00_90EA:
 	STA jumpBaseY                   ;C - - - - - 0x001108 00:90F8: 85 A6
 	STA actionStep                  ;C - - - - - 0x00110A 00:90FA: 85 35
 	STA objStep                     ;C - - - - - 0x00110C 00:90FC: 8D 00 05
-	STA objLandY                    ;C - - - - - 0x00110F 00:90FF: 8D 10 05
+	STA objParamA                   ;C - - - - - 0x00110F 00:90FF: 8D 10 05
 	RTS                             ;C - - - - - 0x001112 00:9102: 60
 loc_00_9103:
 	LDA playerHealth                ;C - - - - - 0x001113 00:9103: A5 3A
