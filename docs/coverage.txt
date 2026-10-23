@@ -4,7 +4,7 @@ bank  code(cdl) code(traced) data  unknown
 00         5920          390   1453      429
 01         3093          273   4718      108
 02            0            0   8192        0
-03         2959           86   4866      281
+03         2959           86   4948      199
 04         2781          103   3275     2033
 05         1578           78   5979      557
 06         2044          195   5749      204
@@ -17,9 +17,9 @@ bank  code(cdl) code(traced) data  unknown
 0D         2990           48   5075       79
 0E         7731          247    198       16
 0F         6124          402   1073      593
-all       48124         2741  68979    11228
+all       48124         2741  69061    11146
 
-Unknown bytes: 463 fill (one repeated byte), 72 code-like, 10693 other (probably data)
+Unknown bytes: 463 fill (one repeated byte), 72 code-like, 10611 other (probably data)
 
 CDL anomalies (code flag but not a valid instruction): 0
 
@@ -1357,7 +1357,6 @@ Unknown runs, longest first (len bank:addr):
      91  04:95A5
      89  00:99A7
      87  04:8A69
-     82  03:ACAE
      69  0F:EFBB
      68  09:A071
      65  04:90BF
