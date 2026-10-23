@@ -902,29 +902,29 @@ split 0B:B100 B200 256 ofsset
 0C:87A7 EnemyHitCheckTbl_87A7
 0C:87A8 EnemyHitCheckTbl_87A8
 0C:87AB EnemyHitCheckTbl_87AB
-0C:87B0 EnemyHitCheckTbl_87B0
-0C:87B3 EnemyHitCheckTbl_87B3
-0C:87B6 EnemyHitCheckTbl_87B6
-0C:87BC EnemyHitCheckTbl_87BC
-0C:87C2 EnemyHitCheckTbl_87C2
-0C:87C8 EnemyHitCheckTbl_87C8
-0C:87CE EnemyHitCheckTbl_87CE
-0C:87D2 EnemyHitCheckTbl_87D2
-0C:87D6 EnemyHitCheckTbl_87D6
-0C:87F9 EnemyHitCheckTbl_87F9
-0C:881C EnemyHitCheckTbl_881C
-0C:883F EnemyHitCheckTbl_883F
-0C:8862 EnemyHitCheckTbl_8862
-0C:8885 EnemyHitCheckTbl_8885
-0C:88A8 EnemyHitCheckTbl_88A8
-0C:88CB EnemyHitCheckTbl_88CB
-0C:88EE EnemyHitCheckTbl_88EE
-0C:8911 EnemyHitCheckTbl_8911
-0C:8934 EnemyHitCheckTbl_8934
-0C:8957 EnemyHitCheckTbl_8957
-0C:897A EnemyHitCheckTbl_897A
-0C:899D EnemyHitCheckTbl_899D
-0C:89C0 EnemyHitCheckTbl_89C0
+0C:87B0 PlayerAttackJumpLo_87B0
+0C:87B3 PlayerAttackJumpHi_87B3
+0C:87B6 PlayerAttackJumpLo_87B6
+0C:87BC PlayerAttackJumpHi_87BC
+0C:87C2 PlayerAttackJumpLo_87C2
+0C:87C8 PlayerAttackJumpHi_87C8
+0C:87CE PlayerAttackJumpLo_87CE
+0C:87D2 PlayerAttackJumpHi_87D2
+0C:87D6 PlayerAttackDamage_87D6
+0C:87F9 PlayerAttackDamage_87F9
+0C:881C PlayerAttackDamage_881C
+0C:883F PlayerAttackDamage_883F
+0C:8862 PlayerAttackDamage_8862
+0C:8885 PlayerAttackDamage_8885
+0C:88A8 PlayerAttackDamage_88A8
+0C:88CB PlayerAttackDamage_88CB
+0C:88EE PlayerAttackDamage_88EE
+0C:8911 PlayerAttackDamage_8911
+0C:8934 PlayerAttackDamage_8934
+0C:8957 PlayerAttackDamage_8957
+0C:897A PlayerAttackDamage_897A
+0C:899D PlayerAttackDamage_899D
+0C:89C0 PlayerAttackDamage_89C0
 0C:8ACE PlayerSpecialDispatchTbl_8ACE
 0C:8AD1 PlayerSpecialDispatchTbl_8AD1
 0C:8AD4 EnemyAI_NopTbl_8AD4
@@ -1199,3 +1199,4 @@ data 09:AA43-AA4A ; map bytes in the stage-9 bank, not an address table
 text 05:A1CD-A23B ; unused boss line: JESSICA HAS ALREADY BEEN TAKEN TO OUR SECRET HIDEOUT / MY BROTHER-S DEFEAT WILL BE AVENGED
 table 02:989E-98F3 2 frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
 table 03:ACAE-ACFF 2 sprite offset set $A4 (dy, dx) used by frame $B6; the sets after it follow
+table 0C:87D6-89E2 35 PlayerAttackDamage rows: 35 bytes indexed by attackType, selected by player and level through PlayerAttackJump*; nonzero = damage dealt

@@ -13,13 +13,13 @@ bank  code(cdl) code(traced) data  unknown
 09          745          156   5651     1640
 0A           32           12   6724     1424
 0B         2957          112   4809      314
-0C         6477          492    786      437
+0C         6477          492   1138       85
 0D         2990           48   5075       79
 0E         7731          247    198       16
 0F         6124          402   1073      593
-all       48124         2741  69061    11146
+all       48124         2741  69413    10794
 
-Unknown bytes: 463 fill (one repeated byte), 72 code-like, 10611 other (probably data)
+Unknown bytes: 364 fill (one repeated byte), 16 code-like, 10414 other (probably data)
 
 CDL anomalies (code flag but not a valid instruction): 0
 
@@ -731,7 +731,7 @@ Traced code (instruction starts, verify by hand):
   0C:8037  SEC
   0C:8038  SBC #$06
   0C:803A  TAY
-  0C:8651  LDA EnemyHitCheckTbl_8885,Y
+  0C:8651  LDA PlayerAttackDamage_8885,Y
   0C:8654  BNE loc_0C_8686
   0C:870D  LDA #$00
   0C:870F  STA ram_0038
@@ -1318,14 +1318,7 @@ Split lo/hi tables whose guessed entries disagreed on the bank (entries left as 
   0C:83AF
 
 Code-like unknown runs (decode cleanly to the end, no BRK; review by hand):
-     15  0C:8899
      10  0E:D450
-      9  0C:8997
-      8  0C:89BB
-      6  0C:89DD
-      6  0C:89D4
-      6  0C:89B1
-      6  0C:898E
       6  09:A436
 
 Unknown runs, longest first (len bank:addr):
@@ -1369,13 +1362,11 @@ Unknown runs, longest first (len bank:addr):
      40  0B:A3AE
      40  0A:8A8B
      36  04:9D32
-     35  0C:8885
      34  0A:8B65
      34  03:AA60
      34  03:A788
      31  04:8B21
      30  0A:8BC1
-     25  0C:8803
      24  0F:EF35
      23  08:9930
      23  08:98A4
@@ -1412,7 +1403,6 @@ Unknown runs, longest first (len bank:addr):
      15  08:94D1
      15  08:944A
      15  03:BE7D
-     14  0C:88D5
      13  08:98EA
      12  08:95DF
      12  08:9579
@@ -1431,27 +1421,15 @@ Unknown runs, longest first (len bank:addr):
      10  0C:9FE2
      10  0C:9FA7
      10  0C:9F91
-     10  0C:893E
-     10  0C:88F8
-     10  0C:886C
-     10  0C:8849
-     10  0C:8826
-     10  0C:87E0
      10  06:89F7
       9  0F:F8CC
       9  0F:F6DF
-      9  0C:8997
-      9  0C:8974
-      9  0C:8951
-      9  0C:891C
-      9  0C:88B3
       9  08:959D
       9  08:9516
       9  08:948F
       9  08:9408
       8  0F:FFF0
       8  0F:EBAA
-      8  0C:89BB
       8  09:A1D5
       8  08:99E3
       8  08:81F6
@@ -1461,7 +1439,6 @@ Unknown runs, longest first (len bank:addr):
       8  06:89DF
       8  04:9646
       7  0F:FCB9
-      7  0C:896B
       7  0B:BD75
       7  0B:BD6D
       7  08:93CB
@@ -1475,12 +1452,6 @@ Unknown runs, longest first (len bank:addr):
       6  0F:ECC9
       6  0F:EC08
       6  0D:A3D3
-      6  0C:89DD
-      6  0C:89D4
-      6  0C:89B1
-      6  0C:898E
-      6  0C:88E8
-      6  0C:8877
       6  0B:A286
       6  0A:8568
       6  0A:855F
@@ -1513,13 +1484,6 @@ Unknown runs, longest first (len bank:addr):
       5  0F:F6C3
       5  0F:EC29
       5  0D:A3CD
-      5  0C:8988
-      5  0C:892F
-      5  0C:890C
-      5  0C:8904
-      5  0C:88C6
-      5  0C:883A
-      5  0C:87F4
       5  0A:853F
       5  09:A4CF
       5  09:A0CE
@@ -1542,9 +1506,6 @@ Unknown runs, longest first (len bank:addr):
       4  0D:A3EB
       4  0D:A3BF
       4  0C:9D67
-      4  0C:8880
-      4  0C:885D
-      4  0C:8856
       4  0A:9ACC
       4  0A:8489
       4  09:A4C6
@@ -1588,14 +1549,6 @@ Unknown runs, longest first (len bank:addr):
       3  0F:F6DB
       3  0F:EC25
       3  0D:AE2C
-      3  0C:89C6
-      3  0C:89A3
-      3  0C:8980
-      3  0C:895D
-      3  0C:8949
-      3  0C:8834
-      3  0C:87EE
-      3  0C:87D7
       3  0A:8590
       3  09:A42D
       3  09:A385
@@ -1695,20 +1648,6 @@ Unknown runs, longest first (len bank:addr):
       2  0C:9EB4
       2  0C:8BC0
       2  0C:8BB5
-      2  0C:894D
-      2  0C:893B
-      2  0C:892A
-      2  0C:8918
-      2  0C:88F5
-      2  0C:88E4
-      2  0C:88D2
-      2  0C:88C1
-      2  0C:88BE
-      2  0C:88AF
-      2  0C:8863
-      2  0C:8840
-      2  0C:881D
-      2  0C:87FA
       2  0C:85FE
       2  0B:BD7D
       2  0B:B693
@@ -1863,29 +1802,6 @@ Unknown runs, longest first (len bank:addr):
       1  0C:9CA9
       1  0C:9CA5
       1  0C:8BBC
-      1  0C:89CE
-      1  0C:89CA
-      1  0C:89C4
-      1  0C:89A7
-      1  0C:89A1
-      1  0C:8984
-      1  0C:897E
-      1  0C:8965
-      1  0C:8961
-      1  0C:895B
-      1  0C:8936
-      1  0C:8928
-      1  0C:8926
-      1  0C:8913
-      1  0C:88F0
-      1  0C:88CD
-      1  0C:88AA
-      1  0C:886A
-      1  0C:8854
-      1  0C:8832
-      1  0C:8824
-      1  0C:8801
-      1  0C:87DE
       1  0C:8601
       1  0A:85ED
       1  0A:85DB

@@ -645,9 +645,9 @@ loc_0C_85A8:
 loc_0C_85B6:
 	JSR InitHitFields               ;C - - - - - 0x0185C6 0C:85B6: 20 09 FB
 	LDY playerId                    ;C - - - - - 0x0185C9 0C:85B9: A4 34
-	LDA EnemyHitCheckTbl_87B0,Y     ;C - - - - - 0x0185CB 0C:85BB: B9 B0 87
+	LDA PlayerAttackJumpLo_87B0,Y   ;C - - - - - 0x0185CB 0C:85BB: B9 B0 87
 	STA ptr_02                      ;C - - - - - 0x0185CE 0C:85BE: 85 02
-	LDA EnemyHitCheckTbl_87B3,Y     ;C - - - - - 0x0185D0 0C:85C0: B9 B3 87
+	LDA PlayerAttackJumpHi_87B3,Y   ;C - - - - - 0x0185D0 0C:85C0: B9 B3 87
 	STA ptr_02+1                    ;C - - - - - 0x0185D3 0C:85C3: 85 03
 	JMP (ptr_02)                    ;C - - - - - 0x0185D5 0C:85C5: 6C 02 00
 ofs_0C_85C8:
@@ -666,9 +666,9 @@ loc_0C_85DA:
 loc_0C_85DC:
 	JSR QueueSound                  ;C - - - - - 0x0185EC 0C:85DC: 20 4C F3
 	LDY playerLevel                 ;C - - - - - 0x0185EF 0C:85DF: A4 6B
-	LDA EnemyHitCheckTbl_87B6,Y     ;C - - - - - 0x0185F1 0C:85E1: B9 B6 87
+	LDA PlayerAttackJumpLo_87B6,Y   ;C - - - - - 0x0185F1 0C:85E1: B9 B6 87
 	STA ptr_04                      ;C - - - - - 0x0185F4 0C:85E4: 85 04
-	LDA EnemyHitCheckTbl_87BC,Y     ;C - - - - - 0x0185F6 0C:85E6: B9 BC 87
+	LDA PlayerAttackJumpHi_87BC,Y   ;C - - - - - 0x0185F6 0C:85E6: B9 BC 87
 	STA ptr_04+1                    ;C - - - - - 0x0185F9 0C:85E9: 85 05
 	LDY attackType                  ;C - - - - - 0x0185FB 0C:85EB: A4 A7
 	JMP (ptr_04)                    ;C - - - - - 0x0185FD 0C:85ED: 6C 04 00
@@ -689,9 +689,9 @@ loc_0C_8602:
 loc_0C_8604:
 	JSR QueueSound                  ;C - - - - - 0x018614 0C:8604: 20 4C F3
 	LDY playerLevel                 ;C - - - - - 0x018617 0C:8607: A4 6B
-	LDA EnemyHitCheckTbl_87C2,Y     ;C - - - - - 0x018619 0C:8609: B9 C2 87
+	LDA PlayerAttackJumpLo_87C2,Y   ;C - - - - - 0x018619 0C:8609: B9 C2 87
 	STA ptr_04                      ;C - - - - - 0x01861C 0C:860C: 85 04
-	LDA EnemyHitCheckTbl_87C8,Y     ;C - - - - - 0x01861E 0C:860E: B9 C8 87
+	LDA PlayerAttackJumpHi_87C8,Y   ;C - - - - - 0x01861E 0C:860E: B9 C8 87
 	STA ptr_04+1                    ;C - - - - - 0x018621 0C:8611: 85 05
 	LDY attackType                  ;C - - - - - 0x018623 0C:8613: A4 A7
 	JMP (ptr_04)                    ;C - - - - - 0x018625 0C:8615: 6C 04 00
@@ -706,59 +706,59 @@ loc_0C_8622:
 loc_0C_8624:
 	JSR QueueSound                  ;C - - - - - 0x018634 0C:8624: 20 4C F3
 	LDY playerLevel                 ;C - - - - - 0x018637 0C:8627: A4 6B
-	LDA EnemyHitCheckTbl_87CE,Y     ;C - - - - - 0x018639 0C:8629: B9 CE 87
+	LDA PlayerAttackJumpLo_87CE,Y   ;C - - - - - 0x018639 0C:8629: B9 CE 87
 	STA ptr_04                      ;C - - - - - 0x01863C 0C:862C: 85 04
-	LDA EnemyHitCheckTbl_87D2,Y     ;C - - - - - 0x01863E 0C:862E: B9 D2 87
+	LDA PlayerAttackJumpHi_87D2,Y   ;C - - - - - 0x01863E 0C:862E: B9 D2 87
 	STA ptr_04+1                    ;C - - - - - 0x018641 0C:8631: 85 05
 	LDY attackType                  ;C - - - - - 0x018643 0C:8633: A4 A7
 	JMP (ptr_04)                    ;C - - - - - 0x018645 0C:8635: 6C 04 00
 ofs_0C_8638:
-	LDA EnemyHitCheckTbl_87D6,Y     ;C - - J - - 0x018648 0C:8638: B9 D6 87
+	LDA PlayerAttackDamage_87D6,Y   ;C - - J - - 0x018648 0C:8638: B9 D6 87
 	BNE loc_0C_8686                 ;C - - - - - 0x01864B 0C:863B: D0 49
 ofs_0C_863D:
-	LDA EnemyHitCheckTbl_87F9,Y     ;C - - J - - 0x01864D 0C:863D: B9 F9 87
+	LDA PlayerAttackDamage_87F9,Y   ;C - - J - - 0x01864D 0C:863D: B9 F9 87
 	BNE loc_0C_8686                 ;C - - - - - 0x018650 0C:8640: D0 44
 ofs_0C_8642:
-	LDA EnemyHitCheckTbl_881C,Y     ;C - - J - - 0x018652 0C:8642: B9 1C 88
+	LDA PlayerAttackDamage_881C,Y   ;C - - J - - 0x018652 0C:8642: B9 1C 88
 	BNE loc_0C_8686                 ;C - - - - - 0x018655 0C:8645: D0 3F
 ofs_0C_8647:
-	LDA EnemyHitCheckTbl_883F,Y     ;C - - J - - 0x018657 0C:8647: B9 3F 88
+	LDA PlayerAttackDamage_883F,Y   ;C - - J - - 0x018657 0C:8647: B9 3F 88
 	BNE loc_0C_8686                 ;C - - - - - 0x01865A 0C:864A: D0 3A
 ofs_0C_864C:
-	LDA EnemyHitCheckTbl_8862,Y     ;C - - J - - 0x01865C 0C:864C: B9 62 88
+	LDA PlayerAttackDamage_8862,Y   ;C - - J - - 0x01865C 0C:864C: B9 62 88
 	BNE loc_0C_8686                 ;C - - - - - 0x01865F 0C:864F: D0 35
 ofs_0C_8651:
-	LDA EnemyHitCheckTbl_8885,Y     ;c - - - - - 0x018661 0C:8651: B9 85 88
+	LDA PlayerAttackDamage_8885,Y   ;c - - - - - 0x018661 0C:8651: B9 85 88
 	BNE loc_0C_8686                 ;c - - - - - 0x018664 0C:8654: D0 30
 ofs_0C_8656:
-	LDA EnemyHitCheckTbl_88A8,Y     ;C - - J - - 0x018666 0C:8656: B9 A8 88
+	LDA PlayerAttackDamage_88A8,Y   ;C - - J - - 0x018666 0C:8656: B9 A8 88
 	BNE loc_0C_8686                 ;C - - - - - 0x018669 0C:8659: D0 2B
 ofs_0C_865B:
-	LDA EnemyHitCheckTbl_88A8,Y     ;C - - J - - 0x01866B 0C:865B: B9 A8 88
+	LDA PlayerAttackDamage_88A8,Y   ;C - - J - - 0x01866B 0C:865B: B9 A8 88
 	BNE loc_0C_8686                 ;C - - - - - 0x01866E 0C:865E: D0 26
 ofs_0C_8660:
-	LDA EnemyHitCheckTbl_88CB,Y     ;C - - J - - 0x018670 0C:8660: B9 CB 88
+	LDA PlayerAttackDamage_88CB,Y   ;C - - J - - 0x018670 0C:8660: B9 CB 88
 	BNE loc_0C_8686                 ;C - - - - - 0x018673 0C:8663: D0 21
 ofs_0C_8665:
-	LDA EnemyHitCheckTbl_88EE,Y     ;C - - J - - 0x018675 0C:8665: B9 EE 88
+	LDA PlayerAttackDamage_88EE,Y   ;C - - J - - 0x018675 0C:8665: B9 EE 88
 	BNE loc_0C_8686                 ;C - - - - - 0x018678 0C:8668: D0 1C
 ofs_0C_866A:
-	LDA EnemyHitCheckTbl_8911,Y     ;C - - J - - 0x01867A 0C:866A: B9 11 89
+	LDA PlayerAttackDamage_8911,Y   ;C - - J - - 0x01867A 0C:866A: B9 11 89
 	BNE loc_0C_8686                 ;C - - - - - 0x01867D 0C:866D: D0 17
 ofs_0C_866F:
-	LDA EnemyHitCheckTbl_8934,Y     ;C - - J - - 0x01867F 0C:866F: B9 34 89
+	LDA PlayerAttackDamage_8934,Y   ;C - - J - - 0x01867F 0C:866F: B9 34 89
 	BNE loc_0C_8686                 ;C - - - - - 0x018682 0C:8672: D0 12
 ofs_0C_8674:
-	LDA EnemyHitCheckTbl_8957,Y     ;C - - J - - 0x018684 0C:8674: B9 57 89
+	LDA PlayerAttackDamage_8957,Y   ;C - - J - - 0x018684 0C:8674: B9 57 89
 	BNE loc_0C_8686                 ;C - - - - - 0x018687 0C:8677: D0 0D
 ofs_0C_8679:
-	LDA EnemyHitCheckTbl_897A,Y     ;C - - J - - 0x018689 0C:8679: B9 7A 89
+	LDA PlayerAttackDamage_897A,Y   ;C - - J - - 0x018689 0C:8679: B9 7A 89
 	BNE loc_0C_8686                 ;C - - - - - 0x01868C 0C:867C: D0 08
 ofs_0C_867E:
-	LDA EnemyHitCheckTbl_899D,Y     ;C - - J - - 0x01868E 0C:867E: B9 9D 89
+	LDA PlayerAttackDamage_899D,Y   ;C - - J - - 0x01868E 0C:867E: B9 9D 89
 	BNE loc_0C_8686                 ;C - - - - - 0x018691 0C:8681: D0 03
 ofs_0C_8683:
-	LDA EnemyHitCheckTbl_89C0,Y     ;C - - J - - 0x018693 0C:8683: B9 C0 89
+	LDA PlayerAttackDamage_89C0,Y   ;C - - J - - 0x018693 0C:8683: B9 C0 89
 loc_0C_8686:
 	STA ptr_00                      ;C - - - - - 0x018696 0C:8686: 85 00
 	LDA attackType                  ;C - - - - - 0x018698 0C:8688: A5 A7
@@ -913,199 +913,52 @@ EnemyHitCheckTbl_87A8:
 	.byte $0C,$00,$04               ;- D 0 - - - 0x0187B8 0C:87A8:
 EnemyHitCheckTbl_87AB:
 	.byte $02,$04,$04,$08,$08       ;- D 0 - - - 0x0187BB 0C:87AB:
-EnemyHitCheckTbl_87B0:
+PlayerAttackJumpLo_87B0:
 	.lobytes ofs_0C_85C8, ofs_0C_85F0, ofs_0C_8618;- D 0 - - - 0x0187C0 0C:87B0:
-EnemyHitCheckTbl_87B3:
+PlayerAttackJumpHi_87B3:
 	.hibytes ofs_0C_85C8, ofs_0C_85F0, ofs_0C_8618;- D 0 - - - 0x0187C3 0C:87B3:
-EnemyHitCheckTbl_87B6:
+PlayerAttackJumpLo_87B6:
 	.lobytes ofs_0C_8638, ofs_0C_863D, ofs_0C_8642, ofs_0C_8647, ofs_0C_864C, ofs_0C_8651;- D 0 - - - 0x0187C6 0C:87B6:
-EnemyHitCheckTbl_87BC:
+PlayerAttackJumpHi_87BC:
 	.hibytes ofs_0C_8638, ofs_0C_863D, ofs_0C_8642, ofs_0C_8647, ofs_0C_864C, ofs_0C_8651;- D 0 - - - 0x0187CC 0C:87BC:
-EnemyHitCheckTbl_87C2:
+PlayerAttackJumpLo_87C2:
 	.lobytes ofs_0C_8656, ofs_0C_865B, ofs_0C_8660, ofs_0C_8665, ofs_0C_866A, ofs_0C_866F;- D 0 - - - 0x0187D2 0C:87C2:
-EnemyHitCheckTbl_87C8:
+PlayerAttackJumpHi_87C8:
 	.hibytes ofs_0C_8656, ofs_0C_865B, ofs_0C_8660, ofs_0C_8665, ofs_0C_866A, ofs_0C_866F;- D 0 - - - 0x0187D8 0C:87C8:
-EnemyHitCheckTbl_87CE:
+PlayerAttackJumpLo_87CE:
 	.lobytes ofs_0C_8674, ofs_0C_8679, ofs_0C_867E, ofs_0C_8683;- D 0 - - - 0x0187DE 0C:87CE:
-EnemyHitCheckTbl_87D2:
+PlayerAttackJumpHi_87D2:
 	.hibytes ofs_0C_8674, ofs_0C_8679, ofs_0C_867E, ofs_0C_8683;- D 0 - - - 0x0187E2 0C:87D2:
-EnemyHitCheckTbl_87D6:
-	.byte $02                       ;- D 0 - - - 0x0187E6 0C:87D6:
-	.byte $09,$08,$04               ;- - - - - - 0x0187E7 0C:87D7:
-	.byte $04,$08,$03,$0C           ;- D 0 - - - 0x0187EA 0C:87DA:
-	.byte $09                       ;- - - - - - 0x0187EE 0C:87DE:
-	.byte $08                       ;- D 0 - - - 0x0187EF 0C:87DF:
-	.byte $08,$01,$01,$01,$01,$01,$01,$01,$01,$01;- - - - - - 0x0187F0 0C:87E0:
-	.byte $08,$08,$08,$08           ;- D 0 - - - 0x0187FA 0C:87EA:
-	.byte $01,$01,$01               ;- - - - - - 0x0187FE 0C:87EE:
-	.byte $04,$04,$08               ;- D 0 - - - 0x018801 0C:87F1:
-	.byte $01,$01,$01,$01,$0C       ;- - - - - - 0x018804 0C:87F4:
-EnemyHitCheckTbl_87F9:
-	.byte $03                       ;- D 0 - - - 0x018809 0C:87F9:
-	.byte $0A,$08                   ;- - - - - - 0x01880A 0C:87FA:
-	.byte $05,$05,$0A,$04,$0E       ;- D 0 - - - 0x01880C 0C:87FC:
-	.byte $0B                       ;- - - - - - 0x018811 0C:8801:
-	.byte $08                       ;- D 0 - - - 0x018812 0C:8802:
-	.byte $0A,$01,$01,$01,$01,$01,$01,$01,$01,$01,$08,$08,$08,$08,$01,$01;- - - - - - 0x018813 0C:8803:
-	.byte $01,$05,$05,$09,$01,$01,$01,$01,$0E;- - - - - - 0x018823 0C:8813:
-EnemyHitCheckTbl_881C:
-	.byte $04                       ;- D 0 - - - 0x01882C 0C:881C:
-	.byte $0B,$08                   ;- - - - - - 0x01882D 0C:881D:
-	.byte $06,$06,$0C,$05,$10       ;- D 0 - - - 0x01882F 0C:881F:
-	.byte $0D                       ;- - - - - - 0x018834 0C:8824:
-	.byte $08                       ;- D 0 - - - 0x018835 0C:8825:
-	.byte $0C,$01,$01,$01,$01,$01,$01,$01,$01,$01;- - - - - - 0x018836 0C:8826:
-	.byte $08,$08                   ;- D 0 - - - 0x018840 0C:8830:
-	.byte $08                       ;- - - - - - 0x018842 0C:8832:
-	.byte $08                       ;- D 0 - - - 0x018843 0C:8833:
-	.byte $01,$01,$01               ;- - - - - - 0x018844 0C:8834:
-	.byte $06,$06,$0A               ;- D 0 - - - 0x018847 0C:8837:
-	.byte $01,$01,$01,$01,$10       ;- - - - - - 0x01884A 0C:883A:
-EnemyHitCheckTbl_883F:
-	.byte $05                       ;- D 0 - - - 0x01884F 0C:883F:
-	.byte $0C,$08                   ;- - - - - - 0x018850 0C:8840:
-	.byte $07,$07,$0E,$06,$12,$0F,$08;- D 0 - - - 0x018852 0C:8842:
-	.byte $0E,$01,$01,$01,$01,$01,$01,$01,$01,$01;- - - - - - 0x018859 0C:8849:
-	.byte $08                       ;- D 0 - - - 0x018863 0C:8853:
-	.byte $08                       ;- - - - - - 0x018864 0C:8854:
-	.byte $08                       ;- D 0 - - - 0x018865 0C:8855:
-	.byte $08,$01,$01,$01           ;- - - - - - 0x018866 0C:8856:
-	.byte $07,$07,$0B               ;- D 0 - - - 0x01886A 0C:885A:
-	.byte $01,$01,$01,$01           ;- - - - - - 0x01886D 0C:885D:
-	.byte $12                       ;- D 0 - - - 0x018871 0C:8861:
-EnemyHitCheckTbl_8862:
-	.byte $06                       ;- D 0 - - - 0x018872 0C:8862:
-	.byte $0D,$08                   ;- - - - - - 0x018873 0C:8863:
-	.byte $08,$08,$10,$07,$14       ;- D 0 - - - 0x018875 0C:8865:
-	.byte $11                       ;- - - - - - 0x01887A 0C:886A:
-	.byte $08                       ;- D 0 - - - 0x01887B 0C:886B:
-	.byte $10,$01,$01,$01,$01,$01,$01,$01,$01,$01;- - - - - - 0x01887C 0C:886C:
-	.byte $08                       ;- D 0 - - - 0x018886 0C:8876:
-	.byte $08,$08,$08,$01,$01,$01   ;- - - - - - 0x018887 0C:8877:
-	.byte $08,$08,$0C               ;- D 0 - - - 0x01888D 0C:887D:
-	.byte $01,$01,$01,$01           ;- - - - - - 0x018890 0C:8880:
-	.byte $14                       ;- D 0 - - - 0x018894 0C:8884:
-EnemyHitCheckTbl_8885:
-	.byte $0B,$0E,$08,$0D,$0D,$15,$0C,$19,$16,$08,$15,$01,$01,$01,$01,$01;- - - - - - 0x018895 0C:8885:
-	.byte $01,$01,$01,$01,$08,$08,$08,$08,$01,$01,$01,$0D,$0D,$11,$01,$01;- - - - - - 0x0188A5 0C:8895:
-	.byte $01,$01,$19               ;- - - - - - 0x0188B5 0C:88A5:
-EnemyHitCheckTbl_88A8:
-	.byte $01,$05                   ;- D 0 - - - 0x0188B8 0C:88A8:
-	.byte $08                       ;- - - - - - 0x0188BA 0C:88AA:
-	.byte $05,$05,$0A,$03           ;- D 0 - - - 0x0188BB 0C:88AB:
-	.byte $08,$02                   ;- - - - - - 0x0188BF 0C:88AF:
-	.byte $08,$14                   ;- D 0 - - - 0x0188C1 0C:88B1:
-	.res 9, $01                     ;- - - - - - 0x0188C3 0C:88B3: fill 9 bytes
-	.byte $08,$08                   ;- D 0 - - - 0x0188CC 0C:88BC:
-	.byte $08,$08                   ;- - - - - - 0x0188CE 0C:88BE:
-	.byte $0B                       ;- D 0 - - - 0x0188D0 0C:88C0:
-	.byte $01,$01                   ;- - - - - - 0x0188D1 0C:88C1:
-	.byte $04,$04,$08               ;- D 0 - - - 0x0188D3 0C:88C3:
-	.byte $01,$01,$01,$01,$01       ;- - - - - - 0x0188D6 0C:88C6:
-EnemyHitCheckTbl_88CB:
-	.byte $01,$07                   ;- D 0 - - - 0x0188DB 0C:88CB:
-	.byte $08                       ;- - - - - - 0x0188DD 0C:88CD:
-	.byte $07,$07,$0E,$06           ;- D 0 - - - 0x0188DE 0C:88CE:
-	.byte $08,$02                   ;- - - - - - 0x0188E2 0C:88D2:
-	.byte $08                       ;- D 0 - - - 0x0188E4 0C:88D4:
-	.byte $15,$01,$01,$01,$01,$01,$01,$01,$01,$01,$08,$08,$08,$08;- - - - - - 0x0188E5 0C:88D5:
-	.byte $0F                       ;- D 0 - - - 0x0188F3 0C:88E3:
-	.byte $01,$01                   ;- - - - - - 0x0188F4 0C:88E4:
-	.byte $06,$06                   ;- D 0 - - - 0x0188F6 0C:88E6:
-	.byte $0A,$01,$01,$01,$01,$01   ;- - - - - - 0x0188F8 0C:88E8:
-EnemyHitCheckTbl_88EE:
-	.byte $01,$08                   ;- D 0 - - - 0x0188FE 0C:88EE:
-	.byte $08                       ;- - - - - - 0x018900 0C:88F0:
-	.byte $08,$08,$10,$07           ;- D 0 - - - 0x018901 0C:88F1:
-	.byte $08,$02                   ;- - - - - - 0x018905 0C:88F5:
-	.byte $08                       ;- D 0 - - - 0x018907 0C:88F7:
-	.byte $15,$01,$01,$01,$01,$01,$01,$01,$01,$01;- - - - - - 0x018908 0C:88F8:
-	.byte $08,$08                   ;- D 0 - - - 0x018912 0C:8902:
-	.byte $08,$08,$11,$01,$01       ;- - - - - - 0x018914 0C:8904:
-	.byte $07,$07,$0B               ;- D 0 - - - 0x018919 0C:8909:
-	.byte $01,$01,$01,$01,$01       ;- - - - - - 0x01891C 0C:890C:
-EnemyHitCheckTbl_8911:
-	.byte $01,$09                   ;- D 0 - - - 0x018921 0C:8911:
-	.byte $08                       ;- - - - - - 0x018923 0C:8913:
-	.byte $09,$09,$12,$08           ;- D 0 - - - 0x018924 0C:8914:
-	.byte $08,$02                   ;- - - - - - 0x018928 0C:8918:
-	.byte $08,$15                   ;- D 0 - - - 0x01892A 0C:891A:
-	.res 9, $01                     ;- - - - - - 0x01892C 0C:891C: fill 9 bytes
-	.byte $08                       ;- D 0 - - - 0x018935 0C:8925:
-	.byte $08                       ;- - - - - - 0x018936 0C:8926:
-	.byte $08                       ;- D 0 - - - 0x018937 0C:8927:
-	.byte $08                       ;- - - - - - 0x018938 0C:8928:
-	.byte $13                       ;- D 0 - - - 0x018939 0C:8929:
-	.byte $01,$01                   ;- - - - - - 0x01893A 0C:892A:
-	.byte $08,$08,$0C               ;- D 0 - - - 0x01893C 0C:892C:
-	.byte $01,$01,$01,$01,$01       ;- - - - - - 0x01893F 0C:892F:
-EnemyHitCheckTbl_8934:
-	.byte $02,$0E                   ;- D 0 - - - 0x018944 0C:8934:
-	.byte $08                       ;- - - - - - 0x018946 0C:8936:
-	.byte $0E,$0E,$17,$0D           ;- D 0 - - - 0x018947 0C:8937:
-	.byte $08,$02                   ;- - - - - - 0x01894B 0C:893B:
-	.byte $08                       ;- D 0 - - - 0x01894D 0C:893D:
-	.byte $15,$01,$01,$01,$01,$01,$01,$01,$01,$01;- - - - - - 0x01894E 0C:893E:
-	.byte $08                       ;- D 0 - - - 0x018958 0C:8948:
-	.byte $08,$08,$08               ;- - - - - - 0x018959 0C:8949:
-	.byte $18                       ;- D 0 - - - 0x01895C 0C:894C:
-	.byte $01,$01                   ;- - - - - - 0x01895D 0C:894D:
-	.byte $0D,$0D                   ;- D 0 - - - 0x01895F 0C:894F:
-	.byte $11,$01,$01,$01,$01,$01   ;- - - - - - 0x018961 0C:8951:
-EnemyHitCheckTbl_8957:
-	.byte $02,$0A,$08               ;- - - - - - 0x018967 0C:8957:
-	.byte $0A                       ;- D 0 - - - 0x01896A 0C:895A:
-	.byte $0A                       ;- - - - - - 0x01896B 0C:895B:
-	.byte $10                       ;- D 0 - - - 0x01896C 0C:895C:
-	.byte $01,$01,$20               ;- - - - - - 0x01896D 0C:895D:
-	.byte $08                       ;- D 0 - - - 0x018970 0C:8960:
-	.byte $01                       ;- - - - - - 0x018971 0C:8961:
-	.byte $06,$04,$0A               ;- D 0 - - - 0x018972 0C:8962:
-	.byte $20                       ;- - - - - - 0x018975 0C:8965:
-	.byte $08,$08,$08,$08,$18       ;- D 0 - - - 0x018976 0C:8966:
-	.byte $01,$01,$01,$01,$01,$02,$02;- - - - - - 0x01897B 0C:896B:
-	.byte $05,$05                   ;- D 0 - - - 0x018982 0C:8972:
-	.byte $09,$01,$01,$01,$01,$01   ;- - - - - - 0x018984 0C:8974:
-EnemyHitCheckTbl_897A:
-	.byte $02,$0A,$08               ;- - - - - - 0x01898A 0C:897A:
-	.byte $0C                       ;- D 0 - - - 0x01898D 0C:897D:
-	.byte $0C                       ;- - - - - - 0x01898E 0C:897E:
-	.byte $14                       ;- D 0 - - - 0x01898F 0C:897F:
-	.byte $01,$0C,$22               ;- - - - - - 0x018990 0C:8980:
-	.byte $08                       ;- D 0 - - - 0x018993 0C:8983:
-	.byte $01                       ;- - - - - - 0x018994 0C:8984:
-	.byte $07,$06,$0C               ;- D 0 - - - 0x018995 0C:8985:
-	.byte $22,$08,$08,$08,$08       ;- - - - - - 0x018998 0C:8988:
-	.byte $1C                       ;- D 0 - - - 0x01899D 0C:898D:
-	.byte $01,$01,$01,$01,$01,$04   ;- - - - - - 0x01899E 0C:898E:
-	.byte $04,$06,$06               ;- D 0 - - - 0x0189A4 0C:8994:
-	.byte $0A,$01,$01,$01,$01,$01   ;- - - - - - 0x0189A7 0C:8997:
-EnemyHitCheckTbl_899D:
-	.byte $02,$0A,$08               ;- - - - - - 0x0189AD 0C:899D:
-	.byte $0E                       ;- D 0 - - - 0x0189B0 0C:89A0:
-	.byte $0E                       ;- - - - - - 0x0189B1 0C:89A1:
-	.byte $18                       ;- D 0 - - - 0x0189B2 0C:89A2:
-	.byte $01,$01,$24               ;- - - - - - 0x0189B3 0C:89A3:
-	.byte $08                       ;- D 0 - - - 0x0189B6 0C:89A6:
-	.byte $01                       ;- - - - - - 0x0189B7 0C:89A7:
-	.byte $08,$0A,$0E,$24,$08,$08,$08,$08,$20;- D 0 - - - 0x0189B8 0C:89A8:
-	.byte $01,$01,$01,$01,$01,$06   ;- - - - - - 0x0189C1 0C:89B1:
-	.byte $06,$07,$07,$0B           ;- D 0 - - - 0x0189C7 0C:89B7:
-	.byte $01,$01,$01,$01,$01       ;- - - - - - 0x0189CB 0C:89BB:
-EnemyHitCheckTbl_89C0:
-	.byte $02,$0A,$08               ;- - - - - - 0x0189D0 0C:89C0:
-	.byte $13                       ;- D 0 - - - 0x0189D3 0C:89C3:
-	.byte $13                       ;- - - - - - 0x0189D4 0C:89C4:
-	.byte $1D                       ;- D 0 - - - 0x0189D5 0C:89C5:
-	.byte $01,$01,$29               ;- - - - - - 0x0189D6 0C:89C6:
-	.byte $08                       ;- D 0 - - - 0x0189D9 0C:89C9:
-	.byte $01                       ;- - - - - - 0x0189DA 0C:89CA:
-	.byte $0D,$0F,$13               ;- D 0 - - - 0x0189DB 0C:89CB:
-	.byte $29                       ;- - - - - - 0x0189DE 0C:89CE:
-	.byte $08,$08,$08,$08,$27       ;- D 0 - - - 0x0189DF 0C:89CF:
-	.byte $01,$01,$01,$01,$01,$08   ;- - - - - - 0x0189E4 0C:89D4:
-	.byte $08,$0C,$0C               ;- D 0 - - - 0x0189EA 0C:89DA:
-	.byte $10,$01,$01,$01,$01,$01   ;- - - - - - 0x0189ED 0C:89DD:
+PlayerAttackDamage_87D6:
+	.byte $02,$09,$08,$04,$04,$08,$03,$0C,$09,$08,$08,$01,$01,$01,$01,$01,$01,$01,$01,$01,$08,$08,$08,$08,$01,$01,$01,$04,$04,$08,$01,$01,$01,$01,$0C;- D 0 - - - 0x0187E6 0C:87D6: PlayerAttackDamage rows: 35 bytes indexed by attackType, selected by player and level through PlayerAttackJump*
+PlayerAttackDamage_87F9:
+	.byte $03,$0A,$08,$05,$05,$0A,$04,$0E,$0B,$08,$0A,$01,$01,$01,$01,$01,$01,$01,$01,$01,$08,$08,$08,$08,$01,$01,$01,$05,$05,$09,$01,$01,$01,$01,$0E;- D 0 - - - 0x018809 0C:87F9: PlayerAttackDamage rows: 35 bytes indexed by attackType, selected by player and level through PlayerAttackJump*
+PlayerAttackDamage_881C:
+	.byte $04,$0B,$08,$06,$06,$0C,$05,$10,$0D,$08,$0C,$01,$01,$01,$01,$01,$01,$01,$01,$01,$08,$08,$08,$08,$01,$01,$01,$06,$06,$0A,$01,$01,$01,$01,$10;- D 0 - - - 0x01882C 0C:881C: PlayerAttackDamage rows: 35 bytes indexed by attackType, selected by player and level through PlayerAttackJump*
+PlayerAttackDamage_883F:
+	.byte $05,$0C,$08,$07,$07,$0E,$06,$12,$0F,$08,$0E,$01,$01,$01,$01,$01,$01,$01,$01,$01,$08,$08,$08,$08,$01,$01,$01,$07,$07,$0B,$01,$01,$01,$01,$12;- D 0 - - - 0x01884F 0C:883F: PlayerAttackDamage rows: 35 bytes indexed by attackType, selected by player and level through PlayerAttackJump*
+PlayerAttackDamage_8862:
+	.byte $06,$0D,$08,$08,$08,$10,$07,$14,$11,$08,$10,$01,$01,$01,$01,$01,$01,$01,$01,$01,$08,$08,$08,$08,$01,$01,$01,$08,$08,$0C,$01,$01,$01,$01,$14;- D 0 - - - 0x018872 0C:8862: PlayerAttackDamage rows: 35 bytes indexed by attackType, selected by player and level through PlayerAttackJump*
+PlayerAttackDamage_8885:
+	.byte $0B,$0E,$08,$0D,$0D,$15,$0C,$19,$16,$08,$15,$01,$01,$01,$01,$01,$01,$01,$01,$01,$08,$08,$08,$08,$01,$01,$01,$0D,$0D,$11,$01,$01,$01,$01,$19;- - - - - - 0x018895 0C:8885: PlayerAttackDamage rows: 35 bytes indexed by attackType, selected by player and level through PlayerAttackJump*
+PlayerAttackDamage_88A8:
+	.byte $01,$05,$08,$05,$05,$0A,$03,$08,$02,$08,$14,$01,$01,$01,$01,$01,$01,$01,$01,$01,$08,$08,$08,$08,$0B,$01,$01,$04,$04,$08,$01,$01,$01,$01,$01;- D 0 - - - 0x0188B8 0C:88A8: PlayerAttackDamage rows: 35 bytes indexed by attackType, selected by player and level through PlayerAttackJump*
+PlayerAttackDamage_88CB:
+	.byte $01,$07,$08,$07,$07,$0E,$06,$08,$02,$08,$15,$01,$01,$01,$01,$01,$01,$01,$01,$01,$08,$08,$08,$08,$0F,$01,$01,$06,$06,$0A,$01,$01,$01,$01,$01;- D 0 - - - 0x0188DB 0C:88CB: PlayerAttackDamage rows: 35 bytes indexed by attackType, selected by player and level through PlayerAttackJump*
+PlayerAttackDamage_88EE:
+	.byte $01,$08,$08,$08,$08,$10,$07,$08,$02,$08,$15,$01,$01,$01,$01,$01,$01,$01,$01,$01,$08,$08,$08,$08,$11,$01,$01,$07,$07,$0B,$01,$01,$01,$01,$01;- D 0 - - - 0x0188FE 0C:88EE: PlayerAttackDamage rows: 35 bytes indexed by attackType, selected by player and level through PlayerAttackJump*
+PlayerAttackDamage_8911:
+	.byte $01,$09,$08,$09,$09,$12,$08,$08,$02,$08,$15,$01,$01,$01,$01,$01,$01,$01,$01,$01,$08,$08,$08,$08,$13,$01,$01,$08,$08,$0C,$01,$01,$01,$01,$01;- D 0 - - - 0x018921 0C:8911: PlayerAttackDamage rows: 35 bytes indexed by attackType, selected by player and level through PlayerAttackJump*
+PlayerAttackDamage_8934:
+	.byte $02,$0E,$08,$0E,$0E,$17,$0D,$08,$02,$08,$15,$01,$01,$01,$01,$01,$01,$01,$01,$01,$08,$08,$08,$08,$18,$01,$01,$0D,$0D,$11,$01,$01,$01,$01,$01;- D 0 - - - 0x018944 0C:8934: PlayerAttackDamage rows: 35 bytes indexed by attackType, selected by player and level through PlayerAttackJump*
+PlayerAttackDamage_8957:
+	.byte $02,$0A,$08,$0A,$0A,$10,$01,$01,$20,$08,$01,$06,$04,$0A,$20,$08,$08,$08,$08,$18,$01,$01,$01,$01,$01,$02,$02,$05,$05,$09,$01,$01,$01,$01,$01;- - - - - - 0x018967 0C:8957: PlayerAttackDamage rows: 35 bytes indexed by attackType, selected by player and level through PlayerAttackJump*
+PlayerAttackDamage_897A:
+	.byte $02,$0A,$08,$0C,$0C,$14,$01,$0C,$22,$08,$01,$07,$06,$0C,$22,$08,$08,$08,$08,$1C,$01,$01,$01,$01,$01,$04,$04,$06,$06,$0A,$01,$01,$01,$01,$01;- - - - - - 0x01898A 0C:897A: PlayerAttackDamage rows: 35 bytes indexed by attackType, selected by player and level through PlayerAttackJump*
+PlayerAttackDamage_899D:
+	.byte $02,$0A,$08,$0E,$0E,$18,$01,$01,$24,$08,$01,$08,$0A,$0E,$24,$08,$08,$08,$08,$20,$01,$01,$01,$01,$01,$06,$06,$07,$07,$0B,$01,$01,$01,$01,$01;- - - - - - 0x0189AD 0C:899D: PlayerAttackDamage rows: 35 bytes indexed by attackType, selected by player and level through PlayerAttackJump*
+PlayerAttackDamage_89C0:
+	.byte $02,$0A,$08,$13,$13,$1D,$01,$01,$29,$08,$01,$0D,$0F,$13,$29,$08,$08,$08,$08,$27,$01,$01,$01,$01,$01,$08,$08,$0C,$0C,$10,$01,$01,$01,$01,$01;- - - - - - 0x0189D0 0C:89C0: PlayerAttackDamage rows: 35 bytes indexed by attackType, selected by player and level through PlayerAttackJump*
 PlayerSpecialDispatch:
 	LDY playerId                    ;C - - - - - 0x0189F3 0C:89E3: A4 34
 	LDA PlayerSpecialDispatchTbl_8ACE,Y;C - - - - - 0x0189F5 0C:89E5: B9 CE 8A
