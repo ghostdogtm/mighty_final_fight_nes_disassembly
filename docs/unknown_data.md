@@ -9,12 +9,12 @@ memory dumped by the build tools into unused ROM space; "dense" runs look like r
 
 | class | bytes |
 |---|---|
-| low-density remnant (about 1-2 bits set per byte, unused) | 4897 |
-| short runs | 3539 |
-| mixed data | 3055 |
-| dense, high entropy (compressed or garbage) | 1788 |
-| structured table (few distinct values, probably animation / sprite metadata) | 743 |
-| mostly zero | 174 |
+| low-density remnant (about 1-2 bits set per byte, unused) | 4914 |
+| mixed data | 3358 |
+| short runs | 2513 |
+| dense, high entropy (compressed or garbage) | 1978 |
+| structured table (few distinct values, probably animation / sprite metadata) | 710 |
+| mostly zero | 190 |
 
 ## Runs of 16 bytes or more
 
@@ -25,12 +25,16 @@ memory dumped by the build tools into unused ROM space; "dense" runs look like r
 | 00:9ECD | 307 | mixed data |
 | 01:AE4B | 21 | mixed data |
 | 01:AEF0 | 16 | mixed data |
-| 01:AFEF | 17 | mixed data |
-| 02:8464 | 36 | mixed data |
+| 01:BB40 | 16 | mixed data |
+| 01:BC40 | 16 | mixed data |
+| 01:BD40 | 16 | mixed data |
+| 01:BE40 | 16 | mixed data |
+| 01:BF40 | 16 | mixed data |
+| 02:83ED | 30 | mixed data |
+| 02:845E | 42 | mixed data |
 | 02:904C | 36 | mixed data |
 | 02:9096 | 16 | mixed data |
-| 02:9156 | 23 | mixed data |
-| 02:9177 | 109 | mixed data |
+| 02:9156 | 142 | mixed data |
 | 02:9546 | 36 | mostly zero |
 | 02:989E | 86 | structured table (few distinct values, probably animation / sprite metadata) |
 | 02:9FA4 | 92 | low-density remnant (about 1-2 bits set per byte, unused) |
@@ -40,14 +44,13 @@ memory dumped by the build tools into unused ROM space; "dense" runs look like r
 | 03:B0EE | 18 | mixed data |
 | 04:8892 | 110 | mixed data |
 | 04:89AE | 18 | mixed data |
-| 04:89D9 | 92 | mixed data |
+| 04:89D9 | 103 | mixed data |
 | 04:8A69 | 87 | mixed data |
 | 04:8B21 | 31 | mixed data |
 | 04:8B98 | 104 | mixed data |
 | 04:8C58 | 168 | dense, high entropy (compressed or garbage) |
 | 04:8F48 | 184 | dense, high entropy (compressed or garbage) |
-| 04:9056 | 99 | mixed data |
-| 04:90BF | 65 | mixed data |
+| 04:9056 | 170 | dense, high entropy (compressed or garbage) |
 | 04:9222 | 222 | dense, high entropy (compressed or garbage) |
 | 04:944D | 179 | low-density remnant (about 1-2 bits set per byte, unused) |
 | 04:95A5 | 91 | low-density remnant (about 1-2 bits set per byte, unused) |
@@ -55,9 +58,18 @@ memory dumped by the build tools into unused ROM space; "dense" runs look like r
 | 04:9CC3 | 17 | mostly zero |
 | 04:9D32 | 36 | mixed data |
 | 05:A1CD | 111 | structured table (few distinct values, probably animation / sprite metadata) |
-| 05:A5AC | 343 | low-density remnant (about 1-2 bits set per byte, unused) |
+| 05:A59B | 360 | low-density remnant (about 1-2 bits set per byte, unused) |
 | 05:ADD3 | 141 | mixed data |
 | 05:AEF0 | 16 | mixed data |
+| 05:BB00 | 16 | mixed data |
+| 05:BB40 | 16 | mixed data |
+| 05:BC00 | 16 | mixed data |
+| 05:BC40 | 16 | mixed data |
+| 05:BD00 | 16 | mixed data |
+| 05:BD40 | 16 | mixed data |
+| 05:BE00 | 16 | mixed data |
+| 05:BE40 | 16 | mixed data |
+| 05:BF00 | 16 | mixed data |
 | 06:892E | 17 | mixed data |
 | 06:895B | 18 | mixed data |
 | 06:896F | 18 | mixed data |
@@ -65,19 +77,26 @@ memory dumped by the build tools into unused ROM space; "dense" runs look like r
 | 07:AC55 | 23 | mixed data |
 | 07:AEF0 | 16 | mixed data |
 | 07:AF70 | 16 | mixed data |
-| 07:AFAA | 21 | mixed data |
-| 07:B12F | 17 | mixed data |
-| 07:B168 | 17 | mixed data |
-| 07:B1A8 | 17 | mixed data |
-| 07:B1E8 | 17 | mixed data |
-| 07:B228 | 17 | mixed data |
+| 07:AFB0 | 16 | mixed data |
 | 07:B308 | 33 | mixed data |
-| 07:B361 | 161 | structured table (few distinct values, probably animation / sprite metadata) |
-| 07:B938 | 20 | mixed data |
-| 07:B950 | 24 | mixed data |
-| 07:B96C | 28 | mixed data |
-| 07:B98C | 44 | mixed data |
-| 07:B9BC | 193 | structured table (few distinct values, probably animation / sprite metadata) |
+| 07:B388 | 49 | mixed data |
+| 07:B3C8 | 49 | mixed data |
+| 07:B940 | 321 | structured table (few distinct values, probably animation / sprite metadata) |
+| 07:BB10 | 16 | mixed data |
+| 07:BB80 | 16 | mixed data |
+| 07:BBD0 | 16 | mixed data |
+| 07:BC10 | 16 | mixed data |
+| 07:BC80 | 16 | mixed data |
+| 07:BCD0 | 16 | mixed data |
+| 07:BD10 | 16 | mixed data |
+| 07:BD80 | 16 | mixed data |
+| 07:BDD0 | 16 | mixed data |
+| 07:BE10 | 16 | mixed data |
+| 07:BE80 | 16 | mixed data |
+| 07:BED0 | 16 | mixed data |
+| 07:BF10 | 16 | mixed data |
+| 07:BF80 | 16 | mixed data |
+| 07:BFD0 | 16 | mixed data |
 | 08:8452 | 20 | mixed data |
 | 08:846E | 16 | mixed data |
 | 08:854A | 36 | mixed data |
@@ -90,10 +109,10 @@ memory dumped by the build tools into unused ROM space; "dense" runs look like r
 | 08:874A | 16 | mixed data |
 | 08:878A | 374 | dense, high entropy (compressed or garbage) |
 | 08:8DF8 | 513 | low-density remnant (about 1-2 bits set per byte, unused) |
-| 08:97B8 | 22 | mixed data |
-| 08:9833 | 22 | mixed data |
-| 08:98A5 | 22 | mixed data |
-| 08:9932 | 21 | mixed data |
+| 08:97B7 | 23 | mixed data |
+| 08:9832 | 23 | mixed data |
+| 08:98A4 | 23 | mixed data |
+| 08:9930 | 23 | mixed data |
 | 08:99F6 | 504 | dense, high entropy (compressed or garbage) |
 | 08:9BF4 | 1036 | low-density remnant (about 1-2 bits set per byte, unused) |
 | 09:A071 | 17 | mostly zero |
@@ -102,14 +121,11 @@ memory dumped by the build tools into unused ROM space; "dense" runs look like r
 | 09:A245 | 187 | mixed data |
 | 09:A3D9 | 18 | mixed data |
 | 09:A52E | 466 | low-density remnant (about 1-2 bits set per byte, unused) |
-| 09:A99C | 165 | dense, high entropy (compressed or garbage) |
-| 09:AA55 | 171 | dense, high entropy (compressed or garbage) |
+| 09:A99C | 356 | dense, high entropy (compressed or garbage) |
 | 09:AD17 | 329 | low-density remnant (about 1-2 bits set per byte, unused) |
 | 09:AEF0 | 16 | mixed data |
-| 09:AFE9 | 23 | mixed data |
-| 09:B0AF | 17 | mixed data |
-| 09:B0FE | 20 | mixed data |
-| 09:B9F4 | 49 | mixed data |
+| 09:B100 | 33 | mixed data |
+| 09:BA00 | 33 | mixed data |
 | 0A:84E0 | 21 | mixed data |
 | 0A:8A8B | 40 | mixed data |
 | 0A:8B65 | 34 | low-density remnant (about 1-2 bits set per byte, unused) |
@@ -120,23 +136,30 @@ memory dumped by the build tools into unused ROM space; "dense" runs look like r
 | 0A:9632 | 20 | mixed data |
 | 0A:9680 | 20 | mixed data |
 | 0A:9728 | 42 | low-density remnant (about 1-2 bits set per byte, unused) |
-| 0A:9BA7 | 89 | mixed data |
+| 0A:9B96 | 106 | mixed data |
 | 0A:9C51 | 943 | low-density remnant (about 1-2 bits set per byte, unused) |
 | 0B:A3AE | 40 | mixed data |
 | 0B:A5A4 | 40 | mixed data |
 | 0B:A77A | 110 | structured table (few distinct values, probably animation / sprite metadata) |
 | 0B:AC44 | 16 | mixed data |
 | 0B:B0F0 | 16 | mixed data |
-| 0B:B30F | 18 | mixed data |
 | 0B:BD5C | 16 | mixed data |
 | 0B:BFEE | 18 | mostly zero |
 | 0C:8803 | 25 | mixed data |
 | 0C:8885 | 35 | low-density remnant (about 1-2 bits set per byte, unused) |
 | 0D:AE4E | 18 | mixed data |
 | 0D:AEF0 | 16 | mixed data |
-| 0D:B0EF | 17 | mixed data |
-| 0D:B280 | 17 | mixed data |
 | 0D:B9F0 | 17 | mostly zero |
+| 0D:BB80 | 16 | mixed data |
+| 0D:BBB0 | 16 | mixed data |
+| 0D:BC80 | 16 | mixed data |
+| 0D:BCB0 | 16 | mixed data |
+| 0D:BD80 | 16 | mixed data |
+| 0D:BDB0 | 16 | mixed data |
+| 0D:BE80 | 16 | mixed data |
+| 0D:BEB0 | 16 | mixed data |
+| 0D:BF80 | 16 | mostly zero |
+| 0D:BFB0 | 16 | mixed data |
 | 0F:EF35 | 24 | mixed data |
 | 0F:EFBB | 69 | low-density remnant (about 1-2 bits set per byte, unused) |
 | 0F:FC00 | 16 | mixed data |

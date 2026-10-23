@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Mighty Final Fight (U) - CDL driven disassembler producing ca65 sources.
 
-  python tools/disasm.py [--rom ROM] [--cdl CDL] [--out DIR] [--build]
+  python tools/disasm.py [--rom ROM] [--cdl CDL] [--out DIR] [--labels DIR] [--build]
 
 Inputs : ROM (.nes), CDL (FCEUX), tools/labels/ram.txt, tools/labels/rom.txt
 Outputs: src/bank_XX.asm, src/main.asm, src/defines.inc, src/ram.inc, src/chr.asm,
@@ -79,8 +79,19 @@ def load_ram_labels(path):
     return names
 
 
+def parse_range(spec):
+    """'BB:LO-HI' or 'BB,BB,BB:LO-HI' -> [(bank, lo_idx, hi_idx)], one entry per bank (same CPU range in each)."""
+    bs, rng = spec.split(':')
+    lo, _, hi = rng.partition('-')
+    out = []
+    for bank in bs.split(','):
+        b = int(bank, 16)
+        out.append((b, parse_addr(lo) - base_of(b), parse_addr(hi or lo) - base_of(b)))
+    return out
+
+
 def load_rom_labels(path):
-    """lines:  BB:AAAA name ; comment   |   code|data|words BB:AAAA-AAAA"""
+    """lines:  BB:AAAA name ; comment   |   code|data|words BB:AAAA-AAAA   (BB may be a list: 01,05,07:AAAA-AAAA)"""
     labels, force, notes = {}, [], {}   # (b, idx) -> (name, comment); force: (kind, b, lo, hi); notes: (b, idx) -> text
     if not os.path.exists(path):
         return labels, force, notes
@@ -93,24 +104,17 @@ def load_rom_labels(path):
             if parts[0] == 'rawsym':             # rawsym AAAA name -> name = $AAAA in defines.inc, used for unresolved $8000-$BFFF operands
                 RAWSYMS[parse_addr(parts[1])] = parts[2]
             elif parts[0] == 'bewords':            # bewords BB:LO-HI -> big-endian address pairs (hi, lo)
-                bs, rng = parts[1].split(':')
-                lo, _, hi = rng.partition('-')
-                b = int(bs, 16)
-                notes[(b, parse_addr(lo) - base_of(b), 'w')] = (parse_addr(hi) - base_of(b),)
-                force.append(('data', b, parse_addr(lo) - base_of(b), parse_addr(hi) - base_of(b)))
+                for b, lo, hi in parse_range(parts[1]):
+                    notes[(b, lo, 'w')] = (hi,)
+                    force.append(('data', b, lo, hi))
             elif parts[0] == 'text':               # text BB:LO-HI  -> strings, split at $FE/$FF, decoded in the comment
-                bs, rng = parts[1].split(':')
-                lo, _, hi = rng.partition('-')
-                b = int(bs, 16)
-                notes[(b, parse_addr(lo) - base_of(b), 's')] = (parse_addr(hi) - base_of(b),)
-                force.append(('data', b, parse_addr(lo) - base_of(b), parse_addr(hi) - base_of(b)))
+                for b, lo, hi in parse_range(parts[1]):
+                    notes[(b, lo, 's')] = (hi,)
+                    force.append(('data', b, lo, hi))
             elif parts[0] == 'table':              # table BB:LO-HI N header text  -> N bytes per row
-                bs, rng = parts[1].split(':')
-                lo, _, hi = rng.partition('-')
-                b = int(bs, 16)
-                notes[(b, parse_addr(lo) - base_of(b), 't')] = (int(parts[2]), parse_addr(hi) - base_of(b),
-                                                                ' '.join(parts[3:]) or comment.strip())
-                force.append(('data', b, parse_addr(lo) - base_of(b), parse_addr(hi) - base_of(b)))
+                for b, lo, hi in parse_range(parts[1]):
+                    notes[(b, lo, 't')] = (int(parts[2]), hi, ' '.join(parts[3:]) or comment.strip())
+                    force.append(('data', b, lo, hi))
             elif parts[0] == 'split':              # split BB:LO HI N  -> lo/hi pointer table of N entries, targets in bank BB
                 bs, ad = parts[1].split(':')
                 b = int(bs, 16)
@@ -119,16 +123,14 @@ def load_rom_labels(path):
                 bs, ad = parts[1].split(':')
                 notes[(int(bs, 16), parse_addr(ad) - base_of(int(bs, 16)), 'b')] = int(parts[2], 16)
             elif parts[0] == 'comment':
-                bs, a = parts[1].split(':')
-                notes[(int(bs, 16), parse_addr(a) - base_of(int(bs, 16)), 'c')] = ' '.join(parts[2:]) or comment.strip()
+                for b, lo, _hi in parse_range(parts[1]):
+                    notes[(b, lo, 'c')] = ' '.join(parts[2:]) or comment.strip()
             elif parts[0] == 'note':
-                bs, a = parts[1].split(':')
-                notes[(int(bs, 16), parse_addr(a) - base_of(int(bs, 16)))] = comment.strip()
+                for b, lo, _hi in parse_range(parts[1]):
+                    notes[(b, lo)] = comment.strip()
             elif parts[0] in ('code', 'data', 'words'):
-                bs, rng = parts[1].split(':')
-                lo, _, hi = rng.partition('-')
-                b = int(bs, 16)
-                force.append((parts[0], b, parse_addr(lo) - base_of(b), parse_addr(hi or lo) - base_of(b)))
+                for b, lo, hi in parse_range(parts[1]):
+                    force.append((parts[0], b, lo, hi))
             else:
                 bs, a = parts[0].split(':')
                 b = int(bs, 16)
@@ -156,6 +158,9 @@ class Disasm:
         self.anomalies = []
         self.notes = {}
         self.word_adj = {}          # (bank, idx) of a word -> 1 for RTS-trick tables (stored address = target-1)
+        self.word_start = set()     # (bank, idx) of the first byte of every word in a word table
+        self.word_raw = set()       # words whose target bank could not be settled: emitted as $XXXX, no label
+        self.table_log = []         # (bank, idx, n_words, strong, weak, raw, kind) for the report
         self.table_targets = set()
         self.ram_user = load_ram_labels(ram_path)
         self.rom_user, self.force, self.user_notes = load_rom_labels(rom_lbl_path)
@@ -165,6 +170,7 @@ class Disasm:
         self.immref = {}            # (bank, idx) of an immediate -> ('<'|'>', target bank, target idx)
         self.split_prefix = {}      # (bank, idx) -> label prefix given by the 'split' directive
         self.split = {}             # (bank, idx) -> ('lo'|'hi', target bank, target idx, adj) for split address tables
+        self.split_raw = set()      # (bank, lo idx) of split tables whose guessed entries disagreed on the bank
         self.hints = {}             # (site bank, idx) -> target bank for raw $8000-$BFFF operands
         self.hint_why = {}
         self.labels = {}
@@ -285,12 +291,19 @@ class Disasm:
                         k[i + j] = 1 if j == 0 else 2
                     i += d[2]
             else:
+                clash = [j for j in range(lo, hi + 1) if self.cdl[b][j] & 1]
+                if clash:
+                    print('WARNING: forced %s %02X:%04X-%04X overrides %d byte(s) the CDL saw as code (first %02X:%04X)'
+                          % (kind, b, base_of(b) + lo, base_of(b) + hi, len(clash), b, base_of(b) + clash[0]))
                 for j in range(lo, hi + 1):
                     k[j] = 3 if kind == 'data' else 4
                     if kind == 'data':
                         self.locked.add((b, j))
-        for j in range(0x1FFA, 0x2000):       # interrupt vectors
-            self.kind[15][j] = 4
+                    elif (j - lo) % 2 == 0:
+                        self.word_start.add((b, j))
+        for j in range(0x1FFA, 0x2000, 2):    # interrupt vectors
+            self.kind[15][j] = self.kind[15][j + 1] = 4
+            self.word_start.add((15, j))
 
     # ------------------------------------------------------------------ static tracing
     def successors(self, b, i, mn, mode, n):
@@ -392,43 +405,83 @@ class Disasm:
             return [(b, idx)]
         return [(x, idx) for x in range(slot, 14, 2)]
 
+    def _word_target(self, b, v, strict):
+        """Classify the word v seen from bank b -> ('strong'|'weak', (bank, idx)) or None.
+        strong: exactly one candidate bank has an instruction start there (and, if strict, the CDL 'J' flag);
+        weak:   a single candidate whose bytes are unknown but decode cleanly as code (unused table entry).
+        Ambiguous banks (several candidates with code) and targets inside data are rejected."""
+        ts = self._target_kinds(b, v)
+        if not ts:
+            return None
+        code = [(tb, ti) for tb, ti in ts if self.kind[tb][ti] == 1]
+        jump = [(tb, ti) for tb, ti in code if self.cdl[tb][ti] & 0x10]
+        if len(code) == 1 and (jump or not strict):
+            return 'strong', code[0]
+        if len(jump) == 1:                      # several banks have code there, but only one was jumped to indirectly
+            return 'strong', jump[0]
+        if strict or len(code) > 1:
+            return None
+        if len(ts) == 1 and self.kind[ts[0][0]][ts[0][1]] == 0 and self.speculate(*ts[0]):
+            return 'weak', ts[0]
+        return None
+
+    def _other_slot(self, b, v):
+        """True when the bank of CPU address v cannot be derived from the bank b the word lives in."""
+        return v < 0xC000 and not (b < 14 and b % 2 == (0 if v < 0xA000 else 1))
+
     def detect_tables(self, min_abs=2, min_rts=3):
         """Find tables of code pointers in data/unknown bytes. Anchor: an aligned word whose target is a known
-        instruction start with the CDL 'indirect code' flag; extend both ways while words point at plausible code."""
+        instruction start with the CDL 'indirect code' flag; extend both ways while words point at code.
+        A table is kept only if it has at least as many 'strong' entries (unique bank, known code) as 'weak' ones
+        (unknown bytes that merely decode as code), which stops tables from growing into tile/sprite data.
+        Entries whose bank is ambiguous ($8000-$BFFF seen from a fixed or other-slot bank) must all agree on one
+        bank; otherwise every such entry is emitted as a raw $XXXX without a label."""
         found = 0
         for b in range(NBANKS):
             k, r = self.kind[b], self.rom[b]
             for adj, mn in ((0, min_abs), (1, min_rts)):
                 def val(p, strict):
-                    if p < 0 or p + 1 >= BANK_SIZE or k[p] not in (0, 3) or k[p + 1] not in (0, 3) or (b, p) in self.split or (b, p + 1) in self.split or (b, p) in self.locked or (b, p + 1) in self.locked:
-                        return False
+                    if p < 0 or p + 1 >= BANK_SIZE or k[p] not in (0, 3) or k[p + 1] not in (0, 3) \
+                            or (b, p) in self.split or (b, p + 1) in self.split \
+                            or (b, p) in self.locked or (b, p + 1) in self.locked:
+                        return None
                     v = ((r[p] | (r[p + 1] << 8)) + adj) & 0xFFFF
-                    ts = self._target_kinds(b, v)
-                    if strict:
-                        return any(self.kind[tb][ti] == 1 and self.cdl[tb][ti] & 0x10 for tb, ti in ts)
-                    return bool(ts) and any(self.kind[tb][ti] in (0, 1) for tb, ti in ts)                         and not all(self.kind[tb][ti] in (2, 3) for tb, ti in ts)
+                    return self._word_target(b, v, strict)
                 p = 0
                 while p < BANK_SIZE - 1:
-                    if val(p, True):
-                        lo = p
-                        while val(lo - 2, False):
-                            lo -= 2
-                        hi = p
-                        while val(hi + 2, False):
-                            hi += 2
-                        if (hi - lo) // 2 + 1 >= mn:
-                            for q in range(lo, hi + 2, 2):
-                                k[q] = k[q + 1] = 4
-                                if adj:
-                                    self.word_adj[(b, q)] = 1
-                                v = ((r[q] | (r[q + 1] << 8)) + adj) & 0xFFFF
-                                ts = self._target_kinds(b, v)
-                                if len(ts) == 1 and self.kind[ts[0][0]][ts[0][1]] == 0:
-                                    self.table_targets.add(ts[0])
-                            found += 1
+                    if not val(p, True):
+                        p += 1
+                        continue
+                    lo = p
+                    while val(lo - 2, False):
+                        lo -= 2
+                    hi = p
+                    while val(hi + 2, False):
+                        hi += 2
+                    entries = [(q, val(q, False)) for q in range(lo, hi + 2, 2)]
+                    strong = sum(1 for _, (st, _) in entries if st == 'strong')
+                    weak = len(entries) - strong
+                    if len(entries) < mn or strong < weak:
                         p = hi + 2
                         continue
-                    p += 1
+                    # bank consensus for entries whose bank is not implied by the table's own bank
+                    amb = {t[0] for q, (st, t) in entries
+                           if self._other_slot(b, ((r[q] | (r[q + 1] << 8)) + adj) & 0xFFFF)}
+                    raw = 0
+                    for q, (st, t) in entries:
+                        k[q] = k[q + 1] = 4
+                        self.word_start.add((b, q))
+                        if adj:
+                            self.word_adj[(b, q)] = 1
+                        v = ((r[q] | (r[q + 1] << 8)) + adj) & 0xFFFF
+                        if len(amb) > 1 and self._other_slot(b, v):
+                            self.word_raw.add((b, q))
+                            raw += 1
+                        elif self.kind[t[0]][t[1]] == 0:
+                            self.table_targets.add(t)
+                    self.table_log.append((b, lo, len(entries), strong, weak, raw, 'rts' if adj else 'abs'))
+                    found += 1
+                    p = hi + 2
         return found
 
     def detect_split_tables(self):
@@ -513,6 +566,13 @@ class Disasm:
                 else:
                     break
             if len(tg) == cnt and loose * 3 <= cnt:
+                # entries whose bank was only guessed from CDL coverage must all agree on one bank; a table like
+                # the enemy-AI stubs ($B300+3k, present in several banks) otherwise gets labels from random banks
+                guessed = {r[0] for r in tg if r[0] is not None and r[2]}
+                if len(guessed) > 1:
+                    tg = [(None, ((self.rom[tb][il + q] | (self.rom[tb][ih + q] << 8)) + adj) & 0xFFFF, False)
+                          if r[2] else r for q, r in enumerate(tg)]
+                    self.split_raw.add((tb, il))
                 for q, r in enumerate(tg):
                     self.split[(tb, il + q)] = ('lo', r[0], r[1], adj)
                     self.split[(tb, ih + q)] = ('hi', r[0], r[1], adj)
@@ -528,6 +588,8 @@ class Disasm:
     def start_of(self, b, idx):
         while idx > 0 and self.kind[b][idx] == 2:
             idx -= 1
+        if self.kind[b][idx] == 4 and (b, idx) not in self.word_start and (b, idx - 1) in self.word_start:
+            idx -= 1                                     # LDA tbl+1,Y: refer to the word, not to its high byte
         return idx
 
     def find_target(self, sb, addr):
@@ -564,10 +626,11 @@ class Disasm:
                     if self.cdl[b][i] & 0x10:
                         self.refs[(b, i)].add('ptr')
                     i += n
-                elif k[i] == 4 and (i & 1) == 0 and i + 1 < BANK_SIZE and k[i + 1] == 4:
+                elif k[i] == 4 and (b, i) in self.word_start and i + 1 < BANK_SIZE and k[i + 1] == 4:
                     v = (self.rom[b][i] | (self.rom[b][i + 1] << 8)) + self.word_adj.get((b, i), 0)
                     self.cur_site = None
-                    self.addref(b, v & 0xFFFF, 'ptr')
+                    if (b, i) not in self.word_raw:
+                        self.addref(b, v & 0xFFFF, 'ptr')
                     i += 2
                 else:
                     i += 1
@@ -762,18 +825,22 @@ class Disasm:
                 o.append('\t%-32s;%s 0x%06X %02X:%04X: %s' % (txt, fl, off0 + i, b, base + i, by))
                 i += n
                 continue
-            if kd == 4 and (b, i + 1) in self.labels:         # a label points into the middle of a word
+            if kd == 4 and ((b, i + 1) in self.labels or (b, i) not in self.word_start):
+                # a label points into the middle of a word, or a stray half of a word: emit the byte alone
                 o.append('\t%-32s;W 0x%06X %02X:%04X:' % ('.byte $%02X' % rom[i], off0 + i, b, base + i))
                 i += 1
                 continue
             if kd == 4 and i + 1 < BANK_SIZE and k[i + 1] == 4:
                 items, j = [], i
                 while j + 1 < BANK_SIZE and k[j] == 4 and k[j + 1] == 4 and len(items) < 8 \
+                        and (b, j) in self.word_start \
                         and (j == i or ((b, j) not in self.labels and (b, j + 1) not in self.labels)):
                     adj = self.word_adj.get((b, j), 0)
                     self.cur_site = None
                     v = rom[j] | (rom[j + 1] << 8)
-                    e = self.label_expr(b, (v + adj) & 0xFFFF)[0] if v + adj >= 0x8000 else None
+                    e = None
+                    if v + adj >= 0x8000 and (b, j) not in self.word_raw:
+                        e = self.label_expr(b, (v + adj) & 0xFFFF)[0]
                     items.append(e + '-1' if e and adj else e or '$%04X' % v)
                     j += 2
                 o.append('\t%-32s;W 0x%06X %02X:%04X:' % ('.word ' + ', '.join(items), off0 + i, b, base + i))
@@ -1117,6 +1184,11 @@ class Disasm:
         raw = self.raw_operands()
         o += ['', 'Raw ROM-address operands (do not relocate with the code): %d' % len(raw)]
         o += ['  %02X:%04X  %s' % (b, base_of(b) + i, t) for b, i, t in raw]
+        o += ['', 'Pointer tables found by detect_tables (bank:addr words strong/weak raw kind); review tables with weak>0 or raw>0:']
+        o += ['  %02X:%04X %3d words  strong=%-3d weak=%-3d raw=%-3d %s' % (b, base_of(b) + i, n, st, wk, rw, kd)
+              for b, i, n, st, wk, rw, kd in sorted(self.table_log)]
+        o += ['', 'Split lo/hi tables whose guessed entries disagreed on the bank (entries left as raw $XXXX):']
+        o += ['  %02X:%04X' % (b, base_of(b) + i) for b, i in sorted(self.split_raw)]
         o += ['', 'Code-like unknown runs (decode cleanly to the end, no BRK; review by hand):']
         o += ['  %5d  %02X:%04X' % (ln, b, base_of(b) + i) for ln, b, i in sorted(cl_runs, reverse=True)]
         o += ['', 'Unknown runs, longest first (len bank:addr):']
@@ -1144,12 +1216,13 @@ def main():
     ap.add_argument('--rom', default=os.path.join(ROOT, 'Mighty Final Fight (U) [!].nes'))
     ap.add_argument('--cdl', default=os.path.join(ROOT, 'Mighty Final Fight (U) [!].cdl'))
     ap.add_argument('--out', default=ROOT)
+    ap.add_argument('--labels', default=os.path.join(HERE, 'labels'), help='directory with ram.txt and rom.txt')
     ap.add_argument('--no-trace', action='store_true')
     ap.add_argument('--no-chr', action='store_true')
     ap.add_argument('--build', action='store_true', help='assemble and compare with the original ROM')
     a = ap.parse_args()
 
-    D = Disasm(a.rom, a.cdl, os.path.join(HERE, 'labels', 'ram.txt'), os.path.join(HERE, 'labels', 'rom.txt'))
+    D = Disasm(a.rom, a.cdl, os.path.join(a.labels, 'ram.txt'), os.path.join(a.labels, 'rom.txt'))
     D.classify_cdl()
     D.apply_force()
     if not a.no_trace:

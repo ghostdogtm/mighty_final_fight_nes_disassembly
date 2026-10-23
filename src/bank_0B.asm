@@ -607,22 +607,30 @@ ofsSetHi_0B:
 	.hibytes ofsset_0B_AEC6, ofsset_0B_AEDE, ofsset_0B_AEF4, ofsset_0B_AF0E, ofsset_0B_AF22, ofsset_0B_AF3A, ofsset_0B_AF4E, ofsset_0B_AF68;- D 1 - - - 0x0172F8 0B:B2E8:
 	.hibytes ofsset_0B_AF7C, ofsset_0B_AF80, ofsset_0B_AF90, ofsset_0B_AFAC, ofsset_0B_AFBE, ofsset_0B_AFDC, ofsset_0B_AFF0, ofsset_0B_B010;- D 1 - - - 0x017300 0B:B2F0:
 	.hibytes ofsset_0B_B022, ofsset_0B_B03E, ofsset_0B_B04E, ofsset_0B_B06C, ofsset_0B_B07E, ofsset_0B_B0A6, ofsset_0B_B0B8, ofsset_0B_B0F0;- D 1 - - - 0x017308 0B:B2F8:
+; enemy AI entry stubs (bank 0B set), 3 bytes each, indexed by enemy kind from enemyAILo/Hi
 ofs_0B_B300:
 	JMP loc_0B_B331                 ;C - - J - - 0x017310 0B:B300: 4C 31 B3
-	.byte $4C,$31,$B3               ;- - - - - - 0x017313 0B:B303:
+	JMP loc_0B_B331                 ;- - - - - - 0x017313 0B:B303: 4C 31 B3
 enemyAI_72:
 	JMP loc_0B_B5D7                 ;C - - J - - 0x017316 0B:B306: 4C D7 B5
-	.byte $4C,$30,$B3               ;- - - - - - 0x017319 0B:B309:
+	JMP loc_0B_B330                 ;- - - - - - 0x017319 0B:B309: 4C 30 B3
 ofs_0B_B30C:
 	JMP loc_0B_B696                 ;C - - J - - 0x01731C 0B:B30C: 4C 96 B6
-	.byte $4C,$30,$B3,$4C,$30,$B3,$4C,$30,$B3,$4C,$30,$B3,$4C,$30,$B3,$4C;- - - - - - 0x01731F 0B:B30F:
-	.byte $30,$B3                   ;- - - - - - 0x01732F 0B:B31F:
+	JMP loc_0B_B330                 ;- - - - - - 0x01731F 0B:B30F: 4C 30 B3
+	JMP loc_0B_B330                 ;- - - - - - 0x017322 0B:B312: 4C 30 B3
+	JMP loc_0B_B330                 ;- - - - - - 0x017325 0B:B315: 4C 30 B3
+	JMP loc_0B_B330                 ;- - - - - - 0x017328 0B:B318: 4C 30 B3
+	JMP loc_0B_B330                 ;- - - - - - 0x01732B 0B:B31B: 4C 30 B3
+	JMP loc_0B_B330                 ;- - - - - - 0x01732E 0B:B31E: 4C 30 B3
 ofs_0B_B321:
 	JMP loc_0B_BD7F                 ;C - - J - - 0x017331 0B:B321: 4C 7F BD
-	.byte $4C,$30,$B3               ;- - - - - - 0x017334 0B:B324:
+	JMP loc_0B_B330                 ;- - - - - - 0x017334 0B:B324: 4C 30 B3
 ofs_0B_B327:
 	JMP loc_0B_BD7F                 ;C - - J - - 0x017337 0B:B327: 4C 7F BD
-	.byte $4C,$30,$B3,$4C,$30,$B3,$60;- - - - - - 0x01733A 0B:B32A:
+	JMP loc_0B_B330                 ;- - - - - - 0x01733A 0B:B32A: 4C 30 B3
+	JMP loc_0B_B330                 ;- - - - - - 0x01733D 0B:B32D: 4C 30 B3
+loc_0B_B330:
+	RTS                             ;- - - - - - 0x017340 0B:B330: 60
 loc_0B_B331:
 	LDA gameOverFlag                ;C - - - - - 0x017341 0B:B331: A5 62
 	BEQ loc_0B_B336                 ;C - - - - - 0x017343 0B:B333: F0 01

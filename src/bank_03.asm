@@ -565,16 +565,22 @@ ofsSetHi_03:
 	.hibytes ofsset_03_B0EE, ofsset_03_B0EE, ofsset_03_B0EE, ofsset_03_B0EE, ofsset_03_B0EE, ofsset_03_B0EE, ofsset_03_B0EE, ofsset_03_B0EE;- - - - - - 0x0072F8 03:B2E8:
 	.hibytes ofsset_03_B0EE, ofsset_03_B0EE, ofsset_03_B0EE, ofsset_03_B0EE, ofsset_03_B0EE, ofsset_03_B0EE, ofsset_03_B0EE, ofsset_03_B0EE;- - - - - - 0x007300 03:B2F0:
 	.hibytes ofsset_03_B0EE, ofsset_03_B0EE, ofsset_03_B0EE, ofsset_03_B0EE, ofsset_03_B0EE, ofsset_03_B0EE, ofsset_03_B0EE, ofsset_03_B0EE;- - - - - - 0x007308 03:B2F8:
+; enemy AI entry stubs (bank 03 set), 3 bytes each, indexed by enemy kind from enemyAILo/Hi
 ofs_03_B300:
 	JMP loc_03_B3F4                 ;C - - J - - 0x007310 03:B300: 4C F4 B3
 frame_02_8A30_02:
 	JMP loc_03_BB91                 ;C - - J - - 0x007313 03:B303: 4C 91 BB
-	.byte $4C,$30,$B3,$4C,$30,$B3   ;- - - - - - 0x007316 03:B306:
+	JMP loc_03_B330                 ;- - - - - - 0x007316 03:B306: 4C 30 B3
+	JMP loc_03_B330                 ;- - - - - - 0x007319 03:B309: 4C 30 B3
 ofs_03_B30C:
 	JMP loc_03_BBCB                 ;C - - J - - 0x00731C 03:B30C: 4C CB BB
 enemyAI_75:
 	JMP loc_03_BD46                 ;C - - J - - 0x00731F 03:B30F: 4C 46 BD
-	.byte $4C,$30,$B3,$4C,$30,$B3,$4C,$30,$B3,$4C,$30,$B3,$4C,$30,$B3;- - - - - - 0x007322 03:B312:
+	JMP loc_03_B330                 ;- - - - - - 0x007322 03:B312: 4C 30 B3
+	JMP loc_03_B330                 ;- - - - - - 0x007325 03:B315: 4C 30 B3
+	JMP loc_03_B330                 ;- - - - - - 0x007328 03:B318: 4C 30 B3
+	JMP loc_03_B330                 ;- - - - - - 0x00732B 03:B31B: 4C 30 B3
+	JMP loc_03_B330                 ;- - - - - - 0x00732E 03:B31E: 4C 30 B3
 ofs_03_B321:
 	JMP loc_03_BF38                 ;C - - J - - 0x007331 03:B321: 4C 38 BF
 enemyAI_7C:
@@ -585,7 +591,8 @@ enemyAI_7E:
 	JMP loc_03_BF48                 ;C - - J - - 0x00733A 03:B32A: 4C 48 BF
 enemyAI_7F:
 	JMP loc_03_BED2                 ;C - - J - - 0x00733D 03:B32D: 4C D2 BE
-	.byte $60                       ;- - - - - - 0x007340 03:B330:
+loc_03_B330:
+	RTS                             ;- - - - - - 0x007340 03:B330: 60
 EnemyMoveProbe4Way:
 	LDA #$00                        ;C - - - - - 0x007341 03:B331: A9 00
 	STA ptr_0E+1                    ;C - - - - - 0x007343 03:B333: 85 0F
@@ -1004,7 +1011,6 @@ loc_03_B686:
 	LDY #$04                        ;C - - - - - 0x00769A 03:B68A: A0 04
 	JSR SetVelFromTbl_B39B          ;C - - - - - 0x00769C 03:B68C: 20 9B B3
 	LDA #$04                        ;C - - - - - 0x00769F 03:B68F: A9 04
-ofs_03_B691:
 	STA objFacing,X                 ;C - - - - - 0x0076A1 03:B691: 9D 60 04
 	BNE loc_03_B6A0                 ;C - - - - - 0x0076A4 03:B694: D0 0A
 loc_03_B696:

@@ -540,7 +540,6 @@ loc_0E_C3B3:
 UpdateRandom:
 	LDX #$00                        ;C - - - - - 0x01C3C4 0E:C3B4: A2 00
 	LDY #$04                        ;C - - - - - 0x01C3C6 0E:C3B6: A0 04
-ofs_0E_C3B8:
 	LDA rngState0,X                 ;C - - - - - 0x01C3C8 0E:C3B8: B5 E4
 	AND #$02                        ;C - - - - - 0x01C3CA 0E:C3BA: 29 02
 	STA ptr_00                      ;C - - - - - 0x01C3CC 0E:C3BC: 85 00
@@ -791,7 +790,6 @@ loc_0E_C5A3:
 	LDA padPressed                  ;C - - - - - 0x01C5B6 0E:C5A6: A5 14
 	BNE loc_0E_C5B3                 ;C - - - - - 0x01C5B8 0E:C5A8: D0 09
 	LDA actionTimer                 ;C - - - - - 0x01C5BA 0E:C5AA: A5 37
-ofs_0E_C5AC:
 	BEQ loc_0E_C5B3                 ;C - - - - - 0x01C5BC 0E:C5AC: F0 05
 	DEC actionTimer                 ;C - - - - - 0x01C5BE 0E:C5AE: C6 37
 	JMP loc_0E_C5A3                 ;C - - - - - 0x01C5C0 0E:C5B0: 4C A3 C5
@@ -1129,7 +1127,6 @@ ClearScreenAndSprites:
 	LDA #$20                        ;C - - - - - 0x01C88B 0E:C87B: A9 20
 	LDX #$00                        ;C - - - - - 0x01C88D 0E:C87D: A2 00
 	LDY #$00                        ;C - - - - - 0x01C88F 0E:C87F: A0 00
-ofs_0E_C881:
 	JSR FillNametable               ;C - - - - - 0x01C891 0E:C881: 20 D1 C2
 	JSR HideSprites                 ;C - - - - - 0x01C894 0E:C884: 20 1D C3
 	RTS                             ;C - - - - - 0x01C897 0E:C887: 60
@@ -1477,7 +1474,6 @@ loc_0E_CB66:
 	JMP loc_0E_CB99                 ;C - - - - - 0x01CB93 0E:CB83: 4C 99 CB
 loc_0E_CB86:
 	LDY playerId                    ;C - - - - - 0x01CB96 0E:CB86: A4 34
-ofs_0E_CB88:
 	LDA Act00_WalkTbl_E225,Y        ;C D 2 - I - 0x01CB98 0E:CB88: B9 25 E2
 	JSR SetPlayerAnim               ;C - - - - - 0x01CB9B 0E:CB8B: 20 94 F2
 	LDA Act00_WalkTbl_E26D,Y        ;C - - - - - 0x01CB9E 0E:CB8E: B9 6D E2
@@ -1757,7 +1753,6 @@ loc_0E_CD5F:
 	BNE loc_0E_CD57                 ;C - - - - - 0x01CDB3 0E:CDA3: D0 B2
 	LDA objAnim,Y                   ;C - - - - - 0x01CDB5 0E:CDA5: B9 80 05
 	CMP #$A6                        ;C - - - - - 0x01CDB8 0E:CDA8: C9 A6
-ofs_0E_CDAA:
 	BEQ loc_0E_CD57                 ;C - - - - - 0x01CDBA 0E:CDAA: F0 AB
 	CMP #$AC                        ;C - - - - - 0x01CDBC 0E:CDAC: C9 AC
 	BEQ loc_0E_CD57                 ;C - - - - - 0x01CDBE 0E:CDAE: F0 A7
@@ -2290,7 +2285,6 @@ loc_0E_D18E:
 	BEQ loc_0E_D158                 ;C - - - - - 0x01D1AF 0E:D19F: F0 B7
 	LDA padHeld                     ;C - - - - - 0x01D1B1 0E:D1A1: A5 16
 	AND #$03                        ;C - - - - - 0x01D1B3 0E:D1A3: 29 03
-ofs_0E_D1A5:
 	BEQ loc_0E_D158                 ;C - - - - - 0x01D1B5 0E:D1A5: F0 B1
 	STA ptr_00                      ;C - - - - - 0x01D1B7 0E:D1A7: 85 00
 	LDA padPressed                  ;C - - - - - 0x01D1B9 0E:D1A9: A5 14
@@ -3077,9 +3071,7 @@ Act04_Grab:
 	STA ptr_00+1                    ;C - - - - - 0x01D7BD 0E:D7AD: 85 01
 	JMP (ptr_00)                    ;C - - - - - 0x01D7BF 0E:D7AF: 6C 00 00
 Act04_GrabTbl_D7B2:
-	.lobytes ofs_0E_D7B8            ;- D 2 - - - 0x01D7C2 0E:D7B2:
-tbl_0E_D7B3:
-	.lobytes ofs_0E_D886, ofs_0E_D89A;- D 2 - - - 0x01D7C3 0E:D7B3:
+	.lobytes ofs_0E_D7B8, ofs_0E_D886, ofs_0E_D89A;- D 2 - - - 0x01D7C2 0E:D7B2:
 Act04_GrabTbl_D7B5:
 	.hibytes ofs_0E_D7B8, ofs_0E_D886, ofs_0E_D89A;- D 2 - - - 0x01D7C5 0E:D7B5:
 ofs_0E_D7B8:
@@ -3824,7 +3816,6 @@ Act0CTbl_DD7C:
 ofs_0E_DD7F:
 	LDA padPressed                  ;C - - J - - 0x01DD8F 0E:DD7F: A5 14
 	AND #$40                        ;C - - - - - 0x01DD91 0E:DD81: 29 40
-ofs_0E_DD83:
 	BEQ loc_0E_DDA8                 ;C - - - - - 0x01DD93 0E:DD83: F0 23
 	LDA timerA3                     ;C - - - - - 0x01DD95 0E:DD85: A5 A3
 	BNE loc_0E_DDC1                 ;C - - - - - 0x01DD97 0E:DD87: D0 38
@@ -3855,7 +3846,6 @@ loc_0E_DDA8:
 	JMP loc_0E_DD8E                 ;C - - - - - 0x01DDC4 0E:DDB4: 4C 8E DD
 loc_0E_DDB7:
 	JSR ResetPlayerStand            ;C - - - - - 0x01DDC7 0E:DDB7: 20 AA CE
-ofs_0E_DDBA:
 	LDA #$00                        ;C - - - - - 0x01DDCA 0E:DDBA: A9 00
 	STA gameAction                  ;C - - - - - 0x01DDCC 0E:DDBC: 85 30
 	STA timerA4                     ;C - - - - - 0x01DDCE 0E:DDBE: 85 A4

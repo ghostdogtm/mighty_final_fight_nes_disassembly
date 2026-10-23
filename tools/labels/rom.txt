@@ -1164,3 +1164,33 @@ split 0B:B100 B200 256 ofsset
 0F:FD16 UpdatePlayerInvincibleTbl_FD16
 0F:FD56 UpdatePlayerInvincibleTbl_FD56
 0F:FFE0 spritePalHaggarTbl_FFE0
+
+; ---- stage data layout, identical in every stage bank (see docs/stage_maps.md); forcing it as data removes the
+;      CDL gaps inside tables the game never read completely and stops detect_tables from seeing pointers in tile data
+table 01,05,07,09,0D:AE60-AEFF 48 stage section header: 8 screen ids (+8 more), pal idx, chr banks, 16-byte palette
+note 01,05,07,09,0D:AF00 ; stageScreenBase: 32 map screens, 64 bytes each = 8x8 metatiles, one row per line (unused screens are $21/$23 fill)
+table 01,05,07,09,0D:AF00-B6FF 8
+note 01,05,07,09,0D:B700 ; stageMetaBase: 256 metatiles x 4 block ids (TL, TR, BL, BR), 4 metatiles per line
+table 01,05,07,09,0D:B700-BAFF 16
+note 01,05,07,09,0D:BB00 ; stageBlockTL / TR ($BC00) / BL ($BD00) / BR ($BE00): tile numbers of 16x16 block b
+table 01,05,07,09,0D:BB00-BEFF 16
+note 01,05,07,09,0D:BF00 ; stageBlockAttr: bits 0-1 palette, bits 4-7 collision/priority flags
+table 01,05,07,09,0D:BF00-BFFF 16
+
+; ---- enemy AI entry stubs: JMP tables at $B300+3k in banks 03 and 0B (same slots, different enemy sets);
+;      unused slots are JMP $B330 (RTS). enemyAILo/Hi in bank 0C hold these addresses bank-independently.
+code 03:B306-B30B               ; 2 unused stubs
+code 03:B312-B320               ; 5 unused stubs
+code 03:B330                    ; RTS used by the unused stubs
+note 03:B300 ; enemy AI entry stubs (bank 03 set), 3 bytes each, indexed by enemy kind from enemyAILo/Hi
+code 0B:B303-B305
+code 0B:B309-B30B
+code 0B:B30F-B320               ; 6 unused stubs
+code 0B:B324-B326
+code 0B:B32A-B330               ; 2 unused stubs + RTS
+note 0B:B300 ; enemy AI entry stubs (bank 0B set), 3 bytes each, indexed by enemy kind from enemyAILo/Hi
+
+; ---- bank 02 holds only animation data (scripts, frames, offset sets); no code, so no pointer tables
+data 02:8000-9FFF
+data 04:90B9-90BE ; three pseudo-pointers inside ScreenInit data, not an address table
+data 09:AA43-AA4A ; map bytes in the stage-9 bank, not an address table

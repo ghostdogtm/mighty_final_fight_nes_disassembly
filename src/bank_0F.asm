@@ -200,7 +200,6 @@ SetPlayerStartPos:
 	STA ptr_06+1                    ;C - - - - - 0x01E18F 0F:E17F: 85 07
 	LDA stageSection                ;C - - - - - 0x01E191 0F:E181: A5 60
 	TAY                             ;C - - - - - 0x01E193 0F:E183: A8
-ofs_0F_E184:
 	LDA (ptr_04),Y                  ;C - - - - - 0x01E194 0F:E184: B1 04
 	STA objY                        ;C - - - - - 0x01E196 0F:E186: 8D C0 03
 	LDA (ptr_06),Y                  ;C - - - - - 0x01E199 0F:E189: B1 06
@@ -253,11 +252,9 @@ PlaceGrabbedEnemyTbl_E1D4:
 Act00_WalkTbl_E1D7:
 	.byte $D9,$0F,$B5               ;- D 3 - - - 0x01E1E7 0F:E1D7:
 Act00_WalkTbl_E1DA:
-	.byte $00,$01                   ;- D 3 - - - 0x01E1EA 0F:E1DA:
-	.byte $00                       ;W 0x01E1EC 0F:E1DC:
+	.byte $00,$01,$00               ;- D 3 - - - 0x01E1EA 0F:E1DA:
 ActNoneTbl_E1DD:
-	.word $E6B3                     ;W 0x01E1ED 0F:E1DD:
-	.byte $80                       ;W 0x01E1EF 0F:E1DF:
+	.byte $B3,$E6,$80               ;- D 3 - - - 0x01E1ED 0F:E1DD:
 ActNoneTbl_E1E0:
 	.byte $00,$00,$00               ;- D 3 - - - 0x01E1F0 0F:E1E0: Cody, Guy, Haggar
 tbl_0F_E1E3:
@@ -651,7 +648,6 @@ loc_0F_E473:
 	BNE loc_0F_E489                 ;C - - - - - 0x01E48B 0F:E47B: D0 0C
 	LDA gameAction                  ;C - - - - - 0x01E48D 0F:E47D: A5 30
 	CMP #$04                        ;C - - - - - 0x01E48F 0F:E47F: C9 04
-ofs_0F_E481:
 	BNE loc_0F_E489                 ;C - - - - - 0x01E491 0F:E481: D0 06
 	LDA playerFacing                ;C - - - - - 0x01E493 0F:E483: A5 31
 	CMP #$02                        ;C - - - - - 0x01E495 0F:E485: C9 02
@@ -962,7 +958,6 @@ loc_0F_E689:
 	STA ptr_20                      ;C - - - - - 0x01E6B1 0F:E6A1: 85 20
 	LDA ptr_00                      ;C - - - - - 0x01E6B3 0F:E6A3: A5 00
 	CLC                             ;C - - - - - 0x01E6B5 0F:E6A5: 18  ; map screens at $AF00, 64 bytes each
-ofs_0F_E6A6:
 	ADC #$AF                        ;C - - - - - 0x01E6B6 0F:E6A6: 69 AF
 	STA ptr_20+1                    ;C - - - - - 0x01E6B8 0F:E6A8: 85 21
 	RTS                             ;C - - - - - 0x01E6BA 0F:E6AA: 60
@@ -1154,6 +1149,7 @@ loc_0F_E7F5:
 	LDA #$23                        ;C - - - - - 0x01E80B 0F:E7FB: A9 23
 	STA vramQueue,X                 ;C - - - - - 0x01E80D 0F:E7FD: 9D 80 07
 	INX                             ;C - - - - - 0x01E810 0F:E800: E8
+ofs_0F_E801:
 	LDA #$5A                        ;C - - - - - 0x01E811 0F:E801: A9 5A
 	STA vramQueue,X                 ;C - - - - - 0x01E813 0F:E803: 9D 80 07
 	INX                             ;C - - - - - 0x01E816 0F:E806: E8
@@ -1226,9 +1222,7 @@ QueueHudHealthBarTbl_E87B:
 QueueHudHealthBarTbl_E87E:
 	.hibytes tbl_0F_E881, tbl_0F_E88B, tbl_0F_E895;- D 3 - - - 0x01E88E 0F:E87E:
 tbl_0F_E881:
-	.byte $00,$33,$00               ;- D 3 - I - 0x01E891 0F:E881:
-tbl_0F_E884:
-	.byte $54,$00,$90,$01,$47,$02,$50;- D 3 - I - 0x01E894 0F:E884:
+	.byte $00,$33,$00,$54,$00,$90,$01,$47,$02,$50;- D 3 - I - 0x01E891 0F:E881:
 tbl_0F_E88B:
 	.byte $00,$27,$00,$45,$00,$74,$01,$22,$02,$10;- D 3 - I - 0x01E89B 0F:E88B:
 tbl_0F_E895:
@@ -1243,7 +1237,6 @@ loc_0F_E89D:
 	CMP #$08                        ;C - - - - - 0x01E8B4 0F:E8A4: C9 08
 	BEQ loc_0F_E8B8                 ;C - - - - - 0x01E8B6 0F:E8A6: F0 10
 	CMP #$09                        ;C - - - - - 0x01E8B8 0F:E8A8: C9 09
-ofs_0F_E8AA:
 	BEQ loc_0F_E8B8                 ;C - - - - - 0x01E8BA 0F:E8AA: F0 0C
 	CMP #$0B                        ;C - - - - - 0x01E8BC 0F:E8AC: C9 0B
 	BEQ loc_0F_E8B8                 ;C - - - - - 0x01E8BE 0F:E8AE: F0 08
@@ -1508,7 +1501,6 @@ loc_0F_EA6F:
 	LDA objFlags,X                  ;C - - - - - 0x01EA95 0F:EA85: BD 60 05
 	PHA                             ;C - - - - - 0x01EA98 0F:EA88: 48
 	AND #$40                        ;C - - - - - 0x01EA99 0F:EA89: 29 40
-ofs_0F_EA8B:
 	STA spriteFlipMask              ;C - - - - - 0x01EA9B 0F:EA8B: 85 10
 	PLA                             ;C - - - - - 0x01EA9D 0F:EA8D: 68
 	AND #$20                        ;C - - - - - 0x01EA9E 0F:EA8E: 29 20
@@ -1565,7 +1557,6 @@ loc_0F_EAF0:
 	STA ptr_02                      ;C - - - - - 0x01EB04 0F:EAF4: 85 02
 	LDA frameListHi,Y               ;C - - - - - 0x01EB06 0F:EAF6: B9 00 82
 	STA ptr_02+1                    ;C - - - - - 0x01EB09 0F:EAF9: 85 03
-ofs_0F_EAFB:
 	LDY #$00                        ;C - - - - - 0x01EB0B 0F:EAFB: A0 00
 	LDA (ptr_02),Y                  ;C - - - - - 0x01EB0D 0F:EAFD: B1 02
 	PHA                             ;C - - - - - 0x01EB0F 0F:EAFF: 48
@@ -1682,9 +1673,8 @@ animBankTable:
 	.byte $02                       ;- D 3 - - - 0x01EBEA 0F:EBDA:
 	.byte $02                       ;- - - - - - 0x01EBEB 0F:EBDB:
 	.byte $02,$02,$02               ;- D 3 - - - 0x01EBEC 0F:EBDC:
-	.res 13, $02                    ;- - - - - - 0x01EBEF 0F:EBDF: fill 13 bytes
-tbl_0F_EBEC:
-	.byte $02,$02,$02,$02,$02,$02,$02,$0A,$0A;- - - - - - 0x01EBFC 0F:EBEC:
+	.res 20, $02                    ;- - - - - - 0x01EBEF 0F:EBDF: fill 20 bytes
+	.byte $0A,$0A                   ;- - - - - - 0x01EC03 0F:EBF3:
 	.byte $0A,$0A                   ;- D 3 - - - 0x01EC05 0F:EBF5:
 	.byte $02                       ;- - - - - - 0x01EC07 0F:EBF7:
 	.byte $02,$0A,$0A,$02,$0A       ;- D 3 - - - 0x01EC08 0F:EBF8:
@@ -1763,7 +1753,6 @@ loc_0F_EC81:
 	STA objStunTimer,X              ;C - - - - - 0x01EC9F 0F:EC8F: 9D B0 04
 	STA objKind,X                   ;C - - - - - 0x01ECA2 0F:EC92: 9D 20 03
 	STA objId,X                     ;C - - - - - 0x01ECA5 0F:EC95: 9D 30 03
-ofs_0F_EC98:
 	STA objAtkBox,X                 ;C - - - - - 0x01ECA8 0F:EC98: 9D 40 04
 	STA objAtkDamage,X              ;C - - - - - 0x01ECAB 0F:EC9B: 9D 50 04
 	STA objDownState,X              ;C - - - - - 0x01ECAE 0F:EC9E: 9D C0 04
@@ -1811,7 +1800,7 @@ loc_0F_ECFB:
 	LDA #$00                        ;c - - - - - 0x01ED0B 0F:ECFB: A9 00
 	LDY ptr_02                      ;c - - - - - 0x01ED0D 0F:ECFD: A4 02
 loc_0F_ECFF:
-	STA a:ptr_42,Y                  ;c - - - - - 0x01ED0F 0F:ECFF: 99 42 00
+	STA a:ram_0042,Y                ;c - - - - - 0x01ED0F 0F:ECFF: 99 42 00
 	DEY                             ;c - - - - - 0x01ED12 0F:ED02: 88
 	BPL loc_0F_ECFF                 ;c - - - - - 0x01ED13 0F:ED03: 10 FA
 	JMP loc_0F_EEDF                 ;c - - - - - 0x01ED15 0F:ED05: 4C DF EE
@@ -1873,7 +1862,7 @@ loc_0F_ED5F:
 	LDA stageBlockAttr,Y            ;C - - - - - 0x01ED74 0F:ED64: B9 00 BF
 	AND #$F0                        ;C - - - - - 0x01ED77 0F:ED67: 29 F0
 	LDY ptr_02                      ;C - - - - - 0x01ED79 0F:ED69: A4 02
-	STA a:ptr_42,Y                  ;C - - - - - 0x01ED7B 0F:ED6B: 99 42 00
+	STA a:ram_0042,Y                ;C - - - - - 0x01ED7B 0F:ED6B: 99 42 00
 	CMP ram_0041                    ;C - - - - - 0x01ED7E 0F:ED6E: C5 41
 	BCC loc_0F_ED74                 ;C - - - - - 0x01ED80 0F:ED70: 90 02
 	STA ram_0041                    ;C - - - - - 0x01ED82 0F:ED72: 85 41
@@ -1945,7 +1934,6 @@ loc_0F_EDD3:
 	STA ptr_02+1                    ;C - - - - - 0x01EDF9 0F:EDE9: 85 03
 	PLA                             ;C - - - - - 0x01EDFB 0F:EDEB: 68
 	LSR A                           ;C - - - - - 0x01EDFC 0F:EDEC: 4A
-ofs_0F_EDED:
 	STA stageMapIndex               ;C - - - - - 0x01EDFD 0F:EDED: 85 28
 	LDA objYPage,X                  ;C - - - - - 0x01EDFF 0F:EDEF: BD E0 03
 	BMI loc_0F_EE18                 ;C - - - - - 0x01EE02 0F:EDF2: 30 24
@@ -1989,7 +1977,7 @@ loc_0F_EE32:
 	STY ram_0040                    ;c - - - - - 0x01EE43 0F:EE33: 84 40
 	LDY ptr_02                      ;c - - - - - 0x01EE45 0F:EE35: A4 02
 	LDA #$00                        ;c - - - - - 0x01EE47 0F:EE37: A9 00
-	STA a:ptr_42,Y                  ;c - - - - - 0x01EE49 0F:EE39: 99 42 00
+	STA a:ram_0042,Y                ;c - - - - - 0x01EE49 0F:EE39: 99 42 00
 	DEC ptr_02                      ;c - - - - - 0x01EE4C 0F:EE3C: C6 02
 	BPL loc_0F_EE1E                 ;c - - - - - 0x01EE4E 0F:EE3E: 10 DE
 	JMP loc_0F_EEDF                 ;c - - - - - 0x01EE50 0F:EE40: 4C DF EE
@@ -2023,7 +2011,7 @@ loc_0F_EE6C:
 	LDA stageBlockAttr,Y            ;C - - - - - 0x01EE81 0F:EE71: B9 00 BF
 	AND #$F0                        ;C - - - - - 0x01EE84 0F:EE74: 29 F0
 	LDY ptr_02                      ;C - - - - - 0x01EE86 0F:EE76: A4 02
-	STA a:ptr_42,Y                  ;C - - - - - 0x01EE88 0F:EE78: 99 42 00
+	STA a:ram_0042,Y                ;C - - - - - 0x01EE88 0F:EE78: 99 42 00
 	CMP ram_0041                    ;C - - - - - 0x01EE8B 0F:EE7B: C5 41
 	BCC loc_0F_EE81                 ;C - - - - - 0x01EE8D 0F:EE7D: 90 02
 	STA ram_0041                    ;C - - - - - 0x01EE8F 0F:EE7F: 85 41
@@ -2093,9 +2081,7 @@ loc_0F_EEDF:
 	TAX                             ;C - - - - - 0x01EEF9 0F:EEE9: AA
 	RTS                             ;C - - - - - 0x01EEFA 0F:EEEA: 60
 TileCollideYTbl_EEEB:
-	.byte $00,$05,$09,$0D,$11,$15,$19,$1E,$21;- D 3 - - - 0x01EEFB 0F:EEEB:
-tbl_0F_EEF4:
-	.byte $24,$29                   ;- D 3 - - - 0x01EF04 0F:EEF4:
+	.byte $00,$05,$09,$0D,$11,$15,$19,$1E,$21,$24,$29;- D 3 - - - 0x01EEFB 0F:EEEB:
 TileCollideYTbl_EEF6:
 	.byte $02                       ;- D 3 - - - 0x01EF06 0F:EEF6:
 TileCollideYTbl_EEF7:
@@ -2990,7 +2976,6 @@ loc_0F_F5BF:
 	BEQ loc_0F_F5CC                 ;C - - - - - 0x01F5D4 0F:F5C4: F0 06
 	LDA #$01                        ;C - - - - - 0x01F5D6 0F:F5C6: A9 01
 	STA ptr_00+1                    ;C - - - - - 0x01F5D8 0F:F5C8: 85 01
-ofs_0F_F5CA:
 	BNE loc_0F_F5D0                 ;C - - - - - 0x01F5DA 0F:F5CA: D0 04
 loc_0F_F5CC:
 	LDA #$00                        ;C - - - - - 0x01F5DC 0F:F5CC: A9 00
@@ -3501,7 +3486,6 @@ loc_0F_F999:
 	ROR A                           ;C - - - - - 0x01F9AF 0F:F99F: 6A
 	ROR A                           ;C - - - - - 0x01F9B0 0F:F9A0: 6A
 	AND #$40                        ;C - - - - - 0x01F9B1 0F:F9A1: 29 40
-ofs_0F_F9A3:
 	STA ptr_00                      ;C - - - - - 0x01F9B3 0F:F9A3: 85 00
 	LDA objFlags                    ;C - - - - - 0x01F9B5 0F:F9A5: AD 60 05
 	AND #$BF                        ;C - - - - - 0x01F9B8 0F:F9A8: 29 BF
@@ -3802,11 +3786,9 @@ tbl_0F_FC33:
 	.byte $01,$01,$00               ;- D 3 - - - 0x01FC4A 0F:FC3A:
 	.byte $01                       ;- - - - - - 0x01FC4D 0F:FC3D:
 	.byte $01,$00                   ;- D 3 - - - 0x01FC4E 0F:FC3E:
-	.byte $02                       ;W 0x01FC50 0F:FC40:
+	.byte $02                       ;- - - - - - 0x01FC50 0F:FC40:
 EnemyAI_Kind0ETbl_FC41:
-	.word $B5B4, $B3B2              ;W 0x01FC51 0F:FC41:
-	.byte $B6                       ;- D 3 - - - 0x01FC55 0F:FC45:
-	.byte $B8                       ;- D 3 - - - 0x01FC56 0F:FC46:
+	.byte $B4,$B5,$B2,$B3,$B6,$B8   ;- D 3 - - - 0x01FC51 0F:FC41:
 	.byte $00,$ED                   ;- - - - - - 0x01FC57 0F:FC47:
 	.byte $FB,$DB                   ;- D 3 - - - 0x01FC59 0F:FC49:
 	.byte $FB,$C9,$00               ;- - - - - - 0x01FC5B 0F:FC4B:
@@ -4092,7 +4074,6 @@ loc_0F_FE51:
 	JSR FillNametable               ;C - - - - - 0x01FEB6 0F:FEA6: 20 D1 C2
 	LDA #$C5                        ;C - - - - - 0x01FEB9 0F:FEA9: A9 C5
 	STA ptr_93+1                    ;C - - - - - 0x01FEBB 0F:FEAB: 85 94
-ofs_0F_FEAD:
 	LDA #$56                        ;C - - - - - 0x01FEBD 0F:FEAD: A9 56
 	STA ptr_93                      ;C - - - - - 0x01FEBF 0F:FEAF: 85 93
 	LDA #$00                        ;C - - - - - 0x01FEC1 0F:FEB1: A9 00
@@ -4235,7 +4216,6 @@ SoundUpdate:
 	LDA #$06                        ;C - - - - - 0x01FF8D 0F:FF7D: A9 06
 	STA MMC3_BANK_DATA              ;C - - - - - 0x01FF8F 0F:FF7F: 8D 01 80
 	LDA #$07                        ;C - - - - - 0x01FF92 0F:FF82: A9 07
-ofs_0F_FF84:
 	STA mmc3SelectShadow            ;C - - - - - 0x01FF94 0F:FF84: 85 F0
 	STA MMC3_BANK_SELECT            ;C - - - - - 0x01FF96 0F:FF86: 8D 00 80
 	LDA #$07                        ;C - - - - - 0x01FF99 0F:FF89: A9 07

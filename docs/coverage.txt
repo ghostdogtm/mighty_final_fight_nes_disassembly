@@ -2,24 +2,24 @@ Coverage report (bytes). cdl = from CDL, traced = found by static tracing
 
 bank  code(cdl) code(traced) data  unknown
 00         5920          390   1453      429
-01         3093          273   2886     1940
-02            0            0   7702      490
-03         2937           86   4866      303
-04         2781          103   3279     2029
-05         1578           86   3995     2533
+01         3093          273   4718      108
+02            0            0   8192        0
+03         2959           86   4866      281
+04         2781          103   3275     2033
+05         1578           78   5979      557
 06         2044          195   5749      204
-07            0            0   5663     2529
-08         2693          140   2316     3043
-09          745          156   3569     3722
-0A           32           12   6728     1420
-0B         2923          112   4809      348
+07            0            0   8129       63
+08         2693          147   2302     3050
+09          745          156   5651     1640
+0A           32           12   6724     1424
+0B         2957          112   4809      314
 0C         6477          492    786      437
-0D         2990           48   3025     2129
+0D         2990           48   5075       79
 0E         7731          247    198       16
-0F         6124          402   1074      592
-all       48068         2742  58098    22164
+0F         6124          402   1073      593
+all       48124         2741  68979    11228
 
-Unknown bytes: 9185 fill (one repeated byte), 130 code-like, 12849 other (probably data)
+Unknown bytes: 463 fill (one repeated byte), 72 code-like, 10693 other (probably data)
 
 CDL anomalies (code flag but not a valid instruction): 0
 
@@ -403,11 +403,6 @@ Traced code (instruction starts, verify by hand):
   04:9BA8  JSR QueueSound
   04:9BAB  INC ram_00AA
   04:9BAD  RTS
-  05:A5A4  ASL ram_0041
-  05:A5A6  CLD
-  05:A5A7  EOR (ptr_20+1),Y
-  05:A5A9  ORA (ptr_42,X)
-  05:A5AB  RTI
   05:A790  RTI
   05:A79C  BVC loc_05_A7F6
   05:A79E  RTS
@@ -603,6 +598,9 @@ Traced code (instruction starts, verify by hand):
   08:986E  LDA StageEventDispatch2Tbl_99D7,Y
   08:9871  JSR SetSectionChr
   08:9874  RTS
+  08:991F  LDA tbl_08_99EB,Y
+  08:9922  JSR SetSectionChr
+  08:9925  RTS
   08:996C  LDA StageEventDispatch2Tbl_99EC,Y
   08:996F  JSR SetSectionChr
   08:9972  RTS
@@ -1162,7 +1160,7 @@ Traced code (instruction starts, verify by hand):
   0F:EC80  RTS
   0F:ECFB  LDA #$00
   0F:ECFD  LDY ptr_02
-  0F:ECFF  STA a:ptr_42,Y
+  0F:ECFF  STA a:ram_0042,Y
   0F:ED02  DEY
   0F:ED03  BPL loc_0F_ECFF
   0F:ED05  JMP loc_0F_EEDF
@@ -1188,7 +1186,7 @@ Traced code (instruction starts, verify by hand):
   0F:EE33  STY ram_0040
   0F:EE35  LDY ptr_02
   0F:EE37  LDA #$00
-  0F:EE39  STA a:ptr_42,Y
+  0F:EE39  STA a:ram_0042,Y
   0F:EE3C  DEC ptr_02
   0F:EE3E  BPL loc_0F_EE1E
   0F:EE40  JMP loc_0F_EEDF
@@ -1287,189 +1285,136 @@ Traced code (instruction starts, verify by hand):
 Raw ROM-address operands (do not relocate with the code): 1
   0E:C0DC  STA $E000,X
 
+Pointer tables found by detect_tables (bank:addr words strong/weak raw kind); review tables with weak>0 or raw>0:
+  06:81B5   8 words  strong=5   weak=3   raw=0   abs
+  06:8329   5 words  strong=5   weak=0   raw=0   abs
+  06:84A7  25 words  strong=25  weak=0   raw=0   abs
+  06:86C7   5 words  strong=5   weak=0   raw=0   abs
+  06:8D01   2 words  strong=2   weak=0   raw=2   abs
+  06:943A   4 words  strong=4   weak=0   raw=4   rts
+  06:9783   3 words  strong=3   weak=0   raw=0   abs
+  06:97C6   3 words  strong=3   weak=0   raw=2   rts
+  06:98B1   3 words  strong=3   weak=0   raw=0   abs
+  06:9938   3 words  strong=3   weak=0   raw=0   abs
+  06:9971   3 words  strong=3   weak=0   raw=0   abs
+  06:9B5F   3 words  strong=3   weak=0   raw=2   rts
+  06:9C2A   3 words  strong=3   weak=0   raw=0   abs
+  06:9C35   4 words  strong=4   weak=0   raw=0   abs
+  07:A0C6   2 words  strong=2   weak=0   raw=0   abs
+  07:A308   2 words  strong=2   weak=0   raw=2   abs
+  07:A331   2 words  strong=2   weak=0   raw=2   abs
+  07:A3DA   7 words  strong=7   weak=0   raw=7   abs
+  07:A620   2 words  strong=2   weak=0   raw=0   abs
+  08:8321   2 words  strong=1   weak=1   raw=0   abs
+  08:97B1   3 words  strong=3   weak=0   raw=3   abs
+  08:982C   3 words  strong=3   weak=0   raw=3   abs
+  08:989E   3 words  strong=3   weak=0   raw=3   abs
+  08:98E4   3 words  strong=3   weak=0   raw=3   abs
+  08:98F7   2 words  strong=2   weak=0   raw=0   abs
+  08:992A   3 words  strong=3   weak=0   raw=3   abs
+  08:9BEE   3 words  strong=3   weak=0   raw=2   rts
+
+Split lo/hi tables whose guessed entries disagreed on the bank (entries left as raw $XXXX):
+  0C:83AF
+
 Code-like unknown runs (decode cleanly to the end, no BRK; review by hand):
-     18  0B:B30F
      15  0C:8899
-     15  03:B312
      10  0E:D450
       9  0C:8997
       8  0C:89BB
-      7  0B:B32A
-      6  0D:AE72
       6  0C:89DD
       6  0C:89D4
       6  0C:89B1
       6  0C:898E
       6  09:A436
-      6  05:AF28
-      6  03:B306
 
 Unknown runs, longest first (len bank:addr):
-   1424  01:B170
-   1361  05:B1AF
-   1360  0D:B1B0
    1036  08:9BF4
-    991  09:B321
     943  0A:9C51
-    902  07:B361
-    529  07:B12F
     520  08:8DF8
     504  08:99F6
-    480  09:B120
     466  09:A52E
     413  04:9663
     374  08:878A
-    343  05:A5AC
+    360  05:A59B
     329  09:AD17
-    324  07:B9BC
     306  00:9ECE
-    290  05:B9E0
-    268  09:B9F4
     267  09:A1F5
     222  04:9222
     184  04:8F48
+    181  09:AA4B
     179  04:944D
-    171  09:AA55
     168  04:8C58
-    165  09:A99C
-    152  0D:B9F0
+    167  09:A99C
     141  05:ADD3
-    116  0D:BA8C
     110  0B:A77A
     110  04:8892
-    109  02:9177
     106  0F:FD96
+    106  0A:9B96
     104  04:8B98
+    103  04:89D9
      99  04:9056
-     92  04:89D9
-     92  02:9FA4
      91  04:95A5
-     89  0A:9BA7
      89  00:99A7
      87  04:8A69
-     86  02:989E
      82  03:ACAE
      69  0F:EFBB
      68  09:A071
      65  04:90BF
      61  06:8A03
      54  0A:8BE3
-     44  07:B98C
      43  0F:FFB5
      43  04:9CC3
      42  0A:9728
      40  0B:A5A4
      40  0B:A3AE
      40  0A:8A8B
-     40  01:BAD4
      36  04:9D32
-     36  02:9546
-     36  02:904C
-     36  02:8464
      35  0C:8885
      34  0A:8B65
      34  03:AA60
      34  03:A788
      31  04:8B21
      30  0A:8BC1
-     28  07:B96C
-     28  01:BAA4
      25  0C:8803
      24  0F:EF35
-     24  0D:B168
-     24  0D:B128
-     24  09:B028
-     24  09:AF28
-     24  07:B950
-     24  07:B6E8
-     24  05:B168
-     24  01:B128
-     24  01:B0E8
-     24  01:B0A8
-     24  01:B068
-     23  09:AFE9
+     23  08:9930
+     23  08:98A4
+     23  08:9832
+     23  08:97B7
      23  07:AC55
-     23  02:9156
-     23  01:B028
      22  0F:EBDF
      22  0A:90AF
      22  0A:8C21
      21  0A:84E0
      21  09:A0F0
-     21  08:9932
-     21  08:98A6
-     21  08:9834
-     21  08:97B9
-     21  07:AFAA
      21  01:AE4B
      20  0A:9680
      20  0A:9632
-     20  09:B0FE
-     20  07:B938
      18  0D:AE4E
      18  0B:BFEE
-     18  0B:B30F
      18  09:A3D9
      18  06:896F
      18  06:895B
-     18  05:AFEE
      18  04:89AE
      18  03:B0EE
-     17  0D:B0EF
-     17  09:B0AF
      17  06:892E
-     17  01:AFEF
      16  0F:FC00
-     16  0D:B0B0
-     16  0D:B070
-     16  0D:B030
-     16  0D:AFF0
-     16  0D:AFB0
-     16  0D:AF70
-     16  0D:AF30
-     16  0D:AEF0
      16  0B:BD5C
      16  0B:B681
      16  0B:B66C
      16  0B:B0F0
      16  0B:AC44
-     16  09:B070
-     16  09:AFB0
-     16  09:AF70
-     16  09:AEF0
      16  09:A16D
-     16  07:B0F0
-     16  07:B0B0
-     16  07:B070
-     16  07:B030
-     16  07:AFF0
-     16  07:AF70
-     16  07:AF30
-     16  07:AEF0
-     16  05:B130
-     16  05:B0F0
-     16  05:B0B0
-     16  05:B070
-     16  05:B030
-     16  05:AFB0
-     16  05:AF70
-     16  05:AF30
-     16  05:AEF0
      16  04:98C8
-     16  02:9096
-     16  01:AFB0
-     16  01:AF70
-     16  01:AF30
-     16  01:AEF0
      16  00:97E9
      15  09:A370
      15  08:9558
      15  08:94D1
      15  08:944A
      15  03:BE7D
-     15  03:B312
      14  0C:88D5
-     13  0A:9B96
+     13  08:98EA
      12  08:95DF
      12  08:9579
      12  08:94F2
@@ -1481,9 +1426,7 @@ Unknown runs, longest first (len bank:addr):
      12  04:8934
      11  0F:EC17
      11  0A:847C
-     11  09:B0F0
      11  09:A458
-     11  08:98EC
      10  0F:EBC9
      10  0E:D450
      10  0C:9FE2
@@ -1496,7 +1439,6 @@ Unknown runs, longest first (len bank:addr):
      10  0C:8826
      10  0C:87E0
      10  06:89F7
-     10  02:84A4
       9  0F:F8CC
       9  0F:F6DF
       9  0C:8997
@@ -1508,7 +1450,6 @@ Unknown runs, longest first (len bank:addr):
       9  08:9516
       9  08:948F
       9  08:9408
-      9  05:A59B
       8  0F:FFF0
       8  0F:EBAA
       8  0C:89BB
@@ -1520,52 +1461,20 @@ Unknown runs, longest first (len bank:addr):
       8  06:8AF7
       8  06:89DF
       8  04:9646
-      8  01:BAC4
       7  0F:FCB9
-      7  0D:B028
-      7  0D:AF28
-      7  0D:AEC9
-      7  0D:AE99
-      7  0D:AE69
       7  0C:896B
       7  0B:BD75
       7  0B:BD6D
-      7  0B:B32A
-      7  09:B319
-      7  09:B311
-      7  09:B309
-      7  09:B301
-      7  09:AEC9
-      7  09:AE99
-      7  09:AE69
       7  08:93CB
-      7  07:B359
-      7  07:B351
-      7  07:B349
-      7  07:B341
-      7  07:AEC9
-      7  07:AE99
-      7  07:AE69
       7  07:AE59
-      7  05:AEC9
-      7  05:AE99
-      7  05:AE69
       7  04:9D5C
-      7  04:8A39
       7  03:BE8D
-      7  02:857B
-      7  01:AEC9
-      7  01:AE99
-      7  01:AE69
       6  0F:F8AB
       6  0F:F887
       6  0F:F6CA
       6  0F:EF25
       6  0F:ECC9
       6  0F:EC08
-      6  0D:AED2
-      6  0D:AEA2
-      6  0D:AE72
       6  0D:A3D3
       6  0C:89DD
       6  0C:89D4
@@ -1576,10 +1485,6 @@ Unknown runs, longest first (len bank:addr):
       6  0B:A286
       6  0A:8568
       6  0A:855F
-      6  09:AED2
-      6  09:AEA2
-      6  09:AE92
-      6  09:AE72
       6  09:A436
       6  09:A3F1
       6  08:98FB
@@ -1600,22 +1505,8 @@ Unknown runs, longest first (len bank:addr):
       6  08:9426
       6  08:93DB
       6  08:93BB
-      6  07:AED2
-      6  07:AEC2
-      6  07:AEA2
-      6  07:AE72
-      6  05:AF28
-      6  05:AED2
-      6  05:AEA2
-      6  05:AE72
+      6  05:A892
       6  05:A795
-      6  03:B306
-      6  02:85BD
-      6  01:B78A
-      6  01:AF28
-      6  01:AED2
-      6  01:AEA2
-      6  01:AE72
       6  01:A95E
       6  01:A94E
       6  01:A93E
@@ -1634,15 +1525,11 @@ Unknown runs, longest first (len bank:addr):
       5  09:A4CF
       5  09:A0CE
       5  08:8DE7
-      5  07:AF69
-      5  07:AF28
-      5  05:AEC3
       5  04:9D64
       5  04:921C
       5  03:BB18
       5  03:BB08
       5  03:BAF8
-      5  01:AEC3
       4  0F:FD0A
       4  0F:FCC2
       4  0F:FBD5
@@ -1651,7 +1538,6 @@ Unknown runs, longest first (len bank:addr):
       4  0F:EB9D
       4  0F:E60B
       4  0F:E161
-      4  0D:AEC4
       4  0D:AD92
       4  0D:A87E
       4  0D:A3EB
@@ -1662,12 +1548,11 @@ Unknown runs, longest first (len bank:addr):
       4  0C:8856
       4  0A:9ACC
       4  0A:8489
-      4  09:AEC4
       4  09:A4C6
       4  09:A04F
       4  08:99D4
       4  08:99C9
-      4  08:991F
+      4  08:9926
       4  08:98E0
       4  08:989A
       4  08:9828
@@ -1678,12 +1563,6 @@ Unknown runs, longest first (len bank:addr):
       4  08:93F8
       4  08:93A1
       4  08:9034
-      4  07:BFF2
-      4  07:BEF2
-      4  07:BDF2
-      4  07:BCF2
-      4  07:BBF2
-      4  07:B7B4
       4  06:89ED
       4  06:8928
       4  05:A57B
@@ -1693,7 +1572,6 @@ Unknown runs, longest first (len bank:addr):
       4  03:BB81
       4  03:BAE9
       4  03:A806
-      4  02:845E
       4  01:A968
       4  01:A958
       4  01:A948
@@ -1710,13 +1588,6 @@ Unknown runs, longest first (len bank:addr):
       3  0F:F8B9
       3  0F:F6DB
       3  0F:EC25
-      3  0D:BFF5
-      3  0D:BEF5
-      3  0D:BDF5
-      3  0D:BCF5
-      3  0D:BBF5
-      3  0D:AE95
-      3  0D:AE65
       3  0D:AE2C
       3  0C:89C6
       3  0C:89A3
@@ -1726,32 +1597,12 @@ Unknown runs, longest first (len bank:addr):
       3  0C:8834
       3  0C:87EE
       3  0C:87D7
-      3  0B:B324
-      3  0B:B309
-      3  0B:B303
       3  0A:8590
-      3  09:BFD8
-      3  09:BF92
-      3  09:BF01
-      3  09:BED8
-      3  09:BE92
-      3  09:BE01
-      3  09:BDD8
-      3  09:BD92
-      3  09:BD01
-      3  09:BCD8
-      3  09:BC92
-      3  09:BC01
-      3  09:BBD8
-      3  09:BB92
-      3  09:BB01
-      3  09:AE65
       3  09:A42D
       3  09:A385
       3  09:A0E8
       3  09:A0BA
       3  08:99DE
-      3  08:9927
       3  08:96AB
       3  08:9624
       3  08:95B5
@@ -1769,28 +1620,8 @@ Unknown runs, longest first (len bank:addr):
       3  08:93C2
       3  08:93AD
       3  08:8035
-      3  07:BF7E
-      3  07:BF38
-      3  07:BF18
-      3  07:BE7E
-      3  07:BE38
-      3  07:BE18
-      3  07:BD7E
-      3  07:BD38
-      3  07:BD18
-      3  07:BC7E
-      3  07:BC38
-      3  07:BC18
-      3  07:BB7E
-      3  07:BB38
-      3  07:BB18
-      3  07:B02C
-      3  07:B028
-      3  07:AE95
-      3  07:AE65
       3  06:8949
       3  06:891A
-      3  05:AE65
       3  05:AA7F
       3  05:A791
       3  05:A71E
@@ -1801,9 +1632,6 @@ Unknown runs, longest first (len bank:addr):
       3  03:BB10
       3  03:BB00
       3  03:BAF0
-      3  02:849E
-      3  01:AE95
-      3  01:AE65
       3  01:AA2B
       3  01:A9C1
       3  01:A9B9
@@ -1848,48 +1676,6 @@ Unknown runs, longest first (len bank:addr):
       2  0F:EBA7
       2  0F:E879
       2  0E:DE5C
-      2  0D:BFFC
-      2  0D:BFDE
-      2  0D:BFD7
-      2  0D:BFBD
-      2  0D:BFAF
-      2  0D:BF9E
-      2  0D:BF97
-      2  0D:BF7F
-      2  0D:BEFC
-      2  0D:BEDE
-      2  0D:BED7
-      2  0D:BEBD
-      2  0D:BEAF
-      2  0D:BE9E
-      2  0D:BE97
-      2  0D:BE7F
-      2  0D:BDFC
-      2  0D:BDDE
-      2  0D:BDD7
-      2  0D:BDBD
-      2  0D:BDAF
-      2  0D:BD9E
-      2  0D:BD97
-      2  0D:BD7F
-      2  0D:BCFC
-      2  0D:BCDE
-      2  0D:BCD7
-      2  0D:BCBD
-      2  0D:BCAF
-      2  0D:BC9E
-      2  0D:BC97
-      2  0D:BBFC
-      2  0D:BBDE
-      2  0D:BBD7
-      2  0D:BBBD
-      2  0D:BBAF
-      2  0D:BB9E
-      2  0D:BB97
-      2  0D:BB7F
-      2  0D:AEDA
-      2  0D:AEAA
-      2  0D:AE7A
       2  0D:AD99
       2  0D:AD8F
       2  0D:AD89
@@ -1931,14 +1717,6 @@ Unknown runs, longest first (len bank:addr):
       2  0A:8391
       2  0A:8360
       2  0A:8338
-      2  09:BFFE
-      2  09:BEFE
-      2  09:BDFE
-      2  09:BCFE
-      2  09:BBFE
-      2  09:AEDA
-      2  09:AEAA
-      2  09:AE7A
       2  09:A445
       2  09:A069
       2  09:A03B
@@ -1952,75 +1730,11 @@ Unknown runs, longest first (len bank:addr):
       2  08:93B7
       2  08:939E
       2  08:8DCB
-      2  07:BFDD
-      2  07:BFDA
-      2  07:BFC3
-      2  07:BFBD
-      2  07:BF68
-      2  07:BF5A
-      2  07:BF54
-      2  07:BF51
-      2  07:BF03
-      2  07:BEDD
-      2  07:BEDA
-      2  07:BEC3
-      2  07:BEBD
-      2  07:BE68
-      2  07:BE5A
-      2  07:BE54
-      2  07:BE51
-      2  07:BE03
-      2  07:BDDD
-      2  07:BDDA
-      2  07:BDC3
-      2  07:BDBD
-      2  07:BD68
-      2  07:BD5A
-      2  07:BD54
-      2  07:BD51
-      2  07:BD03
-      2  07:BCDD
-      2  07:BCDA
-      2  07:BCC3
-      2  07:BCBD
-      2  07:BC68
-      2  07:BC5A
-      2  07:BC54
-      2  07:BC51
-      2  07:BC03
-      2  07:BBDD
-      2  07:BBDA
-      2  07:BBC3
-      2  07:BBBD
-      2  07:BB68
-      2  07:BB5A
-      2  07:BB54
-      2  07:BB51
-      2  07:BB03
-      2  07:B77A
-      2  07:AEDA
-      2  07:AEAA
-      2  07:AE7A
       2  07:A8CF
       2  06:8B50
       2  06:89F3
       2  06:89E9
       2  06:8983
-      2  05:BFD1
-      2  05:BF00
-      2  05:BED1
-      2  05:BE00
-      2  05:BDD1
-      2  05:BD00
-      2  05:BCD1
-      2  05:BC00
-      2  05:BBD1
-      2  05:B782
-      2  05:B028
-      2  05:AEDA
-      2  05:AEAA
-      2  05:AE96
-      2  05:AE7A
       2  05:A7A0
       2  04:98DA
       2  04:965E
@@ -2029,9 +1743,6 @@ Unknown runs, longest first (len bank:addr):
       2  03:BD31
       2  03:BD19
       2  03:BD01
-      2  01:AEDA
-      2  01:AEAA
-      2  01:AE7A
       2  01:AA30
       2  01:A98A
       2  00:821B
@@ -2057,6 +1768,7 @@ Unknown runs, longest first (len bank:addr):
       1  0F:FC7F
       1  0F:FC74
       1  0F:FC72
+      1  0F:FC40
       1  0F:FC3D
       1  0F:FC39
       1  0F:FC29
@@ -2113,73 +1825,6 @@ Unknown runs, longest first (len bank:addr):
       1  0E:DE54
       1  0E:DE51
       1  0E:DE4D
-      1  0D:BFE5
-      1  0D:BFDB
-      1  0D:BFC7
-      1  0D:BFA2
-      1  0D:BF91
-      1  0D:BF88
-      1  0D:BF7C
-      1  0D:BF6A
-      1  0D:BF54
-      1  0D:BF44
-      1  0D:BF33
-      1  0D:BF28
-      1  0D:BF02
-      1  0D:BEFF
-      1  0D:BEE5
-      1  0D:BEDB
-      1  0D:BEC7
-      1  0D:BEA2
-      1  0D:BE91
-      1  0D:BE88
-      1  0D:BE7C
-      1  0D:BE6A
-      1  0D:BE54
-      1  0D:BE44
-      1  0D:BE33
-      1  0D:BE28
-      1  0D:BE02
-      1  0D:BDFF
-      1  0D:BDE5
-      1  0D:BDDB
-      1  0D:BDC7
-      1  0D:BDA2
-      1  0D:BD91
-      1  0D:BD88
-      1  0D:BD7C
-      1  0D:BD6A
-      1  0D:BD54
-      1  0D:BD33
-      1  0D:BD28
-      1  0D:BD02
-      1  0D:BCFF
-      1  0D:BCE5
-      1  0D:BCDB
-      1  0D:BCC7
-      1  0D:BCA2
-      1  0D:BC88
-      1  0D:BC6A
-      1  0D:BC54
-      1  0D:BC44
-      1  0D:BC33
-      1  0D:BC28
-      1  0D:BC02
-      1  0D:BBFF
-      1  0D:BBE5
-      1  0D:BBDB
-      1  0D:BBC7
-      1  0D:BBA2
-      1  0D:BB91
-      1  0D:BB88
-      1  0D:BB7C
-      1  0D:BB6A
-      1  0D:BB54
-      1  0D:BB44
-      1  0D:BB33
-      1  0D:BB28
-      1  0D:BB02
-      1  0D:B77F
       1  0D:ADA9
       1  0D:AD97
       1  0D:AD8D
@@ -2268,37 +1913,6 @@ Unknown runs, longest first (len bank:addr):
       1  0A:839B
       1  0A:8331
       1  0A:832A
-      1  09:BFF7
-      1  09:BFEF
-      1  09:BFEB
-      1  09:BF84
-      1  09:BF68
-      1  09:BF27
-      1  09:BEF7
-      1  09:BEEF
-      1  09:BEEB
-      1  09:BE84
-      1  09:BE68
-      1  09:BE27
-      1  09:BDF7
-      1  09:BDEF
-      1  09:BDEB
-      1  09:BD84
-      1  09:BD68
-      1  09:BD27
-      1  09:BCF7
-      1  09:BCEF
-      1  09:BCEB
-      1  09:BC84
-      1  09:BC68
-      1  09:BC27
-      1  09:BBF7
-      1  09:BBEF
-      1  09:BBEB
-      1  09:BB84
-      1  09:BB68
-      1  09:BB27
-      1  09:B068
       1  09:A781
       1  09:A450
       1  09:A44E
@@ -2424,166 +2038,6 @@ Unknown runs, longest first (len bank:addr):
       1  08:82B6
       1  08:82AF
       1  08:82A8
-      1  07:BFF9
-      1  07:BFEA
-      1  07:BFE6
-      1  07:BFD4
-      1  07:BFD2
-      1  07:BFD0
-      1  07:BFCE
-      1  07:BFCC
-      1  07:BFAF
-      1  07:BFA6
-      1  07:BF9F
-      1  07:BF9D
-      1  07:BF96
-      1  07:BF8C
-      1  07:BF88
-      1  07:BF77
-      1  07:BF6E
-      1  07:BF66
-      1  07:BF61
-      1  07:BF5D
-      1  07:BF58
-      1  07:BF4D
-      1  07:BF32
-      1  07:BF2F
-      1  07:BF2D
-      1  07:BF2A
-      1  07:BF28
-      1  07:BF22
-      1  07:BF14
-      1  07:BF10
-      1  07:BF06
-      1  07:BEFF
-      1  07:BEF9
-      1  07:BEEA
-      1  07:BEE6
-      1  07:BED4
-      1  07:BED2
-      1  07:BED0
-      1  07:BECE
-      1  07:BECC
-      1  07:BEAF
-      1  07:BEA6
-      1  07:BE9F
-      1  07:BE9D
-      1  07:BE96
-      1  07:BE8C
-      1  07:BE88
-      1  07:BE77
-      1  07:BE6E
-      1  07:BE66
-      1  07:BE61
-      1  07:BE5D
-      1  07:BE58
-      1  07:BE4D
-      1  07:BE32
-      1  07:BE2F
-      1  07:BE2D
-      1  07:BE2A
-      1  07:BE28
-      1  07:BE22
-      1  07:BE14
-      1  07:BE10
-      1  07:BE06
-      1  07:BDFF
-      1  07:BDF9
-      1  07:BDEA
-      1  07:BDE6
-      1  07:BDD4
-      1  07:BDD2
-      1  07:BDD0
-      1  07:BDCE
-      1  07:BDCC
-      1  07:BDAF
-      1  07:BDA6
-      1  07:BD9F
-      1  07:BD9D
-      1  07:BD96
-      1  07:BD8C
-      1  07:BD88
-      1  07:BD77
-      1  07:BD6E
-      1  07:BD66
-      1  07:BD61
-      1  07:BD5D
-      1  07:BD58
-      1  07:BD4D
-      1  07:BD32
-      1  07:BD2F
-      1  07:BD2D
-      1  07:BD2A
-      1  07:BD28
-      1  07:BD22
-      1  07:BD14
-      1  07:BD10
-      1  07:BD06
-      1  07:BCFF
-      1  07:BCF9
-      1  07:BCEA
-      1  07:BCE6
-      1  07:BCD4
-      1  07:BCD2
-      1  07:BCD0
-      1  07:BCCE
-      1  07:BCCC
-      1  07:BCAF
-      1  07:BCA6
-      1  07:BC9F
-      1  07:BC9D
-      1  07:BC96
-      1  07:BC8C
-      1  07:BC88
-      1  07:BC77
-      1  07:BC6E
-      1  07:BC66
-      1  07:BC61
-      1  07:BC5D
-      1  07:BC58
-      1  07:BC4D
-      1  07:BC32
-      1  07:BC2F
-      1  07:BC2D
-      1  07:BC2A
-      1  07:BC28
-      1  07:BC22
-      1  07:BC14
-      1  07:BC10
-      1  07:BC06
-      1  07:BBFF
-      1  07:BBF9
-      1  07:BBEA
-      1  07:BBE6
-      1  07:BBD4
-      1  07:BBD2
-      1  07:BBD0
-      1  07:BBCE
-      1  07:BBCC
-      1  07:BBAF
-      1  07:BBA6
-      1  07:BB9F
-      1  07:BB9D
-      1  07:BB96
-      1  07:BB8C
-      1  07:BB88
-      1  07:BB77
-      1  07:BB6E
-      1  07:BB66
-      1  07:BB61
-      1  07:BB5D
-      1  07:BB58
-      1  07:BB4D
-      1  07:BB32
-      1  07:BB2F
-      1  07:BB2D
-      1  07:BB2A
-      1  07:BB28
-      1  07:BB22
-      1  07:BB14
-      1  07:BB10
-      1  07:BB06
-      1  07:B0EE
       1  07:A976
       1  07:A913
       1  07:A700
@@ -2637,76 +2091,6 @@ Unknown runs, longest first (len bank:addr):
       1  06:8940
       1  06:8923
       1  06:8915
-      1  05:BFE2
-      1  05:BFCF
-      1  05:BFCB
-      1  05:BFC6
-      1  05:BFB8
-      1  05:BFB2
-      1  05:BF7C
-      1  05:BF73
-      1  05:BF5E
-      1  05:BF5B
-      1  05:BF53
-      1  05:BF29
-      1  05:BF25
-      1  05:BEE2
-      1  05:BECF
-      1  05:BECB
-      1  05:BEC6
-      1  05:BEB8
-      1  05:BEB2
-      1  05:BE7C
-      1  05:BE73
-      1  05:BE5E
-      1  05:BE5B
-      1  05:BE53
-      1  05:BE40
-      1  05:BE29
-      1  05:BE25
-      1  05:BDE2
-      1  05:BDCF
-      1  05:BDCB
-      1  05:BDC6
-      1  05:BDB8
-      1  05:BDB2
-      1  05:BD7C
-      1  05:BD73
-      1  05:BD5E
-      1  05:BD5B
-      1  05:BD53
-      1  05:BD40
-      1  05:BD29
-      1  05:BD25
-      1  05:BCE2
-      1  05:BCCF
-      1  05:BCCB
-      1  05:BCC6
-      1  05:BCB8
-      1  05:BCB2
-      1  05:BC7C
-      1  05:BC73
-      1  05:BC5E
-      1  05:BC5B
-      1  05:BC53
-      1  05:BC40
-      1  05:BC29
-      1  05:BC25
-      1  05:BBE2
-      1  05:BBCF
-      1  05:BBCB
-      1  05:BBC6
-      1  05:BBB8
-      1  05:BBB2
-      1  05:BB7C
-      1  05:BB5E
-      1  05:BB5B
-      1  05:BB53
-      1  05:BB40
-      1  05:BB29
-      1  05:BB25
-      1  05:B1A8
-      1  05:AF6E
       1  05:A9E1
       1  05:A89A
       1  05:A730
@@ -2756,97 +2140,6 @@ Unknown runs, longest first (len bank:addr):
       1  03:B3CC
       1  03:B3C3
       1  03:B3BC
-      1  03:B330
-      1  02:8655
-      1  02:8645
-      1  02:8642
-      1  02:85C9
-      1  02:85A5
-      1  02:8591
-      1  02:855D
-      1  02:8510
-      1  02:84FA
-      1  02:8443
-      1  02:843C
-      1  02:8433
-      1  02:8421
-      1  02:840E
-      1  02:8408
-      1  02:8405
-      1  02:8402
-      1  02:83FF
-      1  02:83FC
-      1  02:83F9
-      1  02:83F6
-      1  02:83F3
-      1  02:83F0
-      1  02:83ED
-      1  02:83B4
-      1  02:8397
-      1  01:BFED
-      1  01:BFD6
-      1  01:BFCE
-      1  01:BFC5
-      1  01:BFBD
-      1  01:BFA6
-      1  01:BF92
-      1  01:BF5E
-      1  01:BF53
-      1  01:BF40
-      1  01:BF3A
-      1  01:BF35
-      1  01:BEED
-      1  01:BED6
-      1  01:BECE
-      1  01:BEC5
-      1  01:BEBD
-      1  01:BEA6
-      1  01:BE92
-      1  01:BE5E
-      1  01:BE53
-      1  01:BE40
-      1  01:BE3A
-      1  01:BE35
-      1  01:BE2B
-      1  01:BDED
-      1  01:BDD6
-      1  01:BDCE
-      1  01:BDC5
-      1  01:BDBD
-      1  01:BDA6
-      1  01:BD92
-      1  01:BD5E
-      1  01:BD53
-      1  01:BD40
-      1  01:BD3A
-      1  01:BD35
-      1  01:BD2B
-      1  01:BCED
-      1  01:BCD6
-      1  01:BCCE
-      1  01:BCC5
-      1  01:BCBD
-      1  01:BCA6
-      1  01:BC92
-      1  01:BC5E
-      1  01:BC53
-      1  01:BC40
-      1  01:BC3A
-      1  01:BC35
-      1  01:BC2B
-      1  01:BBED
-      1  01:BBD6
-      1  01:BBCE
-      1  01:BBC5
-      1  01:BBBD
-      1  01:BBA6
-      1  01:BB92
-      1  01:BB5E
-      1  01:BB53
-      1  01:BB40
-      1  01:BB3A
-      1  01:BB35
-      1  01:BB2B
       1  01:AA25
       1  01:AA23
       1  01:A9C9

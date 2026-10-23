@@ -507,12 +507,12 @@ enemyAILo:
 	.lobytes EnemyAI_Var2, EnemyAI_Var1, EnemyAI_Var2, EnemyAI_Var4, EnemyAI_Var1, EnemyAI_Var2, EnemyAI_Var4, EnemyAI_Var4;- - - - - - 0x018417 0C:8407:
 	.lobytes $A700, $A703, $A706, $A709, $A70C, $A70F, $A712, $A715;- - - - - - 0x01841F 0C:840F:
 	.lobytes $A718, $A71B, $A71E, $A721, $A724, $A727, $A72A, $A72D;- D 0 - - - 0x018427 0C:8417:
-	.lobytes $B300, frame_02_8A30_02, enemyAI_72, $B309, $B30C, enemyAI_75, $B312, $B315;- D 0 - - - 0x01842F 0C:841F:
-	.lobytes enemyAI_78, $B31B, $B31E, $B321, enemyAI_7C, $B327, enemyAI_7E, enemyAI_7F;- - - - - - 0x018437 0C:8427:
+	.lobytes $B300, $B303, $B306, $B309, $B30C, $B30F, $B312, $B315;- D 0 - - - 0x01842F 0C:841F:
+	.lobytes $B318, $B31B, $B31E, $B321, $B324, $B327, $B32A, $B32D;- - - - - - 0x018437 0C:8427:
 	.lobytes $A000, $A003, $A006, $A009, $A00C, $A00F, $A012, $A015;- D 0 - - - 0x01843F 0C:842F:
 	.lobytes $A018, $A01B, $A01E, $A021, $A024, $A027, $A02A, $A02D;- - - - - - 0x018447 0C:8437:
-	.lobytes $B300, frame_02_8A30_02, enemyAI_72, $B309, $B30C, enemyAI_75, $B312, $B315;- D 0 - - - 0x01844F 0C:843F:
-	.lobytes enemyAI_78, $B31B, $B31E, $B321, enemyAI_7C, $B327, enemyAI_7E, enemyAI_7F;- - - - - - 0x018457 0C:8447:
+	.lobytes $B300, $B303, $B306, $B309, $B30C, $B30F, $B312, $B315;- D 0 - - - 0x01844F 0C:843F:
+	.lobytes $B318, $B31B, $B31E, $B321, $B324, $B327, $B32A, $B32D;- - - - - - 0x018457 0C:8447:
 ; hi bytes; the last 48 entries point into other banks ($A700.., $B300.., $A000..)
 enemyAIHi:
 	.hibytes EnemyAI_None, EnemyAI_Nop, EnemyAI_Launched, EnemyAI_KnockedBack, EnemyAI_Kind04, EnemyAI_KnockedBack, EnemyAI_Falling, EnemyAI_Kind07_16;- D 0 - - - 0x01845F 0C:844F:
@@ -529,12 +529,12 @@ enemyAIHi:
 	.hibytes EnemyAI_Var2, EnemyAI_Var1, EnemyAI_Var2, EnemyAI_Var4, EnemyAI_Var1, EnemyAI_Var2, EnemyAI_Var4, EnemyAI_Var4;- - - - - - 0x0184B7 0C:84A7:
 	.hibytes $A700, $A703, $A706, $A709, $A70C, $A70F, $A712, $A715;- - - - - - 0x0184BF 0C:84AF:
 	.hibytes $A718, $A71B, $A71E, $A721, $A724, $A727, $A72A, $A72D;- D 0 - - - 0x0184C7 0C:84B7:
-	.hibytes $B300, frame_02_8A30_02, enemyAI_72, $B309, $B30C, enemyAI_75, $B312, $B315;- D 0 - - - 0x0184CF 0C:84BF:
-	.hibytes enemyAI_78, $B31B, $B31E, $B321, enemyAI_7C, $B327, enemyAI_7E, enemyAI_7F;- - - - - - 0x0184D7 0C:84C7:
+	.hibytes $B300, $B303, $B306, $B309, $B30C, $B30F, $B312, $B315;- D 0 - - - 0x0184CF 0C:84BF:
+	.hibytes $B318, $B31B, $B31E, $B321, $B324, $B327, $B32A, $B32D;- - - - - - 0x0184D7 0C:84C7:
 	.hibytes $A000, $A003, $A006, $A009, $A00C, $A00F, $A012, $A015;- D 0 - - - 0x0184DF 0C:84CF:
 	.hibytes $A018, $A01B, $A01E, $A021, $A024, $A027, $A02A, $A02D;- - - - - - 0x0184E7 0C:84D7:
-	.hibytes $B300, frame_02_8A30_02, enemyAI_72, $B309, $B30C, enemyAI_75, $B312, $B315;- D 0 - - - 0x0184EF 0C:84DF:
-	.hibytes enemyAI_78, $B31B, $B31E, $B321, enemyAI_7C, $B327, enemyAI_7E, enemyAI_7F;- - - - - - 0x0184F7 0C:84E7:
+	.hibytes $B300, $B303, $B306, $B309, $B30C, $B30F, $B312, $B315;- D 0 - - - 0x0184EF 0C:84DF:
+	.hibytes $B318, $B31B, $B31E, $B321, $B324, $B327, $B32A, $B32D;- - - - - - 0x0184F7 0C:84E7:
 ; RTS handler used by unused kinds
 EnemyAI_None:
 	RTS                             ;C - - J - - 0x0184FF 0C:84EF: 60

@@ -41,8 +41,9 @@ Requires the ROM and your own FCEUX CDL (`Mighty Final Fight (U) [!].cdl`, same 
 ```
 python tools/disasm.py --build      # generate src/, build mff.nes and compare with the original
 ```
-Options: `--out DIR` (write to another directory), `--no-trace` (skip static code tracing), `--no-chr`,
-`--rom`, `--cdl`.
+Options: `--out DIR` (write to another directory), `--labels DIR` (another directory with `ram.txt`/`rom.txt`),
+`--no-trace` (skip static code tracing), `--no-chr`, `--rom`, `--cdl`. A `WARNING` is printed when a forced
+`data`/`table`/`text` range overrides bytes the CDL saw as code.
 
 **Warning:** `disasm.py` overwrites `src/`. Once you start editing `src/*.asm` by hand, do not run it in the same
 directory (generate with `--out` and diff instead). As long as the asm is not hand-edited, keep label and RAM names
@@ -65,6 +66,8 @@ in `tools/labels/*.txt` and regenerate.
 | `docs/enemy_data.md` | enemy placement and types |
 | `docs/animation_format.md` | animation, frame and sprite offset formats |
 | `docs/unknown_data.md` | classification of bytes the CDL never touched (`tools/unknown_report.py`) |
+| `docs/PLAN.md` | plan for further improving the disassembler |
+| `tools/selftest.py` | generator self-test on a synthetic ROM (`python tools/selftest.py`, needs ca65/ld65) |
 | `tools/reloc_test.py` | relocation test: rebuilds with all switchable banks moved by $100; only address bytes may change |
 | `tools/chr_tool.py` | CHR ↔ 1 KB `.chr` ↔ PNG |
 | `tools/labels/ram.txt` | RAM names: `ADDR NAME [SIZE] ; comment` |
@@ -83,7 +86,12 @@ A lowercase `c` means the code was found by tracing (the emulator never saw it; 
 2. Traces extra code from branches/`JSR`/`JMP`/fall-throughs into unknown bytes (a path is rejected on an invalid
    opcode, `BRK`, or running into data).
 3. Finds pointer tables (including the "RTS trick", `.word label-1`): the anchor is a word pointing to code with the
-   `J` flag, then the table is extended in both directions. Table targets are traced too.
+   `J` flag, then the table is extended in both directions while the words point at code. An entry is "strong" when
+   exactly one candidate bank has an instruction there (or exactly one has the `J` flag) and "weak" when it points at
+   unknown bytes that merely decode cleanly; a table is kept only if strong >= weak (otherwise tables grew into tile and
+   sprite data). Entries whose bank is ambiguous must agree on one bank, else they are emitted as raw `$XXXX` without a
+   label; the same rule applies to split lo/hi tables (item 5). The tables found are listed in `docs/coverage.txt`.
+   Table targets are traced too.
 4. Names labels `sub_/loc_/ofs_/tbl_/dat_BB_AAAA`. The bank behind an `$8000–$BFFF` address is determined by (a) a single
    CDL candidate, (b) banks that are always mapped as a pair (00/01, 04/05, 08/09, 0C/0D), (c) linear tracking of the values
    stored to `prgBank8000/prgBankA000` ($F4/$F5) in the fixed banks. These operands carry `bank=NN` in the comment.
@@ -96,4 +104,4 @@ A lowercase `c` means the code was found by tracing (the emulator never saw it; 
 - About 24 KB of PRG (≈19 %) was never seen by the CDL and tracing did not turn it into code — it is mostly data the
   game did not read during play. It stays as `.byte` (largest regions in `docs/coverage.txt`).
 - Operands in `$8000–$BFFF` whose bank depends on the stage or animation set (`stageBankTable`) cannot be resolved statically; they are named with `rawsym AAAA name` in `rom.txt` (`stagePalettes_s0`, `animPtrLo`, …). One stays raw (listed in `docs/coverage.txt`).
-- `rom.txt` directives: `comment BB:AAAA text` appends a comment to a line; `bewords BB:LO-HI` emits big-endian address pairs (hi, lo) as `>label,<label`; `text BB:LO-HI` emits strings per line with the decoded text (tile = ASCII−$31 for A-Z, `$00` space, `$FE` newline, `$FF` end); `table BB:LO-HI N header` emits a range N bytes per row with a comment; `bank BB:AAAA TT` states the bank behind a raw `$8000–$BFFF` operand of the instruction at BB:AAAA.
+- `rom.txt` directives (in `code|data|words|table|text|bewords|note|comment` the `BB` may be a bank list `01,05,07:AAAA-AAAA`, the same CPU range in each bank, handy for the stage banks that share one layout): `comment BB:AAAA text` appends a comment to a line; `bewords BB:LO-HI` emits big-endian address pairs (hi, lo) as `>label,<label`; `text BB:LO-HI` emits strings per line with the decoded text (tile = ASCII−$31 for A-Z, `$00` space, `$FE` newline, `$FF` end); `table BB:LO-HI N header` emits a range N bytes per row with a comment; `bank BB:AAAA TT` states the bank behind a raw `$8000–$BFFF` operand of the instruction at BB:AAAA.
