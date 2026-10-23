@@ -206,32 +206,32 @@ SetPlayerStartPos:
 	STA objX                        ;C - - - - - 0x01E19B 0F:E18B: 8D 60 03
 	RTS                             ;C - - - - - 0x01E19E 0F:E18E: 60
 SetPlayerStartPosTbl_E18F:
-	.lobytes tbl_0F_E1A3, tbl_0F_E1A6, tbl_0F_E1A9, tbl_0F_E1AC, tbl_0F_E1AF;- D 3 - - - 0x01E19F 0F:E18F:
+	.lobytes SetPlayerStartPosTbl_E18F_00, SetPlayerStartPosTbl_E18F_01, SetPlayerStartPosTbl_E18F_02, SetPlayerStartPosTbl_E18F_03, SetPlayerStartPosTbl_E18F_04;- D 3 - - - 0x01E19F 0F:E18F:
 SetPlayerStartPosTbl_E194:
-	.hibytes tbl_0F_E1A3, tbl_0F_E1A6, tbl_0F_E1A9, tbl_0F_E1AC, tbl_0F_E1AF;- D 3 - - - 0x01E1A4 0F:E194:
+	.hibytes SetPlayerStartPosTbl_E18F_00, SetPlayerStartPosTbl_E18F_01, SetPlayerStartPosTbl_E18F_02, SetPlayerStartPosTbl_E18F_03, SetPlayerStartPosTbl_E18F_04;- D 3 - - - 0x01E1A4 0F:E194:
 SetPlayerStartPosTbl_E199:
-	.lobytes tbl_0F_E1B2, tbl_0F_E1B5, tbl_0F_E1B8, tbl_0F_E1BB, tbl_0F_E1BE;- D 3 - - - 0x01E1A9 0F:E199:
+	.lobytes SetPlayerStartPosTbl_E199_00, SetPlayerStartPosTbl_E199_01, SetPlayerStartPosTbl_E199_02, SetPlayerStartPosTbl_E199_03, SetPlayerStartPosTbl_E199_04;- D 3 - - - 0x01E1A9 0F:E199:
 SetPlayerStartPosTbl_E19E:
-	.hibytes tbl_0F_E1B2, tbl_0F_E1B5, tbl_0F_E1B8, tbl_0F_E1BB, tbl_0F_E1BE;- D 3 - - - 0x01E1AE 0F:E19E:
-tbl_0F_E1A3:
+	.hibytes SetPlayerStartPosTbl_E199_00, SetPlayerStartPosTbl_E199_01, SetPlayerStartPosTbl_E199_02, SetPlayerStartPosTbl_E199_03, SetPlayerStartPosTbl_E199_04;- D 3 - - - 0x01E1AE 0F:E19E:
+SetPlayerStartPosTbl_E18F_00:
 	.byte $90,$81,$00               ;- D 3 - I - 0x01E1B3 0F:E1A3:
-tbl_0F_E1A6:
+SetPlayerStartPosTbl_E18F_01:
 	.byte $98,$98,$A0               ;- D 3 - I - 0x01E1B6 0F:E1A6:
-tbl_0F_E1A9:
+SetPlayerStartPosTbl_E18F_02:
 	.byte $98,$98,$88               ;- D 3 - I - 0x01E1B9 0F:E1A9:
-tbl_0F_E1AC:
+SetPlayerStartPosTbl_E18F_03:
 	.byte $98,$78,$A0               ;- D 3 - I - 0x01E1BC 0F:E1AC:
-tbl_0F_E1AF:
+SetPlayerStartPosTbl_E18F_04:
 	.byte $98,$98,$98               ;- D 3 - I - 0x01E1BF 0F:E1AF:
-tbl_0F_E1B2:
+SetPlayerStartPosTbl_E199_00:
 	.byte $30,$0C,$40               ;- D 3 - I - 0x01E1C2 0F:E1B2:
-tbl_0F_E1B5:
+SetPlayerStartPosTbl_E199_01:
 	.byte $30,$30,$00               ;- D 3 - I - 0x01E1C5 0F:E1B5:
-tbl_0F_E1B8:
+SetPlayerStartPosTbl_E199_02:
 	.byte $30,$30,$18               ;- D 3 - I - 0x01E1C8 0F:E1B8:
-tbl_0F_E1BB:
+SetPlayerStartPosTbl_E199_03:
 	.byte $30,$40,$30               ;- D 3 - I - 0x01E1CB 0F:E1BB:
-tbl_0F_E1BE:
+SetPlayerStartPosTbl_E199_04:
 	.byte $30,$30,$30               ;- D 3 - I - 0x01E1CE 0F:E1BE:
 tbl_0F_E1C1:
 	.byte $4C,$80,$19               ;- D 3 - - - 0x01E1D1 0F:E1C1: Cody, Guy, Haggar
@@ -1218,14 +1218,14 @@ QueueHudHealthBarTbl_E875:
 	.byte $0A,$0B,$0C,$0D           ;- D 3 - - - 0x01E885 0F:E875:
 	.byte $0D,$0D                   ;- - - - - - 0x01E889 0F:E879:
 QueueHudHealthBarTbl_E87B:
-	.lobytes tbl_0F_E881, tbl_0F_E88B, tbl_0F_E895;- D 3 - - - 0x01E88B 0F:E87B:
+	.lobytes QueueHudHealthBarTbl_E87B_00, QueueHudHealthBarTbl_E87B_01, QueueHudHealthBarTbl_E87B_02;- D 3 - - - 0x01E88B 0F:E87B:
 QueueHudHealthBarTbl_E87E:
-	.hibytes tbl_0F_E881, tbl_0F_E88B, tbl_0F_E895;- D 3 - - - 0x01E88E 0F:E87E:
-tbl_0F_E881:
+	.hibytes QueueHudHealthBarTbl_E87B_00, QueueHudHealthBarTbl_E87B_01, QueueHudHealthBarTbl_E87B_02;- D 3 - - - 0x01E88E 0F:E87E:
+QueueHudHealthBarTbl_E87B_00:
 	.byte $00,$33,$00,$54,$00,$90,$01,$47,$02,$50;- D 3 - I - 0x01E891 0F:E881:
-tbl_0F_E88B:
+QueueHudHealthBarTbl_E87B_01:
 	.byte $00,$27,$00,$45,$00,$74,$01,$22,$02,$10;- D 3 - I - 0x01E89B 0F:E88B:
-tbl_0F_E895:
+QueueHudHealthBarTbl_E87B_02:
 	.byte $01,$25,$01,$93,$03,$70   ;- D 3 - I - 0x01E8A5 0F:E895:
 ; picks the enemy shown on the HUD (objSpriteDown 7/8/9/B)
 SelectHudEnemy:
@@ -1370,20 +1370,20 @@ loc_0F_E97E:
 	STX vramQueueEnd                ;C - - - - - 0x01E999 0F:E989: 86 65
 	RTS                             ;C - - - - - 0x01E99B 0F:E98B: 60
 QueueHudLevelTextTbl_E98C:
-	.lobytes tbl_0F_E998, tbl_0F_E99E, tbl_0F_E9A4, tbl_0F_E9AA, tbl_0F_E9B0, tbl_0F_E9B6;- D 3 - - - 0x01E99C 0F:E98C:
+	.lobytes QueueHudLevelTextTbl_E98C_00, QueueHudLevelTextTbl_E98C_01, QueueHudLevelTextTbl_E98C_02, QueueHudLevelTextTbl_E98C_03, QueueHudLevelTextTbl_E98C_04, QueueHudLevelTextTbl_E98C_05;- D 3 - - - 0x01E99C 0F:E98C:
 QueueHudLevelTextTbl_E992:
-	.hibytes tbl_0F_E998, tbl_0F_E99E, tbl_0F_E9A4, tbl_0F_E9AA, tbl_0F_E9B0, tbl_0F_E9B6;- D 3 - - - 0x01E9A2 0F:E992:
-tbl_0F_E998:
+	.hibytes QueueHudLevelTextTbl_E98C_00, QueueHudLevelTextTbl_E98C_01, QueueHudLevelTextTbl_E98C_02, QueueHudLevelTextTbl_E98C_03, QueueHudLevelTextTbl_E98C_04, QueueHudLevelTextTbl_E98C_05;- D 3 - - - 0x01E9A2 0F:E992:
+QueueHudLevelTextTbl_E98C_00:
 	.byte $73,$74,$74,$74,$74,$74   ;- D 3 - I - 0x01E9A8 0F:E998:
-tbl_0F_E99E:
+QueueHudLevelTextTbl_E98C_01:
 	.byte $73,$73,$74,$74,$74,$74   ;- D 3 - I - 0x01E9AE 0F:E99E:
-tbl_0F_E9A4:
+QueueHudLevelTextTbl_E98C_02:
 	.byte $73,$73,$73,$74,$74,$74   ;- D 3 - I - 0x01E9B4 0F:E9A4:
-tbl_0F_E9AA:
+QueueHudLevelTextTbl_E98C_03:
 	.byte $73,$73,$73,$73,$74,$74   ;- D 3 - I - 0x01E9BA 0F:E9AA:
-tbl_0F_E9B0:
+QueueHudLevelTextTbl_E98C_04:
 	.byte $73,$73,$73,$73,$73,$74   ;- D 3 - I - 0x01E9C0 0F:E9B0:
-tbl_0F_E9B6:
+QueueHudLevelTextTbl_E98C_05:
 	.byte $73,$73,$73,$73,$73,$73   ;- D 3 - I - 0x01E9C6 0F:E9B6:
 ; slots 15,14 first; then slots 0-15 ascending / 13-0 descending, alternating every frame (flicker order)
 DrawObjects:

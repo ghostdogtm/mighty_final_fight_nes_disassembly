@@ -383,14 +383,14 @@ Wait180Frames:
 	JSR WaitFrames                  ;C - - - - - 0x0127E2 09:A7D2: 20 2A FF
 	RTS                             ;C - - - - - 0x0127E5 09:A7D5: 60
 RunTextScript_09Tbl_A7D6:
-	.lobytes tbl_09_A7E0, tbl_09_A7F1, tbl_09_A87D, tbl_09_A8CB, tbl_09_A95C;- D 1 - - - 0x0127E6 09:A7D6:
+	.lobytes RunTextScript_09Tbl_A7D6_00, RunTextScript_09Tbl_A7D6_01, RunTextScript_09Tbl_A7D6_02, RunTextScript_09Tbl_A7D6_03, RunTextScript_09Tbl_A7D6_04;- D 1 - - - 0x0127E6 09:A7D6:
 RunTextScript_09Tbl_A7DB:
-	.hibytes tbl_09_A7E0, tbl_09_A7F1, tbl_09_A87D, tbl_09_A8CB, tbl_09_A95C;- D 1 - - - 0x0127EB 09:A7DB:
-tbl_09_A7E0:
+	.hibytes RunTextScript_09Tbl_A7D6_00, RunTextScript_09Tbl_A7D6_01, RunTextScript_09Tbl_A7D6_02, RunTextScript_09Tbl_A7D6_03, RunTextScript_09Tbl_A7D6_04;- D 1 - - - 0x0127EB 09:A7DB:
+RunTextScript_09Tbl_A7D6_00:
 	.byte $00,$00,$00,$00,$00,$22,$00,$23,$00,$10,$00,$15,$00,$15,$FE;- D 1 - I - 0x0127F0 09:A7E0: "     S T A F F/"
 	.byte $FE                       ;- D 1 - I - 0x0127FF 09:A7EF: "/"
 	.byte $FF                       ;- D 1 - I - 0x012800 09:A7F0: "$"
-tbl_09_A7F1:
+RunTextScript_09Tbl_A7D6_01:
 	.byte $00,$00,$00,$00,$00,$00,$1F,$1B,$10,$1D,$1D,$14,$21,$FE;- D 1 - I - 0x012801 09:A7F1: "      PLANNER/"
 	.res 8, $00                     ;- D 1 - I - 0x01280F 09:A7FF: fill 8 bytes
 	.byte $1A,$2B,$1E,$FE           ;- D 1 - I - 0x012817 09:A807: "K.O/"
@@ -407,14 +407,14 @@ tbl_09_A7F1:
 	.byte $00,$00,$00,$00,$10,$21,$10,$22,$17,$18,$2B,$1A,$10,$18,$FE;- D 1 - I - 0x012866 09:A856: "    ARASHI.KAI/"
 	.byte $00,$00,$00,$00,$23,$22,$24,$11,$1E,$00,$1F,$18,$FE;- D 1 - I - 0x012875 09:A865: "    TSUBO PI/"
 	.byte $00,$00,$00,$00,$29,$14,$1D,$13,$14,$1D,$FF;- D 1 - I - 0x012882 09:A872: "    ZENDEN$"
-tbl_09_A87D:
+RunTextScript_09Tbl_A7D6_02:
 	.byte $00,$00,$22,$12,$21,$1E,$1B,$1B,$00,$13,$14,$22,$18,$16,$1D,$14,$21,$FE;- D 1 - I - 0x01288D 09:A87D: "  SCROLL DESIGNER/"
 	.byte $00,$00,$00,$00,$00,$00,$28,$24,$1A,$18,$FE;- D 1 - I - 0x01289F 09:A88F: "      YUKI/"
 	.byte $00,$00,$00,$00,$00,$00,$1B,$18,$1D,$13,$10,$FE;- D 1 - I - 0x0128AA 09:A89A: "      LINDA/"
 	.byte $00,$00,$00,$00,$00,$00,$21,$28,$24,$16,$1E,$FE;- D 1 - I - 0x0128B6 09:A8A6: "      RYUGO/"
 	.byte $00,$00,$00,$00,$00,$00,$10,$21,$1D,$18,$14,$FE;- D 1 - I - 0x0128C2 09:A8B2: "      ARNIE/"
 	.byte $00,$00,$00,$00,$00,$00,$1C,$10,$1C,$18,$1C,$24,$FF;- D 1 - I - 0x0128CE 09:A8BE: "      MAMIMU$"
-tbl_09_A8CB:
+RunTextScript_09Tbl_A7D6_03:
 	.byte $00,$00,$00,$22,$1E,$24,$1D,$13,$00,$12,$1E,$1C,$1F,$1E,$22,$14,$FE;- D 1 - I - 0x0128DB 09:A8CB: "   SOUND COMPOSE/"
 	.byte $00,$00,$00,$00,$00,$00,$00,$22,$14,$23,$22,$24,$1E,$FE;- D 1 - I - 0x0128EC 09:A8DC: "       SETSUO/"
 	.byte $00,$00,$00,$00,$00,$00,$00,$28,$24,$1A,$1E,$FE;- D 1 - I - 0x0128FA 09:A8EA: "       YUKO/"
@@ -427,7 +427,7 @@ tbl_09_A8CB:
 	.byte $FE                       ;- D 1 - I - 0x01294E 09:A93E: "/"
 	.byte $00,$00,$00,$00,$00,$00,$00,$10,$1D,$13,$FE;- D 1 - I - 0x01294F 09:A93F: "       AND/"
 	.byte $00,$12,$10,$1F,$12,$1E,$1C,$00,$10,$1B,$1B,$00,$22,$23,$10,$15,$15,$FF;- D 1 - I - 0x01295A 09:A94A: " CAPCOM ALL STAFF$"
-tbl_09_A95C:
+RunTextScript_09Tbl_A7D6_04:
 	.byte $00,$00,$00,$00,$23,$17,$10,$1D,$1A,$00,$28,$1E,$24,$FE;- D 1 - I - 0x01296C 09:A95C: "    THANK YOU/"
 	.byte $00,$00,$00,$00,$00,$00,$00,$15,$1E,$21,$00,$FE;- D 1 - I - 0x01297A 09:A96A: "       FOR /"
 	.byte $00,$00,$00,$28,$1E,$24,$21,$00,$1F,$1B,$10,$28,$18,$1D,$16,$FE;- D 1 - I - 0x012986 09:A976: "   YOUR PLAYING/"
@@ -478,10 +478,10 @@ InitEndingPlayerObj:
 	STA ptr_00+1                    ;C - - - - - 0x012B39 09:AB29: 85 01
 	JMP (ptr_00)                    ;C - - - - - 0x012B3B 09:AB2B: 6C 00 00
 InitEndingPlayerObjTbl_AB2E:
-	.lobytes loc_09_AB34, ofs_09_ABD0, loc_09_AC81;- - - - - - 0x012B3E 09:AB2E:
+	.lobytes InitEndingPlayerObjTbl_AB2E_00, InitEndingPlayerObjTbl_AB2E_01, InitEndingPlayerObjTbl_AB2E_02;- - - - - - 0x012B3E 09:AB2E:
 InitEndingPlayerObjTbl_AB31:
-	.hibytes loc_09_AB34, ofs_09_ABD0, loc_09_AC81;- - - - - - 0x012B41 09:AB31:
-loc_09_AB34:
+	.hibytes InitEndingPlayerObjTbl_AB2E_00, InitEndingPlayerObjTbl_AB2E_01, InitEndingPlayerObjTbl_AB2E_02;- - - - - - 0x012B41 09:AB31:
+InitEndingPlayerObjTbl_AB2E_00:
 	LDA objActive                   ;c - - - - - 0x012B44 09:AB34: AD 00 03
 	AND #$0F                        ;c - - - - - 0x012B47 09:AB37: 29 0F
 	BNE loc_09_AB7D                 ;c - - - - - 0x012B49 09:AB39: D0 42
@@ -513,7 +513,7 @@ loc_09_AB59:
 	INC objActive                   ;c - - - - - 0x012B84 09:AB74: EE 00 03
 loc_09_AB77:
 	JSR RedrawAndWaitFrame          ;c - - - - - 0x012B87 09:AB77: 20 06 F4
-	JMP loc_09_AB34                 ;c - - - - - 0x012B8A 09:AB7A: 4C 34 AB
+	JMP InitEndingPlayerObjTbl_AB2E_00;c - - - - - 0x012B8A 09:AB7A: 4C 34 AB
 loc_09_AB7D:
 	LDA objActive                   ;c - - - - - 0x012B8D 09:AB7D: AD 00 03
 	AND #$02                        ;c - - - - - 0x012B90 09:AB80: 29 02
@@ -552,7 +552,7 @@ loc_09_ABB4:
 	JMP RedrawAndWaitFrame          ;c - - - - - 0x012BDA 09:ABCA: 4C 06 F4
 loc_09_ABCD:
 	JMP loc_09_AB77                 ;c - - - - - 0x012BDD 09:ABCD: 4C 77 AB
-ofs_09_ABD0:
+InitEndingPlayerObjTbl_AB2E_01:
 	LDA #$24                        ;C - - J - - 0x012BE0 09:ABD0: A9 24
 	CMP objAnim                     ;C - - - - - 0x012BE2 09:ABD2: CD 80 05
 	BEQ loc_09_ABEE                 ;C - - - - - 0x012BE5 09:ABD5: F0 17
@@ -633,7 +633,7 @@ loc_09_AC75:
 loc_09_AC7B:
 	JSR RedrawAndWaitFrame          ;C - - - - - 0x012C8B 09:AC7B: 20 06 F4
 	JMP loc_09_AC20                 ;C - - - - - 0x012C8E 09:AC7E: 4C 20 AC
-loc_09_AC81:
+InitEndingPlayerObjTbl_AB2E_02:
 	LDA #$30                        ;C - - J - - 0x012C91 09:AC81: A9 30
 	CMP objAnim                     ;C - - - - - 0x012C93 09:AC83: CD 80 05
 	BEQ loc_09_ACA9                 ;C - - - - - 0x012C96 09:AC86: F0 21
@@ -655,7 +655,7 @@ loc_09_ACA9:
 	BEQ loc_09_ACB7                 ;C - - - - - 0x012CBC 09:ACAC: F0 09
 	DEC objStep                     ;C - - - - - 0x012CBE 09:ACAE: CE 00 05
 	JSR RedrawAndWaitFrame          ;C - - - - - 0x012CC1 09:ACB1: 20 06 F4
-	JMP loc_09_AC81                 ;C - - - - - 0x012CC4 09:ACB4: 4C 81 AC
+	JMP InitEndingPlayerObjTbl_AB2E_02;C - - - - - 0x012CC4 09:ACB4: 4C 81 AC
 loc_09_ACB7:
 	LDA #$3D                        ;C - - - - - 0x012CC7 09:ACB7: A9 3D
 	CMP objAnim                     ;C - - - - - 0x012CC9 09:ACB9: CD 80 05

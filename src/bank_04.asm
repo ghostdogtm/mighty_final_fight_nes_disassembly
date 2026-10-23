@@ -149,15 +149,15 @@ dat_04_80FE:
 dat_04_80FF:
 	.byte $80                       ;- D 0 - - - 0x00810F 04:80FF:
 QueueVramScriptTbl_8100:
-	.lobytes tbl_04_811C, tbl_04_8131, tbl_04_81DE, tbl_04_83CE, tbl_04_8431, tbl_04_8449, tbl_04_847A, tbl_04_850C;- D 0 - - - 0x008110 04:8100:
-	.lobytes tbl_04_8554, tbl_04_85D9, tbl_04_865E, tbl_04_86E3, tbl_04_8768, tbl_04_87ED;- D 0 - - - 0x008118 04:8108:
+	.lobytes QueueVramScriptTbl_8100_00, QueueVramScriptTbl_8100_01, QueueVramScriptTbl_8100_02, QueueVramScriptTbl_8100_03, QueueVramScriptTbl_8100_04, QueueVramScriptTbl_8100_05, QueueVramScriptTbl_8100_06, QueueVramScriptTbl_8100_07;- D 0 - - - 0x008110 04:8100:
+	.lobytes QueueVramScriptTbl_8100_08, QueueVramScriptTbl_8100_09, QueueVramScriptTbl_8100_0A, QueueVramScriptTbl_8100_0B, QueueVramScriptTbl_8100_0C, QueueVramScriptTbl_8100_0D;- D 0 - - - 0x008118 04:8108:
 QueueVramScriptTbl_810E:
-	.hibytes tbl_04_811C, tbl_04_8131, tbl_04_81DE, tbl_04_83CE, tbl_04_8431, tbl_04_8449, tbl_04_847A, tbl_04_850C;- D 0 - - - 0x00811E 04:810E:
-	.hibytes tbl_04_8554, tbl_04_85D9, tbl_04_865E, tbl_04_86E3, tbl_04_8768, tbl_04_87ED;- D 0 - - - 0x008126 04:8116:
-tbl_04_811C:
+	.hibytes QueueVramScriptTbl_8100_00, QueueVramScriptTbl_8100_01, QueueVramScriptTbl_8100_02, QueueVramScriptTbl_8100_03, QueueVramScriptTbl_8100_04, QueueVramScriptTbl_8100_05, QueueVramScriptTbl_8100_06, QueueVramScriptTbl_8100_07;- D 0 - - - 0x00811E 04:810E:
+	.hibytes QueueVramScriptTbl_8100_08, QueueVramScriptTbl_8100_09, QueueVramScriptTbl_8100_0A, QueueVramScriptTbl_8100_0B, QueueVramScriptTbl_8100_0C, QueueVramScriptTbl_8100_0D;- D 0 - - - 0x008126 04:8116:
+QueueVramScriptTbl_8100_00:
 	.byte $88,$21,$AC,$90,$84,$58,$A0,$C4,$C7,$88,$77,$98,$42,$A8,$A9,$02;- D 0 - I - 0x00812C 04:811C:
 	.byte $23,$DB,$A5,$A5,$00       ;- D 0 - I - 0x00813C 04:812C:
-tbl_04_8131:
+QueueVramScriptTbl_8100_01:
 	.byte $03,$20,$6D,$1D,$1E,$1F,$85,$5B,$20,$03,$48,$19,$1A,$1B,$C4,$EC;- D 0 - I - 0x008141 04:8131:
 	.byte $8A,$47,$25,$CE,$A1,$8E,$44,$2F,$CD,$AF,$8D,$46,$3D,$CD,$BC,$8E;- D 0 - I - 0x008151 04:8141:
 	.byte $45,$4A,$CC,$C9,$8E,$46,$58,$C9,$D5,$8E,$49,$66,$C5,$DE,$41,$FC;- D 0 - I - 0x008161 04:8151:
@@ -169,7 +169,7 @@ tbl_04_8131:
 	.byte $05,$07,$0D,$13,$0C,$00,$0E,$11,$05,$16,$10,$0B,$0D,$16,$01,$03;- D 0 - I - 0x0081C1 04:81B1:
 	.byte $03,$02,$01,$23,$C3,$A0,$07,$45,$BA,$EA,$5A,$55,$55,$50,$50,$05;- D 0 - I - 0x0081D1 04:81C1:
 	.byte $C0,$55,$43,$15,$05,$05,$04,$C0,$55,$42,$05,$01,$00;- D 0 - I - 0x0081E1 04:81D1:
-tbl_04_81DE:
+QueueVramScriptTbl_8100_02:
 	.byte $3F,$A0,$00,$E8,$05,$C0,$E8,$58,$62,$E8,$60,$E8,$77,$E8,$60,$E8;- D 0 - I - 0x0081EE 04:81DE:
 	.byte $63,$E8,$6B,$E8,$E8,$74,$E8,$77,$E8,$F4,$F0,$6F,$7E,$60,$E8,$61;- D 0 - I - 0x0081FE 04:81EE:
 	.byte $08,$C0,$E8,$58,$72,$E8,$70,$E8,$7A,$E8,$70,$E8,$73,$E8,$6C,$E8;- D 0 - I - 0x00820E 04:81FE:
@@ -201,7 +201,7 @@ tbl_04_81DE:
 	.byte $C0,$E8,$08,$C0,$FF,$43,$7F,$5F,$1F,$04,$C0,$0F,$44,$CF,$77,$55;- D 0 - I - 0x0083AE 04:839E:
 	.byte $11,$04,$44,$CC,$77,$55,$11,$04,$44,$CC,$77,$55,$11,$04,$44,$CC;- D 0 - I - 0x0083BE 04:83AE:
 	.byte $77,$55,$11,$04,$44,$CC,$77,$55,$11,$01,$44,$CC,$08,$C0,$0F,$00;- D 0 - I - 0x0083CE 04:83BE:
-tbl_04_83CE:
+QueueVramScriptTbl_8100_03:
 	.byte $89,$20,$88,$E0,$42,$E4,$E5,$C4,$EB,$02,$41,$E9,$EA,$89,$4E,$F0;- D 0 - I - 0x0083DE 04:83CE:
 	.byte $42,$F4,$F5,$C4,$FB,$02,$41,$F9,$FA,$03,$21,$4F,$72,$64,$6D,$02;- D 0 - I - 0x0083EE 04:83DE:
 	.byte $7D,$69,$6A,$12,$22,$07,$6B,$6C,$64,$6D,$6D,$00,$6D,$6E,$60,$6C;- D 0 - I - 0x0083FE 04:83EE:
@@ -209,15 +209,15 @@ tbl_04_83CE:
 	.byte $6E,$13,$A3,$C0,$55,$42,$15,$45,$06,$C0,$55,$42,$51,$54,$04,$C0;- D 0 - I - 0x00841E 04:840E:
 	.byte $55,$41,$51,$04,$C0,$50,$41,$54,$0E,$C0,$55,$43,$15,$05,$04,$07;- D 0 - I - 0x00842E 04:841E:
 	.byte $C0,$05,$00               ;- D 0 - I - 0x00843E 04:842E:
-tbl_04_8431:
+QueueVramScriptTbl_8100_04:
 	.byte $14,$21,$A6,$08,$10,$0D,$09,$0B,$11,$09,$0F,$00,$14,$06,$00,$0B;- D 0 - I - 0x008441 04:8431:
 	.byte $10,$0B,$04,$09,$0B,$0F,$13,$00;- D 0 - I - 0x008451 04:8441:
-tbl_04_8449:
+QueueVramScriptTbl_8100_05:
 	.byte $12,$21,$87,$E0,$E1,$D1,$D2,$D5,$D6,$ED,$EE,$00,$00,$E2,$E3,$D9;- D 0 - I - 0x008459 04:8449:
 	.byte $DA,$ED,$EE,$DD,$DE,$12,$4E,$F0,$D0,$D3,$D4,$D7,$D8,$FD,$FE,$00;- D 0 - I - 0x008469 04:8459:
 	.byte $00,$F2,$F3,$DB,$DC,$FD,$FE,$CB,$CC,$01,$23,$D9,$0C,$05,$C0,$0F;- D 0 - I - 0x008479 04:8469:
 	.byte $00                       ;- D 0 - I - 0x008489 04:8479:
-tbl_04_847A:
+QueueVramScriptTbl_8100_06:
 	.byte $01,$21,$48,$E7,$03,$C0,$E8,$42,$E9,$EA,$04,$C0,$E8,$42,$E9,$EA;- D 0 - I - 0x00848A 04:847A:
 	.byte $04,$C0,$E8,$04,$D0,$F7,$43,$F9,$FA,$FB,$03,$C0,$F7,$42,$DA,$D9;- D 0 - I - 0x00849A 04:848A:
 	.byte $C4,$DC,$8A,$50,$80,$41,$84,$C5,$8B,$84,$50,$90,$41,$84,$C5,$95;- D 0 - I - 0x0084AA 04:849A:
@@ -228,13 +228,13 @@ tbl_04_847A:
 	.byte $C0,$ED,$01,$50,$F0,$03,$C0,$B0,$43,$F4,$F5,$F0,$04,$C0,$B0,$42;- D 0 - I - 0x0084FA 04:84EA:
 	.byte $F5,$FC,$03,$C0,$FD,$04,$A3,$D2,$50,$03,$C4,$55,$41,$F5,$04,$C4;- D 0 - I - 0x00850A 04:84FA:
 	.byte $A5,$00                   ;- D 0 - I - 0x00851A 04:850A:
-tbl_04_850C:
+QueueVramScriptTbl_8100_07:
 	.byte $08,$A1,$08,$F1,$C5,$F0,$08,$D3,$F1,$46,$E0,$E1,$85,$88,$8E,$8F;- D 0 - I - 0x00851C 04:850C:
 	.byte $85,$52,$80,$44,$83,$82,$87,$98,$C5,$89,$90,$52,$90,$90,$50,$A0;- D 0 - I - 0x00852C 04:851C:
 	.byte $90,$50,$B0,$90,$50,$C0,$8F,$50,$D0,$8E,$53,$E2,$85,$55,$F5,$46;- D 0 - I - 0x00853C 04:852C:
 	.byte $F8,$FB,$FC,$00,$00,$FF,$03,$A3,$D2,$0A,$41,$C8,$04,$44,$F3,$0F;- D 0 - I - 0x00854C 04:853C:
 	.byte $02,$3C,$03,$45,$05,$00,$03,$00;- D 0 - I - 0x00855C 04:854C:
-tbl_04_8554:
+QueueVramScriptTbl_8100_08:
 	.byte $12,$20,$C7,$01,$02,$00,$03,$04,$00,$05,$06,$00,$07,$08,$00,$09;- D 0 - I - 0x008564 04:8554:
 	.byte $0A,$00,$00,$0B,$0C,$12,$4E,$11,$12,$00,$13,$14,$00,$15,$16,$00;- D 0 - I - 0x008574 04:8564:
 	.byte $17,$18,$00,$19,$1A,$00,$00,$1B,$1C,$88,$21,$AB,$28,$8B,$57,$38;- D 0 - I - 0x008584 04:8574:
@@ -244,7 +244,7 @@ tbl_04_8554:
 	.byte $23,$C9,$C0,$04,$C0,$F0,$41,$30,$16,$4A,$50,$54,$A5,$65,$50,$50;- D 0 - I - 0x0085C4 04:85B4:
 	.byte $00,$00,$59,$56,$59,$56,$5A,$56,$00,$00,$59,$5A,$56,$5A,$5A,$11;- D 0 - I - 0x0085D4 04:85C4:
 	.byte $02,$45,$04,$05,$00       ;- D 0 - I - 0x0085E4 04:85D4:
-tbl_04_85D9:
+QueueVramScriptTbl_8100_09:
 	.byte $12,$20,$C7,$01,$02,$00,$03,$04,$00,$05,$06,$00,$07,$08,$00,$09;- D 0 - I - 0x0085E9 04:85D9:
 	.byte $0A,$00,$00,$0D,$0E,$12,$4E,$11,$12,$00,$13,$14,$00,$15,$16,$00;- D 0 - I - 0x0085F9 04:85E9:
 	.byte $17,$18,$00,$19,$1A,$00,$00,$1D,$1E,$88,$21,$AB,$28,$8B,$57,$38;- D 0 - I - 0x008609 04:85F9:
@@ -254,7 +254,7 @@ tbl_04_85D9:
 	.byte $23,$C9,$C0,$04,$C0,$F0,$41,$30,$16,$4A,$50,$54,$A5,$65,$50,$50;- D 0 - I - 0x008649 04:8639:
 	.byte $00,$00,$59,$56,$59,$56,$5A,$56,$00,$00,$59,$5A,$56,$5A,$5A,$11;- D 0 - I - 0x008659 04:8649:
 	.byte $02,$45,$04,$05,$00       ;- D 0 - I - 0x008669 04:8659:
-tbl_04_865E:
+QueueVramScriptTbl_8100_0A:
 	.byte $12,$20,$C7,$01,$02,$00,$03,$04,$00,$05,$06,$00,$07,$08,$00,$09;- D 0 - I - 0x00866E 04:865E:
 	.byte $0A,$00,$00,$0F,$20,$12,$4E,$11,$12,$00,$13,$14,$00,$15,$16,$00;- D 0 - I - 0x00867E 04:866E:
 	.byte $17,$18,$00,$19,$1A,$00,$00,$1F,$30,$88,$21,$AB,$28,$8B,$57,$38;- D 0 - I - 0x00868E 04:867E:
@@ -264,7 +264,7 @@ tbl_04_865E:
 	.byte $23,$C9,$C0,$04,$C0,$F0,$41,$30,$16,$4A,$50,$54,$A5,$65,$50,$50;- D 0 - I - 0x0086CE 04:86BE:
 	.byte $00,$00,$59,$56,$59,$56,$5A,$56,$00,$00,$59,$5A,$56,$5A,$5A,$11;- D 0 - I - 0x0086DE 04:86CE:
 	.byte $02,$45,$04,$05,$00       ;- D 0 - I - 0x0086EE 04:86DE:
-tbl_04_86E3:
+QueueVramScriptTbl_8100_0B:
 	.byte $12,$20,$C7,$01,$02,$00,$03,$04,$00,$05,$06,$00,$07,$08,$00,$09;- D 0 - I - 0x0086F3 04:86E3:
 	.byte $0A,$00,$00,$21,$22,$12,$4E,$11,$12,$00,$13,$14,$00,$15,$16,$00;- D 0 - I - 0x008703 04:86F3:
 	.byte $17,$18,$00,$19,$1A,$00,$00,$31,$32,$88,$21,$AB,$28,$8B,$57,$38;- D 0 - I - 0x008713 04:8703:
@@ -274,7 +274,7 @@ tbl_04_86E3:
 	.byte $23,$C9,$C0,$04,$C0,$F0,$41,$30,$16,$4A,$50,$54,$A5,$65,$50,$50;- D 0 - I - 0x008753 04:8743:
 	.byte $00,$00,$59,$56,$59,$56,$5A,$56,$00,$00,$59,$5A,$56,$5A,$5A,$11;- D 0 - I - 0x008763 04:8753:
 	.byte $02,$45,$04,$05,$00       ;- D 0 - I - 0x008773 04:8763:
-tbl_04_8768:
+QueueVramScriptTbl_8100_0C:
 	.byte $12,$20,$C7,$01,$02,$00,$03,$04,$00,$05,$06,$00,$07,$08,$00,$09;- D 0 - I - 0x008778 04:8768:
 	.byte $0A,$00,$00,$23,$24,$12,$4E,$11,$12,$00,$13,$14,$00,$15,$16,$00;- D 0 - I - 0x008788 04:8778:
 	.byte $17,$18,$00,$19,$1A,$00,$00,$33,$34,$88,$21,$AB,$28,$8B,$57,$38;- D 0 - I - 0x008798 04:8788:
@@ -284,7 +284,7 @@ tbl_04_8768:
 	.byte $23,$C9,$C0,$04,$C0,$F0,$41,$30,$16,$4A,$50,$54,$A5,$65,$50,$50;- D 0 - I - 0x0087D8 04:87C8:
 	.byte $00,$00,$59,$56,$59,$56,$5A,$56,$00,$00,$59,$5A,$56,$5A,$5A,$11;- D 0 - I - 0x0087E8 04:87D8:
 	.byte $02,$45,$04,$05,$00       ;- D 0 - I - 0x0087F8 04:87E8:
-tbl_04_87ED:
+QueueVramScriptTbl_8100_0D:
 	.byte $01,$21,$48,$E7,$03,$C0,$E8,$42,$E9,$EA,$04,$C0,$E8,$42,$E9,$EA;- D 0 - I - 0x0087FD 04:87ED:
 	.byte $04,$C0,$E8,$04,$D0,$F7,$43,$F9,$FA,$FB,$03,$C0,$F7,$46,$DA,$D9;- D 0 - I - 0x00880D 04:87FD:
 	.byte $DC,$DD,$F7,$DF,$8A,$50,$80,$46,$84,$8B,$8C,$D2,$D3,$D5,$84,$50;- D 0 - I - 0x00881D 04:880D:
@@ -622,14 +622,14 @@ loc_04_8D55:
 	STA ptr_00+1                    ;C - - - - - 0x008DD3 04:8DC3: 85 01
 	JMP (ptr_00)                    ;C - - - - - 0x008DD5 04:8DC5: 6C 00 00
 ScreenInit8D00Tbl_8DC8:
-	.lobytes ofs_04_8DD8, ofs_04_8E56, ofs_04_8ED4;- D 0 - - - 0x008DD8 04:8DC8:
+	.lobytes ScreenInit8D00Tbl_8DC8_00, ScreenInit8D00Tbl_8DC8_01, ScreenInit8D00Tbl_8DC8_02;- D 0 - - - 0x008DD8 04:8DC8:
 ScreenInit8D00Tbl_8DCB:
-	.hibytes ofs_04_8DD8, ofs_04_8E56, ofs_04_8ED4;- D 0 - - - 0x008DDB 04:8DCB:
+	.hibytes ScreenInit8D00Tbl_8DC8_00, ScreenInit8D00Tbl_8DC8_01, ScreenInit8D00Tbl_8DC8_02;- D 0 - - - 0x008DDB 04:8DCB:
 ScreenInit8D00Tbl_8DCE:
 	.byte $4A,$62,$92,$AA,$B2       ;- D 0 - - - 0x008DDE 04:8DCE:
 ScreenInit8D00Tbl_8DD3:
 	.byte $93,$9B,$7B,$93,$B3       ;- D 0 - - - 0x008DE3 04:8DD3:
-ofs_04_8DD8:
+ScreenInit8D00Tbl_8DC8_00:
 	LDA #$73                        ;C - - J - - 0x008DE8 04:8DD8: A9 73
 	CMP objAnim                     ;C - - - - - 0x008DEA 04:8DDA: CD 80 05
 	BEQ loc_04_8DEC                 ;C - - - - - 0x008DED 04:8DDD: F0 0D
@@ -686,7 +686,7 @@ loc_04_8E45:
 loc_04_8E50:
 	JSR RedrawAndWaitFrame          ;C - - - - - 0x008E60 04:8E50: 20 06 F4
 	JMP loc_04_8DEC                 ;C - - - - - 0x008E63 04:8E53: 4C EC 8D
-ofs_04_8E56:
+ScreenInit8D00Tbl_8DC8_01:
 	LDA #$46                        ;C - - J - - 0x008E66 04:8E56: A9 46
 	CMP objAnim                     ;C - - - - - 0x008E68 04:8E58: CD 80 05
 	BEQ loc_04_8E65                 ;C - - - - - 0x008E6B 04:8E5B: F0 08
@@ -742,7 +742,7 @@ loc_04_8EB6:
 loc_04_8ECE:
 	JSR RedrawAndWaitFrame          ;C - - - - - 0x008EDE 04:8ECE: 20 06 F4
 	JMP loc_04_8E65                 ;C - - - - - 0x008EE1 04:8ED1: 4C 65 8E
-ofs_04_8ED4:
+ScreenInit8D00Tbl_8DC8_02:
 	LDA #$4B                        ;C - - J - - 0x008EE4 04:8ED4: A9 4B
 	CMP objAnim                     ;C - - - - - 0x008EE6 04:8ED6: CD 80 05
 	BEQ loc_04_8EED                 ;C - - - - - 0x008EE9 04:8ED9: F0 12
@@ -1285,7 +1285,7 @@ ScreenDispatch9800:
 	LDA ScreenDispatch9800Tbl_9D59,Y;C - - - - - 0x009817 04:9807: B9 59 9D
 	STA ptr_0C+1                    ;C - - - - - 0x00981A 04:980A: 85 0D
 	JMP (ptr_0C)                    ;C - - - - - 0x00981C 04:980C: 6C 0C 00
-ofs_04_980F:
+ScreenDispatch9800Tbl_9D56_00:
 	LDA gameOverFlag                ;C - - J - - 0x00981F 04:980F: A5 62
 	CMP #$F0                        ;C - - - - - 0x009821 04:9811: C9 F0
 	BNE loc_04_9818                 ;C - - - - - 0x009823 04:9813: D0 03
@@ -1389,7 +1389,7 @@ ScreenDispatch9800Tbl_98C8:
 	.byte $0A,$0A                   ;- D 0 - - - 0x0098E8 04:98D8:
 	.byte $08,$08                   ;- - - - - - 0x0098EA 04:98DA:
 	.byte $09                       ;- D 0 - - - 0x0098EC 04:98DC:
-ofs_04_98DD:
+ScreenDispatch9800Tbl_9D56_01:
 	LDA padPressed                  ;C - - J - - 0x0098ED 04:98DD: A5 14
 	CMP #$10                        ;C - - - - - 0x0098EF 04:98DF: C9 10
 	BNE loc_04_98E9                 ;C - - - - - 0x0098F1 04:98E1: D0 06
@@ -1631,7 +1631,7 @@ BonusEnemyHit:
 	RTS                             ;C - - - - - 0x009A9D 04:9A8D: 60
 loc_04_9A8E:
 	RTS                             ;C - - - - - 0x009A9E 04:9A8E: 60
-ofs_04_9A8F:
+ScreenDispatch9800Tbl_9D56_02:
 	LDY #$00                        ;C - - J - - 0x009A9F 04:9A8F: A0 00
 	STY screenStep                  ;C - - - - - 0x009AA1 04:9A91: 84 66
 	STY gameOverFlag                ;C - - - - - 0x009AA3 04:9A93: 84 62
@@ -1800,62 +1800,62 @@ loc_04_9BA8:
 	INC ram_00AA                    ;c - - - - - 0x009BBB 04:9BAB: E6 AA
 	RTS                             ;c - - - - - 0x009BBD 04:9BAD: 60
 QueueTextScriptTbl_9BAE:
-	.lobytes tbl_04_9BCC, tbl_04_9C1C, tbl_04_9C2F, tbl_04_9C3B, tbl_04_9C6B, tbl_04_9C99, tbl_04_9CC3, tbl_04_9CEE;- D 0 - - - 0x009BBE 04:9BAE:
-	.lobytes tbl_04_9D18, tbl_04_9D24, tbl_04_9D2B, tbl_04_9D32, tbl_04_9D3B, tbl_04_9D44, tbl_04_9D4D;- - - - - - 0x009BC6 04:9BB6:
+	.lobytes QueueTextScriptTbl_9BAE_00, QueueTextScriptTbl_9BAE_01, QueueTextScriptTbl_9BAE_02, QueueTextScriptTbl_9BAE_03, QueueTextScriptTbl_9BAE_04, QueueTextScriptTbl_9BAE_05, QueueTextScriptTbl_9BAE_06, QueueTextScriptTbl_9BAE_07;- D 0 - - - 0x009BBE 04:9BAE:
+	.lobytes QueueTextScriptTbl_9BAE_08, QueueTextScriptTbl_9BAE_09, QueueTextScriptTbl_9BAE_0A, QueueTextScriptTbl_9BAE_0B, QueueTextScriptTbl_9BAE_0C, QueueTextScriptTbl_9BAE_0D, QueueTextScriptTbl_9BAE_0E;- - - - - - 0x009BC6 04:9BB6:
 QueueTextScriptTbl_9BBD:
-	.hibytes tbl_04_9BCC, tbl_04_9C1C, tbl_04_9C2F, tbl_04_9C3B, tbl_04_9C6B, tbl_04_9C99, tbl_04_9CC3, tbl_04_9CEE;- D 0 - - - 0x009BCD 04:9BBD:
-	.hibytes tbl_04_9D18, tbl_04_9D24, tbl_04_9D2B, tbl_04_9D32, tbl_04_9D3B, tbl_04_9D44, tbl_04_9D4D;- - - - - - 0x009BD5 04:9BC5:
-tbl_04_9BCC:
+	.hibytes QueueTextScriptTbl_9BAE_00, QueueTextScriptTbl_9BAE_01, QueueTextScriptTbl_9BAE_02, QueueTextScriptTbl_9BAE_03, QueueTextScriptTbl_9BAE_04, QueueTextScriptTbl_9BAE_05, QueueTextScriptTbl_9BAE_06, QueueTextScriptTbl_9BAE_07;- D 0 - - - 0x009BCD 04:9BBD:
+	.hibytes QueueTextScriptTbl_9BAE_08, QueueTextScriptTbl_9BAE_09, QueueTextScriptTbl_9BAE_0A, QueueTextScriptTbl_9BAE_0B, QueueTextScriptTbl_9BAE_0C, QueueTextScriptTbl_9BAE_0D, QueueTextScriptTbl_9BAE_0E;- - - - - - 0x009BD5 04:9BC5:
+QueueTextScriptTbl_9BAE_00:
 	.byte $1C,$23,$22,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00;- D 0 - I - 0x009BDC 04:9BCC:
 	.res 15, $00                    ;- D 0 - I - 0x009BEC 04:9BDC: fill 15 bytes
 	.byte $1C,$23,$42,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00;- D 0 - I - 0x009BFB 04:9BEB:
 	.res 15, $00                    ;- D 0 - I - 0x009C0B 04:9BFB: fill 15 bytes
 	.byte $04,$23,$67,$00,$00,$00,$00,$03,$23,$73,$00,$00,$00,$01,$23,$6F;- D 0 - I - 0x009C1A 04:9C0A:
 	.byte $00,$FF                   ;- D 0 - I - 0x009C2A 04:9C1A:
-tbl_04_9C1C:
+QueueTextScriptTbl_9BAE_01:
 	.byte $05,$23,$43,$68,$64,$70,$64,$68,$03,$23,$52,$64,$71,$6B,$01,$23;- D 0 - I - 0x009C2C 04:9C1C:
 	.byte $59,$7B,$FF               ;- D 0 - I - 0x009C3C 04:9C2C:
-tbl_04_9C2F:
+QueueTextScriptTbl_9BAE_02:
 	.byte $03,$23,$68,$28,$14,$22,$02,$23,$74,$1D,$1E,$FF;- D 0 - I - 0x009C3F 04:9C2F:
-tbl_04_9C3B:
+QueueTextScriptTbl_9BAE_03:
 	.byte $1C,$23,$42,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00;- D 0 - I - 0x009C4B 04:9C3B:
 	.res 15, $00                    ;- D 0 - I - 0x009C5B 04:9C4B: fill 15 bytes
 	.byte $0D,$23,$4A,$6C,$6A,$6F,$69,$63,$00,$00,$00,$62,$68,$64,$60,$6C;- D 0 - I - 0x009C6A 04:9C5A:
 	.byte $FF                       ;- D 0 - I - 0x009C7A 04:9C6A:
-tbl_04_9C6B:
+QueueTextScriptTbl_9BAE_04:
 	.byte $1C,$23,$42,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00;- D 0 - I - 0x009C7B 04:9C6B:
 	.res 15, $00                    ;- D 0 - I - 0x009C8B 04:9C7B: fill 15 bytes
 	.byte $0B,$23,$4A,$61,$6A,$69,$6F,$6D,$00,$6D,$6E,$60,$66,$64,$FF;- D 0 - I - 0x009C9A 04:9C8A:
-tbl_04_9C99:
+QueueTextScriptTbl_9BAE_05:
 	.byte $1C,$23,$42,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00;- D 0 - I - 0x009CA9 04:9C99:
 	.res 15, $00                    ;- D 0 - I - 0x009CB9 04:9CA9: fill 15 bytes
 	.byte $07,$23,$4C,$6B,$64,$6C,$65,$64,$62,$6E,$FF;- D 0 - I - 0x009CC8 04:9CB8:
-tbl_04_9CC3:
+QueueTextScriptTbl_9BAE_06:
 	.byte $1C,$23,$42,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00;- - - - - - 0x009CD3 04:9CC3:
 	.res 15, $00                    ;- - - - - - 0x009CE3 04:9CD3: fill 15 bytes
 	.byte $08,$23,$4C,$69,$6A,$00,$61,$6A,$69,$6F,$6D,$FF;- - - - - - 0x009CF2 04:9CE2:
-tbl_04_9CEE:
+QueueTextScriptTbl_9BAE_07:
 	.byte $1C,$23,$42,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00;- D 0 - I - 0x009CFE 04:9CEE:
 	.res 15, $00                    ;- D 0 - I - 0x009D0E 04:9CFE: fill 15 bytes
 	.byte $07,$23,$48,$72,$6A,$6F,$00,$66,$6A,$6E,$FF;- D 0 - I - 0x009D1D 04:9D0D:
-tbl_04_9D18:
+QueueTextScriptTbl_9BAE_08:
 	.byte $08,$23,$51,$62,$6A,$69,$6E,$67,$69,$6F,$64,$FF;- - - - - - 0x009D28 04:9D18:
-tbl_04_9D24:
+QueueTextScriptTbl_9BAE_09:
 	.byte $03,$23,$51,$03,$6F,$6B,$FF;- D 0 - I - 0x009D34 04:9D24:
-tbl_04_9D2B:
+QueueTextScriptTbl_9BAE_0A:
 	.byte $03,$23,$51,$02,$6F,$6B,$FF;- D 0 - I - 0x009D3B 04:9D2B:
-tbl_04_9D32:
+QueueTextScriptTbl_9BAE_0B:
 	.byte $05,$23,$51,$04,$03,$64,$71,$6B,$FF;- - - - - - 0x009D42 04:9D32:
-tbl_04_9D3B:
+QueueTextScriptTbl_9BAE_0C:
 	.byte $05,$23,$51,$03,$05,$64,$71,$6B,$FF;- - - - - - 0x009D4B 04:9D3B:
-tbl_04_9D44:
+QueueTextScriptTbl_9BAE_0D:
 	.byte $05,$23,$51,$02,$07,$64,$71,$6B,$FF;- - - - - - 0x009D54 04:9D44:
-tbl_04_9D4D:
+QueueTextScriptTbl_9BAE_0E:
 	.byte $05,$23,$51,$00,$09,$64,$71,$6B,$FF;- - - - - - 0x009D5D 04:9D4D:
 ScreenDispatch9800Tbl_9D56:
-	.lobytes ofs_04_980F, ofs_04_98DD, ofs_04_9A8F;- D 0 - - - 0x009D66 04:9D56:
+	.lobytes ScreenDispatch9800Tbl_9D56_00, ScreenDispatch9800Tbl_9D56_01, ScreenDispatch9800Tbl_9D56_02;- D 0 - - - 0x009D66 04:9D56:
 ScreenDispatch9800Tbl_9D59:
-	.hibytes ofs_04_980F, ofs_04_98DD, ofs_04_9A8F;- D 0 - - - 0x009D69 04:9D59:
+	.hibytes ScreenDispatch9800Tbl_9D56_00, ScreenDispatch9800Tbl_9D56_01, ScreenDispatch9800Tbl_9D56_02;- D 0 - - - 0x009D69 04:9D59:
 ScreenDispatch9800Tbl_9D5C:
 	.byte $2F,$2F,$2F               ;- - - - - - 0x009D6C 04:9D5C:
 ScreenDispatch9800Tbl_9D5F:

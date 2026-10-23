@@ -638,7 +638,7 @@ Traced code (instruction starts, verify by hand):
   09:AB71  STA objVelYHi
   09:AB74  INC objActive
   09:AB77  JSR RedrawAndWaitFrame
-  09:AB7A  JMP loc_09_AB34
+  09:AB7A  JMP InitEndingPlayerObjTbl_AB2E_00
   09:AB7D  LDA objActive
   09:AB80  AND #$02
   09:AB82  BNE loc_09_AB95

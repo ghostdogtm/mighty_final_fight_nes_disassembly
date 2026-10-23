@@ -209,18 +209,18 @@ loc_05_A786:
 loc_05_A789:
 	RTS                             ;C - - - - - 0x00A799 05:A789: 60
 RefillPlayerHealthTbl_A78A:
-	.lobytes ofs_05_A790, tbl_05_A796, ofs_05_A79C;- D 1 - - - 0x00A79A 05:A78A:
+	.lobytes RefillPlayerHealthTbl_A78A_00, RefillPlayerHealthTbl_A78A_01, RefillPlayerHealthTbl_A78A_02;- D 1 - - - 0x00A79A 05:A78A:
 RefillPlayerHealthTbl_A78D:
-	.hibytes ofs_05_A790, tbl_05_A796, ofs_05_A79C;- D 1 - - - 0x00A79D 05:A78D:
-ofs_05_A790:
+	.hibytes RefillPlayerHealthTbl_A78A_00, RefillPlayerHealthTbl_A78A_01, RefillPlayerHealthTbl_A78A_02;- D 1 - - - 0x00A79D 05:A78D:
+RefillPlayerHealthTbl_A78A_00:
 	RTI                             ;c - - - - - 0x00A7A0 05:A790: 40
 	.byte $48,$50,$58               ;- - - - - - 0x00A7A1 05:A791:
 	.byte $60                       ;- D 1 - I - 0x00A7A4 05:A794:
 	.byte $68                       ;- - - - - - 0x00A7A5 05:A795:
-tbl_05_A796:
+RefillPlayerHealthTbl_A78A_01:
 	.byte $30,$38,$40,$48,$50       ;- - - - - - 0x00A7A6 05:A796:
 	.byte $58                       ;- D 1 - I - 0x00A7AB 05:A79B:
-ofs_05_A79C:
+RefillPlayerHealthTbl_A78A_02:
 	BVC loc_05_A7F6                 ;c - - - - - 0x00A7AC 05:A79C: 50 58
 	RTS                             ;c - - - - - 0x00A7AE 05:A79E: 60
 	.byte $68                       ;- D 1 - I - 0x00A7AF 05:A79F:

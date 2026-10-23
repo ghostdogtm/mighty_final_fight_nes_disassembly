@@ -157,7 +157,7 @@ loc_01_A129:
 	LDA SetFlag40ToPlayer_01Tbl_A6CD,Y;C - - - - - 0x002144 01:A134: B9 CD A6
 	STA ptr_00+1                    ;C - - - - - 0x002147 01:A137: 85 01
 	JMP (ptr_00)                    ;C - - - - - 0x002149 01:A139: 6C 00 00
-ofs_01_A13C:
+SetFlag40ToPlayer_01Tbl_A6C4_00:
 	JSR SetFlag40ToPlayer_01        ;C - - J - - 0x00214C 01:A13C: 20 90 A0
 	LDA objXPage,X                  ;C - - - - - 0x00214F 01:A13F: BD 80 03
 	CMP #$01                        ;C - - - - - 0x002152 01:A142: C9 01
@@ -179,7 +179,7 @@ loc_01_A15B:
 	STA objSubStep,X                ;C - - - - - 0x002172 01:A162: 9D 50 05
 	INC objActive,X                 ;C - - - - - 0x002175 01:A165: FE 00 03
 	RTS                             ;C - - - - - 0x002178 01:A168: 60
-ofs_01_A169:
+SetFlag40ToPlayer_01Tbl_A6C4_01:
 	LDA gameAction                  ;C - - J - - 0x002179 01:A169: A5 30
 	CMP #$1F                        ;C - - - - - 0x00217B 01:A16B: C9 1F
 	BEQ loc_01_A19A                 ;C - - - - - 0x00217D 01:A16D: F0 2B
@@ -382,7 +382,7 @@ loc_01_A2E4:
 	LDA #$00                        ;C - - - - - 0x0022F7 01:A2E7: A9 00
 	STA objStep,X                   ;C - - - - - 0x0022F9 01:A2E9: 9D 00 05
 	RTS                             ;C - - - - - 0x0022FC 01:A2EC: 60
-ofs_01_A2ED:
+SetFlag40ToPlayer_01Tbl_A6C4_02:
 	LDA objStep,X                   ;C - - J - - 0x0022FD 01:A2ED: BD 00 05
 	BNE loc_01_A31F                 ;C - - - - - 0x002300 01:A2F0: D0 2D
 	STA objCooldown,X               ;C - - - - - 0x002302 01:A2F2: 9D 40 05
@@ -537,7 +537,7 @@ SetFlag40ToPlayer_01Tbl_A413:
 	.byte $8D,$8E                   ;- D 1 - - - 0x002423 01:A413:
 SetFlag40ToPlayer_01Tbl_A415:
 	.byte $1F,$27                   ;- D 1 - - - 0x002425 01:A415:
-ofs_01_A417:
+SetFlag40ToPlayer_01Tbl_A6C4_03:
 	LDA objStep,X                   ;C - - J - - 0x002427 01:A417: BD 00 05
 	BNE loc_01_A42A                 ;C - - - - - 0x00242A 01:A41A: D0 0E
 	LDA #$78                        ;C - - - - - 0x00242C 01:A41C: A9 78
@@ -580,7 +580,7 @@ loc_01_A463:
 	LDA #$07                        ;c - - - - - 0x00247D 01:A46D: A9 07
 	STA objSubStep,X                ;c - - - - - 0x00247F 01:A46F: 9D 50 05
 	RTS                             ;c - - - - - 0x002482 01:A472: 60
-ofs_01_A473:
+SetFlag40ToPlayer_01Tbl_A6C4_04:
 	LDA objStep,X                   ;C - - J - - 0x002483 01:A473: BD 00 05
 	CMP #$01                        ;C - - - - - 0x002486 01:A476: C9 01
 	BEQ loc_01_A49D                 ;C - - - - - 0x002488 01:A478: F0 23
@@ -744,7 +744,7 @@ loc_01_A58A:
 	STA objActive,X                 ;C - - - - - 0x0025DB 01:A5CB: 9D 00 03
 loc_01_A5CE:
 	RTS                             ;C - - - - - 0x0025DE 01:A5CE: 60
-ofs_01_A5CF:
+SetFlag40ToPlayer_01Tbl_A6C4_06:
 	LDA #$00                        ;C - - J - - 0x0025DF 01:A5CF: A9 00
 	STA objVelXLo,X                 ;C - - - - - 0x0025E1 01:A5D1: 9D 00 04
 	LDA #$02                        ;C - - - - - 0x0025E4 01:A5D4: A9 02
@@ -794,7 +794,7 @@ loc_01_A62D:
 	STA objStep,X                   ;C - - - - - 0x00263F 01:A62F: 9D 00 05
 loc_01_A632:
 	RTS                             ;C - - - - - 0x002642 01:A632: 60
-ofs_01_A633:
+SetFlag40ToPlayer_01Tbl_A6C4_07:
 	JSR FaceToPlayerFlag            ;C - - J - - 0x002643 01:A633: 20 43 F3
 	DEC objHitTimer,X               ;C - - - - - 0x002646 01:A636: DE E0 04
 	BNE loc_01_A64B                 ;C - - - - - 0x002649 01:A639: D0 10
@@ -811,7 +811,7 @@ loc_01_A64B:
 	LDA #$00                        ;C - - - - - 0x00265B 01:A64B: A9 00
 	STA objStep,X                   ;C - - - - - 0x00265D 01:A64D: 9D 00 05
 	RTS                             ;C - - - - - 0x002660 01:A650: 60
-ofs_01_A651:
+SetFlag40ToPlayer_01Tbl_A6C4_08:
 	JSR SetGrabbedAnimB_01          ;c - - - - - 0x002661 01:A651: 20 82 A8
 	LDA objXPage,X                  ;c - - - - - 0x002664 01:A654: BD 80 03
 	CMP #$01                        ;c - - - - - 0x002667 01:A657: C9 01
@@ -868,11 +868,11 @@ loc_01_A6B2:
 	STA objSubStep,X                ;c - - - - - 0x0026CE 01:A6BE: 9D 50 05
 	JMP FaceToPlayerFlag            ;c - - - - - 0x0026D1 01:A6C1: 4C 43 F3
 SetFlag40ToPlayer_01Tbl_A6C4:
-	.lobytes ofs_01_A13C, ofs_01_A169, ofs_01_A2ED, ofs_01_A417, ofs_01_A473, EnemyJumpUp, ofs_01_A5CF, ofs_01_A633;- D 1 - - - 0x0026D4 01:A6C4:
-	.lobytes ofs_01_A651            ;- - - - - - 0x0026DC 01:A6CC:
+	.lobytes SetFlag40ToPlayer_01Tbl_A6C4_00, SetFlag40ToPlayer_01Tbl_A6C4_01, SetFlag40ToPlayer_01Tbl_A6C4_02, SetFlag40ToPlayer_01Tbl_A6C4_03, SetFlag40ToPlayer_01Tbl_A6C4_04, EnemyJumpUp, SetFlag40ToPlayer_01Tbl_A6C4_06, SetFlag40ToPlayer_01Tbl_A6C4_07;- D 1 - - - 0x0026D4 01:A6C4:
+	.lobytes SetFlag40ToPlayer_01Tbl_A6C4_08;- - - - - - 0x0026DC 01:A6CC:
 SetFlag40ToPlayer_01Tbl_A6CD:
-	.hibytes ofs_01_A13C, ofs_01_A169, ofs_01_A2ED, ofs_01_A417, ofs_01_A473, EnemyJumpUp, ofs_01_A5CF, ofs_01_A633;- D 1 - - - 0x0026DD 01:A6CD:
-	.hibytes ofs_01_A651            ;- - - - - - 0x0026E5 01:A6D5:
+	.hibytes SetFlag40ToPlayer_01Tbl_A6C4_00, SetFlag40ToPlayer_01Tbl_A6C4_01, SetFlag40ToPlayer_01Tbl_A6C4_02, SetFlag40ToPlayer_01Tbl_A6C4_03, SetFlag40ToPlayer_01Tbl_A6C4_04, EnemyJumpUp, SetFlag40ToPlayer_01Tbl_A6C4_06, SetFlag40ToPlayer_01Tbl_A6C4_07;- D 1 - - - 0x0026DD 01:A6CD:
+	.hibytes SetFlag40ToPlayer_01Tbl_A6C4_08;- - - - - - 0x0026E5 01:A6D5:
 EnemyGrabbedCheck_01:
 	LDA objGrabState,X              ;C - - - - - 0x0026E6 01:A6D6: BD F0 03
 	BEQ loc_01_A71C                 ;C - - - - - 0x0026E9 01:A6D9: F0 41
@@ -1382,12 +1382,12 @@ loc_01_AAB3:
 	STA ptr_00+1                    ;C - - - - - 0x002AD1 01:AAC1: 85 01
 	JMP (ptr_00)                    ;C - - - - - 0x002AD3 01:AAC3: 6C 00 00
 EnemySetDirAndParamsTbl_AAC6:
-	.lobytes ofs_01_AAD8, ofs_01_AB0A, ofs_01_A2ED, ofs_01_AC4E, ofs_01_A473, ofs_01_ABB6, ofs_01_ADBA, ofs_01_AD8C;- D 1 - - - 0x002AD6 01:AAC6:
-	.lobytes ofs_01_AE19            ;- D 1 - - - 0x002ADE 01:AACE:
+	.lobytes EnemySetDirAndParamsTbl_AAC6_00, EnemySetDirAndParamsTbl_AAC6_01, SetFlag40ToPlayer_01Tbl_A6C4_02, EnemySetDirAndParamsTbl_AAC6_03, SetFlag40ToPlayer_01Tbl_A6C4_04, EnemySetDirAndParamsTbl_AAC6_05, EnemySetDirAndParamsTbl_AAC6_06, EnemySetDirAndParamsTbl_AAC6_07;- D 1 - - - 0x002AD6 01:AAC6:
+	.lobytes EnemySetDirAndParamsTbl_AAC6_08;- D 1 - - - 0x002ADE 01:AACE:
 EnemySetDirAndParamsTbl_AACF:
-	.hibytes ofs_01_AAD8, ofs_01_AB0A, ofs_01_A2ED, ofs_01_AC4E, ofs_01_A473, ofs_01_ABB6, ofs_01_ADBA, ofs_01_AD8C;- D 1 - - - 0x002ADF 01:AACF:
-	.hibytes ofs_01_AE19            ;- D 1 - - - 0x002AE7 01:AAD7:
-ofs_01_AAD8:
+	.hibytes EnemySetDirAndParamsTbl_AAC6_00, EnemySetDirAndParamsTbl_AAC6_01, SetFlag40ToPlayer_01Tbl_A6C4_02, EnemySetDirAndParamsTbl_AAC6_03, SetFlag40ToPlayer_01Tbl_A6C4_04, EnemySetDirAndParamsTbl_AAC6_05, EnemySetDirAndParamsTbl_AAC6_06, EnemySetDirAndParamsTbl_AAC6_07;- D 1 - - - 0x002ADF 01:AACF:
+	.hibytes EnemySetDirAndParamsTbl_AAC6_08;- D 1 - - - 0x002AE7 01:AAD7:
+EnemySetDirAndParamsTbl_AAC6_00:
 	LDA objVariant,X                ;C - - J - - 0x002AE8 01:AAD8: BD C0 05
 	CMP #$03                        ;C - - - - - 0x002AEB 01:AADB: C9 03
 	BEQ loc_01_AAF4                 ;C - - - - - 0x002AED 01:AADD: F0 15
@@ -1412,7 +1412,7 @@ loc_01_AAFF:
 	STA objStep,X                   ;C - - - - - 0x002B11 01:AB01: 9D 00 05
 	INC objActive,X                 ;C - - - - - 0x002B14 01:AB04: FE 00 03
 	JMP SetGrabbedAnimA_01          ;C - - - - - 0x002B17 01:AB07: 4C 3A A8
-ofs_01_AB0A:
+EnemySetDirAndParamsTbl_AAC6_01:
 	LDA #$24                        ;C - - J - - 0x002B1A 01:AB0A: A9 24
 	LDY #$09                        ;C - - - - - 0x002B1C 01:AB0C: A0 09
 	JSR CheckNearPlayer             ;C - - - - - 0x002B1E 01:AB0E: 20 3E FB
@@ -1498,7 +1498,7 @@ loc_01_AB9E:
 loc_01_ABB0:
 	JSR EnemyVertBounce             ;C - - - - - 0x002BC0 01:ABB0: 20 31 A0
 	JMP SetFlag40ToPlayer_01        ;C - - - - - 0x002BC3 01:ABB3: 4C 90 A0
-ofs_01_ABB6:
+EnemySetDirAndParamsTbl_AAC6_05:
 	JSR SetGrabbedAnimB_01          ;C - - J - - 0x002BC6 01:ABB6: 20 82 A8
 	LDA gameAction                  ;C - - - - - 0x002BC9 01:ABB9: A5 30
 	CMP #$01                        ;C - - - - - 0x002BCB 01:ABBB: C9 01
@@ -1572,7 +1572,7 @@ loc_01_AC43:
 	LDA #$86                        ;C - - - - - 0x002C58 01:AC48: A9 86
 	STA objActive,X                 ;C - - - - - 0x002C5A 01:AC4A: 9D 00 03
 	RTS                             ;C - - - - - 0x002C5D 01:AC4D: 60
-ofs_01_AC4E:
+EnemySetDirAndParamsTbl_AAC6_03:
 	LDA objStep,X                   ;C - - J - - 0x002C5E 01:AC4E: BD 00 05
 	BEQ loc_01_AC61                 ;C - - - - - 0x002C61 01:AC51: F0 0E
 	CMP #$01                        ;C - - - - - 0x002C63 01:AC53: C9 01
@@ -1727,7 +1727,7 @@ EnemySetDirAndParamsTbl_AD84:
 	.byte $10,$08,$08,$10           ;- D 1 - - - 0x002D94 01:AD84:
 EnemySetDirAndParamsTbl_AD88:
 	.byte $08,$04,$04,$08           ;- D 1 - - - 0x002D98 01:AD88:
-ofs_01_AD8C:
+EnemySetDirAndParamsTbl_AAC6_07:
 	JSR FaceToPlayerFlag            ;C - - J - - 0x002D9C 01:AD8C: 20 43 F3
 	DEC objHitTimer,X               ;C - - - - - 0x002D9F 01:AD8F: DE E0 04
 	BNE loc_01_ADB9                 ;C - - - - - 0x002DA2 01:AD92: D0 25
@@ -1754,7 +1754,7 @@ loc_01_ADB1:
 	STA objStep,X                   ;C - - - - - 0x002DC6 01:ADB6: 9D 00 05
 loc_01_ADB9:
 	RTS                             ;C - - - - - 0x002DC9 01:ADB9: 60
-ofs_01_ADBA:
+EnemySetDirAndParamsTbl_AAC6_06:
 	LDA objStep,X                   ;C - - J - - 0x002DCA 01:ADBA: BD 00 05
 	BNE loc_01_ADCA                 ;C - - - - - 0x002DCD 01:ADBD: D0 0B
 	LDA #$18                        ;C - - - - - 0x002DCF 01:ADBF: A9 18
@@ -1808,7 +1808,7 @@ loc_01_AE0C:
 loc_01_AE15:
 	LDA #$81                        ;C - - - - - 0x002E25 01:AE15: A9 81
 	BNE loc_01_AE0C                 ;C - - - - - 0x002E27 01:AE17: D0 F3
-ofs_01_AE19:
+EnemySetDirAndParamsTbl_AAC6_08:
 	LDA objStep,X                   ;C - - J - - 0x002E29 01:AE19: BD 00 05
 	BNE loc_01_AE31                 ;C - - - - - 0x002E2C 01:AE1C: D0 13
 	LDA #$20                        ;C - - - - - 0x002E2E 01:AE1E: A9 20

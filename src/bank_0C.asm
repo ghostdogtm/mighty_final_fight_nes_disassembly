@@ -650,7 +650,7 @@ loc_0C_85B6:
 	LDA PlayerAttackJumpHi_87B3,Y   ;C - - - - - 0x0185D0 0C:85C0: B9 B3 87
 	STA ptr_02+1                    ;C - - - - - 0x0185D3 0C:85C3: 85 03
 	JMP (ptr_02)                    ;C - - - - - 0x0185D5 0C:85C5: 6C 02 00
-ofs_0C_85C8:
+PlayerAttackJumpLo_87B0_00:
 	LDA attackType                  ;C - - J - - 0x0185D8 0C:85C8: A5 A7
 	CMP #$07                        ;C - - - - - 0x0185DA 0C:85CA: C9 07
 	BNE loc_0C_85D2                 ;C - - - - - 0x0185DC 0C:85CC: D0 04
@@ -672,7 +672,7 @@ loc_0C_85DC:
 	STA ptr_04+1                    ;C - - - - - 0x0185F9 0C:85E9: 85 05
 	LDY attackType                  ;C - - - - - 0x0185FB 0C:85EB: A4 A7
 	JMP (ptr_04)                    ;C - - - - - 0x0185FD 0C:85ED: 6C 04 00
-ofs_0C_85F0:
+PlayerAttackJumpLo_87B0_01:
 	LDA attackType                  ;C - - J - - 0x018600 0C:85F0: A5 A7
 	CMP #$01                        ;C - - - - - 0x018602 0C:85F2: C9 01
 	BNE loc_0C_85FA                 ;C - - - - - 0x018604 0C:85F4: D0 04
@@ -695,7 +695,7 @@ loc_0C_8604:
 	STA ptr_04+1                    ;C - - - - - 0x018621 0C:8611: 85 05
 	LDY attackType                  ;C - - - - - 0x018623 0C:8613: A4 A7
 	JMP (ptr_04)                    ;C - - - - - 0x018625 0C:8615: 6C 04 00
-ofs_0C_8618:
+PlayerAttackJumpLo_87B0_02:
 	LDA attackType                  ;C - - J - - 0x018628 0C:8618: A5 A7
 	CMP #$0D                        ;C - - - - - 0x01862A 0C:861A: C9 0D
 	BNE loc_0C_8622                 ;C - - - - - 0x01862C 0C:861C: D0 04
@@ -712,52 +712,52 @@ loc_0C_8624:
 	STA ptr_04+1                    ;C - - - - - 0x018641 0C:8631: 85 05
 	LDY attackType                  ;C - - - - - 0x018643 0C:8633: A4 A7
 	JMP (ptr_04)                    ;C - - - - - 0x018645 0C:8635: 6C 04 00
-ofs_0C_8638:
+PlayerAttackJumpLo_87B6_00:
 	LDA PlayerAttackDamage_87D6,Y   ;C - - J - - 0x018648 0C:8638: B9 D6 87
 	BNE loc_0C_8686                 ;C - - - - - 0x01864B 0C:863B: D0 49
-ofs_0C_863D:
+PlayerAttackJumpLo_87B6_01:
 	LDA PlayerAttackDamage_87F9,Y   ;C - - J - - 0x01864D 0C:863D: B9 F9 87
 	BNE loc_0C_8686                 ;C - - - - - 0x018650 0C:8640: D0 44
-ofs_0C_8642:
+PlayerAttackJumpLo_87B6_02:
 	LDA PlayerAttackDamage_881C,Y   ;C - - J - - 0x018652 0C:8642: B9 1C 88
 	BNE loc_0C_8686                 ;C - - - - - 0x018655 0C:8645: D0 3F
-ofs_0C_8647:
+PlayerAttackJumpLo_87B6_03:
 	LDA PlayerAttackDamage_883F,Y   ;C - - J - - 0x018657 0C:8647: B9 3F 88
 	BNE loc_0C_8686                 ;C - - - - - 0x01865A 0C:864A: D0 3A
-ofs_0C_864C:
+PlayerAttackJumpLo_87B6_04:
 	LDA PlayerAttackDamage_8862,Y   ;C - - J - - 0x01865C 0C:864C: B9 62 88
 	BNE loc_0C_8686                 ;C - - - - - 0x01865F 0C:864F: D0 35
-ofs_0C_8651:
+PlayerAttackJumpLo_87B6_05:
 	LDA PlayerAttackDamage_8885,Y   ;c - - - - - 0x018661 0C:8651: B9 85 88
 	BNE loc_0C_8686                 ;c - - - - - 0x018664 0C:8654: D0 30
-ofs_0C_8656:
+PlayerAttackJumpLo_87C2_00:
 	LDA PlayerAttackDamage_88A8,Y   ;C - - J - - 0x018666 0C:8656: B9 A8 88
 	BNE loc_0C_8686                 ;C - - - - - 0x018669 0C:8659: D0 2B
-ofs_0C_865B:
+PlayerAttackJumpLo_87C2_01:
 	LDA PlayerAttackDamage_88A8,Y   ;C - - J - - 0x01866B 0C:865B: B9 A8 88
 	BNE loc_0C_8686                 ;C - - - - - 0x01866E 0C:865E: D0 26
-ofs_0C_8660:
+PlayerAttackJumpLo_87C2_02:
 	LDA PlayerAttackDamage_88CB,Y   ;C - - J - - 0x018670 0C:8660: B9 CB 88
 	BNE loc_0C_8686                 ;C - - - - - 0x018673 0C:8663: D0 21
-ofs_0C_8665:
+PlayerAttackJumpLo_87C2_03:
 	LDA PlayerAttackDamage_88EE,Y   ;C - - J - - 0x018675 0C:8665: B9 EE 88
 	BNE loc_0C_8686                 ;C - - - - - 0x018678 0C:8668: D0 1C
-ofs_0C_866A:
+PlayerAttackJumpLo_87C2_04:
 	LDA PlayerAttackDamage_8911,Y   ;C - - J - - 0x01867A 0C:866A: B9 11 89
 	BNE loc_0C_8686                 ;C - - - - - 0x01867D 0C:866D: D0 17
-ofs_0C_866F:
+PlayerAttackJumpLo_87C2_05:
 	LDA PlayerAttackDamage_8934,Y   ;C - - J - - 0x01867F 0C:866F: B9 34 89
 	BNE loc_0C_8686                 ;C - - - - - 0x018682 0C:8672: D0 12
-ofs_0C_8674:
+PlayerAttackJumpLo_87CE_00:
 	LDA PlayerAttackDamage_8957,Y   ;C - - J - - 0x018684 0C:8674: B9 57 89
 	BNE loc_0C_8686                 ;C - - - - - 0x018687 0C:8677: D0 0D
-ofs_0C_8679:
+PlayerAttackJumpLo_87CE_01:
 	LDA PlayerAttackDamage_897A,Y   ;C - - J - - 0x018689 0C:8679: B9 7A 89
 	BNE loc_0C_8686                 ;C - - - - - 0x01868C 0C:867C: D0 08
-ofs_0C_867E:
+PlayerAttackJumpLo_87CE_02:
 	LDA PlayerAttackDamage_899D,Y   ;C - - J - - 0x01868E 0C:867E: B9 9D 89
 	BNE loc_0C_8686                 ;C - - - - - 0x018691 0C:8681: D0 03
-ofs_0C_8683:
+PlayerAttackJumpLo_87CE_03:
 	LDA PlayerAttackDamage_89C0,Y   ;C - - J - - 0x018693 0C:8683: B9 C0 89
 loc_0C_8686:
 	STA ptr_00                      ;C - - - - - 0x018696 0C:8686: 85 00
@@ -914,21 +914,21 @@ EnemyHitCheckTbl_87A8:
 EnemyHitCheckTbl_87AB:
 	.byte $02,$04,$04,$08,$08       ;- D 0 - - - 0x0187BB 0C:87AB:
 PlayerAttackJumpLo_87B0:
-	.lobytes ofs_0C_85C8, ofs_0C_85F0, ofs_0C_8618;- D 0 - - - 0x0187C0 0C:87B0:
+	.lobytes PlayerAttackJumpLo_87B0_00, PlayerAttackJumpLo_87B0_01, PlayerAttackJumpLo_87B0_02;- D 0 - - - 0x0187C0 0C:87B0:
 PlayerAttackJumpHi_87B3:
-	.hibytes ofs_0C_85C8, ofs_0C_85F0, ofs_0C_8618;- D 0 - - - 0x0187C3 0C:87B3:
+	.hibytes PlayerAttackJumpLo_87B0_00, PlayerAttackJumpLo_87B0_01, PlayerAttackJumpLo_87B0_02;- D 0 - - - 0x0187C3 0C:87B3:
 PlayerAttackJumpLo_87B6:
-	.lobytes ofs_0C_8638, ofs_0C_863D, ofs_0C_8642, ofs_0C_8647, ofs_0C_864C, ofs_0C_8651;- D 0 - - - 0x0187C6 0C:87B6:
+	.lobytes PlayerAttackJumpLo_87B6_00, PlayerAttackJumpLo_87B6_01, PlayerAttackJumpLo_87B6_02, PlayerAttackJumpLo_87B6_03, PlayerAttackJumpLo_87B6_04, PlayerAttackJumpLo_87B6_05;- D 0 - - - 0x0187C6 0C:87B6:
 PlayerAttackJumpHi_87BC:
-	.hibytes ofs_0C_8638, ofs_0C_863D, ofs_0C_8642, ofs_0C_8647, ofs_0C_864C, ofs_0C_8651;- D 0 - - - 0x0187CC 0C:87BC:
+	.hibytes PlayerAttackJumpLo_87B6_00, PlayerAttackJumpLo_87B6_01, PlayerAttackJumpLo_87B6_02, PlayerAttackJumpLo_87B6_03, PlayerAttackJumpLo_87B6_04, PlayerAttackJumpLo_87B6_05;- D 0 - - - 0x0187CC 0C:87BC:
 PlayerAttackJumpLo_87C2:
-	.lobytes ofs_0C_8656, ofs_0C_865B, ofs_0C_8660, ofs_0C_8665, ofs_0C_866A, ofs_0C_866F;- D 0 - - - 0x0187D2 0C:87C2:
+	.lobytes PlayerAttackJumpLo_87C2_00, PlayerAttackJumpLo_87C2_01, PlayerAttackJumpLo_87C2_02, PlayerAttackJumpLo_87C2_03, PlayerAttackJumpLo_87C2_04, PlayerAttackJumpLo_87C2_05;- D 0 - - - 0x0187D2 0C:87C2:
 PlayerAttackJumpHi_87C8:
-	.hibytes ofs_0C_8656, ofs_0C_865B, ofs_0C_8660, ofs_0C_8665, ofs_0C_866A, ofs_0C_866F;- D 0 - - - 0x0187D8 0C:87C8:
+	.hibytes PlayerAttackJumpLo_87C2_00, PlayerAttackJumpLo_87C2_01, PlayerAttackJumpLo_87C2_02, PlayerAttackJumpLo_87C2_03, PlayerAttackJumpLo_87C2_04, PlayerAttackJumpLo_87C2_05;- D 0 - - - 0x0187D8 0C:87C8:
 PlayerAttackJumpLo_87CE:
-	.lobytes ofs_0C_8674, ofs_0C_8679, ofs_0C_867E, ofs_0C_8683;- D 0 - - - 0x0187DE 0C:87CE:
+	.lobytes PlayerAttackJumpLo_87CE_00, PlayerAttackJumpLo_87CE_01, PlayerAttackJumpLo_87CE_02, PlayerAttackJumpLo_87CE_03;- D 0 - - - 0x0187DE 0C:87CE:
 PlayerAttackJumpHi_87D2:
-	.hibytes ofs_0C_8674, ofs_0C_8679, ofs_0C_867E, ofs_0C_8683;- D 0 - - - 0x0187E2 0C:87D2:
+	.hibytes PlayerAttackJumpLo_87CE_00, PlayerAttackJumpLo_87CE_01, PlayerAttackJumpLo_87CE_02, PlayerAttackJumpLo_87CE_03;- D 0 - - - 0x0187E2 0C:87D2:
 PlayerAttackDamage_87D6:
 	.byte $02,$09,$08,$04,$04,$08,$03,$0C,$09,$08,$08,$01,$01,$01,$01,$01,$01,$01,$01,$01,$08,$08,$08,$08,$01,$01,$01,$04,$04,$08,$01,$01,$01,$01,$0C;- D 0 - - - 0x0187E6 0C:87D6: PlayerAttackDamage rows: 35 bytes indexed by attackType, selected by player and level through PlayerAttackJump*
 PlayerAttackDamage_87F9:
@@ -966,7 +966,7 @@ PlayerSpecialDispatch:
 	LDA PlayerSpecialDispatchTbl_8AD1,Y;C - - - - - 0x0189FA 0C:89EA: B9 D1 8A
 	STA ptr_04                      ;C - - - - - 0x0189FD 0C:89ED: 85 04
 	JMP (ptr_02+1)                  ;C - - - - - 0x0189FF 0C:89EF: 6C 03 00
-ofs_0C_89F2:
+PlayerSpecialDispatchTbl_8ACE_00:
 	LDA playerLevel                 ;C - - J - - 0x018A02 0C:89F2: A5 6B
 	CMP #$05                        ;C - - - - - 0x018A04 0C:89F4: C9 05
 	BNE loc_0C_89F9                 ;C - - - - - 0x018A06 0C:89F6: D0 01
@@ -980,7 +980,7 @@ loc_0C_89F9:
 	LDA EnemyAI_NopTbl_8AD9,Y       ;C - - - - - 0x018A10 0C:8A00: B9 D9 8A
 	STA ram_0009                    ;C - - - - - 0x018A13 0C:8A03: 85 09
 	JMP loc_0C_8A31                 ;C - - - - - 0x018A15 0C:8A05: 4C 31 8A
-ofs_0C_8A08:
+PlayerSpecialDispatchTbl_8ACE_01:
 	LDA playerLevel                 ;C - - J - - 0x018A18 0C:8A08: A5 6B
 	CMP #$05                        ;C - - - - - 0x018A1A 0C:8A0A: C9 05
 	BNE loc_0C_8A0F                 ;C - - - - - 0x018A1C 0C:8A0C: D0 01
@@ -992,7 +992,7 @@ loc_0C_8A0F:
 	LDA EnemyAI_NopTbl_8AE3,Y       ;C - - - - - 0x018A26 0C:8A16: B9 E3 8A
 	STA ram_0009                    ;C - - - - - 0x018A29 0C:8A19: 85 09
 	JMP loc_0C_8A31                 ;C - - - - - 0x018A2B 0C:8A1B: 4C 31 8A
-ofs_0C_8A1E:
+PlayerSpecialDispatchTbl_8ACE_02:
 	LDA playerLevel                 ;C - - J - - 0x018A2E 0C:8A1E: A5 6B
 	CMP #$03                        ;C - - - - - 0x018A30 0C:8A20: C9 03
 	BNE loc_0C_8A25                 ;C - - - - - 0x018A32 0C:8A22: D0 01
@@ -1091,9 +1091,9 @@ loc_0C_8AC2:
 	STA playerExp+1                 ;C - - - - - 0x018ADB 0C:8ACB: 85 6D
 	RTS                             ;C - - - - - 0x018ADD 0C:8ACD: 60
 PlayerSpecialDispatchTbl_8ACE:
-	.lobytes ofs_0C_89F2, ofs_0C_8A08, ofs_0C_8A1E;- D 0 - - - 0x018ADE 0C:8ACE:
+	.lobytes PlayerSpecialDispatchTbl_8ACE_00, PlayerSpecialDispatchTbl_8ACE_01, PlayerSpecialDispatchTbl_8ACE_02;- D 0 - - - 0x018ADE 0C:8ACE:
 PlayerSpecialDispatchTbl_8AD1:
-	.hibytes ofs_0C_89F2, ofs_0C_8A08, ofs_0C_8A1E;- D 0 - - - 0x018AE1 0C:8AD1:
+	.hibytes PlayerSpecialDispatchTbl_8ACE_00, PlayerSpecialDispatchTbl_8ACE_01, PlayerSpecialDispatchTbl_8ACE_02;- D 0 - - - 0x018AE1 0C:8AD1:
 EnemyAI_NopTbl_8AD4:
 	.byte $33,$54,$90,$47,$50       ;- D 0 - - - 0x018AE4 0C:8AD4:
 EnemyAI_NopTbl_8AD9:
@@ -1162,10 +1162,10 @@ loc_0C_8B22:
 loc_0C_8B5B:
 	RTS                             ;C - - - - - 0x018B6B 0C:8B5B: 60
 EnemyAI_Item10_13Tbl_8B5C:
-	.lobytes ofs_0C_8B64, ofs_0C_8BC2, ofs_0C_8BD6, ofs_0C_8BED;- D 0 - - - 0x018B6C 0C:8B5C:
+	.lobytes EnemyAI_Item10_13Tbl_8B5C_00, EnemyAI_Item10_13Tbl_8B5C_01, EnemyAI_Item10_13Tbl_8B5C_02, EnemyAI_Item10_13Tbl_8B5C_03;- D 0 - - - 0x018B6C 0C:8B5C:
 EnemyAI_Item10_13Tbl_8B60:
-	.hibytes ofs_0C_8B64, ofs_0C_8BC2, ofs_0C_8BD6, ofs_0C_8BED;- D 0 - - - 0x018B70 0C:8B60:
-ofs_0C_8B64:
+	.hibytes EnemyAI_Item10_13Tbl_8B5C_00, EnemyAI_Item10_13Tbl_8B5C_01, EnemyAI_Item10_13Tbl_8B5C_02, EnemyAI_Item10_13Tbl_8B5C_03;- D 0 - - - 0x018B70 0C:8B60:
+EnemyAI_Item10_13Tbl_8B5C_00:
 	LDA #$26                        ;C - - J - - 0x018B74 0C:8B64: A9 26
 	JSR QueueSound                  ;C - - - - - 0x018B76 0C:8B66: 20 4C F3
 	LDY playerId                    ;C - - - - - 0x018B79 0C:8B69: A4 34
@@ -1202,21 +1202,21 @@ loc_0C_8BA6:
 	JSR EndAttackAction             ;C - - - - - 0x018BB6 0C:8BA6: 20 00 8C
 	RTS                             ;C - - - - - 0x018BB9 0C:8BA9: 60
 EnemyAI_NopTbl_8BAA:
-	.lobytes ofs_0C_8BB0, tbl_0C_8BB6, tbl_0C_8BBC;- D 0 - - - 0x018BBA 0C:8BAA:
+	.lobytes EnemyAI_NopTbl_8BAA_00, EnemyAI_NopTbl_8BAA_01, EnemyAI_NopTbl_8BAA_02;- D 0 - - - 0x018BBA 0C:8BAA:
 EnemyAI_NopTbl_8BAD:
-	.hibytes ofs_0C_8BB0, tbl_0C_8BB6, tbl_0C_8BBC;- D 0 - - - 0x018BBD 0C:8BAD:
-ofs_0C_8BB0:
+	.hibytes EnemyAI_NopTbl_8BAA_00, EnemyAI_NopTbl_8BAA_01, EnemyAI_NopTbl_8BAA_02;- D 0 - - - 0x018BBD 0C:8BAD:
+EnemyAI_NopTbl_8BAA_00:
 	RTI                             ;c - - - - - 0x018BC0 0C:8BB0: 40
 	.byte $48,$50,$58,$60           ;- D 0 - I - 0x018BC1 0C:8BB1:
 	.byte $68                       ;- - - - - - 0x018BC5 0C:8BB5:
-tbl_0C_8BB6:
+EnemyAI_NopTbl_8BAA_01:
 	.byte $30                       ;- - - - - - 0x018BC6 0C:8BB6:
 	.byte $38,$40,$48,$50,$58       ;- D 0 - I - 0x018BC7 0C:8BB7:
-tbl_0C_8BBC:
+EnemyAI_NopTbl_8BAA_02:
 	.byte $50                       ;- - - - - - 0x018BCC 0C:8BBC:
 	.byte $58,$60,$68               ;- D 0 - I - 0x018BCD 0C:8BBD:
 	.byte $68,$68                   ;- - - - - - 0x018BD0 0C:8BC0:
-ofs_0C_8BC2:
+EnemyAI_Item10_13Tbl_8B5C_01:
 	LDA #$2E                        ;c - - - - - 0x018BD2 0C:8BC2: A9 2E
 	JSR QueueSound                  ;c - - - - - 0x018BD4 0C:8BC4: 20 4C F3
 	LDA credits                     ;c - - - - - 0x018BD7 0C:8BC7: A5 AF
@@ -1228,7 +1228,7 @@ ofs_0C_8BC2:
 loc_0C_8BD2:
 	JSR EndAttackAction             ;c - - - - - 0x018BE2 0C:8BD2: 20 00 8C
 	RTS                             ;c - - - - - 0x018BE5 0C:8BD5: 60
-ofs_0C_8BD6:
+EnemyAI_Item10_13Tbl_8B5C_02:
 	LDA #$2D                        ;C - - J - - 0x018BE6 0C:8BD6: A9 2D
 	JSR QueueSound                  ;C - - - - - 0x018BE8 0C:8BD8: 20 4C F3
 	INC lives                       ;C - - - - - 0x018BEB 0C:8BDB: E6 3E
@@ -1241,7 +1241,7 @@ ofs_0C_8BD6:
 loc_0C_8BE9:
 	JSR EndAttackAction             ;C - - - - - 0x018BF9 0C:8BE9: 20 00 8C
 	RTS                             ;C - - - - - 0x018BFC 0C:8BEC: 60
-ofs_0C_8BED:
+EnemyAI_Item10_13Tbl_8B5C_03:
 	LDA #$2D                        ;C - - J - - 0x018BFD 0C:8BED: A9 2D
 	JSR QueueSound                  ;C - - - - - 0x018BFF 0C:8BEF: 20 4C F3
 	LDA lives                       ;C - - - - - 0x018C02 0C:8BF2: A5 3E
@@ -1279,10 +1279,10 @@ EnemyAI_Kind04:
 	STA ptr_00+1                    ;C - - - - - 0x018C3A 0C:8C2A: 85 01
 	JMP (ptr_00)                    ;C - - - - - 0x018C3C 0C:8C2C: 6C 00 00
 EnemyAI_Kind04Tbl_8C2F:
-	.lobytes ofs_0C_8C3F, ofs_0C_8C98, ofs_0C_8D00, ofs_0C_8D88, ofs_0C_8E43, ofs_0C_8E5A, ofs_0C_8EE5, ofs_0C_8F8D;- D 0 - - - 0x018C3F 0C:8C2F:
+	.lobytes EnemyAI_Kind04Tbl_8C2F_00, EnemyAI_Kind04Tbl_8C2F_01, EnemyAI_Kind04Tbl_8C2F_02, EnemyAI_Kind04Tbl_8C2F_03, EnemyAI_Kind04Tbl_8C2F_04, EnemyAI_Kind04Tbl_8C2F_05, EnemyAI_Kind04Tbl_8C2F_06, EnemyAI_Kind04Tbl_8C2F_07;- D 0 - - - 0x018C3F 0C:8C2F:
 EnemyAI_Kind04Tbl_8C37:
-	.hibytes ofs_0C_8C3F, ofs_0C_8C98, ofs_0C_8D00, ofs_0C_8D88, ofs_0C_8E43, ofs_0C_8E5A, ofs_0C_8EE5, ofs_0C_8F8D;- D 0 - - - 0x018C47 0C:8C37:
-ofs_0C_8C3F:
+	.hibytes EnemyAI_Kind04Tbl_8C2F_00, EnemyAI_Kind04Tbl_8C2F_01, EnemyAI_Kind04Tbl_8C2F_02, EnemyAI_Kind04Tbl_8C2F_03, EnemyAI_Kind04Tbl_8C2F_04, EnemyAI_Kind04Tbl_8C2F_05, EnemyAI_Kind04Tbl_8C2F_06, EnemyAI_Kind04Tbl_8C2F_07;- D 0 - - - 0x018C47 0C:8C37:
+EnemyAI_Kind04Tbl_8C2F_00:
 	LDA #$10                        ;C - - J - - 0x018C4F 0C:8C3F: A9 10
 	STA objParamA,X                 ;C - - - - - 0x018C51 0C:8C41: 9D 10 05
 	LDA #$08                        ;C - - - - - 0x018C54 0C:8C44: A9 08
@@ -1323,7 +1323,7 @@ loc_0C_8C65:
 	STA objX,X                      ;C - - - - - 0x018CA4 0C:8C94: 9D 60 03
 loc_0C_8C97:
 	RTS                             ;C - - - - - 0x018CA7 0C:8C97: 60
-ofs_0C_8C98:
+EnemyAI_Kind04Tbl_8C2F_01:
 	LDA objMoveMode,X               ;C - - J - - 0x018CA8 0C:8C98: BD 70 04
 	BNE loc_0C_8CC4                 ;C - - - - - 0x018CAB 0C:8C9B: D0 27
 	LDA objFacing,X                 ;C - - - - - 0x018CAD 0C:8C9D: BD 60 04
@@ -1372,7 +1372,7 @@ loc_0C_8CD9:
 	SEC                             ;C - - - - - 0x018D0A 0C:8CFA: 38
 	SBC #$08                        ;C - - - - - 0x018D0B 0C:8CFB: E9 08
 	STA objY,X                      ;C - - - - - 0x018D0D 0C:8CFD: 9D C0 03
-ofs_0C_8D00:
+EnemyAI_Kind04Tbl_8C2F_02:
 	LDA gameAction                  ;C - - - - - 0x018D10 0C:8D00: A5 30
 	CMP #$06                        ;C - - - - - 0x018D12 0C:8D02: C9 06
 	BEQ loc_0C_8D15                 ;C - - - - - 0x018D14 0C:8D04: F0 0F
@@ -1438,7 +1438,7 @@ loc_0C_8D61:
 	SEC                             ;C - - - - - 0x018D92 0C:8D82: 38
 	SBC #$06                        ;C - - - - - 0x018D93 0C:8D83: E9 06
 	STA objY,X                      ;C - - - - - 0x018D95 0C:8D85: 9D C0 03
-ofs_0C_8D88:
+EnemyAI_Kind04Tbl_8C2F_03:
 	LDA gameAction                  ;C - - - - - 0x018D98 0C:8D88: A5 30
 	CMP #$06                        ;C - - - - - 0x018D9A 0C:8D8A: C9 06
 	BEQ loc_0C_8D9D                 ;C - - - - - 0x018D9C 0C:8D8C: F0 0F
@@ -1533,7 +1533,7 @@ loc_0C_8E1C:
 	SBC #$06                        ;C - - - - - 0x018E4B 0C:8E3B: E9 06
 	STA objY,X                      ;C - - - - - 0x018E4D 0C:8E3D: 9D C0 03
 	INC objActive,X                 ;C - - - - - 0x018E50 0C:8E40: FE 00 03
-ofs_0C_8E43:
+EnemyAI_Kind04Tbl_8C2F_04:
 	LDA #$00                        ;C - - - - - 0x018E53 0C:8E43: A9 00
 	STA objVelXLo,X                 ;C - - - - - 0x018E55 0C:8E45: 9D 00 04
 	LDA #$02                        ;C - - - - - 0x018E58 0C:8E48: A9 02
@@ -1543,7 +1543,7 @@ ofs_0C_8E43:
 	LDA #$01                        ;C - - - - - 0x018E62 0C:8E52: A9 01
 	STA objVelYHi,X                 ;C - - - - - 0x018E64 0C:8E54: 9D 30 04
 	INC objActive,X                 ;C - - - - - 0x018E67 0C:8E57: FE 00 03
-ofs_0C_8E5A:
+EnemyAI_Kind04Tbl_8C2F_05:
 	LDA objAnimFlags,X              ;C - - - - - 0x018E6A 0C:8E5A: BD 90 05
 	CMP #$0C                        ;C - - - - - 0x018E6D 0C:8E5D: C9 0C
 	BNE loc_0C_8E64                 ;C - - - - - 0x018E6F 0C:8E5F: D0 03
@@ -1610,7 +1610,7 @@ loc_0C_8EC5:
 	LDA #$00                        ;C - - - - - 0x018EED 0C:8EDD: A9 00
 	STA objVelXHi,X                 ;C - - - - - 0x018EEF 0C:8EDF: 9D 10 04
 	INC objActive,X                 ;C - - - - - 0x018EF2 0C:8EE2: FE 00 03
-ofs_0C_8EE5:
+EnemyAI_Kind04Tbl_8C2F_06:
 	LDA objDownState,X              ;C - - - - - 0x018EF5 0C:8EE5: BD C0 04
 	CMP #$FE                        ;C - - - - - 0x018EF8 0C:8EE8: C9 FE
 	BEQ loc_0C_8EF2                 ;C - - - - - 0x018EFA 0C:8EEA: F0 06
@@ -1691,7 +1691,7 @@ loc_0C_8F80:
 	LDA #$FF                        ;C - - - - - 0x018F95 0C:8F85: A9 FF
 	STA objDownState,X              ;C - - - - - 0x018F97 0C:8F87: 9D C0 04
 	JMP EnemyKnockdownStep          ;C - - - - - 0x018F9A 0C:8F8A: 4C FC 9B
-ofs_0C_8F8D:
+EnemyAI_Kind04Tbl_8C2F_07:
 	DEC objParamA,X                 ;C - - J - - 0x018F9D 0C:8F8D: DE 10 05
 	LDA objParamA,X                 ;C - - - - - 0x018FA0 0C:8F90: BD 10 05
 	BEQ loc_0C_8FA2                 ;C - - - - - 0x018FA3 0C:8F93: F0 0D
@@ -1716,10 +1716,10 @@ EnemyAI_Kind08:
 	STA ptr_00+1                    ;C - - - - - 0x018FC3 0C:8FB3: 85 01
 	JMP (ptr_00)                    ;C - - - - - 0x018FC5 0C:8FB5: 6C 00 00
 EnemyAI_Kind08Tbl_8FB8:
-	.lobytes ofs_0C_8FC6, ofs_0C_9036, ofs_0C_9078, ofs_0C_90BA, ofs_0C_9128, ofs_0C_8F8D, ofs_0C_917E;- D 0 - - - 0x018FC8 0C:8FB8:
+	.lobytes EnemyAI_Kind08Tbl_8FB8_00, EnemyAI_Kind08Tbl_8FB8_01, EnemyAI_Kind08Tbl_8FB8_02, EnemyAI_Kind08Tbl_8FB8_03, EnemyAI_Kind08Tbl_8FB8_04, EnemyAI_Kind04Tbl_8C2F_07, EnemyAI_Kind08Tbl_8FB8_06;- D 0 - - - 0x018FC8 0C:8FB8:
 EnemyAI_Kind08Tbl_8FBF:
-	.hibytes ofs_0C_8FC6, ofs_0C_9036, ofs_0C_9078, ofs_0C_90BA, ofs_0C_9128, ofs_0C_8F8D, ofs_0C_917E;- D 0 - - - 0x018FCF 0C:8FBF:
-ofs_0C_8FC6:
+	.hibytes EnemyAI_Kind08Tbl_8FB8_00, EnemyAI_Kind08Tbl_8FB8_01, EnemyAI_Kind08Tbl_8FB8_02, EnemyAI_Kind08Tbl_8FB8_03, EnemyAI_Kind08Tbl_8FB8_04, EnemyAI_Kind04Tbl_8C2F_07, EnemyAI_Kind08Tbl_8FB8_06;- D 0 - - - 0x018FCF 0C:8FBF:
+EnemyAI_Kind08Tbl_8FB8_00:
 	LDA #$33                        ;C - - J - - 0x018FD6 0C:8FC6: A9 33
 	JSR QueueSound                  ;C - - - - - 0x018FD8 0C:8FC8: 20 4C F3
 	LDA #$10                        ;C - - - - - 0x018FDB 0C:8FCB: A9 10
@@ -1771,7 +1771,7 @@ loc_0C_901A:
 	PLA                             ;C - - - - - 0x019041 0C:9031: 68
 	STA objX,X                      ;C - - - - - 0x019042 0C:9032: 9D 60 03
 	RTS                             ;C - - - - - 0x019045 0C:9035: 60
-ofs_0C_9036:
+EnemyAI_Kind08Tbl_8FB8_01:
 	LDA gameAction                  ;C - - J - - 0x019046 0C:9036: A5 30
 	CMP #$06                        ;C - - - - - 0x019048 0C:9038: C9 06
 	BEQ loc_0C_9059                 ;C - - - - - 0x01904A 0C:903A: F0 1D
@@ -1804,7 +1804,7 @@ loc_0C_9059:
 	STA objX,X                      ;C - - - - - 0x019084 0C:9074: 9D 60 03
 loc_0C_9077:
 	RTS                             ;C - - - - - 0x019087 0C:9077: 60
-ofs_0C_9078:
+EnemyAI_Kind08Tbl_8FB8_02:
 	LDA gameAction                  ;C - - J - - 0x019088 0C:9078: A5 30
 	CMP #$06                        ;C - - - - - 0x01908A 0C:907A: C9 06
 	BEQ loc_0C_9092                 ;C - - - - - 0x01908C 0C:907C: F0 14
@@ -1837,7 +1837,7 @@ loc_0C_9092:
 	STA objX,X                      ;C - - - - - 0x0190C6 0C:90B6: 9D 60 03
 loc_0C_90B9:
 	RTS                             ;C - - - - - 0x0190C9 0C:90B9: 60
-ofs_0C_90BA:
+EnemyAI_Kind08Tbl_8FB8_03:
 	LDA gameAction                  ;C - - J - - 0x0190CA 0C:90BA: A5 30
 	CMP #$06                        ;C - - - - - 0x0190CC 0C:90BC: C9 06
 	BEQ loc_0C_90EC                 ;C - - - - - 0x0190CE 0C:90BE: F0 2C
@@ -1887,7 +1887,7 @@ loc_0C_90EC:
 	STA objX,X                      ;C - - - - - 0x019134 0C:9124: 9D 60 03
 loc_0C_9127:
 	RTS                             ;C - - - - - 0x019137 0C:9127: 60
-ofs_0C_9128:
+EnemyAI_Kind08Tbl_8FB8_04:
 	JSR EnemyLandCheck              ;C - - J - - bank=0D 0x019138 0C:9128: 20 F6 A9
 	BCC loc_0C_9138                 ;C - - - - - 0x01913B 0C:912B: 90 0B
 	LDA #$FE                        ;c - - - - - 0x01913D 0C:912D: A9 FE
@@ -1927,7 +1927,7 @@ loc_0C_9173:
 	STA attackType                  ;C - - - - - 0x019186 0C:9176: 85 A7
 	INC objActive,X                 ;C - - - - - 0x019188 0C:9178: FE 00 03
 	INC objActive,X                 ;C - - - - - 0x01918B 0C:917B: FE 00 03
-ofs_0C_917E:
+EnemyAI_Kind08Tbl_8FB8_06:
 	LDA objDownState,X              ;C - - - - - 0x01918E 0C:917E: BD C0 04
 	CMP #$FE                        ;C - - - - - 0x019191 0C:9181: C9 FE
 	BEQ loc_0C_91B3                 ;C - - - - - 0x019193 0C:9183: F0 2E
@@ -2143,12 +2143,12 @@ EnemyAI_Kind0F:
 	STA ptr_00+1                    ;C - - - - - 0x019350 0C:9340: 85 01
 	JMP (ptr_00)                    ;C - - - - - 0x019352 0C:9342: 6C 00 00
 EnemyAI_Kind0FTbl_9345:
-	.lobytes ofs_0C_9357, ofs_0C_93D1, ofs_0C_9457, ofs_0C_94D4, ofs_0C_9551, ofs_0C_95CE, ofs_0C_9602, ofs_0C_968D;- D 0 - - - 0x019355 0C:9345:
-	.lobytes ofs_0C_8F8D            ;- D 0 - - - 0x01935D 0C:934D:
+	.lobytes EnemyAI_Kind0FTbl_9345_00, EnemyAI_Kind0FTbl_9345_01, EnemyAI_Kind0FTbl_9345_02, EnemyAI_Kind0FTbl_9345_03, EnemyAI_Kind0FTbl_9345_04, EnemyAI_Kind0FTbl_9345_05, EnemyAI_Kind0FTbl_9345_06, EnemyAI_Kind0FTbl_9345_07;- D 0 - - - 0x019355 0C:9345:
+	.lobytes EnemyAI_Kind04Tbl_8C2F_07;- D 0 - - - 0x01935D 0C:934D:
 EnemyAI_Kind0FTbl_934E:
-	.hibytes ofs_0C_9357, ofs_0C_93D1, ofs_0C_9457, ofs_0C_94D4, ofs_0C_9551, ofs_0C_95CE, ofs_0C_9602, ofs_0C_968D;- D 0 - - - 0x01935E 0C:934E:
-	.hibytes ofs_0C_8F8D            ;- D 0 - - - 0x019366 0C:9356:
-ofs_0C_9357:
+	.hibytes EnemyAI_Kind0FTbl_9345_00, EnemyAI_Kind0FTbl_9345_01, EnemyAI_Kind0FTbl_9345_02, EnemyAI_Kind0FTbl_9345_03, EnemyAI_Kind0FTbl_9345_04, EnemyAI_Kind0FTbl_9345_05, EnemyAI_Kind0FTbl_9345_06, EnemyAI_Kind0FTbl_9345_07;- D 0 - - - 0x01935E 0C:934E:
+	.hibytes EnemyAI_Kind04Tbl_8C2F_07;- D 0 - - - 0x019366 0C:9356:
+EnemyAI_Kind0FTbl_9345_00:
 	LDA #$33                        ;C - - J - - 0x019367 0C:9357: A9 33
 	JSR QueueSound                  ;C - - - - - 0x019369 0C:9359: 20 4C F3
 	LDA #$10                        ;C - - - - - 0x01936C 0C:935C: A9 10
@@ -2204,7 +2204,7 @@ loc_0C_93B5:
 	PLA                             ;c - - - - - 0x0193DC 0C:93CC: 68
 	STA objX,X                      ;c - - - - - 0x0193DD 0C:93CD: 9D 60 03
 	RTS                             ;c - - - - - 0x0193E0 0C:93D0: 60
-ofs_0C_93D1:
+EnemyAI_Kind0FTbl_9345_01:
 	LDA gameAction                  ;C - - J - - 0x0193E1 0C:93D1: A5 30
 	CMP #$06                        ;C - - - - - 0x0193E3 0C:93D3: C9 06
 	BEQ loc_0C_93E7                 ;C - - - - - 0x0193E5 0C:93D5: F0 10
@@ -2273,7 +2273,7 @@ loc_0C_942F:
 	PLA                             ;C - - - - - 0x019462 0C:9452: 68
 	STA objX,X                      ;C - - - - - 0x019463 0C:9453: 9D 60 03
 	RTS                             ;C - - - - - 0x019466 0C:9456: 60
-ofs_0C_9457:
+EnemyAI_Kind0FTbl_9345_02:
 	LDA gameAction                  ;C - - J - - 0x019467 0C:9457: A5 30
 	CMP #$06                        ;C - - - - - 0x019469 0C:9459: C9 06
 	BEQ loc_0C_946D                 ;C - - - - - 0x01946B 0C:945B: F0 10
@@ -2338,7 +2338,7 @@ loc_0C_94B5:
 	PLA                             ;C - - - - - 0x0194DF 0C:94CF: 68
 	STA objX,X                      ;C - - - - - 0x0194E0 0C:94D0: 9D 60 03
 	RTS                             ;C - - - - - 0x0194E3 0C:94D3: 60
-ofs_0C_94D4:
+EnemyAI_Kind0FTbl_9345_03:
 	LDA gameAction                  ;C - - J - - 0x0194E4 0C:94D4: A5 30
 	CMP #$06                        ;C - - - - - 0x0194E6 0C:94D6: C9 06
 	BEQ loc_0C_94EA                 ;C - - - - - 0x0194E8 0C:94D8: F0 10
@@ -2403,7 +2403,7 @@ loc_0C_9532:
 	PLA                             ;C - - - - - 0x01955C 0C:954C: 68
 	STA objX,X                      ;C - - - - - 0x01955D 0C:954D: 9D 60 03
 	RTS                             ;C - - - - - 0x019560 0C:9550: 60
-ofs_0C_9551:
+EnemyAI_Kind0FTbl_9345_04:
 	LDA gameAction                  ;C - - J - - 0x019561 0C:9551: A5 30
 	CMP #$06                        ;C - - - - - 0x019563 0C:9553: C9 06
 	BEQ loc_0C_9567                 ;C - - - - - 0x019565 0C:9555: F0 10
@@ -2468,7 +2468,7 @@ loc_0C_95AF:
 	PLA                             ;C - - - - - 0x0195D9 0C:95C9: 68
 	STA objX,X                      ;C - - - - - 0x0195DA 0C:95CA: 9D 60 03
 	RTS                             ;C - - - - - 0x0195DD 0C:95CD: 60
-ofs_0C_95CE:
+EnemyAI_Kind0FTbl_9345_05:
 	LDA #$00                        ;C - - J - - 0x0195DE 0C:95CE: A9 00
 	STA objVelXLo,X                 ;C - - - - - 0x0195E0 0C:95D0: 9D 00 04
 	LDA #$02                        ;C - - - - - 0x0195E3 0C:95D3: A9 02
@@ -2492,7 +2492,7 @@ ofs_0C_95CE:
 loc_0C_95FE:
 	INC objActive,X                 ;C - - - - - 0x01960E 0C:95FE: FE 00 03
 	RTS                             ;C - - - - - 0x019611 0C:9601: 60
-ofs_0C_9602:
+EnemyAI_Kind0FTbl_9345_06:
 	LDA objAnimFlags,X              ;C - - J - - 0x019612 0C:9602: BD 90 05
 	CMP #$10                        ;C - - - - - 0x019615 0C:9605: C9 10
 	BNE loc_0C_960C                 ;C - - - - - 0x019617 0C:9607: D0 03
@@ -2559,7 +2559,7 @@ loc_0C_966D:
 	LDA #$00                        ;C - - - - - 0x019695 0C:9685: A9 00
 	STA objVelXHi,X                 ;C - - - - - 0x019697 0C:9687: 9D 10 04
 	INC objActive,X                 ;C - - - - - 0x01969A 0C:968A: FE 00 03
-ofs_0C_968D:
+EnemyAI_Kind0FTbl_9345_07:
 	LDA objDownState,X              ;C - - - - - 0x01969D 0C:968D: BD C0 04
 	CMP #$FE                        ;C - - - - - 0x0196A0 0C:9690: C9 FE
 	BEQ loc_0C_96C5                 ;C - - - - - 0x0196A2 0C:9692: F0 31

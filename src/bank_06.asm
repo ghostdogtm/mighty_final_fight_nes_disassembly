@@ -279,7 +279,7 @@ SoundControl:
 	STY sndParam                    ;C - - - - - 0x00C1BE 06:81AE: 84 C3
 	AND #$07                        ;C - - - - - 0x00C1C0 06:81B0: 29 07
 	JSR SoundJumpInline             ;C - - - - - 0x00C1C2 06:81B2: 20 23 80
-	.word SoundControl_00, SoundStop, SoundResetChannels, SoundControl_03, SoundControl_04, ofs_06_822D, SoundControl_06, ofs_06_824A;W 0x00C1C5 06:81B5:
+	.word SoundControl_00, SoundStop, SoundResetChannels, SoundControl_03, SoundControl_04, SoundControl_05, SoundControl_06, SoundControl_07;W 0x00C1C5 06:81B5:
 SoundControl_00:
 	JSR SoundResetChannels          ;C - - J - - 0x00C1D5 06:81C5: 20 E4 81
 ; clear priority and stream pointer, silence channels
@@ -343,7 +343,7 @@ SoundControl_04:
 	AND #$FD                        ;C - - - - - 0x00C238 06:8228: 29 FD
 	STA soundBusy                   ;C - - - - - 0x00C23A 06:822A: 85 C0
 	RTS                             ;C - - - - - 0x00C23C 06:822C: 60
-ofs_06_822D:
+SoundControl_05:
 	ASL sndParam                    ;c - - - - - 0x00C23D 06:822D: 06 C3
 	BEQ SoundControl_06             ;c - - - - - 0x00C23F 06:822F: F0 03
 	SEC                             ;c - - - - - 0x00C241 06:8231: 38
@@ -363,7 +363,7 @@ loc_06_8247:
 	STY sndFadeLevel                ;c - - - - - 0x00C257 06:8247: 84 CD
 loc_06_8249:
 	RTS                             ;c - - - - - 0x00C259 06:8249: 60
-ofs_06_824A:
+SoundControl_07:
 	LDA #$00                        ;c - - - - - 0x00C25A 06:824A: A9 00
 	SEC                             ;c - - - - - 0x00C25C 06:824C: 38
 	SBC sndParam                    ;c - - - - - 0x00C25D 06:824D: E5 C3

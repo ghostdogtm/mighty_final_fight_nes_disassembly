@@ -644,7 +644,7 @@ loc_0B_B336:
 	LDA ofsSetHi_0BTbl_B652,Y       ;C - - - - - 0x017351 0B:B341: B9 52 B6
 	STA ptr_00+1                    ;C - - - - - 0x017354 0B:B344: 85 01
 	JMP (ptr_00)                    ;C - - - - - 0x017356 0B:B346: 6C 00 00
-ofs_0B_B349:
+ofsSetHi_0BTbl_B64E_00:
 	LDA #$09                        ;C - - J - - 0x017359 0B:B349: A9 09
 	JSR QueueSoundSaved             ;C - - - - - 0x01735B 0B:B34B: 20 4A F3
 	LDA #$14                        ;C - - - - - 0x01735E 0B:B34E: A9 14
@@ -657,7 +657,7 @@ ofs_0B_B349:
 	INC objActive,X                 ;C - - - - - 0x01736F 0B:B35F: FE 00 03
 	INC objActive,X                 ;C - - - - - 0x017372 0B:B362: FE 00 03
 	RTS                             ;C - - - - - 0x017375 0B:B365: 60
-ofs_0B_B366:
+ofsSetHi_0BTbl_B64E_01:
 	LDA objStep,X                   ;C - - J - - 0x017376 0B:B366: BD 00 05
 	BNE loc_0B_B370                 ;C - - - - - 0x017379 0B:B369: D0 05
 	LDA objParamB,X                 ;C - - - - - 0x01737B 0B:B36B: BD 20 05
@@ -729,7 +729,7 @@ loc_0B_B3E9:
 	LDA #$FB                        ;c - - - - - 0x01740E 0B:B3FE: A9 FB
 	STA gameOverFlag                ;c - - - - - 0x017410 0B:B400: 85 62
 	RTS                             ;c - - - - - 0x017412 0B:B402: 60
-ofs_0B_B403:
+ofsSetHi_0BTbl_B64E_02:
 	DEC objParamC,X                 ;C - - J - - 0x017413 0B:B403: DE 30 05
 	BNE loc_0B_B410                 ;C - - - - - 0x017416 0B:B406: D0 08
 	LDA #$40                        ;C - - - - - 0x017418 0B:B408: A9 40
@@ -737,7 +737,7 @@ ofs_0B_B403:
 	DEC objActive,X                 ;C - - - - - 0x01741D 0B:B40D: DE 00 03
 loc_0B_B410:
 	RTS                             ;C - - - - - 0x017420 0B:B410: 60
-ofs_0B_B411:
+ofsSetHi_0BTbl_B64E_03:
 	LDA objY+6                      ;C - - J - - 0x017421 0B:B411: AD C6 03
 	CMP #$8C                        ;C - - - - - 0x017424 0B:B414: C9 8C
 	BCC loc_0B_B45F                 ;C - - - - - 0x017426 0B:B416: 90 47
@@ -1009,9 +1009,9 @@ loc_0B_B63F:
 loc_0B_B64D:
 	RTS                             ;C - - - - - 0x01765D 0B:B64D: 60
 ofsSetHi_0BTbl_B64E:
-	.lobytes ofs_0B_B349, ofs_0B_B366, ofs_0B_B403, ofs_0B_B411;- D 1 - - - 0x01765E 0B:B64E:
+	.lobytes ofsSetHi_0BTbl_B64E_00, ofsSetHi_0BTbl_B64E_01, ofsSetHi_0BTbl_B64E_02, ofsSetHi_0BTbl_B64E_03;- D 1 - - - 0x01765E 0B:B64E:
 ofsSetHi_0BTbl_B652:
-	.hibytes ofs_0B_B349, ofs_0B_B366, ofs_0B_B403, ofs_0B_B411;- D 1 - - - 0x017662 0B:B652:
+	.hibytes ofsSetHi_0BTbl_B64E_00, ofsSetHi_0BTbl_B64E_01, ofsSetHi_0BTbl_B64E_02, ofsSetHi_0BTbl_B64E_03;- D 1 - - - 0x017662 0B:B652:
 SpawnThrownObj72Tbl_B656:
 	.byte $00,$00,$00,$FF,$FF,$FF,$FF,$FF;- D 1 - - - 0x017666 0B:B656:
 EnemyRandomJumpTbl_B65E:
@@ -1207,7 +1207,7 @@ loc_0B_B7F8:
 	LDA EnemyRandomJumpTbl_BCFD,Y   ;C - - - - - 0x017813 0B:B803: B9 FD BC
 	STA ptr_00+1                    ;C - - - - - 0x017816 0B:B806: 85 01
 	JMP (ptr_00)                    ;C - - - - - 0x017818 0B:B808: 6C 00 00
-ofs_0B_B80B:
+EnemyRandomJumpTbl_BCE6_00:
 	JSR SetFlag40ToPlayer_0B        ;C - - J - - 0x01781B 0B:B80B: 20 E1 BB
 	JSR SetAnimBD                   ;C - - - - - 0x01781E 0B:B80E: 20 D9 BC
 	LDA #$00                        ;C - - - - - 0x017821 0B:B811: A9 00
@@ -1218,7 +1218,7 @@ ofs_0B_B80B:
 	LDA #$83                        ;C - - - - - 0x01782F 0B:B81F: A9 83
 	STA objActive,X                 ;C - - - - - 0x017831 0B:B821: 9D 00 03
 	RTS                             ;C - - - - - 0x017834 0B:B824: 60
-ofs_0B_B825:
+EnemyRandomJumpTbl_BCE6_03:
 	JSR SetAnimBD                   ;C - - J - - 0x017835 0B:B825: 20 D9 BC
 	LDA #$20                        ;C - - - - - 0x017838 0B:B828: A9 20
 	LDY #$18                        ;C - - - - - 0x01783A 0B:B82A: A0 18
@@ -1250,7 +1250,7 @@ loc_0B_B84B:
 loc_0B_B869:
 	JSR EnemyBounceMoveVert         ;C - - - - - 0x017879 0B:B869: 20 6B BC
 	JMP SetFlag40ToPlayer_0B        ;C - - - - - 0x01787C 0B:B86C: 4C E1 BB
-ofs_0B_B86F:
+EnemyRandomJumpTbl_BCE6_04:
 	JSR SetFlag40ToPlayer_0B        ;C - - J - - 0x01787F 0B:B86F: 20 E1 BB
 	DEC objTimer,X                  ;C - - - - - 0x017882 0B:B872: DE D0 05
 	LDA objTimer,X                  ;C - - - - - 0x017885 0B:B875: BD D0 05
@@ -1297,7 +1297,7 @@ loc_0B_B8C4:
 	LDA #$C0                        ;C - - - - - 0x0178DC 0B:B8CC: A9 C0
 	LDY #$39                        ;C - - - - - 0x0178DE 0B:B8CE: A0 39
 	JMP SetAnimXChr4                ;C - - - - - 0x0178E0 0B:B8D0: 4C 49 F4
-ofs_0B_B8D3:
+EnemyRandomJumpTbl_BCE6_05:
 	LDA #$1C                        ;C - - J - - 0x0178E3 0B:B8D3: A9 1C
 	LDY #$04                        ;C - - - - - 0x0178E5 0B:B8D5: A0 04
 	JSR CheckNearPlayer             ;C - - - - - 0x0178E7 0B:B8D7: 20 3E FB
@@ -1337,7 +1337,7 @@ loc_0B_B911:
 	STA objToggle,X                 ;C - - - - - 0x017935 0B:B925: 9D F0 05
 loc_0B_B928:
 	RTS                             ;C - - - - - 0x017938 0B:B928: 60
-ofs_0B_B929:
+EnemyRandomJumpTbl_BCEC_00:
 	JSR SetFlag40ToPlayer_0B        ;C - - J - - 0x017939 0B:B929: 20 E1 BB
 	JSR SetAnimBD                   ;C - - - - - 0x01793C 0B:B92C: 20 D9 BC
 	LDA objXPage,X                  ;C - - - - - 0x01793F 0B:B92F: BD 80 03
@@ -1360,7 +1360,7 @@ loc_0B_B952:
 	LDA #$83                        ;C - - - - - 0x017962 0B:B952: A9 83
 	STA objActive,X                 ;C - - - - - 0x017964 0B:B954: 9D 00 03
 	RTS                             ;C - - - - - 0x017967 0B:B957: 60
-ofs_0B_B958:
+EnemyRandomJumpTbl_BCEC_03:
 	JSR SetAnimBD                   ;C - - J - - 0x017968 0B:B958: 20 D9 BC
 	LDA objX,X                      ;C - - - - - 0x01796B 0B:B95B: BD 60 03
 	CMP objX                        ;C - - - - - 0x01796E 0B:B95E: CD 60 03
@@ -1377,7 +1377,7 @@ loc_0B_B969:
 	INC objActive,X                 ;C - - - - - 0x017984 0B:B974: FE 00 03
 	INC objActive,X                 ;C - - - - - 0x017987 0B:B977: FE 00 03
 	RTS                             ;C - - - - - 0x01798A 0B:B97A: 60
-ofs_0B_B97B:
+EnemyRandomJumpTbl_BCEC_04:
 	JSR SetFlag40ToPlayer_0B        ;C - - J - - 0x01798B 0B:B97B: 20 E1 BB
 	LDA objSubStep,X                ;C - - - - - 0x01798E 0B:B97E: BD 50 05
 	BNE loc_0B_B9A7                 ;C - - - - - 0x017991 0B:B981: D0 24
@@ -1490,7 +1490,7 @@ loc_0B_BA4A:
 	LDA #$C0                        ;C - - - - - 0x017A71 0B:BA61: A9 C0
 	LDY #$39                        ;C - - - - - 0x017A73 0B:BA63: A0 39
 	JMP SetAnimXChr4                ;C - - - - - 0x017A75 0B:BA65: 4C 49 F4
-ofs_0B_BA68:
+EnemyRandomJumpTbl_BCEC_05:
 	JSR SetBounceVel                ;C - - J - - 0x017A78 0B:BA68: 20 C8 BC
 	LDA objXPage,X                  ;C - - - - - 0x017A7B 0B:BA6B: BD 80 03
 	CMP #$02                        ;C - - - - - 0x017A7E 0B:BA6E: C9 02
@@ -1517,7 +1517,7 @@ loc_0B_BA94:
 	STA objActive,X                 ;C - - - - - 0x017AA6 0B:BA96: 9D 00 03
 loc_0B_BA99:
 	RTS                             ;C - - - - - 0x017AA9 0B:BA99: 60
-ofs_0B_BA9A:
+EnemyRandomJumpTbl_BCEC_06:
 	LDA objAnimFrame,X              ;C - - J - - 0x017AAA 0B:BA9A: BD 70 05
 	CMP #$01                        ;C - - - - - 0x017AAD 0B:BA9D: C9 01
 	BNE loc_0B_BAB0                 ;C - - - - - 0x017AAF 0B:BA9F: D0 0F
@@ -1542,7 +1542,7 @@ loc_0B_BAB0:
 	STA objActive,X                 ;C - - - - - 0x017ADC 0B:BACC: 9D 00 03
 loc_0B_BACF:
 	RTS                             ;C - - - - - 0x017ADF 0B:BACF: 60
-ofs_0B_BAD0:
+EnemyRandomJumpTbl_BCEC_07:
 	JSR SetFlag40ToPlayer_0B        ;C - - J - - 0x017AE0 0B:BAD0: 20 E1 BB
 	DEC objTimer,X                  ;C - - - - - 0x017AE3 0B:BAD3: DE D0 05
 	BNE loc_0B_BAE7                 ;C - - - - - 0x017AE6 0B:BAD6: D0 0F
@@ -1554,7 +1554,7 @@ ofs_0B_BAD0:
 	RTS                             ;C - - - - - 0x017AF6 0B:BAE6: 60
 loc_0B_BAE7:
 	RTS                             ;C - - - - - 0x017AF7 0B:BAE7: 60
-ofs_0B_BAE8:
+EnemyRandomJumpTbl_BCEC_08:
 	DEC objTimer,X                  ;C - - J - - 0x017AF8 0B:BAE8: DE D0 05
 	BNE loc_0B_BAFB                 ;C - - - - - 0x017AFB 0B:BAEB: D0 0E
 	JSR SetAnimBD                   ;C - - - - - 0x017AFD 0B:BAED: 20 D9 BC
@@ -1568,7 +1568,7 @@ loc_0B_BAFB:
 	LDA #$C6                        ;C - - - - - 0x017B0E 0B:BAFE: A9 C6
 	LDY #$3A                        ;C - - - - - 0x017B10 0B:BB00: A0 3A
 	JMP SetAnimXChr4                ;C - - - - - 0x017B12 0B:BB02: 4C 49 F4
-ofs_0B_BB05:
+EnemyRandomJumpTbl_BCEC_09:
 	DEC objTimer,X                  ;C - - J - - 0x017B15 0B:BB05: DE D0 05
 	BEQ loc_0B_BB28                 ;C - - - - - 0x017B18 0B:BB08: F0 1E
 EnemyAttackHitboxFrame3:
@@ -1605,7 +1605,7 @@ loc_0B_BB28:
 	STA objParamB,X                 ;C - - - - - 0x017B5C 0B:BB4C: 9D 20 05
 	INC objActive,X                 ;C - - - - - 0x017B5F 0B:BB4F: FE 00 03
 	RTS                             ;C - - - - - 0x017B62 0B:BB52: 60
-ofs_0B_BB53:
+EnemyRandomJumpTbl_BCEC_0A:
 	LDA #$90                        ;C - - J - - 0x017B63 0B:BB53: A9 90
 	STA objAtkBox,X                 ;C - - - - - 0x017B65 0B:BB55: 9D 40 04
 	LDA #$34                        ;C - - - - - 0x017B68 0B:BB58: A9 34
@@ -1630,7 +1630,7 @@ loc_0B_BB7F:
 	JMP ApplyVelXSub                ;C - - - - - 0x017B96 0B:BB86: 4C A1 F1
 loc_0B_BB89:
 	JMP ApplyVelXAdd                ;C - - - - - 0x017B99 0B:BB89: 4C 83 F1
-ofs_0B_BB8C:
+EnemyRandomJumpTbl_BCE6_01:
 	JSR FaceToPlayerFlag            ;C - - J - - 0x017B9C 0B:BB8C: 20 43 F3
 	DEC objHitTimer,X               ;C - - - - - 0x017B9F 0B:BB8F: DE E0 04
 	LDA objHitTimer,X               ;C - - - - - 0x017BA2 0B:BB92: BD E0 04
@@ -1647,7 +1647,7 @@ loc_0B_BB9C:
 	JSR SetAnimXChr4                ;C - - - - - 0x017BB8 0B:BBA8: 20 49 F4
 loc_0B_BBAB:
 	RTS                             ;C - - - - - 0x017BBB 0B:BBAB: 60
-ofs_0B_BBAC:
+EnemyRandomJumpTbl_BCE6_02:
 	JSR SetAnimBD                   ;C - - J - - 0x017BBC 0B:BBAC: 20 D9 BC
 	JSR SetBounceVel                ;C - - - - - 0x017BBF 0B:BBAF: 20 C8 BC
 	LDA objFacing,X                 ;C - - - - - 0x017BC2 0B:BBB2: BD 60 04
@@ -1799,15 +1799,15 @@ SetAnimBD:
 loc_0B_BCE5:
 	RTS                             ;C - - - - - 0x017CF5 0B:BCE5: 60
 EnemyRandomJumpTbl_BCE6:
-	.lobytes ofs_0B_B80B, ofs_0B_BB8C, ofs_0B_BBAC, ofs_0B_B825, ofs_0B_B86F, ofs_0B_B8D3;- D 1 - - - 0x017CF6 0B:BCE6:
+	.lobytes EnemyRandomJumpTbl_BCE6_00, EnemyRandomJumpTbl_BCE6_01, EnemyRandomJumpTbl_BCE6_02, EnemyRandomJumpTbl_BCE6_03, EnemyRandomJumpTbl_BCE6_04, EnemyRandomJumpTbl_BCE6_05;- D 1 - - - 0x017CF6 0B:BCE6:
 EnemyRandomJumpTbl_BCEC:
-	.lobytes ofs_0B_B929, ofs_0B_BB8C, ofs_0B_BBAC, ofs_0B_B958, ofs_0B_B97B, ofs_0B_BA68, ofs_0B_BA9A, ofs_0B_BAD0;- D 1 - - - 0x017CFC 0B:BCEC:
-	.lobytes ofs_0B_BAE8, ofs_0B_BB05, ofs_0B_BB53;- D 1 - - - 0x017D04 0B:BCF4:
+	.lobytes EnemyRandomJumpTbl_BCEC_00, EnemyRandomJumpTbl_BCE6_01, EnemyRandomJumpTbl_BCE6_02, EnemyRandomJumpTbl_BCEC_03, EnemyRandomJumpTbl_BCEC_04, EnemyRandomJumpTbl_BCEC_05, EnemyRandomJumpTbl_BCEC_06, EnemyRandomJumpTbl_BCEC_07;- D 1 - - - 0x017CFC 0B:BCEC:
+	.lobytes EnemyRandomJumpTbl_BCEC_08, EnemyRandomJumpTbl_BCEC_09, EnemyRandomJumpTbl_BCEC_0A;- D 1 - - - 0x017D04 0B:BCF4:
 EnemyRandomJumpTbl_BCF7:
-	.hibytes ofs_0B_B80B, ofs_0B_BB8C, ofs_0B_BBAC, ofs_0B_B825, ofs_0B_B86F, ofs_0B_B8D3;- D 1 - - - 0x017D07 0B:BCF7:
+	.hibytes EnemyRandomJumpTbl_BCE6_00, EnemyRandomJumpTbl_BCE6_01, EnemyRandomJumpTbl_BCE6_02, EnemyRandomJumpTbl_BCE6_03, EnemyRandomJumpTbl_BCE6_04, EnemyRandomJumpTbl_BCE6_05;- D 1 - - - 0x017D07 0B:BCF7:
 EnemyRandomJumpTbl_BCFD:
-	.hibytes ofs_0B_B929, ofs_0B_BB8C, ofs_0B_BBAC, ofs_0B_B958, ofs_0B_B97B, ofs_0B_BA68, ofs_0B_BA9A, ofs_0B_BAD0;- D 1 - - - 0x017D0D 0B:BCFD:
-	.hibytes ofs_0B_BAE8, ofs_0B_BB05, ofs_0B_BB53;- D 1 - - - 0x017D15 0B:BD05:
+	.hibytes EnemyRandomJumpTbl_BCEC_00, EnemyRandomJumpTbl_BCE6_01, EnemyRandomJumpTbl_BCE6_02, EnemyRandomJumpTbl_BCEC_03, EnemyRandomJumpTbl_BCEC_04, EnemyRandomJumpTbl_BCEC_05, EnemyRandomJumpTbl_BCEC_06, EnemyRandomJumpTbl_BCEC_07;- D 1 - - - 0x017D0D 0B:BCFD:
+	.hibytes EnemyRandomJumpTbl_BCEC_08, EnemyRandomJumpTbl_BCEC_09, EnemyRandomJumpTbl_BCEC_0A;- D 1 - - - 0x017D15 0B:BD05:
 SpawnProjectileC7Tbl_BD08:
 	.byte $1A                       ;- D 1 - - - 0x017D18 0B:BD08:
 SpawnProjectileC7Tbl_BD09:
@@ -1845,7 +1845,7 @@ loc_0B_BD7F:
 	LDA SetAnimBDTbl_BFA7,Y         ;C - - - - - 0x017DA3 0B:BD93: B9 A7 BF
 	STA ptr_00+1                    ;C - - - - - 0x017DA6 0B:BD96: 85 01
 	JMP (ptr_00)                    ;C - - - - - 0x017DA8 0B:BD98: 6C 00 00
-ofs_0B_BD9B:
+SetAnimBDTbl_BF9F_00:
 	LDA #$80                        ;C - - J - - 0x017DAB 0B:BD9B: A9 80
 	STA padPressed                  ;C - - - - - 0x017DAD 0B:BD9D: 85 14
 	STA padHeld                     ;C - - - - - 0x017DAF 0B:BD9F: 85 16
@@ -1861,7 +1861,7 @@ ofs_0B_BD9B:
 	JSR SetAnimXChr4                ;C - - - - - 0x017DC6 0B:BDB6: 20 49 F4
 	INC objActive,X                 ;C - - - - - 0x017DC9 0B:BDB9: FE 00 03
 	JMP loc_0B_BFAF                 ;C - - - - - 0x017DCC 0B:BDBC: 4C AF BF
-ofs_0B_BDBF:
+SetAnimBDTbl_BF9F_01:
 	LDA playerFacing                ;C - - J - - 0x017DCF 0B:BDBF: A5 31
 	EOR #$FF                        ;C - - - - - 0x017DD1 0B:BDC1: 49 FF
 	AND #$03                        ;C - - - - - 0x017DD3 0B:BDC3: 29 03
@@ -1881,7 +1881,7 @@ loc_0B_BDE1:
 	LDA #$28                        ;C - - - - - 0x017DF1 0B:BDE1: A9 28
 	STA gameAction                  ;C - - - - - 0x017DF3 0B:BDE3: 85 30
 	RTS                             ;C - - - - - 0x017DF5 0B:BDE5: 60
-ofs_0B_BDE6:
+SetAnimBDTbl_BF9F_02:
 	LDY objParamA,X                 ;C - - J - - 0x017DF6 0B:BDE6: BC 10 05
 	LDA objActive,Y                 ;C - - - - - 0x017DF9 0B:BDE9: B9 00 03
 	BMI loc_0B_BE22                 ;C - - - - - 0x017DFC 0B:BDEC: 30 34
@@ -1909,7 +1909,7 @@ ofs_0B_BDE6:
 	STA objFlags                    ;C - - - - - 0x017E2F 0B:BE1F: 8D 60 05
 loc_0B_BE22:
 	RTS                             ;C - - - - - 0x017E32 0B:BE22: 60
-ofs_0B_BE23:
+SetAnimBDTbl_BF9F_03:
 	LDA objFlags                    ;C - - J - - 0x017E33 0B:BE23: AD 60 05
 	AND #$FB                        ;C - - - - - 0x017E36 0B:BE26: 29 FB
 	STA objFlags                    ;C - - - - - 0x017E38 0B:BE28: 8D 60 05
@@ -2038,7 +2038,7 @@ loc_0B_BF0D:
 	LDA #$86                        ;C - - - - - 0x017F35 0B:BF25: A9 86
 	STA objActive,X                 ;C - - - - - 0x017F37 0B:BF27: 9D 00 03
 	RTS                             ;C - - - - - 0x017F3A 0B:BF2A: 60
-ofs_0B_BF2B:
+SetAnimBDTbl_BF9F_04:
 	LDA #$90                        ;C - - J - - 0x017F3B 0B:BF2B: A9 90
 	STA objFlags,X                  ;C - - - - - 0x017F3D 0B:BF2D: 9D 60 05
 	LDA #$01                        ;C - - - - - 0x017F40 0B:BF30: A9 01
@@ -2059,7 +2059,7 @@ ofs_0B_BF2B:
 	STA palUpdateFlag               ;C - - - - - 0x017F65 0B:BF55: 85 18
 	INC objActive,X                 ;C - - - - - 0x017F67 0B:BF57: FE 00 03
 	RTS                             ;C - - - - - 0x017F6A 0B:BF5A: 60
-ofs_0B_BF5B:
+SetAnimBDTbl_BF9F_05:
 	JSR ApplyVelXSub                ;C - - J - - 0x017F6B 0B:BF5B: 20 A1 F1
 	LDA objX,X                      ;C - - - - - 0x017F6E 0B:BF5E: BD 60 03
 	CMP #$B0                        ;C - - - - - 0x017F71 0B:BF61: C9 B0
@@ -2072,7 +2072,7 @@ ofs_0B_BF5B:
 	STA objActive,X                 ;C - - - - - 0x017F81 0B:BF71: 9D 00 03
 loc_0B_BF74:
 	RTS                             ;C - - - - - 0x017F84 0B:BF74: 60
-ofs_0B_BF75:
+SetAnimBDTbl_BF9F_06:
 	LDA objParamB,X                 ;C - - J - - 0x017F85 0B:BF75: BD 20 05
 	CMP playerId                    ;C - - - - - 0x017F88 0B:BF78: C5 34
 	BNE loc_0B_BF80                 ;C - - - - - 0x017F8A 0B:BF7A: D0 04
@@ -2087,7 +2087,7 @@ loc_0B_BF80:
 	STA objActive,X                 ;C - - - - - 0x017F9C 0B:BF8C: 9D 00 03
 loc_0B_BF8F:
 	RTS                             ;C - - - - - 0x017F9F 0B:BF8F: 60
-ofs_0B_BF90:
+SetAnimBDTbl_BF9F_07:
 	DEC objTimer,X                  ;C - - J - - 0x017FA0 0B:BF90: DE D0 05
 	BNE loc_0B_BF9E                 ;C - - - - - 0x017FA3 0B:BF93: D0 09
 	LDA #$0E                        ;C - - - - - 0x017FA5 0B:BF95: A9 0E
@@ -2097,9 +2097,9 @@ ofs_0B_BF90:
 loc_0B_BF9E:
 	RTS                             ;C - - - - - 0x017FAE 0B:BF9E: 60
 SetAnimBDTbl_BF9F:
-	.lobytes ofs_0B_BD9B, ofs_0B_BDBF, ofs_0B_BDE6, ofs_0B_BE23, ofs_0B_BF2B, ofs_0B_BF5B, ofs_0B_BF75, ofs_0B_BF90;- D 1 - - - 0x017FAF 0B:BF9F:
+	.lobytes SetAnimBDTbl_BF9F_00, SetAnimBDTbl_BF9F_01, SetAnimBDTbl_BF9F_02, SetAnimBDTbl_BF9F_03, SetAnimBDTbl_BF9F_04, SetAnimBDTbl_BF9F_05, SetAnimBDTbl_BF9F_06, SetAnimBDTbl_BF9F_07;- D 1 - - - 0x017FAF 0B:BF9F:
 SetAnimBDTbl_BFA7:
-	.hibytes ofs_0B_BD9B, ofs_0B_BDBF, ofs_0B_BDE6, ofs_0B_BE23, ofs_0B_BF2B, ofs_0B_BF5B, ofs_0B_BF75, ofs_0B_BF90;- D 1 - - - 0x017FB7 0B:BFA7:
+	.hibytes SetAnimBDTbl_BF9F_00, SetAnimBDTbl_BF9F_01, SetAnimBDTbl_BF9F_02, SetAnimBDTbl_BF9F_03, SetAnimBDTbl_BF9F_04, SetAnimBDTbl_BF9F_05, SetAnimBDTbl_BF9F_06, SetAnimBDTbl_BF9F_07;- D 1 - - - 0x017FB7 0B:BFA7:
 loc_0B_BFAF:
 	JSR FindFreeEnemySlot           ;C - - - - - 0x017FBF 0B:BFAF: 20 1A F7
 	BCS loc_0B_BFED                 ;C - - - - - 0x017FC2 0B:BFB2: B0 39

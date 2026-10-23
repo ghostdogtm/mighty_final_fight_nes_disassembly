@@ -2542,10 +2542,10 @@ loc_0E_D39E:
 	STA ptr_00+1                    ;C - - - - - 0x01D3B8 0E:D3A8: 85 01
 	JMP (ptr_00)                    ;C - - - - - 0x01D3BA 0E:D3AA: 6C 00 00
 Act03_PunchTbl_D3AD:
-	.lobytes ofs_0E_D3B3, ofs_0E_D47D, ofs_0E_D641;- D 2 - - - 0x01D3BD 0E:D3AD:
+	.lobytes Act03_PunchTbl_D3AD_00, Act03_PunchTbl_D3AD_01, Act03_PunchTbl_D3AD_02;- D 2 - - - 0x01D3BD 0E:D3AD:
 Act03_PunchTbl_D3B0:
-	.hibytes ofs_0E_D3B3, ofs_0E_D47D, ofs_0E_D641;- D 2 - - - 0x01D3C0 0E:D3B0:
-ofs_0E_D3B3:
+	.hibytes Act03_PunchTbl_D3AD_00, Act03_PunchTbl_D3AD_01, Act03_PunchTbl_D3AD_02;- D 2 - - - 0x01D3C0 0E:D3B0:
+Act03_PunchTbl_D3AD_00:
 	LDA objAnim                     ;C - - J - - 0x01D3C3 0E:D3B3: AD 80 05
 	CMP #$0D                        ;C - - - - - 0x01D3C6 0E:D3B6: C9 0D
 	BEQ loc_0E_D3F1                 ;C - - - - - 0x01D3C8 0E:D3B8: F0 37
@@ -2647,7 +2647,7 @@ loc_0E_D475:
 loc_0E_D477:
 	JSR StartAction0C               ;C - - - - - 0x01D487 0E:D477: 20 9A D7
 	JMP Act0C                       ;C - - - - - 0x01D48A 0E:D47A: 4C 6A DD
-ofs_0E_D47D:
+Act03_PunchTbl_D3AD_01:
 	LDA objAnim                     ;C - - J - - 0x01D48D 0E:D47D: AD 80 05
 	CMP #$0E                        ;C - - - - - 0x01D490 0E:D480: C9 0E
 	BEQ loc_0E_D4A9                 ;C - - - - - 0x01D492 0E:D482: F0 25
@@ -2881,7 +2881,7 @@ loc_0E_D639:
 	STA playerStandAnim             ;C - - - - - 0x01D649 0E:D639: 85 6F
 	JSR StartAction0C               ;C - - - - - 0x01D64B 0E:D63B: 20 9A D7
 	JMP Act0C                       ;C - - - - - 0x01D64E 0E:D63E: 4C 6A DD
-ofs_0E_D641:
+Act03_PunchTbl_D3AD_02:
 	LDA objAnim                     ;C - - J - - 0x01D651 0E:D641: AD 80 05
 	CMP #$0F                        ;C - - - - - 0x01D654 0E:D644: C9 0F
 	BEQ loc_0E_D66A                 ;C - - - - - 0x01D656 0E:D646: F0 22
@@ -3074,10 +3074,10 @@ Act04_Grab:
 	STA ptr_00+1                    ;C - - - - - 0x01D7BD 0E:D7AD: 85 01
 	JMP (ptr_00)                    ;C - - - - - 0x01D7BF 0E:D7AF: 6C 00 00
 Act04_GrabTbl_D7B2:
-	.lobytes ofs_0E_D7B8, ofs_0E_D886, ofs_0E_D89A;- D 2 - - - 0x01D7C2 0E:D7B2:
+	.lobytes Act04_GrabTbl_D7B2_00, Act04_GrabTbl_D7B2_01, Act04_GrabTbl_D7B2_02;- D 2 - - - 0x01D7C2 0E:D7B2:
 Act04_GrabTbl_D7B5:
-	.hibytes ofs_0E_D7B8, ofs_0E_D886, ofs_0E_D89A;- D 2 - - - 0x01D7C5 0E:D7B5:
-ofs_0E_D7B8:
+	.hibytes Act04_GrabTbl_D7B2_00, Act04_GrabTbl_D7B2_01, Act04_GrabTbl_D7B2_02;- D 2 - - - 0x01D7C5 0E:D7B5:
+Act04_GrabTbl_D7B2_00:
 	LDA padPressed                  ;C - - J - - 0x01D7C8 0E:D7B8: A5 14
 	CMP #$40                        ;C - - - - - 0x01D7CA 0E:D7BA: C9 40
 	BNE loc_0E_D82E                 ;C - - - - - 0x01D7CC 0E:D7BC: D0 70
@@ -3180,7 +3180,7 @@ loc_0E_D84E:
 	LDA #$1B                        ;C - - - - - 0x01D88E 0E:D87E: A9 1B
 	JSR QueueSound                  ;C - - - - - 0x01D890 0E:D880: 20 4C F3
 	JMP Act01_Jump                  ;C - - - - - 0x01D893 0E:D883: 4C 88 CF
-ofs_0E_D886:
+Act04_GrabTbl_D7B2_01:
 	LDA padPressed                  ;C - - J - - 0x01D896 0E:D886: A5 14
 	CMP #$40                        ;C - - - - - 0x01D898 0E:D888: C9 40
 	BNE loc_0E_D82E                 ;C - - - - - 0x01D89A 0E:D88A: D0 A2
@@ -3192,7 +3192,7 @@ loc_0E_D88C:
 	LDA #$80                        ;C - - - - - 0x01D8A4 0E:D894: A9 80
 	STA objActive                   ;C - - - - - 0x01D8A6 0E:D896: 8D 00 03
 	RTS                             ;C - - - - - 0x01D8A9 0E:D899: 60
-ofs_0E_D89A:
+Act04_GrabTbl_D7B2_02:
 	LDA padPressed                  ;C - - J - - 0x01D8AA 0E:D89A: A5 14
 	CMP #$40                        ;C - - - - - 0x01D8AC 0E:D89C: C9 40
 	BEQ loc_0E_D8A8                 ;C - - - - - 0x01D8AE 0E:D89E: F0 08
@@ -3664,14 +3664,14 @@ loc_0E_DC40:
 loc_0E_DC58:
 	RTS                             ;C - - - - - 0x01DC68 0E:DC58: 60
 ClampPlayerGroundYTbl_DC59:
-	.lobytes tbl_0E_DC63, tbl_0E_DC66, tbl_0E_DC69, tbl_0E_DC63, tbl_0E_DC69;- D 2 - - - 0x01DC69 0E:DC59:
+	.lobytes ClampPlayerGroundYTbl_DC59_00, ClampPlayerGroundYTbl_DC59_01, ClampPlayerGroundYTbl_DC59_02, ClampPlayerGroundYTbl_DC59_00, ClampPlayerGroundYTbl_DC59_02;- D 2 - - - 0x01DC69 0E:DC59:
 ClampPlayerGroundYTbl_DC5E:
-	.hibytes tbl_0E_DC63, tbl_0E_DC66, tbl_0E_DC69, tbl_0E_DC63, tbl_0E_DC69;- D 2 - - - 0x01DC6E 0E:DC5E:
-tbl_0E_DC63:
+	.hibytes ClampPlayerGroundYTbl_DC59_00, ClampPlayerGroundYTbl_DC59_01, ClampPlayerGroundYTbl_DC59_02, ClampPlayerGroundYTbl_DC59_00, ClampPlayerGroundYTbl_DC59_02;- D 2 - - - 0x01DC6E 0E:DC5E:
+ClampPlayerGroundYTbl_DC59_00:
 	.byte $82,$72,$82               ;- D 2 - I - 0x01DC73 0E:DC63:
-tbl_0E_DC66:
+ClampPlayerGroundYTbl_DC59_01:
 	.byte $82,$92,$82               ;- D 2 - I - 0x01DC76 0E:DC66:
-tbl_0E_DC69:
+ClampPlayerGroundYTbl_DC59_02:
 	.byte $82,$82,$82               ;- D 2 - I - 0x01DC79 0E:DC69:
 Act09_Continue:
 	LDA #$00                        ;C - - - - - 0x01DC7C 0E:DC6C: A9 00
@@ -3813,10 +3813,10 @@ Act0C:
 	STA ptr_04+1                    ;C - - - - - 0x01DD84 0E:DD74: 85 05
 	JMP (ptr_04)                    ;C - - - - - 0x01DD86 0E:DD76: 6C 04 00
 Act0CTbl_DD79:
-	.lobytes ofs_0E_DD7F, ofs_0E_DDD3, ofs_0E_DDFF;- D 2 - - - 0x01DD89 0E:DD79:
+	.lobytes Act0CTbl_DD79_00, Act0CTbl_DD79_01, Act0CTbl_DD79_02;- D 2 - - - 0x01DD89 0E:DD79:
 Act0CTbl_DD7C:
-	.hibytes ofs_0E_DD7F, ofs_0E_DDD3, ofs_0E_DDFF;- D 2 - - - 0x01DD8C 0E:DD7C:
-ofs_0E_DD7F:
+	.hibytes Act0CTbl_DD79_00, Act0CTbl_DD79_01, Act0CTbl_DD79_02;- D 2 - - - 0x01DD8C 0E:DD7C:
+Act0CTbl_DD79_00:
 	LDA padPressed                  ;C - - J - - 0x01DD8F 0E:DD7F: A5 14
 	AND #$40                        ;C - - - - - 0x01DD91 0E:DD81: 29 40
 	BEQ loc_0E_DDA8                 ;C - - - - - 0x01DD93 0E:DD83: F0 23
@@ -3863,7 +3863,7 @@ loc_0E_DDC4:
 	STA objAnimFlags                ;C - - - - - 0x01DDDD 0E:DDCD: 8D 90 05
 	STA timerA4                     ;C - - - - - 0x01DDE0 0E:DDD0: 85 A4
 	RTS                             ;C - - - - - 0x01DDE2 0E:DDD2: 60
-ofs_0E_DDD3:
+Act0CTbl_DD79_01:
 	LDA padPressed                  ;C - - J - - 0x01DDE3 0E:DDD3: A5 14
 	AND #$40                        ;C - - - - - 0x01DDE5 0E:DDD5: 29 40
 	BEQ loc_0E_DDF0                 ;C - - - - - 0x01DDE7 0E:DDD7: F0 17
@@ -3889,7 +3889,7 @@ loc_0E_DDF0:
 	BEQ loc_0E_DDE2                 ;C - - - - - 0x01DE08 0E:DDF8: F0 E8
 	DEC timerA3                     ;C - - - - - 0x01DE0A 0E:DDFA: C6 A3
 	JMP loc_0E_DDE2                 ;C - - - - - 0x01DE0C 0E:DDFC: 4C E2 DD
-ofs_0E_DDFF:
+Act0CTbl_DD79_02:
 	LDA padPressed                  ;C - - J - - 0x01DE0F 0E:DDFF: A5 14
 	AND #$40                        ;C - - - - - 0x01DE11 0E:DE01: 29 40
 	BEQ loc_0E_DE21                 ;C - - - - - 0x01DE13 0E:DE03: F0 1C
@@ -3930,20 +3930,20 @@ LoadPlayerHealthByLevel:
 	STA playerHealth                ;C - - - - - 0x01DE53 0E:DE43: 85 3A
 	RTS                             ;C - - - - - 0x01DE55 0E:DE45: 60
 LoadPlayerHealthByLevelTbl_DE46:
-	.lobytes tbl_0E_DE4C, tbl_0E_DE52, tbl_0E_DE58;- D 2 - - - 0x01DE56 0E:DE46:
+	.lobytes LoadPlayerHealthByLevelTbl_DE46_00, LoadPlayerHealthByLevelTbl_DE46_01, LoadPlayerHealthByLevelTbl_DE46_02;- D 2 - - - 0x01DE56 0E:DE46:
 LoadPlayerHealthByLevelTbl_DE49:
-	.hibytes tbl_0E_DE4C, tbl_0E_DE52, tbl_0E_DE58;- D 2 - - - 0x01DE59 0E:DE49:
-tbl_0E_DE4C:
+	.hibytes LoadPlayerHealthByLevelTbl_DE46_00, LoadPlayerHealthByLevelTbl_DE46_01, LoadPlayerHealthByLevelTbl_DE46_02;- D 2 - - - 0x01DE59 0E:DE49:
+LoadPlayerHealthByLevelTbl_DE46_00:
 	.byte $40                       ;- D 2 - I - 0x01DE5C 0E:DE4C:
 	.byte $48                       ;- - - - - - 0x01DE5D 0E:DE4D:
 	.byte $50,$58,$60               ;- D 2 - I - 0x01DE5E 0E:DE4E:
 	.byte $68                       ;- - - - - - 0x01DE61 0E:DE51:
-tbl_0E_DE52:
+LoadPlayerHealthByLevelTbl_DE46_01:
 	.byte $30,$38                   ;- D 2 - I - 0x01DE62 0E:DE52:
 	.byte $40                       ;- - - - - - 0x01DE64 0E:DE54:
 	.byte $48,$50                   ;- D 2 - I - 0x01DE65 0E:DE55:
 	.byte $58                       ;- - - - - - 0x01DE67 0E:DE57:
-tbl_0E_DE58:
+LoadPlayerHealthByLevelTbl_DE46_02:
 	.byte $50,$58,$60,$68           ;- D 2 - I - 0x01DE68 0E:DE58:
 	.byte $68,$68                   ;- - - - - - 0x01DE6C 0E:DE5C:
 ; also used for action $0E (skip stage): resets scroll/queues, rebuilds screen

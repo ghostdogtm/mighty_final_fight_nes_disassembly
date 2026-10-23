@@ -920,7 +920,7 @@ loc_0D_A76F:
 	LDA EnemyRoutine9FF6Tbl_A87B,Y  ;C - - - - - 0x01A788 0D:A778: B9 7B A8
 	STA ptr_00+1                    ;C - - - - - 0x01A78B 0D:A77B: 85 01
 	JMP (ptr_00)                    ;C - - - - - 0x01A78D 0D:A77D: 6C 00 00
-ofs_0D_A780:
+EnemyRoutine9FF6Tbl_A878_00:
 	DEC objTimer,X                  ;C - - J - - 0x01A790 0D:A780: DE D0 05
 	BEQ loc_0D_A7A9                 ;C - - - - - 0x01A793 0D:A783: F0 24
 	JSR EnemyDirMoveCheck           ;C - - - - - 0x01A795 0D:A785: 20 53 A9
@@ -941,7 +941,7 @@ loc_0D_A7A9:
 	INC objStep,X                   ;C - - - - - 0x01A7B9 0D:A7A9: FE 00 05
 loc_0D_A7AC:
 	RTS                             ;C - - - - - 0x01A7BC 0D:A7AC: 60
-ofs_0D_A7AD:
+EnemyRoutine9FF6Tbl_A878_01:
 	LDA objTimer,X                  ;C - - J - - 0x01A7BD 0D:A7AD: BD D0 05
 	BNE loc_0D_A7B7                 ;C - - - - - 0x01A7C0 0D:A7B0: D0 05
 	LDA #$04                        ;C - - - - - 0x01A7C2 0D:A7B2: A9 04
@@ -1002,7 +1002,7 @@ loc_0D_A828:
 	RTS                             ;C - - - - - 0x01A838 0D:A828: 60
 loc_0D_A829:
 	JMP EnemyResetAction81          ;C - - - - - 0x01A839 0D:A829: 4C E8 A8
-ofs_0D_A82C:
+EnemyRoutine9FF6Tbl_A878_02:
 	JSR DistanceXToPlayer           ;C - - J - - 0x01A83C 0D:A82C: 20 74 F3
 	CMP #$30                        ;C - - - - - 0x01A83F 0D:A82F: C9 30
 	BCS loc_0D_A83A                 ;C - - - - - 0x01A841 0D:A831: B0 07
@@ -1042,9 +1042,9 @@ loc_0D_A86C:
 loc_0D_A877:
 	RTS                             ;C - - - - - 0x01A887 0D:A877: 60
 EnemyRoutine9FF6Tbl_A878:
-	.lobytes ofs_0D_A780, ofs_0D_A7AD, ofs_0D_A82C;- D 1 - - - 0x01A888 0D:A878:
+	.lobytes EnemyRoutine9FF6Tbl_A878_00, EnemyRoutine9FF6Tbl_A878_01, EnemyRoutine9FF6Tbl_A878_02;- D 1 - - - 0x01A888 0D:A878:
 EnemyRoutine9FF6Tbl_A87B:
-	.hibytes ofs_0D_A780, ofs_0D_A7AD, ofs_0D_A82C;- D 1 - - - 0x01A88B 0D:A87B:
+	.hibytes EnemyRoutine9FF6Tbl_A878_00, EnemyRoutine9FF6Tbl_A878_01, EnemyRoutine9FF6Tbl_A878_02;- D 1 - - - 0x01A88B 0D:A87B:
 EnemyAI_LeaperCommonTbl_A87E:
 	.byte $09,$09,$09,$09           ;- - - - - - 0x01A88E 0D:A87E:
 	.byte $01,$05,$05,$05           ;- D 1 - - - 0x01A892 0D:A882:
@@ -1533,7 +1533,7 @@ EnemyStartVelocity:
 	STA ptr_00+1                    ;C - - - - - 0x01AC54 0D:AC44: 85 01
 	LDY ptr_02                      ;C - - - - - 0x01AC56 0D:AC46: A4 02
 	JMP (ptr_00)                    ;C - - - - - 0x01AC58 0D:AC48: 6C 00 00
-ofs_0D_AC4B:
+EnemyStartVelocityTbl_ACA7_02:
 	LDA EnemyStartVelocityTbl_ACC6,Y;C - - J - - 0x01AC5B 0D:AC4B: B9 C6 AC
 	STA objVelXLo,X                 ;C - - - - - 0x01AC5E 0D:AC4E: 9D 00 04
 	LDA EnemyStartVelocityTbl_ACD6,Y;C - - - - - 0x01AC61 0D:AC51: B9 D6 AC
@@ -1542,7 +1542,7 @@ ofs_0D_AC4B:
 	STA objVelXHi,X                 ;C - - - - - 0x01AC69 0D:AC59: 9D 10 04
 	STA objVelYHi,X                 ;C - - - - - 0x01AC6C 0D:AC5C: 9D 30 04
 	RTS                             ;C - - - - - 0x01AC6F 0D:AC5F: 60
-ofs_0D_AC60:
+EnemyStartVelocityTbl_ACA7_03:
 	LDA EnemyStartVelocityTbl_ACE6,Y;C - - J - - 0x01AC70 0D:AC60: B9 E6 AC
 	STA objVelXLo,X                 ;C - - - - - 0x01AC73 0D:AC63: 9D 00 04
 	LDA EnemyStartVelocityTbl_ACF6,Y;C - - - - - 0x01AC76 0D:AC66: B9 F6 AC
@@ -1551,7 +1551,7 @@ ofs_0D_AC60:
 	STA objVelXHi,X                 ;C - - - - - 0x01AC7E 0D:AC6E: 9D 10 04
 	STA objVelYHi,X                 ;C - - - - - 0x01AC81 0D:AC71: 9D 30 04
 	RTS                             ;C - - - - - 0x01AC84 0D:AC74: 60
-ofs_0D_AC75:
+EnemyStartVelocityTbl_ACA7_00:
 	LDA EnemyStartVelocityTbl_AD26,Y;C - - J - - 0x01AC85 0D:AC75: B9 26 AD
 	STA objVelXLo,X                 ;C - - - - - 0x01AC88 0D:AC78: 9D 00 04
 	LDA EnemyStartVelocityTbl_AD06,Y;C - - - - - 0x01AC8B 0D:AC7B: B9 06 AD
@@ -1561,7 +1561,7 @@ ofs_0D_AC75:
 	LDA EnemyStartVelocityTbl_AD16,Y;C - - - - - 0x01AC97 0D:AC87: B9 16 AD
 	STA objVelYHi,X                 ;C - - - - - 0x01AC9A 0D:AC8A: 9D 30 04
 	RTS                             ;C - - - - - 0x01AC9D 0D:AC8D: 60
-ofs_0D_AC8E:
+EnemyStartVelocityTbl_ACA7_01:
 	LDA EnemyStartVelocityTbl_AD46,Y;C - - J - - 0x01AC9E 0D:AC8E: B9 46 AD
 	STA objVelXLo,X                 ;C - - - - - 0x01ACA1 0D:AC91: 9D 00 04
 	LDA EnemyStartVelocityTbl_AD06,Y;C - - - - - 0x01ACA4 0D:AC94: B9 06 AD
@@ -1572,9 +1572,9 @@ ofs_0D_AC8E:
 	STA objVelYHi,X                 ;C - - - - - 0x01ACB3 0D:ACA3: 9D 30 04
 	RTS                             ;C - - - - - 0x01ACB6 0D:ACA6: 60
 EnemyStartVelocityTbl_ACA7:
-	.lobytes ofs_0D_AC75, ofs_0D_AC8E, ofs_0D_AC4B, ofs_0D_AC60, ofs_0D_AC8E, ofs_0D_AC60;- D 1 - - - 0x01ACB7 0D:ACA7:
+	.lobytes EnemyStartVelocityTbl_ACA7_00, EnemyStartVelocityTbl_ACA7_01, EnemyStartVelocityTbl_ACA7_02, EnemyStartVelocityTbl_ACA7_03, EnemyStartVelocityTbl_ACA7_01, EnemyStartVelocityTbl_ACA7_03;- D 1 - - - 0x01ACB7 0D:ACA7:
 EnemyStartVelocityTbl_ACAD:
-	.hibytes ofs_0D_AC75, ofs_0D_AC8E, ofs_0D_AC4B, ofs_0D_AC60, ofs_0D_AC8E, ofs_0D_AC60;- D 1 - - - 0x01ACBD 0D:ACAD:
+	.hibytes EnemyStartVelocityTbl_ACA7_00, EnemyStartVelocityTbl_ACA7_01, EnemyStartVelocityTbl_ACA7_02, EnemyStartVelocityTbl_ACA7_03, EnemyStartVelocityTbl_ACA7_01, EnemyStartVelocityTbl_ACA7_03;- D 1 - - - 0x01ACBD 0D:ACAD:
 EnemyLookupParam:
 	STY ptr_0E+1                    ;C - - - - - 0x01ACC3 0D:ACB3: 84 0F
 	LDA objSpriteDown,X             ;C - - - - - 0x01ACC5 0D:ACB5: BD B0 05
