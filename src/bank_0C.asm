@@ -3770,6 +3770,6 @@ EnemyAI_CdCommonTbl_9FCC:
 EnemyRoutine9FF6:
 	LDA objActive,X                 ;C - - - - - 0x01A006 0C:9FF6: BD 00 03
 	CMP #$89                        ;C - - - - - 0x01A009 0C:9FF9: C9 89
-	.byte $F0, $48                  ;C - - - - - BEQ loc_0D_A045 0x01A00B 0C:9FFB: (branch to another bank, kept as bytes)
+	.byte $F0, <(loc_0D_A045 - (* + 1));C - - - - - BEQ loc_0D_A045 0x01A00B 0C:9FFB: (branch to another bank, offset resolved by ld65)
 	CMP #$8F                        ;C - - - - - 0x01A00D 0C:9FFD: C9 8F
 	.byte $F0                       ;C - - - - - 0x01A00F 0C:9FFF: crosses into bank 0D: BEQ $A045 (rel)

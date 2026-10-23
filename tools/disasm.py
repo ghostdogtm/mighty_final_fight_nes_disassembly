@@ -809,9 +809,11 @@ class Disasm:
                 fl = self.cdl_flags(f) if f else ('c - - - - -' if key in self.traced else '- - - - - -')
                 txt = self.instr_text(b, i)
                 if mode == 'rel' and self.rel_dest(b, i)[0] != b:     # ca65 can't branch between segments
-                    by = ', '.join('$%02X' % x for x in rom[i:i + n])
-                    txt, fl = '.byte ' + by, fl + ' ' + txt.replace(' ', ' ', 1)
-                    o.append('\t%-32s;%s 0x%06X %02X:%04X: (branch to another bank, kept as bytes)'
+                    # opcode byte + offset resolved by ld65 from the label in the other segment
+                    tgt = txt.split(None, 1)[1]
+                    fl = fl + ' ' + txt
+                    txt = '.byte $%02X, <(%s - (* + 1))' % (rom[i], tgt)
+                    o.append('\t%-32s;%s 0x%06X %02X:%04X: (branch to another bank, offset resolved by ld65)'
                              % (txt, fl, off0 + i, b, base + i))
                     i += n
                     continue

@@ -5,7 +5,7 @@
 	JSR StageScrollUpdate           ;C D 3 - - - 0x01E011 0F:E001: 20 21 E5
 	JSR WaitFrame                   ;C - - - - - 0x01E014 0F:E004: 20 31 FF
 	LDA stageScreen                 ;C - - - - - 0x01E017 0F:E007: A5 29
-	.byte $F0, $F2                  ;C - - - - - BEQ loc_0E_DFFD 0x01E019 0F:E009: (branch to another bank, kept as bytes)
+	.byte $F0, <(loc_0E_DFFD - (* + 1));C - - - - - BEQ loc_0E_DFFD 0x01E019 0F:E009: (branch to another bank, offset resolved by ld65)
 	LDX #$0A                        ;C - - - - - 0x01E01B 0F:E00B: A2 0A
 	STX prgBank8000                 ;C - - - - - 0x01E01D 0F:E00D: 86 F4
 	INX                             ;C - - - - - 0x01E01F 0F:E00F: E8
