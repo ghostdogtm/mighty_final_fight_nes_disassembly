@@ -948,50 +948,50 @@ frame_02_9880:
 	.byte $8D,$A3,$A5,$03,$A6,$00,$A7,$00,$A8,$00,$A9,$03,$AA,$03,$AB,$00;- D 0 - I - 0x005890 02:9880:
 	.byte $AC,$00,$AD,$00,$AE,$00,$AF,$00,$B0,$00,$B1,$00,$B2,$02;- D 0 - I - 0x0058A0 02:9890:
 frame_02_989E:
-	.byte $93,$A4                   ;- - - - - - 0x0058AE 02:989E: unused animation script data: (frame id, flags) pairs
-	.byte $92,$80                   ;- - - - - - 0x0058B0 02:98A0: unused animation script data: (frame id, flags) pairs
-	.byte $93,$80                   ;- - - - - - 0x0058B2 02:98A2: unused animation script data: (frame id, flags) pairs
-	.byte $8E,$80                   ;- - - - - - 0x0058B4 02:98A4: unused animation script data: (frame id, flags) pairs
-	.byte $8F,$83                   ;- - - - - - 0x0058B6 02:98A6: unused animation script data: (frame id, flags) pairs
-	.byte $90,$83                   ;- - - - - - 0x0058B8 02:98A8: unused animation script data: (frame id, flags) pairs
-	.byte $91,$80                   ;- - - - - - 0x0058BA 02:98AA: unused animation script data: (frame id, flags) pairs
-	.byte $8A,$80                   ;- - - - - - 0x0058BC 02:98AC: unused animation script data: (frame id, flags) pairs
-	.byte $8B,$80                   ;- - - - - - 0x0058BE 02:98AE: unused animation script data: (frame id, flags) pairs
-	.byte $8C,$80                   ;- - - - - - 0x0058C0 02:98B0: unused animation script data: (frame id, flags) pairs
-	.byte $8D,$80                   ;- - - - - - 0x0058C2 02:98B2: unused animation script data: (frame id, flags) pairs
-	.byte $86,$80                   ;- - - - - - 0x0058C4 02:98B4: unused animation script data: (frame id, flags) pairs
-	.byte $87,$80                   ;- - - - - - 0x0058C6 02:98B6: unused animation script data: (frame id, flags) pairs
-	.byte $88,$80                   ;- - - - - - 0x0058C8 02:98B8: unused animation script data: (frame id, flags) pairs
-	.byte $89,$80                   ;- - - - - - 0x0058CA 02:98BA: unused animation script data: (frame id, flags) pairs
-	.byte $84,$82                   ;- - - - - - 0x0058CC 02:98BC: unused animation script data: (frame id, flags) pairs
-	.byte $82,$80                   ;- - - - - - 0x0058CE 02:98BE: unused animation script data: (frame id, flags) pairs
-	.byte $85,$82                   ;- - - - - - 0x0058D0 02:98C0: unused animation script data: (frame id, flags) pairs
-	.byte $83,$80                   ;- - - - - - 0x0058D2 02:98C2: unused animation script data: (frame id, flags) pairs
-	.byte $80,$80                   ;- - - - - - 0x0058D4 02:98C4: unused animation script data: (frame id, flags) pairs
-	.byte $81,$80                   ;- - - - - - 0x0058D6 02:98C6: unused animation script data: (frame id, flags) pairs
+	.byte $93,$A4                   ;- - - - - - 0x0058AE 02:989E: frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
+	.byte $92,$80                   ;- - - - - - 0x0058B0 02:98A0: frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
+	.byte $93,$80                   ;- - - - - - 0x0058B2 02:98A2: frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
+	.byte $8E,$80                   ;- - - - - - 0x0058B4 02:98A4: frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
+	.byte $8F,$83                   ;- - - - - - 0x0058B6 02:98A6: frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
+	.byte $90,$83                   ;- - - - - - 0x0058B8 02:98A8: frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
+	.byte $91,$80                   ;- - - - - - 0x0058BA 02:98AA: frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
+	.byte $8A,$80                   ;- - - - - - 0x0058BC 02:98AC: frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
+	.byte $8B,$80                   ;- - - - - - 0x0058BE 02:98AE: frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
+	.byte $8C,$80                   ;- - - - - - 0x0058C0 02:98B0: frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
+	.byte $8D,$80                   ;- - - - - - 0x0058C2 02:98B2: frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
+	.byte $86,$80                   ;- - - - - - 0x0058C4 02:98B4: frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
+	.byte $87,$80                   ;- - - - - - 0x0058C6 02:98B6: frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
+	.byte $88,$80                   ;- - - - - - 0x0058C8 02:98B8: frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
+	.byte $89,$80                   ;- - - - - - 0x0058CA 02:98BA: frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
+	.byte $84,$82                   ;- - - - - - 0x0058CC 02:98BC: frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
+	.byte $82,$80                   ;- - - - - - 0x0058CE 02:98BE: frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
+	.byte $85,$82                   ;- - - - - - 0x0058D0 02:98C0: frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
+	.byte $83,$80                   ;- - - - - - 0x0058D2 02:98C2: frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
+	.byte $80,$80                   ;- - - - - - 0x0058D4 02:98C4: frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
+	.byte $81,$80                   ;- - - - - - 0x0058D6 02:98C6: frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
 frame_02_98C8:
-	.byte $94,$A5                   ;- - - - - - 0x0058D8 02:98C8: unused animation script data: (frame id, flags) pairs
-	.byte $81,$C0                   ;- - - - - - 0x0058DA 02:98CA: unused animation script data: (frame id, flags) pairs
-	.byte $80,$C0                   ;- - - - - - 0x0058DC 02:98CC: unused animation script data: (frame id, flags) pairs
-	.byte $82,$C0                   ;- - - - - - 0x0058DE 02:98CE: unused animation script data: (frame id, flags) pairs
-	.byte $84,$C0                   ;- - - - - - 0x0058E0 02:98D0: unused animation script data: (frame id, flags) pairs
-	.byte $83,$C0                   ;- - - - - - 0x0058E2 02:98D2: unused animation script data: (frame id, flags) pairs
-	.byte $85,$C0                   ;- - - - - - 0x0058E4 02:98D4: unused animation script data: (frame id, flags) pairs
-	.byte $86,$C2                   ;- - - - - - 0x0058E6 02:98D6: unused animation script data: (frame id, flags) pairs
-	.byte $88,$C0                   ;- - - - - - 0x0058E8 02:98D8: unused animation script data: (frame id, flags) pairs
-	.byte $87,$C2                   ;- - - - - - 0x0058EA 02:98DA: unused animation script data: (frame id, flags) pairs
-	.byte $8A,$C0                   ;- - - - - - 0x0058EC 02:98DC: unused animation script data: (frame id, flags) pairs
-	.byte $89,$C0                   ;- - - - - - 0x0058EE 02:98DE: unused animation script data: (frame id, flags) pairs
-	.byte $8C,$C0                   ;- - - - - - 0x0058F0 02:98E0: unused animation script data: (frame id, flags) pairs
-	.byte $8B,$C0                   ;- - - - - - 0x0058F2 02:98E2: unused animation script data: (frame id, flags) pairs
-	.byte $8E,$C0                   ;- - - - - - 0x0058F4 02:98E4: unused animation script data: (frame id, flags) pairs
-	.byte $8D,$C0                   ;- - - - - - 0x0058F6 02:98E6: unused animation script data: (frame id, flags) pairs
-	.byte $8F,$C0                   ;- - - - - - 0x0058F8 02:98E8: unused animation script data: (frame id, flags) pairs
-	.byte $91,$C3                   ;- - - - - - 0x0058FA 02:98EA: unused animation script data: (frame id, flags) pairs
-	.byte $90,$C3                   ;- - - - - - 0x0058FC 02:98EC: unused animation script data: (frame id, flags) pairs
-	.byte $92,$C0                   ;- - - - - - 0x0058FE 02:98EE: unused animation script data: (frame id, flags) pairs
-	.byte $94,$C0                   ;- - - - - - 0x005900 02:98F0: unused animation script data: (frame id, flags) pairs
-	.byte $93,$C0                   ;- - - - - - 0x005902 02:98F2: unused animation script data: (frame id, flags) pairs
+	.byte $94,$A5                   ;- - - - - - 0x0058D8 02:98C8: frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
+	.byte $81,$C0                   ;- - - - - - 0x0058DA 02:98CA: frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
+	.byte $80,$C0                   ;- - - - - - 0x0058DC 02:98CC: frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
+	.byte $82,$C0                   ;- - - - - - 0x0058DE 02:98CE: frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
+	.byte $84,$C0                   ;- - - - - - 0x0058E0 02:98D0: frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
+	.byte $83,$C0                   ;- - - - - - 0x0058E2 02:98D2: frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
+	.byte $85,$C0                   ;- - - - - - 0x0058E4 02:98D4: frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
+	.byte $86,$C2                   ;- - - - - - 0x0058E6 02:98D6: frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
+	.byte $88,$C0                   ;- - - - - - 0x0058E8 02:98D8: frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
+	.byte $87,$C2                   ;- - - - - - 0x0058EA 02:98DA: frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
+	.byte $8A,$C0                   ;- - - - - - 0x0058EC 02:98DC: frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
+	.byte $89,$C0                   ;- - - - - - 0x0058EE 02:98DE: frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
+	.byte $8C,$C0                   ;- - - - - - 0x0058F0 02:98E0: frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
+	.byte $8B,$C0                   ;- - - - - - 0x0058F2 02:98E2: frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
+	.byte $8E,$C0                   ;- - - - - - 0x0058F4 02:98E4: frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
+	.byte $8D,$C0                   ;- - - - - - 0x0058F6 02:98E6: frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
+	.byte $8F,$C0                   ;- - - - - - 0x0058F8 02:98E8: frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
+	.byte $91,$C3                   ;- - - - - - 0x0058FA 02:98EA: frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
+	.byte $90,$C3                   ;- - - - - - 0x0058FC 02:98EC: frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
+	.byte $92,$C0                   ;- - - - - - 0x0058FE 02:98EE: frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
+	.byte $94,$C0                   ;- - - - - - 0x005900 02:98F0: frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
+	.byte $93,$C0                   ;- - - - - - 0x005902 02:98F2: frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
 frame_02_98F4:
 	.byte $98,$B1,$FF,$00,$80,$00,$81,$00,$82,$00,$83,$00,$85,$02,$8A,$00;- D 0 - I - 0x005904 02:98F4:
 	.byte $86,$02,$87,$02,$88,$02,$B8,$00,$8C,$02,$8F,$00,$8D,$03,$B9,$00;- D 0 - I - 0x005914 02:9904:

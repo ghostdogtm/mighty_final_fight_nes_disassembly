@@ -1197,5 +1197,5 @@ data 09:AA43-AA4A ; map bytes in the stage-9 bank, not an address table
 
 ; ---- unused data found among the bytes the CDL never touched (docs/unknown_data.md)
 text 05:A1CD-A23B ; unused boss line: JESSICA HAS ALREADY BEEN TAKEN TO OUR SECRET HIDEOUT / MY BROTHER-S DEFEAT WILL BE AVENGED
-table 02:989E-98F3 2 unused animation script data: (frame id, flags) pairs
-table 03:ACAE-ACFF 2 unused sprite offset pairs (dy, dx)
+table 02:989E-98F3 2 frame record $B6 (anim $6D, never shown in the CDL run): header (20 sprites, offset set $A4 in bank 03), then (tile, attr) pairs
+table 03:ACAE-ACFF 2 sprite offset set $A4 (dy, dx) used by frame $B6; the sets after it follow

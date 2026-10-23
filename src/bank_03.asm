@@ -385,48 +385,48 @@ ofsset_03_AC92:
 	.byte $FB,$F6,$FB,$02,$FB,$0A,$FB,$12,$03,$F4,$03,$FC,$03,$02,$03,$0A;- D 1 - I - 0x006CA2 03:AC92:
 	.byte $03,$12,$0B,$F4,$0B,$FC,$0B,$04,$0B,$0C,$0B,$12;- D 1 - I - 0x006CB2 03:ACA2:
 ofsset_03_ACAE:
-	.byte $ED,$FC                   ;- - - - - - 0x006CBE 03:ACAE: unused sprite offset pairs (dy, dx)
-	.byte $ED,$06                   ;- - - - - - 0x006CC0 03:ACB0: unused sprite offset pairs (dy, dx)
-	.byte $F5,$F7                   ;- - - - - - 0x006CC2 03:ACB2: unused sprite offset pairs (dy, dx)
-	.byte $F5,$FD                   ;- - - - - - 0x006CC4 03:ACB4: unused sprite offset pairs (dy, dx)
-	.byte $F5,$05                   ;- - - - - - 0x006CC6 03:ACB6: unused sprite offset pairs (dy, dx)
-	.byte $F5,$05                   ;- - - - - - 0x006CC8 03:ACB8: unused sprite offset pairs (dy, dx)
-	.byte $FD,$F4                   ;- - - - - - 0x006CCA 03:ACBA: unused sprite offset pairs (dy, dx)
-	.byte $FD,$FC                   ;- - - - - - 0x006CCC 03:ACBC: unused sprite offset pairs (dy, dx)
-	.byte $FD,$04                   ;- - - - - - 0x006CCE 03:ACBE: unused sprite offset pairs (dy, dx)
-	.byte $FD,$0C                   ;- - - - - - 0x006CD0 03:ACC0: unused sprite offset pairs (dy, dx)
-	.byte $05,$F4                   ;- - - - - - 0x006CD2 03:ACC2: unused sprite offset pairs (dy, dx)
-	.byte $05,$FC                   ;- - - - - - 0x006CD4 03:ACC4: unused sprite offset pairs (dy, dx)
-	.byte $05,$04                   ;- - - - - - 0x006CD6 03:ACC6: unused sprite offset pairs (dy, dx)
-	.byte $05,$0C                   ;- - - - - - 0x006CD8 03:ACC8: unused sprite offset pairs (dy, dx)
-	.byte $0D,$F4                   ;- - - - - - 0x006CDA 03:ACCA: unused sprite offset pairs (dy, dx)
-	.byte $0D,$FB                   ;- - - - - - 0x006CDC 03:ACCC: unused sprite offset pairs (dy, dx)
-	.byte $0D,$FC                   ;- - - - - - 0x006CDE 03:ACCE: unused sprite offset pairs (dy, dx)
-	.byte $0D,$03                   ;- - - - - - 0x006CE0 03:ACD0: unused sprite offset pairs (dy, dx)
-	.byte $15,$FB                   ;- - - - - - 0x006CE2 03:ACD2: unused sprite offset pairs (dy, dx)
-	.byte $15,$03                   ;- - - - - - 0x006CE4 03:ACD4: unused sprite offset pairs (dy, dx)
+	.byte $ED,$FC                   ;- - - - - - 0x006CBE 03:ACAE: sprite offset set $A4 (dy, dx) used by frame $B6
+	.byte $ED,$06                   ;- - - - - - 0x006CC0 03:ACB0: sprite offset set $A4 (dy, dx) used by frame $B6
+	.byte $F5,$F7                   ;- - - - - - 0x006CC2 03:ACB2: sprite offset set $A4 (dy, dx) used by frame $B6
+	.byte $F5,$FD                   ;- - - - - - 0x006CC4 03:ACB4: sprite offset set $A4 (dy, dx) used by frame $B6
+	.byte $F5,$05                   ;- - - - - - 0x006CC6 03:ACB6: sprite offset set $A4 (dy, dx) used by frame $B6
+	.byte $F5,$05                   ;- - - - - - 0x006CC8 03:ACB8: sprite offset set $A4 (dy, dx) used by frame $B6
+	.byte $FD,$F4                   ;- - - - - - 0x006CCA 03:ACBA: sprite offset set $A4 (dy, dx) used by frame $B6
+	.byte $FD,$FC                   ;- - - - - - 0x006CCC 03:ACBC: sprite offset set $A4 (dy, dx) used by frame $B6
+	.byte $FD,$04                   ;- - - - - - 0x006CCE 03:ACBE: sprite offset set $A4 (dy, dx) used by frame $B6
+	.byte $FD,$0C                   ;- - - - - - 0x006CD0 03:ACC0: sprite offset set $A4 (dy, dx) used by frame $B6
+	.byte $05,$F4                   ;- - - - - - 0x006CD2 03:ACC2: sprite offset set $A4 (dy, dx) used by frame $B6
+	.byte $05,$FC                   ;- - - - - - 0x006CD4 03:ACC4: sprite offset set $A4 (dy, dx) used by frame $B6
+	.byte $05,$04                   ;- - - - - - 0x006CD6 03:ACC6: sprite offset set $A4 (dy, dx) used by frame $B6
+	.byte $05,$0C                   ;- - - - - - 0x006CD8 03:ACC8: sprite offset set $A4 (dy, dx) used by frame $B6
+	.byte $0D,$F4                   ;- - - - - - 0x006CDA 03:ACCA: sprite offset set $A4 (dy, dx) used by frame $B6
+	.byte $0D,$FB                   ;- - - - - - 0x006CDC 03:ACCC: sprite offset set $A4 (dy, dx) used by frame $B6
+	.byte $0D,$FC                   ;- - - - - - 0x006CDE 03:ACCE: sprite offset set $A4 (dy, dx) used by frame $B6
+	.byte $0D,$03                   ;- - - - - - 0x006CE0 03:ACD0: sprite offset set $A4 (dy, dx) used by frame $B6
+	.byte $15,$FB                   ;- - - - - - 0x006CE2 03:ACD2: sprite offset set $A4 (dy, dx) used by frame $B6
+	.byte $15,$03                   ;- - - - - - 0x006CE4 03:ACD4: sprite offset set $A4 (dy, dx) used by frame $B6
 ofsset_03_ACD6:
-	.byte $15,$FA                   ;- - - - - - 0x006CE6 03:ACD6: unused sprite offset pairs (dy, dx)
-	.byte $15,$02                   ;- - - - - - 0x006CE8 03:ACD8: unused sprite offset pairs (dy, dx)
-	.byte $15,$F2                   ;- - - - - - 0x006CEA 03:ACDA: unused sprite offset pairs (dy, dx)
-	.byte $0D,$F8                   ;- - - - - - 0x006CEC 03:ACDC: unused sprite offset pairs (dy, dx)
-	.byte $0D,$00                   ;- - - - - - 0x006CEE 03:ACDE: unused sprite offset pairs (dy, dx)
-	.byte $0D,$F0                   ;- - - - - - 0x006CF0 03:ACE0: unused sprite offset pairs (dy, dx)
-	.byte $0D,$FA                   ;- - - - - - 0x006CF2 03:ACE2: unused sprite offset pairs (dy, dx)
-	.byte $05,$FA                   ;- - - - - - 0x006CF4 03:ACE4: unused sprite offset pairs (dy, dx)
-	.byte $05,$02                   ;- - - - - - 0x006CF6 03:ACE6: unused sprite offset pairs (dy, dx)
-	.byte $05,$EA                   ;- - - - - - 0x006CF8 03:ACE8: unused sprite offset pairs (dy, dx)
-	.byte $05,$F2                   ;- - - - - - 0x006CFA 03:ACEA: unused sprite offset pairs (dy, dx)
-	.byte $FD,$FA                   ;- - - - - - 0x006CFC 03:ACEC: unused sprite offset pairs (dy, dx)
-	.byte $FD,$02                   ;- - - - - - 0x006CFE 03:ACEE: unused sprite offset pairs (dy, dx)
-	.byte $FD,$EA                   ;- - - - - - 0x006D00 03:ACF0: unused sprite offset pairs (dy, dx)
-	.byte $FD,$F2                   ;- - - - - - 0x006D02 03:ACF2: unused sprite offset pairs (dy, dx)
-	.byte $F5,$FC                   ;- - - - - - 0x006D04 03:ACF4: unused sprite offset pairs (dy, dx)
-	.byte $F5,$ED                   ;- - - - - - 0x006D06 03:ACF6: unused sprite offset pairs (dy, dx)
-	.byte $F5,$F5                   ;- - - - - - 0x006D08 03:ACF8: unused sprite offset pairs (dy, dx)
-	.byte $F5,$EE                   ;- - - - - - 0x006D0A 03:ACFA: unused sprite offset pairs (dy, dx)
-	.byte $ED,$F2                   ;- - - - - - 0x006D0C 03:ACFC: unused sprite offset pairs (dy, dx)
-	.byte $ED,$FA                   ;- - - - - - 0x006D0E 03:ACFE: unused sprite offset pairs (dy, dx)
+	.byte $15,$FA                   ;- - - - - - 0x006CE6 03:ACD6: sprite offset set $A4 (dy, dx) used by frame $B6
+	.byte $15,$02                   ;- - - - - - 0x006CE8 03:ACD8: sprite offset set $A4 (dy, dx) used by frame $B6
+	.byte $15,$F2                   ;- - - - - - 0x006CEA 03:ACDA: sprite offset set $A4 (dy, dx) used by frame $B6
+	.byte $0D,$F8                   ;- - - - - - 0x006CEC 03:ACDC: sprite offset set $A4 (dy, dx) used by frame $B6
+	.byte $0D,$00                   ;- - - - - - 0x006CEE 03:ACDE: sprite offset set $A4 (dy, dx) used by frame $B6
+	.byte $0D,$F0                   ;- - - - - - 0x006CF0 03:ACE0: sprite offset set $A4 (dy, dx) used by frame $B6
+	.byte $0D,$FA                   ;- - - - - - 0x006CF2 03:ACE2: sprite offset set $A4 (dy, dx) used by frame $B6
+	.byte $05,$FA                   ;- - - - - - 0x006CF4 03:ACE4: sprite offset set $A4 (dy, dx) used by frame $B6
+	.byte $05,$02                   ;- - - - - - 0x006CF6 03:ACE6: sprite offset set $A4 (dy, dx) used by frame $B6
+	.byte $05,$EA                   ;- - - - - - 0x006CF8 03:ACE8: sprite offset set $A4 (dy, dx) used by frame $B6
+	.byte $05,$F2                   ;- - - - - - 0x006CFA 03:ACEA: sprite offset set $A4 (dy, dx) used by frame $B6
+	.byte $FD,$FA                   ;- - - - - - 0x006CFC 03:ACEC: sprite offset set $A4 (dy, dx) used by frame $B6
+	.byte $FD,$02                   ;- - - - - - 0x006CFE 03:ACEE: sprite offset set $A4 (dy, dx) used by frame $B6
+	.byte $FD,$EA                   ;- - - - - - 0x006D00 03:ACF0: sprite offset set $A4 (dy, dx) used by frame $B6
+	.byte $FD,$F2                   ;- - - - - - 0x006D02 03:ACF2: sprite offset set $A4 (dy, dx) used by frame $B6
+	.byte $F5,$FC                   ;- - - - - - 0x006D04 03:ACF4: sprite offset set $A4 (dy, dx) used by frame $B6
+	.byte $F5,$ED                   ;- - - - - - 0x006D06 03:ACF6: sprite offset set $A4 (dy, dx) used by frame $B6
+	.byte $F5,$F5                   ;- - - - - - 0x006D08 03:ACF8: sprite offset set $A4 (dy, dx) used by frame $B6
+	.byte $F5,$EE                   ;- - - - - - 0x006D0A 03:ACFA: sprite offset set $A4 (dy, dx) used by frame $B6
+	.byte $ED,$F2                   ;- - - - - - 0x006D0C 03:ACFC: sprite offset set $A4 (dy, dx) used by frame $B6
+	.byte $ED,$FA                   ;- - - - - - 0x006D0E 03:ACFE: sprite offset set $A4 (dy, dx) used by frame $B6
 ofsset_03_AD00:
 	.byte $07,$FC,$E2,$FB,$E2,$03,$EA,$F1,$EA,$FA,$EA,$02,$F2,$F1,$F2,$F3;- D 1 - I - 0x006D10 03:AD00:
 	.byte $F2,$FB,$F2,$03,$FA,$F4,$FA,$FC,$FA,$00,$FA,$04,$02,$F4,$02,$FC;- D 1 - I - 0x006D20 03:AD10:
