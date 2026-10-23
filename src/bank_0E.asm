@@ -799,8 +799,8 @@ loc_0E_C5B3:
 	CMP #$08                        ;C - - - - - 0x01C5C8 0E:C5B8: C9 08
 	BNE loc_0E_C5CA                 ;C - - - - - 0x01C5CA 0E:C5BA: D0 0E
 loc_0E_C5BC:
-	LDA spritePalHaggarTbl_FFE0,X   ;C - - - - - 0x01C5CC 0E:C5BC: BD E0 FF
-	CMP spritePalHaggarTbl_C8DD,X   ;C - - - - - 0x01C5CF 0E:C5BF: DD DD C8
+	LDA romSignature,X              ;C - - - - - 0x01C5CC 0E:C5BC: BD E0 FF
+	CMP romSignatureTbl,X           ;C - - - - - 0x01C5CF 0E:C5BF: DD DD C8
 	BNE loc_0E_C5CA                 ;C - - - - - 0x01C5D2 0E:C5C2: D0 06
 	DEX                             ;C - - - - - 0x01C5D4 0E:C5C4: CA
 	BPL loc_0E_C5BC                 ;C - - - - - 0x01C5D5 0E:C5C5: 10 F5
@@ -986,7 +986,7 @@ ofs_0E_C703:
 	LDY #$00                        ;C - - - - - 0x01C764 0E:C754: A0 00
 	STY enemyLevelIdx               ;C - - - - - 0x01C766 0E:C756: 84 67
 	STY stageData                   ;C - - - - - 0x01C768 0E:C758: 84 22
-	LDA spritePalHaggarTbl_C83C,Y   ;C - - - - - 0x01C76A 0E:C75A: B9 3C C8
+	LDA stageMusicTbl,Y             ;C - - - - - 0x01C76A 0E:C75A: B9 3C C8
 	JSR QueueSoundSaved             ;C - - - - - 0x01C76D 0E:C75D: 20 4A F3
 	LDA #$FF                        ;C - - - - - 0x01C770 0E:C760: A9 FF
 	STA stageScreen                 ;C - - - - - 0x01C772 0E:C762: 85 29
@@ -1038,7 +1038,7 @@ loc_0E_C768:
 	STA enemyLevelIdx               ;C - - - - - 0x01C7DB 0E:C7CB: 85 67
 	JSR SetHopVelY                  ;C - - - - - 0x01C7DD 0E:C7CD: 20 6E F2
 	LDY playerId                    ;C - - - - - 0x01C7E0 0E:C7D0: A4 34
-	LDA spritePalHaggarTbl_C841,Y   ;C - - - - - 0x01C7E2 0E:C7D2: B9 41 C8
+	LDA playerStartHealthTbl,Y      ;C - - - - - 0x01C7E2 0E:C7D2: B9 41 C8
 	STA playerHealth                ;C - - - - - 0x01C7E5 0E:C7D5: 85 3A
 	JSR LoadPlayerPalette           ;C - - - - - 0x01C7E7 0E:C7D7: 20 B4 C8
 	LDX #$08                        ;C - - - - - 0x01C7EA 0E:C7DA: A2 08
@@ -1088,9 +1088,11 @@ loc_0E_C768:
 	STA objAirSnapshot+2            ;C - - - - - 0x01C843 0E:C833: 8D A2 05
 	STA ram_0150                    ;C - - - - - 0x01C846 0E:C836: 8D 50 01
 	JMP loc_0E_C8ED                 ;C - - - - - 0x01C849 0E:C839: 4C ED C8
-spritePalHaggarTbl_C83C:
+; sound id queued on entering each stage (indexed by stage)
+stageMusicTbl:
 	.byte $00,$01,$02,$03,$04       ;- D 2 - - - 0x01C84C 0E:C83C:
-spritePalHaggarTbl_C841:
+; start health per playerId: Cody $40, Guy $30, Haggar $50
+playerStartHealthTbl:
 	.byte $40,$30,$50               ;- D 2 - - - 0x01C851 0E:C841:
 ; zero $0400-$05FF
 ClearObjArrays:
@@ -1174,7 +1176,8 @@ loc_0E_C8BC:
 	RTS                             ;C - - - - - 0x01C8E9 0E:C8D9: 60
 tbl_0E_C8DA:
 	.byte $07,$0F,$17               ;- D 2 - - - 0x01C8EA 0E:C8DA:
-spritePalHaggarTbl_C8DD:
+; "M FINAL FIGHT  " compared with 0F:FFE0 (header check at 0E:C5B3; mismatch hangs in an endless loop)
+romSignatureTbl:
 	.byte $4D,$20,$46,$49,$4E,$41,$4C,$20,$46,$49,$47,$48,$54,$59,$20,$20;- D 2 - - - 0x01C8ED 0E:C8DD:
 loc_0E_C8ED:
 	LDA gameAction                  ;C - - - - - 0x01C8FD 0E:C8ED: A5 30
@@ -4123,7 +4126,7 @@ loc_0E_DFE2:
 	STA stageData                   ;C - - - - - 0x01DFF7 0E:DFE7: 85 22
 loc_0E_DFE9:
 	LDY stage                       ;C - - - - - 0x01DFF9 0E:DFE9: A4 61
-	LDA spritePalHaggarTbl_C83C,Y   ;C - - - - - 0x01DFFB 0E:DFEB: B9 3C C8
+	LDA stageMusicTbl,Y             ;C - - - - - 0x01DFFB 0E:DFEB: B9 3C C8
 	CMP soundLast                   ;C - - - - - 0x01DFFE 0E:DFEE: C5 D9
 	BEQ loc_0E_DFF5                 ;C - - - - - 0x01E000 0E:DFF0: F0 03
 	JSR QueueSoundSaved             ;C - - - - - 0x01E002 0E:DFF2: 20 4A F3

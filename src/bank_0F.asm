@@ -4247,7 +4247,8 @@ loc_0F_FFB2:
 	.byte $01,$47,$00,$80,$01,$08,$10,$31,$11,$40,$00,$C4,$41,$02,$30,$24;- - - - - - 0x01FFC5 0F:FFB5:
 	.byte $00,$41,$40,$00,$12,$08,$00,$44,$00,$10,$41,$61,$45,$06,$00,$A0;- - - - - - 0x01FFD5 0F:FFC5:
 	.byte $40,$48,$04,$08,$00,$0C,$00,$84,$40,$88,$50;- - - - - - 0x01FFE5 0F:FFD5:
-spritePalHaggarTbl_FFE0:
+; "M FINAL FIGHT  " cartridge header string, checked against romSignatureTbl
+romSignature:
 	.byte $4D,$20,$46,$49,$4E,$41,$4C,$20,$46,$49,$47,$48,$54,$59,$20,$20;- D 3 - - - 0x01FFF0 0F:FFE0:
 	.byte $10,$B9,$E8,$BB,$33,$04,$01,$0F;- - - - - - 0x020000 0F:FFF0:
 dat_0F_FFF8:

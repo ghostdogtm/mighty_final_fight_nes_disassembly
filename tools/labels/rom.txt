@@ -1006,9 +1006,9 @@ split 0B:B100 B200 256 ofsset
 0D:AE32 EnemyRoutine9FF6Tbl_AE32
 0D:AE38 EnemyRoutine9FF6Tbl_AE38
 0D:AE3E EnemyRoutine9FF6Tbl_AE3E
-0E:C83C spritePalHaggarTbl_C83C
-0E:C841 spritePalHaggarTbl_C841
-0E:C8DD spritePalHaggarTbl_C8DD
+0E:C83C stageMusicTbl ; sound id queued on entering each stage (indexed by stage)
+0E:C841 playerStartHealthTbl ; start health per playerId: Cody $40, Guy $30, Haggar $50
+0E:C8DD romSignatureTbl ; "M FINAL FIGHT  " compared with 0F:FFE0 (header check at 0E:C5B3; mismatch hangs in an endless loop)
 0E:D3AD Act03_PunchTbl_D3AD
 0E:D3B0 Act03_PunchTbl_D3B0
 0E:D7B2 Act04_GrabTbl_D7B2
@@ -1163,7 +1163,7 @@ split 0B:B100 B200 256 ofsset
 0F:FD13 EnemyAI_Kind0FTbl_FD13
 0F:FD16 UpdatePlayerInvincibleTbl_FD16
 0F:FD56 UpdatePlayerInvincibleTbl_FD56
-0F:FFE0 spritePalHaggarTbl_FFE0
+0F:FFE0 romSignature ; "M FINAL FIGHT  " cartridge header string, checked against romSignatureTbl
 
 ; ---- stage data layout, identical in every stage bank (see docs/stage_maps.md); forcing it as data removes the
 ;      CDL gaps inside tables the game never read completely and stops detect_tables from seeing pointers in tile data

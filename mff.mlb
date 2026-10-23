@@ -4077,8 +4077,8 @@ P:1C6CF:loc_0E_C6CF
 P:1C6D2:loc_0E_C6D2
 P:1C703:ofs_0E_C703
 P:1C768:loc_0E_C768
-P:1C83C:spritePalHaggarTbl_C83C
-P:1C841:spritePalHaggarTbl_C841
+P:1C83C:stageMusicTbl
+P:1C841:playerStartHealthTbl
 P:1C844:ClearObjArrays
 P:1C851:loc_0E_C851
 P:1C85C:FadeAndClearScreen
@@ -4088,7 +4088,7 @@ P:1C8A6:ClearScreenSetBank04
 P:1C8B4:LoadPlayerPalette
 P:1C8BC:loc_0E_C8BC
 P:1C8DA:tbl_0E_C8DA
-P:1C8DD:spritePalHaggarTbl_C8DD
+P:1C8DD:romSignatureTbl
 P:1C8ED:loc_0E_C8ED
 P:1C8F6:loc_0E_C8F6
 P:1C8FD:loc_0E_C8FD
@@ -5056,7 +5056,7 @@ P:1FF72:SoundUpdate
 P:1FF8E:SoundStep
 P:1FFA8:loc_0F_FFA8
 P:1FFB2:loc_0F_FFB2
-P:1FFE0:spritePalHaggarTbl_FFE0
+P:1FFE0:romSignature
 P:1FFF8:dat_0F_FFF8
 P:1FFFA:Vectors
 R:0:ptr_00
