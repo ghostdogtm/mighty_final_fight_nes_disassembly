@@ -9,9 +9,9 @@ memory dumped by the build tools into unused ROM space; "dense" runs look like r
 
 | class | bytes |
 |---|---|
-| low-density remnant (about 1-2 bits set per byte, unused) | 4914 |
-| mixed data | 3358 |
-| short runs | 2513 |
+| low-density remnant (about 1-2 bits set per byte, unused) | 5054 |
+| mixed data | 3333 |
+| short runs | 2237 |
 | dense, high entropy (compressed or garbage) | 1978 |
 | structured table (few distinct values, probably animation / sprite metadata) | 710 |
 | mostly zero | 190 |
@@ -145,8 +145,8 @@ memory dumped by the build tools into unused ROM space; "dense" runs look like r
 | 0B:B0F0 | 16 | mixed data |
 | 0B:BD5C | 16 | mixed data |
 | 0B:BFEE | 18 | mostly zero |
-| 0C:8803 | 25 | mixed data |
 | 0C:8885 | 35 | low-density remnant (about 1-2 bits set per byte, unused) |
+| 0C:8957 | 140 | low-density remnant (about 1-2 bits set per byte, unused) |
 | 0D:AE4E | 18 | mixed data |
 | 0D:AEF0 | 16 | mixed data |
 | 0D:B9F0 | 17 | mostly zero |
