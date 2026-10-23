@@ -661,12 +661,12 @@ split 0B:B100 B200 256 ofsset
 05:AA7C SpawnObj6ATbl_AA7C
 05:AA7F SpawnObj6ATbl_AA7F
 05:ACDF SpawnObj63Tbl_ACDF
-06:8915 SoundNextNoteTbl_8915
-06:891C SoundNextNoteTbl_891C
-06:8923 SoundNextNoteTbl_8923
-06:8933 SoundEnvelopeStepTbl_8933
-06:8953 SoundEnvelopeStepTbl_8953
-06:8959 SoundNotePitchTbl_8959
+06:8915 SoundNoteLenTripletTbl ; note durations (ticks) for duration codes 1-7, triplet set (same as _triplet_note_length_table in Mega Man 3-6)
+06:891C SoundNoteLenRegularTbl ; note durations, regular set
+06:8923 SoundOctaveTbl ; octave * 12 (8 entries) followed by the octave-jump set
+06:8933 SoundAdsrTbl ; envelope step / decay rate table
+06:8953 SoundNoteFreqIndexTbl
+06:8959 SoundNoteFreqTbl ; APU timer value per note index (word table)
 06:895A SoundNotePitchTbl_895A
 06:8A43 SoundStartTbl_8A43
 06:8A44 SoundStartTbl_8A44
