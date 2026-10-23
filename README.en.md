@@ -68,6 +68,8 @@ in `tools/labels/*.txt` and regenerate.
 | `docs/unknown_data.md` | classification of bytes the CDL never touched (`tools/unknown_report.py`) |
 | `docs/PLAN.md` | plan for further improving the disassembler |
 | `tools/selftest.py` | generator self-test on a synthetic ROM (`python tools/selftest.py`, needs ca65/ld65) |
+| `tools/lint_labels.py` | lint of `tools/labels/*.txt`: duplicate names/addresses, ranges outside the bank, code/data overlaps |
+| `Makefile` | `make`, `make gen`, `make check`, `make test` (Windows users can use `assemble.bat`) |
 | `tools/reloc_test.py` | relocation test: rebuilds with all switchable banks moved by $100; only address bytes may change |
 | `tools/chr_tool.py` | CHR ↔ 1 KB `.chr` ↔ PNG |
 | `tools/labels/ram.txt` | RAM names: `ADDR NAME [SIZE] ; comment` |

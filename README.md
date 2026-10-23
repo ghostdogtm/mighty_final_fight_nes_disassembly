@@ -66,6 +66,8 @@ python tools/disasm.py --build      # згенерувати src/, зібрат�
 | `docs/unknown_data.md` | класифікація байтів, яких не торкнувся CDL (`tools/unknown_report.py`) |
 | `docs/PLAN.md` | план подальшого покращення дизасембля |
 | `tools/selftest.py` | самотест генератора на синтетичному ROM (`python tools/selftest.py`, потрібні ca65/ld65) |
+| `tools/lint_labels.py` | перевірка `tools/labels/*.txt`: дублікати імен/адрес, діапазони поза банком, перекриття code/data |
+| `Makefile` | `make`, `make gen`, `make check`, `make test` (потрібен make; для Windows є `assemble.bat`) |
 | `tools/reloc_test.py` | тест переміщуваності: збірка зі зсувом усіх змінних банків на $100 має змінити лише байти адрес |
 | `tools/chr_tool.py` | CHR ↔ `.chr` по 1 КБ ↔ PNG |
 | `tools/labels/ram.txt` | імена RAM: `ADDR NAME [SIZE] ; коментар` |
