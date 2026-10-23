@@ -504,7 +504,7 @@ Traced code (instruction starts, verify by hand):
   06:824A  LDA #$00
   06:824C  SEC
   06:824D  SBC sndParam
-  06:824F  STA ram_00D8
+  06:824F  STA sfxPitchTune
   06:8251  RTS
   06:826A  JSR SoundStart
   06:826D  JMP loc_06_825B
@@ -517,14 +517,14 @@ Traced code (instruction starts, verify by hand):
   06:8740  CPX #$29
   06:8742  BNE loc_06_875B
   06:8744  STA sndTmp
-  06:8746  LDA ram_0740,X
+  06:8746  LDA sndNoteAdsRemain,X
   06:8749  STA ptr_C1
   06:874B  JSR SoundMul8
   06:874E  LDA ptr_C1
   06:8750  BEQ loc_06_87AA
   06:875B  CMP sndNoteTimer,X
   06:875E  BCC loc_06_8763
-  06:881C  LDA ram_00D8
+  06:881C  LDA sfxPitchTune
   06:881E  BEQ loc_06_8835
   06:8820  STA sndTmp
   06:8822  STY ptr_C1

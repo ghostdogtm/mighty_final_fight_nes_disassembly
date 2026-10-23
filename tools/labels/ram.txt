@@ -208,3 +208,17 @@
 0038 grabTimer                   ; countdown while holding an enemy (set to $3C on grab, runs down to negative = release)
 00BC screenLockFlag             ; nonzero: enemies are kept inside the visible screen (stage events set $FF while enemies must be beaten)
 0150 continueUsedFlag           ; set by the CONTINUE screen, cleared at game start; nonzero skips staff credits and ending scene
+071C sndNote 4                  ; per channel: current note index
+0720 sndFreqLo 4                ; per channel: APU timer low
+0724 sndFreqHi 4                ; per channel: APU timer high
+0728 sndStreamLo 4              ; per channel: read pointer into the music stream (low)
+072C sndStreamHi 4              ; per channel: read pointer into the music stream (high)
+0730 sndNoteFlags 4             ; per channel: $20 triplet, $40 connected, $10 dotted, $08 octave jump, low 3 bits octave (commands 00-04, 09)
+0734 sndChanTranspose 4         ; per channel: transpose (command 0B)
+0738 sndNoteLenRemain 4         ; per channel: note length counter
+073C sndNoteAds 4               ; per channel: note length ADS scale (command 06)
+0740 sndNoteAdsRemain 4         ; per channel: ADS counter
+0744 sndLoopCounter 16          ; loop / break counters: slot * 4 + channel (commands 0E-15)
+077C sndChannelHandle 4         ; per channel: id of the request that owns it (sfx / music priority)
+00CB sndGlobalTranspose         ; command 0A
+00D8 sfxPitchTune               ; detune added to SFX tone channels (applies when sfxFlags bit 7 is set)

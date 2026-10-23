@@ -33,26 +33,34 @@ the stream starts right after the byte and is read by `SoundStreamTick` (06:8252
 `SoundCommand` (06:8497) dispatches through a table of 25 words at 06:84A7. Commands 0-3 take no parameter,
 all others read one parameter byte first. Per-channel flags live in `ram_0730,X`.
 
-| cmd | handler | parameter / effect |
-|---|---|---|
-| 00 | SndCmd00 | toggle flag $20 |
-| 01 | SndCmd01 | toggle flag $40 |
-| 02 | SndCmd02 | set flag $10 |
-| 03 | SndCmd03 | toggle flag $08 |
-| 04 | SndCmd04 | flags := (flags & $97) \| param |
-| 05 | SndCmd05 | tempo: param = high byte, next byte = low byte (8.8 ticks per frame; default $0199) |
-| 06 | SndCmd06 | `ram_073C,X` := param (multiplies note durations) |
-| 07 | SndCmd07 | volume/duty: (reg & $C0) \| param \| $30 (triangle: stored as is) |
-| 08 | SndCmd08 | instrument number = param+1; entries are 8 bytes at the address given big-endian at 06:8A41 |
-| 09 | SndCmd09 | low 3 bits of flags := param (selects the duration table) |
-| 0A | SndCmd0A | global transpose |
-| 0B | SndCmd0B | channel transpose |
-| 0C, 0D | SndCmd0C/0D | per-channel parameters (`ram_0714`, `ram_0718`; the latter feeds the slide/pitch logic) |
-| 0E-11 | SndCmd0E.. | loop with counter slot 0-3: param = count, then a big-endian address; loops back while the counter lasts |
-| 12-15 | | same slots, other sense: jump taken once the counter runs out (the param is also OR-ed into the flags) |
-| 16 | | unconditional jump: param = high byte, next byte = low byte |
-| 17 | SndCmd17 | end of channel (silences it) |
-| 18 | SndCmd18 | noise/channel volume: (reg & $0F) \| param \| $30 |
+| cmd | handler | Mega Man 3-6 name | parameter / effect |
+|---|---|---|---|
+| 00 | SndCmd00_TripletNote | `_cmd_triplet_note_set` | toggle note flag $20 (triplet) |
+| 01 | SndCmd01_ConnectNote | `_cmd_connect_note_set` | toggle note flag $40 (connected note) |
+| 02 | SndCmd02_DottedNote | `_cmd_dotted_note_set` | set note flag $10 (dotted note) |
+| 03 | SndCmd03_OctaveJump | `_cmd_octave_jump` | toggle note flag $08 (octave +1) |
+| 04 | SndCmd04_ChannelFlags | `_cmd_channel_flags` | flags := (flags & $97) \| param |
+| 05 | SndCmd05_Tempo | `_cmd_tempo` | tempo: param = high byte, next byte = low byte (8.8 ticks per frame; default $0199) |
+| 06 | SndCmd06_NoteAds | `_cmd_note_ads` | `sndNoteAds,X` := param (scales the note length) |
+| 07 | SndCmd07_Volume | `_cmd_volume` | volume: (reg & $C0) \| param \| $30 (triangle: stored as is) |
+| 08 | SndCmd08_Instrument | `_cmd_instrument` | instrument number = param+1; entries are 8 bytes at the address given big-endian at 06:8A41 |
+| 09 | SndCmd09_Octave | `_cmd_octave` | low 3 bits of the note flags := octave |
+| 0A | SndCmd0A_GlobalTranspose | `_cmd_global_transpose` | global transpose |
+| 0B | SndCmd0B_ChanTranspose | `_cmd_channel_transpose` | channel transpose |
+| 0C | SndCmd0C_PitchTune | `_cmd_pitch_tune` | per-channel pitch tune (`sndPitchTune`) |
+| 0D | SndCmd0D_PitchSlide | `_cmd_pitch_slide` | per-channel pitch slide (`sndPitchSlide`) |
+| 0E-11 | SndCmd0E_Loop1, SndCmd0F_Loop2, SndCmd10_Loop3, SndCmd11_Loop4 | `_cmd_loop_1..4` | loop with counter slot 0-3: param = count, then a big-endian address; loops back while the counter lasts |
+| 12-15 | same four entries | `_cmd_break_1..4` | same slots, other sense: jump taken once the counter runs out (the param is also OR-ed into the flags) |
+| 16 | SndCmd16_Jump | `_cmd_music_jump` | unconditional jump: param = high byte, next byte = low byte |
+| 17 | SndCmd17_EndChannel | `_cmd_music_end` | end of channel (silences it) |
+| 18 | SndCmd18_DutyCycle | `_cmd_duty_cycle` | duty / noise volume: (reg & $0F) \| param \| $30 |
+
+**The driver is Capcom's NES sound engine.** The command list, its order, the 8.8 tempo, the flag bits and even the RAM
+layout ($0700-$077F, zero page $C0-$D9) are the same as in the Mega Man 3-6 disassemblies
+(`lsmmega/mm3..mm6`, `refreshing-lemonade/megaman*-disassembly`): `_music_cmd` there is a table of the same 25 handlers.
+The per-channel arrays are named after them (`sndNoteFlags` = `anote_flags` $730, `sndChanTranspose` = `achannel_transpose` $734,
+`sndNoteAds` = `anote_ads` $73C, `sndLoopCounter` = `achannel_loop_counter` $744, ...). The differences are
+the song/header layout (big-endian pointers, banks $17/$18 for data) and the MFF-specific SFX records.
 
 Note pitch: word table at 06:8959 (index = pitch*2, clamped to $5F). Duration: code from the note byte
 looks up 06:8915 or 06:891C, is scaled by `ram_073C` and counted down by the tempo ticks.

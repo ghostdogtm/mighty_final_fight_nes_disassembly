@@ -191,23 +191,23 @@ comment 0E:DEBC call into the switchable $8000 bank (bank depends on stage)
 06:8393 SoundChannelStep       ; per-channel step of a music stream (X = channel)
 06:83CD SoundNextNote          ; reads an event: <$20 command, >=$20 note (bits 7-5 duration, bits 4-0 pitch)
 06:8497 SoundCommand           ; stream command < $20 (jump table follows); see docs/sound_format.md
-06:84D9 SndCmd00_ToggleFlag20
-06:84DD SndCmd01_ToggleFlag40
-06:84E1 SndCmd02_SetFlag10
-06:84E8 SndCmd03_ToggleFlag08
-06:8575 SndCmd04_SetModeBits   ; flags := (flags & $97) | param
+06:84D9 SndCmd00_TripletNote ; toggle note flag $20 (triplet)
+06:84DD SndCmd01_ConnectNote ; toggle note flag $40 (connected / tied note)
+06:84E1 SndCmd02_DottedNote ; set note flag $10 (dotted)
+06:84E8 SndCmd03_OctaveJump ; toggle note flag $08 (octave +1)
+06:8575 SndCmd04_ChannelFlags ; flags := (flags & $97) | param
 06:84F1 SndCmd05_Tempo         ; params: hi, lo of the 16-bit tempo (ticks/frame, 8.8)
-06:84FF SndCmd06_NoteScale     ; ram_073C,X := param
+06:84FF SndCmd06_NoteAds ; note length ADS scale, ram_073C,X := param
 06:865A SndCmd07_Volume        ; volume/duty register value
 06:866F SndCmd08_Instrument    ; param+1 = instrument number (8-byte entries, base at 06:8A41)
-06:8505 SndCmd09_LenMode       ; low 3 bits of flags := param
-06:8510 SndCmd0A_Transpose     ; global transpose
+06:8505 SndCmd09_Octave ; low 3 bits of the note flags := octave
+06:8510 SndCmd0A_GlobalTranspose ; global transpose
 06:8515 SndCmd0B_ChanTranspose
-06:86A1 SndCmd0C_Param714
-06:86A7 SndCmd0D_Param718
-06:851B SndCmd0E_Loop0         ; loop slot 0..3 (also $12-$15): count param, then big-endian address
+06:86A1 SndCmd0C_PitchTune ; channel pitch tune
+06:86A7 SndCmd0D_PitchSlide ; channel pitch slide
+06:851B SndCmd0E_Loop1 ; loop 1 / break 1 (cmd $0E and $12 share this entry)
 06:8580 SndCmd17_EndChannel
-06:86AD SndCmd18_NoiseVolume
+06:86AD SndCmd18_DutyCycle ; duty cycle: (reg & $0F) | param | $30
 rawsym AF00 stageScreenBase
 rawsym B700 stageMetaBase
 0F:E60F StageLoadMetaTiles     ; 4 blocks of the current 32x32 metatile -> ram_06C0.. tile buffer, attributes -> spriteFlipMask
@@ -1594,3 +1594,7 @@ comment 0F:E1C1 per-player rows (3 bytes: Cody, Guy, Haggar; index = playerId); 
 0F:FC5B enemyAnimTblA ; per enemy type: animation id (stand / idle variant)
 0F:FC68 enemyAnimTblB ; per enemy type: animation id (alternate variant)
 0F:FC75 enemyChrBankTbl ; per enemy type: CHR bank number written to chrBankShadow
+06:851F SndCmd0F_Loop2 ; loop 2 / break 2 (cmd $0F and $13)
+06:8523 SndCmd10_Loop3 ; loop 3 / break 3 (cmd $10 and $14)
+06:8527 SndCmd11_Loop4 ; loop 4 / break 4 (cmd $11 and $15)
+06:855A SndCmd16_Jump ; unconditional jump in the stream (param = hi, next byte = lo)
