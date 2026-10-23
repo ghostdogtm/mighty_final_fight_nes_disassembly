@@ -43,7 +43,7 @@ playerId               = $0034 ; 190 ; 00 Cody, 01 Guy, 02 Haggar
 actionStep             = $0035 ; 23 ; sub-step of the current player action
 playerGroundY          = $0036 ; 55 ; player Y saved at the start of an action (used by FB5B/FBD9 range checks)
 actionTimer            = $0037 ; 44 ; frame counter of the current gameAction (Act02/Act0B count it down)
-ram_0038               = $0038 ; 15
+grabTimer              = $0038 ; 15 ; countdown while holding an enemy (set to $3C on grab, runs down to negative = release)
 grabbedSlot            = $0039 ; 44 ; object slot of the enemy held by the player
 playerHealth           = $003A ; 30 ; max $68 (104), depends on level
 playerInvincible       = $003B ; 17 ; cheat 003B:25 = invincible
@@ -121,7 +121,7 @@ textScriptIdx          = $00B8 ; 17 ; index of the text script for RunTextScript
 ram_00B9               = $00B9 ; 7
 ram_00BA               = $00BA ; 16
 ram_00BB               = $00BB ; 11
-ram_00BC               = $00BC ; 34
+screenLockFlag         = $00BC ; 34 ; nonzero: enemies are kept inside the visible screen (stage events set $FF while enemies must be beaten)
 ram_00BD               = $00BD ; 3
 ram_00BE               = $00BE ; 7
 ram_00BF               = $00BF ; 6
@@ -176,7 +176,7 @@ palAnimActive          = $0100 ; 11 (size 4) ; palette animation channels (Palet
 palAnimStep            = $0104 ; 18 (size 4) ; current step
 palAnimType            = $0108 ; 9 (size 4) ; animation type (index into tbl_09_A445)
 palAnimTimer           = $010C ; 11 (size 4) ; frame timer of the step
-ram_0150               = $0150 ; 3
+continueUsedFlag       = $0150 ; 3 ; set by the CONTINUE screen, cleared at game start; nonzero skips staff credits and ending scene
 ram_0151               = $0151 ; 6
 oamBuffer              = $0200 ; 9 (size 256) ; OAM DMA source ($4014 <- $02)
 objActive              = $0300 ; 428 (size 16)

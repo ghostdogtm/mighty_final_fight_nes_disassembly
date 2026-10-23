@@ -205,3 +205,6 @@
 00D5 sfxGateTimer               ; SFX record: frames until the envelopes are released
 00D6 sfxFlags                   ; bit 7 = effect applies the detune ram_00D8; low bits = loop counter
 00D7 sfxChain                   ; chained sound request (bit 0 = start follow-up)
+0038 grabTimer                   ; countdown while holding an enemy (set to $3C on grab, runs down to negative = release)
+00BC screenLockFlag             ; nonzero: enemies are kept inside the visible screen (stage events set $FF while enemies must be beaten)
+0150 continueUsedFlag           ; set by the CONTINUE screen, cleared at game start; nonzero skips staff credits and ending scene

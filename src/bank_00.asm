@@ -1420,7 +1420,7 @@ loc_00_8B54:
 	LDA PlayerRow_E288,Y            ;C - - - - - 0x000B92 00:8B82: B9 88 E2
 	STA playerStandAnim             ;C - - - - - 0x000B95 00:8B85: 85 6F
 	LDA #$3C                        ;C - - - - - 0x000B97 00:8B87: A9 3C
-	STA ram_0038                    ;C - - - - - 0x000B99 00:8B89: 85 38
+	STA grabTimer                   ;C - - - - - 0x000B99 00:8B89: 85 38
 	LDY grabbedSlot                 ;C - - - - - 0x000B9B 00:8B8B: A4 39
 	LDA #$00                        ;C - - - - - 0x000B9D 00:8B8D: A9 00
 	STA objHitTimer,Y               ;C - - - - - 0x000B9F 00:8B8F: 99 E0 04
@@ -1493,7 +1493,7 @@ loc_00_8BF0:
 	LDA PlayerRow_E288,Y            ;C - - - - - 0x000C2E 00:8C1E: B9 88 E2
 	STA playerStandAnim             ;C - - - - - 0x000C31 00:8C21: 85 6F
 	LDA #$3C                        ;C - - - - - 0x000C33 00:8C23: A9 3C
-	STA ram_0038                    ;C - - - - - 0x000C35 00:8C25: 85 38
+	STA grabTimer                   ;C - - - - - 0x000C35 00:8C25: 85 38
 	LDY grabbedSlot                 ;C - - - - - 0x000C37 00:8C27: A4 39
 	LDA #$00                        ;C - - - - - 0x000C39 00:8C29: A9 00
 	STA objHitTimer,Y               ;C - - - - - 0x000C3B 00:8C2B: 99 E0 04
@@ -1553,7 +1553,7 @@ loc_00_8C70:
 	LDA PlayerRow_E288,Y            ;C - - - - - 0x000CAE 00:8C9E: B9 88 E2
 	STA playerStandAnim             ;C - - - - - 0x000CB1 00:8CA1: 85 6F
 	LDA #$3C                        ;C - - - - - 0x000CB3 00:8CA3: A9 3C
-	STA ram_0038                    ;C - - - - - 0x000CB5 00:8CA5: 85 38
+	STA grabTimer                   ;C - - - - - 0x000CB5 00:8CA5: 85 38
 	LDY grabbedSlot                 ;C - - - - - 0x000CB7 00:8CA7: A4 39
 	LDA #$00                        ;C - - - - - 0x000CB9 00:8CA9: A9 00
 	STA objHitTimer,Y               ;C - - - - - 0x000CBB 00:8CAB: 99 E0 04

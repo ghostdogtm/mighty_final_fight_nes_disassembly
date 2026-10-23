@@ -101,7 +101,7 @@ loc_0F_E0A5:
 	STA ram_00B5                    ;C - - - - - 0x01E0DD 0F:E0CD: 85 B5
 	STA ram_00B6                    ;C - - - - - 0x01E0DF 0F:E0CF: 85 B6
 	STA ram_00BB                    ;C - - - - - 0x01E0E1 0F:E0D1: 85 BB
-	STA ram_00BC                    ;C - - - - - 0x01E0E3 0F:E0D3: 85 BC
+	STA screenLockFlag              ;C - - - - - 0x01E0E3 0F:E0D3: 85 BC
 	STA jumpBaseY                   ;C - - - - - 0x01E0E5 0F:E0D5: 85 A6
 	STA ram_00BE                    ;C - - - - - 0x01E0E7 0F:E0D7: 85 BE
 	STA ram_00BA                    ;C - - - - - 0x01E0E9 0F:E0D9: 85 BA

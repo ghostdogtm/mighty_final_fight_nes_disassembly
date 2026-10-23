@@ -5101,7 +5101,7 @@ R:34:playerId
 R:35:actionStep
 R:36:playerGroundY
 R:37:actionTimer
-R:38:ram_0038
+R:38:grabTimer
 R:39:grabbedSlot
 R:3A:playerHealth
 R:3B:playerInvincible
@@ -5179,7 +5179,7 @@ R:B8:textScriptIdx
 R:B9:ram_00B9
 R:BA:ram_00BA
 R:BB:ram_00BB
-R:BC:ram_00BC
+R:BC:screenLockFlag
 R:BD:ram_00BD
 R:BE:ram_00BE
 R:BF:ram_00BF
@@ -5234,7 +5234,7 @@ R:100:palAnimActive
 R:104:palAnimStep
 R:108:palAnimType
 R:10C:palAnimTimer
-R:150:ram_0150
+R:150:continueUsedFlag
 R:151:ram_0151
 R:200:oamBuffer
 R:300:objActive

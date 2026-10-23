@@ -707,12 +707,12 @@ Traced code (instruction starts, verify by hand):
   0B:B70B  JSR FaceToPlayerFlag
   0B:B70E  LDA #$80
   0B:B710  STA objActive,X
-  0B:B713  LDA ram_0038
+  0B:B713  LDA grabTimer
   0B:B715  BMI loc_0B_B743
   0B:B717  CMP #$0C
   0B:B719  BCC loc_0B_B743
   0B:B71B  LDA #$0C
-  0B:B71D  STA ram_0038
+  0B:B71D  STA grabTimer
   0B:B71F  BNE loc_0B_B743
   0B:B7C6  LDA #$82
   0B:B7C8  STA objY,X
@@ -734,7 +734,7 @@ Traced code (instruction starts, verify by hand):
   0C:8651  LDA PlayerAttackDamage_8885,Y
   0C:8654  BNE loc_0C_8686
   0C:870D  LDA #$00
-  0C:870F  STA ram_0038
+  0C:870F  STA grabTimer
   0C:8711  STA gameAction
   0C:8713  STA ram_00BA
   0C:8715  JSR ClearTimerA4

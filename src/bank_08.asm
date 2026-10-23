@@ -983,7 +983,7 @@ StageEventDispatchTbl_8ABD:
 	.hibytes StageEventDispatchTbl_8A3B_00, StageEventDispatchTbl_8ABB_01;- - - - - - 0x010ACD 08:8ABD:
 StageEventDispatchTbl_8ABB_01:
 	LDA #$FF                        ;C - - J - - 0x010ACF 08:8ABF: A9 FF
-	STA ram_00BC                    ;C - - - - - 0x010AD1 08:8AC1: 85 BC
+	STA screenLockFlag              ;C - - - - - 0x010AD1 08:8AC1: 85 BC
 	LDA enemiesDefeated             ;C - - - - - 0x010AD3 08:8AC3: A5 54
 	CMP StageEventDispatchTbl_8DCC,Y;C - - - - - 0x010AD5 08:8AC5: D9 CC 8D
 	BCC loc_08_8AD2                 ;C - - - - - 0x010AD8 08:8AC8: 90 08
@@ -1201,7 +1201,7 @@ StageEventDispatchTbl_8C42:
 	.byte $8C                       ;- D 0 - - - 0x010C52 08:8C42:
 ofs_08_8C43:
 	LDA #$FF                        ;C - - J - - 0x010C53 08:8C43: A9 FF
-	STA ram_00BC                    ;C - - - - - 0x010C55 08:8C45: 85 BC
+	STA screenLockFlag              ;C - - - - - 0x010C55 08:8C45: 85 BC
 	LDA enemiesDefeated             ;C - - - - - 0x010C57 08:8C47: A5 54
 	CMP StageEventDispatchTbl_8DE1,Y;C - - - - - 0x010C59 08:8C49: D9 E1 8D
 	BCC loc_08_8C56                 ;C - - - - - 0x010C5C 08:8C4C: 90 08
@@ -1253,7 +1253,7 @@ StageEventDispatchTbl_8CA0:
 	.hibytes StageEventDispatchTbl_8C9B_00, StageEventDispatchTbl_8C9B_00, StageEventDispatchTbl_8C9B_00, StageEventDispatchTbl_8C9B_00, StageEventDispatchTbl_8C9B_00;- D 0 - - - 0x010CB0 08:8CA0:
 StageEventDispatchTbl_8C9B_00:
 	LDA #$FF                        ;C - - J - - 0x010CB5 08:8CA5: A9 FF
-	STA ram_00BC                    ;C - - - - - 0x010CB7 08:8CA7: 85 BC
+	STA screenLockFlag              ;C - - - - - 0x010CB7 08:8CA7: 85 BC
 	LDA enemiesDefeated             ;C - - - - - 0x010CB9 08:8CA9: A5 54
 	CMP StageEventDispatchTbl_8DE6,Y;C - - - - - 0x010CBB 08:8CAB: D9 E6 8D
 	BCC loc_08_8CB9                 ;C - - - - - 0x010CBE 08:8CAE: 90 09
@@ -1287,7 +1287,7 @@ loc_08_8CDD:
 	RTS                             ;C - - - - - 0x010CF0 08:8CE0: 60
 StageEventDispatchTbl_8CCC_02:
 	LDA #$FF                        ;C - - J - - 0x010CF1 08:8CE1: A9 FF
-	STA ram_00BC                    ;C - - - - - 0x010CF3 08:8CE3: 85 BC
+	STA screenLockFlag              ;C - - - - - 0x010CF3 08:8CE3: 85 BC
 	LDA enemiesDefeated             ;C - - - - - 0x010CF5 08:8CE5: A5 54
 	CMP StageEventDispatchTbl_8DEB,Y;C - - - - - 0x010CF7 08:8CE7: D9 EB 8D
 	BCC loc_08_8CF4                 ;C - - - - - 0x010CFA 08:8CEA: 90 08
@@ -1365,7 +1365,7 @@ loc_08_8D6B:
 	RTS                             ;C - - - - - 0x010D7E 08:8D6E: 60
 StageEventDispatchTbl_8D49_03:
 	LDA #$FF                        ;C - - J - - 0x010D7F 08:8D6F: A9 FF
-	STA ram_00BC                    ;C - - - - - 0x010D81 08:8D71: 85 BC
+	STA screenLockFlag              ;C - - - - - 0x010D81 08:8D71: 85 BC
 	LDA enemiesDefeated             ;C - - - - - 0x010D83 08:8D73: A5 54
 	CMP StageEventDispatchTbl_8DF2,Y;C - - - - - 0x010D85 08:8D75: D9 F2 8D
 	BCC loc_08_8D82                 ;C - - - - - 0x010D88 08:8D78: 90 08
@@ -1396,7 +1396,7 @@ loc_08_8DA7:
 	RTS                             ;C - - - - - 0x010DB7 08:8DA7: 60
 StageEventDispatchTbl_8D92_02:
 	LDA #$FF                        ;C - - J - - 0x010DB8 08:8DA8: A9 FF
-	STA ram_00BC                    ;C - - - - - 0x010DBA 08:8DAA: 85 BC
+	STA screenLockFlag              ;C - - - - - 0x010DBA 08:8DAA: 85 BC
 	LDY #$0F                        ;C - - - - - 0x010DBC 08:8DAC: A0 0F
 loc_08_8DAE:
 	LDA objKind,Y                   ;C - - - - - 0x010DBE 08:8DAE: B9 20 03

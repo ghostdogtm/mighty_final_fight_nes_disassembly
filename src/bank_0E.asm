@@ -1080,13 +1080,13 @@ loc_0E_C768:
 	STA ram_00B2                    ;C - - - - - 0x01C831 0E:C821: 85 B2
 	STA ram_00B7                    ;C - - - - - 0x01C833 0E:C823: 85 B7
 	STA ram_00BB                    ;C - - - - - 0x01C835 0E:C825: 85 BB
-	STA ram_00BC                    ;C - - - - - 0x01C837 0E:C827: 85 BC
+	STA screenLockFlag              ;C - - - - - 0x01C837 0E:C827: 85 BC
 	STA ram_00BE                    ;C - - - - - 0x01C839 0E:C829: 85 BE
 	STA ram_00BA                    ;C - - - - - 0x01C83B 0E:C82B: 85 BA
 	STA objAirSnapshot              ;C - - - - - 0x01C83D 0E:C82D: 8D A0 05
 	STA objAirSnapshot+1            ;C - - - - - 0x01C840 0E:C830: 8D A1 05
 	STA objAirSnapshot+2            ;C - - - - - 0x01C843 0E:C833: 8D A2 05
-	STA ram_0150                    ;C - - - - - 0x01C846 0E:C836: 8D 50 01
+	STA continueUsedFlag            ;C - - - - - 0x01C846 0E:C836: 8D 50 01
 	JMP loc_0E_C8ED                 ;C - - - - - 0x01C849 0E:C839: 4C ED C8
 ; sound id queued on entering each stage (indexed by stage)
 stageMusicTbl:
@@ -1874,7 +1874,7 @@ loc_0E_CE85:
 	LDA #$3C                        ;C - - - - - 0x01CE95 0E:CE85: A9 3C
 	BNE loc_0E_CE89                 ;C - - - - - 0x01CE97 0E:CE87: D0 00
 loc_0E_CE89:
-	STA ram_0038                    ;C - - - - - 0x01CE99 0E:CE89: 85 38
+	STA grabTimer                   ;C - - - - - 0x01CE99 0E:CE89: 85 38
 	LDY grabbedSlot                 ;C - - - - - 0x01CE9B 0E:CE8B: A4 39
 	STA objGrabState,Y              ;C - - - - - 0x01CE9D 0E:CE8D: 99 F0 03
 	LDA #$00                        ;C - - - - - 0x01CEA0 0E:CE90: A9 00
@@ -3142,9 +3142,9 @@ loc_0E_D82E:
 	LDA padPressed                  ;C - - - - - 0x01D83E 0E:D82E: A5 14
 	CMP #$80                        ;C - - - - - 0x01D840 0E:D830: C9 80
 	BEQ loc_0E_D84E                 ;C - - - - - 0x01D842 0E:D832: F0 1A
-	LDA ram_0038                    ;C - - - - - 0x01D844 0E:D834: A5 38
+	LDA grabTimer                   ;C - - - - - 0x01D844 0E:D834: A5 38
 	BMI loc_0E_D83B                 ;C - - - - - 0x01D846 0E:D836: 30 03
-	DEC ram_0038                    ;C - - - - - 0x01D848 0E:D838: C6 38
+	DEC grabTimer                   ;C - - - - - 0x01D848 0E:D838: C6 38
 	RTS                             ;C - - - - - 0x01D84A 0E:D83A: 60
 loc_0E_D83B:
 	LDA #$00                        ;C - - - - - 0x01D84B 0E:D83B: A9 00
@@ -3167,7 +3167,7 @@ loc_0E_D84E:
 	LDA PlayerRow_E22E,Y            ;C - - - - - 0x01D870 0E:D860: B9 2E E2
 	JSR SetChrBank2                 ;C - - - - - 0x01D873 0E:D863: 20 40 F4
 	LDA #$00                        ;C - - - - - 0x01D876 0E:D866: A9 00
-	STA ram_0038                    ;C - - - - - 0x01D878 0E:D868: 85 38
+	STA grabTimer                   ;C - - - - - 0x01D878 0E:D868: 85 38
 	STA ram_00BA                    ;C - - - - - 0x01D87A 0E:D86A: 85 BA
 	LDA #$FF                        ;C - - - - - 0x01D87C 0E:D86C: A9 FF
 	LDY grabbedSlot                 ;C - - - - - 0x01D87E 0E:D86E: A4 39
@@ -3233,9 +3233,9 @@ loc_0E_D8E5:
 	LDA padPressed                  ;C - - - - - 0x01D8F5 0E:D8E5: A5 14
 	CMP #$80                        ;C - - - - - 0x01D8F7 0E:D8E7: C9 80
 	BEQ loc_0E_D8B7                 ;C - - - - - 0x01D8F9 0E:D8E9: F0 CC
-	LDA ram_0038                    ;C - - - - - 0x01D8FB 0E:D8EB: A5 38
+	LDA grabTimer                   ;C - - - - - 0x01D8FB 0E:D8EB: A5 38
 	BMI loc_0E_D8E2                 ;C - - - - - 0x01D8FD 0E:D8ED: 30 F3
-	DEC ram_0038                    ;C - - - - - 0x01D8FF 0E:D8EF: C6 38
+	DEC grabTimer                   ;C - - - - - 0x01D8FF 0E:D8EF: C6 38
 	LDA #$58                        ;C - - - - - 0x01D901 0E:D8F1: A9 58
 	CMP objAnim                     ;C - - - - - 0x01D903 0E:D8F3: CD 80 05
 	BEQ loc_0E_D900                 ;C - - - - - 0x01D906 0E:D8F6: F0 08
@@ -3383,7 +3383,7 @@ loc_0E_DA03:
 	LDA PlayerRow_E1CA,Y            ;C - - - - - 0x01DA2D 0E:DA1D: B9 CA E1
 	STA objVelYHi                   ;C - - - - - 0x01DA30 0E:DA20: 8D 30 04
 	LDA #$00                        ;C - - - - - 0x01DA33 0E:DA23: A9 00
-	STA ram_0038                    ;C - - - - - 0x01DA35 0E:DA25: 85 38
+	STA grabTimer                   ;C - - - - - 0x01DA35 0E:DA25: 85 38
 	STA gameAction                  ;C - - - - - 0x01DA37 0E:DA27: 85 30
 	STA timerA3                     ;C - - - - - 0x01DA39 0E:DA29: 85 A3
 	STA actionStep                  ;C - - - - - 0x01DA3B 0E:DA2B: 85 35
@@ -4023,7 +4023,7 @@ loc_0E_DE8B:
 	LDA #$06                        ;C - - - - - 0x01DF0C 0E:DEFC: A9 06
 	STA textScriptIdx               ;C - - - - - 0x01DF0E 0E:DEFE: 85 B8
 	JSR RunTextScript_00            ;C - - - - - bank=00 0x01DF10 0E:DF00: 20 00 9A
-	LDA ram_0150                    ;C - - - - - 0x01DF13 0E:DF03: AD 50 01
+	LDA continueUsedFlag            ;C - - - - - 0x01DF13 0E:DF03: AD 50 01
 	BNE loc_0E_DF4D                 ;C - - - - - 0x01DF16 0E:DF06: D0 45
 	LDA #$00                        ;C - - - - - 0x01DF18 0E:DF08: A9 00
 	STA renderOffCount              ;C - - - - - 0x01DF1A 0E:DF0A: 85 EE

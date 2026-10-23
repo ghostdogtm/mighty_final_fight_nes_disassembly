@@ -840,7 +840,7 @@ loc_0C_8703:
 	BNE loc_0C_872D                 ;C - - - - - 0x01871B 0C:870B: D0 20
 loc_0C_870D:
 	LDA #$00                        ;c - - - - - 0x01871D 0C:870D: A9 00
-	STA ram_0038                    ;c - - - - - 0x01871F 0C:870F: 85 38
+	STA grabTimer                   ;c - - - - - 0x01871F 0C:870F: 85 38
 	STA gameAction                  ;c - - - - - 0x018721 0C:8711: 85 30
 	STA ram_00BA                    ;c - - - - - 0x018723 0C:8713: 85 BA
 	JSR ClearTimerA4                ;c - - - - - 0x018725 0C:8715: 20 36 F4
@@ -1459,7 +1459,7 @@ loc_0C_8D9D:
 	CMP #$03                        ;C - - - - - 0x018DBA 0C:8DAA: C9 03
 	BEQ loc_0C_8DB2                 ;C - - - - - 0x018DBC 0C:8DAC: F0 04
 loc_0C_8DAE:
-	LDA ram_00BC                    ;C - - - - - 0x018DBE 0C:8DAE: A5 BC
+	LDA screenLockFlag              ;C - - - - - 0x018DBE 0C:8DAE: A5 BC
 	BEQ loc_0C_8DCE                 ;C - - - - - 0x018DC0 0C:8DB0: F0 1C
 loc_0C_8DB2:
 	LDA objX,X                      ;C - - - - - 0x018DC2 0C:8DB2: BD 60 03
@@ -1478,7 +1478,7 @@ loc_0C_8DB2:
 loc_0C_8DCE:
 	JMP loc_0C_8DEF                 ;C - - - - - 0x018DDE 0C:8DCE: 4C EF 8D
 loc_0C_8DD1:
-	LDA ram_00BC                    ;C - - - - - 0x018DE1 0C:8DD1: A5 BC
+	LDA screenLockFlag              ;C - - - - - 0x018DE1 0C:8DD1: A5 BC
 	BEQ loc_0C_8DEF                 ;C - - - - - 0x018DE3 0C:8DD3: F0 1A
 	LDA objX,X                      ;C - - - - - 0x018DE5 0C:8DD5: BD 60 03
 	SEC                             ;C - - - - - 0x018DE8 0C:8DD8: 38
@@ -1552,7 +1552,7 @@ loc_0C_8E64:
 	LDA objFacing,X                 ;C - - - - - 0x018E74 0C:8E64: BD 60 04
 	AND #$01                        ;C - - - - - 0x018E77 0C:8E67: 29 01
 	BEQ loc_0C_8E91                 ;C - - - - - 0x018E79 0C:8E69: F0 26
-	LDA ram_00BC                    ;C - - - - - 0x018E7B 0C:8E6B: A5 BC
+	LDA screenLockFlag              ;C - - - - - 0x018E7B 0C:8E6B: A5 BC
 	BEQ loc_0C_8E8B                 ;C - - - - - 0x018E7D 0C:8E6D: F0 1C
 	LDA objX,X                      ;C - - - - - 0x018E7F 0C:8E6F: BD 60 03
 	SEC                             ;C - - - - - 0x018E82 0C:8E72: 38
@@ -1571,7 +1571,7 @@ loc_0C_8E8B:
 	JSR ApplyVelXSub                ;C - - - - - 0x018E9B 0C:8E8B: 20 A1 F1
 	JMP loc_0C_8EB4                 ;C - - - - - 0x018E9E 0C:8E8E: 4C B4 8E
 loc_0C_8E91:
-	LDA ram_00BC                    ;C - - - - - 0x018EA1 0C:8E91: A5 BC
+	LDA screenLockFlag              ;C - - - - - 0x018EA1 0C:8E91: A5 BC
 	BEQ loc_0C_8EB1                 ;C - - - - - 0x018EA3 0C:8E93: F0 1C
 	LDA objX,X                      ;C - - - - - 0x018EA5 0C:8E95: BD 60 03
 	SEC                             ;C - - - - - 0x018EA8 0C:8E98: 38
@@ -1623,7 +1623,7 @@ loc_0C_8EF5:
 	LDA objFacing,X                 ;C - - - - - 0x018F05 0C:8EF5: BD 60 04
 	AND #$01                        ;C - - - - - 0x018F08 0C:8EF8: 29 01
 	BEQ loc_0C_8F22                 ;C - - - - - 0x018F0A 0C:8EFA: F0 26
-	LDA ram_00BC                    ;C - - - - - 0x018F0C 0C:8EFC: A5 BC
+	LDA screenLockFlag              ;C - - - - - 0x018F0C 0C:8EFC: A5 BC
 	BEQ loc_0C_8F1C                 ;C - - - - - 0x018F0E 0C:8EFE: F0 1C
 	LDA objX,X                      ;C - - - - - 0x018F10 0C:8F00: BD 60 03
 	SEC                             ;C - - - - - 0x018F13 0C:8F03: 38
@@ -1642,7 +1642,7 @@ loc_0C_8F1C:
 	JSR ApplyVelXSub                ;C - - - - - 0x018F2C 0C:8F1C: 20 A1 F1
 	JMP loc_0C_8F45                 ;C - - - - - 0x018F2F 0C:8F1F: 4C 45 8F
 loc_0C_8F22:
-	LDA ram_00BC                    ;C - - - - - 0x018F32 0C:8F22: A5 BC
+	LDA screenLockFlag              ;C - - - - - 0x018F32 0C:8F22: A5 BC
 	BEQ loc_0C_8F42                 ;C - - - - - 0x018F34 0C:8F24: F0 1C
 	LDA objX,X                      ;C - - - - - 0x018F36 0C:8F26: BD 60 03
 	SEC                             ;C - - - - - 0x018F39 0C:8F29: 38
@@ -2220,7 +2220,7 @@ loc_0C_93E7:
 	LDA objFacing,X                 ;C - - - - - 0x0193F7 0C:93E7: BD 60 04
 	AND #$01                        ;C - - - - - 0x0193FA 0C:93EA: 29 01
 	BEQ loc_0C_9411                 ;C - - - - - 0x0193FC 0C:93EC: F0 23
-	LDA ram_00BC                    ;C - - - - - 0x0193FE 0C:93EE: A5 BC
+	LDA screenLockFlag              ;C - - - - - 0x0193FE 0C:93EE: A5 BC
 	BEQ loc_0C_940E                 ;C - - - - - 0x019400 0C:93F0: F0 1C
 	LDA objX,X                      ;C - - - - - 0x019402 0C:93F2: BD 60 03
 	SEC                             ;C - - - - - 0x019405 0C:93F5: 38
@@ -2238,7 +2238,7 @@ loc_0C_93E7:
 loc_0C_940E:
 	JMP loc_0C_942F                 ;C - - - - - 0x01941E 0C:940E: 4C 2F 94
 loc_0C_9411:
-	LDA ram_00BC                    ;C - - - - - 0x019421 0C:9411: A5 BC
+	LDA screenLockFlag              ;C - - - - - 0x019421 0C:9411: A5 BC
 	BEQ loc_0C_942F                 ;C - - - - - 0x019423 0C:9413: F0 1A
 	LDA objX,X                      ;C - - - - - 0x019425 0C:9415: BD 60 03
 	SEC                             ;C - - - - - 0x019428 0C:9418: 38
@@ -2289,7 +2289,7 @@ loc_0C_946D:
 	LDA objFacing,X                 ;C - - - - - 0x01947D 0C:946D: BD 60 04
 	AND #$01                        ;C - - - - - 0x019480 0C:9470: 29 01
 	BEQ loc_0C_9497                 ;C - - - - - 0x019482 0C:9472: F0 23
-	LDA ram_00BC                    ;C - - - - - 0x019484 0C:9474: A5 BC
+	LDA screenLockFlag              ;C - - - - - 0x019484 0C:9474: A5 BC
 	BEQ loc_0C_9494                 ;C - - - - - 0x019486 0C:9476: F0 1C
 	LDA objX,X                      ;C - - - - - 0x019488 0C:9478: BD 60 03
 	SEC                             ;C - - - - - 0x01948B 0C:947B: 38
@@ -2307,7 +2307,7 @@ loc_0C_946D:
 loc_0C_9494:
 	JMP loc_0C_94B5                 ;C - - - - - 0x0194A4 0C:9494: 4C B5 94
 loc_0C_9497:
-	LDA ram_00BC                    ;C - - - - - 0x0194A7 0C:9497: A5 BC
+	LDA screenLockFlag              ;C - - - - - 0x0194A7 0C:9497: A5 BC
 	BEQ loc_0C_94B5                 ;C - - - - - 0x0194A9 0C:9499: F0 1A
 	LDA objX,X                      ;C - - - - - 0x0194AB 0C:949B: BD 60 03
 	SEC                             ;C - - - - - 0x0194AE 0C:949E: 38
@@ -2354,7 +2354,7 @@ loc_0C_94EA:
 	LDA objFacing,X                 ;C - - - - - 0x0194FA 0C:94EA: BD 60 04
 	AND #$01                        ;C - - - - - 0x0194FD 0C:94ED: 29 01
 	BEQ loc_0C_9514                 ;C - - - - - 0x0194FF 0C:94EF: F0 23
-	LDA ram_00BC                    ;C - - - - - 0x019501 0C:94F1: A5 BC
+	LDA screenLockFlag              ;C - - - - - 0x019501 0C:94F1: A5 BC
 	BEQ loc_0C_9511                 ;C - - - - - 0x019503 0C:94F3: F0 1C
 	LDA objX,X                      ;C - - - - - 0x019505 0C:94F5: BD 60 03
 	SEC                             ;C - - - - - 0x019508 0C:94F8: 38
@@ -2372,7 +2372,7 @@ loc_0C_94EA:
 loc_0C_9511:
 	JMP loc_0C_9532                 ;C - - - - - 0x019521 0C:9511: 4C 32 95
 loc_0C_9514:
-	LDA ram_00BC                    ;C - - - - - 0x019524 0C:9514: A5 BC
+	LDA screenLockFlag              ;C - - - - - 0x019524 0C:9514: A5 BC
 	BEQ loc_0C_9511                 ;C - - - - - 0x019526 0C:9516: F0 F9
 	LDA objX,X                      ;C - - - - - 0x019528 0C:9518: BD 60 03
 	SEC                             ;C - - - - - 0x01952B 0C:951B: 38
@@ -2419,7 +2419,7 @@ loc_0C_9567:
 	LDA objFacing,X                 ;C - - - - - 0x019577 0C:9567: BD 60 04
 	AND #$01                        ;C - - - - - 0x01957A 0C:956A: 29 01
 	BEQ loc_0C_9591                 ;C - - - - - 0x01957C 0C:956C: F0 23
-	LDA ram_00BC                    ;C - - - - - 0x01957E 0C:956E: A5 BC
+	LDA screenLockFlag              ;C - - - - - 0x01957E 0C:956E: A5 BC
 	BEQ loc_0C_958E                 ;C - - - - - 0x019580 0C:9570: F0 1C
 	LDA objX,X                      ;C - - - - - 0x019582 0C:9572: BD 60 03
 	SEC                             ;C - - - - - 0x019585 0C:9575: 38
@@ -2437,7 +2437,7 @@ loc_0C_9567:
 loc_0C_958E:
 	JMP loc_0C_95AF                 ;C - - - - - 0x01959E 0C:958E: 4C AF 95
 loc_0C_9591:
-	LDA ram_00BC                    ;C - - - - - 0x0195A1 0C:9591: A5 BC
+	LDA screenLockFlag              ;C - - - - - 0x0195A1 0C:9591: A5 BC
 	BEQ loc_0C_95AF                 ;C - - - - - 0x0195A3 0C:9593: F0 1A
 	LDA objX,X                      ;C - - - - - 0x0195A5 0C:9595: BD 60 03
 	SEC                             ;C - - - - - 0x0195A8 0C:9598: 38
@@ -2501,7 +2501,7 @@ loc_0C_960C:
 	LDA objFacing,X                 ;C - - - - - 0x01961C 0C:960C: BD 60 04
 	AND #$01                        ;C - - - - - 0x01961F 0C:960F: 29 01
 	BEQ loc_0C_9639                 ;C - - - - - 0x019621 0C:9611: F0 26
-	LDA ram_00BC                    ;C - - - - - 0x019623 0C:9613: A5 BC
+	LDA screenLockFlag              ;C - - - - - 0x019623 0C:9613: A5 BC
 	BEQ loc_0C_9633                 ;C - - - - - 0x019625 0C:9615: F0 1C
 	LDA objX,X                      ;C - - - - - 0x019627 0C:9617: BD 60 03
 	SEC                             ;C - - - - - 0x01962A 0C:961A: 38
@@ -2520,7 +2520,7 @@ loc_0C_9633:
 	JSR ApplyVelXSub                ;C - - - - - 0x019643 0C:9633: 20 A1 F1
 	JMP loc_0C_965C                 ;C - - - - - 0x019646 0C:9636: 4C 5C 96
 loc_0C_9639:
-	LDA ram_00BC                    ;C - - - - - 0x019649 0C:9639: A5 BC
+	LDA screenLockFlag              ;C - - - - - 0x019649 0C:9639: A5 BC
 	BEQ loc_0C_9659                 ;C - - - - - 0x01964B 0C:963B: F0 1C
 	LDA objX,X                      ;C - - - - - 0x01964D 0C:963D: BD 60 03
 	SEC                             ;C - - - - - 0x019650 0C:9640: 38
@@ -2568,7 +2568,7 @@ EnemyAI_Kind0FTbl_9345_07:
 	LDA objFacing,X                 ;C - - - - - 0x0196A8 0C:9698: BD 60 04
 	AND #$01                        ;C - - - - - 0x0196AB 0C:969B: 29 01
 	BEQ loc_0C_96C8                 ;C - - - - - 0x0196AD 0C:969D: F0 29
-	LDA ram_00BC                    ;C - - - - - 0x0196AF 0C:969F: A5 BC
+	LDA screenLockFlag              ;C - - - - - 0x0196AF 0C:969F: A5 BC
 	BEQ loc_0C_96BF                 ;C - - - - - 0x0196B1 0C:96A1: F0 1C
 	LDA objX,X                      ;C - - - - - 0x0196B3 0C:96A3: BD 60 03
 	SEC                             ;C - - - - - 0x0196B6 0C:96A6: 38
@@ -2589,7 +2589,7 @@ loc_0C_96BF:
 loc_0C_96C5:
 	JMP loc_0C_9730                 ;C - - - - - 0x0196D5 0C:96C5: 4C 30 97
 loc_0C_96C8:
-	LDA ram_00BC                    ;C - - - - - 0x0196D8 0C:96C8: A5 BC
+	LDA screenLockFlag              ;C - - - - - 0x0196D8 0C:96C8: A5 BC
 	BEQ loc_0C_96E8                 ;C - - - - - 0x0196DA 0C:96CA: F0 1C
 	LDA objX,X                      ;C - - - - - 0x0196DC 0C:96CC: BD 60 03
 	SEC                             ;C - - - - - 0x0196DF 0C:96CF: 38
@@ -2687,7 +2687,7 @@ loc_0C_9794:
 	LDA objFacing,X                 ;C - - - - - 0x0197A4 0C:9794: BD 60 04
 	AND #$01                        ;C - - - - - 0x0197A7 0C:9797: 29 01
 	BEQ loc_0C_97C1                 ;C - - - - - 0x0197A9 0C:9799: F0 26
-	LDA ram_00BC                    ;C - - - - - 0x0197AB 0C:979B: A5 BC
+	LDA screenLockFlag              ;C - - - - - 0x0197AB 0C:979B: A5 BC
 	BEQ loc_0C_97BB                 ;C - - - - - 0x0197AD 0C:979D: F0 1C
 	LDA objX,X                      ;C - - - - - 0x0197AF 0C:979F: BD 60 03
 	SEC                             ;C - - - - - 0x0197B2 0C:97A2: 38
@@ -2706,7 +2706,7 @@ loc_0C_97BB:
 	JSR ApplyVelXAdd                ;C - - - - - 0x0197CB 0C:97BB: 20 83 F1
 	JMP loc_0C_97E4                 ;C - - - - - 0x0197CE 0C:97BE: 4C E4 97
 loc_0C_97C1:
-	LDA ram_00BC                    ;C - - - - - 0x0197D1 0C:97C1: A5 BC
+	LDA screenLockFlag              ;C - - - - - 0x0197D1 0C:97C1: A5 BC
 	BEQ loc_0C_97E1                 ;C - - - - - 0x0197D3 0C:97C3: F0 1C
 	LDA objX,X                      ;C - - - - - 0x0197D5 0C:97C5: BD 60 03
 	SEC                             ;C - - - - - 0x0197D8 0C:97C8: 38
@@ -2806,7 +2806,7 @@ loc_0C_988B:
 	LDA objFacing,X                 ;C - - - - - 0x01989B 0C:988B: BD 60 04
 	AND #$01                        ;C - - - - - 0x01989E 0C:988E: 29 01
 	BEQ loc_0C_98BB                 ;C - - - - - 0x0198A0 0C:9890: F0 29
-	LDA ram_00BC                    ;C - - - - - 0x0198A2 0C:9892: A5 BC
+	LDA screenLockFlag              ;C - - - - - 0x0198A2 0C:9892: A5 BC
 	BEQ loc_0C_98B2                 ;C - - - - - 0x0198A4 0C:9894: F0 1C
 	LDA objX,X                      ;C - - - - - 0x0198A6 0C:9896: BD 60 03
 	SEC                             ;C - - - - - 0x0198A9 0C:9899: 38
@@ -2827,7 +2827,7 @@ loc_0C_98B2:
 loc_0C_98B8:
 	JMP loc_0C_9912                 ;C - - - - - 0x0198C8 0C:98B8: 4C 12 99
 loc_0C_98BB:
-	LDA ram_00BC                    ;C - - - - - 0x0198CB 0C:98BB: A5 BC
+	LDA screenLockFlag              ;C - - - - - 0x0198CB 0C:98BB: A5 BC
 	BEQ loc_0C_98DB                 ;C - - - - - 0x0198CD 0C:98BD: F0 1C
 	LDA objX,X                      ;C - - - - - 0x0198CF 0C:98BF: BD 60 03
 	SEC                             ;C - - - - - 0x0198D2 0C:98C2: 38
@@ -2945,7 +2945,7 @@ loc_0C_99AC:
 	LDA objFacing,X                 ;C - - - - - 0x0199BC 0C:99AC: BD 60 04
 	AND #$01                        ;C - - - - - 0x0199BF 0C:99AF: 29 01
 	BEQ loc_0C_99D9                 ;C - - - - - 0x0199C1 0C:99B1: F0 26
-	LDA ram_00BC                    ;C - - - - - 0x0199C3 0C:99B3: A5 BC
+	LDA screenLockFlag              ;C - - - - - 0x0199C3 0C:99B3: A5 BC
 	BEQ loc_0C_99D3                 ;C - - - - - 0x0199C5 0C:99B5: F0 1C
 	LDA objX,X                      ;C - - - - - 0x0199C7 0C:99B7: BD 60 03
 	SEC                             ;C - - - - - 0x0199CA 0C:99BA: 38
@@ -2964,7 +2964,7 @@ loc_0C_99D3:
 	JSR ApplyVelXAdd                ;C - - - - - 0x0199E3 0C:99D3: 20 83 F1
 	JMP loc_0C_99FC                 ;C - - - - - 0x0199E6 0C:99D6: 4C FC 99
 loc_0C_99D9:
-	LDA ram_00BC                    ;C - - - - - 0x0199E9 0C:99D9: A5 BC
+	LDA screenLockFlag              ;C - - - - - 0x0199E9 0C:99D9: A5 BC
 	BEQ loc_0C_99F9                 ;C - - - - - 0x0199EB 0C:99DB: F0 1C
 	LDA objX,X                      ;C - - - - - 0x0199ED 0C:99DD: BD 60 03
 	SEC                             ;C - - - - - 0x0199F0 0C:99E0: 38
@@ -3047,7 +3047,7 @@ loc_0C_9A88:
 	LDA objFacing,X                 ;C - - - - - 0x019A98 0C:9A88: BD 60 04
 	AND #$01                        ;C - - - - - 0x019A9B 0C:9A8B: 29 01
 	BEQ loc_0C_9AB5                 ;C - - - - - 0x019A9D 0C:9A8D: F0 26
-	LDA ram_00BC                    ;C - - - - - 0x019A9F 0C:9A8F: A5 BC
+	LDA screenLockFlag              ;C - - - - - 0x019A9F 0C:9A8F: A5 BC
 	BEQ loc_0C_9AAF                 ;C - - - - - 0x019AA1 0C:9A91: F0 1C
 	LDA objX,X                      ;C - - - - - 0x019AA3 0C:9A93: BD 60 03
 	SEC                             ;C - - - - - 0x019AA6 0C:9A96: 38
@@ -3066,7 +3066,7 @@ loc_0C_9AAF:
 	JSR ApplyVelXAdd                ;C - - - - - 0x019ABF 0C:9AAF: 20 83 F1
 	JMP loc_0C_9AD8                 ;C - - - - - 0x019AC2 0C:9AB2: 4C D8 9A
 loc_0C_9AB5:
-	LDA ram_00BC                    ;C - - - - - 0x019AC5 0C:9AB5: A5 BC
+	LDA screenLockFlag              ;C - - - - - 0x019AC5 0C:9AB5: A5 BC
 	BEQ loc_0C_9AD5                 ;C - - - - - 0x019AC7 0C:9AB7: F0 1C
 	LDA objX,X                      ;C - - - - - 0x019AC9 0C:9AB9: BD 60 03
 	SEC                             ;C - - - - - 0x019ACC 0C:9ABC: 38

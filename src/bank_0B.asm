@@ -1091,20 +1091,20 @@ loc_0B_B707:
 	JSR FaceToPlayerFlag            ;c - - - - - 0x01771B 0B:B70B: 20 43 F3
 	LDA #$80                        ;c - - - - - 0x01771E 0B:B70E: A9 80
 	STA objActive,X                 ;c - - - - - 0x017720 0B:B710: 9D 00 03
-	LDA ram_0038                    ;c - - - - - 0x017723 0B:B713: A5 38
+	LDA grabTimer                   ;c - - - - - 0x017723 0B:B713: A5 38
 	BMI loc_0B_B743                 ;c - - - - - 0x017725 0B:B715: 30 2C
 	CMP #$0C                        ;c - - - - - 0x017727 0B:B717: C9 0C
 	BCC loc_0B_B743                 ;c - - - - - 0x017729 0B:B719: 90 28
 	LDA #$0C                        ;c - - - - - 0x01772B 0B:B71B: A9 0C
-	STA ram_0038                    ;c - - - - - 0x01772D 0B:B71D: 85 38
+	STA grabTimer                   ;c - - - - - 0x01772D 0B:B71D: 85 38
 	BNE loc_0B_B743                 ;c - - - - - 0x01772F 0B:B71F: D0 22
 loc_0B_B721:
 	LDA #$00                        ;C - - - - - 0x017731 0B:B721: A9 00
 	STA gameAction                  ;C - - - - - 0x017733 0B:B723: 85 30
 	STA objHitTimer,X               ;C - - - - - 0x017735 0B:B725: 9D E0 04
 	STA objGrabState,X              ;C - - - - - 0x017738 0B:B728: 9D F0 03
-	STA ram_0038                    ;C - - - - - 0x01773B 0B:B72B: 85 38
-	DEC ram_0038                    ;C - - - - - 0x01773D 0B:B72D: C6 38
+	STA grabTimer                   ;C - - - - - 0x01773B 0B:B72B: 85 38
+	DEC grabTimer                   ;C - - - - - 0x01773D 0B:B72D: C6 38
 	LDY playerId                    ;C - - - - - 0x01773F 0B:B72F: A4 34
 	LDA EnemyRandomJumpTbl_BD7C,Y   ;C - - - - - 0x017741 0B:B731: B9 7C BD
 	JSR SetChrBank2                 ;C - - - - - 0x017744 0B:B734: 20 40 F4
