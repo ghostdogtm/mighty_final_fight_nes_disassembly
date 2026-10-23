@@ -482,7 +482,7 @@ InitEndingPlayerObjTbl_AB2E:
 InitEndingPlayerObjTbl_AB31:
 	.hibytes InitEndingPlayerObjTbl_AB2E_00, InitEndingPlayerObjTbl_AB2E_01, InitEndingPlayerObjTbl_AB2E_02;- - - - - - 0x012B41 09:AB31:
 InitEndingPlayerObjTbl_AB2E_00:
-	LDA objActive                   ;c - - - - - 0x012B44 09:AB34: AD 00 03
+	LDA objActive                   ;c - - - - - 0x012B44 09:AB34: AD 00 03  ; Cody ending: executed in the Mesen ending test (docs/ending_test.md), after the continue-flag check at 0E:DF03
 	AND #$0F                        ;c - - - - - 0x012B47 09:AB37: 29 0F
 	BNE loc_09_AB7D                 ;c - - - - - 0x012B49 09:AB39: D0 42
 	LDA #$73                        ;c - - - - - 0x012B4B 09:AB3B: A9 73

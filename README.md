@@ -67,6 +67,8 @@ python tools/disasm.py --build      # згенерувати src/, зібрат�
 | `docs/PLAN.md` | план подальшого покращення дизасембля |
 | `tools/selftest.py` | самотест генератора на синтетичному ROM (`python tools/selftest.py`, потрібні ca65/ld65) |
 | `tools/lint_labels.py` | перевірка `tools/labels/*.txt`: дублікати імен/адрес, діапазони поза банком, перекриття code/data |
+| `tools/mesen/` | headless лог читань ROM у Mesen 2 (Lua-бот, `run_log.py`, `merge_logs.py`), див. `tools/mesen/README.md` |
+| `docs/rom_reads.md`, `docs/table_extents.txt`, `docs/ending_test.md` | результати логу: що виконувалось/читалось, мінімальні довжини таблиць, тест фіналу |
 | `Makefile` | `make`, `make gen`, `make check`, `make test` (потрібен make; для Windows є `assemble.bat`) |
 | `tools/reloc_test.py` | тест переміщуваності: збірка зі зсувом усіх змінних банків на $100 має змінити лише байти адрес |
 | `tools/chr_tool.py` | CHR ↔ `.chr` по 1 КБ ↔ PNG |

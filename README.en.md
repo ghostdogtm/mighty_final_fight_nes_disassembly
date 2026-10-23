@@ -69,6 +69,8 @@ in `tools/labels/*.txt` and regenerate.
 | `docs/PLAN.md` | plan for further improving the disassembler |
 | `tools/selftest.py` | generator self-test on a synthetic ROM (`python tools/selftest.py`, needs ca65/ld65) |
 | `tools/lint_labels.py` | lint of `tools/labels/*.txt`: duplicate names/addresses, ranges outside the bank, code/data overlaps |
+| `tools/mesen/` | headless ROM read log in Mesen 2 (Lua bot, `run_log.py`, `merge_logs.py`), see `tools/mesen/README.md` |
+| `docs/rom_reads.md`, `docs/table_extents.txt`, `docs/ending_test.md` | log results: what ran / was read, minimum table lengths, ending test |
 | `Makefile` | `make`, `make gen`, `make check`, `make test` (Windows users can use `assemble.bat`) |
 | `tools/reloc_test.py` | relocation test: rebuilds with all switchable banks moved by $100; only address bytes may change |
 | `tools/chr_tool.py` | CHR ↔ 1 KB `.chr` ↔ PNG |

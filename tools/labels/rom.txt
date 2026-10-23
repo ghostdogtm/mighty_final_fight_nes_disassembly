@@ -1598,3 +1598,4 @@ comment 0F:E1C1 per-player rows (3 bytes: Cody, Guy, Haggar; index = playerId); 
 06:8523 SndCmd10_Loop3 ; loop 3 / break 3 (cmd $10 and $14)
 06:8527 SndCmd11_Loop4 ; loop 4 / break 4 (cmd $11 and $15)
 06:855A SndCmd16_Jump ; unconditional jump in the stream (param = hi, next byte = lo)
+comment 09:AB34 Cody ending: executed in the Mesen ending test (docs/ending_test.md), after the continue-flag check at 0E:DF03
