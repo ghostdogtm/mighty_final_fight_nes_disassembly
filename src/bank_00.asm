@@ -236,7 +236,7 @@ loc_00_81FA:
 	STA weaponHeld                  ;C - - - - - 0x00021A 00:820A: 85 A9
 	STA gameAction                  ;C - - - - - 0x00021C 00:820C: 85 30
 	LDY playerId                    ;C - - - - - 0x00021E 00:820E: A4 34
-	LDA tbl_0F_E288,Y               ;C - - - - - 0x000220 00:8210: B9 88 E2
+	LDA PlayerRow_E288,Y            ;C - - - - - 0x000220 00:8210: B9 88 E2
 	STA playerStandAnim             ;C - - - - - 0x000223 00:8213: 85 6F
 	JSR ResetPlayerStand            ;C - - - - - 0x000225 00:8215: 20 AA CE
 loc_00_8218:
@@ -310,7 +310,7 @@ loc_00_829C:
 	LDA #$00                        ;C - - - - - 0x0002AC 00:829C: A9 00
 	STA gameAction                  ;C - - - - - 0x0002AE 00:829E: 85 30
 	LDY playerId                    ;C - - - - - 0x0002B0 00:82A0: A4 34
-	LDA tbl_0F_E288,Y               ;C - - - - - 0x0002B2 00:82A2: B9 88 E2
+	LDA PlayerRow_E288,Y            ;C - - - - - 0x0002B2 00:82A2: B9 88 E2
 	STA playerStandAnim             ;C - - - - - 0x0002B5 00:82A5: 85 6F
 	JSR ResetPlayerStand            ;C - - - - - 0x0002B7 00:82A7: 20 AA CE
 loc_00_82AA:
@@ -347,7 +347,7 @@ loc_00_82DB:
 	LDA #$00                        ;C - - - - - 0x0002F2 00:82E2: A9 00
 	STA gameAction                  ;C - - - - - 0x0002F4 00:82E4: 85 30
 	LDY playerId                    ;C - - - - - 0x0002F6 00:82E6: A4 34
-	LDA tbl_0F_E288,Y               ;C - - - - - 0x0002F8 00:82E8: B9 88 E2
+	LDA PlayerRow_E288,Y            ;C - - - - - 0x0002F8 00:82E8: B9 88 E2
 	STA playerStandAnim             ;C - - - - - 0x0002FB 00:82EB: 85 6F
 	LDA weaponHeld                  ;C - - - - - 0x0002FD 00:82ED: A5 A9
 	BNE loc_00_82F5                 ;C - - - - - 0x0002FF 00:82EF: D0 04
@@ -907,7 +907,7 @@ loc_00_874D:
 	LDA #$80                        ;C - - - - - 0x000773 00:8763: A9 80
 	STA objActive                   ;C - - - - - 0x000775 00:8765: 8D 00 03
 	LDY playerId                    ;C - - - - - 0x000778 00:8768: A4 34
-	LDA tbl_0F_E288,Y               ;C - - - - - 0x00077A 00:876A: B9 88 E2
+	LDA PlayerRow_E288,Y            ;C - - - - - 0x00077A 00:876A: B9 88 E2
 	STA playerStandAnim             ;C - - - - - 0x00077D 00:876D: 85 6F
 	JSR ResetPlayerStand            ;C - - - - - 0x00077F 00:876F: 20 AA CE
 	LDA ram_00BF                    ;C - - - - - 0x000782 00:8772: A5 BF
@@ -1023,7 +1023,7 @@ loc_00_8832:
 	LDA #$FF                        ;C - - - - - 0x00084F 00:883F: A9 FF
 	STA objVelYHi                   ;C - - - - - 0x000851 00:8841: 8D 30 04
 	LDY playerId                    ;C - - - - - 0x000854 00:8844: A4 34
-	LDA tbl_0F_E288,Y               ;C - - - - - 0x000856 00:8846: B9 88 E2
+	LDA PlayerRow_E288,Y            ;C - - - - - 0x000856 00:8846: B9 88 E2
 	STA playerStandAnim             ;C - - - - - 0x000859 00:8849: 85 6F
 	JSR ResetPlayerStand            ;C - - - - - 0x00085B 00:884B: 20 AA CE
 loc_00_884E:
@@ -1352,7 +1352,7 @@ loc_00_8AD3:
 	STA ram_00B3                    ;C - - - - - 0x000B03 00:8AF3: 85 B3
 	JSR ResetPlayerStand            ;C - - - - - 0x000B05 00:8AF5: 20 AA CE
 	LDY playerId                    ;C - - - - - 0x000B08 00:8AF8: A4 34
-	LDA tbl_0F_E288,Y               ;C - - - - - 0x000B0A 00:8AFA: B9 88 E2
+	LDA PlayerRow_E288,Y            ;C - - - - - 0x000B0A 00:8AFA: B9 88 E2
 	STA playerStandAnim             ;C - - - - - 0x000B0D 00:8AFD: 85 6F
 loc_00_8AFF:
 	RTS                             ;C - - - - - 0x000B0F 00:8AFF: 60
@@ -1413,11 +1413,11 @@ loc_00_8B54:
 	LDA #$04                        ;C - - - - - 0x000B80 00:8B70: A9 04
 	STA gameAction                  ;C - - - - - 0x000B82 00:8B72: 85 30
 	LDY playerId                    ;C - - - - - 0x000B84 00:8B74: A4 34
-	LDA GameActionDispatch00Tbl_E213,Y;C - - - - - 0x000B86 00:8B76: B9 13 E2
+	LDA PlayerRow_E213,Y            ;C - - - - - 0x000B86 00:8B76: B9 13 E2
 	JSR SetPlayerAnim               ;C - - - - - 0x000B89 00:8B79: 20 94 F2
-	LDA GameActionDispatch00Tbl_E25B,Y;C - - - - - 0x000B8C 00:8B7C: B9 5B E2
+	LDA PlayerRow_E25B,Y            ;C - - - - - 0x000B8C 00:8B7C: B9 5B E2
 	JSR SetChrBank2                 ;C - - - - - 0x000B8F 00:8B7F: 20 40 F4
-	LDA tbl_0F_E288,Y               ;C - - - - - 0x000B92 00:8B82: B9 88 E2
+	LDA PlayerRow_E288,Y            ;C - - - - - 0x000B92 00:8B82: B9 88 E2
 	STA playerStandAnim             ;C - - - - - 0x000B95 00:8B85: 85 6F
 	LDA #$3C                        ;C - - - - - 0x000B97 00:8B87: A9 3C
 	STA ram_0038                    ;C - - - - - 0x000B99 00:8B89: 85 38
@@ -1436,7 +1436,7 @@ loc_00_8B98:
 	LDA #$80                        ;C - - - - - 0x000BB1 00:8BA1: A9 80
 	STA objActive                   ;C - - - - - 0x000BB3 00:8BA3: 8D 00 03
 	LDY playerId                    ;C - - - - - 0x000BB6 00:8BA6: A4 34
-	LDA tbl_0F_E288,Y               ;C - - - - - 0x000BB8 00:8BA8: B9 88 E2
+	LDA PlayerRow_E288,Y            ;C - - - - - 0x000BB8 00:8BA8: B9 88 E2
 	STA playerStandAnim             ;C - - - - - 0x000BBB 00:8BAB: 85 6F
 	JSR ResetPlayerStand            ;C - - - - - 0x000BBD 00:8BAD: 20 AA CE
 	RTS                             ;C - - - - - 0x000BC0 00:8BB0: 60
@@ -1486,11 +1486,11 @@ loc_00_8BF0:
 	LDA #$04                        ;C - - - - - 0x000C1C 00:8C0C: A9 04
 	STA gameAction                  ;C - - - - - 0x000C1E 00:8C0E: 85 30
 	LDY playerId                    ;C - - - - - 0x000C20 00:8C10: A4 34
-	LDA GameActionDispatch00Tbl_E213,Y;C - - - - - 0x000C22 00:8C12: B9 13 E2
+	LDA PlayerRow_E213,Y            ;C - - - - - 0x000C22 00:8C12: B9 13 E2
 	JSR SetPlayerAnim               ;C - - - - - 0x000C25 00:8C15: 20 94 F2
-	LDA GameActionDispatch00Tbl_E25B,Y;C - - - - - 0x000C28 00:8C18: B9 5B E2
+	LDA PlayerRow_E25B,Y            ;C - - - - - 0x000C28 00:8C18: B9 5B E2
 	JSR SetChrBank2                 ;C - - - - - 0x000C2B 00:8C1B: 20 40 F4
-	LDA tbl_0F_E288,Y               ;C - - - - - 0x000C2E 00:8C1E: B9 88 E2
+	LDA PlayerRow_E288,Y            ;C - - - - - 0x000C2E 00:8C1E: B9 88 E2
 	STA playerStandAnim             ;C - - - - - 0x000C31 00:8C21: 85 6F
 	LDA #$3C                        ;C - - - - - 0x000C33 00:8C23: A9 3C
 	STA ram_0038                    ;C - - - - - 0x000C35 00:8C25: 85 38
@@ -1546,11 +1546,11 @@ loc_00_8C70:
 	LDA #$04                        ;C - - - - - 0x000C9C 00:8C8C: A9 04
 	STA gameAction                  ;C - - - - - 0x000C9E 00:8C8E: 85 30
 	LDY playerId                    ;C - - - - - 0x000CA0 00:8C90: A4 34
-	LDA GameActionDispatch00Tbl_E213,Y;C - - - - - 0x000CA2 00:8C92: B9 13 E2
+	LDA PlayerRow_E213,Y            ;C - - - - - 0x000CA2 00:8C92: B9 13 E2
 	JSR SetPlayerAnim               ;C - - - - - 0x000CA5 00:8C95: 20 94 F2
-	LDA GameActionDispatch00Tbl_E25B,Y;C - - - - - 0x000CA8 00:8C98: B9 5B E2
+	LDA PlayerRow_E25B,Y            ;C - - - - - 0x000CA8 00:8C98: B9 5B E2
 	JSR SetChrBank2                 ;C - - - - - 0x000CAB 00:8C9B: 20 40 F4
-	LDA tbl_0F_E288,Y               ;C - - - - - 0x000CAE 00:8C9E: B9 88 E2
+	LDA PlayerRow_E288,Y            ;C - - - - - 0x000CAE 00:8C9E: B9 88 E2
 	STA playerStandAnim             ;C - - - - - 0x000CB1 00:8CA1: 85 6F
 	LDA #$3C                        ;C - - - - - 0x000CB3 00:8CA3: A9 3C
 	STA ram_0038                    ;C - - - - - 0x000CB5 00:8CA5: 85 38
@@ -1659,7 +1659,7 @@ loc_00_8D6F:
 	STA ram_00B3                    ;C - - - - - 0x000D8A 00:8D7A: 85 B3
 	STA actionStep                  ;C - - - - - 0x000D8C 00:8D7C: 85 35
 	LDY playerId                    ;C - - - - - 0x000D8E 00:8D7E: A4 34
-	LDA tbl_0F_E288,Y               ;C - - - - - 0x000D90 00:8D80: B9 88 E2
+	LDA PlayerRow_E288,Y            ;C - - - - - 0x000D90 00:8D80: B9 88 E2
 	STA playerStandAnim             ;C - - - - - 0x000D93 00:8D83: 85 6F
 	JSR ResetPlayerStand            ;C - - - - - 0x000D95 00:8D85: 20 AA CE
 loc_00_8D88:
@@ -1688,9 +1688,9 @@ loc_00_8DAB:
 loc_00_8DAD:
 	STA objFacing                   ;C - - - - - 0x000DBD 00:8DAD: 8D 60 04
 	LDY playerId                    ;C - - - - - 0x000DC0 00:8DB0: A4 34
-	LDA tbl_0F_E1C1,Y               ;C - - - - - 0x000DC2 00:8DB2: B9 C1 E1
+	LDA PlayerRow_E1C1,Y            ;C - - - - - 0x000DC2 00:8DB2: B9 C1 E1
 	STA objVelXLo                   ;C - - - - - 0x000DC5 00:8DB5: 8D 00 04
-	LDA tbl_0F_E1C4,Y               ;C - - - - - 0x000DC8 00:8DB8: B9 C4 E1
+	LDA PlayerRow_E1C4,Y            ;C - - - - - 0x000DC8 00:8DB8: B9 C4 E1
 	STA objVelXHi                   ;C - - - - - 0x000DCB 00:8DBB: 8D 10 04
 	INC objActive                   ;C - - - - - 0x000DCE 00:8DBE: EE 00 03
 loc_00_8DC1:
@@ -1711,9 +1711,9 @@ loc_00_8DD1:
 	BNE loc_00_8DE0                 ;c - - - - - 0x000DEE 00:8DDE: D0 00
 loc_00_8DE0:
 	LDY playerId                    ;C - - - - - 0x000DF0 00:8DE0: A4 34
-	LDA tbl_0F_E219,Y               ;C - - - - - 0x000DF2 00:8DE2: B9 19 E2
+	LDA PlayerRow_E219,Y            ;C - - - - - 0x000DF2 00:8DE2: B9 19 E2
 	JSR SetPlayerAnim               ;C - - - - - 0x000DF5 00:8DE5: 20 94 F2
-	LDA tbl_0F_E22E,Y               ;C - - - - - 0x000DF8 00:8DE8: B9 2E E2
+	LDA PlayerRow_E22E,Y            ;C - - - - - 0x000DF8 00:8DE8: B9 2E E2
 	JSR SetChrBank2                 ;C - - - - - 0x000DFB 00:8DEB: 20 40 F4
 	LDA objY                        ;C - - - - - 0x000DFE 00:8DEE: AD C0 03
 	CMP #$A8                        ;C - - - - - 0x000E01 00:8DF1: C9 A8
@@ -1778,9 +1778,9 @@ loc_00_8E5F:
 	STA objKind                     ;C - - - - - 0x000E79 00:8E69: 8D 20 03
 	JSR LoadPlayerHealthByLevel     ;C - - - - - 0x000E7C 00:8E6C: 20 33 DE
 	LDY playerId                    ;C - - - - - 0x000E7F 00:8E6F: A4 34
-	LDA tbl_0F_E219,Y               ;C - - - - - 0x000E81 00:8E71: B9 19 E2
+	LDA PlayerRow_E219,Y            ;C - - - - - 0x000E81 00:8E71: B9 19 E2
 	JSR SetPlayerAnim               ;C - - - - - 0x000E84 00:8E74: 20 94 F2
-	LDA tbl_0F_E22E,Y               ;C - - - - - 0x000E87 00:8E77: B9 2E E2
+	LDA PlayerRow_E22E,Y            ;C - - - - - 0x000E87 00:8E77: B9 2E E2
 	JSR SetChrBank2                 ;C - - - - - 0x000E8A 00:8E7A: 20 40 F4
 	INC objActive                   ;C - - - - - 0x000E8D 00:8E7D: EE 00 03
 	LDA #$80                        ;C - - - - - 0x000E90 00:8E80: A9 80
@@ -1827,7 +1827,7 @@ loc_00_8E9E:
 	JSR ResetPlayerStand            ;C - - - - - 0x000EE4 00:8ED4: 20 AA CE
 	JSR SetHopVelY                  ;C - - - - - 0x000EE7 00:8ED7: 20 6E F2
 	LDY playerId                    ;C - - - - - 0x000EEA 00:8EDA: A4 34
-	LDA tbl_0F_E288,Y               ;C - - - - - 0x000EEC 00:8EDC: B9 88 E2
+	LDA PlayerRow_E288,Y            ;C - - - - - 0x000EEC 00:8EDC: B9 88 E2
 	STA playerStandAnim             ;C - - - - - 0x000EEF 00:8EDF: 85 6F
 	LDA gameOverFlag                ;C - - - - - 0x000EF1 00:8EE1: A5 62
 	CMP #$B5                        ;C - - - - - 0x000EF3 00:8EE3: C9 B5
@@ -1920,11 +1920,11 @@ loc_00_8F82:
 	LDA #$80                        ;C - - - - - 0x000FA3 00:8F93: A9 80
 	STA objActive                   ;C - - - - - 0x000FA5 00:8F95: 8D 00 03
 	LDY playerId                    ;C - - - - - 0x000FA8 00:8F98: A4 34
-	LDA tbl_0F_E288,Y               ;C - - - - - 0x000FAA 00:8F9A: B9 88 E2
+	LDA PlayerRow_E288,Y            ;C - - - - - 0x000FAA 00:8F9A: B9 88 E2
 	STA playerStandAnim             ;C - - - - - 0x000FAD 00:8F9D: 85 6F
-	LDA tbl_0F_E1C1,Y               ;C - - - - - 0x000FAF 00:8F9F: B9 C1 E1
+	LDA PlayerRow_E1C1,Y            ;C - - - - - 0x000FAF 00:8F9F: B9 C1 E1
 	STA objVelXLo                   ;C - - - - - 0x000FB2 00:8FA2: 8D 00 04
-	LDA tbl_0F_E1C4,Y               ;C - - - - - 0x000FB5 00:8FA5: B9 C4 E1
+	LDA PlayerRow_E1C4,Y            ;C - - - - - 0x000FB5 00:8FA5: B9 C4 E1
 	STA objVelXHi                   ;C - - - - - 0x000FB8 00:8FA8: 8D 10 04
 	JSR ResetPlayerStand            ;C - - - - - 0x000FBB 00:8FAB: 20 AA CE
 loc_00_8FAE:
@@ -1979,31 +1979,31 @@ GameActionDispatch00Tbl_8011_1E:
 	LDA #$00                        ;C - - - - - 0x00100F 00:8FFF: A9 00
 	STA ram_00BB                    ;C - - - - - 0x001011 00:9001: 85 BB
 	LDY playerId                    ;C - - - - - 0x001013 00:9003: A4 34
-	LDA tbl_0F_E1C1,Y               ;C - - - - - 0x001015 00:9005: B9 C1 E1
+	LDA PlayerRow_E1C1,Y            ;C - - - - - 0x001015 00:9005: B9 C1 E1
 	STA objVelXLo                   ;C - - - - - 0x001018 00:9008: 8D 00 04
-	LDA tbl_0F_E1C4,Y               ;C - - - - - 0x00101B 00:900B: B9 C4 E1
+	LDA PlayerRow_E1C4,Y            ;C - - - - - 0x00101B 00:900B: B9 C4 E1
 	STA objVelXHi                   ;C - - - - - 0x00101E 00:900E: 8D 10 04
-	LDA tbl_0F_E1C7,Y               ;C - - - - - 0x001021 00:9011: B9 C7 E1
+	LDA PlayerRow_E1C7,Y            ;C - - - - - 0x001021 00:9011: B9 C7 E1
 	STA objVelYLo                   ;C - - - - - 0x001024 00:9014: 8D 20 04
-	LDA tbl_0F_E1CA,Y               ;C - - - - - 0x001027 00:9017: B9 CA E1
+	LDA PlayerRow_E1CA,Y            ;C - - - - - 0x001027 00:9017: B9 CA E1
 	STA objVelYHi                   ;C - - - - - 0x00102A 00:901A: 8D 30 04
 	JSR SetPlayerFlag40             ;C - - - - - 0x00102D 00:901D: 20 3F F0
 	LDA weaponHeld                  ;C - - - - - 0x001030 00:9020: A5 A9
 	BNE loc_00_9035                 ;C - - - - - 0x001032 00:9022: D0 11
 	LDA objAnim                     ;C - - - - - 0x001034 00:9024: AD 80 05
-	CMP tbl_0F_E273,Y               ;C - - - - - 0x001037 00:9027: D9 73 E2
+	CMP PlayerRow_E273,Y            ;C - - - - - 0x001037 00:9027: D9 73 E2
 	BEQ loc_00_9049                 ;C - - - - - 0x00103A 00:902A: F0 1D
-	LDA tbl_0F_E1E6,Y               ;C - - - - - 0x00103C 00:902C: B9 E6 E1
+	LDA PlayerRow_E1E6,Y            ;C - - - - - 0x00103C 00:902C: B9 E6 E1
 	JSR SetPlayerAnim               ;C - - - - - 0x00103F 00:902F: 20 94 F2
 	JMP loc_00_9043                 ;C - - - - - 0x001042 00:9032: 4C 43 90
 loc_00_9035:
 	LDA objAnim                     ;c - - - - - 0x001045 00:9035: AD 80 05
-	CMP GameActionDispatch00Tbl_E29A,Y;c - - - - - 0x001048 00:9038: D9 9A E2
+	CMP PlayerRow_E29A,Y            ;c - - - - - 0x001048 00:9038: D9 9A E2
 	BEQ loc_00_9049                 ;c - - - - - 0x00104B 00:903B: F0 0C
-	LDA GameActionDispatch00Tbl_E204,Y;c - - - - - 0x00104D 00:903D: B9 04 E2
+	LDA PlayerRow_E204,Y            ;c - - - - - 0x00104D 00:903D: B9 04 E2
 	JSR SetPlayerAnim               ;c - - - - - 0x001050 00:9040: 20 94 F2
 loc_00_9043:
-	LDA tbl_0F_E22B,Y               ;C - - - - - 0x001053 00:9043: B9 2B E2
+	LDA PlayerRow_E22B,Y            ;C - - - - - 0x001053 00:9043: B9 2B E2
 	JSR SetChrBank2                 ;C - - - - - 0x001056 00:9046: 20 40 F4
 loc_00_9049:
 	LDA objY                        ;C - - - - - 0x001059 00:9049: AD C0 03
@@ -2040,16 +2040,16 @@ loc_00_9073:
 	LDA objVelYHi                   ;C - - - - - 0x001098 00:9088: AD 30 04
 	BMI loc_00_909E                 ;C - - - - - 0x00109B 00:908B: 30 11
 	LDY playerId                    ;C - - - - - 0x00109D 00:908D: A4 34
-	LDA tbl_0F_E1E9,Y               ;C - - - - - 0x00109F 00:908F: B9 E9 E1
+	LDA PlayerRow_E1E9,Y            ;C - - - - - 0x00109F 00:908F: B9 E9 E1
 	JSR SetPlayerAnim               ;C - - - - - 0x0010A2 00:9092: 20 94 F2
-	LDA tbl_0F_E22E,Y               ;C - - - - - 0x0010A5 00:9095: B9 2E E2
+	LDA PlayerRow_E22E,Y            ;C - - - - - 0x0010A5 00:9095: B9 2E E2
 	JSR SetChrBank2                 ;C - - - - - 0x0010A8 00:9098: 20 40 F4
 	JMP loc_00_90AC                 ;C - - - - - 0x0010AB 00:909B: 4C AC 90
 loc_00_909E:
 	LDY playerId                    ;C - - - - - 0x0010AE 00:909E: A4 34
-	LDA tbl_0F_E219,Y               ;C - - - - - 0x0010B0 00:90A0: B9 19 E2
+	LDA PlayerRow_E219,Y            ;C - - - - - 0x0010B0 00:90A0: B9 19 E2
 	JSR SetPlayerAnim               ;C - - - - - 0x0010B3 00:90A3: 20 94 F2
-	LDA tbl_0F_E22E,Y               ;C - - - - - 0x0010B6 00:90A6: B9 2E E2
+	LDA PlayerRow_E22E,Y            ;C - - - - - 0x0010B6 00:90A6: B9 2E E2
 	JSR SetChrBank2                 ;C - - - - - 0x0010B9 00:90A9: 20 40 F4
 loc_00_90AC:
 	JSR ApplyVelXAdd                ;C - - - - - 0x0010BC 00:90AC: 20 83 F1
@@ -2073,9 +2073,9 @@ GameActionDispatch00Tbl_8011_1F:
 	BNE loc_00_9103                 ;C - - - - - 0x0010DD 00:90CD: D0 34
 loc_00_90CF:
 	LDY playerId                    ;C - - - - - 0x0010DF 00:90CF: A4 34
-	LDA tbl_0F_E210,Y               ;C - - - - - 0x0010E1 00:90D1: B9 10 E2
+	LDA PlayerRow_E210,Y            ;C - - - - - 0x0010E1 00:90D1: B9 10 E2
 	JSR SetPlayerAnim               ;C - - - - - 0x0010E4 00:90D4: 20 94 F2
-	LDA tbl_0F_E258,Y               ;C - - - - - 0x0010E7 00:90D7: B9 58 E2
+	LDA PlayerRow_E258,Y            ;C - - - - - 0x0010E7 00:90D7: B9 58 E2
 	JSR SetChrBank2                 ;C - - - - - 0x0010EA 00:90DA: 20 40 F4
 	LDA objFlags                    ;C - - - - - 0x0010ED 00:90DD: AD 60 05
 	CMP #$D0                        ;C - - - - - 0x0010F0 00:90E0: C9 D0
@@ -2202,19 +2202,19 @@ GameActionDispatch00Tbl_8011_26:
 	JSR ClearTimerA4                ;C - - - - - 0x0011D9 00:91C9: 20 36 F4
 	LDY playerId                    ;C - - - - - 0x0011DC 00:91CC: A4 34
 	LDA objAnim                     ;C - - - - - 0x0011DE 00:91CE: AD 80 05
-	CMP tbl_0F_E273,Y               ;C - - - - - 0x0011E1 00:91D1: D9 73 E2
+	CMP PlayerRow_E273,Y            ;C - - - - - 0x0011E1 00:91D1: D9 73 E2
 	BEQ loc_00_91FD                 ;C - - - - - 0x0011E4 00:91D4: F0 27
-	LDA tbl_0F_E1E6,Y               ;C - - - - - 0x0011E6 00:91D6: B9 E6 E1
+	LDA PlayerRow_E1E6,Y            ;C - - - - - 0x0011E6 00:91D6: B9 E6 E1
 	JSR SetPlayerAnim               ;C - - - - - 0x0011E9 00:91D9: 20 94 F2
-	LDA tbl_0F_E22B,Y               ;C - - - - - 0x0011EC 00:91DC: B9 2B E2
+	LDA PlayerRow_E22B,Y            ;C - - - - - 0x0011EC 00:91DC: B9 2B E2
 	JSR SetChrBank2                 ;C - - - - - 0x0011EF 00:91DF: 20 40 F4
-	LDA tbl_0F_E1C1,Y               ;C - - - - - 0x0011F2 00:91E2: B9 C1 E1
+	LDA PlayerRow_E1C1,Y            ;C - - - - - 0x0011F2 00:91E2: B9 C1 E1
 	STA objVelXLo                   ;C - - - - - 0x0011F5 00:91E5: 8D 00 04
-	LDA tbl_0F_E1C4,Y               ;C - - - - - 0x0011F8 00:91E8: B9 C4 E1
+	LDA PlayerRow_E1C4,Y            ;C - - - - - 0x0011F8 00:91E8: B9 C4 E1
 	STA objVelXHi                   ;C - - - - - 0x0011FB 00:91EB: 8D 10 04
-	LDA tbl_0F_E1C7,Y               ;C - - - - - 0x0011FE 00:91EE: B9 C7 E1
+	LDA PlayerRow_E1C7,Y            ;C - - - - - 0x0011FE 00:91EE: B9 C7 E1
 	STA objVelYLo                   ;C - - - - - 0x001201 00:91F1: 8D 20 04
-	LDA tbl_0F_E1CA,Y               ;C - - - - - 0x001204 00:91F4: B9 CA E1
+	LDA PlayerRow_E1CA,Y            ;C - - - - - 0x001204 00:91F4: B9 CA E1
 	STA objVelYHi                   ;C - - - - - 0x001207 00:91F7: 8D 30 04
 	JSR SetPlayerFlag40             ;C - - - - - 0x00120A 00:91FA: 20 3F F0
 loc_00_91FD:
@@ -2257,9 +2257,9 @@ loc_00_9245:
 	RTS                             ;C - - - - - 0x001258 00:9248: 60
 loc_00_9249:
 	LDY playerId                    ;C - - - - - 0x001259 00:9249: A4 34
-	LDA tbl_0F_E210,Y               ;C - - - - - 0x00125B 00:924B: B9 10 E2
+	LDA PlayerRow_E210,Y            ;C - - - - - 0x00125B 00:924B: B9 10 E2
 	JSR SetPlayerAnim               ;C - - - - - 0x00125E 00:924E: 20 94 F2
-	LDA tbl_0F_E258,Y               ;C - - - - - 0x001261 00:9251: B9 58 E2
+	LDA PlayerRow_E258,Y            ;C - - - - - 0x001261 00:9251: B9 58 E2
 	JSR SetChrBank2                 ;C - - - - - 0x001264 00:9254: 20 40 F4
 	INC objActive                   ;C - - - - - 0x001267 00:9257: EE 00 03
 	LDA #$6E                        ;C - - - - - 0x00126A 00:925A: A9 6E
@@ -2370,18 +2370,18 @@ loc_00_9319:
 	STA weaponHeld                  ;C - - - - - 0x001335 00:9325: 85 A9
 loc_00_9327:
 	LDY playerId                    ;C - - - - - 0x001337 00:9327: A4 34
-	LDA tbl_0F_E1E3,Y               ;C - - - - - 0x001339 00:9329: B9 E3 E1
+	LDA PlayerRow_E1E3,Y            ;C - - - - - 0x001339 00:9329: B9 E3 E1
 	JSR SetPlayerAnim               ;C - - - - - 0x00133C 00:932C: 20 94 F2
-	LDA tbl_0F_E22B,Y               ;C - - - - - 0x00133F 00:932F: B9 2B E2
+	LDA PlayerRow_E22B,Y            ;C - - - - - 0x00133F 00:932F: B9 2B E2
 	JSR SetChrBank2                 ;C - - - - - 0x001342 00:9332: 20 40 F4
 	LDY playerId                    ;C - - - - - 0x001345 00:9335: A4 34
-	LDA tbl_0F_E1C1,Y               ;C - - - - - 0x001347 00:9337: B9 C1 E1
+	LDA PlayerRow_E1C1,Y            ;C - - - - - 0x001347 00:9337: B9 C1 E1
 	STA objVelXLo                   ;C - - - - - 0x00134A 00:933A: 8D 00 04
-	LDA tbl_0F_E1C4,Y               ;C - - - - - 0x00134D 00:933D: B9 C4 E1
+	LDA PlayerRow_E1C4,Y            ;C - - - - - 0x00134D 00:933D: B9 C4 E1
 	STA objVelXHi                   ;C - - - - - 0x001350 00:9340: 8D 10 04
-	LDA tbl_0F_E1C7,Y               ;C - - - - - 0x001353 00:9343: B9 C7 E1
+	LDA PlayerRow_E1C7,Y            ;C - - - - - 0x001353 00:9343: B9 C7 E1
 	STA objVelYLo                   ;C - - - - - 0x001356 00:9346: 8D 20 04
-	LDA tbl_0F_E1CA,Y               ;C - - - - - 0x001359 00:9349: B9 CA E1
+	LDA PlayerRow_E1CA,Y            ;C - - - - - 0x001359 00:9349: B9 CA E1
 	STA objVelYHi                   ;C - - - - - 0x00135C 00:934C: 8D 30 04
 	INC objActive                   ;C - - - - - 0x00135F 00:934F: EE 00 03
 loc_00_9352:
@@ -2460,7 +2460,7 @@ SpawnObj6BTbl_9391_00:
 	CMP #$02                        ;C - - - - - 0x001404 00:93F4: C9 02
 	BEQ loc_00_9413                 ;C - - - - - 0x001406 00:93F6: F0 1B
 	LDY playerId                    ;C - - - - - 0x001408 00:93F8: A4 34
-	LDA tbl_0F_E1E6,Y               ;C - - - - - 0x00140A 00:93FA: B9 E6 E1
+	LDA PlayerRow_E1E6,Y            ;C - - - - - 0x00140A 00:93FA: B9 E6 E1
 	JSR SetPlayerAnim               ;C - - - - - 0x00140D 00:93FD: 20 94 F2
 	LDA objX                        ;C - - - - - 0x001410 00:9400: AD 60 03
 	CMP #$E0                        ;C - - - - - 0x001413 00:9403: C9 E0
@@ -2519,11 +2519,11 @@ SpawnObj6BTbl_9391_01:
 	BEQ loc_00_94C5                 ;C - - - - - 0x001479 00:9469: F0 5A
 	LDY playerId                    ;C - - - - - 0x00147B 00:946B: A4 34
 	LDA objAnim                     ;C - - - - - 0x00147D 00:946D: AD 80 05
-	CMP tbl_0F_E273,Y               ;C - - - - - 0x001480 00:9470: D9 73 E2
+	CMP PlayerRow_E273,Y            ;C - - - - - 0x001480 00:9470: D9 73 E2
 	BEQ loc_00_9481                 ;C - - - - - 0x001483 00:9473: F0 0C
-	LDA tbl_0F_E1E6,Y               ;C - - - - - 0x001485 00:9475: B9 E6 E1
+	LDA PlayerRow_E1E6,Y            ;C - - - - - 0x001485 00:9475: B9 E6 E1
 	JSR SetPlayerAnim               ;C - - - - - 0x001488 00:9478: 20 94 F2
-	LDA tbl_0F_E22B,Y               ;C - - - - - 0x00148B 00:947B: B9 2B E2
+	LDA PlayerRow_E22B,Y            ;C - - - - - 0x00148B 00:947B: B9 2B E2
 	JSR SetChrBank2                 ;C - - - - - 0x00148E 00:947E: 20 40 F4
 loc_00_9481:
 	JSR ApplyVelXAdd                ;C - - - - - 0x001491 00:9481: 20 83 F1
@@ -2541,9 +2541,9 @@ loc_00_9496:
 	LDY #$02                        ;C - - - - - 0x0014AB 00:949B: A0 02
 	JSR QueueVram128                ;C - - - - - 0x0014AD 00:949D: 20 7A 98
 	LDY playerId                    ;C - - - - - 0x0014B0 00:94A0: A4 34
-	LDA tbl_0F_E219,Y               ;C - - - - - 0x0014B2 00:94A2: B9 19 E2
+	LDA PlayerRow_E219,Y            ;C - - - - - 0x0014B2 00:94A2: B9 19 E2
 	JSR SetPlayerAnim               ;C - - - - - 0x0014B5 00:94A5: 20 94 F2
-	LDA tbl_0F_E22E,Y               ;C - - - - - 0x0014B8 00:94A8: B9 2E E2
+	LDA PlayerRow_E22E,Y            ;C - - - - - 0x0014B8 00:94A8: B9 2E E2
 	JSR SetChrBank2                 ;C - - - - - 0x0014BB 00:94AB: 20 40 F4
 	INC objActive                   ;C - - - - - 0x0014BE 00:94AE: EE 00 03
 	LDA #$00                        ;C - - - - - 0x0014C1 00:94B1: A9 00
@@ -2637,7 +2637,7 @@ SpawnObj6BTbl_9391_03:
 	BEQ loc_00_957C                 ;C - - - - - 0x00157C 00:956C: F0 0E
 	INC objActive                   ;C - - - - - 0x00157E 00:956E: EE 00 03
 	LDY playerId                    ;C - - - - - 0x001581 00:9571: A4 34
-	LDA tbl_0F_E1E6,Y               ;C - - - - - 0x001583 00:9573: B9 E6 E1
+	LDA PlayerRow_E1E6,Y            ;C - - - - - 0x001583 00:9573: B9 E6 E1
 	JSR SetPlayerAnim               ;C - - - - - 0x001586 00:9576: 20 94 F2
 	JSR SetPlayerFlag40             ;C - - - - - 0x001589 00:9579: 20 3F F0
 loc_00_957C:
@@ -2661,7 +2661,7 @@ SpawnObj6BTbl_9391_07:
 	LDA #$21                        ;C - - - - - 0x0015AD 00:959D: A9 21
 	JSR QueueSound                  ;C - - - - - 0x0015AF 00:959F: 20 4C F3
 	LDY playerId                    ;C - - - - - 0x0015B2 00:95A2: A4 34
-	LDA tbl_0F_E1E6,Y               ;C - - - - - 0x0015B4 00:95A4: B9 E6 E1
+	LDA PlayerRow_E1E6,Y            ;C - - - - - 0x0015B4 00:95A4: B9 E6 E1
 	JSR SetPlayerAnim               ;C - - - - - 0x0015B7 00:95A7: 20 94 F2
 	LDA objX                        ;C - - - - - 0x0015BA 00:95AA: AD 60 03
 	CMP #$E0                        ;C - - - - - 0x0015BD 00:95AD: C9 E0
@@ -2704,9 +2704,9 @@ loc_00_95F0:
 	BCC loc_00_960F                 ;C - - - - - 0x001608 00:95F8: 90 15
 loc_00_95FA:
 	LDY playerId                    ;C - - - - - 0x00160A 00:95FA: A4 34
-	LDA tbl_0F_E219,Y               ;C - - - - - 0x00160C 00:95FC: B9 19 E2
+	LDA PlayerRow_E219,Y            ;C - - - - - 0x00160C 00:95FC: B9 19 E2
 	JSR SetPlayerAnim               ;C - - - - - 0x00160F 00:95FF: 20 94 F2
-	LDA tbl_0F_E22E,Y               ;C - - - - - 0x001612 00:9602: B9 2E E2
+	LDA PlayerRow_E22E,Y            ;C - - - - - 0x001612 00:9602: B9 2E E2
 	JSR SetChrBank2                 ;C - - - - - 0x001615 00:9605: 20 40 F4
 	INC objActive                   ;C - - - - - 0x001618 00:9608: EE 00 03
 loc_00_960B:
@@ -2753,9 +2753,9 @@ GameActionDispatch00Tbl_8011_1B:
 	LDA #$1E                        ;C - - - - - 0x00165F 00:964F: A9 1E
 	STA objStep                     ;C - - - - - 0x001661 00:9651: 8D 00 05
 	LDY playerId                    ;C - - - - - 0x001664 00:9654: A4 34
-	LDA InitSlot1Follower67Tbl_E1F2,Y;C - - - - - 0x001666 00:9656: B9 F2 E1
+	LDA PlayerRow_E1F2,Y            ;C - - - - - 0x001666 00:9656: B9 F2 E1
 	JSR SetPlayerAnim               ;C - - - - - 0x001669 00:9659: 20 94 F2
-	LDA InitSlot1Follower67Tbl_E23A,Y;C - - - - - 0x00166C 00:965C: B9 3A E2
+	LDA PlayerRow_E23A,Y            ;C - - - - - 0x00166C 00:965C: B9 3A E2
 	JSR SetChrBank2                 ;C - - - - - 0x00166F 00:965F: 20 40 F4
 loc_00_9662:
 	LDA objActive                   ;C - - - - - 0x001672 00:9662: AD 00 03
@@ -2782,11 +2782,11 @@ loc_00_9686:
 loc_00_968F:
 	LDY playerId                    ;C - - - - - 0x00169F 00:968F: A4 34
 	LDA objAnim                     ;C - - - - - 0x0016A1 00:9691: AD 80 05
-	CMP tbl_0F_E273,Y               ;C - - - - - 0x0016A4 00:9694: D9 73 E2
+	CMP PlayerRow_E273,Y            ;C - - - - - 0x0016A4 00:9694: D9 73 E2
 	BEQ loc_00_96A5                 ;C - - - - - 0x0016A7 00:9697: F0 0C
-	LDA tbl_0F_E1E6,Y               ;C - - - - - 0x0016A9 00:9699: B9 E6 E1
+	LDA PlayerRow_E1E6,Y            ;C - - - - - 0x0016A9 00:9699: B9 E6 E1
 	JSR SetPlayerAnim               ;C - - - - - 0x0016AC 00:969C: 20 94 F2
-	LDA tbl_0F_E22B,Y               ;C - - - - - 0x0016AF 00:969F: B9 2B E2
+	LDA PlayerRow_E22B,Y            ;C - - - - - 0x0016AF 00:969F: B9 2B E2
 	JSR SetChrBank2                 ;C - - - - - 0x0016B2 00:96A2: 20 40 F4
 loc_00_96A5:
 	JSR ApplyVelXAdd                ;C - - - - - 0x0016B5 00:96A5: 20 83 F1
@@ -2818,9 +2818,9 @@ loc_00_96DC:
 	LDA #$20                        ;C - - - - - 0x0016EC 00:96DC: A9 20
 	STA gameAction                  ;C - - - - - 0x0016EE 00:96DE: 85 30
 	LDY playerId                    ;C - - - - - 0x0016F0 00:96E0: A4 34
-	LDA tbl_0F_E1C1,Y               ;C - - - - - 0x0016F2 00:96E2: B9 C1 E1
+	LDA PlayerRow_E1C1,Y            ;C - - - - - 0x0016F2 00:96E2: B9 C1 E1
 	STA objVelXLo                   ;C - - - - - 0x0016F5 00:96E5: 8D 00 04
-	LDA tbl_0F_E1C4,Y               ;C - - - - - 0x0016F8 00:96E8: B9 C4 E1
+	LDA PlayerRow_E1C4,Y            ;C - - - - - 0x0016F8 00:96E8: B9 C4 E1
 	STA objVelXHi                   ;C - - - - - 0x0016FB 00:96EB: 8D 10 04
 	RTS                             ;C - - - - - 0x0016FE 00:96EE: 60
 GameActionDispatch00Tbl_8011_1C:
@@ -2831,9 +2831,9 @@ GameActionDispatch00Tbl_8011_1C:
 	LDA #$05                        ;C - - - - - 0x001709 00:96F9: A9 05
 	STA objVelYHi                   ;C - - - - - 0x00170B 00:96FB: 8D 30 04
 	LDY playerId                    ;C - - - - - 0x00170E 00:96FE: A4 34
-	LDA tbl_0F_E20A,Y               ;C - - - - - 0x001710 00:9700: B9 0A E2
+	LDA PlayerRow_E20A,Y            ;C - - - - - 0x001710 00:9700: B9 0A E2
 	JSR SetPlayerAnim               ;C - - - - - 0x001713 00:9703: 20 94 F2
-	LDA tbl_0F_E252,Y               ;C - - - - - 0x001716 00:9706: B9 52 E2
+	LDA PlayerRow_E252,Y            ;C - - - - - 0x001716 00:9706: B9 52 E2
 	JSR SetChrBank2                 ;C - - - - - 0x001719 00:9709: 20 40 F4
 	INC objActive                   ;C - - - - - 0x00171C 00:970C: EE 00 03
 loc_00_970F:
@@ -2872,9 +2872,9 @@ loc_00_974A:
 	BCC loc_00_9749                 ;C - - - - - 0x001765 00:9755: 90 F2
 	INC objActive                   ;C - - - - - 0x001767 00:9757: EE 00 03
 	LDY playerId                    ;C - - - - - 0x00176A 00:975A: A4 34
-	LDA tbl_0F_E20D,Y               ;C - - - - - 0x00176C 00:975C: B9 0D E2
+	LDA PlayerRow_E20D,Y            ;C - - - - - 0x00176C 00:975C: B9 0D E2
 	JSR SetPlayerAnim               ;C - - - - - 0x00176F 00:975F: 20 94 F2
-	LDA tbl_0F_E255,Y               ;C - - - - - 0x001772 00:9762: B9 55 E2
+	LDA PlayerRow_E255,Y            ;C - - - - - 0x001772 00:9762: B9 55 E2
 	JSR SetChrBank2                 ;C - - - - - 0x001775 00:9765: 20 40 F4
 	LDY #$0F                        ;C - - - - - 0x001778 00:9768: A0 0F
 	LDA InitSlot1Follower67Tbl_97F9,Y;C - - - - - 0x00177A 00:976A: B9 F9 97
@@ -2892,9 +2892,9 @@ loc_00_9779:
 	CMP #$0A                        ;C - - - - - 0x001793 00:9783: C9 0A
 	BNE loc_00_97A8                 ;C - - - - - 0x001795 00:9785: D0 21
 	LDY playerId                    ;C - - - - - 0x001797 00:9787: A4 34
-	LDA tbl_0F_E210,Y               ;C - - - - - 0x001799 00:9789: B9 10 E2
+	LDA PlayerRow_E210,Y            ;C - - - - - 0x001799 00:9789: B9 10 E2
 	JSR SetPlayerAnim               ;C - - - - - 0x00179C 00:978C: 20 94 F2
-	LDA tbl_0F_E258,Y               ;C - - - - - 0x00179F 00:978F: B9 58 E2
+	LDA PlayerRow_E258,Y            ;C - - - - - 0x00179F 00:978F: B9 58 E2
 	JSR SetChrBank2                 ;C - - - - - 0x0017A2 00:9792: 20 40 F4
 	INC objActive                   ;C - - - - - 0x0017A5 00:9795: EE 00 03
 	LDY #$0F                        ;C - - - - - 0x0017A8 00:9798: A0 0F
@@ -2945,15 +2945,15 @@ InitSlot1Follower67Tbl_9809:
 GameActionDispatch00Tbl_8011_20:
 	LDY playerId                    ;C - - J - - 0x001829 00:9819: A4 34
 	LDA objAnim                     ;C - - - - - 0x00182B 00:981B: AD 80 05
-	CMP tbl_0F_E273,Y               ;C - - - - - 0x00182E 00:981E: D9 73 E2
+	CMP PlayerRow_E273,Y            ;C - - - - - 0x00182E 00:981E: D9 73 E2
 	BEQ loc_00_983B                 ;C - - - - - 0x001831 00:9821: F0 18
-	LDA tbl_0F_E1E6,Y               ;C - - - - - 0x001833 00:9823: B9 E6 E1
+	LDA PlayerRow_E1E6,Y            ;C - - - - - 0x001833 00:9823: B9 E6 E1
 	JSR SetPlayerAnim               ;C - - - - - 0x001836 00:9826: 20 94 F2
-	LDA tbl_0F_E22B,Y               ;C - - - - - 0x001839 00:9829: B9 2B E2
+	LDA PlayerRow_E22B,Y            ;C - - - - - 0x001839 00:9829: B9 2B E2
 	JSR SetChrBank2                 ;C - - - - - 0x00183C 00:982C: 20 40 F4
-	LDA tbl_0F_E1C1,Y               ;C - - - - - 0x00183F 00:982F: B9 C1 E1
+	LDA PlayerRow_E1C1,Y            ;C - - - - - 0x00183F 00:982F: B9 C1 E1
 	STA objVelXLo                   ;C - - - - - 0x001842 00:9832: 8D 00 04
-	LDA tbl_0F_E1C4,Y               ;C - - - - - 0x001845 00:9835: B9 C4 E1
+	LDA PlayerRow_E1C4,Y            ;C - - - - - 0x001845 00:9835: B9 C4 E1
 	STA objVelXHi                   ;C - - - - - 0x001848 00:9838: 8D 10 04
 loc_00_983B:
 	JSR ApplyVelXAdd                ;C - - - - - 0x00184B 00:983B: 20 83 F1

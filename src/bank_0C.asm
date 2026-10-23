@@ -847,7 +847,7 @@ loc_0C_870D:
 	LDA #$80                        ;c - - - - - 0x018728 0C:8718: A9 80
 	STA objActive                   ;c - - - - - 0x01872A 0C:871A: 8D 00 03
 	LDY playerId                    ;c - - - - - 0x01872D 0C:871D: A4 34
-	LDA tbl_0F_E288,Y               ;c - - - - - 0x01872F 0C:871F: B9 88 E2
+	LDA PlayerRow_E288,Y            ;c - - - - - 0x01872F 0C:871F: B9 88 E2
 	STA playerStandAnim             ;c - - - - - 0x018732 0C:8722: 85 6F
 	JSR ResetPlayerStand            ;c - - - - - 0x018734 0C:8724: 20 AA CE
 	LDA objY                        ;c - - - - - 0x018737 0C:8727: AD C0 03
@@ -1147,9 +1147,9 @@ loc_0C_8B22:
 	CMP #$40                        ;C - - - - - 0x018B46 0C:8B36: C9 40
 	BNE loc_0C_8B5B                 ;C - - - - - 0x018B48 0C:8B38: D0 21
 	LDY playerId                    ;C - - - - - 0x018B4A 0C:8B3A: A4 34
-	LDA tbl_0F_E210,Y               ;C - - - - - 0x018B4C 0C:8B3C: B9 10 E2
+	LDA PlayerRow_E210,Y            ;C - - - - - 0x018B4C 0C:8B3C: B9 10 E2
 	JSR SetPlayerAnim               ;C - - - - - 0x018B4F 0C:8B3F: 20 94 F2
-	LDA tbl_0F_E258,Y               ;C - - - - - 0x018B52 0C:8B42: B9 58 E2
+	LDA PlayerRow_E258,Y            ;C - - - - - 0x018B52 0C:8B42: B9 58 E2
 	JSR SetChrBank2                 ;C - - - - - 0x018B55 0C:8B45: 20 40 F4
 	LDA objKind,X                   ;C - - - - - 0x018B58 0C:8B48: BD 20 03
 	AND #$0F                        ;C - - - - - 0x018B5B 0C:8B4B: 29 0F
@@ -1289,13 +1289,13 @@ EnemyAI_Kind04Tbl_8C2F_00:
 	STA objCooldown,X               ;C - - - - - 0x018C56 0C:8C46: 9D 40 05
 	LDA objSpriteDown,X             ;C - - - - - 0x018C59 0C:8C49: BD B0 05
 	TAY                             ;C - - - - - 0x018C5C 0C:8C4C: A8
-	LDA tbl_0F_FC5B,Y               ;C - - - - - 0x018C5D 0C:8C4D: B9 5B FC
+	LDA enemyAnimTblA,Y             ;C - - - - - 0x018C5D 0C:8C4D: B9 5B FC
 	CMP ptr_00                      ;C - - - - - 0x018C60 0C:8C50: C5 00
 	BEQ loc_0C_8C65                 ;C - - - - - 0x018C62 0C:8C52: F0 11
 	JSR SetAnimX                    ;C - - - - - 0x018C64 0C:8C54: 20 88 F2
-	LDA tbl_0F_FC75,Y               ;C - - - - - 0x018C67 0C:8C57: B9 75 FC
+	LDA enemyChrBankTbl,Y           ;C - - - - - 0x018C67 0C:8C57: B9 75 FC
 	STA ptr_00                      ;C - - - - - 0x018C6A 0C:8C5A: 85 00
-	LDA tbl_0F_FC33,Y               ;C - - - - - 0x018C6C 0C:8C5C: B9 33 FC
+	LDA enemyChrSlotTbl,Y           ;C - - - - - 0x018C6C 0C:8C5C: B9 33 FC
 	TAY                             ;C - - - - - 0x018C6F 0C:8C5F: A8
 	LDA ptr_00                      ;C - - - - - 0x018C70 0C:8C60: A5 00
 	STA a:chrBankShadow+3,Y         ;C - - - - - 0x018C72 0C:8C62: 99 EB 00
@@ -1386,7 +1386,7 @@ EnemyAI_Kind04Tbl_8C2F_02:
 loc_0C_8D15:
 	LDA objSpriteDown,X             ;C - - - - - 0x018D25 0C:8D15: BD B0 05
 	TAY                             ;C - - - - - 0x018D28 0C:8D18: A8
-	LDA tbl_0F_FC68,Y               ;C - - - - - 0x018D29 0C:8D19: B9 68 FC
+	LDA enemyAnimTblB,Y             ;C - - - - - 0x018D29 0C:8D19: B9 68 FC
 	JSR SetAnimX                    ;C - - - - - 0x018D2C 0C:8D1C: 20 88 F2
 	LDA objMoveMode,X               ;C - - - - - 0x018D2F 0C:8D1F: BD 70 04
 	BNE loc_0C_8D4C                 ;C - - - - - 0x018D32 0C:8D22: D0 28
@@ -1852,11 +1852,11 @@ EnemyAI_Kind08Tbl_8FB8_03:
 	BNE loc_0C_9127                 ;C - - - - - 0x0190E2 0C:90D2: D0 53
 	LDA objSpriteDown,X             ;C - - - - - 0x0190E4 0C:90D4: BD B0 05
 	TAY                             ;C - - - - - 0x0190E7 0C:90D7: A8
-	LDA tbl_0F_FC68,Y               ;C - - - - - 0x0190E8 0C:90D8: B9 68 FC
+	LDA enemyAnimTblB,Y             ;C - - - - - 0x0190E8 0C:90D8: B9 68 FC
 	JSR SetAnimX                    ;C - - - - - 0x0190EB 0C:90DB: 20 88 F2
-	LDA tbl_0F_FC75,Y               ;C - - - - - 0x0190EE 0C:90DE: B9 75 FC
+	LDA enemyChrBankTbl,Y           ;C - - - - - 0x0190EE 0C:90DE: B9 75 FC
 	STA ptr_00                      ;C - - - - - 0x0190F1 0C:90E1: 85 00
-	LDA tbl_0F_FC33,Y               ;C - - - - - 0x0190F3 0C:90E3: B9 33 FC
+	LDA enemyChrSlotTbl,Y           ;C - - - - - 0x0190F3 0C:90E3: B9 33 FC
 	TAY                             ;C - - - - - 0x0190F6 0C:90E6: A8
 	LDA ptr_00                      ;C - - - - - 0x0190F7 0C:90E7: A5 00
 	STA a:chrBankShadow+3,Y         ;C - - - - - 0x0190F9 0C:90E9: 99 EB 00
@@ -1975,7 +1975,7 @@ EnemyAI_Kind0E:
 	JSR SetAnimX                    ;C - - - - - 0x0191EB 0C:91DB: 20 88 F2
 	LDA EnemyAI_Kind0ETbl_FC4E,Y    ;C - - - - - 0x0191EE 0C:91DE: B9 4E FC
 	STA ptr_00                      ;C - - - - - 0x0191F1 0C:91E1: 85 00
-	LDA tbl_0F_FC33,Y               ;C - - - - - 0x0191F3 0C:91E3: B9 33 FC
+	LDA enemyChrSlotTbl,Y           ;C - - - - - 0x0191F3 0C:91E3: B9 33 FC
 	TAY                             ;C - - - - - 0x0191F6 0C:91E6: A8
 	LDA ptr_00                      ;C - - - - - 0x0191F7 0C:91E7: A5 00
 	STA a:chrBankShadow+3,Y         ;C - - - - - 0x0191F9 0C:91E9: 99 EB 00
@@ -2027,13 +2027,13 @@ loc_0C_9230:
 loc_0C_924A:
 	LDA objSpriteDown,X             ;C - - - - - 0x01925A 0C:924A: BD B0 05
 	TAY                             ;C - - - - - 0x01925D 0C:924D: A8
-	LDA tbl_0F_FC68,Y               ;C - - - - - 0x01925E 0C:924E: B9 68 FC
+	LDA enemyAnimTblB,Y             ;C - - - - - 0x01925E 0C:924E: B9 68 FC
 	CMP ptr_00                      ;C - - - - - 0x019261 0C:9251: C5 00
 	BEQ loc_0C_9266                 ;C - - - - - 0x019263 0C:9253: F0 11
 	JSR SetAnimX                    ;C - - - - - 0x019265 0C:9255: 20 88 F2
-	LDA tbl_0F_FC75,Y               ;C - - - - - 0x019268 0C:9258: B9 75 FC
+	LDA enemyChrBankTbl,Y           ;C - - - - - 0x019268 0C:9258: B9 75 FC
 	STA ptr_00                      ;C - - - - - 0x01926B 0C:925B: 85 00
-	LDA tbl_0F_FC33,Y               ;C - - - - - 0x01926D 0C:925D: B9 33 FC
+	LDA enemyChrSlotTbl,Y           ;C - - - - - 0x01926D 0C:925D: B9 33 FC
 	TAY                             ;C - - - - - 0x019270 0C:9260: A8
 	LDA ptr_00                      ;C - - - - - 0x019271 0C:9261: A5 00
 	STA a:chrBankShadow+3,Y         ;C - - - - - 0x019273 0C:9263: 99 EB 00
@@ -2164,13 +2164,13 @@ EnemyAI_Kind0FTbl_9345_00:
 	STA objY,X                      ;C - - - - - 0x019385 0C:9375: 9D C0 03
 	LDA objSpriteDown,X             ;C - - - - - 0x019388 0C:9378: BD B0 05
 	TAY                             ;C - - - - - 0x01938B 0C:937B: A8
-	LDA tbl_0F_FC5B,Y               ;C - - - - - 0x01938C 0C:937C: B9 5B FC
+	LDA enemyAnimTblA,Y             ;C - - - - - 0x01938C 0C:937C: B9 5B FC
 	CMP ptr_00                      ;C - - - - - 0x01938F 0C:937F: C5 00
 	BEQ loc_0C_9394                 ;C - - - - - 0x019391 0C:9381: F0 11
 	JSR SetAnimX                    ;C - - - - - 0x019393 0C:9383: 20 88 F2
-	LDA tbl_0F_FC75,Y               ;C - - - - - 0x019396 0C:9386: B9 75 FC
+	LDA enemyChrBankTbl,Y           ;C - - - - - 0x019396 0C:9386: B9 75 FC
 	STA ptr_00                      ;C - - - - - 0x019399 0C:9389: 85 00
-	LDA tbl_0F_FC33,Y               ;C - - - - - 0x01939B 0C:938B: B9 33 FC
+	LDA enemyChrSlotTbl,Y           ;C - - - - - 0x01939B 0C:938B: B9 33 FC
 	TAY                             ;C - - - - - 0x01939E 0C:938E: A8
 	LDA ptr_00                      ;C - - - - - 0x01939F 0C:938F: A5 00
 	STA a:chrBankShadow+3,Y         ;C - - - - - 0x0193A1 0C:9391: 99 EB 00
@@ -2479,13 +2479,13 @@ EnemyAI_Kind0FTbl_9345_05:
 	STA objVelYHi,X                 ;C - - - - - 0x0195EF 0C:95DF: 9D 30 04
 	LDA objSpriteDown,X             ;C - - - - - 0x0195F2 0C:95E2: BD B0 05
 	TAY                             ;C - - - - - 0x0195F5 0C:95E5: A8
-	LDA tbl_0F_FC68,Y               ;C - - - - - 0x0195F6 0C:95E6: B9 68 FC
+	LDA enemyAnimTblB,Y             ;C - - - - - 0x0195F6 0C:95E6: B9 68 FC
 	CMP ptr_00                      ;C - - - - - 0x0195F9 0C:95E9: C5 00
 	BEQ loc_0C_95FE                 ;C - - - - - 0x0195FB 0C:95EB: F0 11
 	JSR SetAnimX                    ;C - - - - - 0x0195FD 0C:95ED: 20 88 F2
-	LDA tbl_0F_FC75,Y               ;C - - - - - 0x019600 0C:95F0: B9 75 FC
+	LDA enemyChrBankTbl,Y           ;C - - - - - 0x019600 0C:95F0: B9 75 FC
 	STA ptr_00                      ;C - - - - - 0x019603 0C:95F3: 85 00
-	LDA tbl_0F_FC33,Y               ;C - - - - - 0x019605 0C:95F5: B9 33 FC
+	LDA enemyChrSlotTbl,Y           ;C - - - - - 0x019605 0C:95F5: B9 33 FC
 	TAY                             ;C - - - - - 0x019608 0C:95F8: A8
 	LDA ptr_00                      ;C - - - - - 0x019609 0C:95F9: A5 00
 	STA a:chrBankShadow+3,Y         ;C - - - - - 0x01960B 0C:95FB: 99 EB 00
@@ -3282,7 +3282,7 @@ EnemySetDownAnimA:
 	BEQ loc_0C_9C79                 ;C - - - - - 0x019C79 0C:9C69: F0 0E
 	LDA EnemySetDownAnimATbl_FC9D,Y ;C - - - - - 0x019C7B 0C:9C6B: B9 9D FC
 	STA ptr_00                      ;C - - - - - 0x019C7E 0C:9C6E: 85 00
-	LDA tbl_0F_FC33,Y               ;C - - - - - 0x019C80 0C:9C70: B9 33 FC
+	LDA enemyChrSlotTbl,Y           ;C - - - - - 0x019C80 0C:9C70: B9 33 FC
 	TAY                             ;C - - - - - 0x019C83 0C:9C73: A8
 	LDA ptr_00                      ;C - - - - - 0x019C84 0C:9C74: A5 00
 	STA a:chrBankShadow+3,Y         ;C - - - - - 0x019C86 0C:9C76: 99 EB 00
@@ -3300,7 +3300,7 @@ EnemySetDownAnimB:
 	BEQ loc_0C_9C9E                 ;C - - - - - 0x019C9E 0C:9C8E: F0 0E
 	LDA EnemySetDownAnimBTbl_9C9F,Y ;C - - - - - 0x019CA0 0C:9C90: B9 9F 9C
 	STA ptr_00                      ;C - - - - - 0x019CA3 0C:9C93: 85 00
-	LDA tbl_0F_FC33,Y               ;C - - - - - 0x019CA5 0C:9C95: B9 33 FC
+	LDA enemyChrSlotTbl,Y           ;C - - - - - 0x019CA5 0C:9C95: B9 33 FC
 	TAY                             ;C - - - - - 0x019CA8 0C:9C98: A8
 	LDA ptr_00                      ;C - - - - - 0x019CA9 0C:9C99: A5 00
 	STA a:chrBankShadow+3,Y         ;C - - - - - 0x019CAB 0C:9C9B: 99 EB 00
@@ -3322,7 +3322,7 @@ EnemySetDownAnimC:
 	JSR SetAnimX                    ;C - - - - - 0x019CC9 0C:9CB9: 20 88 F2
 	LDA EnemySetDownAnimCTbl_9CE0,Y ;C - - - - - 0x019CCC 0C:9CBC: B9 E0 9C
 	STA ptr_00                      ;C - - - - - 0x019CCF 0C:9CBF: 85 00
-	LDA tbl_0F_FC33,Y               ;C - - - - - 0x019CD1 0C:9CC1: B9 33 FC
+	LDA enemyChrSlotTbl,Y           ;C - - - - - 0x019CD1 0C:9CC1: B9 33 FC
 	TAY                             ;C - - - - - 0x019CD4 0C:9CC4: A8
 	LDA objSpriteDown,X             ;C - - - - - 0x019CD5 0C:9CC5: BD B0 05
 	CMP #$08                        ;C - - - - - 0x019CD8 0C:9CC8: C9 08
@@ -3572,7 +3572,7 @@ loc_0C_9E63:
 loc_0C_9E9F:
 	LDA EnemyAI_TypeCommonTbl_9EB9,Y;C - - - - - 0x019EAF 0C:9E9F: B9 B9 9E
 	PHA                             ;C - - - - - 0x019EB2 0C:9EA2: 48
-	LDA tbl_0F_FC33,Y               ;C - - - - - 0x019EB3 0C:9EA3: B9 33 FC
+	LDA enemyChrSlotTbl,Y           ;C - - - - - 0x019EB3 0C:9EA3: B9 33 FC
 	TAY                             ;C - - - - - 0x019EB6 0C:9EA6: A8
 	PLA                             ;C - - - - - 0x019EB7 0C:9EA7: 68
 	STA a:chrBankShadow+3,Y         ;C - - - - - 0x019EB8 0C:9EA8: 99 EB 00
@@ -3680,7 +3680,7 @@ EnemyAI_CdCommon:
 	LDA EnemyAI_CdCommonTbl_9F8D,Y  ;C - - - - - 0x019F5D 0C:9F4D: B9 8D 9F
 	PHA                             ;C - - - - - 0x019F60 0C:9F50: 48
 	LDY objSpriteDown,X             ;C - - - - - 0x019F61 0C:9F51: BC B0 05
-	LDA tbl_0F_FC33,Y               ;C - - - - - 0x019F64 0C:9F54: B9 33 FC
+	LDA enemyChrSlotTbl,Y           ;C - - - - - 0x019F64 0C:9F54: B9 33 FC
 	TAY                             ;C - - - - - 0x019F67 0C:9F57: A8
 	PLA                             ;C - - - - - 0x019F68 0C:9F58: 68
 	STA a:chrBankShadow+3,Y         ;C - - - - - 0x019F69 0C:9F59: 99 EB 00

@@ -285,7 +285,7 @@ loc_01_A22A:
 loc_01_A231:
 	LDY objParamC,X                 ;C - - - - - 0x002241 01:A231: BC 30 05
 	JSR SetVelFromTbl_A7E1          ;C - - - - - 0x002244 01:A234: 20 E1 A7
-	LDA tbl_0F_FBF0,Y               ;C - - - - - 0x002247 01:A237: B9 F0 FB
+	LDA facingByDirTbl,Y            ;C - - - - - 0x002247 01:A237: B9 F0 FB
 	STA objFacing,X                 ;C - - - - - 0x00224A 01:A23A: 9D 60 04
 	JSR EnemyVertBounce             ;C - - - - - 0x00224D 01:A23D: 20 31 A0
 	JSR SetFlag40ToPlayer_01        ;C - - - - - 0x002250 01:A240: 20 90 A0
@@ -565,7 +565,7 @@ loc_01_A441:
 	JSR DirToPlayerOffset           ;C - - - - - 0x00245B 01:A44B: 20 72 FB
 	TAY                             ;C - - - - - 0x00245E 01:A44E: A8
 	JSR SetVelFromTbl_A7E1          ;C - - - - - 0x00245F 01:A44F: 20 E1 A7
-	LDA tbl_0F_FBF0,Y               ;C - - - - - 0x002462 01:A452: B9 F0 FB
+	LDA facingByDirTbl,Y            ;C - - - - - 0x002462 01:A452: B9 F0 FB
 	STA objFacing,X                 ;C - - - - - 0x002465 01:A455: 9D 60 04
 loc_01_A458:
 	DEC objTimer,X                  ;C - - - - - 0x002468 01:A458: DE D0 05
@@ -1269,7 +1269,7 @@ loc_01_A9EA:
 	LDA EnemyChooseDirToPlayer_01Tbl_AA23,Y;C - - - - - 0x0029FA 01:A9EA: B9 23 AA
 	TAY                             ;C - - - - - 0x0029FD 01:A9ED: A8
 loc_01_A9EE:
-	LDA tbl_0F_FBF0,Y               ;C - - - - - 0x0029FE 01:A9EE: B9 F0 FB
+	LDA facingByDirTbl,Y            ;C - - - - - 0x0029FE 01:A9EE: B9 F0 FB
 	STA objFacing,X                 ;C - - - - - 0x002A01 01:A9F1: 9D 60 04
 	RTS                             ;C - - - - - 0x002A04 01:A9F4: 60
 EnemySetDirAndParams:
@@ -1493,7 +1493,7 @@ loc_01_AB9E:
 	JSR DirToPlayerOffset           ;C - - - - - 0x002BB3 01:ABA3: 20 72 FB
 	TAY                             ;C - - - - - 0x002BB6 01:ABA6: A8
 	JSR SetVelFromTbl_A7E1          ;C - - - - - 0x002BB7 01:ABA7: 20 E1 A7
-	LDA tbl_0F_FBF0,Y               ;C - - - - - 0x002BBA 01:ABAA: B9 F0 FB
+	LDA facingByDirTbl,Y            ;C - - - - - 0x002BBA 01:ABAA: B9 F0 FB
 	STA objFacing,X                 ;C - - - - - 0x002BBD 01:ABAD: 9D 60 04
 loc_01_ABB0:
 	JSR EnemyVertBounce             ;C - - - - - 0x002BC0 01:ABB0: 20 31 A0
@@ -1547,7 +1547,7 @@ loc_01_AC06:
 	INC objFacing,X                 ;C - - - - - 0x002C23 01:AC13: FE 60 04
 loc_01_AC16:
 	LDY objFacing,X                 ;C - - - - - 0x002C26 01:AC16: BC 60 04
-	LDA tbl_0F_FBF0,Y               ;C - - - - - 0x002C29 01:AC19: B9 F0 FB
+	LDA facingByDirTbl,Y            ;C - - - - - 0x002C29 01:AC19: B9 F0 FB
 	STA objFacing,X                 ;C - - - - - 0x002C2C 01:AC1C: 9D 60 04
 	LDA #$64                        ;C - - - - - 0x002C2F 01:AC1F: A9 64
 	STA objTimer,X                  ;C - - - - - 0x002C31 01:AC21: 9D D0 05

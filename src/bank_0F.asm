@@ -233,153 +233,153 @@ SetPlayerStartPosTbl_E199_03:
 	.byte $30,$40,$30               ;- D 3 - I - 0x01E1CB 0F:E1BB:
 SetPlayerStartPosTbl_E199_04:
 	.byte $30,$30,$30               ;- D 3 - I - 0x01E1CE 0F:E1BE:
-tbl_0F_E1C1:
-	.byte $4C,$80,$19               ;- D 3 - - - 0x01E1D1 0F:E1C1: Cody, Guy, Haggar
-tbl_0F_E1C4:
+PlayerRow_E1C1:
+	.byte $4C,$80,$19               ;- D 3 - - - 0x01E1D1 0F:E1C1: Cody, Guy, Haggar  ; per-player rows (3 bytes: Cody, Guy, Haggar
+PlayerRow_E1C4:
 	.byte $01,$01,$01               ;- D 3 - - - 0x01E1D4 0F:E1C4: Cody, Guy, Haggar
-tbl_0F_E1C7:
+PlayerRow_E1C7:
 	.byte $00,$33,$CC               ;- D 3 - - - 0x01E1D7 0F:E1C7: Cody, Guy, Haggar
-tbl_0F_E1CA:
+PlayerRow_E1CA:
 	.byte $01,$01,$00               ;- D 3 - - - 0x01E1DA 0F:E1CA: Cody, Guy, Haggar
-StartAction24Tbl_E1CD:
+PlayerRow_E1CD:
 	.byte $80,$B3,$33               ;- D 3 - - - 0x01E1DD 0F:E1CD: Cody, Guy, Haggar
-StartAction24Tbl_E1D0:
+PlayerRow_E1D0:
 	.byte $01,$01,$01               ;- D 3 - - - 0x01E1E0 0F:E1D0: Cody, Guy, Haggar
-PlaceGrabbedEnemyTbl_E1D3:
+PlayerRow_E1D3:
 	.byte $0F                       ;- D 3 - - - 0x01E1E3 0F:E1D3:
-PlaceGrabbedEnemyTbl_E1D4:
+PlayerRow_E1D4:
 	.byte $00,$F1,$FF               ;- D 3 - - - 0x01E1E4 0F:E1D4:
-Act00_WalkTbl_E1D7:
+PlayerRow_E1D7:
 	.byte $D9,$0F,$B5               ;- D 3 - - - 0x01E1E7 0F:E1D7:
-Act00_WalkTbl_E1DA:
+PlayerRow_E1DA:
 	.byte $00,$01,$00               ;- D 3 - - - 0x01E1EA 0F:E1DA:
-ActNoneTbl_E1DD:
+PlayerRow_E1DD:
 	.byte $B3,$E6,$80               ;- D 3 - - - 0x01E1ED 0F:E1DD:
-ActNoneTbl_E1E0:
+PlayerRow_E1E0:
 	.byte $00,$00,$00               ;- D 3 - - - 0x01E1F0 0F:E1E0: Cody, Guy, Haggar
-tbl_0F_E1E3:
+PlayerRow_E1E3:
 	.byte $01,$02,$03               ;- D 3 - - - 0x01E1F3 0F:E1E3: Cody, Guy, Haggar
-tbl_0F_E1E6:
+PlayerRow_E1E6:
 	.byte $04,$05,$06               ;- D 3 - - - 0x01E1F6 0F:E1E6: Cody, Guy, Haggar
-tbl_0F_E1E9:
+PlayerRow_E1E9:
 	.byte $07,$08,$09               ;- D 3 - - - 0x01E1F9 0F:E1E9: Cody, Guy, Haggar
-StartAction24Tbl_E1EC:
+PlayerRow_E1EC:
 	.byte $0A,$0B,$0C               ;- D 3 - - - 0x01E1FC 0F:E1EC: Cody, Guy, Haggar
-PlaceGrabbedEnemyTbl_E1EF:
+PlayerRow_E1EF:
 	.byte $0D,$0E,$0F               ;- D 3 - - - 0x01E1FF 0F:E1EF: Cody, Guy, Haggar
-InitSlot1Follower67Tbl_E1F2:
+PlayerRow_E1F2:
 	.byte $10,$11,$12               ;- D 3 - - - 0x01E202 0F:E1F2: Cody, Guy, Haggar
 	.byte $13,$14,$15               ;- - - - - - 0x01E205 0F:E1F5: Cody, Guy, Haggar
 	.byte $16,$17,$18               ;- - - - - - 0x01E208 0F:E1F8: Cody, Guy, Haggar
-StartAction24Tbl_E1FB:
+PlayerRow_E1FB:
 	.byte $19,$1A,$1B               ;- D 3 - - - 0x01E20B 0F:E1FB: Cody, Guy, Haggar
-StartAction24Tbl_E1FE:
+PlayerRow_E1FE:
 	.byte $1C,$1D,$1E               ;- D 3 - - - 0x01E20E 0F:E1FE: Cody, Guy, Haggar
-StartAction24Tbl_E201:
+PlayerRow_E201:
 	.byte $1F,$20,$21               ;- D 3 - - - 0x01E211 0F:E201: Cody, Guy, Haggar
-GameActionDispatch00Tbl_E204:
+PlayerRow_E204:
 	.byte $53,$05,$54               ;- D 3 - - - 0x01E214 0F:E204: Cody, Guy, Haggar
-SetVelFromTbl_B39BTbl_E207:
+PlayerRow_E207:
 	.byte $25,$26,$27               ;- D 3 - - - 0x01E217 0F:E207: Cody, Guy, Haggar
-tbl_0F_E20A:
+PlayerRow_E20A:
 	.byte $28,$29,$2A               ;- D 3 - - - 0x01E21A 0F:E20A: Cody, Guy, Haggar
-tbl_0F_E20D:
+PlayerRow_E20D:
 	.byte $2B,$2C,$2D               ;- D 3 - - - 0x01E21D 0F:E20D: Cody, Guy, Haggar
-tbl_0F_E210:
+PlayerRow_E210:
 	.byte $2E,$2F,$30               ;- D 3 - - - 0x01E220 0F:E210: Cody, Guy, Haggar
-GameActionDispatch00Tbl_E213:
+PlayerRow_E213:
 	.byte $31,$32,$33               ;- D 3 - - - 0x01E223 0F:E213: Cody, Guy, Haggar
-Act00_WalkTbl_E216:
+PlayerRow_E216:
 	.byte $34,$35,$36               ;- - - - - - 0x01E226 0F:E216: Cody, Guy, Haggar
-tbl_0F_E219:
+PlayerRow_E219:
 	.byte $37,$38,$39               ;- D 3 - - - 0x01E229 0F:E219: Cody, Guy, Haggar
-StartAction24Tbl_E21C:
+PlayerRow_E21C:
 	.byte $3A,$3B,$3C               ;- D 3 - - - 0x01E22C 0F:E21C: Cody, Guy, Haggar
-ResetPlayerStandTbl_E21F:
+PlayerRow_E21F:
 	.byte $42,$02,$44               ;- D 3 - - - 0x01E22F 0F:E21F: Cody, Guy, Haggar
-Act00_WalkTbl_E222:
+PlayerRow_E222:
 	.byte $45,$46,$47               ;- D 3 - - - 0x01E232 0F:E222: Cody, Guy, Haggar
-Act00_WalkTbl_E225:
+PlayerRow_E225:
 	.byte $4A,$46,$47               ;- D 3 - - - 0x01E235 0F:E225: Cody, Guy, Haggar
-Act00_WalkTbl_E228:
+PlayerRow_E228:
 	.byte $6C,$6A                   ;- D 3 - - - 0x01E238 0F:E228: Cody, Guy, Haggar
-dat_0F_E22A:
+PlayerRow_E22A:
 	.byte $57                       ;- D 3 - - - 0x01E23A 0F:E22A:
-tbl_0F_E22B:
+PlayerRow_E22B:
 	.byte $00,$04,$08               ;- D 3 - - - 0x01E23B 0F:E22B: Cody, Guy, Haggar
-tbl_0F_E22E:
+PlayerRow_E22E:
 	.byte $01,$05,$12               ;- D 3 - - - 0x01E23E 0F:E22E: Cody, Guy, Haggar
 	.byte $07,$05,$12               ;- - - - - - 0x01E241 0F:E231: Cody, Guy, Haggar
 	.byte $07,$05,$12               ;- - - - - - 0x01E244 0F:E234: Cody, Guy, Haggar
-Act00_WalkTbl_E237:
+PlayerRow_E237:
 	.byte $02,$06,$09               ;- D 3 - - - 0x01E247 0F:E237: Cody, Guy, Haggar
-InitSlot1Follower67Tbl_E23A:
+PlayerRow_E23A:
 	.byte $03,$07,$09               ;- D 3 - - - 0x01E24A 0F:E23A: Cody, Guy, Haggar
-Act00_WalkTbl_E23D:
+PlayerRow_E23D:
 	.byte $03,$07,$10               ;- - - - - - 0x01E24D 0F:E23D: Cody, Guy, Haggar
 	.byte $02,$06,$09               ;- - - - - - 0x01E250 0F:E240: Cody, Guy, Haggar
-StartAction24Tbl_E243:
+PlayerRow_E243:
 	.byte $02,$06,$13               ;- D 3 - - - 0x01E253 0F:E243: Cody, Guy, Haggar
-StartAction24Tbl_E246:
+PlayerRow_E246:
 	.byte $02,$06,$13               ;- D 3 - - - 0x01E256 0F:E246: Cody, Guy, Haggar
-StartAction24Tbl_E249:
+PlayerRow_E249:
 	.byte $01,$05,$13               ;- D 3 - - - 0x01E259 0F:E249: Cody, Guy, Haggar
-Act02_ActionEndTbl_E24C:
+PlayerRow_E24C:
 	.byte $23,$18,$00               ;- - - - - - 0x01E25C 0F:E24C: Cody, Guy, Haggar
-SetVelFromTbl_B39BTbl_E24F:
+PlayerRow_E24F:
 	.byte $0D,$15,$11               ;- D 3 - - - 0x01E25F 0F:E24F: Cody, Guy, Haggar
-tbl_0F_E252:
+PlayerRow_E252:
 	.byte $0D,$15,$13               ;- D 3 - - - 0x01E262 0F:E252: Cody, Guy, Haggar
-tbl_0F_E255:
+PlayerRow_E255:
 	.byte $0D,$15,$12               ;- D 3 - - - 0x01E265 0F:E255: Cody, Guy, Haggar
-tbl_0F_E258:
+PlayerRow_E258:
 	.byte $00,$04,$0B               ;- D 3 - - - 0x01E268 0F:E258: Cody, Guy, Haggar
-GameActionDispatch00Tbl_E25B:
+PlayerRow_E25B:
 	.byte $0C,$14,$08               ;- D 3 - - - 0x01E26B 0F:E25B: Cody, Guy, Haggar
-Act00_WalkTbl_E25E:
+PlayerRow_E25E:
 	.byte $0C,$14,$0B               ;- - - - - - 0x01E26E 0F:E25E: Cody, Guy, Haggar
 	.byte $07,$07,$07               ;- - - - - - 0x01E271 0F:E261: Cody, Guy, Haggar
 	.byte $00,$06,$00               ;- - - - - - 0x01E274 0F:E264: Cody, Guy, Haggar
-ResetPlayerStandTbl_E267:
+PlayerRow_E267:
 	.byte $00,$04,$08               ;- D 3 - - - 0x01E277 0F:E267: Cody, Guy, Haggar
-Act00_WalkTbl_E26A:
+PlayerRow_E26A:
 	.byte $03,$16,$0B               ;- D 3 - - - 0x01E27A 0F:E26A: Cody, Guy, Haggar
-Act00_WalkTbl_E26D:
+PlayerRow_E26D:
 	.byte $03,$16,$11               ;- D 3 - - - 0x01E27D 0F:E26D: Cody, Guy, Haggar
-Act00_WalkTbl_E270:
+PlayerRow_E270:
 	.byte $0E,$17                   ;- D 3 - - - 0x01E280 0F:E270: Cody, Guy, Haggar
-dat_0F_E272:
+PlayerRow_E272:
 	.byte $0F                       ;- D 3 - - - 0x01E282 0F:E272:
-tbl_0F_E273:
+PlayerRow_E273:
 	.byte $04,$05,$06               ;- D 3 - - - 0x01E283 0F:E273: Cody, Guy, Haggar
-StartAction24Tbl_E276:
+PlayerRow_E276:
 	.byte $1F,$20,$21               ;- D 3 - - - 0x01E286 0F:E276: Cody, Guy, Haggar
-Act01_JumpTbl_E279:
+PlayerRow_E279:
 	.byte $1C,$1D,$1E               ;- D 3 - - - 0x01E289 0F:E279: Cody, Guy, Haggar
-Act01_JumpTbl_E27C:
+PlayerRow_E27C:
 	.byte $1F,$20,$21               ;- D 3 - - - 0x01E28C 0F:E27C: Cody, Guy, Haggar
-Act01_JumpTbl_E27F:
+PlayerRow_E27F:
 	.byte $0A,$0B,$0C               ;- D 3 - - - 0x01E28F 0F:E27F: Cody, Guy, Haggar
-Act01_JumpTbl_E282:
+PlayerRow_E282:
 	.byte $07,$08,$09               ;- D 3 - - - 0x01E292 0F:E282: Cody, Guy, Haggar
-Act01_JumpTbl_E285:
+PlayerRow_E285:
 	.byte $3A,$3B,$3C               ;- D 3 - - - 0x01E295 0F:E285: Cody, Guy, Haggar
-tbl_0F_E288:
+PlayerRow_E288:
 	.byte $0D,$0E,$0F               ;- D 3 - - - 0x01E298 0F:E288: Cody, Guy, Haggar
-Act00_WalkTbl_E28B:
+PlayerRow_E28B:
 	.byte $16,$17,$18               ;- D 3 - - - 0x01E29B 0F:E28B: Cody, Guy, Haggar
-Act03_PunchTbl_E28E:
+PlayerRow_E28E:
 	.byte $45,$46,$47               ;- D 3 - - - 0x01E29E 0F:E28E: Cody, Guy, Haggar
-Act00_WalkTbl_E291:
+PlayerRow_E291:
 	.byte $13,$14,$15               ;- D 3 - - - 0x01E2A1 0F:E291: Cody, Guy, Haggar
 	.byte $10,$11,$12               ;- - - - - - 0x01E2A4 0F:E294: Cody, Guy, Haggar
-UpdatePlayerFlashTbl_E297:
+PlayerRow_E297:
 	.byte $34,$35,$52               ;- D 3 - - - 0x01E2A7 0F:E297: Cody, Guy, Haggar
-GameActionDispatch00Tbl_E29A:
+PlayerRow_E29A:
 	.byte $53,$05,$54               ;- D 3 - - - 0x01E2AA 0F:E29A: Cody, Guy, Haggar
-Act03_PunchTbl_E29D:
+PlayerRow_E29D:
 	.byte $00,$14,$15               ;- D 3 - - - 0x01E2AD 0F:E29D: Cody, Guy, Haggar
-Act03_PunchTbl_E2A0:
+PlayerRow_E2A0:
 	.byte $00,$5B,$15               ;- D 3 - - - 0x01E2B0 0F:E2A0: Cody, Guy, Haggar
 ; scroll follows the player (skipped for several gameActions)
 UpdateHorizScroll:
@@ -3427,9 +3427,9 @@ loc_0F_F922:
 	LDA UpdatePlayerInvincibleTbl_FD56,Y;C - - - - - 0x01F93F 0F:F92F: B9 56 FD
 	BNE loc_0F_F999                 ;C - - - - - 0x01F942 0F:F932: D0 65
 	LDY playerId                    ;C - - - - - 0x01F944 0F:F934: A4 34
-	LDA SetVelFromTbl_B39BTbl_E207,Y;C - - - - - 0x01F946 0F:F936: B9 07 E2
+	LDA PlayerRow_E207,Y            ;C - - - - - 0x01F946 0F:F936: B9 07 E2
 	JSR SetPlayerAnim               ;C - - - - - 0x01F949 0F:F939: 20 94 F2
-	LDA SetVelFromTbl_B39BTbl_E24F,Y;C - - - - - 0x01F94C 0F:F93C: B9 4F E2
+	LDA PlayerRow_E24F,Y            ;C - - - - - 0x01F94C 0F:F93C: B9 4F E2
 	JSR SetChrBank2                 ;C - - - - - 0x01F94F 0F:F93F: 20 40 F4
 	LDA objFacing,X                 ;C - - - - - 0x01F952 0F:F942: BD 60 04
 	EOR #$03                        ;C - - - - - 0x01F955 0F:F945: 49 03
@@ -3500,9 +3500,9 @@ loc_0F_F9B7:
 loc_0F_F9B9:
 	STA playerFacing                ;C - - - - - 0x01F9C9 0F:F9B9: 85 31
 	LDY playerId                    ;C - - - - - 0x01F9CB 0F:F9BB: A4 34
-	LDA tbl_0F_E20A,Y               ;C - - - - - 0x01F9CD 0F:F9BD: B9 0A E2
+	LDA PlayerRow_E20A,Y            ;C - - - - - 0x01F9CD 0F:F9BD: B9 0A E2
 	JSR SetPlayerAnim               ;C - - - - - 0x01F9D0 0F:F9C0: 20 94 F2
-	LDA tbl_0F_E252,Y               ;C - - - - - 0x01F9D3 0F:F9C3: B9 52 E2
+	LDA PlayerRow_E252,Y            ;C - - - - - 0x01F9D3 0F:F9C3: B9 52 E2
 	JSR SetChrBank2                 ;C - - - - - 0x01F9D6 0F:F9C6: 20 40 F4
 	LDA #$00                        ;C - - - - - 0x01F9D9 0F:F9C9: A9 00
 	STA timerA4                     ;C - - - - - 0x01F9DB 0F:F9CB: 85 A4
@@ -3767,7 +3767,8 @@ DistanceYToPlayerGround:
 	STA objY                        ;C - - - - - 0x01FBFA 0F:FBEA: 8D C0 03
 	LDA ptr_0E                      ;C - - - - - 0x01FBFD 0F:FBED: A5 0E
 	RTS                             ;C - - - - - 0x01FBFF 0F:FBEF: 60
-tbl_0F_FBF0:
+; objFacing value for a direction index (from DirToPlayerOffset / SetVelFromTbl)
+facingByDirTbl:
 	.byte $08,$09,$09,$09,$01,$05,$05,$05,$04,$06,$06,$06,$02,$0A,$0A,$0A;- D 3 - - - 0x01FC00 0F:FBF0:
 	.byte $08,$09,$0A,$0B,$0C,$0D,$0E,$0F,$00,$01,$02,$03,$04,$05,$06,$07;- - - - - - 0x01FC10 0F:FC00:
 EnemyAI_NopTbl_FC10:
@@ -3780,7 +3781,8 @@ EnemyAI_NopTbl_FC10:
 	.byte $02,$04,$04,$06,$24,$32   ;- D 3 - - - 0x01FC3A 0F:FC2A:
 	.byte $16,$08                   ;- - - - - - 0x01FC40 0F:FC30:
 	.byte $06                       ;- D 3 - - - 0x01FC42 0F:FC32:
-tbl_0F_FC33:
+; per enemy type: which chrBankShadow slot (+3) its sprite bank goes into
+enemyChrSlotTbl:
 	.byte $01,$02,$00,$01,$02,$00   ;- D 3 - - - 0x01FC43 0F:FC33:
 	.byte $00                       ;- - - - - - 0x01FC49 0F:FC39:
 	.byte $01,$01,$00               ;- D 3 - - - 0x01FC4A 0F:FC3A:
@@ -3797,19 +3799,22 @@ EnemyAI_Kind0ETbl_FC4E:
 	.byte $00,$28                   ;- - - - - - 0x01FC64 0F:FC54:
 	.byte $2C,$24                   ;- D 3 - - - 0x01FC66 0F:FC56:
 	.byte $2C,$38,$00               ;- - - - - - 0x01FC68 0F:FC58:
-tbl_0F_FC5B:
+; per enemy type: animation id (stand / idle variant)
+enemyAnimTblA:
 	.byte $85,$8C,$93,$9C,$A9,$D4   ;- D 3 - - - 0x01FC6B 0F:FC5B:
 	.byte $00,$EA                   ;- - - - - - 0x01FC71 0F:FC61:
 	.byte $F7,$DF                   ;- D 3 - - - 0x01FC73 0F:FC63:
 	.byte $F7,$C3,$00               ;- - - - - - 0x01FC75 0F:FC65:
-tbl_0F_FC68:
+; per enemy type: animation id (alternate variant)
+enemyAnimTblB:
 	.byte $AF,$B0,$AD,$AE,$B1,$D8   ;- D 3 - - - 0x01FC78 0F:FC68:
 	.byte $00,$EE                   ;- - - - - - 0x01FC7E 0F:FC6E:
 	.byte $FC,$E3                   ;- D 3 - - - 0x01FC80 0F:FC70:
 	.byte $FC                       ;- - - - - - 0x01FC82 0F:FC72:
 	.byte $CA                       ;- D 3 - - - 0x01FC83 0F:FC73:
 	.byte $00                       ;- - - - - - 0x01FC84 0F:FC74:
-tbl_0F_FC75:
+; per enemy type: CHR bank number written to chrBankShadow
+enemyChrBankTbl:
 	.byte $19,$1C,$1D,$3D,$21,$26   ;- D 3 - - - 0x01FC85 0F:FC75:
 	.byte $00,$2B                   ;- - - - - - 0x01FC8B 0F:FC7B:
 	.byte $2D,$26                   ;- D 3 - - - 0x01FC8D 0F:FC7D:

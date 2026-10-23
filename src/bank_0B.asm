@@ -750,18 +750,18 @@ loc_0B_B421:
 	LDA #$8C                        ;C - - - - - 0x017431 0B:B421: A9 8C
 	STA objY+6                      ;C - - - - - 0x017433 0B:B423: 8D C6 03
 	LDY playerId                    ;C - - - - - 0x017436 0B:B426: A4 34
-	LDA tbl_0F_E1E6,Y               ;C - - - - - 0x017438 0B:B428: B9 E6 E1
+	LDA PlayerRow_E1E6,Y            ;C - - - - - 0x017438 0B:B428: B9 E6 E1
 	JSR SetPlayerAnim               ;C - - - - - 0x01743B 0B:B42B: 20 94 F2
-	LDA tbl_0F_E22B,Y               ;C - - - - - 0x01743E 0B:B42E: B9 2B E2
+	LDA PlayerRow_E22B,Y            ;C - - - - - 0x01743E 0B:B42E: B9 2B E2
 	JSR SetChrBank2                 ;C - - - - - 0x017441 0B:B431: 20 40 F4
 	LDY playerId                    ;C - - - - - 0x017444 0B:B434: A4 34
-	LDA tbl_0F_E1C1,Y               ;C - - - - - 0x017446 0B:B436: B9 C1 E1
+	LDA PlayerRow_E1C1,Y            ;C - - - - - 0x017446 0B:B436: B9 C1 E1
 	STA objVelXLo                   ;C - - - - - 0x017449 0B:B439: 8D 00 04
-	LDA tbl_0F_E1C4,Y               ;C - - - - - 0x01744C 0B:B43C: B9 C4 E1
+	LDA PlayerRow_E1C4,Y            ;C - - - - - 0x01744C 0B:B43C: B9 C4 E1
 	STA objVelXHi                   ;C - - - - - 0x01744F 0B:B43F: 8D 10 04
-	LDA tbl_0F_E1C7,Y               ;C - - - - - 0x017452 0B:B442: B9 C7 E1
+	LDA PlayerRow_E1C7,Y            ;C - - - - - 0x017452 0B:B442: B9 C7 E1
 	STA objVelYLo                   ;C - - - - - 0x017455 0B:B445: 8D 20 04
-	LDA tbl_0F_E1CA,Y               ;C - - - - - 0x017458 0B:B448: B9 CA E1
+	LDA PlayerRow_E1CA,Y            ;C - - - - - 0x017458 0B:B448: B9 CA E1
 	STA objVelYHi                   ;C - - - - - 0x01745B 0B:B44B: 8D 30 04
 	LDA #$80                        ;C - - - - - 0x01745E 0B:B44E: A9 80
 	STA objActive                   ;C - - - - - 0x017460 0B:B450: 8D 00 03
@@ -1237,7 +1237,7 @@ loc_0B_B83A:
 	LDA #$0A                        ;C - - - - - 0x017856 0B:B846: A9 0A
 	STA objTimer,X                  ;C - - - - - 0x017858 0B:B848: 9D D0 05
 loc_0B_B84B:
-	LDA tbl_0F_FBF0,Y               ;C - - - - - 0x01785B 0B:B84B: B9 F0 FB
+	LDA facingByDirTbl,Y            ;C - - - - - 0x01785B 0B:B84B: B9 F0 FB
 	STA objFacing,X                 ;C - - - - - 0x01785E 0B:B84E: 9D 60 04
 	LDA EnemyRandomJumpTbl_BD1C,Y   ;C - - - - - 0x017861 0B:B851: B9 1C BD
 	STA objVelXLo,X                 ;C - - - - - 0x017864 0B:B854: 9D 00 04

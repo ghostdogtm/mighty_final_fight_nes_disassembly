@@ -1158,9 +1158,9 @@ loc_04_9502:
 	BPL loc_04_9502                 ;C - - - - - 0x00951C 04:950C: 10 F4
 	STY palUpdateFlag               ;C - - - - - 0x00951E 04:950E: 84 18
 	LDY playerId                    ;C - - - - - 0x009520 04:9510: A4 34
-	LDA tbl_0F_E20D,Y               ;C - - - - - 0x009522 04:9512: B9 0D E2
+	LDA PlayerRow_E20D,Y            ;C - - - - - 0x009522 04:9512: B9 0D E2
 	JSR SetPlayerAnim               ;C - - - - - 0x009525 04:9515: 20 94 F2
-	LDA tbl_0F_E255,Y               ;C - - - - - 0x009528 04:9518: B9 55 E2
+	LDA PlayerRow_E255,Y            ;C - - - - - 0x009528 04:9518: B9 55 E2
 	JSR SetChrBank2                 ;C - - - - - 0x00952B 04:951B: 20 40 F4
 	LDA #$0B                        ;C - - - - - 0x00952E 04:951E: A9 0B
 	JSR QueueSoundSaved             ;C - - - - - 0x009530 04:9520: 20 4A F3

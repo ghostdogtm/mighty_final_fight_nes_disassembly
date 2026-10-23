@@ -76,7 +76,7 @@ loc_0D_A085:
 	JSR DirToPlayerGround           ;C - - - - - 0x01A095 0D:A085: 20 5B FB
 loc_0D_A088:
 	TAY                             ;C - - - - - 0x01A098 0D:A088: A8
-	LDA tbl_0F_FBF0,Y               ;C - - - - - 0x01A099 0D:A089: B9 F0 FB
+	LDA facingByDirTbl,Y            ;C - - - - - 0x01A099 0D:A089: B9 F0 FB
 	STA objFacing,X                 ;C - - - - - 0x01A09C 0D:A08C: 9D 60 04
 	JSR EnemyStartVelocity          ;C - - - - - 0x01A09F 0D:A08F: 20 34 AC
 	JMP EnemyDirMoveCheck           ;C - - - - - 0x01A0A2 0D:A092: 4C 53 A9
@@ -200,7 +200,7 @@ loc_0D_A176:
 	LDA objStep,X                   ;C - - - - - 0x01A186 0D:A176: BD 00 05
 	AND #$0F                        ;C - - - - - 0x01A189 0D:A179: 29 0F
 	TAY                             ;C - - - - - 0x01A18B 0D:A17B: A8
-	LDA tbl_0F_FBF0,Y               ;C - - - - - 0x01A18C 0D:A17C: B9 F0 FB
+	LDA facingByDirTbl,Y            ;C - - - - - 0x01A18C 0D:A17C: B9 F0 FB
 	STA objFacing,X                 ;C - - - - - 0x01A18F 0D:A17F: 9D 60 04
 	JSR EnemyStartVelocity          ;C - - - - - 0x01A192 0D:A182: 20 34 AC
 	JSR EnemyLookupParam            ;C - - - - - 0x01A195 0D:A185: 20 B3 AC
@@ -504,7 +504,7 @@ ofs_0D_A3F5:
 	TAY                             ;C - - - - - 0x01A40D 0D:A3FD: A8
 	LDA EnemyRoutine9FF6Tbl_AE3E,Y  ;C - - - - - 0x01A40E 0D:A3FE: B9 3E AE
 	TAY                             ;C - - - - - 0x01A411 0D:A401: A8
-	LDA tbl_0F_FBF0,Y               ;C - - - - - 0x01A412 0D:A402: B9 F0 FB
+	LDA facingByDirTbl,Y            ;C - - - - - 0x01A412 0D:A402: B9 F0 FB
 	STA objFacing,X                 ;C - - - - - 0x01A415 0D:A405: 9D 60 04
 	JSR EnemyStartVelocity          ;C - - - - - 0x01A418 0D:A408: 20 34 AC
 	JMP EnemyDirMoveCheck           ;C - - - - - 0x01A41B 0D:A40B: 4C 53 A9
@@ -1292,11 +1292,11 @@ EnemySetGrabbedAnim:
 	CPY #$02                        ;C - - - - - 0x01AA76 0D:AA66: C0 02
 	BEQ loc_0D_AA7F                 ;C - - - - - 0x01AA78 0D:AA68: F0 15
 loc_0D_AA6A:
-	LDA tbl_0F_FC5B,Y               ;C - - - - - 0x01AA7A 0D:AA6A: B9 5B FC
+	LDA enemyAnimTblA,Y             ;C - - - - - 0x01AA7A 0D:AA6A: B9 5B FC
 	JSR SetAnimX                    ;C - - - - - 0x01AA7D 0D:AA6D: 20 88 F2
-	LDA tbl_0F_FC75,Y               ;C - - - - - 0x01AA80 0D:AA70: B9 75 FC
+	LDA enemyChrBankTbl,Y           ;C - - - - - 0x01AA80 0D:AA70: B9 75 FC
 	STA ptr_00                      ;C - - - - - 0x01AA83 0D:AA73: 85 00
-	LDA tbl_0F_FC33,Y               ;C - - - - - 0x01AA85 0D:AA75: B9 33 FC
+	LDA enemyChrSlotTbl,Y           ;C - - - - - 0x01AA85 0D:AA75: B9 33 FC
 	TAY                             ;C - - - - - 0x01AA88 0D:AA78: A8
 	LDA ptr_00                      ;C - - - - - 0x01AA89 0D:AA79: A5 00
 	STA a:chrBankShadow+3,Y         ;C - - - - - 0x01AA8B 0D:AA7B: 99 EB 00
@@ -1336,7 +1336,7 @@ EnemySetAnimSetA:
 loc_0D_AABC:
 	LDA EnemySetAnimSetATbl_AAD1,Y  ;C - - - - - 0x01AACC 0D:AABC: B9 D1 AA
 	STA ptr_00                      ;C - - - - - 0x01AACF 0D:AABF: 85 00
-	LDA tbl_0F_FC33,Y               ;C - - - - - 0x01AAD1 0D:AAC1: B9 33 FC
+	LDA enemyChrSlotTbl,Y           ;C - - - - - 0x01AAD1 0D:AAC1: B9 33 FC
 	TAY                             ;C - - - - - 0x01AAD4 0D:AAC4: A8
 	LDA ptr_00                      ;C - - - - - 0x01AAD5 0D:AAC5: A5 00
 	STA a:chrBankShadow+3,Y         ;C - - - - - 0x01AAD7 0D:AAC7: 99 EB 00
@@ -1354,7 +1354,7 @@ EnemySetAnimSetB:
 loc_0D_AAE5:
 	LDA EnemySetAnimSetBTbl_AAFA,Y  ;C - - - - - 0x01AAF5 0D:AAE5: B9 FA AA
 	STA ptr_00                      ;C - - - - - 0x01AAF8 0D:AAE8: 85 00
-	LDA tbl_0F_FC33,Y               ;C - - - - - 0x01AAFA 0D:AAEA: B9 33 FC
+	LDA enemyChrSlotTbl,Y           ;C - - - - - 0x01AAFA 0D:AAEA: B9 33 FC
 	TAY                             ;C - - - - - 0x01AAFD 0D:AAED: A8
 	LDA ptr_00                      ;C - - - - - 0x01AAFE 0D:AAEE: A5 00
 	STA a:chrBankShadow+3,Y         ;C - - - - - 0x01AB00 0D:AAF0: 99 EB 00
@@ -1372,7 +1372,7 @@ EnemySetAnimSetC:
 loc_0D_AB0E:
 	LDA EnemySetAnimSetCTbl_AB23,Y  ;C - - - - - 0x01AB1E 0D:AB0E: B9 23 AB
 	STA ptr_00                      ;C - - - - - 0x01AB21 0D:AB11: 85 00
-	LDA tbl_0F_FC33,Y               ;C - - - - - 0x01AB23 0D:AB13: B9 33 FC
+	LDA enemyChrSlotTbl,Y           ;C - - - - - 0x01AB23 0D:AB13: B9 33 FC
 	TAY                             ;C - - - - - 0x01AB26 0D:AB16: A8
 	LDA ptr_00                      ;C - - - - - 0x01AB27 0D:AB17: A5 00
 	STA a:chrBankShadow+3,Y         ;C - - - - - 0x01AB29 0D:AB19: 99 EB 00

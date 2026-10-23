@@ -1019,7 +1019,7 @@ loc_03_B64E:
 	JSR DirToPlayerGround           ;C - - - - - 0x007663 03:B653: 20 5B FB
 	TAY                             ;C - - - - - 0x007666 03:B656: A8
 	JSR SetVelFromTbl_B39B          ;C - - - - - 0x007667 03:B657: 20 9B B3
-	LDA tbl_0F_FBF0,Y               ;C - - - - - 0x00766A 03:B65A: B9 F0 FB
+	LDA facingByDirTbl,Y            ;C - - - - - 0x00766A 03:B65A: B9 F0 FB
 	STA objFacing,X                 ;C - - - - - 0x00766D 03:B65D: 9D 60 04
 loc_03_B660:
 	JSR EnemyMoveProbe4Way          ;C - - - - - 0x007670 03:B660: 20 31 B3
@@ -1062,7 +1062,7 @@ loc_03_B6A0:
 	STA objFacing,X                 ;C - - - - - 0x0076BA 03:B6AA: 9D 60 04
 loc_03_B6AD:
 	LDY objFacing,X                 ;C - - - - - 0x0076BD 03:B6AD: BC 60 04
-	LDA tbl_0F_FBF0,Y               ;C - - - - - 0x0076C0 03:B6B0: B9 F0 FB
+	LDA facingByDirTbl,Y            ;C - - - - - 0x0076C0 03:B6B0: B9 F0 FB
 	STA objFacing,X                 ;C - - - - - 0x0076C3 03:B6B3: 9D 60 04
 	LDA rngState1                   ;C - - - - - 0x0076C6 03:B6B6: A5 E5
 	AND #$07                        ;C - - - - - 0x0076C8 03:B6B8: 29 07
@@ -1381,9 +1381,9 @@ loc_03_B925:
 	CMP #$01                        ;C - - - - - 0x007938 03:B928: C9 01
 	BEQ loc_03_B93A                 ;C - - - - - 0x00793A 03:B92A: F0 0E
 	LDY playerId                    ;C - - - - - 0x00793C 03:B92C: A4 34
-	LDA SetVelFromTbl_B39BTbl_E207,Y;C - - - - - 0x00793E 03:B92E: B9 07 E2
+	LDA PlayerRow_E207,Y            ;C - - - - - 0x00793E 03:B92E: B9 07 E2
 	JSR SetPlayerAnim               ;C - - - - - 0x007941 03:B931: 20 94 F2
-	LDA SetVelFromTbl_B39BTbl_E24F,Y;C - - - - - 0x007944 03:B934: B9 4F E2
+	LDA PlayerRow_E24F,Y            ;C - - - - - 0x007944 03:B934: B9 4F E2
 	JSR SetChrBank2                 ;C - - - - - 0x007947 03:B937: 20 40 F4
 loc_03_B93A:
 	LDA objAnimFrame,X              ;C - - - - - 0x00794A 03:B93A: BD 70 05
@@ -1419,9 +1419,9 @@ loc_03_B977:
 	LDA objParamA,X                 ;C - - - - - 0x00798D 03:B97D: BD 10 05
 	STA playerGroundY               ;C - - - - - 0x007990 03:B980: 85 36
 	LDY playerId                    ;C - - - - - 0x007992 03:B982: A4 34
-	LDA tbl_0F_E20A,Y               ;C - - - - - 0x007994 03:B984: B9 0A E2
+	LDA PlayerRow_E20A,Y            ;C - - - - - 0x007994 03:B984: B9 0A E2
 	JSR SetPlayerAnim               ;C - - - - - 0x007997 03:B987: 20 94 F2
-	LDA tbl_0F_E252,Y               ;C - - - - - 0x00799A 03:B98A: B9 52 E2
+	LDA PlayerRow_E252,Y            ;C - - - - - 0x00799A 03:B98A: B9 52 E2
 	JSR SetChrBank2                 ;C - - - - - 0x00799D 03:B98D: 20 40 F4
 	LDA objAnimFrame,X              ;C - - - - - 0x0079A0 03:B990: BD 70 05
 	CMP #$04                        ;C - - - - - 0x0079A3 03:B993: C9 04
@@ -1661,7 +1661,7 @@ loc_03_BB49:
 	LDA EnemyChooseDirToPlayerTbl_BB81,Y;C - - - - - 0x007B59 03:BB49: B9 81 BB
 	TAY                             ;C - - - - - 0x007B5C 03:BB4C: A8
 loc_03_BB4D:
-	LDA tbl_0F_FBF0,Y               ;C - - - - - 0x007B5D 03:BB4D: B9 F0 FB
+	LDA facingByDirTbl,Y            ;C - - - - - 0x007B5D 03:BB4D: B9 F0 FB
 	STA objFacing,X                 ;C - - - - - 0x007B60 03:BB50: 9D 60 04
 	JSR SetVelFromTbl_BAD0          ;C - - - - - 0x007B63 03:BB53: 20 D0 BA
 	TYA                             ;C - - - - - 0x007B66 03:BB56: 98
@@ -2224,9 +2224,9 @@ loc_03_BFBE:
 	INC objSubStep                  ;C - - - - - 0x007FDF 03:BFCF: EE 50 05
 	LDA #$00                        ;C - - - - - 0x007FE2 03:BFD2: A9 00
 	STA objX                        ;C - - - - - 0x007FE4 03:BFD4: 8D 60 03
-	LDA dat_0F_E22A                 ;C - - - - - 0x007FE7 03:BFD7: AD 2A E2
+	LDA PlayerRow_E22A              ;C - - - - - 0x007FE7 03:BFD7: AD 2A E2
 	JSR SetPlayerAnim               ;C - - - - - 0x007FEA 03:BFDA: 20 94 F2
-	LDA dat_0F_E272                 ;C - - - - - 0x007FED 03:BFDD: AD 72 E2
+	LDA PlayerRow_E272              ;C - - - - - 0x007FED 03:BFDD: AD 72 E2
 	JSR SetChrBank2                 ;C - - - - - 0x007FF0 03:BFE0: 20 40 F4
 	JSR SetPlayerFlag40             ;C - - - - - 0x007FF3 03:BFE3: 20 3F F0
 	LDA #$8F                        ;C - - - - - 0x007FF6 03:BFE6: A9 8F

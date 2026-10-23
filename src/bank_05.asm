@@ -270,9 +270,9 @@ loc_05_A7D9:
 	JSR QueueSound                  ;C - - - - - 0x00A803 05:A7F3: 20 4C F3
 loc_05_A7F6:
 	LDY playerId                    ;C - - - - - 0x00A806 05:A7F6: A4 34
-	LDA tbl_0F_E210,Y               ;C - - - - - 0x00A808 05:A7F8: B9 10 E2
+	LDA PlayerRow_E210,Y            ;C - - - - - 0x00A808 05:A7F8: B9 10 E2
 	JSR SetPlayerAnim               ;C - - - - - 0x00A80B 05:A7FB: 20 94 F2
-	LDA tbl_0F_E258,Y               ;C - - - - - 0x00A80E 05:A7FE: B9 58 E2
+	LDA PlayerRow_E258,Y            ;C - - - - - 0x00A80E 05:A7FE: B9 58 E2
 	JSR SetChrBank2                 ;C - - - - - 0x00A811 05:A801: 20 40 F4
 	LDA #$02                        ;C - - - - - 0x00A814 05:A804: A9 02
 	STA gameAction                  ;C - - - - - 0x00A816 05:A806: 85 30
@@ -733,9 +733,9 @@ loc_05_ABAC:
 	LDA #$D0                        ;C - - - - - 0x00ABC0 05:ABB0: A9 D0
 	STA objFlags                    ;C - - - - - 0x00ABC2 05:ABB2: 8D 60 05
 	LDY playerId                    ;C - - - - - 0x00ABC5 05:ABB5: A4 34
-	LDA tbl_0F_E20A,Y               ;C - - - - - 0x00ABC7 05:ABB7: B9 0A E2
+	LDA PlayerRow_E20A,Y            ;C - - - - - 0x00ABC7 05:ABB7: B9 0A E2
 	JSR SetPlayerAnim               ;C - - - - - 0x00ABCA 05:ABBA: 20 94 F2
-	LDA tbl_0F_E252,Y               ;C - - - - - 0x00ABCD 05:ABBD: B9 52 E2
+	LDA PlayerRow_E252,Y            ;C - - - - - 0x00ABCD 05:ABBD: B9 52 E2
 	JSR SetChrBank2                 ;C - - - - - 0x00ABD0 05:ABC0: 20 40 F4
 	RTS                             ;C - - - - - 0x00ABD3 05:ABC3: 60
 loc_05_ABC4:
